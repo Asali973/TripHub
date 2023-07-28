@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
- <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 
@@ -8,7 +8,7 @@
 
 	<!-- Lancement auto de la page index -->
 	<welcome-file-list>
-    	<welcome-file>index.xhtml</welcome-file>
+    	<welcome-file>home.xhtml</welcome-file>
   	</welcome-file-list>
 
 	<!-- Changer cette valeur à "Production" lors du déploiement final de l'application -->
