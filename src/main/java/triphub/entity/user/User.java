@@ -15,8 +15,9 @@ public class User {
     private String lastName;
     private String email;
     private String phoneNum;
+    private String password;  
 
-    @OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -77,7 +78,13 @@ public class User {
 	public void setFinance(FinanceInfo finance) {
 		this.finance = finance;
 	}
-    
+	  public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
     
 }
 

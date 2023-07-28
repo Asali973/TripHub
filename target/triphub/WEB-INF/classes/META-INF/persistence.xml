@@ -23,9 +23,9 @@
    
    <!-- Unité de persistance : 1 unité par BDD (en mode ressources locale) -->
 	<persistence-unit name="triphub" transaction-type="RESOURCE_LOCAL">
-	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+<!-- 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
 	
-		<class>triphub.entity.user.User</class>
+<!-- 		<class>triphub.entity.user.User</class> -->
 		<!-- Liste des propriétés de JPA et Hibernate pour la Gestion de la BDD -->
 		<properties>
 			
@@ -36,12 +36,12 @@
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/triphub?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;serverTimezone=Europe/Paris" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="Zachary3529&lt;" />
+			<property name="javax.persistence.jdbc.password" value="twitwiboo" />
 	
 			<!-- Propriétés hibernate : dialect de la BDD, création du schéma, traces de dev etc ... -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.hbm2ddl.auto" value="drop-create" />
+			<property name="hibernate.show_sql" value="true" />
 			
 		</properties>
 	</persistence-unit>

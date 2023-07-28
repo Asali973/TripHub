@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Registration</title>
+</h:head>
+<h:body>
+    <h2>Registration Form</h2>
+    <h:form>
+        <h:outputLabel for="firstName" value="First Name:"/>
+        <h:inputText id="firstName" value="#{registrationBean.firstName}"/>
+        <h:outputLabel for="lastName" value="Last Name:"/>
+        <h:inputText id="lastName" value="#{registrationBean.lastName}"/>
+        <h:outputLabel for="email" value="Email:"/>
+        <h:inputText id="email" value="#{registrationBean.email}"/>
+        <h:outputLabel for="password" value="Password:"/>
+        <h:inputSecret id="password" value="#{registrationBean.password}"/>
+        <h:outputLabel for="userType" value="User Type:"/>
+        <h:commandButton value="Register" action="#{registrationBean.register}"/>
+    </h:form>
+</h:body>
+</html>
