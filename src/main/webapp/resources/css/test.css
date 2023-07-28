@@ -1,0 +1,43 @@
+@charset "ISO-8859-1";
+/* Center the contents */
+h2{
+	color:red;
+}
+h3{
+	color:blue;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+/* Style the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Style the buttons */
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: center;
+}
+
+/* Style the search form */
+form {
+    margin: 20px 0;
+}
