@@ -15,12 +15,13 @@ public class User {
     private String lastName;
     private String email;
     private String phoneNum;
+    private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Address address;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private Address address;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private FinanceInfo finance;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private FinanceInfo finance;
 
 	public Long getId() {
 		return id;
@@ -62,20 +63,12 @@ public class User {
 		this.phoneNum = phoneNum;
 	}
 
-	public Address getAddress() {
-		return address;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public FinanceInfo getFinance() {
-		return finance;
-	}
-
-	public void setFinance(FinanceInfo finance) {
-		this.finance = finance;
+	public void setPassword(String password) {
+		this.password = password;
 	}
     
     
