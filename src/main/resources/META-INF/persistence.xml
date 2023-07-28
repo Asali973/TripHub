@@ -25,6 +25,7 @@
 	<persistence-unit name="triphub" transaction-type="RESOURCE_LOCAL">
 <!-- 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
 	<class>triphub.entity.user.User</class>
+	<class>triphub.entity.user.Customer</class>
 <!-- 		<class>triphub.entity.user.User</class> -->
 		<!-- Liste des propriétés de JPA et Hibernate pour la Gestion de la BDD -->
 		<properties>

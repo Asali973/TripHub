@@ -16,6 +16,7 @@ public class User {
     private String email;
     private String phoneNum;
     private String password;
+    
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    private Address address;
@@ -70,6 +71,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
     
     
 }
