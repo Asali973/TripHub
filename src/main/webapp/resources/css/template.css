@@ -1,0 +1,37 @@
+
+
+ html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1; /* Make the container fill the available space */
+  /* Add any other styling for the container */
+}
+
+.footer {
+  height: 80px; /* Set the height of the footer */
+  background-color: #f8f9fa;
+  /* Add any other styling for the footer */
+}
+
+
+        
+        .social-icons {
+            list-style: none;
+            padding: 0;
+        }
+
+        .social-icons li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .social-icons li:last-child {
+            margin-right: 0;
+        }
