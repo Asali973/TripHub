@@ -14,6 +14,7 @@ public class RegistrationBean {
     private String lastName;
     private String email;
     private String password;
+    private String phoneNum;
     private String userType;
 
     private EntityManagerFactory emf;
@@ -30,6 +31,7 @@ public class RegistrationBean {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
+        user.setPhoneNum(phoneNum);
         user.setPassword(password);
 
         em.getTransaction().begin();   // Commencer la transaction
@@ -39,6 +41,14 @@ public class RegistrationBean {
         return "login?faces-redirect=true";
     }
 
+
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
+	}
 
 	public String getFirstName() {
 		return firstName;

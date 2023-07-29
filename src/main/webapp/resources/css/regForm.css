@@ -1,0 +1,44 @@
+/* registrationForm.css */
+
+.reg-form-container {
+	max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #ccc; 
+    border-radius: 5px;
+    display: flex; 
+    padding: 20px;
+    flex-direction: column; /* Display children elements in a column layout */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allow children elements to wrap to the next line */
+}
+
+.reg-form-container h2 {
+    text-align: center;
+     margin-bottom: 20px; /* Center the h2 element */
+}
+
+.reg-form-group {
+    margin-bottom: 15px;
+}
+
+.reg-form-control {
+    width: 100%;
+    padding: 10px;
+    border: none; /* Remove the default border */
+    border-bottom: 1px solid #ccc; /* Add a bottom border to the form fields */
+}
+
+.reg-btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reg-btn-primary:hover {
+    background-color: #0056b3;
+}
