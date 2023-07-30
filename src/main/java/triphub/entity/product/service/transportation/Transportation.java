@@ -25,7 +25,7 @@ public class Transportation {
 	private Address arrival;
 	
 	@Enumerated(EnumType.STRING)
-	private TransportationType accommodation;
+	private TransportationType transportation;
 
 	public Long getId() {
 		return id;
@@ -51,12 +51,12 @@ public class Transportation {
 		this.arrival = arrival;
 	}
 
-	public TransportationType getAccommodation() {
-		return accommodation;
+	public TransportationType getTransportation() {
+		return transportation;
 	}
 
-	public void setAccommodation(TransportationType accommodation) {
-		this.accommodation = accommodation;
+	public void setTransportation(TransportationType transportation) {
+		this.transportation = transportation;
 	}
 	
 	
