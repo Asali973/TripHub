@@ -1,18 +1,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 <h:head>
-    <title>Welcome to Triphub</title>
+	<title>Welcome to Triphub</title>
 </h:head>
 
 <h:body>
-    <h2>Welcome to Triphub!</h2>
-    <h:form>
-        <h:commandButton value="Login" action="login" />
-        <h:commandButton value="Registration" action="registration" />
-    </h:form>
+	<h2>Welcome to Triphub!</h2>
+	<h:form>
+		<h:commandButton value="Login" action="login" />
+		<h:commandButton value="Create a customer account"
+			action="CustomerRegistration" />
+		<h:commandButton value="Create a provider account"
+			action="ProviderRegistration" />
+		<h:commandButton value="Create an organizer account"
+			action="OrganizerRegistration" />
+		<h:commandButton value="Create a superAdmin account"
+			action="SuperAdminRegistration" />
+	</h:form>
+	<h:panelGroup rendered="#{sessionScope.userType eq 'customer'}">
+		<p>Welcome, dear customer!</p>
+	</h:panelGroup>
+
+	<h:panelGroup rendered="#{sessionScope.userType eq 'organizer'}">
+		<p>Welcome, dear organizer!</p>
+	</h:panelGroup>
+
+	<h:panelGroup rendered="#{sessionScope.userType eq 'provider'}">
+		<p>Welcome, dear provider!</p>
+	</h:panelGroup>
+
+	<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
+		<p>Welcome, dear super admin!</p>
+	</h:panelGroup>
 </h:body>
 
 </html>

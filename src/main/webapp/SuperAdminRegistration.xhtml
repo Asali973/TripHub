@@ -3,7 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Create Customer</title>
+	<title>Create Super Administrator</title>
 	<link
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		rel="stylesheet" />
@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-body">
-				<h2 class="card-title text-center mt-3">Create a new Customer
+				<h2 class="card-title text-center mt-3">Create a new Super Administrator
 					account</h2>
 				<h:form>
 					<button
@@ -32,37 +32,37 @@
 					<div class="form-group mt-4">
 						<h:outputLabel for="firstname" value="First Name*:"
 							required="true" requiredMessage="First name is required." />
-						<h:inputText id="firstname" value="#{customerBean.firstName}"
+						<h:inputText id="firstname" value="#{superAdminBean.firstName}"
 							class="form-control" required="true" />
 					</div>
 					<div class="form-group">
 						<h:outputLabel for="lastname" value="Last Name*:" required="true"
 							requiredMessage="Last name is required." />
-						<h:inputText id="lastname" value="#{customerBean.lastName}"
+						<h:inputText id="lastname" value="#{superAdminBean.lastName}"
 							class="form-control" required="true" />
 					</div>
 					<div class="form-group">
 						<h:outputLabel for="email" value="Email*:" required="true"
 							requiredMessage="Email is required." />
-						<h:inputText id="email" value="#{customerBean.email}"
+						<h:inputText id="email" value="#{superAdminBean.email}"
 							class="form-control" required="true" />
 					</div>
 					<div class="form-group">
 						<h:outputLabel for="phoneNum" value="Phone Number:" />
-						<h:inputText id="phoneNum" value="#{customerBean.phoneNum}"
+						<h:inputText id="phoneNum" value="#{superAdminBean.phoneNum}"
 							class="form-control" />
 					</div>
 					<div class="form-group">
 						<h:outputLabel for="password" value="Password*:" required="true"
 							requiredMessage="Please enter a password." />
-						<h:inputSecret id="password" value="#{customerBean.password}"
+						<h:inputSecret id="password" value="#{superAdminBean.password}"
 							class="form-control" required="true" />
 					</div>
 					<div class="form-group">
 						<h:outputLabel for="confirmPassword" value="Confirm Password*:"
 							required="true" requiredMessage="Please confirm your password." />
 						<h:inputSecret id="confirmPassword"
-							value="#{customerBean.confirmPassword}" class="form-control"
+							value="#{superAdminBean.confirmPassword}" class="form-control"
 							required="true" />
 					</div>
 
@@ -75,32 +75,32 @@
 					<div class="collapse" id="addressSection">
 						<div class="form-group mt-4">
 							<h:outputLabel for="num" value="Number:" />
-							<h:inputText id="num" value="#{customerBean.num}"
+							<h:inputText id="num" value="#{superAdminBean.num}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="street" value="Street:" />
-							<h:inputText id="street" value="#{customerBean.street}"
+							<h:inputText id="street" value="#{superAdminBean.street}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="city" value="City:" />
-							<h:inputText id="city" value="#{customerBean.city}"
+							<h:inputText id="city" value="#{superAdminBean.city}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="state" value="State:" />
-							<h:inputText id="state" value="#{customerBean.state}"
+							<h:inputText id="state" value="#{superAdminBean.state}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="country" value="Country:" />
-							<h:inputText id="country" value="#{customerBean.country}"
+							<h:inputText id="country" value="#{superAdminBean.country}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="zipCode" value="Zip Code:" />
-							<h:inputText id="zipCode" value="#{customerBean.zipCode}"
+							<h:inputText id="zipCode" value="#{superAdminBean.zipCode}"
 								class="form-control" />
 						</div>
 					</div>
@@ -114,20 +114,20 @@
 					<div class="collapse" id="paymentSection">
 						<div class="form-group mt-4">
 							<h:outputLabel for="CCNumber" value="Credit Card Number:" />
-							<h:inputText id="CCNumber" value="#{customerBean.CCNumber}"
+							<h:inputText id="CCNumber" value="#{superAdminBean.CCNumber}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="expirationDate"
 								value="Expiration Date (MM/DD/YYYY):" />
 							<h:inputText id="expirationDate"
-								value="#{customerBean.expirationDate}" class="form-control">
+								value="#{superAdminBean.expirationDate}" class="form-control">
 								<f:convertDateTime pattern="MM/dd/yyyy" />
 							</h:inputText>
 						</div>
 					</div>
 					<div class="form-group mt-4">
-						<h:commandButton value="Submit" action="#{customerBean.register}"
+						<h:commandButton value="Submit" action="#{superAdminBean.register}"
 							class="btn btn-primary" />
 					</div>
 

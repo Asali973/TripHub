@@ -5,6 +5,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.user.Customer;
+import triphub.entity.user.User;
 
 public class CustomerDAO {
 	private EntityManager em;
@@ -32,4 +33,17 @@ public class CustomerDAO {
 			return null;
 		}
 	}
+	
+	public Customer findByUser(User user) {
+	    try {
+	        TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.user = :user", Customer.class);
+	        query.setParameter("user", user);
+	        return query.getSingleResult();
+	    } catch (NoResultException e) {
+	        return null;
+	    }
+	}
+
+	
+	
 }

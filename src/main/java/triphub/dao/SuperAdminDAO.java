@@ -4,7 +4,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
+import triphub.entity.user.Customer;
 import triphub.entity.user.SuperAdmin;
+import triphub.entity.user.User;
 
 public class SuperAdminDAO {
 	private EntityManager em;
@@ -31,5 +33,15 @@ public class SuperAdminDAO {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+	
+	public SuperAdmin findByUser(User user) {
+	    try {
+	        TypedQuery<SuperAdmin> query = em.createQuery("SELECT c FROM SuperAdmin c WHERE c.user = :user", SuperAdmin.class);
+	        query.setParameter("user", user);
+	        return query.getSingleResult();
+	    } catch (NoResultException e) {
+	        return null;
+	    }
 	}
 }

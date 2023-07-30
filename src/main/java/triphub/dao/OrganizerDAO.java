@@ -6,6 +6,7 @@ import javax.persistence.TypedQuery;
 
 import triphub.entity.user.Customer;
 import triphub.entity.user.Organizer;
+import triphub.entity.user.User;
 
 public class OrganizerDAO {
     private EntityManager em;
@@ -32,5 +33,15 @@ public class OrganizerDAO {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+	
+	public Organizer findByUser(User user) {
+	    try {
+	        TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user = :user", Organizer.class);
+	        query.setParameter("user", user);
+	        return query.getSingleResult();
+	    } catch (NoResultException e) {
+	        return null;
+	    }
 	}
 }

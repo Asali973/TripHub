@@ -6,29 +6,26 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Persistence;
 import java.io.Serializable;
 import java.util.Date;
-
 import org.mindrot.jbcrypt.BCrypt;
-
-import triphub.dao.ProviderDAO;
-import triphub.entity.user.Provider;
+import triphub.dao.OrganizerDAO;
+import triphub.entity.user.Organizer;
 import triphub.entity.user.User;
 import triphub.entity.util.Address;
 import triphub.entity.util.Administration;
 import triphub.entity.util.CompanyInfo;
 import triphub.entity.util.FinanceInfo;
 import triphub.entity.util.Picture;
-import triphub.entity.util.PictureType;
+import triphub.entity.subscription.Subscription;
 
-@ManagedBean(name="providerBean")
+@ManagedBean(name = "organizerBean")
 @SessionScoped
-public class ProviderBean implements Serializable {
-	
+public class OrganizerBean implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+
 	// User info
 	private String firstName;
 	private String lastName;
@@ -46,22 +43,21 @@ public class ProviderBean implements Serializable {
 	// Finance info
 	private String CCNumber;
 	private Date expirationDate;
-	
-	// Picture
-    private String link;
-    
-	
+
 	// Company info
 	private String companyName;
 	private String companyLogoLink;
 	private String companyPictureLink;
-	
+
 	// Administration info
 	private String siret;
 	private String phone;
 	private String sector;
 	private String adminEmail;
-	
+
+	// Subscription info
+	// Add Subscription properties
+
 	// Login status
 	private boolean loggedIn;
 
@@ -69,17 +65,18 @@ public class ProviderBean implements Serializable {
 	private EntityManagerFactory emf;
 	private EntityManager em;
 
-	public ProviderBean() {
+	public OrganizerBean() {
 		emf = Persistence.createEntityManagerFactory("triphub");
 		em = emf.createEntityManager();
 	}
 
 	public void register() {
 		if (!password.equals(confirmPassword)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Passwords do not match!"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Passwords do not match!"));
 			return;
 		}
-		
+
 		// Create user
 		User user = new User();
 		user.setFirstName(firstName);
@@ -101,45 +98,50 @@ public class ProviderBean implements Serializable {
 		finance.setCCNumber(CCNumber);
 		finance.setExpirationDate(expirationDate);
 		user.setFinance(finance);
-		
+
 		// Create company info
 		CompanyInfo companyInfo = new CompanyInfo();
 		companyInfo.setName(companyName);
-		
+
 		// Set logo
 		Picture logo = new Picture();
 		logo.setLink(companyLogoLink);
 		companyInfo.setLogo(logo);
-		
+
 		// Set company picture
 		Picture picture = new Picture();
 		picture.setLink(companyPictureLink);
 		companyInfo.setPicture(picture);
-		
+
 		// Create administration info
 		Administration administration = new Administration();
 		administration.setSiret(siret);
 		administration.setPhone(phone);
 		administration.setSector(sector);
 		administration.setEmail(adminEmail);
-		
-		// Create provider
-		Provider provider = new Provider();
-		provider.setUser(user);
-		provider.setCompanyInfo(companyInfo);
-		provider.setAdministration(administration);
 
-		ProviderDAO providerDao = new ProviderDAO(em);
+		// Create subscription
+		Subscription subscription = new Subscription();
+		// Subscription properties
+
+		// Create organizer
+		Organizer organizer = new Organizer();
+		organizer.setUser(user);
+		organizer.setCompanyInfo(companyInfo);
+		organizer.setAdministration(administration);
+		organizer.setSubscription(subscription);
+
+		OrganizerDAO organizerDao = new OrganizerDAO(em);
 		em.getTransaction().begin();
-		providerDao.create(provider);
+		organizerDao.create(organizer);
 		em.getTransaction().commit();
 	}
 
 	public boolean login() {
-		ProviderDAO providerDao = new ProviderDAO(em);
-		Provider provider = providerDao.findByEmail(email);
+		OrganizerDAO organizerDao = new OrganizerDAO(em);
+		Organizer organizer = organizerDao.findByEmail(email);
 
-		if (provider != null && checkPassword(password, provider.getUser().getPassword())) {
+		if (organizer != null && checkPassword(password, organizer.getUser().getPassword())) {
 			loggedIn = true;
 			return true;
 		} else {
@@ -282,14 +284,6 @@ public class ProviderBean implements Serializable {
 		this.expirationDate = expirationDate;
 	}
 
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
-	}
-
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -372,4 +366,3 @@ public class ProviderBean implements Serializable {
 
 
 }
-

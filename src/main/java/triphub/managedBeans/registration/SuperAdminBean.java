@@ -1,32 +1,23 @@
 package triphub.managedBeans.registration;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Persistence;
-import java.io.Serializable;
-import java.util.Date;
+import javax.persistence.*;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import triphub.dao.ProviderDAO;
-import triphub.entity.user.Provider;
-import triphub.entity.user.User;
-import triphub.entity.util.Address;
-import triphub.entity.util.Administration;
-import triphub.entity.util.CompanyInfo;
-import triphub.entity.util.FinanceInfo;
-import triphub.entity.util.Picture;
-import triphub.entity.util.PictureType;
+import triphub.entity.user.*;
+import triphub.entity.util.*;
+import triphub.dao.*;
 
-@ManagedBean(name="providerBean")
+@ManagedBean(name="superAdminBean")
 @SessionScoped
-public class ProviderBean implements Serializable {
+public class SuperAdminBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	// User info
@@ -46,22 +37,6 @@ public class ProviderBean implements Serializable {
 	// Finance info
 	private String CCNumber;
 	private Date expirationDate;
-	
-	// Picture
-    private String link;
-    
-	
-	// Company info
-	private String companyName;
-	private String companyLogoLink;
-	private String companyPictureLink;
-	
-	// Administration info
-	private String siret;
-	private String phone;
-	private String sector;
-	private String adminEmail;
-	
 	// Login status
 	private boolean loggedIn;
 
@@ -69,7 +44,7 @@ public class ProviderBean implements Serializable {
 	private EntityManagerFactory emf;
 	private EntityManager em;
 
-	public ProviderBean() {
+	public SuperAdminBean() {
 		emf = Persistence.createEntityManagerFactory("triphub");
 		em = emf.createEntityManager();
 	}
@@ -79,7 +54,6 @@ public class ProviderBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Passwords do not match!"));
 			return;
 		}
-		
 		// Create user
 		User user = new User();
 		user.setFirstName(firstName);
@@ -101,45 +75,21 @@ public class ProviderBean implements Serializable {
 		finance.setCCNumber(CCNumber);
 		finance.setExpirationDate(expirationDate);
 		user.setFinance(finance);
-		
-		// Create company info
-		CompanyInfo companyInfo = new CompanyInfo();
-		companyInfo.setName(companyName);
-		
-		// Set logo
-		Picture logo = new Picture();
-		logo.setLink(companyLogoLink);
-		companyInfo.setLogo(logo);
-		
-		// Set company picture
-		Picture picture = new Picture();
-		picture.setLink(companyPictureLink);
-		companyInfo.setPicture(picture);
-		
-		// Create administration info
-		Administration administration = new Administration();
-		administration.setSiret(siret);
-		administration.setPhone(phone);
-		administration.setSector(sector);
-		administration.setEmail(adminEmail);
-		
-		// Create provider
-		Provider provider = new Provider();
-		provider.setUser(user);
-		provider.setCompanyInfo(companyInfo);
-		provider.setAdministration(administration);
+		// Create SuperAdmin
+		SuperAdmin superAdmin = new SuperAdmin();
+		superAdmin.setUser(user);
 
-		ProviderDAO providerDao = new ProviderDAO(em);
+		SuperAdminDAO superAdminDao = new SuperAdminDAO(em);
 		em.getTransaction().begin();
-		providerDao.create(provider);
+		superAdminDao.create(superAdmin);
 		em.getTransaction().commit();
 	}
 
 	public boolean login() {
-		ProviderDAO providerDao = new ProviderDAO(em);
-		Provider provider = providerDao.findByEmail(email);
+		SuperAdminDAO superAdminDao = new SuperAdminDAO(em);
+		SuperAdmin superAdmin = superAdminDao.findByEmail(email);
 
-		if (provider != null && checkPassword(password, provider.getUser().getPassword())) {
+		if (superAdmin != null && checkPassword(password, superAdmin.getUser().getPassword())) {
 			loggedIn = true;
 			return true;
 		} else {
@@ -162,7 +112,7 @@ public class ProviderBean implements Serializable {
 		return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
 	}
 
-	// Check if the password matches the encrypted password
+	// Check if the password matches the encrypt password
 	private boolean checkPassword(String plainPassword, String hashedPassword) {
 		if (BCrypt.checkpw(plainPassword, hashedPassword))
 			return true;
@@ -282,70 +232,6 @@ public class ProviderBean implements Serializable {
 		this.expirationDate = expirationDate;
 	}
 
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
-	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public String getCompanyLogoLink() {
-		return companyLogoLink;
-	}
-
-	public void setCompanyLogoLink(String companyLogoLink) {
-		this.companyLogoLink = companyLogoLink;
-	}
-
-	public String getCompanyPictureLink() {
-		return companyPictureLink;
-	}
-
-	public void setCompanyPictureLink(String companyPictureLink) {
-		this.companyPictureLink = companyPictureLink;
-	}
-
-	public String getSiret() {
-		return siret;
-	}
-
-	public void setSiret(String siret) {
-		this.siret = siret;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getSector() {
-		return sector;
-	}
-
-	public void setSector(String sector) {
-		this.sector = sector;
-	}
-
-	public String getAdminEmail() {
-		return adminEmail;
-	}
-
-	public void setAdminEmail(String adminEmail) {
-		this.adminEmail = adminEmail;
-	}
-
 	public EntityManagerFactory getEmf() {
 		return emf;
 	}
@@ -371,5 +257,5 @@ public class ProviderBean implements Serializable {
 	}
 
 
-}
 
+}

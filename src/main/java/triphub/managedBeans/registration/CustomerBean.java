@@ -90,8 +90,10 @@ public class CustomerBean implements Serializable {
 		Customer customer = customerDao.findByEmail(email);
 
 		if (customer != null && checkPassword(password, customer.getUser().getPassword())) {
+			loggedIn = true;
 			return true;
 		} else {
+			loggedIn = false;
 			return false;
 		}
 	}
