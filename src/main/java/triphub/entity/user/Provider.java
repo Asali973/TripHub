@@ -10,7 +10,7 @@ import triphub.entity.util.CompanyInfo;
 @Entity
 public class Provider {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@OneToOne(cascade = CascadeType.ALL)
