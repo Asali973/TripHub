@@ -1,12 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 <h:head>
 	<title>Welcome to Triphub</title>
-</h:head>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
+<h:head>
+    
+    <title>Home</title>
+</h:head>
 <h:body>
 	<h2>Welcome to Triphub!</h2>
 	<h:form>
@@ -35,6 +41,12 @@
 	<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
 		<p>Welcome, dear super admin!</p>
 	</h:panelGroup>
-</h:body>
+    <ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+        <ui:define name="content">           
+            <p>This is the home page. Add our content here.</p>
+        </ui:define>
+    </ui:composition>
 
+</h:body>
 </html>
+
