@@ -4,19 +4,19 @@ import javax.persistence.*;
 
 @Entity
 public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+	@OneToOne(cascade = CascadeType.ALL)
+	private User user;
 
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
-		this.id = id; 
+		this.id = id;
 	}
 
 	public User getUser() {
@@ -26,7 +26,5 @@ public class Customer {
 	public void setUser(User user) {
 		this.user = user;
 	}
-    
-    
-}
 
+}
