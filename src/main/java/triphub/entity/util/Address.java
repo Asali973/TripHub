@@ -13,6 +13,7 @@ public class Address {
     private String state;
     private String country;
     private String zipCode;
+
 	public Long getId() {
 		return id;
 	}
@@ -55,6 +56,7 @@ public class Address {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+   
     
-    
+
 }

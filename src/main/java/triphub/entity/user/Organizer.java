@@ -8,9 +8,11 @@ import triphub.entity.util.CompanyInfo;
 
 @Entity
 public class Organizer {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private User user;

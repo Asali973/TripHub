@@ -1,6 +1,9 @@
 package triphub.entity.product;
 
 import javax.persistence.*;
+
+
+
 import java.util.List;
 
 @Entity
@@ -10,7 +13,7 @@ public class Product {
     private Long id;
 
     private String name;
-
+//
 //    @OneToOne(cascade = CascadeType.ALL)
 //    private Price totalPrice;
 //
@@ -27,5 +30,5 @@ public class Product {
 //    private Destination destination;
 //
 //    @OneToOne(cascade = CascadeType.ALL)
-//    private Picture pictures;
+//    private Image image;
 }
