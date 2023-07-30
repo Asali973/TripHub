@@ -1,3 +1,4 @@
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/Picture.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/User.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/SuperAdminDAO.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/SuperAdmin.java
@@ -11,8 +12,10 @@
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/Customer.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/UserDAO.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/Provider.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/registration/CustomerBean.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/Date.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/main/JPAUtil.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/PictureType.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/OrganizerDAO.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/CompanyInfo.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/Administration.java

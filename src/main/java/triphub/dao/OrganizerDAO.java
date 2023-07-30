@@ -1,6 +1,10 @@
 package triphub.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
+
+import triphub.entity.user.Customer;
 import triphub.entity.user.Organizer;
 
 public class OrganizerDAO {
@@ -18,4 +22,15 @@ public class OrganizerDAO {
     public Organizer read(Long id) {
         return em.find(Organizer.class, id);
     }
+    
+	public Organizer findByEmail(String email) {
+		TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user.email = :email",
+				Organizer.class);
+		query.setParameter("email", email);
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 }
