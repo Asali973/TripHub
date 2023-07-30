@@ -1,8 +1,6 @@
 package triphub.entity.product.service.accommodation;
 
 import javax.persistence.*;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 import triphub.entity.util.Address;
 
@@ -10,9 +8,10 @@ import triphub.entity.util.Address;
 public class Accommodation {
 	
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	
 	@Enumerated(EnumType.STRING)
