@@ -12,11 +12,27 @@ public class Accommodation {
 	private Long id;
 	private String nameAccomodation;
 
+	private String nameAccommodation;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	
 	@Enumerated(EnumType.STRING)
-	private AccommodationType accommodation;
+	private AccommodationType accommodationType;
+	
+
+	public Accommodation() {
+	}
+	
+	
+
+	public Accommodation(String nameAccommodation, Address address, AccommodationType accommodationType) {
+		this.nameAccommodation = nameAccommodation;
+		this.address = address;
+		this.accommodationType = accommodationType;
+	}
+
+
 
 	public Accommodation() {}
 	
@@ -44,11 +60,27 @@ public class Accommodation {
 	}
 
 	public AccommodationType getAccommodation() {
-		return accommodation;
+		return accommodationType;
 	}
 
-	public void setAccommodation(AccommodationType accommodation) {
-		this.accommodation = accommodation;
+	public void setAccommodation(AccommodationType accommodationType) {
+		this.accommodationType = accommodationType;
+	}
+
+	public String getNameAccommodation() {
+		return nameAccommodation;
+	}
+
+	public void setNameAccommodation(String nameAccommodation) {
+		this.nameAccommodation = nameAccommodation;
+	}
+
+	public AccommodationType getAccommodationType() {
+		return accommodationType;
+	}
+
+	public void setAccommodationType(AccommodationType accommodationType) {
+		this.accommodationType = accommodationType;
 	}
 
 	public String getNameAccomodation() {
