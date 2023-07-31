@@ -24,23 +24,10 @@ public class Accommodation {
 	public Accommodation() {
 	}
 	
-	
-
 	public Accommodation(String nameAccommodation, Address address, AccommodationType accommodationType) {
 		this.nameAccommodation = nameAccommodation;
 		this.address = address;
 		this.accommodationType = accommodationType;
-	}
-
-
-
-	public Accommodation() {}
-	
-	public Accommodation(String nameAccomodation, Address address, AccommodationType accommodation) {
-		super();
-		this.nameAccomodation = nameAccomodation;
-		this.address = address;
-		this.accommodation = accommodation;
 	}
 
 	public Long getId() {

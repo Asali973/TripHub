@@ -15,7 +15,7 @@ public class DestinationDAO {
 	@PersistenceContext
 	private EntityManager em;
 	
-//	public DestinationDAO() {}
+	public DestinationDAO() {}
 	
 	public DestinationDAO(EntityManager em) {
 		this.em = em;

@@ -13,11 +13,13 @@ import triphub.entity.user.User;
 import triphub.helpers.RegistrationException;
 @Stateless
 public class OrganizerDAO {
+
 	@PersistenceUnit
 	private EntityManager em;
 	
 	   public OrganizerDAO() {
 	    }
+
 
     public OrganizerDAO(EntityManager em) {
         this.em = em;

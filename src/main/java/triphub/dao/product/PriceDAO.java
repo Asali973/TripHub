@@ -16,7 +16,7 @@ public class PriceDAO {
 	@PersistenceContext
 	private EntityManager em;
 	
-//	public PriceDAO() {}
+	public PriceDAO() {}
 	
 	public PriceDAO(EntityManager em) {
 		this.em = em;

@@ -16,9 +16,11 @@ public class CustomerDAO {
 
 	@PersistenceUnit
 	private EntityManager em;
+
 	   public CustomerDAO() {
 	    }
 	
+
 	public CustomerDAO(EntityManager em) {
 		this.em = em;
 	}

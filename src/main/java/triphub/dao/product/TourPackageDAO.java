@@ -3,14 +3,15 @@ package triphub.dao.product;
 import java.util.List;
 import java.util.Objects;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
 
 
 public class TourPackageDAO {
+
 	private EntityManager em;
 		
 	public TourPackageDAO(EntityManager em) {
@@ -30,8 +31,8 @@ public class TourPackageDAO {
 	    return em.merge(tourPackage);
 	}
 	
-	public void delete(Long id) {
-	    TourPackage tourPackage = em.find(TourPackage.class, id);
+	public void delete(TourPackage tourPackage2) {
+	    TourPackage tourPackage = em.find(TourPackage.class, tourPackage2);
 	    if (tourPackage != null) {
 	        em.remove(tourPackage);
 	    }
