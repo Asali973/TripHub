@@ -10,12 +10,22 @@ public class Accommodation {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String nameAccomodation;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	
 	@Enumerated(EnumType.STRING)
 	private AccommodationType accommodation;
+
+	public Accommodation() {}
+	
+	public Accommodation(String nameAccomodation, Address address, AccommodationType accommodation) {
+		super();
+		this.nameAccomodation = nameAccomodation;
+		this.address = address;
+		this.accommodation = accommodation;
+	}
 
 	public Long getId() {
 		return id;
@@ -39,6 +49,14 @@ public class Accommodation {
 
 	public void setAccommodation(AccommodationType accommodation) {
 		this.accommodation = accommodation;
+	}
+
+	public String getNameAccomodation() {
+		return nameAccomodation;
+	}
+
+	public void setNameAccomodation(String nameAccomodation) {
+		this.nameAccomodation = nameAccomodation;
 	}
 	
 	

@@ -30,10 +30,14 @@
 		<class>triphub.entity.util.CompanyInfo</class>
 		<class>triphub.entity.util.Date</class>
 		<class>triphub.entity.util.FinanceInfo</class>
-		<class>triphub.entity.util.Picture</class>
-		<class>triphub.entity.util.PictureType</class>
+		<class>triphub.entity.util.Picture</class>	
 		<class>triphub.entity.product.Product</class>
 		<class>triphub.entity.subscription.Subscription</class>
+		<class>triphub.entity.product.Destination</class>
+		<class>triphub.entity.product.Price</class>
+		<class>triphub.entity.product.Image</class>		
+		<class>triphub.entity.product.Theme</class>
+		<class>triphub.entity.product.TourPackage</class>
 		<!-- <class>triphub.entity.user.User</class> -->
 		<!-- Liste des propriétés de JPA et Hibernate pour la Gestion de la BDD -->
 		<properties>
@@ -46,7 +50,9 @@
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/triphub?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;serverTimezone=Europe/Paris" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="twitwiboo" />	
+
+			<property name="javax.persistence.jdbc.password" value="twitwiboo" />
+	
 			<!-- Propriétés hibernate : dialect de la BDD, création du schéma, traces de dev etc ... -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

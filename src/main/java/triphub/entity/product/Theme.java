@@ -13,7 +13,7 @@ public class Theme {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
+	private String themeName;
 	@OneToMany(mappedBy = "theme")
 	private List<TourPackage> tourPackages;
 
@@ -21,7 +21,7 @@ public class Theme {
 		
 	public Theme(String name) {
 	
-		this.name = name;
+		this.themeName = name;
 	}
 
 	public Long getId() {
@@ -33,11 +33,11 @@ public class Theme {
 	}
 
 	public String getName() {
-		return name;
+		return themeName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.themeName = name;
 	}
 
 	public List<TourPackage> getTourPackages() {

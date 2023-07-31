@@ -2,17 +2,21 @@ package triphub.dao.product;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.product.Price;
 import triphub.entity.product.Theme;
 
 
-
+@Stateless
 public class PriceDAO {
-	
+	@PersistenceContext
 	private EntityManager em;
+	
+//	public PriceDAO() {}
 	
 	public PriceDAO(EntityManager em) {
 		this.em = em;

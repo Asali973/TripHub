@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config version="2.2"
+  <faces-config version="2.2"
     xmlns="http://xmlns.jcp.org/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="
@@ -15,6 +15,10 @@
     <navigation-case>
         <from-outcome>login</from-outcome>
         <to-view-id>/login/login.xhtml</to-view-id>
+    </navigation-case>
+    <navigation-case>
+        <from-outcome>tourPackageHome</from-outcome>
+        <to-view-id>/product/TourpackageHome.xhtml</to-view-id>
     </navigation-case>
 </navigation-rule>
    
