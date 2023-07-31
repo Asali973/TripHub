@@ -19,6 +19,7 @@
 	<!-- Unité de persistance : 1 unité par BDD (en mode ressources locale) -->
 	<persistence-unit name="triphub"
 		transaction-type="RESOURCE_LOCAL">
+		
 		<!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
 		<class>triphub.entity.user.User</class>
 		<class>triphub.entity.user.Customer</class>
