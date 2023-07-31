@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 import triphub.entity.user.Customer;
 import triphub.entity.user.Provider;
 import triphub.entity.user.User;
+import triphub.helpers.RegistrationException;
 
 public class ProviderDAO {
 	private EntityManager em;
@@ -24,16 +25,15 @@ public class ProviderDAO {
 		return em.find(Provider.class, id);
 	}
 
-	public Provider findByEmail(String email) {
-		TypedQuery<Provider> query = em.createQuery("SELECT c FROM Provider c WHERE c.user.email = :email",
-				Provider.class);
-		query.setParameter("email", email);
-		try {
-			return query.getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
-	}
+    public Provider findByEmail(String email) throws RegistrationException {
+        TypedQuery<Provider> query = em.createQuery("SELECT c FROM Provider c WHERE c.user.email = :email", Provider.class);
+        query.setParameter("email", email);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new RegistrationException("Provider with email " + email + " not found.");
+        }
+    }
 	
 	public Provider findByUser(User user) {
 	    try {
