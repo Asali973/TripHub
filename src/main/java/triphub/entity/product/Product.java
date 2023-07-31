@@ -13,7 +13,7 @@ public class Product {
     private Long id;
 
     private String name;
-//
+
 //    @OneToOne(cascade = CascadeType.ALL)
 //    private Price totalPrice;
 //

@@ -10,6 +10,7 @@ public class Accommodation {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String nameAccomodation;
 
 	private String nameAccommodation;
 
@@ -32,6 +33,15 @@ public class Accommodation {
 	}
 
 
+
+	public Accommodation() {}
+	
+	public Accommodation(String nameAccomodation, Address address, AccommodationType accommodation) {
+		super();
+		this.nameAccomodation = nameAccomodation;
+		this.address = address;
+		this.accommodation = accommodation;
+	}
 
 	public Long getId() {
 		return id;
@@ -71,6 +81,14 @@ public class Accommodation {
 
 	public void setAccommodationType(AccommodationType accommodationType) {
 		this.accommodationType = accommodationType;
+	}
+
+	public String getNameAccomodation() {
+		return nameAccomodation;
+	}
+
+	public void setNameAccomodation(String nameAccomodation) {
+		this.nameAccomodation = nameAccomodation;
 	}
 	
 	
