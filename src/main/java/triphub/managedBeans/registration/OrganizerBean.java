@@ -90,7 +90,7 @@ public class OrganizerBean implements Serializable {
 		user.setLastName(lastName);
 		user.setEmail(email);
 		user.setPhoneNum(phoneNum);
-		user.setPassword(hashPassword(password));
+		user.setPassword(pm.hashPassword(password));
 		// Create address
 		Address address = new Address();
 		address.setNum(num);
