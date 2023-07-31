@@ -27,7 +27,7 @@ public class main {
 
 	public static void main(String[] args) {
 
-		EntityManager em = JPAUtil.getEntityManager();
+	 EntityManager em = JPAUtil.getEntityManager();
 
 		UserDAO userDAO = new UserDAO(em);		
 	
