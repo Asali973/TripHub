@@ -7,6 +7,8 @@ import triphub.dao.UserDAO;
 import triphub.entity.user.User;
 import javax.persistence.*;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 @ManagedBean
 @RequestScoped
 public class RegistrationBean {
@@ -33,10 +35,14 @@ public class RegistrationBean {
         user.setEmail(email);
         user.setPhoneNum(phoneNum);
         user.setPassword(password);
+        
+        // Encryption password
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        user.setPassword(hashedPassword);
 
-        em.getTransaction().begin();   // Commencer la transaction
+        em.getTransaction().begin();
         userDao.create(user);
-        em.getTransaction().commit();  // Commit la transaction
+        em.getTransaction().commit();
 
         return "login?faces-redirect=true";
     }

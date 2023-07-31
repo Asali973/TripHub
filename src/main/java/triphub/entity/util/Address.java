@@ -4,8 +4,7 @@ import javax.persistence.*;
 @Entity
 public class Address {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-   
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     private String num;
@@ -14,6 +13,7 @@ public class Address {
     private String state;
     private String country;
     private String zipCode;
+
     
     
    
@@ -29,6 +29,9 @@ public class Address {
 		this.country = country;
 		this.zipCode = zipCode;
 	}
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -71,7 +74,6 @@ public class Address {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-    
     
 }
 

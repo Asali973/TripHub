@@ -8,7 +8,7 @@ import triphub.entity.util.FinanceInfo;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
@@ -18,11 +18,11 @@ public class User {
     private String password;
     
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private FinanceInfo finance;
+    @OneToOne(cascade = CascadeType.ALL)
+    private FinanceInfo finance;
 
 	public Long getId() {
 		return id;
@@ -70,6 +70,22 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public FinanceInfo getFinance() {
+		return finance;
+	}
+
+	public void setFinance(FinanceInfo finance) {
+		this.finance = finance;
 	}
 	
     
