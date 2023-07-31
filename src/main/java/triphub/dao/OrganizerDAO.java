@@ -1,17 +1,25 @@
 package triphub.dao;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.user.Organizer;
 import triphub.entity.user.Organizer;
 import triphub.entity.user.User;
 import triphub.helpers.RegistrationException;
-
+@Stateless
 public class OrganizerDAO {
-    private EntityManager em;
-    public OrganizerDAO() {}
+
+	@PersistenceUnit
+	private EntityManager em;
+	
+	   public OrganizerDAO() {
+	    }
+
 
     public OrganizerDAO(EntityManager em) {
         this.em = em;

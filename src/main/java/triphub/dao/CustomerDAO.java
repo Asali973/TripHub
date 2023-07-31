@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.user.Customer;
@@ -13,10 +14,13 @@ import triphub.helpers.RegistrationException;
 @Stateless
 public class CustomerDAO {
 
-	@PersistenceContext
+	@PersistenceUnit
 	private EntityManager em;
 
-	public CustomerDAO() {}
+	   public CustomerDAO() {
+	    }
+	
+
 	public CustomerDAO(EntityManager em) {
 		this.em = em;
 	}
