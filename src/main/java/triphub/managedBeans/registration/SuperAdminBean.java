@@ -2,23 +2,27 @@ package triphub.managedBeans.registration;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.persistence.*;
-
-import org.mindrot.jbcrypt.BCrypt;
-
-import triphub.entity.user.*;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import triphub.dao.SuperAdminDAO;
 import triphub.entity.util.*;
-import triphub.dao.*;
+import triphub.entity.user.*;
+import triphub.helpers.AuthenticationException;
+import triphub.helpers.FacesMessageUtil;
+import triphub.helpers.PasswordUtils;
+import triphub.helpers.RegistrationException;
 
-@ManagedBean(name="superAdminBean")
-@SessionScoped
+@Named
+@RequestScoped
 public class SuperAdminBean implements Serializable {
-	
+
+	@Inject
+	private SuperAdminDAO superAdminDAO;
+
 	private static final long serialVersionUID = 1L;
 	// User info
 	private String firstName;
@@ -40,18 +44,12 @@ public class SuperAdminBean implements Serializable {
 	// Login status
 	private boolean loggedIn;
 
-	// EntityManager setup
-	private EntityManagerFactory emf;
-	private EntityManager em;
-
 	public SuperAdminBean() {
-		emf = Persistence.createEntityManagerFactory("triphub");
-		em = emf.createEntityManager();
 	}
 
 	public void register() {
 		if (!password.equals(confirmPassword)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Passwords do not match!"));
+			FacesMessageUtil.addErrorMessage("Passwords do not match!");
 			return;
 		}
 		// Create user
@@ -60,7 +58,7 @@ public class SuperAdminBean implements Serializable {
 		user.setLastName(lastName);
 		user.setEmail(email);
 		user.setPhoneNum(phoneNum);
-		user.setPassword(hashPassword(password));
+		user.setPassword(PasswordUtils.getInstance().hashPassword(password));
 		// Create address
 		Address address = new Address();
 		address.setNum(num);
@@ -79,21 +77,31 @@ public class SuperAdminBean implements Serializable {
 		SuperAdmin superAdmin = new SuperAdmin();
 		superAdmin.setUser(user);
 
-		SuperAdminDAO superAdminDao = new SuperAdminDAO(em);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("triphub");
+		EntityManager em = emf.createEntityManager();
+
 		em.getTransaction().begin();
-		superAdminDao.create(superAdmin);
+		superAdminDAO.create(superAdmin);
 		em.getTransaction().commit();
+
+		em.close();
+		emf.close();
 	}
 
 	public boolean login() {
-		SuperAdminDAO superAdminDao = new SuperAdminDAO(em);
-		SuperAdmin superAdmin = superAdminDao.findByEmail(email);
-
-		if (superAdmin != null && checkPassword(password, superAdmin.getUser().getPassword())) {
-			loggedIn = true;
-			return true;
-		} else {
+		try {
+			SuperAdmin superAdmin = superAdminDAO.findByEmail(email);
+			if (superAdmin != null
+					&& PasswordUtils.getInstance().checkPassword(password, superAdmin.getUser().getPassword())) {
+				loggedIn = true;
+				return true;
+			} else {
+				loggedIn = false;
+				return false;
+			}
+		} catch (RegistrationException e) {
 			loggedIn = false;
+			FacesMessageUtil.addErrorMessage("Registration failed: " + e.getMessage());
 			return false;
 		}
 	}
@@ -107,17 +115,12 @@ public class SuperAdminBean implements Serializable {
 		return loggedIn;
 	}
 
-	// Encrypt password
-	private String hashPassword(String plainTextPassword) {
-		return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+	public SuperAdminDAO getSuperAdminDAO() {
+		return superAdminDAO;
 	}
 
-	// Check if the password matches the encrypt password
-	private boolean checkPassword(String plainPassword, String hashedPassword) {
-		if (BCrypt.checkpw(plainPassword, hashedPassword))
-			return true;
-		else
-			return false;
+	public void setSuperAdminDAO(SuperAdminDAO superAdminDAO) {
+		this.superAdminDAO = superAdminDAO;
 	}
 
 	public String getFirstName() {
@@ -232,22 +235,6 @@ public class SuperAdminBean implements Serializable {
 		this.expirationDate = expirationDate;
 	}
 
-	public EntityManagerFactory getEmf() {
-		return emf;
-	}
-
-	public void setEmf(EntityManagerFactory emf) {
-		this.emf = emf;
-	}
-
-	public EntityManager getEm() {
-		return em;
-	}
-
-	public void setEm(EntityManager em) {
-		this.em = em;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -255,7 +242,5 @@ public class SuperAdminBean implements Serializable {
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
-
-
 
 }

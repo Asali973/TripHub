@@ -1,20 +1,20 @@
 package triphub.managedBeans.registration;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Persistence;
+
 import java.io.Serializable;
 import java.util.Date;
 
-import org.mindrot.jbcrypt.BCrypt;
-
 import triphub.dao.ProviderDAO;
+import triphub.entity.subscription.Subscription;
+import triphub.entity.user.Organizer;
 import triphub.entity.user.Provider;
 import triphub.entity.user.User;
 import triphub.entity.util.Address;
@@ -22,13 +22,20 @@ import triphub.entity.util.Administration;
 import triphub.entity.util.CompanyInfo;
 import triphub.entity.util.FinanceInfo;
 import triphub.entity.util.Picture;
-import triphub.entity.util.PictureType;
+import triphub.helpers.AuthenticationException;
+import triphub.helpers.FacesMessageUtil;
+import triphub.helpers.PasswordUtils;
+import triphub.helpers.RegistrationException;
 
-@ManagedBean(name="providerBean")
-@SessionScoped
+@Named("providerBean")
+@RequestScoped
 public class ProviderBean implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private ProviderDAO providerDAO;
+
 	// User info
 	private String firstName;
 	private String lastName;
@@ -46,47 +53,37 @@ public class ProviderBean implements Serializable {
 	// Finance info
 	private String CCNumber;
 	private Date expirationDate;
-	
-	// Picture
-    private String link;
-    
-	
+
 	// Company info
 	private String companyName;
 	private String companyLogoLink;
 	private String companyPictureLink;
-	
+
 	// Administration info
 	private String siret;
 	private String phone;
 	private String sector;
 	private String adminEmail;
-	
+
 	// Login status
 	private boolean loggedIn;
 
-	// EntityManager setup
-	private EntityManagerFactory emf;
-	private EntityManager em;
-
 	public ProviderBean() {
-		emf = Persistence.createEntityManagerFactory("triphub");
-		em = emf.createEntityManager();
 	}
 
 	public void register() {
 		if (!password.equals(confirmPassword)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Passwords do not match!"));
+			FacesMessageUtil.addErrorMessage("Passwords do not match!");
 			return;
 		}
-		
+
 		// Create user
 		User user = new User();
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
 		user.setPhoneNum(phoneNum);
-		user.setPassword(hashPassword(password));
+		user.setPassword(PasswordUtils.getInstance().hashPassword(password));
 		// Create address
 		Address address = new Address();
 		address.setNum(num);
@@ -101,49 +98,59 @@ public class ProviderBean implements Serializable {
 		finance.setCCNumber(CCNumber);
 		finance.setExpirationDate(expirationDate);
 		user.setFinance(finance);
-		
+
 		// Create company info
 		CompanyInfo companyInfo = new CompanyInfo();
 		companyInfo.setName(companyName);
-		
+
 		// Set logo
 		Picture logo = new Picture();
 		logo.setLink(companyLogoLink);
 		companyInfo.setLogo(logo);
-		
+
 		// Set company picture
 		Picture picture = new Picture();
 		picture.setLink(companyPictureLink);
 		companyInfo.setPicture(picture);
-		
+
 		// Create administration info
 		Administration administration = new Administration();
 		administration.setSiret(siret);
 		administration.setPhone(phone);
 		administration.setSector(sector);
 		administration.setEmail(adminEmail);
-		
+
 		// Create provider
 		Provider provider = new Provider();
 		provider.setUser(user);
 		provider.setCompanyInfo(companyInfo);
 		provider.setAdministration(administration);
 
-		ProviderDAO providerDao = new ProviderDAO(em);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("triphub");
+		EntityManager em = emf.createEntityManager();
+
 		em.getTransaction().begin();
-		providerDao.create(provider);
+		providerDAO.create(provider);
 		em.getTransaction().commit();
+
+		em.close();
+		emf.close();
 	}
 
 	public boolean login() {
-		ProviderDAO providerDao = new ProviderDAO(em);
-		Provider provider = providerDao.findByEmail(email);
-
-		if (provider != null && checkPassword(password, provider.getUser().getPassword())) {
-			loggedIn = true;
-			return true;
-		} else {
+		try {
+			Provider provider = providerDAO.findByEmail(email);
+			if (provider != null
+					&& PasswordUtils.getInstance().checkPassword(password, provider.getUser().getPassword())) {
+				loggedIn = true;
+				return true;
+			} else {
+				loggedIn = false;
+				return false;
+			}
+		} catch (RegistrationException e) {
 			loggedIn = false;
+			FacesMessageUtil.addErrorMessage("Registration failed: " + e.getMessage());
 			return false;
 		}
 	}
@@ -157,17 +164,12 @@ public class ProviderBean implements Serializable {
 		return loggedIn;
 	}
 
-	// Encrypt password
-	private String hashPassword(String plainTextPassword) {
-		return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+	public ProviderDAO getProviderDAO() {
+		return providerDAO;
 	}
 
-	// Check if the password matches the encrypted password
-	private boolean checkPassword(String plainPassword, String hashedPassword) {
-		if (BCrypt.checkpw(plainPassword, hashedPassword))
-			return true;
-		else
-			return false;
+	public void setProviderDAO(ProviderDAO providerDAO) {
+		this.providerDAO = providerDAO;
 	}
 
 	public String getFirstName() {
@@ -282,14 +284,6 @@ public class ProviderBean implements Serializable {
 		this.expirationDate = expirationDate;
 	}
 
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
-	}
-
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -346,22 +340,6 @@ public class ProviderBean implements Serializable {
 		this.adminEmail = adminEmail;
 	}
 
-	public EntityManagerFactory getEmf() {
-		return emf;
-	}
-
-	public void setEmf(EntityManagerFactory emf) {
-		this.emf = emf;
-	}
-
-	public EntityManager getEm() {
-		return em;
-	}
-
-	public void setEm(EntityManager em) {
-		this.em = em;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -370,6 +348,4 @@ public class ProviderBean implements Serializable {
 		this.loggedIn = loggedIn;
 	}
 
-
 }
-
