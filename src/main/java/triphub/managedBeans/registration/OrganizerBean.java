@@ -18,6 +18,8 @@ import triphub.entity.util.Administration;
 import triphub.entity.util.CompanyInfo;
 import triphub.entity.util.FinanceInfo;
 import triphub.entity.util.Picture;
+import triphub.helpers.IPasswordManager;
+import triphub.helpers.PasswordManagerImpl;
 import triphub.entity.subscription.Subscription;
 
 @ManagedBean(name = "organizerBean")
@@ -65,9 +67,14 @@ public class OrganizerBean implements Serializable {
 	private EntityManagerFactory emf;
 	private EntityManager em;
 
+	//
+	private IPasswordManager pm;
+	
+	
 	public OrganizerBean() {
 		emf = Persistence.createEntityManagerFactory("triphub");
 		em = emf.createEntityManager();
+		pm = PasswordManagerImpl.getInstance();
 	}
 
 	public void register() {
@@ -141,7 +148,7 @@ public class OrganizerBean implements Serializable {
 		OrganizerDAO organizerDao = new OrganizerDAO(em);
 		Organizer organizer = organizerDao.findByEmail(email);
 
-		if (organizer != null && checkPassword(password, organizer.getUser().getPassword())) {
+		if (organizer != null && pm.checkPassword(password, organizer.getUser().getPassword())) {
 			loggedIn = true;
 			return true;
 		} else {
@@ -159,18 +166,6 @@ public class OrganizerBean implements Serializable {
 		return loggedIn;
 	}
 
-	// Encrypt password
-	private String hashPassword(String plainTextPassword) {
-		return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
-	}
-
-	// Check if the password matches the encrypted password
-	private boolean checkPassword(String plainPassword, String hashedPassword) {
-		if (BCrypt.checkpw(plainPassword, hashedPassword))
-			return true;
-		else
-			return false;
-	}
 
 	public String getFirstName() {
 		return firstName;
