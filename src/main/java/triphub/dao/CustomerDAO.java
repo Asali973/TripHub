@@ -16,7 +16,7 @@ public class CustomerDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	
+	public CustomerDAO() {}
 	public CustomerDAO(EntityManager em) {
 		this.em = em;
 	}

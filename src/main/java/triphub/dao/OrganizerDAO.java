@@ -11,6 +11,7 @@ import triphub.helpers.RegistrationException;
 
 public class OrganizerDAO {
     private EntityManager em;
+    public OrganizerDAO() {}
 
     public OrganizerDAO(EntityManager em) {
         this.em = em;

@@ -51,7 +51,7 @@
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/triphub?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;serverTimezone=Europe/Paris" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="Zachary3529&lt;" />
+			<property name="javax.persistence.jdbc.password" value="twitwiboo" />
 
 			<!-- Propriétés hibernate : dialect de la BDD, création du schéma, traces 
 				de dev etc ... -->

@@ -15,7 +15,7 @@ public class ThemeDAO {
 	@PersistenceContext
 	private EntityManager em;
 	
-	//public ThemeDAO() {}
+	public ThemeDAO() {}
 	
 	public ThemeDAO(EntityManager em) {
 		this.em = em;
