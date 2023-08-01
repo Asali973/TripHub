@@ -24,6 +24,7 @@ import triphub.entity.product.TourPackage;
 import triphub.entity.user.Customer;
 import triphub.entity.user.User;
 import triphub.entity.util.Address;
+import triphub.viewModel.TransportationViewModel;
 
 public class main {
 
@@ -72,30 +73,30 @@ public class main {
 		
 
 
-		AccommodationDAO accommodationDao = new AccommodationDAO(em);
-		
-		
-		Accommodation accommodation1 = new Accommodation();
-		accommodation1.setNameAccommodation("Hotel Ibis");
-		accommodation1.setAddress(address1);
-		accommodation1.setAccommodation(AccommodationType.Hotel);
-		em.getTransaction().begin();
-		accommodationDao.create(accommodation1);
-		em.getTransaction().commit();
-		System.out.println("accommodation create "+ accommodation1.getNameAccommodation());
-		
+//		AccommodationDAO accommodationDao = new AccommodationDAO(em);
+//		
+//		
+//		Accommodation accommodation1 = new Accommodation();
+//		accommodation1.setNameAccommodation("Hotel Ibis");
+//		accommodation1.setAddress(address1);
+//		accommodation1.setAccommodation(AccommodationType.Hotel);
+//		em.getTransaction().begin();
+//		accommodationDao.create(accommodation1);
+//		em.getTransaction().commit();
+//		System.out.println("accommodation create "+ accommodation1.getNameAccommodation());
+//		
 		TransportationDAO transportationDao = new TransportationDAO(em);
 		
 		
-		Transportation transportation1 = new Transportation();
-		transportation1.setNameTransportation("Bus01");
-		transportation1.setDeparture(address1);
-		transportation1.setArrival(address2);
-		transportation1.setTransportation(TransportationType.Bus);
+		TransportationViewModel transportationvm1 = new TransportationViewModel();
+		transportationvm1.setNameTransportation("Bus01");
+		transportationvm1.setDeparture(address1);
+		transportationvm1.setArrival(address2);
+		transportationvm1.setTransportation(TransportationType.Bus);
 		em.getTransaction().begin();
-		transportationDao.create(transportation1);
+		transportationDao.create(transportationvm1);
 		em.getTransaction().commit();
-		System.out.println("transportation create "+ transportation1.getNameTransportation());
+		System.out.println("transportation create "+ transportationvm1.getNameTransportation());
 		
 		
 		//test tourpackage

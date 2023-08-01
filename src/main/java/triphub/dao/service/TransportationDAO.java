@@ -10,6 +10,8 @@ import javax.persistence.TypedQuery;
 import triphub.entity.product.Theme;
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.transportation.Transportation;
+import triphub.entity.product.service.transportation.TransportationType;
+import triphub.viewModel.TransportationViewModel;
 
 @Stateless
 public class TransportationDAO {
@@ -20,7 +22,13 @@ public class TransportationDAO {
 		this.em = em;
 	}
 	
-	public Transportation create(Transportation transportation) {
+	public Transportation create(TransportationViewModel transportationvm) {
+		
+		Transportation transportation = new Transportation();
+		transportation.setNameTransportation(transportationvm.getNameTransportation());
+		transportation.setDeparture(transportationvm.getDeparture());
+		transportation.setArrival(transportationvm.getArrival());
+		transportation.setTransportation(transportationvm.getTransportation());
 		em.persist(transportation);
 		return transportation;
 	}
@@ -40,9 +48,14 @@ public class TransportationDAO {
 	    }
 	}
 	
+	public List<Transportation> findByType(TransportationType transportationType){
+		TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation WHERE t.transportationType = :transportationType", Transportation.class);
+		query.setParameter("transportationType", transportationType);
+		return query.getResultList();		
+	}
+	
 	 public List<Transportation> getAllTransportation() {
 		 TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation", Transportation.class);
-		 
          return query.getResultList();       
 	 }
 
