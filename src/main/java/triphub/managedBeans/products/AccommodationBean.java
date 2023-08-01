@@ -3,7 +3,9 @@ package triphub.managedBeans.products;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 
 
@@ -13,12 +15,16 @@ import triphub.helpers.RegistrationException;
 import triphub.services.AccommodationService;
 import triphub.viewModel.AccommodationViewModel;
 
+@Named
+@RequestScoped
 public class AccommodationBean implements Serializable {
 
 	@Inject
 	private AccommodationService accommodationService;
 	
 	private EntityManager em;
+	
+	private AccommodationViewModel accommodationVm = new AccommodationViewModel();
 	
 	private static final long serialVersionUID = 1L;
 
@@ -67,6 +73,16 @@ public class AccommodationBean implements Serializable {
 
 	public void setEm(EntityManager em) {
 		this.em = em;
+	}
+
+
+	public AccommodationViewModel getAccommodationVm() {
+		return accommodationVm;
+	}
+
+
+	public void setAccommodationVm(AccommodationViewModel accommodationVm) {
+		this.accommodationVm = accommodationVm;
 	}
 	
 	

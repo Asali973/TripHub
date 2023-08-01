@@ -1,6 +1,7 @@
 D:\projet3\TripHub\src\main\java\triphub\entity\user\Organizer.java
 D:\projet3\TripHub\src\main\java\triphub\managedBeans\registration\CustomerBean.java
 D:\projet3\TripHub\src\main\java\triphub\entity\user\Provider.java
+D:\projet3\TripHub\src\main\java\triphub\managedBeans\products\AccommodationBean.java
 D:\projet3\TripHub\src\main\java\triphub\managedBeans\registration\OrganizerBean.java
 D:\projet3\TripHub\src\main\java\triphub\services\TourPackageService.java
 D:\projet3\TripHub\src\main\java\triphub\dao\service\RestaurantDAO.java
@@ -13,6 +14,7 @@ D:\projet3\TripHub\src\main\java\triphub\entity\util\PictureType.java
 D:\projet3\TripHub\src\main\java\triphub\entity\util\Administration.java
 D:\projet3\TripHub\src\main\java\triphub\entity\product\service\accommodation\Accommodation.java
 D:\projet3\TripHub\src\main\java\triphub\entity\product\Destination.java
+D:\projet3\TripHub\src\main\java\triphub\services\AccommodationService.java
 D:\projet3\TripHub\src\main\java\triphub\dao\OrganizerDAO.java
 D:\projet3\TripHub\src\main\java\triphub\managedBeans\products\TourPackageBean.java
 D:\projet3\TripHub\src\main\java\triphub\entity\subscription\Subscription.java
@@ -20,6 +22,7 @@ D:\projet3\TripHub\src\main\java\triphub\entity\util\Date.java
 D:\projet3\TripHub\src\main\java\triphub\helpers\FacesMessageUtil.java
 D:\projet3\TripHub\src\main\java\triphub\helpers\PasswordUtils.java
 D:\projet3\TripHub\src\main\java\triphub\dao\CustomerDAO.java
+D:\projet3\TripHub\src\main\java\triphub\viewModel\AccommodationViewModel.java
 D:\projet3\TripHub\src\main\java\triphub\dao\service\AddressDAO.java
 D:\projet3\TripHub\src\main\java\triphub\entity\product\Theme.java
 D:\projet3\TripHub\src\main\java\triphub\main\DataSeedTest.java
@@ -42,7 +45,7 @@ D:\projet3\TripHub\src\main\java\triphub\entity\product\service\accommodation\Ac
 D:\projet3\TripHub\src\main\java\triphub\entity\product\service\restaurant\Restaurant.java
 D:\projet3\TripHub\src\main\java\triphub\dao\product\ThemeDAO.java
 D:\projet3\TripHub\src\main\java\triphub\dao\UserDAO.java
-D:\projet3\TripHub\src\main\java\triphub\dao\service\AccomodationDAO.java
+D:\projet3\TripHub\src\main\java\triphub\viewModel\AddressViewModel.java
 D:\projet3\TripHub\src\main\java\triphub\main\JPAUtil.java
 D:\projet3\TripHub\src\main\java\triphub\entity\product\Product.java
 D:\projet3\TripHub\src\main\java\triphub\main\DataSeeder.java

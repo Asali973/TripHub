@@ -39,6 +39,7 @@
 		<class>triphub.entity.product.Image</class>		
 		<class>triphub.entity.product.Theme</class>
 		<class>triphub.entity.product.TourPackage</class>
+		
 		<!-- <class>triphub.entity.user.User</class> -->
 
 		<!-- Liste des propriétés de JPA et Hibernate pour la Gestion de la BDD -->

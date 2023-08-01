@@ -4,15 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
+
 import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
+
 import javax.persistence.TypedQuery;
 
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
-import triphub.entity.util.Address;
-import triphub.helpers.RegistrationException;
+
 import triphub.viewModel.AccommodationViewModel;
 
 
