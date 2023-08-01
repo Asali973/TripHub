@@ -1,5 +1,7 @@
 package triphub.main;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import triphub.dao.CustomerDAO;
@@ -24,6 +26,7 @@ import triphub.entity.product.TourPackage;
 import triphub.entity.user.Customer;
 import triphub.entity.user.User;
 import triphub.entity.util.Address;
+import triphub.services.TransportationService;
 import triphub.viewModel.TransportationViewModel;
 
 public class main {
@@ -71,6 +74,19 @@ public class main {
 		address2.setState("Haut de France");
 		address2.setCountry("France");
 		
+		Address address3 = new Address();
+		address3.setNum("2");
+		address3.setStreet("Piaza Napoleone");
+		address3.setCity("Florence");
+		address3.setState("Toscane");
+		address3.setCountry("Italie");
+		
+		Address address4 = new Address();
+		address4.setNum("1");
+		address4.setStreet("Garibaldi");
+		address4.setCity("Milan");
+		address4.setState("Lombardie");
+		address4.setCountry("Italie");
 
 
 //		AccommodationDAO accommodationDao = new AccommodationDAO(em);
@@ -87,17 +103,42 @@ public class main {
 //		
 		TransportationDAO transportationDao = new TransportationDAO(em);
 		
-		
 		TransportationViewModel transportationvm1 = new TransportationViewModel();
 		transportationvm1.setNameTransportation("Bus01");
 		transportationvm1.setDeparture(address1);
 		transportationvm1.setArrival(address2);
 		transportationvm1.setTransportation(TransportationType.Bus);
-		em.getTransaction().begin();
-		transportationDao.create(transportationvm1);
-		em.getTransaction().commit();
-		System.out.println("transportation create "+ transportationvm1.getNameTransportation());
 		
+		em.getTransaction().begin();
+		TransportationService transportationService = new TransportationService(transportationDao);
+		Transportation transportationTest = transportationService.create(transportationvm1);
+		System.out.println("Transportation created successfully");
+		transportationService.read(transportationTest.getId());
+		System.out.println("Found transportation : " + transportationTest.getNameTransportation());
+		
+		TransportationViewModel transportationvm2 = new TransportationViewModel();
+		transportationvm2.setNameTransportation("Trenitalia01");
+		transportationvm2.setDeparture(address3);
+		transportationvm2.setArrival(address4);
+		transportationvm2.setTransportation(TransportationType.Train);
+		
+		
+		TransportationService transportationService2 = new TransportationService(transportationDao);
+		Transportation transportationTest2 = transportationService2.create(transportationvm2);
+//		transportationService2.delete(transportationTest2.getId());
+//		System.out.println("Transportation deleted successfully : " + transportationTest2.getNameTransportation());
+		transportationService2.findByType(transportationTest2.getTransportation());
+		System.out.println("Transportation with type " + transportationTest2.getTransportation() + " found : " + transportationTest2.getNameTransportation());
+		List<Transportation> allTransportation = transportationDao.getAllTransportation();
+		for (Transportation transportation : allTransportation) {
+		    System.out.println("Transportation ID: " + transportation.getId());
+		    System.out.println("Name: " + transportation.getNameTransportation());
+		    System.out.println("Departure: " + transportation.getDeparture());
+		    System.out.println("Arrival: " + transportation.getArrival());
+		    System.out.println("Type: " + transportation.getTransportation());
+		}
+		em.getTransaction().commit();
+
 		
 		//test tourpackage
 		DestinationDAO desDao =new DestinationDAO(em);

@@ -49,13 +49,13 @@ public class TransportationDAO {
 	}
 	
 	public List<Transportation> findByType(TransportationType transportationType){
-		TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation WHERE t.transportationType = :transportationType", Transportation.class);
-		query.setParameter("transportationType", transportationType);
+		TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation t WHERE t.transportation = :transportation", Transportation.class);
+		query.setParameter("transportation", transportationType);
 		return query.getResultList();		
 	}
 	
 	 public List<Transportation> getAllTransportation() {
-		 TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation", Transportation.class);
+		 TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation t", Transportation.class);
          return query.getResultList();       
 	 }
 

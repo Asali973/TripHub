@@ -16,7 +16,8 @@ public class TransportationService {
 	@Inject
 	private TransportationDAO transportationDAO;
 
-	public TransportationService() {
+	public TransportationService(TransportationDAO transportationDAO) {
+		this.transportationDAO = transportationDAO;
 		
 	}
 	

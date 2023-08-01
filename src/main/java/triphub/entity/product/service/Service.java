@@ -19,7 +19,7 @@
 //    @GeneratedValue(strategy=GenerationType.AUTO)
 //    private Long id;
 //	
-//	private Accommodation accomodation;
+//	private Accommodation accommodation;
 //	private Restaurant restaurant;
 //	private Transportation transportation;
 //	private Price price;
