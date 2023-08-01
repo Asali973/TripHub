@@ -23,11 +23,12 @@ import triphub.entity.user.Customer;
 import triphub.entity.user.User;
 import triphub.entity.util.Address;
 import triphub.helpers.RegistrationException;
+import triphub.services.AccommodationService;
 import triphub.viewModel.AccommodationViewModel;
 
 public class main {
 
-	public static void main(String[] args) throws RegistrationException {
+	public static void main(String[] args) {
 
 	 EntityManager em = JPAUtil.getEntityManager();
 
@@ -56,6 +57,7 @@ public class main {
 //		System.out.println("Found user: " + foundUser.getFirstName() + " " + foundUser.getLastName());
 //		
 		AddressDAO addressDAO = new AddressDAO(em);
+		
 		Address address1 = new Address();
 		address1.setNum("12");
 		address1.setStreet("rue de la gare");
@@ -72,15 +74,22 @@ public class main {
 		accommodationvm.setAddress(address1);
 		accommodationvm.setAccommodationType(AccommodationType.Hotel);
 		em.getTransaction().begin();
-		accommodationDao.create(accommodationvm);
-		em.getTransaction().commit();
-		System.out.println("accommodation create "+ accommodationvm.getNameAccommodation());
+	
 		
+
+		AccommodationService accommodationService = new AccommodationService(accommodationDao);
+		Accommodation accommodationTest = accommodationService.create(accommodationvm);
 		accommodationDao.findAccommodationByName(accommodationvm.getNameAccommodation());
-		System.out.println("Accommodation found : " + accommodationvm.getNameAccommodation());
+		
+		System.out.println("Accommodation created successfully");
+	
+		System.out.println("Accommodation found : " + accommodationvm.getNameAccommodation() +"\n Type Accommodation : "+ accommodationvm.getAccommodationType());
 		
 		
+		accommodationService.deleteAccommodation(accommodationTest.getId());
+		System.out.println("Accommdation delete : " + accommodationTest.getNameAccommodation());
 		
+		em.getTransaction().commit();
 		
 
 		

@@ -1,5 +1,6 @@
 package triphub.dao.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -63,14 +64,19 @@ public class AccommodationDAO {
         }
     }
     
-    public Accommodation findAccommodationByName(String nameAccommodation) throws RegistrationException {
+    public Accommodation findAccommodationByName(String nameAccommodation)  {
 		TypedQuery<Accommodation> query = em.createQuery("SELECT a FROM Accommodation a WHERE a.nameAccommodation = :nameAccommodation",Accommodation.class);
 		query.setParameter("nameAccommodation", nameAccommodation);
-		try {
+	
 			return query.getSingleResult();
-		} catch (NoResultException e) {
-			throw new RegistrationException("Accommodation with name accommodation " + nameAccommodation + " not found.");
-		}
+		
+	}
+    
+    
+    public List<Accommodation> findByType(AccommodationType AccommodationType){
+		TypedQuery<Accommodation> query = em.createQuery("SELECT a FROM Accommodation a WHERE a.accommodation = :accommodation", Accommodation.class);
+		query.setParameter("accommodation", AccommodationType);
+		return query.getResultList();		
 	}
     
 //    public Optional<Accommodation> search(Address address, AccommodationType accommodationType) {
