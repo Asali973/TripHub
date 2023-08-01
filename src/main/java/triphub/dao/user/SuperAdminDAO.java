@@ -1,4 +1,4 @@
-package triphub.dao;
+package triphub.dao.user;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,6 +29,13 @@ public class SuperAdminDAO {
 	public SuperAdmin read(Long id) {
 		return em.find(SuperAdmin.class, id);
 	}
+	
+    public void delete(Long id) {
+        SuperAdmin superAdmin = read(id);
+        if (superAdmin  != null) {
+            em.remove(superAdmin);
+        }
+    }
 
     public SuperAdmin findByEmail(String email) throws RegistrationException {
         TypedQuery<SuperAdmin> query = em.createQuery("SELECT c FROM SuperAdmin c WHERE c.user.email = :email", SuperAdmin.class);

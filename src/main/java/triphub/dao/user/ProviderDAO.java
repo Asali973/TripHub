@@ -1,4 +1,4 @@
-package triphub.dao;
+package triphub.dao.user;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import triphub.entity.user.Customer;
 import triphub.entity.user.Provider;
+import triphub.entity.user.SuperAdmin;
 import triphub.entity.user.User;
 import triphub.helpers.RegistrationException;
 @Stateless
@@ -29,6 +30,13 @@ public class ProviderDAO {
 	public Provider read(Long id) {
 		return em.find(Provider.class, id);
 	}
+	
+    public void delete(Long id) {
+        Provider provider = read(id);
+        if (provider != null) {
+            em.remove(provider);
+        }
+    }
 
     public Provider findByEmail(String email) throws RegistrationException {
         TypedQuery<Provider> query = em.createQuery("SELECT c FROM Provider c WHERE c.user.email = :email", Provider.class);

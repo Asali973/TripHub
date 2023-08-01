@@ -2,11 +2,10 @@ package triphub.main;
 
 import javax.persistence.EntityManager;
 
-import triphub.dao.CustomerDAO;
-import triphub.dao.UserDAO;
-
 import triphub.dao.service.AccommodationDAO;
 import triphub.dao.service.AddressDAO;
+import triphub.dao.user.CustomerDAO;
+import triphub.dao.user.UserDAO;
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
 

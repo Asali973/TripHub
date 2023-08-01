@@ -1,4 +1,4 @@
-package triphub.dao;
+package triphub.dao.user;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -8,6 +8,7 @@ import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.user.Organizer;
+import triphub.entity.user.SuperAdmin;
 import triphub.entity.user.Organizer;
 import triphub.entity.user.User;
 import triphub.helpers.RegistrationException;
@@ -30,6 +31,13 @@ public class OrganizerDAO {
 
     public Organizer read(Long id) {
         return em.find(Organizer.class, id);
+    }
+    
+    public void delete(Long id) {
+        Organizer organizer = read(id);
+        if (organizer  != null) {
+            em.remove(organizer);
+        }
     }
     
     public Organizer findByEmail(String email) throws RegistrationException {

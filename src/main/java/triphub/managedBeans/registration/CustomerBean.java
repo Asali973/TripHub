@@ -8,8 +8,9 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import triphub.dao.CustomerDAO;
+
 import triphub.entity.util.*;
+import triphub.dao.user.CustomerDAO;
 import triphub.entity.user.*;
 import triphub.helpers.AuthenticationException;
 import triphub.helpers.FacesMessageUtil;

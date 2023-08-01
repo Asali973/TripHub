@@ -12,7 +12,7 @@ import javax.persistence.Persistence;
 import java.io.Serializable;
 import java.util.Date;
 
-import triphub.dao.ProviderDAO;
+import triphub.dao.user.ProviderDAO;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.user.Organizer;
 import triphub.entity.user.Provider;

@@ -11,7 +11,8 @@ import javax.persistence.Persistence;
 
 import java.io.Serializable;
 import java.util.Date;
-import triphub.dao.OrganizerDAO;
+
+import triphub.dao.user.OrganizerDAO;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.user.Customer;
 import triphub.entity.user.Organizer;
