@@ -7,9 +7,11 @@ import triphub.dao.UserDAO;
 
 import triphub.dao.service.AccommodationDAO;
 import triphub.dao.service.AddressDAO;
+import triphub.dao.service.TransportationDAO;
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
-
+import triphub.entity.product.service.transportation.Transportation;
+import triphub.entity.product.service.transportation.TransportationType;
 import triphub.dao.product.DestinationDAO;
 import triphub.dao.product.PriceDAO;
 import triphub.dao.product.ThemeDAO;
@@ -61,6 +63,13 @@ public class main {
 		address1.setState("Haut de France");
 		address1.setCountry("France");
 		
+		Address address2 = new Address();
+		address2.setNum("24");
+		address2.setStreet("rue de la gare");
+		address2.setCity("Lille");
+		address2.setState("Haut de France");
+		address2.setCountry("France");
+		
 
 
 		AccommodationDAO accommodationDao = new AccommodationDAO(em);
@@ -75,7 +84,19 @@ public class main {
 		em.getTransaction().commit();
 		System.out.println("accommodation create "+ accommodation1.getNameAccommodation());
 		
-
+		TransportationDAO transportationDao = new TransportationDAO(em);
+		
+		
+		Transportation transportation1 = new Transportation();
+		transportation1.setNameTransportation("Bus01");
+		transportation1.setDeparture(address1);
+		transportation1.setArrival(address2);
+		transportation1.setTransportation(TransportationType.Bus);
+		em.getTransaction().begin();
+		transportationDao.create(transportation1);
+		em.getTransaction().commit();
+		System.out.println("transportation create "+ transportation1.getNameTransportation());
+		
 		
 		//test tourpackage
 		DestinationDAO desDao =new DestinationDAO(em);
