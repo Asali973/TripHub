@@ -76,7 +76,7 @@ public class main {
 		
 		Address address3 = new Address();
 		address3.setNum("2");
-		address3.setStreet("Piaza Napoleone");
+		address3.setStreet("Piazza Napoleone");
 		address3.setCity("Florence");
 		address3.setState("Toscane");
 		address3.setCountry("Italie");
@@ -102,19 +102,13 @@ public class main {
 //		System.out.println("accommodation create "+ accommodation1.getNameAccommodation());
 //		
 		TransportationDAO transportationDao = new TransportationDAO(em);
-		
+		TransportationService transportationService = new TransportationService(transportationDao);
+
 		TransportationViewModel transportationvm1 = new TransportationViewModel();
 		transportationvm1.setNameTransportation("Bus01");
 		transportationvm1.setDeparture(address1);
 		transportationvm1.setArrival(address2);
 		transportationvm1.setTransportation(TransportationType.Bus);
-		
-		em.getTransaction().begin();
-		TransportationService transportationService = new TransportationService(transportationDao);
-		Transportation transportationTest = transportationService.create(transportationvm1);
-		System.out.println("Transportation created successfully");
-		transportationService.read(transportationTest.getId());
-		System.out.println("Found transportation : " + transportationTest.getNameTransportation());
 		
 		TransportationViewModel transportationvm2 = new TransportationViewModel();
 		transportationvm2.setNameTransportation("Trenitalia01");
@@ -122,12 +116,16 @@ public class main {
 		transportationvm2.setArrival(address4);
 		transportationvm2.setTransportation(TransportationType.Train);
 		
+		em.getTransaction().begin();
+		Transportation transportationTest = transportationService.create(transportationvm1);
+		System.out.println("Transportation created successfully");
+		transportationService.read(transportationTest.getId());
+		System.out.println("Found transportation : " + transportationTest.getNameTransportation());
 		
-		TransportationService transportationService2 = new TransportationService(transportationDao);
-		Transportation transportationTest2 = transportationService2.create(transportationvm2);
-//		transportationService2.delete(transportationTest2.getId());
+		Transportation transportationTest2 = transportationService.create(transportationvm2);
+//		transportationService.delete(transportationTest2.getId());
 //		System.out.println("Transportation deleted successfully : " + transportationTest2.getNameTransportation());
-		transportationService2.findByType(transportationTest2.getTransportation());
+		transportationService.findByType(transportationTest2.getTransportation());
 		System.out.println("Transportation with type " + transportationTest2.getTransportation() + " found : " + transportationTest2.getNameTransportation());
 		List<Transportation> allTransportation = transportationDao.getAllTransportation();
 		for (Transportation transportation : allTransportation) {
