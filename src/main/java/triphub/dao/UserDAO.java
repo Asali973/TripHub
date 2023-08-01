@@ -13,16 +13,16 @@ public class UserDAO {
 		this.em = em;
 	}
 
-	public User create(User user) {
+	public User createUser(User user) {
 		em.persist(user);
 		return user;
 	}
 
-	public User read(Long id) {
+	public User readUser(Long id) {
 		return em.find(User.class, id);
 	}
 
-	public User findByEmail(String email) {
+	public User findByEmailUser(String email) {
 		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
 		query.setParameter("email", email);
 

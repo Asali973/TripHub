@@ -1,19 +1,10 @@
 package triphub.managedBeans.registration;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import triphub.dao.CustomerDAO;
-import triphub.entity.util.*;
-import triphub.entity.user.*;
-import triphub.helpers.AuthenticationException;
 import triphub.helpers.FacesMessageUtil;
-import triphub.helpers.PasswordUtils;
 import triphub.helpers.RegistrationException;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
@@ -29,47 +20,52 @@ public class CustomerBean implements Serializable {
 
     private UserViewModel userViewModel = new UserViewModel();
     
-    // Login status
-    private boolean loggedIn;
-    private String confirmPassword;
+	// Login status
+	private boolean loggedIn;
 
     public CustomerBean() {
     }
+    
+
 
     public void register() {
-        if (!userViewModel.getPassword().equals(confirmPassword)) {
+        if (!userViewModel.getPassword().equals(userViewModel.getConfirmPassword())) {
             FacesMessageUtil.addErrorMessage("Passwords do not match!");
             return;
         }
         
         try {
-            userService.create(userViewModel);
+            userService.createCustomer(userViewModel);
         } catch (RegistrationException e) {
             FacesMessageUtil.addErrorMessage("Registration failed: " + e.getMessage());
         }
     }
-
-    public boolean login() {
-        try {
-            Customer customer = userService.findByEmail(userViewModel.getEmail());
-            if (customer != null
-                    && PasswordUtils.getInstance().checkPassword(userViewModel.getPassword(), customer.getUser().getPassword())) {
-                loggedIn = true;
-                return true;
-            } else {
-                loggedIn = false;
-                return false;
-            }
-        } catch (RegistrationException e) {
-            loggedIn = false;
-            FacesMessageUtil.addErrorMessage("Registration failed: " + e.getMessage());
-            return false;
-        }
-    }
-
-    public void logout() {
-        loggedIn = false;
-    }
+    
+//  public void init() {
+//	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+//	Long idUserConnecte = (Long) session. getAttribute("connectedUserId");
+//}
+//    public boolean login() {
+//        try {
+//            Customer customer = userService.findByEmailCustomer(userViewModel.getEmail());
+//            if (customer != null
+//                    && PasswordUtils.getInstance().checkPassword(userViewModel.getPassword(), customer.getUser().getPassword())) {
+//                loggedIn = true;
+//                return true;
+//            } else {
+//                loggedIn = false;
+//                return false;
+//            }
+//        } catch (RegistrationException e) {
+//            loggedIn = false;
+//            FacesMessageUtil.addErrorMessage("Registration failed: " + e.getMessage());
+//            return false;
+//        }
+//    }
+//
+//    public void logout() {
+//        loggedIn = false;
+//    }
 
     // Check if the user is logged in
     public boolean isLoggedIn() {
@@ -92,13 +88,6 @@ public class CustomerBean implements Serializable {
 		this.userViewModel = userViewModel;
 	}
 
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

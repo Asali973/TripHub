@@ -60,7 +60,7 @@ public class main {
 
         try {
             // Essayer de créer un nouveau client
-            userService.create(userViewModel);
+            userService.createCustomer(userViewModel);
             System.out.println("Customer created successfully!");
         } catch (RegistrationException e) {
             System.out.println("Failed to create customer: " + e.getMessage());

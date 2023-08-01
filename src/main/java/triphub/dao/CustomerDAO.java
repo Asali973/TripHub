@@ -28,7 +28,7 @@ public class CustomerDAO {
 		this.em = em;
 	}
 
-	public Customer create(UserViewModel form) {
+	public Customer createCustomer(UserViewModel form) {
 
 		// Create user
 		User user = new User();
@@ -62,25 +62,25 @@ public class CustomerDAO {
 		return customer;
 	}
 
-	public Customer read(Long id) {
+	public Customer readCustomer(Long id) {
 		return em.find(Customer.class, id);
 	}
 	
-    public void delete(Long id) {
-        Customer customer = read(id);
+    public void deleteCustomer(Long id) {
+        Customer customer = readCustomer(id);
         if (customer != null) {
             em.remove(customer);
         }
     }
     
-    public void update(Long id) {
-        Customer customer = read(id);
+    public void updateCustomer(Long id) {
+        Customer customer = readCustomer(id);
         if (customer != null) {
             em.merge(customer);
         }
     }
 
-	public Customer findByEmail(String email) throws RegistrationException {
+	public Customer findByEmailCustomer(String email) throws RegistrationException {
 		TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.user.email = :email",
 				Customer.class);
 		query.setParameter("email", email);
@@ -91,7 +91,7 @@ public class CustomerDAO {
 		}
 	}
 
-	public Customer findByUser(User user) {
+	public Customer findByUserCustomer(User user) {
 		try {
 			TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.user = :user",
 					Customer.class);
