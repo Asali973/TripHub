@@ -2,6 +2,7 @@ package triphub.services;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
@@ -10,7 +11,7 @@ import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
 import triphub.helpers.RegistrationException;
 import triphub.viewModel.AccommodationViewModel;
-
+@Stateless
 public class AccommodationService {
 	
 	@Inject

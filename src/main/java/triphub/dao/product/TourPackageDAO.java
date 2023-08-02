@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
@@ -21,14 +22,11 @@ import triphub.viewModel.TourPackageFormViewModel;
 public class TourPackageDAO {
 	@PersistenceContext
 
-	private EntityManager em;
-	 private ThemeDAO themeDAO;
+	private EntityManager em;	
 	 
 	public TourPackageDAO() {}
 		
-	public TourPackageDAO(EntityManager em) {
-		this.em = em;
-	}
+	
 	//basic, to be removed later
 	public TourPackage create(TourPackageFormViewModel tourPackageVm) {
 		
@@ -54,7 +52,7 @@ public class TourPackageDAO {
 	        em.persist(newTheme);
 	        em.persist(newPrice);
 	        em.persist(newPackage); 
-
+	        em.flush();
 	        return newPackage; 	  
 	}
 	

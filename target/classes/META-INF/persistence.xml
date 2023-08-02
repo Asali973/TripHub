@@ -10,9 +10,10 @@
 	<persistence-unit name="triphub"
 		transaction-type="JTA">
 
-		<jta-data-source>java:jboss/datasources/triphubDS</jta-data-source>
-		
+    
+		<jta-data-source>java:jboss/datasources/triphubDS</jta-data-source>	
 
+    
 		<!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
 		<class>triphub.entity.user.User</class>
 		<class>triphub.entity.user.Customer</class>
@@ -35,10 +36,19 @@
 		<class>triphub.entity.product.TourPackage</class>
 		
 
+
 		<!-- <class>triphub.entity.user.User</class> -->
 
 		<!-- Liste des propriétés de JPA et Hibernate pour la Gestion de la BDD -->
 		<properties>
+
+			<!-- Pilote JDBC adapté à MySQL -->
+<!-- 			<property name="javax.persistence.jdbc.driver" -->
+<!-- 				value="com.mysql.cj.jdbc.Driver" /> -->
+
+			<!-- URL de connexion -->
+
+
 
 
 			<!-- Propriétés hibernate : dialect de la BDD, création du schéma, traces 

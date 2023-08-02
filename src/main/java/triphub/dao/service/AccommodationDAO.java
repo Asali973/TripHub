@@ -3,8 +3,9 @@ package triphub.dao.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
 import javax.persistence.TypedQuery;
@@ -14,16 +15,16 @@ import triphub.entity.product.service.accommodation.AccommodationType;
 
 import triphub.viewModel.AccommodationViewModel;
 
-
+@Stateless
 public class AccommodationDAO {
-	@PersistenceUnit
+	@PersistenceContext
 	private EntityManager em;
 
 	public AccommodationDAO(EntityManager em) {
 	this.em = em;
 	
 	}
-	
+	public AccommodationDAO() {}
 	public Accommodation create(AccommodationViewModel accommodationVm) {
 		Accommodation accommodation = new Accommodation();
 		accommodation.setNameAccommodation(accommodationVm.getNameAccommodation());

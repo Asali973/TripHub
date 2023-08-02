@@ -13,6 +13,7 @@ import triphub.viewModel.TourPackageFormViewModel;
 public class TourPackageService {
     @Inject
     private TourPackageDAO tourPackageDAO;
+    
     public TourPackageService() {}
 
     public List<TourPackage> getAllTourPackages() {
