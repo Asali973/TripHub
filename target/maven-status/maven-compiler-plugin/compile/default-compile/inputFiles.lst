@@ -50,7 +50,10 @@ D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\registration\ProviderBean
 D:\Trip hub\TripHub\src\main\java\triphub\entity\product\Product.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\product\service\restaurant\Restaurant.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\product\service\transportation\Transportation.java
+D:\Trip hub\TripHub\src\main\java\triphub\viewModel\TourPackageFormViewModel.java
 D:\Trip hub\TripHub\src\main\java\triphub\helpers\AuthenticationException.java
+D:\Trip hub\TripHub\src\main\java\triphub\entity\util\ImageConverter.java
+D:\Trip hub\TripHub\src\main\java\triphub\dao\ImageDAO.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\user\User.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\util\Administration.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\product\Price.java

@@ -26,7 +26,7 @@ public class DataSeedTest {
 	            List<Theme> themes = themeDAO.getAllThemes();
 	            System.out.println("Themes:");
 	            for (Theme theme : themes) {
-	                System.out.println(theme.getName());
+	                System.out.println(theme.getThemeName());
 	            }
 
 	            DestinationDAO destinationDAO = new DestinationDAO(em);
@@ -48,7 +48,7 @@ public class DataSeedTest {
 	            System.out.println("Tour Packages:");
 	            for (TourPackage tourPackage : tourPackages) {
 	                System.out.println("Name: " + tourPackage.getName());
-	                System.out.println("Theme: " + tourPackage.getTheme().getName());
+	                System.out.println("Theme: " + tourPackage.getTheme().getThemeName());
 	                System.out.println("Destination: " + tourPackage.getDestination().getCityName() + ", " +
 	                        tourPackage.getDestination().getState() + ", " +
 	                        tourPackage.getDestination().getCountry());

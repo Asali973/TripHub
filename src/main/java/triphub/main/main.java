@@ -100,8 +100,7 @@ public class main {
 		priceDao.create(price);
 		em.getTransaction().commit();
 		
-		Theme theme = new Theme("InstaSpots");
-	
+		Theme theme = new Theme("InstaSpots");	
 		
 		em.getTransaction().begin();
 		themeDao.create(theme);
@@ -115,14 +114,14 @@ public class main {
 		tourPackage.setPrice(price);
 
 		em.getTransaction().begin();
-		tpDao.createOrUpdate(tourPackage);
+	//	tpDao.create(tourPackage);
 		em.getTransaction().commit();
 		
         System.out.println("Tourpackage:");
         System.out.println("Name: " + tourPackage.getName());
         System.out.println("Price: " + tourPackage.getPrice().getAmount() + " " + tourPackage.getPrice().getCurrency());
         System.out.println("Destination: " + tourPackage.getDestination().getCityName() + ", " + tourPackage.getDestination().getState() + ", " + tourPackage.getDestination().getCountry());
-        System.out.println("Theme: " + tourPackage.getTheme().getName());
+        System.out.println("Theme: " + tourPackage.getTheme().getThemeName());
         
 
 		JPAUtil.shutdown();

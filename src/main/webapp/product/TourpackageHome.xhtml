@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Tour Packages</title>
+</h:head>
+<h:body>
+    <h3>Add New Tour Package</h3>
+    <h:form>
+        <p>
+            <h:outputLabel for="name" value="Name:" />
+            <h:inputText id="name" value="#{tourPackageBean.tourPackageVm.name}" />
+        </p>
+        <p>
+            <h:outputLabel for="price" value="Price:" />
+            <h:inputText id="price" value="#{tourPackageBean.tourPackageVm.amount}" />
+        </p>
+        <p>
+            <h:outputLabel for="currency" value="Currency:" />
+            <h:inputText id="currency" value="#{tourPackageBean.tourPackageVm.currency}" />
+        </p>
+        <p>
+            <h:outputLabel for="cityName" value="City:" />
+            <h:inputText id="cityName" value="#{tourPackageBean.tourPackageVm.cityName}" />
+        </p>
+        <p>
+            <h:outputLabel for="state" value="State:" />
+            <h:inputText id="state" value="#{tourPackageBean.tourPackageVm.state}" />
+        </p>
+        <p>
+            <h:outputLabel for="country" value="Country:" />
+            <h:inputText id="country" value="#{tourPackageBean.tourPackageVm.country}" />
+        </p>
+        <p>
+            <h:outputLabel for="themeName" value="Theme:" />
+            <h:inputText id="themeName" value="#{tourPackageBean.tourPackageVm.themeName}" />
+        </p>       
+        <p>
+            <h:commandButton value="Add Package" action="#{tourPackageBean.createTourPackage}" />
+        </p>
+    </h:form>
+
+   
+</h:body>
+</html>

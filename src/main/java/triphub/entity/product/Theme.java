@@ -18,11 +18,13 @@ public class Theme {
 	private List<TourPackage> tourPackages;
 
 	public Theme() {}
-		
-	public Theme(String name) {
 	
-		this.themeName = name;
+
+	public Theme(String themeName) {
+		super();
+		this.themeName = themeName;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -32,12 +34,12 @@ public class Theme {
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getThemeName() {
 		return themeName;
 	}
 
-	public void setName(String name) {
-		this.themeName = name;
+	public void setThemeName(String themeName) {
+		this.themeName = themeName;
 	}
 
 	public List<TourPackage> getTourPackages() {
@@ -47,5 +49,7 @@ public class Theme {
 	public void setTourPackages(List<TourPackage> tourPackages) {
 		this.tourPackages = tourPackages;
 	}
+		
+
 
 }
