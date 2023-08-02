@@ -5,7 +5,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 
-import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceContext;
+
+
 import javax.persistence.TypedQuery;
 
 import triphub.entity.product.Destination;
@@ -13,7 +15,7 @@ import triphub.entity.product.Theme;
 
 @Stateless
 public class DestinationDAO {
-	@PersistenceUnit
+	@PersistenceContext
 	private EntityManager em;
 	
 	public DestinationDAO() {}

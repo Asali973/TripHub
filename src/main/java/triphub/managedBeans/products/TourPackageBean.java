@@ -16,7 +16,7 @@ import triphub.entity.product.Image;
 import triphub.entity.product.Price;
 import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
-import triphub.main.JPAUtil;
+
 
 @Named
 @RequestScoped
@@ -58,7 +58,7 @@ public class TourPackageBean implements Serializable {
 			// Constructor
 			 @Inject
 			    public TourPackageBean(EntityManagerFactory emf) {
-			        this.em = JPAUtil.getEntityManager();
+			        //this.em = JPAUtil.getEntityManager();
 			        this.tourPackageDAO = new TourPackageDAO(em);
 			        this.newTourPackage = new TourPackage();
 			    }
