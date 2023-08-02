@@ -1,3 +1,4 @@
+
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/transportation/Transportation.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/Theme.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/accommodation/AccommodationType.java
@@ -55,3 +56,4 @@
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/main/DataSeedTest.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/CompanyInfo.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/Organizer.java
+

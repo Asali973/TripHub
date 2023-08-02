@@ -13,6 +13,7 @@ public class Accommodation {
 
 	private String nameAccommodation;
 
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	
@@ -68,8 +69,5 @@ public class Accommodation {
 	public void setAccommodationType(AccommodationType accommodationType) {
 		this.accommodationType = accommodationType;
 	}
-
-
-	
 	
 }
