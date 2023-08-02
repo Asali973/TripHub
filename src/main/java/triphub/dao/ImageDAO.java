@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
@@ -11,7 +12,7 @@ import triphub.entity.product.Image;
 
 @Stateless
 public class ImageDAO {
-	@PersistenceUnit
+	@PersistenceContext
 	 private EntityManager em;
 
     public ImageDAO() {

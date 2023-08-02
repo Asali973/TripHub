@@ -14,6 +14,11 @@
     PATH="/product/TourpackageHome.xhtml"
     TARGET="rules:#product#TourpackageHome.xhtml"
     TITLE="tourPackageHome" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="tpAdvancedSearch::#product#TpAdvancedSearch.xhtml"
+    NAME="output3" PATH="/product/TpAdvancedSearch.xhtml"
+    TARGET="rules:#product#TpAdvancedSearch.xhtml"
+    TITLE="tpAdvancedSearch" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#login#registration.xhtml"
@@ -22,4 +27,6 @@
   SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#product#TourpackageHome.xhtml"
   PATH="/product/TourpackageHome.xhtml" SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#product#TpAdvancedSearch.xhtml"
+  PATH="/product/TpAdvancedSearch.xhtml" SHAPE="288,465,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

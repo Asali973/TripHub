@@ -1,47 +1,76 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-    <title>Tour Packages</title>
+    <title>Tour Packages</title>    
 </h:head>
-<h:body>
+<h:body> 
+        <div class="reg-form-container">
     <h3>Add New Tour Package</h3>
     <h:form>
-        <p>
+         <div class="reg-form-group">
             <h:outputLabel for="name" value="Name:" />
             <h:inputText id="name" value="#{tourPackageBean.tourPackageVm.name}" />
-        </p>
-        <p>
+     </div>
+       <div class="reg-form-group">
             <h:outputLabel for="price" value="Price:" />
             <h:inputText id="price" value="#{tourPackageBean.tourPackageVm.amount}" />
-        </p>
-        <p>
+     </div>
+     <div class="reg-form-group">
             <h:outputLabel for="currency" value="Currency:" />
             <h:inputText id="currency" value="#{tourPackageBean.tourPackageVm.currency}" />
-        </p>
-        <p>
+        </div>
+        <div class="reg-form-group">
             <h:outputLabel for="cityName" value="City:" />
             <h:inputText id="cityName" value="#{tourPackageBean.tourPackageVm.cityName}" />
-        </p>
-        <p>
+       </div>
+         <div class="reg-form-group">
             <h:outputLabel for="state" value="State:" />
             <h:inputText id="state" value="#{tourPackageBean.tourPackageVm.state}" />
-        </p>
-        <p>
+  </div>
+      <div class="reg-form-group">
             <h:outputLabel for="country" value="Country:" />
             <h:inputText id="country" value="#{tourPackageBean.tourPackageVm.country}" />
-        </p>
-        <p>
+     </div>
+     <div class="reg-form-group">
             <h:outputLabel for="themeName" value="Theme:" />
             <h:inputText id="themeName" value="#{tourPackageBean.tourPackageVm.themeName}" />
-        </p>       
-        <p>
+   </div>    
+       <div class="reg-form-group">
             <h:commandButton value="Add Package" action="#{tourPackageBean.createPackage}" />
-        </p>
+         </div> 
     </h:form>
-
+  <h3>Available Tour Packages</h3>
+    <h:dataTable value="#{tourPackageBean.allTourPackages}" var="package" border="1">
+        <h:column>
+            <f:facet name="header">Package Name</f:facet>
+            #{package.name}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Price</f:facet>
+            #{package.price.amount} #{package.price.currency}
+        </h:column>
+        <h:column>
+            <f:facet name="header">City</f:facet>
+            #{package.destination.cityName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">State</f:facet>
+            #{package.destination.state}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Country</f:facet>
+            #{package.destination.country}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Theme</f:facet>
+            #{package.theme.themeName}
+        </h:column>
+    </h:dataTable>
+         </div>
    
 </h:body>
 </html>
