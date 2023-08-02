@@ -1,17 +1,17 @@
 package triphub.dao.product;
 
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
 import triphub.entity.product.Destination;
+
 
 @Stateless
 public class DestinationDAO {
 	@PersistenceContext
+
 	private EntityManager em;
 	
 	public DestinationDAO() {}
