@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
@@ -15,13 +16,13 @@ import triphub.viewModel.TransportationViewModel;
 
 @Stateless
 public class TransportationDAO {
-@PersistenceUnit
+@PersistenceContext
 	private EntityManager em;
 
 	public TransportationDAO(EntityManager em) {
 		this.em = em;
 	}
-	
+	public TransportationDAO() {}
 	public Transportation create(TransportationViewModel transportationvm) {
 		
 		Transportation transportation = new Transportation();

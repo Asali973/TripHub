@@ -10,7 +10,7 @@ import triphub.entity.product.Destination;
 
 @Stateless
 public class DestinationDAO {
-	@PersistenceUnit
+	@PersistenceContext
 
 	private EntityManager em;
 	

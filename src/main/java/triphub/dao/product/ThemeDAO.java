@@ -17,7 +17,7 @@ import triphub.entity.product.Theme;
 
 @Stateless
 public class ThemeDAO {
-	@PersistenceUnit
+	@PersistenceContext
 
 	private EntityManager em;
 	

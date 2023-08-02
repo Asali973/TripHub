@@ -11,7 +11,7 @@ import triphub.entity.product.Price;
 
 @Stateless
 public class PriceDAO {
-	@PersistenceUnit
+	@PersistenceContext
 	private EntityManager em;
 	
 	public PriceDAO() {}
