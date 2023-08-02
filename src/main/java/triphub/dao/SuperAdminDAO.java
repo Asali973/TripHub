@@ -18,15 +18,15 @@ import triphub.viewModel.UserViewModel;
 @Stateless
 public class SuperAdminDAO {
 
-	@PersistenceUnit
+	@PersistenceContext
 	private EntityManager em;
 
 	public SuperAdminDAO() {
 	}
 
-	public SuperAdminDAO(EntityManager em) {
-		this.em = em;
-	}
+//	public SuperAdminDAO(EntityManager em) {
+//		this.em = em;
+//	}
 
 	public SuperAdmin createSuperAdmin(UserViewModel form) {
 

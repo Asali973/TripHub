@@ -19,15 +19,15 @@ import triphub.viewModel.UserViewModel;
 @Stateless
 public class ProviderDAO {
 
-	@PersistenceUnit
+	@PersistenceContext
 	private EntityManager em;
 
 	public ProviderDAO() {
 	}
 
-	public ProviderDAO(EntityManager em) {
-		this.em = em;
-	}
+//	public ProviderDAO(EntityManager em) {
+//		this.em = em;
+//	}
 
 	public Provider createProvider(UserViewModel form) {
 

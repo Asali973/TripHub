@@ -19,15 +19,15 @@ import triphub.viewModel.UserViewModel;
 @Stateless
 public class OrganizerDAO {
 
-	@PersistenceUnit
+	@PersistenceContext
 	private EntityManager em;
 
 	public OrganizerDAO() {
 	}
 
-	public OrganizerDAO(EntityManager em) {
-		this.em = em;
-	}
+//	public OrganizerDAO(EntityManager em) {
+//		this.em = em;
+//	}
 
 	public Organizer createOrganizer(UserViewModel form) {
 

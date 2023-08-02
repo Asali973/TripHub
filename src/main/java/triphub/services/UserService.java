@@ -75,9 +75,9 @@ public class UserService {
 		customerDAO.deleteCustomer(id);
 	}
 
-	public void updateCustomer(Long id) {
-		customerDAO.updateCustomer(id);
-	}
+//	public void updateCustomer(Long id) {
+//		customerDAO.updateCustomer(id);
+//	}
 
 	public Customer findByEmailCustomer(String email) throws RegistrationException {
 		return customerDAO.findByEmailCustomer(email);
