@@ -4,7 +4,11 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+
+import javax.persistence.NoResultException;
+
 import javax.persistence.PersistenceContext;
+
 import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
@@ -13,7 +17,8 @@ import triphub.entity.product.Theme;
 
 @Stateless
 public class ThemeDAO {
-	@PersistenceContext
+	@PersistenceUnit
+
 	private EntityManager em;
 	
 	public ThemeDAO() {}
@@ -47,4 +52,31 @@ public class ThemeDAO {
 		 
          return query.getResultList();       
 	 }
+	 
+	 public Theme findByThemeName(String themeName) {
+		    TypedQuery<Theme> query = em.createQuery("SELECT t FROM Theme t WHERE t.themeName = :themeName", Theme.class);
+		    query.setParameter("themeName", themeName);
+		    
+		    try {
+		        return query.getSingleResult();
+		    } catch (NoResultException e) {
+		        // Theme with the given name does not exist
+		        return null;
+		    }
+		}
+	 public  Theme findOrCreateThemeByName(String themeName) {
+		    Theme existingTheme = findByThemeName(themeName);
+
+		    if (existingTheme == null) {
+		        // Theme with the given name doesn't exist, create a new one
+		        Theme newTheme = new Theme();
+		        newTheme.setThemeName(themeName);
+		        // Set any other properties if needed
+		        em.persist(newTheme); // Persist the new theme
+		        return newTheme;
+		    } else {
+		        return existingTheme;
+		    }
+		}
+
 }

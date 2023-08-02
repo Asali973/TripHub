@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources xmlns="http://www.jboss.org/ironjacamar/schema"
+
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
     <datasource jndi-name="java:jboss/datasources/triphubDS"
@@ -14,7 +15,7 @@
     </datasource>
     <drivers>
         <driver name="com.mysql" module="com.mysql">
-            <driver-class>com.mysql.cj.jdbc.Driver</driver-class>
+            <driver-class>com.mysql.cj.jdbc.Driver</driver-class
             <datasource-class>
             com.mysql.cj.jdbc.MysqlConnectionPoolDataSource
             </datasource-class>

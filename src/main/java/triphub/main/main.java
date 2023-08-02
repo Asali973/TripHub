@@ -149,14 +149,16 @@ public class main {
 		Accommodation accommodationTest = accommodationService.create(accommodationvm);
 		accommodationDao.findAccommodationByName(accommodationvm.getNameAccommodation());
 		
+
 		System.out.println("Accommodation created successfully");
 	
 		System.out.println("Accommodation found : " + accommodationvm.getNameAccommodation() +"\n Type Accommodation : "+ accommodationvm.getAccommodationType());
+
 		
 		
 		accommodationService.deleteAccommodation(accommodationTest.getId());
 		System.out.println("Accommdation delete : " + accommodationTest.getNameAccommodation());
-		
+
 		em.getTransaction().commit();
 		
 
@@ -207,6 +209,7 @@ public class main {
 //        System.out.println("Price: " + tourPackage.getPrice().getAmount() + " " + tourPackage.getPrice().getCurrency());
 //        System.out.println("Destination: " + tourPackage.getDestination().getCityName() + ", " + tourPackage.getDestination().getState() + ", " + tourPackage.getDestination().getCountry());
 //        System.out.println("Theme: " + tourPackage.getTheme().getName());
+
         
 
 		JPAUtil.shutdown();
