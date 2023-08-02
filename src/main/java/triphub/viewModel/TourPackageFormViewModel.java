@@ -1,6 +1,7 @@
 package triphub.viewModel;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 
 public class TourPackageFormViewModel implements Serializable{
@@ -10,7 +11,7 @@ public class TourPackageFormViewModel implements Serializable{
     private String name;
 
     // Price properties
-    private double amount;
+    private BigDecimal amount;
     private String currency;
 
     // Destination properties
@@ -19,12 +20,33 @@ public class TourPackageFormViewModel implements Serializable{
     private String country;
 
     // Theme properties
-    private String themeName;   
+    private String themeName;      
+
+
+	// New fields for price range
+    private BigDecimal minPrice = new BigDecimal(100);
+    private BigDecimal maxPrice = BigDecimal.ZERO;
 
     // Image properties
 //    private List<Image> imagelinks;
     
 	public TourPackageFormViewModel() {}
+	
+	 public BigDecimal getMinPrice() {
+			return minPrice;
+		}
+
+		public void setMinPrice(BigDecimal minPrice) {
+			this.minPrice = minPrice;
+		}
+
+		public BigDecimal getMaxPrice() {
+			return maxPrice;
+		}
+
+		public void setMaxPrice(BigDecimal maxPrice) {
+			this.maxPrice = maxPrice;
+		}
 
 	public String getName() {
 		return name;
@@ -34,11 +56,11 @@ public class TourPackageFormViewModel implements Serializable{
 		this.name = name;
 	}
 
-	public double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 

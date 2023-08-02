@@ -9,9 +9,13 @@ import triphub.dao.UserDAO;
 
 import triphub.dao.service.AccommodationDAO;
 import triphub.dao.service.AddressDAO;
-import triphub.dao.service.RestaurantDAO;
+
+import triphub.dao.service.TransportationDAO;
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
+import triphub.entity.product.service.transportation.Transportation;
+import triphub.entity.product.service.transportation.TransportationType;
+import triphub.dao.service.RestaurantDAO;
 import triphub.entity.product.service.restaurant.Restaurant;
 import triphub.dao.product.DestinationDAO;
 import triphub.dao.product.PriceDAO;
@@ -21,77 +25,47 @@ import triphub.entity.product.Destination;
 import triphub.entity.product.Price;
 import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
-
 import triphub.entity.user.Customer;
 import triphub.entity.user.User;
 import triphub.entity.util.Address;
+import triphub.helpers.RegistrationException;
+import triphub.services.AccommodationService;
+import triphub.viewModel.AccommodationViewModel;
+import triphub.services.TransportationService;
+import triphub.viewModel.TransportationViewModel;
 import triphub.services.RestaurantService;
 import triphub.viewModel.RestaurantViewModel;
+
 
 public class main {
 
 	public static void main(String[] args) {
 
 	 EntityManager em = JPAUtil.getEntityManager();
-//
-//		UserDAO userDAO = new UserDAO(em);		
-//	
+
+//		em.getTransaction().begin();
+//		themeDao.create(theme);
+//		em.getTransaction().commit();
 //		
-//		User user = new User();
-//		user.setFirstName("John");
-//		user.setLastName("Doe");
-//		user.setEmail("john.doe@example.com");
-//		user.setPhoneNum("1234567890");
+
+//		TourPackage tourPackage = new TourPackage();
+//		tourPackage.setName("Summer Adventure");
+//		
+//		tourPackage.setDestination(destination);
+//		tourPackage.setTheme(theme);
+//		tourPackage.setPrice(price);
 //
 //		em.getTransaction().begin();
-//		userDAO.create(user);
+//		tpDao.createOrUpdate(tourPackage);
 //		em.getTransaction().commit();
-//
-//		CustomerDAO customerDAO = new CustomerDAO(em);
-//
-//		Customer customer1 = new Customer();
-//		customer1.setUser(user);
-//		em.getTransaction().begin();
-//		customerDAO.create(customer1);
-//		em.getTransaction().commit();
-//
-//		User foundUser = userDAO.read(user.getId());
-//		System.out.println("Found user: " + foundUser.getFirstName() + " " + foundUser.getLastName());
-		
-		AddressDAO addressDAO = new AddressDAO(em);
-		
-		Address address1 = new Address();
-		address1.setNum("12");
-		address1.setStreet("rue de la gare");
-		address1.setCity("Amiens");
-		address1.setState("Haut de France");
-		address1.setCountry("France");
-		
-		Address address2 = new Address();
-		address2.setNum("24");
-		address2.setStreet("rue de la gare");
-		address2.setCity("Lille");
-		address2.setState("Haut de France");
-		address2.setCountry("France");
-		
-		Address address3 = new Address();
-		address3.setNum("2");
-		address3.setStreet("Piazza Napoleone");
-		address3.setCity("Florence");
-		address3.setState("Toscane");
-		address3.setCountry("Italie");
-		
-		Address address4 = new Address();
-		address4.setNum("1");
-		address4.setStreet("Garibaldi");
-		address4.setCity("Milan");
-		address4.setState("Lombardie");
-		address4.setCountry("Italie");
-
-
-//		AccommodationDAO accommodationDao = new AccommodationDAO(em);
 //		
-//		
+//        System.out.println("Tourpackage:");
+//        System.out.println("Name: " + tourPackage.getName());
+//        System.out.println("Price: " + tourPackage.getPrice().getAmount() + " " + tourPackage.getPrice().getCurrency());
+//        System.out.println("Destination: " + tourPackage.getDestination().getCityName() + ", " + tourPackage.getDestination().getState() + ", " + tourPackage.getDestination().getCountry());
+//        System.out.println("Theme: " + tourPackage.getTheme().getName());
+
+=======
 //		Accommodation accommodation1 = new Accommodation();
 //		accommodation1.setNameAccommodation("Hotel Ibis");
 //		accommodation1.setAddress(address1);
@@ -178,8 +152,9 @@ public class main {
         System.out.println("Destination: " + tourPackage.getDestination().getCityName() + ", " + tourPackage.getDestination().getState() + ", " + tourPackage.getDestination().getCountry());
         System.out.println("Theme: " + tourPackage.getTheme().getName());
         System.out.println("Restau : " + restaurants);
+
         
 
 		JPAUtil.shutdown();
 	}
-}
+

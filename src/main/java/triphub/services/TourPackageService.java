@@ -1,5 +1,6 @@
 package triphub.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -35,4 +36,9 @@ public class TourPackageService {
     public void deleteTourPackage(TourPackage tourPackage) {
         tourPackageDAO.delete(tourPackage);
     }
+    
+    public List<TourPackage> advancedSearch(String city, String state, String country, BigDecimal minPrice, BigDecimal maxPrice, String name, String themeName) {
+        return tourPackageDAO.advancedSearch(city, state, country, minPrice, maxPrice, name, themeName);
+    }
+
 }

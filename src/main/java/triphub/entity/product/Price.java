@@ -1,5 +1,7 @@
 package triphub.entity.product;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +14,7 @@ public class Price {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private double amount;
+	private BigDecimal amount;
 	private String currency;
 	
 	@OneToOne(mappedBy = "price")
@@ -20,17 +22,17 @@ public class Price {
 			
 	public Price() {}
 	
-	public Price(double amount, String currency) {
+	public Price(BigDecimal amount, String currency) {
 		super();
 		this.amount = amount;
 		this.currency = currency;
 	}
 
-	public double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 

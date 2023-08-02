@@ -1,25 +1,27 @@
 package triphub.main;
 
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
 import triphub.dao.UserDAO;
 import triphub.dao.product.DestinationDAO;
 import triphub.dao.product.PriceDAO;
 import triphub.dao.product.ThemeDAO;
 import triphub.dao.product.TourPackageDAO;
 import triphub.dao.service.AddressDAO;
-import triphub.dao.service.RestaurantDAO;
+import triphub.dao.service.RestaurantDAO;>>>>>>> master
 import triphub.entity.product.Destination;
 import triphub.entity.product.Price;
 import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
+import triphub.entity.user.Customer;
 import triphub.entity.product.service.restaurant.Restaurant;
 import triphub.entity.user.Customer;
 import triphub.entity.util.Address;
+
 
 public class DataSeeder {
 
@@ -29,12 +31,14 @@ public class DataSeeder {
 		em = JPAUtil.getEntityManager();
 	}
 
-	UserDAO userDAO = new UserDAO(em);
+
+	UserDAO userDAO = new UserDAO();
+
 	Customer customer1 = new Customer();
 	DestinationDAO desDao = new DestinationDAO(em);
 	ThemeDAO themeDao = new ThemeDAO(em);
 	PriceDAO priceDao = new PriceDAO(em);
-	TourPackageDAO tpDao = new TourPackageDAO(em);
+	TourPackageDAO tpDao = new TourPackageDAO();	
 	RestaurantDAO rDAO = new RestaurantDAO(em);
 	AddressDAO addressDAO = new AddressDAO(em);
 
@@ -50,7 +54,7 @@ public class DataSeeder {
         persistEntities(prices);
 
         List<TourPackage> tourPackages = createSampleTourPackages(themes, destinations, prices);
-        persistEntities(tourPackages);
+        persistEntities(tourPackages);    
         
         List<Address> addresses = createSampleAddresses();
         persistEntities(addresses);
@@ -61,6 +65,7 @@ public class DataSeeder {
 
 
 	private void persistEntities(List<?> entities) {
+
         em.getTransaction().begin();
         for (Object entity : entities) {
             em.persist(entity);
@@ -68,8 +73,6 @@ public class DataSeeder {
         em.getTransaction().commit();
     }
 
-	
-	
 	private List<Theme> createSampleThemes() {
 		// Define sample Theme objects here using collection initialization
 		return Arrays.asList(new Theme("Adventure"), new Theme("Cultural"), new Theme("InstaSpots"),
@@ -84,7 +87,12 @@ public class DataSeeder {
 	}
 
 	private List<Price> createSamplePrices() {
-		return Arrays.asList(new Price(1200, "USD"), new Price(1140, "Euro"));
+
+	    return Arrays.asList(
+	        new Price(new BigDecimal("1200"), "USD"),
+	        new Price(new BigDecimal("1140"), "Euro")
+	    );
+
 	}
 		
     private List<TourPackage> createSampleTourPackages(List<Theme> themes, List<Destination> destinations, List<Price> prices) {
@@ -171,6 +179,6 @@ public class DataSeeder {
 		Restaurants.add(restaurant3);
     	
 		return Restaurants;
-	}
-    	
+	}    	
+
 }
