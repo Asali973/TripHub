@@ -9,9 +9,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import triphub.entity.product.TourPackage;
 
-
+@Stateless
 public class TourPackageDAO {
-
+	@PersistenceContext
 	private EntityManager em;
 		
 	public TourPackageDAO(EntityManager em) {

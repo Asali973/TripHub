@@ -1,61 +1,65 @@
 package triphub.managedBeans;
 
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import triphub.dao.*;
 import triphub.entity.user.*;
+import triphub.services.UserService;
+import triphub.viewModel.UserViewModel;
+
 import javax.persistence.*;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-@ManagedBean
-@SessionScoped
+@Named
+@RequestScoped
 public class LoginBean {
-    private String email;
-    private String password;
-    private User user;
-    
-    private EntityManagerFactory emf;
-    private EntityManager em;
+	
+    @Inject
+    private UserService userService;
+
+    private static final long serialVersionUID = 1L;
+
+    private UserViewModel userViewModel = new UserViewModel();
+    //private User user;
 
     public LoginBean() {
-        emf = Persistence.createEntityManagerFactory("triphub");
-        em = emf.createEntityManager();
     }
 
     public String login() {
-        UserDAO userDao = new UserDAO(em);
-        User user = userDao.findByEmail(email);
 
-        if(user != null && BCrypt.checkpw(password, user.getPassword())) {
-            this.user = user;
+        User user = userService.findByEmailUser(userViewModel.getEmail());
+ 
+        if(user != null && BCrypt.checkpw(userViewModel.getPassword(), user.getPassword())) {
+            //this.user = user;
+            // Add user object to the session
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
             
-            CustomerDAO customerDao = new CustomerDAO(em);
-            Customer customer = customerDao.findByUser(user);
+            Customer customer = userService.findByUserCustomer(user);
             if (customer != null) {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "customer");
                 return "home?faces-redirect=true";
             }
-
-            OrganizerDAO organizerDao = new OrganizerDAO(em);
-            Organizer organizer = organizerDao.findByUser(user);
+            
+            Organizer organizer = userService.findByUserOrganizer(user);
             if (organizer != null) {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "organizer");
                 return "home?faces-redirect=true";
             }
 
-            ProviderDAO providerDao = new ProviderDAO(em);
-            Provider provider = providerDao.findByUser(user);
+            Provider provider = userService.findByUserProvider(user);
             if (provider != null) {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "provider");
                 return "home?faces-redirect=true";
             }
 
-            SuperAdminDAO superAdminDao = new SuperAdminDAO(em);
-            SuperAdmin superAdmin = superAdminDao.findByUser(user);
+            SuperAdmin superAdmin = userService.findByUserSuperAdmin(user);
             if (superAdmin != null) {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "superAdmin");
                 return "home?faces-redirect=true";
@@ -64,32 +68,15 @@ public class LoginBean {
         }
         return "login"; 
     }
-
-
-
-    public String getEmail() {
-        return email;
+    
+    public String logout() {
+        // Invalidate session
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login?faces-redirect=true"; 
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
     
     
 }
