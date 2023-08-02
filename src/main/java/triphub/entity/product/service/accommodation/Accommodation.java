@@ -10,9 +10,9 @@ public class Accommodation {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nameAccomodation;
 
 	private String nameAccommodation;
+
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
@@ -69,15 +69,5 @@ public class Accommodation {
 	public void setAccommodationType(AccommodationType accommodationType) {
 		this.accommodationType = accommodationType;
 	}
-
-	public String getNameAccomodation() {
-		return nameAccomodation;
-	}
-
-	public void setNameAccomodation(String nameAccomodation) {
-		this.nameAccomodation = nameAccomodation;
-	}
-	
-	
 	
 }

@@ -19,7 +19,8 @@ import triphub.viewModel.TourPackageFormViewModel;
 
 @Stateless
 public class TourPackageDAO {
-	@PersistenceUnit
+	@PersistenceContext
+
 	private EntityManager em;
 	 private ThemeDAO themeDAO;
 	 
