@@ -14,9 +14,9 @@ public class UserDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-//	public UserDAO(EntityManager em) {
-//		this.em = em;
-//	}
+	public UserDAO(EntityManager em) {
+		this.em = em;
+	}
 	
 	public UserDAO() {
 	}

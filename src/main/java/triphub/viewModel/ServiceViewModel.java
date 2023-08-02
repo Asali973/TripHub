@@ -8,7 +8,7 @@ import triphub.entity.util.Date;
 
 public class ServiceViewModel {
 
-	private Accommodation accomodation;
+	private Accommodation accommodation;
 	private Restaurant restaurant;
 	private Transportation transportation;
 	private Price price;
@@ -19,11 +19,11 @@ public class ServiceViewModel {
 	private Date endDate;
 	
 	
-	public Accommodation getAccomodation() {
-		return accomodation;
+	public Accommodation getAccommodation() {
+		return accommodation;
 	}
-	public void setAccomodation(Accommodation accomodation) {
-		this.accomodation = accomodation;
+	public void setAccommodation(Accommodation accommodation) {
+		this.accommodation = accommodation;
 	}
 	public Restaurant getRestaurant() {
 		return restaurant;

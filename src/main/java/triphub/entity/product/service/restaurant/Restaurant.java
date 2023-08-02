@@ -15,6 +15,8 @@ public class Restaurant {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String nameRestaurant;
+	
 	@OneToOne
 	private Address address;
 	
@@ -43,8 +45,13 @@ public class Restaurant {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-	
 
+	public String getNameRestaurant() {
+		return nameRestaurant;
+	}
+
+	public void setNameRestaurant(String nameRestaurant) {
+		this.nameRestaurant = nameRestaurant;
+	}
+	
 }

@@ -16,15 +16,18 @@ import triphub.viewModel.TransportationViewModel;
 
 @Stateless
 public class TransportationDAO {
-@PersistenceContext
+	@PersistenceContext
 	private EntityManager em;
 
 	public TransportationDAO(EntityManager em) {
 		this.em = em;
 	}
-	public TransportationDAO() {}
+
+	public TransportationDAO() {
+	}
+
 	public Transportation create(TransportationViewModel transportationvm) {
-		
+
 		Transportation transportation = new Transportation();
 		transportation.setNameTransportation(transportationvm.getNameTransportation());
 		transportation.setDeparture(transportationvm.getDeparture());
@@ -33,31 +36,32 @@ public class TransportationDAO {
 		em.persist(transportation);
 		return transportation;
 	}
-	
+
 	public Transportation read(Long id) {
 		return em.find(Transportation.class, id);
 	}
-	
+
 	public Transportation update(Transportation transportation) {
-	    return em.merge(transportation);
+		return em.merge(transportation);
 	}
-	
+
 	public void delete(Long id) {
 		Transportation transportation = em.find(Transportation.class, id);
-	    if (transportation != null) {
-	        em.remove(transportation);
-	    }
+		if (transportation != null) {
+			em.remove(transportation);
+		}
 	}
-	
-	public List<Transportation> findByType(TransportationType transportationType){
-		TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation t WHERE t.transportation = :transportation", Transportation.class);
+
+	public List<Transportation> findByType(TransportationType transportationType) {
+		TypedQuery<Transportation> query = em.createQuery(
+				"SELECT t FROM Transportation t WHERE t.transportation = :transportation", Transportation.class);
 		query.setParameter("transportation", transportationType);
-		return query.getResultList();		
+		return query.getResultList();
 	}
-	
-	 public List<Transportation> getAllTransportation() {
-		 TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation t", Transportation.class);
-         return query.getResultList();       
-	 }
+
+	public List<Transportation> getAllTransportation() {
+		TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation t", Transportation.class);
+		return query.getResultList();
+	}
 
 }
