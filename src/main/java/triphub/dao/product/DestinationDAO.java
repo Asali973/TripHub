@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.product.Destination;
-import triphub.entity.product.Theme;
 
 @Stateless
 public class DestinationDAO {

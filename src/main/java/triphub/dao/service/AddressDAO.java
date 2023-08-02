@@ -11,7 +11,6 @@ public class AddressDAO {
 	
 	public AddressDAO(EntityManager em) {
 		this.em = em;
-		
 		}
 		
 		public Address create(Address address) {

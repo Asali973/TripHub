@@ -1,56 +1,59 @@
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\service\accommodation\AccommodationType.java
-D:\Trip hub\TripHub\src\main\java\triphub\helpers\RegistrationException.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\service\AccommodationDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\products\TourPackageBean.java
-D:\Trip hub\TripHub\src\main\java\triphub\viewModel\LoginViewModel.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\util\Picture.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\user\Provider.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\SuperAdminDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\service\AddressDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\service\RestaurantDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\services\TourPackageService.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\product\PriceDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\UserDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\service\accommodation\Accommodation.java
-D:\Trip hub\TripHub\src\main\java\triphub\main\DataSeeder.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\OrganizerDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\subscription\Subscription.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\util\Date.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\product\TourPackageDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\main\DataSeedTest.java
-D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\registration\CustomerBean.java
-D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\RegistrationBean.java
-D:\Trip hub\TripHub\src\main\java\triphub\viewModel\UserViewModel.java
-D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\registration\OrganizerBean.java
-D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\registration\SuperAdminBean.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\ProviderDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\user\Customer.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\product\DestinationDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\Destination.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\util\CompanyInfo.java
-D:\Trip hub\TripHub\src\main\java\triphub\helpers\PasswordUtils.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\util\Address.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\user\Organizer.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\util\FinanceInfo.java
-D:\Trip hub\TripHub\src\main\java\triphub\helpers\FacesMessageUtil.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\service\transportation\TransportationType.java
-D:\Trip hub\TripHub\src\main\java\triphub\main\JPAUtil.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\service\Service.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\Image.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\product\ThemeDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\main\main.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\user\SuperAdmin.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\TourPackage.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\Theme.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\service\AccomodationDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\dao\CustomerDAO.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\util\PictureType.java
-D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\LoginBean.java
-D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\registration\ProviderBean.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\Product.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\service\restaurant\Restaurant.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\service\transportation\Transportation.java
-D:\Trip hub\TripHub\src\main\java\triphub\helpers\AuthenticationException.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\user\User.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\util\Administration.java
-D:\Trip hub\TripHub\src\main\java\triphub\entity\product\Price.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\user\Organizer.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\OrganizerDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\product\PriceDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\helpers\AuthenticationException.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\UserDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\viewModel\LoginViewModel.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\service\RestaurantDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\user\SuperAdmin.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\services\TourPackageService.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\product\TourPackageDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\util\Picture.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\service\accommodation\Accommodation.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\service\accommodation\AccommodationType.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\user\Provider.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\viewModel\RestaurantViewModel.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\main\JPAUtil.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\main\DataSeeder.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\service\restaurant\Restaurant.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\product\ThemeDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\helpers\PasswordUtils.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\service\AddressDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\service\transportation\TransportationType.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\user\User.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\util\Address.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\Theme.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\managedBeans\registration\CustomerBean.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\helpers\RegistrationException.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\SuperAdminDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\service\Service.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\service\transportation\Transportation.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\managedBeans\products\TourPackageBean.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\Price.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\Destination.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\subscription\Subscription.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\ProviderDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\managedBeans\registration\OrganizerBean.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\viewModel\UserViewModel.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\CustomerDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\util\Administration.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\util\CompanyInfo.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\managedBeans\registration\SuperAdminBean.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\user\Customer.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\main\main.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\managedBeans\registration\ProviderBean.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\util\Date.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\util\FinanceInfo.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\managedBeans\RegistrationBean.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\service\AccommodationDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\managedBeans\service\RestaurantBean.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\helpers\FacesMessageUtil.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\services\RestaurantService.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\product\DestinationDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\TourPackage.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\service\AccomodationDAO.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\Image.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\main\DataSeedTest.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\managedBeans\LoginBean.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\Product.java
+C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\util\PictureType.java
