@@ -177,6 +177,7 @@ public class main {
         System.out.println("Price: " + tourPackage.getPrice().getAmount() + " " + tourPackage.getPrice().getCurrency());
         System.out.println("Destination: " + tourPackage.getDestination().getCityName() + ", " + tourPackage.getDestination().getState() + ", " + tourPackage.getDestination().getCountry());
         System.out.println("Theme: " + tourPackage.getTheme().getName());
+        System.out.println("Restau : " + restaurants);
         
 
 		JPAUtil.shutdown();
