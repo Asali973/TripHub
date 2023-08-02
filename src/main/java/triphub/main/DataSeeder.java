@@ -1,22 +1,27 @@
 package triphub.main;
 
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
 import triphub.dao.UserDAO;
 import triphub.dao.product.DestinationDAO;
 import triphub.dao.product.PriceDAO;
 import triphub.dao.product.ThemeDAO;
 import triphub.dao.product.TourPackageDAO;
+import triphub.dao.service.AddressDAO;
+import triphub.dao.service.RestaurantDAO;>>>>>>> master
 import triphub.entity.product.Destination;
 import triphub.entity.product.Price;
 import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
 import triphub.entity.user.Customer;
+import triphub.entity.product.service.restaurant.Restaurant;
+import triphub.entity.user.Customer;
+import triphub.entity.util.Address;
+
 
 public class DataSeeder {
 
@@ -26,12 +31,17 @@ public class DataSeeder {
 		em = JPAUtil.getEntityManager();
 	}
 
+
 	UserDAO userDAO = new UserDAO();
+
 	Customer customer1 = new Customer();
 	DestinationDAO desDao = new DestinationDAO(em);
 	ThemeDAO themeDao = new ThemeDAO(em);
 	PriceDAO priceDao = new PriceDAO(em);
-	TourPackageDAO tpDao = new TourPackageDAO();
+	TourPackageDAO tpDao = new TourPackageDAO();	
+	RestaurantDAO rDAO = new RestaurantDAO(em);
+	AddressDAO addressDAO = new AddressDAO(em);
+
 
 	public void seedData() {
         List<Theme> themes = createSampleThemes();
@@ -44,10 +54,18 @@ public class DataSeeder {
         persistEntities(prices);
 
         List<TourPackage> tourPackages = createSampleTourPackages(themes, destinations, prices);
-        persistEntities(tourPackages);
+        persistEntities(tourPackages);    
+        
+        List<Address> addresses = createSampleAddresses();
+        persistEntities(addresses);
+        
+        List<Restaurant> restaurants = createSampleRestaurants(addresses);
+        persistEntities(restaurants);
     }
 
-    private void persistEntities(List<?> entities) {
+
+	private void persistEntities(List<?> entities) {
+
         em.getTransaction().begin();
         for (Object entity : entities) {
             em.persist(entity);
@@ -69,10 +87,12 @@ public class DataSeeder {
 	}
 
 	private List<Price> createSamplePrices() {
+
 	    return Arrays.asList(
 	        new Price(new BigDecimal("1200"), "USD"),
 	        new Price(new BigDecimal("1140"), "Euro")
 	    );
+
 	}
 		
     private List<TourPackage> createSampleTourPackages(List<Theme> themes, List<Destination> destinations, List<Price> prices) {
@@ -95,6 +115,70 @@ public class DataSeeder {
 
         return tourPackages;
     }
+    
+    private List<Address> createSampleAddresses(){
 
-	
+    	List<Address> addresses = new ArrayList<>();
+
+		Address address1 = new Address();
+		address1.setNum("12");
+		address1.setStreet("rue de la gare");
+		address1.setCity("Amiens");
+		address1.setState("Haut de France");
+		address1.setCountry("France");
+		addresses.add(address1);
+		
+		Address address2 = new Address();
+		address2.setNum("24");
+		address2.setStreet("rue de la gare");
+		address2.setCity("Lille");
+		address2.setState("Haut de France");
+		address2.setCountry("France");
+		addresses.add(address2);
+		
+		Address address3 = new Address();
+		address3.setNum("2");
+		address3.setStreet("Piazza Napoleone");
+		address3.setCity("Florence");
+		address3.setState("Toscane");
+		address3.setCountry("Italie");
+		addresses.add(address3);
+		
+		Address address4 = new Address();
+		address4.setNum("1");
+		address4.setStreet("Garibaldi");
+		address4.setCity("Milan");
+		address4.setState("Lombardie");
+		address4.setCountry("Italie");
+		addresses.add(address4);
+		
+		return addresses;
+    }
+    
+    
+    private List<Restaurant> createSampleRestaurants(List<Address> addresses) {
+    	
+    	List<Restaurant> Restaurants = new ArrayList<>();
+    	
+    	Restaurant restaurant1 = new Restaurant();
+    	restaurant1.setNameRestaurant("restaut 1");
+		restaurant1.setAddressRestaurant(addresses.get(0));
+		restaurant1.setDescription("c'est un très joli restaurant");
+		Restaurants.add(restaurant1);
+		
+    	Restaurant restaurant2 = new Restaurant();
+    	restaurant2.setNameRestaurant("restaut 2");
+		restaurant2.setAddressRestaurant(addresses.get(1));
+		restaurant2.setDescription("voici un restau sympa !");
+		Restaurants.add(restaurant2);
+
+    	Restaurant restaurant3 = new Restaurant();
+    	restaurant3.setNameRestaurant("restaut 3");
+		restaurant3.setAddressRestaurant(addresses.get(2));
+		restaurant3.setDescription("ce restau est vraiment nul");
+		Restaurants.add(restaurant3);
+    	
+		return Restaurants;
+	}    	
+
 }

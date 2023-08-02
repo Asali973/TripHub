@@ -2,21 +2,23 @@
 package triphub.main;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
 import triphub.dao.product.DestinationDAO;
 import triphub.dao.product.PriceDAO;
 import triphub.dao.product.ThemeDAO;
 import triphub.dao.product.TourPackageDAO;
+import triphub.dao.service.RestaurantDAO;
 import triphub.entity.product.Destination;
 import triphub.entity.product.Price;
 import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
+import triphub.entity.product.service.restaurant.Restaurant;
+
 
 public class DataSeedTest {
 
 	public static void main(String[] args) {
+
 		
 		EntityManager em = JPAUtil.getEntityManager();
 		 try {
@@ -65,3 +67,4 @@ public class DataSeedTest {
 	}
 
 }
+

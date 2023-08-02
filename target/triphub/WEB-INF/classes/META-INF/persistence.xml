@@ -8,12 +8,9 @@
 
 	<!-- Unité de persistance : 1 unité par BDD (en mode ressources locale) -->
 	<persistence-unit name="triphub"
-		transaction-type="JTA">
+		transaction-type="JTA">    
+		<jta-data-source>java:jboss/datasources/triphubDS</jta-data-source>	    
 
-    
-		<jta-data-source>java:jboss/datasources/triphubDS</jta-data-source>	
-
-    
 		<!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
 		<class>triphub.entity.user.User</class>
 		<class>triphub.entity.user.Customer</class>
@@ -48,7 +45,11 @@
 
 			<!-- URL de connexion -->
 
-
+			<!-- URL de connexion -->
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/triphub?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;serverTimezone=Europe/Paris" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="rrrrr" />
 
 
 			<!-- Propriétés hibernate : dialect de la BDD, création du schéma, traces 
