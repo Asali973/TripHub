@@ -3,7 +3,8 @@ package triphub.managedBeans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import triphub.dao.UserDAO;
+
+import triphub.dao.user.UserDAO;
 import triphub.entity.user.User;
 import javax.persistence.*;
 

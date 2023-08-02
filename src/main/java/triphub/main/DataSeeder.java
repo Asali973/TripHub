@@ -6,11 +6,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import triphub.dao.UserDAO;
 import triphub.dao.product.DestinationDAO;
 import triphub.dao.product.PriceDAO;
 import triphub.dao.product.ThemeDAO;
 import triphub.dao.product.TourPackageDAO;
+import triphub.dao.user.UserDAO;
 import triphub.entity.product.Destination;
 import triphub.entity.product.Price;
 import triphub.entity.product.Theme;

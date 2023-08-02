@@ -6,6 +6,11 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import triphub.dao.*;
+import triphub.dao.user.CustomerDAO;
+import triphub.dao.user.OrganizerDAO;
+import triphub.dao.user.ProviderDAO;
+import triphub.dao.user.SuperAdminDAO;
+import triphub.dao.user.UserDAO;
 import triphub.entity.user.*;
 import javax.persistence.*;
 

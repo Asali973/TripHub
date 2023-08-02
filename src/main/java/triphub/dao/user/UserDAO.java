@@ -1,4 +1,4 @@
-package triphub.dao;
+package triphub.dao.user;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;

@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import triphub.dao.*;
+import triphub.dao.user.CustomerDAO;
 import triphub.entity.user.*;
 import triphub.helpers.RegistrationException;
 import triphub.viewModel.UserViewModel;
