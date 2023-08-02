@@ -17,6 +17,8 @@ public class Transportation {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	private String nameTransportation;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address departure;
@@ -57,6 +59,14 @@ public class Transportation {
 
 	public void setTransportation(TransportationType transportation) {
 		this.transportation = transportation;
+	}
+
+	public String getNameTransportation() {
+		return nameTransportation;
+	}
+
+	public void setNameTransportation(String nameTransportation) {
+		this.nameTransportation = nameTransportation;
 	}
 	
 	

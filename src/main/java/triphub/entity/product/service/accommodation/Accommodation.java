@@ -10,7 +10,6 @@ public class Accommodation {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nameAccomodation;
 
 	private String nameAccommodation;
 
@@ -70,14 +69,7 @@ public class Accommodation {
 		this.accommodationType = accommodationType;
 	}
 
-	public String getNameAccomodation() {
-		return nameAccomodation;
-	}
 
-	public void setNameAccomodation(String nameAccomodation) {
-		this.nameAccomodation = nameAccomodation;
-	}
-	
 	
 	
 }
