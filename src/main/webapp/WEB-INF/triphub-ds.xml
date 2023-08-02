@@ -11,7 +11,7 @@
 <!--         <connection-property name="databaseName">triphub</connection-property> -->
         <security>
             <user-name>root</user-name>
-            <password>twitwiboo</password>
+            <password>rrrrr</password>
         </security>
     </datasource>
     <drivers>

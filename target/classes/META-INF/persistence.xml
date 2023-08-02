@@ -28,7 +28,6 @@
 		<class>triphub.entity.util.Picture</class>	
 		<class>triphub.entity.product.Product</class>
 		<class>triphub.entity.subscription.Subscription</class>
-
 		<class>triphub.entity.product.Destination</class>
 		<class>triphub.entity.product.Price</class>
 		<class>triphub.entity.product.Image</class>		
