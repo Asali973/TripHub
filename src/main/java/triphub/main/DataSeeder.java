@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
-import triphub.dao.UserDAO;
+import triphub.dao.user.*;
 import triphub.dao.product.DestinationDAO;
 import triphub.dao.product.PriceDAO;
 import triphub.dao.product.ThemeDAO;

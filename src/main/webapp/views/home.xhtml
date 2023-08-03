@@ -16,19 +16,23 @@
 			<h:form>
 				<h:commandButton value="Login" action="login" />
 				<h:commandButton value="Create a customer account"
-					action="CustomerRegistration" />
+					action="loginAndAccount/CustomerRegistration" />
 				<h:commandButton value="Create a provider account"
-					action="ProviderRegistration" />
+					action="loginAndAccount/ProviderRegistration" />
 				<h:commandButton value="Create an organizer account"
-					action="OrganizerRegistration" />
+					action="loginAndAccount/OrganizerRegistration" />
 				<h:commandButton value="Create a superAdmin account"
-					action="SuperAdminRegistration" />
-					<h:commandButton value="Go to Tour Packages" action="tourPackageHome" />			
-		
-					<h:commandButton value="Create Accommodation" action="AccommodationHome" />
-					
-					<h:commandButton value="Search your Tour Packages" action="tpAdvancedSearch" />		
-					
+					action="loginAndAccount/SuperAdminRegistration" />
+
+				<h:commandButton value="Create Accommodation"
+					action="AccommodationHome" />
+
+				<h:commandButton value="Search your Tour Packages"
+					action="tpAdvancedSearch" />
+				<h:commandButton value="Go to Tour Packages"
+					action="tourPackageHome" />
+
+
 			</h:form>
 			<h:panelGroup rendered="#{sessionScope.userType eq 'customer'}">
 				<p>Welcome, dear customer!</p>

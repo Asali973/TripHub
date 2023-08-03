@@ -35,4 +35,22 @@ public class ProviderBean implements Serializable {
             FacesMessageUtil.addErrorMessage("Registration failed: " + e.getMessage());
         }
     }
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public UserViewModel getUserViewModel() {
+		return userViewModel;
+	}
+
+	public void setUserViewModel(UserViewModel userViewModel) {
+		this.userViewModel = userViewModel;
+	}
+    
+    
 }

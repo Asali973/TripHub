@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
- <PROCESS-ITEM NAME="rules:#home.xhtml" PATH="/home.xhtml"
-  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#home.xhtml:0" NAME="item" PATH="/home.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="registration::#login#registration.xhtml"
-    NAME="output" PATH="/login/registration.xhtml"
-    TARGET="rules:#login#registration.xhtml" TITLE="registration" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="login::#login#login.xhtml" NAME="output1"
-    PATH="/login/login.xhtml" TARGET="rules:#login#login.xhtml"
+ <PROCESS-ITEM NAME="rules:#loginAndAccount#login.xhtml"
+  PATH="/loginAndAccount/login.xhtml" SHAPE="272,209,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#loginAndAccount#registration.xhtml"
+  PATH="/loginAndAccount/registration.xhtml" SHAPE="272,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#loginAndAccount#login.xhtml"
+  PATH="/views/loginAndAccount/login.xhtml" SHAPE="32,353,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#views#loginAndAccount#login.xhtml:0"
+   NAME="item" PATH="/views/loginAndAccount/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#views#home.xhtml" NAME="output"
+    PATH="/views/home.xhtml" TARGET="rules:#views#home.xhtml"
     TITLE="login" model-entity="JSFProcessItemOutput"/>
+<<<<<<< HEAD
    <PROCESS-ITEM-OUTPUT
     ID="tourPackageHome::#product#TourpackageHome.xhtml" NAME="output2"
     PATH="/product/TourpackageHome.xhtml"
@@ -29,4 +32,27 @@
   PATH="/product/TourpackageHome.xhtml" SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#product#TpAdvancedSearch.xhtml"
   PATH="/product/TpAdvancedSearch.xhtml" SHAPE="288,465,0,0" model-entity="JSFProcessGroup"/>
+=======
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#home.xhtml" PATH="/views/home.xhtml"
+  SHAPE="240,369,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#views#home.xhtml:0" NAME="item"
+   PATH="/views/home.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="registration::#loginAndAccount#registration.xhtml" NAME="output"
+    PATH="/loginAndAccount/registration.xhtml"
+    TARGET="rules:#loginAndAccount#registration.xhtml"
+    TITLE="registration" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="login::#loginAndAccount#login.xhtml"
+    NAME="output1" PATH="/loginAndAccount/login.xhtml"
+    TARGET="rules:#loginAndAccount#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="tourPackageHome::TourpackageHome.xhtml"
+    NAME="output2" PATH="TourpackageHome.xhtml"
+    TARGET="rules:TourpackageHome.xhtml" TITLE="tourPackageHome" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:TourpackageHome.xhtml"
+  PATH="TourpackageHome.xhtml" SHAPE="480,353,0,0" model-entity="JSFProcessGroup"/>
+>>>>>>> BS_UserRefactoringV4
 </PROCESS>

@@ -24,10 +24,15 @@ import triphub.viewModel.TourPackageFormViewModel;
 @Stateless
 public class TourPackageDAO {
 	@PersistenceContext(unitName = "triphub") 
-
 	private EntityManager em;
-
+		
 	public TourPackageDAO() {
+	}
+	//basic, to be removed later
+	public TourPackage create(TourPackage tourPackage) {
+		em.persist(tourPackage);
+		return tourPackage;
+
 	}
 	
 	public TourPackage create(TourPackageFormViewModel tourPackageVm) {

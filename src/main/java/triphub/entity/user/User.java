@@ -1,12 +1,14 @@
 package triphub.entity.user;
 
 import javax.persistence.*;
+import java.io.Serializable;
+
 
 import triphub.entity.util.Address;
 import triphub.entity.util.FinanceInfo;
 
 @Entity
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
