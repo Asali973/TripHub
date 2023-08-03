@@ -14,8 +14,7 @@ public class TourPackageDAO {
 	@PersistenceContext
 	private EntityManager em;
 		
-	public TourPackageDAO(EntityManager em) {
-		this.em = em;
+	public TourPackageDAO() {
 	}
 	//basic, to be removed later
 	public TourPackage create(TourPackage tourPackage) {

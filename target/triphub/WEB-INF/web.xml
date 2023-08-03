@@ -8,7 +8,7 @@
 
 	<!-- Lancement auto de la page index -->
 	<welcome-file-list>
-    	<welcome-file>home.xhtml</welcome-file>
+    	<welcome-file>views/home.xhtml</welcome-file>
   	</welcome-file-list>
 
 	<!-- Changer cette valeur à "Production" lors du déploiement final de l'application -->

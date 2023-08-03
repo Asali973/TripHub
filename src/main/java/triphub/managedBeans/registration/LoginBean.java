@@ -1,20 +1,13 @@
-package triphub.managedBeans;
+package triphub.managedBeans.registration;
 
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import triphub.dao.*;
 import triphub.entity.user.*;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
-
-import javax.persistence.*;
-
 import org.mindrot.jbcrypt.BCrypt;
 
 @Named
@@ -44,25 +37,25 @@ public class LoginBean {
             Customer customer = userService.findByUserCustomer(user);
             if (customer != null) {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "customer");
-                return "home?faces-redirect=true";
+                return "/views/home?faces-redirect=true";
             }
             
             Organizer organizer = userService.findByUserOrganizer(user);
             if (organizer != null) {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "organizer");
-                return "home?faces-redirect=true";
+                return "/views/home?faces-redirect=true";
             }
 
             Provider provider = userService.findByUserProvider(user);
             if (provider != null) {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "provider");
-                return "home?faces-redirect=true";
+                return "/views/home?faces-redirect=true";
             }
 
             SuperAdmin superAdmin = userService.findByUserSuperAdmin(user);
             if (superAdmin != null) {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "superAdmin");
-                return "home?faces-redirect=true";
+                return "/views/home?faces-redirect=true";
             }
 
         }
@@ -74,6 +67,22 @@ public class LoginBean {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "login?faces-redirect=true"; 
     }
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public UserViewModel getUserViewModel() {
+		return userViewModel;
+	}
+
+	public void setUserViewModel(UserViewModel userViewModel) {
+		this.userViewModel = userViewModel;
+	}
 
 
 

@@ -1,4 +1,4 @@
-package triphub.dao;
+package triphub.dao.user;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,19 +17,19 @@ import triphub.helpers.RegistrationException;
 import triphub.viewModel.UserViewModel;
 
 @Stateless
-public class ProviderDAO {
+public class OrganizerDAO {
 
 	@PersistenceContext
 	private EntityManager em;
 
-	public ProviderDAO() {
+	public OrganizerDAO() {
 	}
 
-//	public ProviderDAO(EntityManager em) {
+//	public OrganizerDAO(EntityManager em) {
 //		this.em = em;
 //	}
 
-	public Provider createProvider(UserViewModel form) {
+	public Organizer createOrganizer(UserViewModel form) {
 
 		// Create user
 		User user = new User();
@@ -72,12 +72,15 @@ public class ProviderDAO {
 		administration.setPhone(form.getPhone());
 		administration.setSector(form.getSector());
 		administration.setEmail(form.getAdminEmail());
+		
+		// Subscription info
+		// Add Subscription properties
 
 		// Create provider
-		Provider provider = new Provider();
-		provider.setUser(user);
-		provider.setCompanyInfo(companyInfo);
-		provider.setAdministration(administration);
+		Organizer organizer = new Organizer();
+		organizer.setUser(user);
+		organizer.setCompanyInfo(companyInfo);
+		organizer.setAdministration(administration);
 		
 		
 		em.persist(companyInfo);
@@ -85,41 +88,41 @@ public class ProviderDAO {
 		em.persist(finance);
 		em.persist(address);
 		em.persist(user);
-		em.persist(provider);
-		return provider;
+		em.persist(organizer);
+		return organizer;
 	}
 
-	public Provider readProvider(Long id) {
-		return em.find(Provider.class, id);
-	}
-	
-    public void deleteProvider(Long id) {
-        Provider provider = readProvider(id);
-        if (provider != null) {
-            em.remove(provider);
+    public Organizer readOrganizer(Long id) {
+        return em.find(Organizer.class, id);
+    }
+    
+    public void deleteOrganizer(Long id) {
+        Organizer organizer = readOrganizer(id);
+        if (organizer != null) {
+            em.remove(organizer);
         }
     }
     
-    public void updateProvider(Long id) {
-        Provider provider = readProvider(id);
-        if (provider != null) {
-            em.merge(provider);
+    public void updateOrganizer(Long id) {
+        Organizer organizer = readOrganizer(id);
+        if (organizer != null) {
+            em.merge(organizer);
         }
     }
-
-    public Provider findByEmailProvider(String email) throws RegistrationException {
-        TypedQuery<Provider> query = em.createQuery("SELECT c FROM Provider c WHERE c.user.email = :email", Provider.class);
+    
+    public Organizer findByEmailOrganizer(String email) throws RegistrationException {
+        TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user.email = :email", Organizer.class);
         query.setParameter("email", email);
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
-            throw new RegistrationException("Provider with email " + email + " not found.");
+            throw new RegistrationException("Organizer with email " + email + " not found.");
         }
     }
 	
-	public Provider findByUserProvider(User user) {
+	public Organizer findByUserOrganizer(User user) {
 	    try {
-	        TypedQuery<Provider> query = em.createQuery("SELECT c FROM Provider c WHERE c.user = :user", Provider.class);
+	        TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user = :user", Organizer.class);
 	        query.setParameter("user", user);
 	        return query.getSingleResult();
 	    } catch (NoResultException e) {

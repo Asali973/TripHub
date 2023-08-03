@@ -6,14 +6,16 @@
         pool-name="triphub" enabled="true"
         use-java-context="true">
         <connection-url>jdbc:mysql://localhost:3306/triphub?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;serverTimezone=Europe/Paris</connection-url>
-        <driver>com.mysql</driver>
+        <driver>mysql</driver>
+        
+<!--         <connection-property name="databaseName">triphub</connection-property> -->
         <security>
             <user-name>root</user-name>
             <password>Zachary3529&lt;</password>
         </security>
     </datasource>
     <drivers>
-        <driver name="com.mysql" module="com.mysql">
+        <driver name="mysql" module="com.mysql">
             <driver-class>com.mysql.cj.jdbc.Driver</driver-class>
             <datasource-class>
             com.mysql.cj.jdbc.MysqlConnectionPoolDataSource

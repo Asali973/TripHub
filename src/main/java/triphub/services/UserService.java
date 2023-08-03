@@ -1,13 +1,11 @@
 package triphub.services;
 
-import java.util.Optional;
+
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
 
-import triphub.dao.*;
+import triphub.dao.user.*;
 import triphub.entity.user.*;
 import triphub.helpers.RegistrationException;
 import triphub.viewModel.UserViewModel;

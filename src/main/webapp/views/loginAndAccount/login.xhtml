@@ -16,11 +16,11 @@
             <h:form>
                 <div class="reg-form-group">
                     <h:outputLabel for="email" value="Email:"/>
-                    <h:inputText id="email" value="#{loginBean.email}" class="reg-form-control"/>
+                    <h:inputText id="email" value="#{loginBean.userViewModel.email}" class="reg-form-control"/>
                 </div>
                 <div class="reg-form-group">
                     <h:outputLabel for="password" value="Password:"/>
-                    <h:inputSecret id="password" value="#{loginBean.password}" class="reg-form-control"/>
+                    <h:inputSecret id="password" value="#{loginBean.userViewModel.password}" class="reg-form-control"/>
                 </div>
                 <h:commandButton value="Login" action="#{loginBean.login}" styleClass="reg-btn-primary"/>
             </h:form>
