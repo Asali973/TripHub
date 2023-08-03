@@ -10,7 +10,7 @@ import triphub.helpers.RegistrationException;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 
-@Named
+@Named("customerBean")
 @RequestScoped
 public class CustomerBean implements Serializable {
 
