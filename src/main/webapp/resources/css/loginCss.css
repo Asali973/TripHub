@@ -1,0 +1,47 @@
+.card {
+	margin: auto;
+	max-width: 500px;
+	border-radius: 20px;
+	background-color: #F0F0F0;
+}
+
+.container {
+	margin-top: 50px;
+}
+
+.form-control {
+	border-radius: 20px;
+}
+
+.btn-outline-dark {
+	border-radius: 20px;
+}
+
+.btn-custom {
+	background-color: black; /* You can choose your preferred color */
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 0.9em;
+	transition: all 0.3s;
+	height: 38px;
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-custom:hover {
+	background-color: #FF4500; /* Darker shade for hover state */
+	color: white;
+}
+
+.btn-custom-signup {
+	width: 200px; /* adjust as needed */
+	height: 48px; /* adjust as needed */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.3em;
+}

@@ -1,3 +1,4 @@
+
 package triphub.managedBeans.products;
 
 import java.io.Serializable;
@@ -194,3 +195,4 @@ public class TourPackageBean implements Serializable {
 //// Add an event listener to execute onSearchComplete when the form is submitted
 //document.getElementById('formId').addEventListener('submit', onSearchComplete);
 //</script>
+
