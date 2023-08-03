@@ -40,7 +40,7 @@
 		<!-- <class>triphub.entity.user.User</class> -->
 
 		<!-- Liste des propriétés de JPA et Hibernate pour la Gestion de la BDD -->
-		<properties>
+		
 
 			<!-- Pilote JDBC adapté à MySQL -->
 <!-- 			<property name="javax.persistence.jdbc.driver" -->
@@ -48,14 +48,15 @@
 
 			<!-- URL de connexion -->
 
-      <property name="javax.persistence.jdbc.url"
+		<!--	<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/triphub?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;serverTimezone=Europe/Paris" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="rrrrr" />
+			<property name="javax.persistence.jdbc.password" value="twitwiboo" />-->
 
 
 			<!-- Propriétés hibernate : dialect de la BDD, création du schéma, traces 
 				de dev etc ... -->
+		<properties>
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL5Dialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
