@@ -12,14 +12,13 @@ import triphub.dao.product.PriceDAO;
 import triphub.dao.product.ThemeDAO;
 import triphub.dao.product.TourPackageDAO;
 import triphub.dao.service.AddressDAO;
-import triphub.dao.service.RestaurantDAO;>>>>>>> master
+import triphub.dao.service.RestaurantDAO;
 import triphub.entity.product.Destination;
 import triphub.entity.product.Price;
 import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
 import triphub.entity.user.Customer;
 import triphub.entity.product.service.restaurant.Restaurant;
-import triphub.entity.user.Customer;
 import triphub.entity.util.Address;
 
 

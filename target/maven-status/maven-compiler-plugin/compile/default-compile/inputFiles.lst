@@ -1,8 +1,3 @@
-
-C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\dao\service\RestaurantDAO.java
-C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\viewModel\RestaurantViewModel.java
-C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\entity\product\service\restaurant\Restaurant.java
-C:\Users\MOOT\Desktop\PROJET 3 - TripHub\TripHub\src\main\java\triphub\services\RestaurantService.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\product\service\accommodation\AccommodationType.java
 D:\Trip hub\TripHub\src\main\java\triphub\helpers\RegistrationException.java
 D:\Trip hub\TripHub\src\main\java\triphub\viewModel\AddressViewModel.java
@@ -18,6 +13,7 @@ D:\Trip hub\TripHub\src\main\java\triphub\viewModel\TransportationViewModel.java
 D:\Trip hub\TripHub\src\main\java\triphub\dao\service\RestaurantDAO.java
 D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\products\TransportationBean.java
 D:\Trip hub\TripHub\src\main\java\triphub\services\TourPackageService.java
+D:\Trip hub\TripHub\src\main\java\triphub\services\RestaurantService.java
 D:\Trip hub\TripHub\src\main\java\triphub\dao\product\PriceDAO.java
 D:\Trip hub\TripHub\src\main\java\triphub\dao\UserDAO.java
 D:\Trip hub\TripHub\src\main\java\triphub\services\UserService.java
@@ -55,10 +51,12 @@ D:\Trip hub\TripHub\src\main\java\triphub\entity\product\TourPackage.java
 D:\Trip hub\TripHub\src\main\java\triphub\viewModel\AccommodationViewModel.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\product\Theme.java
 D:\Trip hub\TripHub\src\main\java\triphub\dao\CustomerDAO.java
+D:\Trip hub\TripHub\src\main\java\triphub\viewModel\RestaurantViewModel.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\util\PictureType.java
 D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\LoginBean.java
 D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\registration\ProviderBean.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\product\Product.java
+D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\service\RestaurantBean.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\product\service\restaurant\Restaurant.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\product\service\transportation\Transportation.java
 D:\Trip hub\TripHub\src\main\java\triphub\viewModel\TourPackageFormViewModel.java
