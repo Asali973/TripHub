@@ -8,6 +8,8 @@ public class AddressViewModel {
     private String state;
     private String country;
     private String zipCode;
+    
+    
 	public String getNum() {
 		return num;
 	}

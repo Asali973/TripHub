@@ -14,6 +14,7 @@ import triphub.entity.product.service.accommodation.AccommodationType;
 import triphub.helpers.RegistrationException;
 import triphub.services.AccommodationService;
 import triphub.viewModel.AccommodationViewModel;
+import triphub.viewModel.SubServicesViewModel;
 
 @Named
 @RequestScoped
@@ -33,13 +34,13 @@ public class AccommodationBean implements Serializable {
 	}
 	
 	
-	public Accommodation create (AccommodationViewModel accommodationVm) {
+	public Accommodation create (SubServicesViewModel accommodationVm) {
 		return accommodationService.create(accommodationVm);
 		
 	}
 	
-	public Accommodation  updateAccommodation(Accommodation accommodation) {
-		return accommodationService.updateAccommodation(accommodation);
+	public void updateAccommodation(Accommodation accommodation) {
+		accommodationService.updateAccommodation(accommodation);
 	}
 	
 	public Accommodation findAccommodationByName(String nameAccommodation) {

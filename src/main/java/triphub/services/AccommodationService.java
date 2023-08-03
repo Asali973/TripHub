@@ -11,6 +11,7 @@ import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
 import triphub.helpers.RegistrationException;
 import triphub.viewModel.AccommodationViewModel;
+import triphub.viewModel.SubServicesViewModel;
 @Stateless
 public class AccommodationService {
 	
@@ -28,13 +29,13 @@ public class AccommodationService {
 		
 	}
 	
-	public Accommodation create (AccommodationViewModel accommodationVm) {
-		return accommodationDao.create(accommodationVm);
+	public Accommodation create (SubServicesViewModel formService) {
+		return accommodationDao.createAccommodation(formService);
 		
 	}
 	
-	public Accommodation  updateAccommodation(Accommodation accommodation) {
-		return accommodationDao.updateAccommodation(accommodation);
+	public void  updateAccommodation(Accommodation accommodation) {
+		accommodationDao.updateAccommodation(accommodation);
 	}
 	
 	public Accommodation findAccommodationByName(String nameAccommodation) {

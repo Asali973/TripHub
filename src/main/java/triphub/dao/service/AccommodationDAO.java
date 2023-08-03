@@ -12,45 +12,60 @@ import javax.persistence.TypedQuery;
 
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
-
+import triphub.entity.util.Address;
+import triphub.entity.util.Picture;
 import triphub.viewModel.AccommodationViewModel;
+import triphub.viewModel.SubServicesViewModel;
 
 @Stateless
 public class AccommodationDAO {
+	
 	@PersistenceContext
 	private EntityManager em;
 
+	
 	public AccommodationDAO(EntityManager em) {
 	this.em = em;
 	
 	}
+	
 	public AccommodationDAO() {}
 	
-	public Accommodation create(AccommodationViewModel accommodationVm) {
+	public Accommodation createAccommodation(SubServicesViewModel formService) {
+		
+		// creer Accommodation 
 		Accommodation accommodation = new Accommodation();
-		accommodation.setNameAccommodation(accommodationVm.getNameAccommodation());
-		accommodation.setAddress(accommodationVm.getAddress());
-		accommodation.setAccommodationType(accommodationVm.getAccommodationType());
-
+		
+		accommodation.setName(formService.getName());
+		accommodation.setDescription(formService.getDescription());
+		accommodation.setAccommodationType(formService.getAccommodationType());
+		
+		
+		Picture picture = new Picture();
+		picture.setLink(formService.getLink());
+		accommodation.setPicture(picture);
+		
+		Address addressAccommodation = new Address();
+		addressAccommodation.setNum(formService.getNum());
+		addressAccommodation.setStreet(formService.getStreet());
+		addressAccommodation.setCity(formService.getCity());
+		addressAccommodation.setState(formService.getState());
+		addressAccommodation.setCountry(formService.getCountry());
+		accommodation.setAddresAccommodation(addressAccommodation);
+		
+		em.persist(picture);
+		em.persist(addressAccommodation);
 		em.persist(accommodation);
 		return accommodation;
 	}
 	// Méthode pour modifer une entité Accommodation
-	 public Accommodation updateAccommodation(Accommodation accommodation) {
-	        // Vérifier si l'entité existe dans la base de données
-	        Accommodation existingAccommodation = em.find(Accommodation.class, accommodation.getId());
-
-	        if (existingAccommodation != null) {
-	        	
-	            // Copier les nouvelles informations dans l'entité existante
-	            existingAccommodation.setAccommodation(accommodation.getAccommodation());
-	            existingAccommodation.setAddress(accommodation.getAddress());
-	            
+	 public void updateAccommodation(Accommodation accommodation) {
+	        if (accommodation != null) {
 	            // Mettre à jour l'entité dans la base de données
-	            em.merge(existingAccommodation);
+	            em.merge(accommodation);
 	        
 	        }
-			return existingAccommodation;
+			
 	    }
 	
 	// Méthode pour supprimer une entité Accommodation en utilisant son id

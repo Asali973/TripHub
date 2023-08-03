@@ -3,32 +3,69 @@ package triphub.entity.product.service.accommodation;
 import javax.persistence.*;
 
 import triphub.entity.util.Address;
+import triphub.entity.util.Picture;
 
 @Entity
 public class Accommodation {
-	
+
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String nameAccommodation;
-
+	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	private Address address;
-	
+	private Address addresAccommodation;
+
 	@Enumerated(EnumType.STRING)
 	private AccommodationType accommodationType;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Picture picture;
+	
+	private String description;
 
 	public Accommodation() {
 	}
-	
-	public Accommodation(String nameAccommodation, Address address, AccommodationType accommodationType) {
-		this.nameAccommodation = nameAccommodation;
-		this.address = address;
+		
+
+	public Accommodation(String name, Address addresAccommodation, AccommodationType accommodationType, Picture picture,
+			String description) {
+		
+		this.name = name;
+		this.addresAccommodation = addresAccommodation;
 		this.accommodationType = accommodationType;
+		this.picture = picture;
+		this.description = description;
 	}
+
+
+
+
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public Picture getPicture() {
+		return picture;
+	}
+
+
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -38,28 +75,21 @@ public class Accommodation {
 		this.id = id;
 	}
 
-	public Address getAddress() {
-		return address;
+	
+	public String getName() {
+		return name;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public AccommodationType getAccommodation() {
-		return accommodationType;
+	public Address getAddresAccommodation() {
+		return addresAccommodation;
 	}
 
-	public void setAccommodation(AccommodationType accommodationType) {
-		this.accommodationType = accommodationType;
-	}
-
-	public String getNameAccommodation() {
-		return nameAccommodation;
-	}
-
-	public void setNameAccommodation(String nameAccommodation) {
-		this.nameAccommodation = nameAccommodation;
+	public void setAddresAccommodation(Address addresAccommodation) {
+		this.addresAccommodation = addresAccommodation;
 	}
 
 	public AccommodationType getAccommodationType() {
@@ -69,5 +99,5 @@ public class Accommodation {
 	public void setAccommodationType(AccommodationType accommodationType) {
 		this.accommodationType = accommodationType;
 	}
-	
+
 }
