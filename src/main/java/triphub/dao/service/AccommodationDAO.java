@@ -25,6 +25,7 @@ public class AccommodationDAO {
 	
 	}
 	public AccommodationDAO() {}
+	
 	public Accommodation create(AccommodationViewModel accommodationVm) {
 		Accommodation accommodation = new Accommodation();
 		accommodation.setNameAccommodation(accommodationVm.getNameAccommodation());
