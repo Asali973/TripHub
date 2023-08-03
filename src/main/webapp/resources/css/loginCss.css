@@ -45,3 +45,11 @@
 	justify-content: center;
 	font-size: 1.3em;
 }
+.btn-subService-create {
+	width: 200px; /* adjust as needed */
+	height: 48px; /* adjust as needed */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.3em;
+}

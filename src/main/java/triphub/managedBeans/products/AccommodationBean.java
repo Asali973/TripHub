@@ -27,7 +27,7 @@ public class AccommodationBean implements Serializable {
 	
 	private SubServicesViewModel accommodationVm = new SubServicesViewModel();
 	
-	private static final long serialVersionUID = 1L;
+	
 
 	public AccommodationBean() {
 		

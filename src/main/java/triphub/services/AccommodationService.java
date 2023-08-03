@@ -4,13 +4,9 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.TypedQuery;
-
 import triphub.dao.service.AccommodationDAO;
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
-import triphub.helpers.RegistrationException;
-import triphub.viewModel.AccommodationViewModel;
 import triphub.viewModel.SubServicesViewModel;
 @Stateless
 public class AccommodationService {
@@ -29,8 +25,8 @@ public class AccommodationService {
 		
 	}
 	
-	public Accommodation create (SubServicesViewModel formService) {
-		return accommodationDao.createAccommodation(formService);
+	public Accommodation create (SubServicesViewModel accommodationVm) {
+		return accommodationDao.createAccommodation(accommodationVm);
 		
 	}
 	

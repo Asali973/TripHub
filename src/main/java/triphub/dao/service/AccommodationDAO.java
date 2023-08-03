@@ -14,7 +14,6 @@ import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
-import triphub.viewModel.AccommodationViewModel;
 import triphub.viewModel.SubServicesViewModel;
 
 @Stateless

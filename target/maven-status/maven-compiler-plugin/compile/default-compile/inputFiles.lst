@@ -3,6 +3,7 @@ D:\projet3\TripHub\src\main\java\triphub\managedBeans\registration\CustomerBean.
 D:\projet3\TripHub\src\main\java\triphub\entity\user\Provider.java
 D:\projet3\TripHub\src\main\java\triphub\managedBeans\products\AccommodationBean.java
 D:\projet3\TripHub\src\main\java\triphub\managedBeans\service\RestaurantBean.java
+D:\projet3\TripHub\src\main\java\triphub\viewModel\SubServicesViewModel.java
 D:\projet3\TripHub\src\main\java\triphub\managedBeans\registration\OrganizerBean.java
 D:\projet3\TripHub\src\main\java\triphub\services\TourPackageService.java
 D:\projet3\TripHub\src\main\java\triphub\dao\service\RestaurantDAO.java
@@ -27,7 +28,6 @@ D:\projet3\TripHub\src\main\java\triphub\dao\user\ProviderDAO.java
 D:\projet3\TripHub\src\main\java\triphub\helpers\PasswordUtils.java
 D:\projet3\TripHub\src\main\java\triphub\managedBeans\registration\LoginBean.java
 D:\projet3\TripHub\src\main\java\triphub\dao\service\TransportationDAO.java
-D:\projet3\TripHub\src\main\java\triphub\viewModel\AccommodationViewModel.java
 D:\projet3\TripHub\src\main\java\triphub\dao\service\AddressDAO.java
 D:\projet3\TripHub\src\main\java\triphub\entity\product\Theme.java
 D:\projet3\TripHub\src\main\java\triphub\main\DataSeedTest.java

@@ -1,7 +1,5 @@
 package triphub.viewModel;
 
-
-
 import triphub.entity.product.service.accommodation.AccommodationType;
 import triphub.entity.product.service.transportation.TransportationType;
 import triphub.entity.util.PictureType;
@@ -122,7 +120,11 @@ public class SubServicesViewModel {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
     
+	
    
     
     
