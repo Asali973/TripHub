@@ -11,28 +11,6 @@
    <PROCESS-ITEM-OUTPUT ID="login::#views#home.xhtml" NAME="output"
     PATH="/views/home.xhtml" TARGET="rules:#views#home.xhtml"
     TITLE="login" model-entity="JSFProcessItemOutput"/>
-<<<<<<< HEAD
-   <PROCESS-ITEM-OUTPUT
-    ID="tourPackageHome::#product#TourpackageHome.xhtml" NAME="output2"
-    PATH="/product/TourpackageHome.xhtml"
-    TARGET="rules:#product#TourpackageHome.xhtml"
-    TITLE="tourPackageHome" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="tpAdvancedSearch::#product#TpAdvancedSearch.xhtml"
-    NAME="output3" PATH="/product/TpAdvancedSearch.xhtml"
-    TARGET="rules:#product#TpAdvancedSearch.xhtml"
-    TITLE="tpAdvancedSearch" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#login#registration.xhtml"
-  PATH="/login/registration.xhtml" SHAPE="256,33,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#login#login.xhtml" PATH="/login/login.xhtml"
-  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#product#TourpackageHome.xhtml"
-  PATH="/product/TourpackageHome.xhtml" SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#product#TpAdvancedSearch.xhtml"
-  PATH="/product/TpAdvancedSearch.xhtml" SHAPE="288,465,0,0" model-entity="JSFProcessGroup"/>
-=======
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#views#home.xhtml" PATH="/views/home.xhtml"
@@ -47,12 +25,20 @@
    <PROCESS-ITEM-OUTPUT ID="login::#loginAndAccount#login.xhtml"
     NAME="output1" PATH="/loginAndAccount/login.xhtml"
     TARGET="rules:#loginAndAccount#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="tourPackageHome::TourpackageHome.xhtml"
-    NAME="output2" PATH="TourpackageHome.xhtml"
-    TARGET="rules:TourpackageHome.xhtml" TITLE="tourPackageHome" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="tourPackageHome::#product#TourpackageHome.xhtml" NAME="output2"
+    PATH="/product/TourpackageHome.xhtml"
+    TARGET="rules:#product#TourpackageHome.xhtml"
+    TITLE="tourPackageHome" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="tpAdvancedSearch::#product#TpAdvancedSearch.xhtml"
+    NAME="output3" PATH="/product/TpAdvancedSearch.xhtml"
+    TARGET="rules:#product#TpAdvancedSearch.xhtml"
+    TITLE="tpAdvancedSearch" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:TourpackageHome.xhtml"
-  PATH="TourpackageHome.xhtml" SHAPE="480,353,0,0" model-entity="JSFProcessGroup"/>
->>>>>>> BS_UserRefactoringV4
+ <PROCESS-ITEM NAME="rules:#product#TpAdvancedSearch.xhtml"
+  PATH="/product/TpAdvancedSearch.xhtml" SHAPE="528,241,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#product#TourpackageHome.xhtml"
+  PATH="/product/TourpackageHome.xhtml" SHAPE="528,657,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
