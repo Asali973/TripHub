@@ -6,13 +6,10 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-
-import triphub.dao.service.TransportationDAO;
 import triphub.entity.product.service.transportation.Transportation;
 import triphub.entity.product.service.transportation.TransportationType;
 import triphub.services.TransportationService;
-import triphub.viewModel.TransportationViewModel;
+import triphub.viewModel.SubServicesViewModel;
 
 @Named
 @RequestScoped
@@ -23,13 +20,13 @@ public class TransportationBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private TransportationViewModel transportationvm = new TransportationViewModel();
+	private SubServicesViewModel transportationvm = new SubServicesViewModel();
 
 	public TransportationBean() {
 		
 	}
 	
-	public Transportation create(TransportationViewModel transportationvm) {
+	public Transportation create(SubServicesViewModel transportationvm) {
 		return transportationService.create(transportationvm);
 	}
 	
@@ -37,8 +34,8 @@ public class TransportationBean implements Serializable {
 		return transportationService.read(id);
 	} 
 	
-	public Transportation update(Transportation transportation) {
-		return transportationService.update(transportation);
+	public void update(Transportation transportation) {
+		transportationService.update(transportation);
 	}
 	
 	public void delete(Long id) {
