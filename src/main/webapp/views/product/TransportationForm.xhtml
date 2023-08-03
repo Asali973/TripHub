@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Add Transportation</title>
+	<h:outputStylesheet library="css" name="loginCss.css" />
+	<link
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<h:outputStylesheet library="css" name="loginCss.css" />
+</h:head>
+<h:body>
+	<div class="container">
+		<div class="card">
+			<h:form prependId="false">
+
+				<div class="card-body">
+					<h2 class="card-title text-center mt-3">Offer a transportation
+						service</h2>
+					<button
+						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
+						type="button">Service informations</button>
+					<div class="form-group mt-4">
+						<h:outputLabel for="transportationName" value="Name*:"
+							required="true" requiredMessage="Name is required." />
+						<h:inputText id="name"
+							value="#{transportationBean.transportationvm.name}"
+							class="form-control" required="true" />
+					</div>
+		</div>
+
+		<!-- Departure dépliable -->
+		<button
+			class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
+			type="button" data-toggle="collapse" data-target="#addressSection"
+			aria-expanded="false" aria-controls="addressSection">Departure
+			informations</button>
+		<div class="collapse" id="addressSection">
+			<div class="form-group mt-4">
+				<h:outputLabel for="DepartureNum" value="Number:" />
+				<h:inputText id="DepartureNum"
+					value="#{transportationBean.transportationvm.num}"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel for="DepartureStreet" value="Street:" />
+				<h:inputText id="DepartureStreet"
+					value="#{transportationBean.transportationvm.street}"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel for="DepartureCity" value="City:" />
+				<h:inputText id="DepartureCity"
+					value="#{transportationBean.transportationvm.city}"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel for="DepartureState" value="State:" />
+				<h:inputText id="DepartureState"
+					value="#{transportationBean.transportationvm.state}"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel for="DepartureCountry" value="Country:" />
+				<h:inputText id="DepartureCountry"
+					value="#{transportationBean.transportationvm.country}"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel for="DepartureZipCode" value="Zip Code:" />
+				<h:inputText id="DepartureZipCode"
+					value="#{transportationBean.transportationvm.zipCode}"
+					class="form-control" />
+			</div>
+		</div>
+
+		<!-- Departure dépliable -->
+		<button
+			class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
+			type="button" data-toggle="collapse" data-target="#addressSection"
+			aria-expanded="false" aria-controls="addressSection">Arrival
+			informations</button>
+		<div class="collapse" id="addressSection">
+			<div class="form-group mt-4">
+				<h:outputLabel for="ArrivalNum" value="Number:" />
+				<h:inputText id="ArrivalNum"
+					value="#{transportationBean.transportationvm.num}"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel for="ArrivalStreet" value="Street:" />
+				<h:inputText id="ArrivalStreet"
+					value="#{transportationBean.transportationvm.street}"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel for="ArrivalCity" value="City:" />
+				<h:inputText id="ArrivalCity"
+					value="#{transportationBean.transportationvm.city}"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel for="ArrivalState" value="State:" />
+				<h:inputText id="ArrivalState"
+					value="#{transportationBean.transportationvm.state}"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel for="ArrivalCountry" value="Country:" />
+				<h:inputText id="ArrivalCountry"
+					value="#{transportationBean.transportationvm.country}"
+					class="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel for="ArrivalZipCode" value="Zip Code:" />
+				<h:inputText id="ArrivalZipCode"
+					value="#{transportationBean.transportationvm.zipCode}"
+					class="form-control" />
+			</div>
+		</div>
+		<!-- Description dépliable -->
+		<button
+			class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
+			type="button" data-toggle="collapse" data-target="#addressSection"
+			aria-expanded="false" aria-controls="addressSection">Description
+		</button>
+		<div class="collapse" id="addressSection">
+			<div class="form-group mt-4">
+				<label for="description">Description:</label>
+				<textarea id="description" class="form-control" maxlength="500"
+					oninput="updateCharCount(this)"></textarea>
+				<small id="charCount">500 characters remaining</small>
+			</div>
+
+		</div>
+		<div class="form-group mt-4 d-flex justify-content-center">
+			<h:commandButton value="Add Service"
+				action="#{transportationBean.create}"
+				styleClass="btn btn-custom btn-custom-signup" id="submitButton" />
+		</div>
+			</h:form>
+
+
+	</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script>
+    function updateCharCount(textarea) {
+        const maxLength = 500;
+        const currentLength = textarea.value.length;
+        const remainingChars = maxLength - currentLength;
+
+        const charCountElement = document.getElementById('charCount');
+        charCountElement.innerText = remainingChars + " characters remaining";
+    }
+</script>
+	<!-- 	<h:outputScript library="javascript" name="loginJs.js" /> -->
+</h:body>
+</html>

@@ -28,31 +28,31 @@ public class TransportationDAO {
 	public TransportationDAO() {
 	}
 
-	public Transportation create(SubServicesViewModel formService) {
+	public Transportation create(SubServicesViewModel transportationvm) {
 
 		Transportation transportation = new Transportation();
-		transportation.setNameTransportation(formService.getName());
-		transportation.setTransportation(formService.getTransportationType());
-		transportation.setDescription(formService.getDescription());
+		transportation.setNameTransportation(transportationvm.getName());
+		transportation.setTransportation(transportationvm.getTransportationType());
+		transportation.setDescription(transportationvm.getDescription());
 
 		Address departure = new Address();
-		departure.setNum(formService.getNum());
-		departure.setStreet(formService.getStreet());
-		departure.setCity(formService.getCity());
-		departure.setState(formService.getState());
-		departure.setCountry(formService.getCountry());
-		departure.setZipCode(formService.getZipCode());
+		departure.setNum(transportationvm.getNum());
+		departure.setStreet(transportationvm.getStreet());
+		departure.setCity(transportationvm.getCity());
+		departure.setState(transportationvm.getState());
+		departure.setCountry(transportationvm.getCountry());
+		departure.setZipCode(transportationvm.getZipCode());
 
 		Address arrival = new Address();
-		arrival.setNum(formService.getNum());
-		arrival.setStreet(formService.getStreet());
-		arrival.setCity(formService.getCity());
-		arrival.setState(formService.getState());
-		arrival.setCountry(formService.getCountry());
-		arrival.setZipCode(formService.getZipCode());
+		arrival.setNum(transportationvm.getNum());
+		arrival.setStreet(transportationvm.getStreet());
+		arrival.setCity(transportationvm.getCity());
+		arrival.setState(transportationvm.getState());
+		arrival.setCountry(transportationvm.getCountry());
+		arrival.setZipCode(transportationvm.getZipCode());
 
 		Picture picture = new Picture();
-		picture.setLink(formService.getLink());
+		picture.setLink(transportationvm.getLink());
 
 		em.persist(transportation);
 		em.persist(departure);

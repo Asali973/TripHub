@@ -11,7 +11,7 @@ import triphub.entity.product.service.transportation.TransportationType;
 import triphub.services.TransportationService;
 import triphub.viewModel.SubServicesViewModel;
 
-@Named
+@Named("transportationBean")
 @RequestScoped
 public class TransportationBean implements Serializable {
 	
@@ -49,6 +49,14 @@ public class TransportationBean implements Serializable {
 	 public List<Transportation> getAllTransportation() {
 		 return transportationService.getAllTransportation();
 	 }
+
+	public SubServicesViewModel getTransportationvm() {
+		return transportationvm;
+	}
+
+	public void setTransportationvm(SubServicesViewModel transportationvm) {
+		this.transportationvm = transportationvm;
+	}
 	
 
 }
