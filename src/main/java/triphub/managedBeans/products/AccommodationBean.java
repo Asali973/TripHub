@@ -11,12 +11,12 @@ import javax.persistence.EntityManager;
 
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
-import triphub.helpers.RegistrationException;
+
 import triphub.services.AccommodationService;
-import triphub.viewModel.AccommodationViewModel;
+
 import triphub.viewModel.SubServicesViewModel;
 
-@Named
+@Named("accommmodationBean")
 @RequestScoped
 public class AccommodationBean implements Serializable {
 
@@ -25,7 +25,7 @@ public class AccommodationBean implements Serializable {
 	
 	private EntityManager em;
 	
-	private AccommodationViewModel accommodationVm = new AccommodationViewModel();
+	private SubServicesViewModel accommodationVm = new SubServicesViewModel();
 	
 	private static final long serialVersionUID = 1L;
 
@@ -77,14 +77,17 @@ public class AccommodationBean implements Serializable {
 	}
 
 
-	public AccommodationViewModel getAccommodationVm() {
+	public SubServicesViewModel getAccommodationVm() {
 		return accommodationVm;
 	}
 
 
-	public void setAccommodationVm(AccommodationViewModel accommodationVm) {
+	public void setAccommodationVm(SubServicesViewModel accommodationVm) {
 		this.accommodationVm = accommodationVm;
 	}
+
+
+	
 	
 	
 	
