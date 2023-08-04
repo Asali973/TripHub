@@ -83,6 +83,8 @@ public class OrganizerDAO {
 		organizer.setAdministration(administration);
 		
 		
+		em.persist(picture);
+		em.persist(logo);
 		em.persist(companyInfo);
 		em.persist(administration);
 		em.persist(finance);

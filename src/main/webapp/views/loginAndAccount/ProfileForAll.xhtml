@@ -3,7 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Create Customer</title>
+	<title>User Profile</title>
 	<h:outputStylesheet library="css" name="loginCss.css" />
 	<link
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -14,37 +14,56 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-body">
-				<h2 class="card-title text-center mt-3">Create a new Customer
-					account</h2>
-				<h:form prependId="false">
+				<h2 class="card-title text-center mt-3">Update Your Profile</h2>
+				<h:form prependId="false" enctype="multipart/form-data">
+
+					<!-- Current Profile Picture -->
+					<div class="form-group">
+						<h:outputLabel value="Current Profile Picture:" />
+<h:graphicImage value="images/#{userBean.userViewModel.profilePicture}"
+    alt="Current profile picture" style="width:100px; height:100px;" />
+
+					</div>
+
+					<!-- Profile Picture Upload -->
+					<div class="form-group">
+						<h:outputLabel for="profilePicture"
+							value="Upload New Profile Picture:" />
+						<h:inputFile value="#{userBean.profilePicture}"
+							id="profilePicture" />
+					</div>
+
+
+					<!-- Personal Informations -->
 					<button
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
 						type="button">Personal informations</button>
+
 					<div class="form-group mt-4">
 						<h:outputLabel for="firstname" value="First Name*:"
 							required="true" requiredMessage="First name is required." />
 						<h:inputText id="firstname"
-							value="#{customerBean.userViewModel.firstName}"
+							value="#{userBean.userViewModel.firstName}"
 							class="form-control" required="true" />
 					</div>
 					<div class="form-group">
 						<h:outputLabel for="lastname" value="Last Name*:" required="true"
 							requiredMessage="Last name is required." />
 						<h:inputText id="lastname"
-							value="#{customerBean.userViewModel.lastName}"
+							value="#{userBean.userViewModel.lastName}"
 							class="form-control" required="true" />
 					</div>
 					<div class="form-group">
 						<h:outputLabel for="email" value="Email*:" required="true"
 							requiredMessage="Email is required." />
 						<h:inputText id="email"
-							value="#{customerBean.userViewModel.email}" class="form-control"
+							value="#{userBean.userViewModel.email}" class="form-control"
 							required="true" />
 					</div>
 					<div class="form-group">
 						<h:outputLabel for="phoneNum" value="Phone Number:" />
 						<h:inputText id="phoneNum"
-							value="#{customerBean.userViewModel.phoneNum}"
+							value="#{userBean.userViewModel.phoneNum}"
 							class="form-control" />
 					</div>
 					<div class="form-group">
@@ -52,7 +71,7 @@
 							requiredMessage="Please enter a password." />
 						<div class="input-group">
 							<h:inputSecret id="password"
-								value="#{customerBean.userViewModel.password}"
+								value="#{userBean.userViewModel.password}"
 								class="form-control" required="true" />
 							<div class="input-group-append">
 								<button id="togglePassword" type="button" class="btn btn-custom">Show/Hide</button>
@@ -64,7 +83,7 @@
 							required="true" requiredMessage="Please confirm your password." />
 						<div class="input-group">
 							<h:inputSecret id="confirmPassword"
-								value="#{customerBean.userViewModel.confirmPassword}"
+								value="#{userBean.userViewModel.confirmPassword}"
 								class="form-control" required="true" />
 						</div>
 					</div>
@@ -78,35 +97,35 @@
 					<div class="collapse" id="addressSection">
 						<div class="form-group mt-4">
 							<h:outputLabel for="num" value="Number:" />
-							<h:inputText id="num" value="#{customerBean.userViewModel.num}"
+							<h:inputText id="num" value="#{userBean.userViewModel.num}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="street" value="Street:" />
 							<h:inputText id="street"
-								value="#{customerBean.userViewModel.street}"
+								value="#{userBean.userViewModel.street}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="city" value="City:" />
-							<h:inputText id="city" value="#{customerBean.userViewModel.city}"
+							<h:inputText id="city" value="#{userBean.userViewModel.city}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="state" value="State:" />
 							<h:inputText id="state"
-								value="#{customerBean.userViewModel.state}" class="form-control" />
+								value="#{userBean.userViewModel.state}" class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="country" value="Country:" />
 							<h:inputText id="country"
-								value="#{customerBean.userViewModel.country}"
+								value="#{userBean.userViewModel.country}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="zipCode" value="Zip Code:" />
 							<h:inputText id="zipCode"
-								value="#{customerBean.userViewModel.zipCode}"
+								value="#{userBean.userViewModel.zipCode}"
 								class="form-control" />
 						</div>
 					</div>
@@ -121,24 +140,26 @@
 						<div class="form-group mt-4">
 							<h:outputLabel for="CCNumber" value="Credit Card Number:" />
 							<h:inputText id="CCNumber"
-								value="#{customerBean.userViewModel.CCNumber}"
+								value="#{userBean.userViewModel.CCNumber}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="expirationDate"
 								value="Expiration Date (MM/DD/YYYY):" />
 							<h:inputText id="expirationDate"
-								value="#{customerBean.userViewModel.expirationDate}"
+								value="#{userBean.userViewModel.expirationDate}"
 								class="form-control">
 								<f:convertDateTime pattern="MM/dd/yyyy" />
 							</h:inputText>
 						</div>
 					</div>
+
+					<!-- Submit Button -->
 					<div class="form-group mt-4 d-flex justify-content-center">
-						<h:commandButton value="Sign up" action="#{customerBean.register}"
+						<h:commandButton value="Update"
+							action="#{userBean.updatCustomer}"
 							class="btn btn-custom btn-custom-signup" id="submitButton" />
 					</div>
-
 				</h:form>
 			</div>
 		</div>
@@ -146,6 +167,6 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<h:outputScript library="javascript" name="loginJs.js" />
+	<script src="js/passwordToggle.js"></script>
 </h:body>
 </html>

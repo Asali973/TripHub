@@ -3,50 +3,49 @@ package triphub.viewModel;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-
-public class TourPackageFormViewModel implements Serializable{
+public class TourPackageFormViewModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	// TourPackage properties
-    private String name;
+	private String name;
 
-    // Price properties
-    private BigDecimal amount;
-    private String currency;
+	// Price properties
+	private BigDecimal amount;
+	private String currency;
 
-    // Destination properties
-    private String cityName;
-    private String state;
-    private String country;
+	// Destination properties
+	private String cityName;
+	private String state;
+	private String country;
 
-    // Theme properties
-    private String themeName;      
-
+	// Theme properties
+	private String themeName;
 
 	// New fields for price range
-    private BigDecimal minPrice = new BigDecimal(100);
-    private BigDecimal maxPrice = BigDecimal.ZERO;
+	private BigDecimal minPrice = new BigDecimal(100);
+	private BigDecimal maxPrice = BigDecimal.ZERO;
 
-    // Image properties
-//    private List<Image> imagelinks;
-    
-	public TourPackageFormViewModel() {}
-	
-	 public BigDecimal getMinPrice() {
-			return minPrice;
-		}
+	// Image properties
+//    private List<Picture> pictureslinks;
 
-		public void setMinPrice(BigDecimal minPrice) {
-			this.minPrice = minPrice;
-		}
+	public TourPackageFormViewModel() {
+	}
 
-		public BigDecimal getMaxPrice() {
-			return maxPrice;
-		}
+	public BigDecimal getMinPrice() {
+		return minPrice;
+	}
 
-		public void setMaxPrice(BigDecimal maxPrice) {
-			this.maxPrice = maxPrice;
-		}
+	public void setMinPrice(BigDecimal minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public BigDecimal getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(BigDecimal maxPrice) {
+		this.maxPrice = maxPrice;
+	}
 
 	public String getName() {
 		return name;
@@ -104,17 +103,4 @@ public class TourPackageFormViewModel implements Serializable{
 		this.themeName = themeName;
 	}
 
-//	public List<Image> getImagelinks() {
-//		return imagelinks;
-//	}
-//
-//	public void setImagelinks(List<Image> imagelinks) {
-//		this.imagelinks = imagelinks;
-//	}
-
-
-
-
-	
-	
 }

@@ -8,6 +8,9 @@ import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.user.User;
+import triphub.entity.util.Address;
+import triphub.entity.util.FinanceInfo;
+import triphub.viewModel.UserViewModel;
 
 @Stateless
 public class UserDAO {
@@ -28,6 +31,40 @@ public class UserDAO {
 
 	public User readUser(Long id) {
 		return em.find(User.class, id);
+	}
+	
+	public UserViewModel initUser(Long userId) {
+	    User user = em.find(User.class, userId);
+	    if (user == null) {
+	        return null;
+	    }
+	    
+        UserViewModel userViewModel = new UserViewModel();
+        userViewModel.setUserId(user.getId());
+        userViewModel.setFirstName(user.getFirstName());
+        userViewModel.setLastName(user.getLastName());
+        userViewModel.setEmail(user.getEmail());
+        userViewModel.setPhoneNum(user.getPhoneNum());
+
+        Address address = user.getAddress();
+        if (address != null) {
+            userViewModel.setNum(address.getNum());
+            userViewModel.setStreet(address.getStreet());
+            userViewModel.setCity(address.getCity());
+            userViewModel.setState(address.getState());
+            userViewModel.setCountry(address.getCountry());
+            userViewModel.setZipCode(address.getZipCode());
+        }
+
+        FinanceInfo finance = user.getFinance();
+        if (finance != null) {
+            userViewModel.setCCNumber(finance.getCCNumber());
+            userViewModel.setExpirationDate(finance.getExpirationDate());
+        }
+        
+        userViewModel.setUserId(user.getId());
+
+	    return userViewModel;
 	}
 
 	public User findByEmailUser(String email) {

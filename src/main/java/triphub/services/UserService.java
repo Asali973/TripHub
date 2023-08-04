@@ -47,16 +47,15 @@ public class UserService {
 	public User findByEmailUser(String email) {
 		return userDAO.findByEmailUser(email);
 	}
+	
+	public UserViewModel initUser(Long userId) {
+	    return userDAO.initUser(userId);
+	}
 
 	// Methods related to customers
 	public Customer createCustomer(UserViewModel customerForm) throws RegistrationException {
 
-		Customer email = null;
-		try {
-			email = customerDAO.findByEmailCustomer(customerForm.getEmail());
-		} catch (RegistrationException e) {
-			System.out.println("Customer with email " + customerForm.getEmail() + " not found.");
-		}
+		Customer email = customerDAO.findByEmailCustomer(customerForm.getEmail());
 
 		if (email != null) {
 			throw new RegistrationException("This email is already used");
@@ -73,9 +72,17 @@ public class UserService {
 		customerDAO.deleteCustomer(id);
 	}
 
-//	public void updateCustomer(Long id) {
-//		customerDAO.updateCustomer(id);
-//	}
+	public UserViewModel updateCustomerWithImage(UserViewModel userViewModel) throws RegistrationException {
+
+	    UserViewModel updatedUserViewModel = customerDAO.updateCustomer(userViewModel);
+
+	    if (updatedUserViewModel != null) {
+	        return updatedUserViewModel;
+	    } else {
+	        throw new RegistrationException("Failed to update customer with id " + userViewModel.getCustomerId());
+	    }
+	}
+
 
 	public Customer findByEmailCustomer(String email) throws RegistrationException {
 		return customerDAO.findByEmailCustomer(email);
@@ -84,6 +91,10 @@ public class UserService {
 	public Customer findByUserCustomer(User user) {
 		return customerDAO.findByUserCustomer(user);
 	}
+	
+    public UserViewModel initCustomer(Long customerId) {
+        return customerDAO.initCustomer(customerId);
+    }
 
 	// Methods related to SuperAdmin
 	public SuperAdmin createSuperAdmin(UserViewModel superAdminForm) throws RegistrationException {
