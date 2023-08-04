@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import triphub.entity.util.Address;
+import triphub.entity.util.Picture;
 
 @Entity
 public class Restaurant {
@@ -22,17 +23,21 @@ public class Restaurant {
 	private Address addressRestaurant;
 	
 	private String description;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Picture picture;
 
 	
 	public Restaurant () {
 	}
 	
-	public Restaurant(String nameRestaurant, Address addressRestaurant, String description) {
-		super();
-		this.nameRestaurant = nameRestaurant;
-		this.addressRestaurant = addressRestaurant;
-		this.description = description;
-	}
+//	public Restaurant(String nameRestaurant, Address addressRestaurant, String description, Picture picture) {
+//		super();
+//		this.nameRestaurant = nameRestaurant;
+//		this.addressRestaurant = addressRestaurant;
+//		this.description = description;
+//		this.picture = picture;
+//	}
 
 	
 	// Getters - Setters
@@ -69,6 +74,14 @@ public class Restaurant {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
 	}
 
 }

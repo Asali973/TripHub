@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import triphub.dao.service.RestaurantDAO;
 import triphub.entity.product.service.restaurant.Restaurant;
-import triphub.viewModel.RestaurantViewModel;
+import triphub.viewModel.SubServicesViewModel;
 
 	@Stateless
 	public class RestaurantService {
@@ -24,7 +24,7 @@ import triphub.viewModel.RestaurantViewModel;
 			this.restaurantDAO = restaurantDAO;
 		}
 		
-		public Restaurant create(RestaurantViewModel restaurantvm) {
+		public Restaurant create(SubServicesViewModel restaurantvm) {
 			return restaurantDAO.create(restaurantvm);
 		}
 		
