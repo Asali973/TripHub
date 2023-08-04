@@ -2,6 +2,8 @@ package triphub.entity.util;
 
 import javax.persistence.*;
 
+import triphub.viewModel.UserViewModel;
+
 @Entity
 public class Administration {
     @Id
@@ -12,6 +14,32 @@ public class Administration {
     private String phone;
     private String sector;
     private String email;
+    
+    public static Administration createAdministrationFromViewModel(UserViewModel form) {
+        Administration administration = new Administration();
+        administration.setSiret(form.getSiret());
+        administration.setPhone(form.getPhone());
+        administration.setSector(form.getSector());
+        administration.setEmail(form.getAdminEmail());
+        return administration;
+    }
+    
+    public void updateAdministrationFromViewModel(UserViewModel form) {
+        this.setSiret(form.getSiret());
+        this.setPhone(form.getPhone());
+        this.setSector(form.getSector());
+        this.setEmail(form.getAdminEmail());
+    }
+
+    public void initAdministrationViewModel(UserViewModel userViewModel) {
+        userViewModel.setSiret(this.getSiret());
+        userViewModel.setPhone(this.getPhone());
+        userViewModel.setSector(this.getSector());
+        userViewModel.setAdminEmail(this.getEmail());
+    }
+
+
+    
 	public Long getId() {
 		return id;
 	}

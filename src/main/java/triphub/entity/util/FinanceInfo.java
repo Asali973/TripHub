@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 import triphub.entity.user.User;
+import triphub.viewModel.UserViewModel;
 
 @Entity
 public class FinanceInfo {
@@ -18,6 +19,25 @@ public class FinanceInfo {
 	private String CCNumber;
 
 	private Date expirationDate;
+	
+	public static FinanceInfo createFinanceInfoFromViewModel(UserViewModel form) {
+	    FinanceInfo finance = new FinanceInfo();
+	    finance.setCCNumber(form.getCCNumber());
+	    finance.setExpirationDate(form.getExpirationDate());
+	    return finance;
+	}
+	
+	public void updateFinanceInfoFromViewModel(UserViewModel form) {
+	    this.setCCNumber(form.getCCNumber());
+	    this.setExpirationDate(form.getExpirationDate());
+	}
+
+	public void initFinanceInfoViewModel(UserViewModel userViewModel) {
+	    userViewModel.setCCNumber(this.getCCNumber());
+	    userViewModel.setExpirationDate(this.getExpirationDate());
+	}
+
+
 
 	public Long getId() {
 		return id;

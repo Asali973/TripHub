@@ -10,6 +10,7 @@ import triphub.entity.user.Customer;
 import triphub.entity.user.User;
 import triphub.entity.util.Address;
 import triphub.entity.util.FinanceInfo;
+import triphub.entity.util.Picture;
 import triphub.helpers.PasswordUtils;
 import triphub.helpers.RegistrationException;
 import triphub.viewModel.UserViewModel;
@@ -24,31 +25,25 @@ public class CustomerDAO {
 	}
 
 	public Customer createCustomer(UserViewModel form) {
-		// Create user
-		User user = new User();
-		user.setFirstName(form.getFirstName());
-		user.setLastName(form.getLastName());
-		user.setEmail(form.getEmail());
-		user.setPhoneNum(form.getPhoneNum());
-		user.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));
-		// Create address
-		Address address = new Address();
-		address.setNum(form.getNum());
-		address.setStreet(form.getStreet());
-		address.setCity(form.getCity());
-		address.setState(form.getState());
-		address.setCountry(form.getCountry());
-		address.setZipCode(form.getZipCode());
+
+		User user = User.createUserFromViewModel(form);
+		Address address = Address.createAddressFromViewModel(form);
 		user.setAddress(address);
-		// Create finance info
-		FinanceInfo finance = new FinanceInfo();
-		finance.setCCNumber(form.getCCNumber());
-		finance.setExpirationDate(form.getExpirationDate());
+
+		FinanceInfo finance = FinanceInfo.createFinanceInfoFromViewModel(form);
 		user.setFinance(finance);
+
+		// Create profile picture
+		Picture pictureProfile = new Picture();
+		pictureProfile.setLink(form.getProfilePicture());
+
 		// Create customer
 		Customer customer = new Customer();
+		customer.setId(form.getCustomerId());
 		customer.setUser(user);
-		
+		customer.setPicture(pictureProfile);
+
+		em.persist(pictureProfile);
 		em.persist(finance);
 		em.persist(address);
 		em.persist(user);
@@ -56,45 +51,76 @@ public class CustomerDAO {
 		em.flush();
 		return customer;
 	}
-	
+
+	public UserViewModel updateCustomer(UserViewModel userViewModel) {
+		// Find existing customer
+		Customer customer = em.find(Customer.class, userViewModel.getCustomerId());
+
+		if (customer == null) {
+			return null;
+		}
+
+		// Update customer
+		customer.updateCustomerFromViewModel(userViewModel);
+
+		// Persist changes
+		em.persist(customer);
+		em.flush();
+
+		return userViewModel;
+	}
+
+	public UserViewModel initCustomer(Long customerId) {
+		Customer customer = em.find(Customer.class, customerId);
+		if (customer == null) {
+			return null;
+		}
+
+		return customer.initCustomerViewModel();
+	}
+
 	public Customer readCustomer(Long id) {
-	    return em.find(Customer.class, id);
+		return em.find(Customer.class, id);
 	}
 
 	public void deleteCustomer(Long id) {
-	    Customer customer = em.find(Customer.class, id);
-	    if (customer != null) {
-	        em.remove(customer);
-	    }
+		Customer customer = em.find(Customer.class, id);
+		if (customer != null) {
+			em.remove(customer);
+		}
 	}
 
-	public void updateCustomer(Long id, Customer updatedCustomer) {
-	    Customer customer = em.find(Customer.class, id);
-	    if (customer != null) {
-	        // Here update the fields of the customer object
-	        // For example:
-	        // customer.setFieldName(updatedCustomer.getFieldName());
-	        em.merge(customer);
-	    }
-	}
-
-	public Customer findByEmailCustomer(String email) throws RegistrationException {
-	    TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.user.email = :email", Customer.class);
-	    query.setParameter("email", email);
-	    try {
-	    	return query.getSingleResult();
-	    } catch (NoResultException e) {
-	        throw new RegistrationException("Customer with email " + email + " not found.");
-	    }
+	public Customer findByEmailCustomer(String email) {
+		TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.user.email = :email",
+				Customer.class);
+		query.setParameter("email", email);
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	public Customer findByUserCustomer(User user) {
-	    TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.user = :user", Customer.class);
-	    query.setParameter("user", user);
-	    try {
-	    	return query.getSingleResult();
-	    } catch (NoResultException e) {
-	        return null;
-	    }
+		TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.user = :user", Customer.class);
+		query.setParameter("user", user);
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
+
+	public Customer findCustomerByUserId(Long userId) {
+		TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.user.id = :userId",
+				Customer.class);
+		query.setParameter("userId", userId);
+
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
 }

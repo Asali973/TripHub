@@ -57,7 +57,7 @@ public class DataSeedTest {
 	                        tourPackage.getDestination().getCountry());
 	                System.out.println("Price: " + tourPackage.getPrice().getAmount() + " " +
 	                        tourPackage.getPrice().getCurrency());
-	                System.out.println("Images: " + tourPackage.getImages()); // Add image retrieval logic if needed
+	                System.out.println("Images: " + tourPackage.getPictures()); // Add image retrieval logic if needed
 	                System.out.println("-----------------------");
 	            }
 
