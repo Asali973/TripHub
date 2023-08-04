@@ -151,10 +151,17 @@
 						</div>
 
 					</div>
+
+					<div class="form-group mt-4 d-flex justify-content-center">
+						<h:messages class="text-center" id="messages" globalOnly="true"
+							layout="table" styleClass="success-message" />
+					</div>
 					<div class="form-group mt-4 d-flex justify-content-center">
 						<h:commandButton value="Add Service"
 							action="#{transportationBean.create}"
-							styleClass="btn btn-custom btn-custom-signup" id="submitButton" />
+							styleClass="btn btn-custom btn-custom-signup" id="submitButton"
+							update="messages" />
+
 					</div>
 				</div>
 			</h:form>

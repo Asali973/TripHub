@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import triphub.entity.product.service.transportation.Transportation;
@@ -26,8 +28,9 @@ public class TransportationBean implements Serializable {
 		
 	}
 	
-	public Transportation create() {
-		return transportationService.create(transportationvm);
+	public void create() {
+		transportationService.create(transportationvm);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Transportation added successfully !"));
 	}
 	
 	public Transportation read(Long id) {

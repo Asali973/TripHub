@@ -45,3 +45,8 @@
 	justify-content: center;
 	font-size: 1.3em;
 }
+
+ .success-message {
+        color: orange;
+        font-style: italic;
+    }
