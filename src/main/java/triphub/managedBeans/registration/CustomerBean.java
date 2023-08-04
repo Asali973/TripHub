@@ -48,68 +48,57 @@ public class CustomerBean implements Serializable {
 	public CustomerBean() {
 	}
 
-    public void register() {
-        if (!userViewModel.getPassword().equals(userViewModel.getConfirmPassword())) {
-            FacesMessageUtil.addErrorMessage("Passwords do not match!");
-            return;
-        }
+	public void register() {
+		if (!userViewModel.getPassword().equals(userViewModel.getConfirmPassword())) {
+			FacesMessageUtil.addErrorMessage("Passwords do not match!");
+			return;
+		}
 
-        try {
-            Customer email = userService.findByEmailCustomer(userViewModel.getEmail());
-            if (email != null) {
-                throw new RegistrationException("This email is already used");
-            }
+		try {
+			Customer email = userService.findByEmailCustomer(userViewModel.getEmail());
+			if (email != null) {
+				throw new RegistrationException("This email is already used");
+			}
 
-            Customer newCustomer = userService.createCustomer(userViewModel);
+			Customer newCustomer = userService.createCustomer(userViewModel);
 
-            // Get the session and store the customer ID
-            FacesContext context = FacesContext.getCurrentInstance();
-            HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-            session.setAttribute("customerId", newCustomer.getId());
-            
-            // Get the customer ID after creation
-            Long customerId = newCustomer.getId();
+			// Get the session and store the customer ID
+			FacesContext context = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+			session.setAttribute("customerId", newCustomer.getId());
 
-            // Initialize the form data with the newly created customer's ID
-            initFormData(customerId);
+			// Get the customer ID after creation
+			Long customerId = newCustomer.getId();
 
-            // Clear the form fields to prepare for a new customer creation
-            userViewModel.setFirstName("");
-            userViewModel.setLastName("");
-            userViewModel.setEmail("");
-            userViewModel.setPhoneNum("");
-            userViewModel.setPassword("");
-            userViewModel.setConfirmPassword("");
-            userViewModel.setNum("");
-            userViewModel.setStreet("");
-            userViewModel.setCity("");
-            userViewModel.setState("");
-            userViewModel.setCountry("");
-            userViewModel.setZipCode("");
-            userViewModel.setCCNumber("");
-            userViewModel.setExpirationDate(null);
-            userViewModel.setProfilePicture(null);
+			// Initialize the form data with the newly created customer's ID
+			initFormData(customerId);
 
-            // Show a success message
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer created successfully!", null));
-        } catch (RegistrationException e) {
-            // Show an error message
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration failed: " + e.getMessage(), null));
-        }
-    }
+			// Clear the form fields to prepare for a new customer creation
+			userViewModel.setFirstName("");
+			userViewModel.setLastName("");
+			userViewModel.setEmail("");
+			userViewModel.setPhoneNum("");
+			userViewModel.setPassword("");
+			userViewModel.setConfirmPassword("");
+			userViewModel.setNum("");
+			userViewModel.setStreet("");
+			userViewModel.setCity("");
+			userViewModel.setState("");
+			userViewModel.setCountry("");
+			userViewModel.setZipCode("");
+			userViewModel.setCCNumber("");
+			userViewModel.setExpirationDate(null);
+			userViewModel.setProfilePicture(null);
 
-//	public void register() {
-//		if (!userViewModel.getPassword().equals(userViewModel.getConfirmPassword())) {
-//			FacesMessageUtil.addErrorMessage("Passwords do not match!");
-//			return;
-//		}
-//
-//		try {
-//			userService.createCustomer(userViewModel);
-//		} catch (RegistrationException e) {
-//			FacesMessageUtil.addErrorMessage("Registration failed: " + e.getMessage());
-//		}
-//	}
+			// Show a success message
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer created successfully!", null));
+		} catch (RegistrationException e) {
+			// Show an error message
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration failed: " + e.getMessage(), null));
+		}
+	}
 
 	public void initFormData(Long customerId) {
 		UserViewModel temp = userService.initCustomer(customerId);
@@ -119,89 +108,42 @@ public class CustomerBean implements Serializable {
 			FacesMessageUtil.addErrorMessage("Initialization failed: Customer does not exist");
 		}
 	}
-	
+
 	@PostConstruct
 	public void init() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-	    Long customerId = (Long) session.getAttribute("customerId");
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+		Long customerId = (Long) session.getAttribute("customerId");
 
-	    if (customerId != null) {
-	        initFormData(customerId);
-	    }
+		if (customerId != null) {
+			initFormData(customerId);
+		}
 	}
-
-
 
 	public void updateCustomer() {
-	    try {
-	        if (profilePicture != null) {
-	            // Convertir l'InputStream en byte[]
-	            byte[] bytes = IOUtils.toByteArray(profilePicture.getInputStream());
+		try {
+			if (profilePicture != null) {
+				// Convertir l'InputStream en byte[]
+				byte[] bytes = IOUtils.toByteArray(profilePicture.getInputStream());
 
-	            // Créez le chemin du fichier
-	            String filename = profilePicture.getSubmittedFileName();
-	            String path = "/Users/brendan/EnvJEE/Tools/wildfly-18.0.0.Final/data/triphub/images" + "/" + filename;
+				// Créez le chemin du fichier
+				String filename = profilePicture.getSubmittedFileName();
+				String path = "/Users/brendan/EnvJEE/Tools/wildfly-18.0.0.Final/data/triphub/images" + "/" + filename;
 
-	            // le byte[] dans un nouveau fichier
-	            try (FileOutputStream fos = new FileOutputStream(path)) {
-	                fos.write(bytes);
-	            }
+				// le byte[] dans un nouveau fichier
+				try (FileOutputStream fos = new FileOutputStream(path)) {
+					fos.write(bytes);
+				}
 
-	            // Stocke le chemin du fichier dans le UserViewModel
-	            userViewModel.setProfilePicture(filename); // Notez qu'on stocke uniquement le nom du fichier ici, pas le chemin complet.
-	        }
-	        userViewModel = userService.updateCustomerWithImage(userViewModel);
-	    } catch (Exception e) {
-	        FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
-	    }
+				// Stocke le chemin du fichier dans le UserViewModel
+				userViewModel.setProfilePicture(filename); // Notez qu'on stocke uniquement le nom du fichier ici, pas
+															// le chemin complet.
+			}
+			userViewModel = userService.updateCustomerWithImage(userViewModel);
+		} catch (Exception e) {
+			FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
+		}
 	}
-
-//    @PostConstruct
-//    public void init() {
-//        Principal principal = request.getUserPrincipal();
-//        if (principal != null) {
-//            try {
-//                // Assuming the principal's name is the user's ID.
-//                Long userId = Long.parseLong(principal.getName());
-//                UserViewModel temp = userService.initCustomer(userId, customerId);
-//                if (temp != null) {
-//                    this.userViewModel = temp;
-//                    this.customerId = userViewModel.getCustomerId(); // Set the customerId property from the UserViewModel
-//                } else {
-//                    FacesMessageUtil.addErrorMessage("Initialization failed: User does not exist");
-//                }
-//            } catch (NumberFormatException e) {
-//                FacesMessageUtil.addErrorMessage("Initialization failed: Invalid user ID");
-//            }
-//        }
-//    }
-
-//  public void init() {
-//	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-//	Long idUserConnecte = (Long) session. getAttribute("connectedUserId");
-//}
-//    public boolean login() {
-//        try {
-//            Customer customer = userService.findByEmailCustomer(userViewModel.getEmail());
-//            if (customer != null
-//                    && PasswordUtils.getInstance().checkPassword(userViewModel.getPassword(), customer.getUser().getPassword())) {
-//                loggedIn = true;
-//                return true;
-//            } else {
-//                loggedIn = false;
-//                return false;
-//            }
-//        } catch (RegistrationException e) {
-//            loggedIn = false;
-//            FacesMessageUtil.addErrorMessage("Registration failed: " + e.getMessage());
-//            return false;
-//        }
-//    }
-//
-//    public void logout() {
-//        loggedIn = false;
-//    }
 
 	public Part getProfilePicture() {
 		return profilePicture;

@@ -188,6 +188,17 @@ public class CustomerDAO {
 	    }
 	}
 	
+	
+	public Customer findCustomerByUserId(Long userId) {
+	    TypedQuery<Customer> query = em.createQuery("SELECT c FROM Customer c WHERE c.user.id = :userId", Customer.class);
+	    query.setParameter("userId", userId);
+
+	    try {
+	        return query.getSingleResult();
+	    } catch (NoResultException e) {
+	        return null;
+	    }
+	}
 //	public UserViewModel initCustomer(Long userId, Long customerId) {
 //  User user = em.find(User.class, userId);
 //  if (user == null) {

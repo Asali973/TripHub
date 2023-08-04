@@ -20,9 +20,9 @@
 					<!-- Current Profile Picture -->
 					<div class="form-group">
 						<h:outputLabel value="Current Profile Picture:" />
-<h:graphicImage value="images/#{customerBean.userViewModel.profilePicture}"
-    alt="Current profile picture" style="width:100px; height:100px;" />
 
+						<h:graphicImage
+							value="/images/#{customerBean.userViewModel.profilePicture}" />
 					</div>
 
 					<!-- Profile Picture Upload -->
