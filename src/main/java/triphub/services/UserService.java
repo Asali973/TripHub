@@ -1,7 +1,5 @@
 package triphub.services;
 
-
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -47,9 +45,9 @@ public class UserService {
 	public User findByEmailUser(String email) {
 		return userDAO.findByEmailUser(email);
 	}
-	
+
 	public UserViewModel initUser(Long userId) {
-	    return userDAO.initUser(userId);
+		return userDAO.initUser(userId);
 	}
 
 	// Methods related to customers
@@ -74,15 +72,14 @@ public class UserService {
 
 	public UserViewModel updateCustomerWithImage(UserViewModel userViewModel) throws RegistrationException {
 
-	    UserViewModel updatedUserViewModel = customerDAO.updateCustomer(userViewModel);
+		UserViewModel updatedUserViewModel = customerDAO.updateCustomer(userViewModel);
 
-	    if (updatedUserViewModel != null) {
-	        return updatedUserViewModel;
-	    } else {
-	        throw new RegistrationException("Failed to update customer with id " + userViewModel.getCustomerId());
-	    }
+		if (updatedUserViewModel != null) {
+			return updatedUserViewModel;
+		} else {
+			throw new RegistrationException("Failed to update customer with id " + userViewModel.getCustomerId());
+		}
 	}
-
 
 	public Customer findByEmailCustomer(String email) throws RegistrationException {
 		return customerDAO.findByEmailCustomer(email);
@@ -91,20 +88,15 @@ public class UserService {
 	public Customer findByUserCustomer(User user) {
 		return customerDAO.findByUserCustomer(user);
 	}
-	
-    public UserViewModel initCustomer(Long customerId) {
-        return customerDAO.initCustomer(customerId);
-    }
+
+	public UserViewModel initCustomer(Long customerId) {
+		return customerDAO.initCustomer(customerId);
+	}
 
 	// Methods related to SuperAdmin
 	public SuperAdmin createSuperAdmin(UserViewModel superAdminForm) throws RegistrationException {
 
-		SuperAdmin email = null;
-		try {
-			email = superAdminDAO.findByEmailSuperAdmin(superAdminForm.getEmail());
-		} catch (RegistrationException e) {
-			System.out.println("SuperAdmin with email " + superAdminForm.getEmail() + " not found.");
-		}
+		SuperAdmin email = superAdminDAO.findByEmailSuperAdmin(superAdminForm.getEmail());
 
 		if (email != null) {
 			throw new RegistrationException("This email is already used");
@@ -121,8 +113,15 @@ public class UserService {
 		superAdminDAO.deleteSuperAdmin(id);
 	}
 
-	public void updateSuperAdmin(Long id) {
-		superAdminDAO.updateSuperAdmin(id);
+	public UserViewModel updateSuperAdmin(UserViewModel userViewModel) throws RegistrationException {
+
+		UserViewModel updatedUserViewModel = superAdminDAO.updateSuperAdmin(userViewModel);
+
+		if (updatedUserViewModel != null) {
+			return updatedUserViewModel;
+		} else {
+			throw new RegistrationException("Failed to update SuperAdmin with id " + userViewModel.getSuperAdminId());
+		}
 	}
 
 	public SuperAdmin findByEmailSuperAdmin(String email) throws RegistrationException {
@@ -133,21 +132,27 @@ public class UserService {
 		return superAdminDAO.findByUserSuperAdmin(user);
 	}
 
+	public UserViewModel initSuperAdmin(Long superAdminId) {
+		return superAdminDAO.initSuperAdmin(superAdminId);
+	}
+
 	// Methods related to Provider
 	public Provider createProvider(UserViewModel providerForm) throws RegistrationException {
+		Provider provider = providerDAO.findByEmailProvider(providerForm.getEmail());
 
-		Provider email = null;
-		try {
-			email = providerDAO.findByEmailProvider(providerForm.getEmail());
-		} catch (RegistrationException e) {
-			System.out.println("Provider with email " + providerForm.getEmail() + " not found.");
-		}
-
-		if (email != null) {
+		if (provider != null) {
 			throw new RegistrationException("This email is already used");
 		}
 
 		return providerDAO.createProvider(providerForm);
+	}
+
+	public UserViewModel updateProvider(UserViewModel form) {
+		return providerDAO.updateProvider(form);
+	}
+
+	public UserViewModel initProvider(Long id) {
+		return providerDAO.initProvider(id);
 	}
 
 	public Provider readProvider(Long id) {
@@ -158,11 +163,7 @@ public class UserService {
 		providerDAO.deleteProvider(id);
 	}
 
-	public void updateProvider(Long id) {
-		providerDAO.updateProvider(id);
-	}
-
-	public Provider findByEmailProvider(String email) throws RegistrationException {
+	public Provider findByEmailProvider(String email) {
 		return providerDAO.findByEmailProvider(email);
 	}
 
@@ -170,21 +171,27 @@ public class UserService {
 		return providerDAO.findByUserProvider(user);
 	}
 
+	public Provider findProviderByUserId(Long userId) {
+		return providerDAO.findProviderByUserId(userId);
+	}
+
 	// Methods related to Organizer
 	public Organizer createOrganizer(UserViewModel organizerForm) throws RegistrationException {
+		Organizer organizer = organizerDAO.findByEmailOrganizer(organizerForm.getEmail());
 
-		Organizer email = null;
-		try {
-			email = organizerDAO.findByEmailOrganizer(organizerForm.getEmail());
-		} catch (RegistrationException e) {
-			System.out.println("Organizer with email " + organizerForm.getEmail() + " not found.");
-		}
-
-		if (email != null) {
+		if (organizer != null) {
 			throw new RegistrationException("This email is already used");
 		}
 
 		return organizerDAO.createOrganizer(organizerForm);
+	}
+
+	public UserViewModel updateOrganizer(UserViewModel userViewModel) {
+		return organizerDAO.updateOrganizer(userViewModel);
+	}
+
+	public UserViewModel initOrganizer(Long organizerId) {
+		return organizerDAO.initOrganizer(organizerId);
 	}
 
 	public Organizer readOrganizer(Long id) {
@@ -195,16 +202,16 @@ public class UserService {
 		organizerDAO.deleteOrganizer(id);
 	}
 
-	public void updateOrganizer(Long id) {
-		organizerDAO.updateOrganizer(id);
-	}
-
 	public Organizer findByEmailOrganizer(String email) throws RegistrationException {
 		return organizerDAO.findByEmailOrganizer(email);
 	}
 
 	public Organizer findByUserOrganizer(User user) {
 		return organizerDAO.findByUserOrganizer(user);
+	}
+
+	public Organizer findOrganizerByUserId(Long userId) {
+		return organizerDAO.findOrganizerByUserId(userId);
 	}
 
 }

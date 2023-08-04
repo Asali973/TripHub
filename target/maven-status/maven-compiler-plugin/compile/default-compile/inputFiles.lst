@@ -55,6 +55,7 @@
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/helpers/RegistrationException.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/accommodation/Accommodation.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/User.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/helpers/ImageHelper.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/ServiceViewModel.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/restaurant/Restaurant.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/FinanceInfo.java

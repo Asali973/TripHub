@@ -2,6 +2,8 @@ package triphub.entity.util;
 
 import javax.persistence.*;
 
+import triphub.viewModel.UserViewModel;
+
 @Entity
 public class Picture {
     @Id
@@ -16,6 +18,16 @@ public class Picture {
     private PictureType type;
     
     private String altText;
+    
+    
+    public void updatePictureFromViewModel(UserViewModel form) {
+        this.setLink(form.getProfilePicture());
+    }
+    
+    public void initPictureViewModel(UserViewModel userViewModel) {
+        userViewModel.setProfilePicture(this.getLink());
+    }
+
 
     // getters and setters
 

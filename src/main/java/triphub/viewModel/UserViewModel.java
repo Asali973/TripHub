@@ -42,6 +42,42 @@ public class UserViewModel implements Serializable {
 	private String phone;
 	private String sector;
 	private String adminEmail;
+	
+    public void clear() {
+        this.customerId = null;
+        this.providerId = null;
+        this.organizerId = null;
+        this.superAdminId = null;
+        this.userId = null;
+
+        this.firstName = "";
+        this.lastName = "";
+        this.email = "";
+        this.phoneNum = "";
+        this.password = "";
+        this.confirmPassword = "";
+        
+        this.profilePicture = "";
+
+        this.num = "";
+        this.street = "";
+        this.city = "";
+        this.state = "";
+        this.country = "";
+        this.zipCode = "";
+
+        this.CCNumber = "";
+        this.expirationDate = null;
+
+        this.companyName = "";
+        this.companyLogoLink = "";
+        this.companyPictureLink = "";
+
+        this.siret = "";
+        this.phone = "";
+        this.sector = "";
+        this.adminEmail = "";
+    }
 
 	public UserViewModel() {
 	}

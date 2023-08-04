@@ -42,30 +42,31 @@ public class LoginBean implements Serializable {
 			Customer customer = userService.findByUserCustomer(user);
 			if (customer != null) {
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "customer");
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("customerId", customer.getId());
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("customerId",
+						customer.getId());
 				this.userViewModel = userService.initCustomer(customer.getId());
 			}
-//			Organizer organizer = userService.findByUserOrganizer(user);
-//			if (organizer != null) {
-//				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "organizer");
-//				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("oranizerId", organizer.getId());
-//				this.userViewModel = userService.initOrganizer(organizer.getId());
-//			}
-//
-//			Provider provider = userService.findByUserProvider(user);
-//			if (provider != null) {
-//				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "provider");
-//				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("providerId", provider.getId());
-//				this.userViewModel = userService.initProvider(provider.getId());
-//			}
-//
-//			SuperAdmin superAdmin = userService.findByUserSuperAdmin(user);
-//			if (superAdmin != null) {
-//				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "superAdmin");
-//				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("customerId", superAdmin.getId());
-//				this.userViewModel = userService.initSuperAdmin(superAdmin.getId());
-//			}
-			
+			Organizer organizer = userService.findByUserOrganizer(user);
+			if (organizer != null) {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "organizer");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("oranizerId", organizer.getId());
+				this.userViewModel = userService.initOrganizer(organizer.getId());
+			}
+
+			Provider provider = userService.findByUserProvider(user);
+			if (provider != null) {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "provider");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("providerId", provider.getId());
+				this.userViewModel = userService.initProvider(provider.getId());
+			}
+
+			SuperAdmin superAdmin = userService.findByUserSuperAdmin(user);
+			if (superAdmin != null) {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "superAdmin");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("customerId", superAdmin.getId());
+				this.userViewModel = userService.initSuperAdmin(superAdmin.getId());
+			}
+
 			// Save the UserViewModel in the session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userViewModel",
 					this.userViewModel);
@@ -85,7 +86,6 @@ public class LoginBean implements Serializable {
 		Long superAdminId = (Long) session.getAttribute("superAdminId");
 		Long providerId = (Long) session.getAttribute("providerId");
 		Long organizerrId = (Long) session.getAttribute("providerId");
-
 
 		if (user != null) {
 			initUserData(user.getId());

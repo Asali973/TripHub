@@ -1,24 +1,17 @@
 package triphub.managedBeans.registration;
 
-import java.io.FileOutputStream;
 import java.io.Serializable;
-import java.security.Principal;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
-import org.apache.commons.io.IOUtils;
-
 import triphub.entity.user.Customer;
-import triphub.entity.user.User;
 import triphub.helpers.FacesMessageUtil;
+import triphub.helpers.ImageHelper;
 import triphub.helpers.RegistrationException;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
@@ -34,16 +27,7 @@ public class CustomerBean implements Serializable {
 
 	private UserViewModel userViewModel = new UserViewModel();
 
-	@Inject
-	private HttpServletRequest request;
-
-	// Picture profile
 	private Part profilePicture;
-
-	private Long customerId;
-
-	// Login status
-	private boolean loggedIn;
 
 	public CustomerBean() {
 	}
@@ -62,39 +46,17 @@ public class CustomerBean implements Serializable {
 
 			Customer newCustomer = userService.createCustomer(userViewModel);
 
-			// Get the session and store the customer ID
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
 			session.setAttribute("customerId", newCustomer.getId());
 
-			// Get the customer ID after creation
-			Long customerId = newCustomer.getId();
+			initFormData(newCustomer.getId());
 
-			// Initialize the form data with the newly created customer's ID
-			initFormData(customerId);
+			userViewModel.clear();
 
-			// Clear the form fields to prepare for a new customer creation
-			userViewModel.setFirstName("");
-			userViewModel.setLastName("");
-			userViewModel.setEmail("");
-			userViewModel.setPhoneNum("");
-			userViewModel.setPassword("");
-			userViewModel.setConfirmPassword("");
-			userViewModel.setNum("");
-			userViewModel.setStreet("");
-			userViewModel.setCity("");
-			userViewModel.setState("");
-			userViewModel.setCountry("");
-			userViewModel.setZipCode("");
-			userViewModel.setCCNumber("");
-			userViewModel.setExpirationDate(null);
-			userViewModel.setProfilePicture(null);
-
-			// Show a success message
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer created successfully!", null));
 		} catch (RegistrationException e) {
-			// Show an error message
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration failed: " + e.getMessage(), null));
 		}
@@ -122,28 +84,25 @@ public class CustomerBean implements Serializable {
 
 	public void updateCustomer() {
 		try {
-			if (profilePicture != null) {
-				// Convertir l'InputStream en byte[]
-				byte[] bytes = IOUtils.toByteArray(profilePicture.getInputStream());
-
-				// Créez le chemin du fichier
-				String filename = profilePicture.getSubmittedFileName();
-				String path = "/Users/brendan/EnvJEE/Tools/wildfly-18.0.0.Final/data/triphub/images" + "/" + filename;
-
-				// le byte[] dans un nouveau fichier
-				try (FileOutputStream fos = new FileOutputStream(path)) {
-					fos.write(bytes);
-				}
-
-				// Stocke le chemin du fichier dans le UserViewModel
-				userViewModel.setProfilePicture(filename); // Notez qu'on stocke uniquement le nom du fichier ici, pas
-															// le chemin complet.
+			String profilePicName = ImageHelper.processProfilePicture(profilePicture);
+			if (profilePicName != null) {
+				userViewModel.setProfilePicture(profilePicName);
 			}
 			userViewModel = userService.updateCustomerWithImage(userViewModel);
 		} catch (Exception e) {
 			FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
 		}
 	}
+	
+	public void deleteCustomer() {
+	    try {
+	        userService.deleteCustomer(userViewModel.getCustomerId());
+	        FacesMessageUtil.addSuccessMessage("Customer deleted successfully!");
+	    } catch (Exception e) {
+	        FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
+	    }
+	}
+
 
 	public Part getProfilePicture() {
 		return profilePicture;
@@ -153,19 +112,6 @@ public class CustomerBean implements Serializable {
 		this.profilePicture = profilePicture;
 	}
 
-	// Check if the user is logged in
-	public boolean isLoggedIn() {
-		return loggedIn;
-	}
-
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-
 	public UserViewModel getUserViewModel() {
 		return userViewModel;
 	}
@@ -173,13 +119,4 @@ public class CustomerBean implements Serializable {
 	public void setUserViewModel(UserViewModel userViewModel) {
 		this.userViewModel = userViewModel;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public void setLoggedIn(boolean loggedIn) {
-		this.loggedIn = loggedIn;
-	}
-
 }

@@ -3,6 +3,7 @@ package triphub.entity.user;
 import javax.persistence.*;
 
 import triphub.entity.util.Picture;
+import triphub.viewModel.UserViewModel;
 
 @Entity
 public class Customer {
@@ -16,6 +17,27 @@ public class Customer {
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Picture picture;
+	
+	public void updateCustomerFromViewModel(UserViewModel form) {
+	    this.setId(form.getCustomerId());
+	    this.getUser().updateUserFromViewModel(form);
+	    this.getUser().getAddress().updateAddressFromViewModel(form);
+	    this.getUser().getFinance().updateFinanceInfoFromViewModel(form);
+	    this.getPicture().updatePictureFromViewModel(form);
+	}
+
+	public UserViewModel initCustomerViewModel() {
+	    UserViewModel userViewModel = new UserViewModel();
+	    this.getUser().initUserViewModel(userViewModel);
+	    this.getUser().getAddress().initAddressViewModel(userViewModel);
+	    this.getUser().getFinance().initFinanceInfoViewModel(userViewModel);
+	    this.getPicture().initPictureViewModel(userViewModel);
+	    userViewModel.setCustomerId(this.getId());
+
+	    return userViewModel;
+	}
+
+
 
 	public Long getId() {
 		return id;

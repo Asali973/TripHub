@@ -23,4 +23,6 @@ public class ImageServlet extends HttpServlet {
         response.setHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
         Files.copy(file.toPath(), response.getOutputStream());
     }
+    
+    
 }
