@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
+
 <h:head>
 	<title>Offer a Accommodation</title>
 	<h:outputStylesheet library="css" name="loginCss.css" />
@@ -20,8 +21,9 @@
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
 						type="button">Accommodation informations</button>
 					<div class="form-group mt-4">
-						<h:outputLabel for="name" value="Name*:" required="true"
+						<h:outputLabel for="AccomdationName" value="Name*:" required="true"
 							requiredMessage="Name is required." />
+							
 						<h:inputText id="name"
 							value="#{accommodationBean.accommodationVm.name}"
 							class="form-control" required="true" />
@@ -29,18 +31,17 @@
 					<div class="form-group">
 						<h:outputLabel for="typeAccommodation"
 							value="Type Accommodation :" required="true"
-							requiredMessage="Last name is required." />
-						<h:selectOneListBox id="typeAccommodation"
+							requiredMessage="Type accommodation is required." />
+							
+						<h:selectOneMenu id="typeAccommodation"
 							value="#{accommodationBean.accommodationVm.accommodationType}"
 							class="form-control" required="true">
-							<f:selectItem itemValue="option1" itemLabel="Hotel" />
-							<f:selectItem itemValue="option2" itemLabel="Cottage" />
-							<f:selectItem itemValue="option3" itemLabel="Camping" />
-							<f:selectItem itemValue="option4" itemLabel="BnB" />
-							<f:selectItem itemValue="option5" itemLabel="Chambre d'hôte" />
-						</h:selectOneListBox>
+							<f:selectItems
+								value="#{accommodationBean.allAccommodationTypes}" var="type"
+								itemValue="#{type}" itemLabel="#{type.label}" />
+							
+						</h:selectOneMenu>
 					</div>
-
 					<!-- Address dépliable -->
 					<button
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
@@ -114,6 +115,6 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<h:outputScript library="javascript" name="loginJs.js" />
+	
 </h:body>
 </html>

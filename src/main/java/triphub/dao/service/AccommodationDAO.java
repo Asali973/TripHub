@@ -30,31 +30,36 @@ public class AccommodationDAO {
 	
 	public AccommodationDAO() {}
 	
-	public Accommodation createAccommodation(SubServicesViewModel formService) {
+	public Accommodation createAccommodation(SubServicesViewModel accommodationVm) {
 		
 		// creer Accommodation 
 		Accommodation accommodation = new Accommodation();
 		
-		accommodation.setName(formService.getName());
-		accommodation.setDescription(formService.getDescription());
-		accommodation.setAccommodationType(formService.getAccommodationType());
+		accommodation.setName(accommodationVm.getName());
+		accommodation.setDescription(accommodationVm.getDescription());
+		accommodation.setAccommodationType(accommodationVm.getAccommodationType());
 		
 		
-		Picture picture = new Picture();
-		picture.setLink(formService.getLink());
-		accommodation.setPicture(picture);
+//		Picture picture = new Picture();
+//		picture.setLink(formService.getLink());
+//		accommodation.setPicture(picture);
 		
 		Address addressAccommodation = new Address();
-		addressAccommodation.setNum(formService.getNum());
-		addressAccommodation.setStreet(formService.getStreet());
-		addressAccommodation.setCity(formService.getCity());
-		addressAccommodation.setState(formService.getState());
-		addressAccommodation.setCountry(formService.getCountry());
+		addressAccommodation.setNum(accommodationVm.getNum());
+		addressAccommodation.setStreet(accommodationVm.getStreet());
+		addressAccommodation.setCity(accommodationVm.getCity());
+		addressAccommodation.setState(accommodationVm.getState());
+		addressAccommodation.setCountry(accommodationVm.getCountry());
 		accommodation.setAddresAccommodation(addressAccommodation);
 		
-		em.persist(picture);
+		
+		
+//		em.persist(picture);
 		em.persist(addressAccommodation);
 		em.persist(accommodation);
+		
+		accommodation.setAddresAccommodation(addressAccommodation);
+		
 		return accommodation;
 	}
 	// Méthode pour modifer une entité Accommodation

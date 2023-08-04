@@ -3,7 +3,7 @@ package triphub.managedBeans.products;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -16,12 +16,15 @@ import triphub.services.AccommodationService;
 
 import triphub.viewModel.SubServicesViewModel;
 
-@Named("accommmodationBean")
+@Named("accommodationBean")
 @RequestScoped
+
 public class AccommodationBean implements Serializable {
 
 	@Inject
 	private AccommodationService accommodationService;
+	
+	private static final long serialVersionUID = 1L;
 	
 	private EntityManager em;
 	
@@ -34,7 +37,7 @@ public class AccommodationBean implements Serializable {
 	}
 	
 	
-	public Accommodation create (SubServicesViewModel accommodationVm) {
+	public Accommodation create () {
 		return accommodationService.create(accommodationVm);
 		
 	}
@@ -87,7 +90,9 @@ public class AccommodationBean implements Serializable {
 	}
 
 
-	
+	public AccommodationType[] getAllAccommodationTypes() {
+        return AccommodationType.values();
+    }
 	
 	
 	
