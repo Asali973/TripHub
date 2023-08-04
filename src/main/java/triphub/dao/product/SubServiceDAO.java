@@ -44,26 +44,7 @@ public class SubServiceDAO{
 		em.persist(subservice);
 		em.persist(address);
 
+		subservice.setAddress(address);
 	}
-
-//	@Override
-//	public void read(Long id) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void update() {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public void delete(Long id) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
-
 
 }

@@ -16,13 +16,12 @@
 			<h:form prependId="false">
 
 				<div class="card-body">
-					<h2 class="card-title text-center mt-3">Offer a transportation
-						service</h2>
+					<h2 class="card-title text-center mt-3">Offer a sub-service </h2>
 					<button
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
-						type="button">Service informations</button>
+						type="button">Sub-Service informations</button>
 					<div class="form-group mt-4">
-						<h:outputLabel for="transportationName" value="Name*:"
+						<h:outputLabel for="subServiceName" value="Name*:"
 							required="true" requiredMessage="Name is required." />
 						<h:inputText id="name" value="#{subServiceBean.subservicevm.name}"
 							class="form-control" required="true" />
@@ -122,9 +121,7 @@
         const charCountElement = document.getElementById('charCount');
         charCountElement.innerText = remainingChars + " characters remaining";
     }
-</script>
-	<script>
-	 var descriptionTextarea = document.getElementById('description');
+    var descriptionTextarea = document.getElementById('description');
 	  var defaultValue = "#{subServiceBean.subservicevm.description}";
 	  descriptionTextarea.value = defaultValue;
 </script>

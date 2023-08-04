@@ -58,6 +58,11 @@ public class TransportationDAO {
 		em.persist(departure);
 		em.persist(arrival);
 //		em.persist(picture);
+		
+		transportation.setDeparture(departure);
+	    transportation.setArrival(arrival);
+	    
+	    
 		return transportation;
 	}
 

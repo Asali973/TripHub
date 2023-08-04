@@ -22,6 +22,7 @@ public class TransportationBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Inject
 	private SubServicesViewModel transportationvm = new SubServicesViewModel();
 
 	public TransportationBean() {
@@ -33,10 +34,10 @@ public class TransportationBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Transportation added successfully !"));
 	}
 	
-	public Transportation read(Long id) {
-		return transportationService.read(id);
-	} 
-	
+//	public Transportation read(Long id) {
+//		return transportationService.read(id);
+//	} 
+//	
 	public void update(Transportation transportation) {
 		transportationService.update(transportation);
 	}

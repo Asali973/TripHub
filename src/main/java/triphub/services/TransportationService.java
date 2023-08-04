@@ -3,15 +3,17 @@ package triphub.services;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import triphub.dao.service.TransportationDAO;
+import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.transportation.Transportation;
 import triphub.entity.product.service.transportation.TransportationType;
 import triphub.viewModel.SubServicesViewModel;
 
-@Stateless
-public class TransportationService {
+@ApplicationScoped
+public class TransportationService implements ServiceInterface{
 
 	@Inject
 	private TransportationDAO transportationDAO;
@@ -24,14 +26,31 @@ public class TransportationService {
 
 	}
 
-	public Transportation create(SubServicesViewModel transportationvm) {
-		return transportationDAO.create(transportationvm);
+	@Override
+	public void create(SubServicesViewModel transportationvm) {
+		transportationDAO.create(transportationvm);		
 	}
 
-	public Transportation read(Long id) {
-		return transportationDAO.read(id);
+	@Override
+	public void read(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public List<Transportation> findByType(TransportationType transportationType) {
+		return transportationDAO.findByType(transportationType);
+	}
+
+	public List<Transportation> getAllTransportation() {
+		return transportationDAO.getAllTransportation();
+	}
+	
 	public void update(Transportation transportation) {
 		transportationDAO.update(transportation);
 	}
@@ -40,12 +59,6 @@ public class TransportationService {
 		transportationDAO.delete(id);
 	}
 
-	public List<Transportation> findByType(TransportationType transportationType) {
-		return transportationDAO.findByType(transportationType);
-	}
 
-	public List<Transportation> getAllTransportation() {
-		return transportationDAO.getAllTransportation();
-	}
 
 }

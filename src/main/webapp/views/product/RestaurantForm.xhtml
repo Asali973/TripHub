@@ -16,29 +16,17 @@
 			<h:form prependId="false">
 
 				<div class="card-body">
-					<h2 class="card-title text-center mt-3">Offer a transportation
+					<h2 class="card-title text-center mt-3">Offer a restaurant
 						service</h2>
 					<button
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
-						type="button">Service informations</button>
+						type="button">Restaurant informations</button>
 					<div class="form-group mt-4">
 						<h:outputLabel for="transportationName" value="Name*:"
 							required="true" requiredMessage="Name is required." />
 						<h:inputText id="name"
-							value="#{transportationBean.transportationvm.name}"
+							value="#{restaurantBean.restaurantvm.name}"
 							class="form-control" required="true" />
-					</div>
-					<div class="form-group mt-4">
-						<h:outputLabel for="transportationType"
-							value="Transportation Type*:" required="true"
-							requiredMessage="The type is required." />
-						<h:selectOneMenu id="transportationType"
-							value="#{transportationBean.transportationvm.transportationType}"
-							class="form-control" required="true">
-							<f:selectItems
-								value="#{transportationBean.allTransportationTypes}" var="type"
-								itemValue="#{type}" itemLabel="#{type.label}" />
-						</h:selectOneMenu>
 					</div>
 				</div>
 
@@ -48,93 +36,48 @@
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
 						type="button" data-toggle="collapse"
 						data-target="#departureSection" aria-expanded="false"
-						aria-controls="departureSection">Departure informations</button>
+						aria-controls="departureSection">Address informations</button>
 					<div class="collapse" id="departureSection">
 						<div class="form-group mt-4">
 							<h:outputLabel for="DepartureNum" value="Number:" />
 							<h:inputText id="DepartureNum"
-								value="#{transportationBean.transportationvm.num}"
+								value="#{restaurantBean.restaurantvm.num}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="DepartureStreet" value="Street:" />
 							<h:inputText id="DepartureStreet"
-								value="#{transportationBean.transportationvm.street}"
+								value="#{restaurantBean.restaurantvm.street}"
 								class="form-control" />
 						</div>
 						<div class="form-group mt-4">
 							<h:outputLabel for="DepartureCity" value="City:" />
 							<h:inputText id="DepartureCity"
-								value="#{transportationBean.transportationvm.city}"
+								value="#{restaurantBean.restaurantvm.city}"
 								class="form-control" />
 						</div>
 						<div class="form-group mt-4">
 							<h:outputLabel for="DepartureState" value="State:" />
 							<h:inputText id="DepartureState"
-								value="#{transportationBean.transportationvm.state}"
+								value="#{restaurantBean.restaurantvm.state}"
 								class="form-control" />
 						</div>
 						<div class="form-group mt-4">
 							<h:outputLabel for="DepartureCountry" value="Country:" />
 							<h:inputText id="DepartureCountry"
-								value="#{transportationBean.transportationvm.country}"
+								value="#{restaurantBean.restaurantvm.country}"
 								class="form-control" />
 						</div>
 						<div class="form-group mt-4">
 							<h:outputLabel for="DepartureZipCode" value="Zip Code:" />
 							<h:inputText id="DepartureZipCode"
-								value="#{transportationBean.transportationvm.zipCode}"
+								value="#{restaurantBean.restaurantvm.zipCode}"
 								class="form-control" />
 						</div>
 					</div>
 				</div>
 
-				<!-- Departure dépliable -->
-				<div class="col-md-12 mt-4">
-					<button
-						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
-						type="button" data-toggle="collapse" data-target="#arrivalSection"
-						aria-expanded="false" aria-controls="arrivalSection">Arrival
-						informations</button>
-					<div class="collapse" id="arrivalSection">
-						<div class="form-group mt-4">
-							<h:outputLabel for="ArrivalNum" value="Number:" />
-							<h:inputText id="ArrivalNum"
-								value="#{transportationBean.transportationvm.num}"
-								class="form-control" />
-						</div>
-						<div class="form-group mt-4">
-							<h:outputLabel for="ArrivalStreet" value="Street:" />
-							<h:inputText id="ArrivalStreet"
-								value="#{transportationBean.transportationvm.street}"
-								class="form-control" />
-						</div>
-						<div class="form-group mt-4">
-							<h:outputLabel for="ArrivalCity" value="City:" />
-							<h:inputText id="ArrivalCity"
-								value="#{transportationBean.transportationvm.city}"
-								class="form-control" />
-						</div>
-						<div class="form-group mt-4">
-							<h:outputLabel for="ArrivalState" value="State:" />
-							<h:inputText id="ArrivalState"
-								value="#{transportationBean.transportationvm.state}"
-								class="form-control" />
-						</div>
-						<div class="form-group mt-4">
-							<h:outputLabel for="ArrivalCountry" value="Country:" />
-							<h:inputText id="ArrivalCountry"
-								value="#{transportationBean.transportationvm.country}"
-								class="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel for="ArrivalZipCode" value="Zip Code:" />
-							<h:inputText id="ArrivalZipCode"
-								value="#{transportationBean.transportationvm.zipCode}"
-								class="form-control" />
-						</div>
-					</div>
-				</div>
+				
 				<!-- Description dépliable -->
 				<div class="col-md-12 mt-4">
 					<button
@@ -158,7 +101,7 @@
 					</div>
 					<div class="form-group mt-4 d-flex justify-content-center">
 						<h:commandButton value="Add Service"
-							action="#{transportationBean.create}"
+							action="#{restaurantBean.create}"
 							styleClass="btn btn-custom btn-custom-signup" id="submitButton"
 							update="messages" />
 
@@ -182,7 +125,7 @@
         charCountElement.innerText = remainingChars + " characters remaining";
     }
     var descriptionTextarea = document.getElementById('description');
-	  var defaultValue = "#{transportationBean.transportationvm.description}";
+	  var defaultValue = "#{restaurantBean.restaurantvm.description}";
 	  descriptionTextarea.value = defaultValue;
 </script>
 	<!-- 	<h:outputScript library="javascript" name="loginJs.js" /> -->

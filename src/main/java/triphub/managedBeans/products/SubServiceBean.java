@@ -34,7 +34,7 @@ public class SubServiceBean implements Serializable{
 
 	public void create() {
 		subserviceService.create(subservicevm);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("TransportationTest added successfully !"));		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sub-service added successfully !"));		
 	}
 
 
