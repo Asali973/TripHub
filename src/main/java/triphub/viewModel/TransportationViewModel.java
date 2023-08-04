@@ -12,6 +12,7 @@ public class TransportationViewModel implements Serializable {
 	private String nameTransportation;
 	private Address departure;
 	private Address arrival;
+	
 	private TransportationType transportation;
 
 	public String getNameTransportation() {

@@ -5,7 +5,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import triphub.dao.user.*;
 import triphub.dao.product.DestinationDAO;
 import triphub.dao.product.PriceDAO;
@@ -21,25 +25,23 @@ import triphub.entity.user.Customer;
 import triphub.entity.product.service.restaurant.Restaurant;
 import triphub.entity.util.Address;
 
-
 public class DataSeeder {
+	 private final EntityManager em;
 
-	private EntityManager em;
-
-	public DataSeeder() {
-		em = JPAUtil.getEntityManager();
-	}
+	    public DataSeeder(EntityManager em) {
+	        this.em = em;
+	    }
 
 
 	UserDAO userDAO = new UserDAO();
 
 	Customer customer1 = new Customer();
-	DestinationDAO desDao = new DestinationDAO(em);
-	ThemeDAO themeDao = new ThemeDAO(em);
-	PriceDAO priceDao = new PriceDAO(em);
+	DestinationDAO desDao = new DestinationDAO();
+	ThemeDAO themeDao = new ThemeDAO();
+	PriceDAO priceDao = new PriceDAO();
 	TourPackageDAO tpDao = new TourPackageDAO();	
-	RestaurantDAO rDAO = new RestaurantDAO(em);
-	AddressDAO addressDAO = new AddressDAO(em);
+	RestaurantDAO rDAO = new RestaurantDAO();
+	AddressDAO addressDAO = new AddressDAO();
 
 
 	public void seedData() {

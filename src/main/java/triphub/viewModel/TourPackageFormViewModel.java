@@ -8,6 +8,7 @@ public class TourPackageFormViewModel implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	// TourPackage properties
+	private Long id;
     private String name;
 
     // Price properties
@@ -103,6 +104,16 @@ public class TourPackageFormViewModel implements Serializable{
 	public void setThemeName(String themeName) {
 		this.themeName = themeName;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	
 
 //	public List<Image> getImagelinks() {
 //		return imagelinks;

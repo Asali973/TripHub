@@ -9,6 +9,8 @@ public class AddressDAO {
 	
 	private EntityManager em;
 	
+	public AddressDAO() {}
+	
 	public AddressDAO(EntityManager em) {
 		this.em = em;
 		}

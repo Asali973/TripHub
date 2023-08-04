@@ -9,25 +9,26 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import javax.persistence.PersistenceUnit;
-import javax.transaction.Transactional;
+import org.hibernate.mapping.Map;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-
+import triphub.entity.product.Destination;
+import triphub.entity.product.Price;
+import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
+import triphub.helpers.FacesMessageUtil;
 import triphub.services.TourPackageService;
 import triphub.viewModel.TourPackageFormViewModel;
 
-@Named
+@Named("tourPackageBean")
 @RequestScoped
+
 public class TourPackageBean implements Serializable {
 
 	@Inject
@@ -36,9 +37,9 @@ public class TourPackageBean implements Serializable {
 
 	private TourPackageFormViewModel tourPackageVm = new TourPackageFormViewModel();
 	private List<TourPackage> allTourPackages;
-	private String jsonResults;
-	private String selectedPriceRange;
-
+	private TourPackage lastTourPackageAdded;
+	private TourPackage tourPackage;	
+	private TourPackage selectedTourPackage;
 	public TourPackageBean() {
 	}
 
@@ -46,16 +47,206 @@ public class TourPackageBean implements Serializable {
 	public void init() {
 		// Load all tour packages from the database
 		allTourPackages = tourPackageService.getAllTourPackages();
-	}
+		
+		 FacesContext context = FacesContext.getCurrentInstance();
+	 HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+		    Long id = (Long) session.getAttribute("id");
 
+		    if (id != null) {
+		    	initFormData(id);
+		    }
+		
+		// Load the specific tour package based on the provided id from the URL
+//	    FacesContext context = FacesContext.getCurrentInstance();
+//	    String id = context.getExternalContext().getRequestParameterMap().get("id");
+//	    if (id != null) {
+//	        tourPackageVm = tourPackageService.initTourPackage(Long.parseLong(id));
+//		
+//	    }
+		 // Load the specific tour package based on the provided id from the URL
+//        String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+//        if (id != null) {
+//            tourPackage = tourPackageService.getTourPackageById(Long.parseLong(id));           
+//            tourPackageVm.setId(tourPackage.getId());
+//            tourPackageVm.setName(tourPackage.getName());
+//            tourPackageVm.setAmount(tourPackage.getPrice().getAmount());
+//            tourPackageVm.setCurrency(tourPackage.getPrice().getCurrency());
+//            tourPackageVm.setCityName(tourPackage.getDestination().getCityName());
+//            tourPackageVm.setState(tourPackage.getDestination().getState());
+//            tourPackageVm.setCountry(tourPackage.getDestination().getCountry());
+//            tourPackageVm.setThemeName(tourPackage.getTheme().getThemeName());
+//        }
+    }
+	
+	 public void initFormData(Long id) {
+		 TourPackageFormViewModel temp = tourPackageService.initTourPackage(id);
+	        if (temp == null) {
+	        	this.tourPackageVm= temp;
+	        }else {
+	            FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
+	        }
+	    }
+//	
+//	 public void updatePackage() {
+//			
+//	       // Handle image processing if needed
+//	       // ... Image processing ...
+//	
+//	   	tourPackageVm = tourPackageService.updateTourPackageWithImage(tourPackageVm);
+//	 
+//	       FacesMessageUtil.addErrorMessage("Update failed: ");
+//	   }
+	 public String updatePackage() {
+	        // Call the service method to update the tour package
+	        tourPackageVm = tourPackageService.updateTourPackageWithImage(tourPackageVm);
+
+	        // Redirect to the tpUpdate outcome with the updated tour package ID
+	        return "tpUpdate?faces-redirect=true&id=" + tourPackageVm.getId();
+	    }
+
+	  
+	
+	
+	
+
+	// Create
 	public void createPackage() {
-		tourPackageService.createTourPackage(tourPackageVm);
+		lastTourPackageAdded = tourPackageService.createTourPackage(tourPackageVm);
+		clear();
 	}
 
+	// List
 	public void loadAllTourPackages() {
 		allTourPackages = tourPackageService.getAllTourPackages();
 	}
+	
+	
+	
 
+	
+//	public String updatePackage() {
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+//        String id = request.getParameter("id"); // Get the value of the "id" parameter
+//
+//        // Retrieve the tour package from the data source (e.g., database) using the ID
+//        TourPackage tourPackage = tourPackageService.getTourPackageById(Long.parseLong(id));
+//
+//        // Update the tour package properties based on user inputs in the form
+//        tourPackage.setName(tourPackageVm.getName());
+//        tourPackage.getPrice().setAmount(tourPackageVm.getAmount());
+//        tourPackage.getPrice().setCurrency(tourPackageVm.getCurrency());
+//        tourPackage.getDestination().setCityName(tourPackageVm.getCityName());
+//        tourPackage.getDestination().setState(tourPackageVm.getState());
+//        tourPackage.getDestination().setCountry(tourPackageVm.getCountry());
+//        tourPackage.getTheme().setThemeName(tourPackageVm.getThemeName());
+//
+//        // Call your service method to update the tour package
+//        tourPackageService.update(tourPackage);
+//
+//        return "tpUpdate?faces-redirect=true&id=" + id; // Redirect to the tpUpdate outcome with the ID
+//    }
+
+//	public String updatePackage() {
+//	    FacesContext context = FacesContext.getCurrentInstance();
+//	    HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+//        String id = request.getParameter("id"); // Get the value of the "id" parameter
+//
+//
+//	    // Get the existing tour package from the service by its ID
+//	    TourPackage existingTourPackage = tourPackageService.getTourPackageById(Long.parseLong(id));
+//
+//	    // Update the tour package properties based on user inputs in the form
+//	    existingTourPackage.setName(tourPackageVm.getName());
+//	    existingTourPackage.getPrice().setAmount(tourPackageVm.getAmount());
+//	    existingTourPackage.getPrice().setCurrency(tourPackageVm.getCurrency());
+//	    existingTourPackage.getDestination().setCityName(tourPackageVm.getCityName());
+//	    existingTourPackage.getDestination().setState(tourPackageVm.getState());
+//	    existingTourPackage.getDestination().setCountry(tourPackageVm.getCountry());
+//	    existingTourPackage.getTheme().setThemeName(tourPackageVm.getThemeName());
+//
+//	    TourPackage updatedTourPackage = tourPackageService.updateTourPackageWithImage(tourPackageVm);
+//
+//	    // Map the updatedTourPackage to the viewModel
+//	    mapTourPackageToViewModel(updatedTourPackage);
+//
+//	    return "tpUpdate?faces-redirect=true&id=" + id;
+//	}
+
+
+	private void mapTourPackageToViewModel(TourPackage tourPackage) {
+	 
+	    tourPackageVm.setName(tourPackage.getName());
+
+	    // Map Price information
+	    Price price = tourPackage.getPrice();
+	    if (price != null) {
+	        tourPackageVm.setAmount(price.getAmount());
+	        tourPackageVm.setCurrency(price.getCurrency());
+	    }
+
+	    // Map Destination information
+	    Destination destination = tourPackage.getDestination();
+	    if (destination != null) {
+	        tourPackageVm.setCityName(destination.getCityName());
+	        tourPackageVm.setState(destination.getState());
+	        tourPackageVm.setCountry(destination.getCountry());
+	    }
+
+	    // Map Theme information
+	    Theme theme = tourPackage.getTheme();
+	    if (theme != null) {
+	        tourPackageVm.setThemeName(theme.getThemeName());
+	    }	   
+	}
+	 public void deletePackage() {
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+	        String id = request.getParameter("id"); // Get the value of the "id" parameter
+
+	        tourPackageService.deleteTourPackage(Long.parseLong(id));
+	    }
+	 
+	
+	
+	
+	//Update
+//	public void updatePackage() {
+//	    // Retrieve the tourPackageId from the view parameter
+//	    FacesContext context = FacesContext.getCurrentInstance();
+//	    String tourPackageName = context.getExternalContext().getRequestParameterMap().get("tourPackageName");
+//
+//	    // Check if the package already exists based on its unique identifier (e.g., name)
+//	    TourPackage existingPackage = tourPackageService.getTourPackageByName(tourPackageName);
+//
+//	    if (existingPackage != null) {
+//	        // Update the existing package with the values from the view model
+//	        existingPackage.setName(tourPackageVm.getName());
+//	        existingPackage.getPrice().setAmount(tourPackageVm.getAmount());
+//	        existingPackage.getPrice().setCurrency(tourPackageVm.getCurrency());
+//	        existingPackage.getDestination().setCityName(tourPackageVm.getCityName());
+//	        existingPackage.getDestination().setState(tourPackageVm.getState());
+//	        existingPackage.getDestination().setCountry(tourPackageVm.getCountry());
+//	        existingPackage.getTheme().setThemeName(tourPackageVm.getThemeName());
+//
+//	        // Now, when you submit the form, the existing package will be updated in the database
+//	        // using the createOrUpdate method in the DAO
+//	        tourPackageService.updateTourPackage(tourPackageVm);
+//	    }
+//	}
+//	
+	//Delete
+//	public void deletePackage() {
+//	    FacesContext context = FacesContext.getCurrentInstance();
+//	    String tourPackageIdString = context.getExternalContext().getRequestParameterMap().get("tourPackageId");
+//	    Long tourPackageId = Long.valueOf(tourPackageIdString);
+//	    
+//	    tourPackageService.deleteTourPackage(tourPackageId);
+//	}
+
+
+
+	// Search
 	public void performAdvancedSearch() {
 		String name = tourPackageVm.getName();
 		String themeName = tourPackageVm.getThemeName();
@@ -64,13 +255,13 @@ public class TourPackageBean implements Serializable {
 		String country = tourPackageVm.getCountry();
 		BigDecimal minPrice = tourPackageVm.getMinPrice();
 		BigDecimal maxPrice = tourPackageVm.getMaxPrice();
-		
-		 if (minPrice == null) {
-		        minPrice = BigDecimal.ZERO;
-		    }
-		    if (maxPrice == null) {
-		        maxPrice = BigDecimal.ZERO;
-		    }
+
+		if (minPrice == null) {
+			minPrice = BigDecimal.ZERO;
+		}
+		if (maxPrice == null) {
+			maxPrice = BigDecimal.ZERO;
+		}
 
 		List<TourPackage> searchResults = tourPackageService.advancedSearch(city, state, country, minPrice, maxPrice,
 				name, themeName);
@@ -96,36 +287,31 @@ public class TourPackageBean implements Serializable {
 		}
 	}
 
+	// Setting Max and Min values
 	public List<BigDecimal> generateNumberOptions(BigDecimal maxPrice) {
-	    if (maxPrice == null || maxPrice.compareTo(BigDecimal.ZERO) == 0) {
-	        maxPrice = BigDecimal.valueOf(3000); // Set the default maximum price to 3000
-	    }
+		if (maxPrice == null || maxPrice.compareTo(BigDecimal.ZERO) == 0) {
+			maxPrice = BigDecimal.valueOf(3000); // Set the default maximum price to 3000
+		}
 
-	    List<BigDecimal> options = new ArrayList<>();
-	    for (BigDecimal i = BigDecimal.valueOf(100); i.compareTo(maxPrice) <= 0; i = i.add(BigDecimal.valueOf(100))) {
-	        options.add(i);
-	    }
-	    return options;
+		List<BigDecimal> options = new ArrayList<>();
+		for (BigDecimal i = BigDecimal.valueOf(100); i.compareTo(maxPrice) <= 0; i = i.add(BigDecimal.valueOf(100))) {
+			options.add(i);
+		}
+		return options;
 	}
 
+	// Clear after creating new id (have to check again)
+	public void clear() {
+		tourPackageVm = new TourPackageFormViewModel();
+	}
+
+	// GETTERS SETTERS
 	public List<BigDecimal> getMinPriceOptions() {
-	    return generateNumberOptions(tourPackageVm.getMaxPrice());
+		return generateNumberOptions(tourPackageVm.getMaxPrice());
 	}
 
 	public List<BigDecimal> getMaxPriceOptions() {
-	    return generateNumberOptions(tourPackageVm.getMinPrice());
-	}
-
-
-// not successful , have stackoverflow errors
-	private String convertResultsToJson(List<TourPackage> searchResults) {
-		try {
-			Gson gson = new Gson();
-			return gson.toJson(searchResults);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "[]"; // Return an empty JSON array in case of an error
-		}
+		return generateNumberOptions(tourPackageVm.getMinPrice());
 	}
 
 	public List<TourPackage> getAllTourPackages() {
@@ -144,15 +330,36 @@ public class TourPackageBean implements Serializable {
 		this.tourPackageVm = tourPackageVm;
 	}
 
-	public String getJsonResults() {
-		return jsonResults;
+	
+	public TourPackage getLastTourPackageAdded() {
+		return lastTourPackageAdded;
 	}
 
-	public void setJsonResults(String jsonResults) {
-		this.jsonResults = jsonResults;
+	public void setLastTourPackageAdded(TourPackage lastTourPackageAdded) {
+		this.lastTourPackageAdded = lastTourPackageAdded;
 	}
 
+	
+
+	public TourPackage getTourPackage() {
+		return tourPackage;
+	}
+
+	public void setTourPackage(TourPackage tourPackage) {
+		this.tourPackage = tourPackage;
+	}
+
+	public TourPackage getSelectedTourPackage() {
+		return selectedTourPackage;
+	}
+
+	public void setSelectedTourPackage(TourPackage selectedTourPackage) {
+		this.selectedTourPackage = selectedTourPackage;
+	}
+	
 }
+
+
 // both have stackoverflow
 //<script>
 //function displayResults(results) {
@@ -195,4 +402,3 @@ public class TourPackageBean implements Serializable {
 //// Add an event listener to execute onSearchComplete when the form is submitted
 //document.getElementById('formId').addEventListener('submit', onSearchComplete);
 //</script>
-

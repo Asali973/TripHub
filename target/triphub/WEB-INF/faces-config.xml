@@ -1,70 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
 
- <faces-config version="2.2"
 
-    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-=======
-<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
->>>>>>> BS_UserRefactoringV4
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+<faces-config version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+		http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-<<<<<<< HEAD
-   <navigation-rule>
-    <from-view-id>/home.xhtml</from-view-id>
-    <navigation-case>
-        <from-outcome>registration</from-outcome>
-        <to-view-id>/login/registration.xhtml</to-view-id>
-    </navigation-case>
-    <navigation-case>
-        <from-outcome>login</from-outcome>
-        <to-view-id>/login/login.xhtml</to-view-id>
-    </navigation-case>
-    <navigation-case>
-        <from-outcome>tourPackageHome</from-outcome>
-        <to-view-id>/product/TourpackageHome.xhtml</to-view-id>
-    </navigation-case>    
-      <navigation-case>
-        <from-outcome>tpAdvancedSearch</from-outcome>
-        <to-view-id>/product/TpAdvancedSearch.xhtml</to-view-id>
-    </navigation-case> 
-</navigation-rule>  
 
-   <!--      <converter>
-            <converter-id>imageConverter</converter-id>
-            <converter-class>triphub.entity.util.ImageConverter</converter-class>
-        </converter>    -->  
-=======
-    <navigation-rule>
-        <from-view-id>/views/loginAndAccount/login.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>login</from-outcome>
-            <to-view-id>/views/home.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
+	<navigation-rule>
+		<from-view-id>/views/loginAndAccount/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/views/home.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 
-    <navigation-rule>
-        <from-view-id>/views/home.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>registration</from-outcome>
-            <to-view-id>/loginAndAccount/registration.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>login</from-outcome>
-            <to-view-id>/loginAndAccount/login.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>tourPackageHome</from-outcome>
-            <to-view-id>TourpackageHome.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
+	<navigation-rule>
+		<from-view-id>/views/product/TourpackageHome.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>tpUpdate</from-outcome>
+			<to-view-id>/tpUpdate.xhtml</to-view-id>
+		</navigation-case>
 
-    <application />
->>>>>>> BS_UserRefactoringV4
+		<navigation-case>
+			<from-outcome>tpDelete</from-outcome>
+			<to-view-id>/tpDelete.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- <navigation-rule> <from-view-id>/views/home.xhtml</from-view-id> <navigation-case> 
+		<from-outcome>registration</from-outcome> <to-view-id>/loginAndAccount/registration.xhtml</to-view-id> 
+		<redirect /> </navigation-case> <navigation-case> <from-outcome>login</from-outcome> 
+		<to-view-id>/loginAndAccount/login.xhtml</to-view-id> <redirect /> </navigation-case> 
+		<navigation-case> <from-outcome>tourPackageHome</from-outcome> <to-view-id>/product/TourpackageHome.xhtml</to-view-id> 
+		</navigation-case> <navigation-case> <from-outcome>tpAdvancedSearch</from-outcome> 
+		<to-view-id>/product/TpAdvancedSearch.xhtml</to-view-id> </navigation-case> 
+		</navigation-rule> -->
+
+	<!-- <converter> <converter-id>imageConverter</converter-id> <converter-class>triphub.entity.util.ImageConverter</converter-class> 
+		</converter> -->
+
+	<!-- <navigation-rule> -->
+	<!-- <from-view-id>/views/loginAndAccount/login.xhtml</from-view-id> -->
+	<!-- <navigation-case> -->
+	<!-- <from-outcome>login</from-outcome> -->
+	<!-- <to-view-id>/views/home.xhtml</to-view-id> -->
+	<!-- <redirect /> -->
+	<!-- </navigation-case> -->
+	<!-- </navigation-rule> -->
+
+	<!-- <navigation-rule> -->
+	<!-- <from-view-id>/views/home.xhtml</from-view-id> -->
+	<!-- <navigation-case> -->
+	<!-- <from-outcome>registration</from-outcome> -->
+	<!-- <to-view-id>/loginAndAccount/registration.xhtml</to-view-id> -->
+	<!-- <redirect /> -->
+	<!-- </navigation-case> -->
+	<!-- <navigation-case> -->
+	<!-- <from-outcome>login</from-outcome> -->
+	<!-- <to-view-id>/loginAndAccount/login.xhtml</to-view-id> -->
+	<!-- <redirect /> -->
+	<!-- </navigation-case> -->
+	<!-- <navigation-case> -->
+	<!-- <from-outcome>tourPackageHome</from-outcome> -->
+	<!-- <to-view-id>TourpackageHome.xhtml</to-view-id> -->
+	<!-- <redirect /> -->
+	<!-- </navigation-case> -->
+	<!-- </navigation-rule> -->
+
+	<application />
 </faces-config>
+
 

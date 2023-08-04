@@ -14,7 +14,7 @@ import triphub.entity.product.service.transportation.TransportationType;
 import triphub.services.TransportationService;
 import triphub.viewModel.TransportationViewModel;
 
-@Named
+@Named("transportationBean")
 @RequestScoped
 public class TransportationBean implements Serializable {
 	
