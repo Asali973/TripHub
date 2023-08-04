@@ -10,24 +10,42 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import triphub.entity.util.Address;
+import triphub.entity.util.Picture;
 
 @Entity
 public class Transportation {
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String nameTransportation;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address departure;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address arrival;
-	
+
 	@Enumerated(EnumType.STRING)
 	private TransportationType transportation;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Picture picture;
+	
+	private String description;
+
+	public Transportation() {
+
+	}
+
+	public Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
 
 	public Long getId() {
 		return id;
@@ -37,12 +55,12 @@ public class Transportation {
 		this.id = id;
 	}
 
-	public Address getDeparture() {
-		return departure;
-	}
-
 	public void setDeparture(Address departure) {
 		this.departure = departure;
+	}
+
+	public Address getDeparture() {
+		return departure;
 	}
 
 	public Address getArrival() {
@@ -68,6 +86,13 @@ public class Transportation {
 	public void setNameTransportation(String nameTransportation) {
 		this.nameTransportation = nameTransportation;
 	}
-	
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }

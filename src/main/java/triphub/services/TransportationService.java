@@ -3,48 +3,62 @@ package triphub.services;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import triphub.dao.service.TransportationDAO;
+import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.transportation.Transportation;
 import triphub.entity.product.service.transportation.TransportationType;
-import triphub.viewModel.TransportationViewModel;
+import triphub.viewModel.SubServicesViewModel;
 
-@Stateless
-public class TransportationService {
+@ApplicationScoped
+public class TransportationService implements ServiceInterface{
 
 	@Inject
 	private TransportationDAO transportationDAO;
-	
-	public  TransportationService() {}
+
+	public TransportationService() {
+	}
 
 	public TransportationService(TransportationDAO transportationDAO) {
 		this.transportationDAO = transportationDAO;
+
+	}
+
+	@Override
+	public void create(SubServicesViewModel transportationvm) {
+		transportationDAO.create(transportationvm);		
+	}
+
+	@Override
+	public void read(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
 		
 	}
 	
-	public Transportation create (TransportationViewModel transportationvm) {
-		return transportationDAO.create(transportationvm);
+	public List<Transportation> findByType(TransportationType transportationType) {
+		return transportationDAO.findByType(transportationType);
+	}
+
+	public List<Transportation> getAllTransportation() {
+		return transportationDAO.getAllTransportation();
 	}
 	
-	public Transportation read(Long id) {
-		return transportationDAO.read(id);
+	public void update(Transportation transportation) {
+		transportationDAO.update(transportation);
 	}
-	
-	public Transportation update(Transportation transportation) {
-		return transportationDAO.update(transportation);
-	}
-	
+
 	public void delete(Long id) {
 		transportationDAO.delete(id);
 	}
-	
-	public List<Transportation> findByType(TransportationType transportationType){
-		return transportationDAO.findByType(transportationType);
-	}
-	
-	 public List<Transportation> getAllTransportation() {
-		 return transportationDAO.getAllTransportation();
-	 }
+
+
 
 }

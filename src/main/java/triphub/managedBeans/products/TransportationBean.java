@@ -4,17 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-
-import triphub.dao.service.TransportationDAO;
 import triphub.entity.product.service.transportation.Transportation;
 import triphub.entity.product.service.transportation.TransportationType;
 import triphub.services.TransportationService;
-import triphub.viewModel.TransportationViewModel;
+import triphub.viewModel.SubServicesViewModel;
 
-@Named
+@Named("transportationBean")
 @RequestScoped
 public class TransportationBean implements Serializable {
 	
@@ -23,22 +22,24 @@ public class TransportationBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private TransportationViewModel transportationvm = new TransportationViewModel();
+	@Inject
+	private SubServicesViewModel transportationvm = new SubServicesViewModel();
 
 	public TransportationBean() {
 		
 	}
 	
-	public Transportation create(TransportationViewModel transportationvm) {
-		return transportationService.create(transportationvm);
+	public void create() {
+		transportationService.create(transportationvm);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Transportation added successfully !"));
 	}
 	
-	public Transportation read(Long id) {
-		return transportationService.read(id);
-	} 
-	
-	public Transportation update(Transportation transportation) {
-		return transportationService.update(transportation);
+//	public Transportation read(Long id) {
+//		return transportationService.read(id);
+//	} 
+//	
+	public void update(Transportation transportation) {
+		transportationService.update(transportation);
 	}
 	
 	public void delete(Long id) {
@@ -52,6 +53,16 @@ public class TransportationBean implements Serializable {
 	 public List<Transportation> getAllTransportation() {
 		 return transportationService.getAllTransportation();
 	 }
-	
+
+	public SubServicesViewModel getTransportationvm() {
+		return transportationvm;
+	}
+
+	public void setTransportationvm(SubServicesViewModel transportationvm) {
+		this.transportationvm = transportationvm;
+	}
+	public TransportationType[] getAllTransportationTypes() {
+        return TransportationType.values();
+    }
 
 }

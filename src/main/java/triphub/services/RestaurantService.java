@@ -3,14 +3,17 @@ package triphub.services;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import triphub.dao.service.RestaurantDAO;
+import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.restaurant.Restaurant;
 import triphub.viewModel.RestaurantViewModel;
+import triphub.viewModel.SubServicesViewModel;
 
-	@Stateless
-	public class RestaurantService {
+	@ApplicationScoped
+	public class RestaurantService implements ServiceInterface {
 
 		@Inject
 		private RestaurantDAO restaurantDAO;
@@ -24,18 +27,7 @@ import triphub.viewModel.RestaurantViewModel;
 			this.restaurantDAO = restaurantDAO;
 		}
 		
-		public Restaurant create(RestaurantViewModel restaurantvm) {
-			return restaurantDAO.create(restaurantvm);
-		}
-		
-		public Restaurant read(Long id) {
-			return restaurantDAO.read(id);
-		}
-		
-		public Restaurant update(Restaurant restaurant) {
-			return restaurantDAO.update(restaurant);
-		}
-		
+
 		public void delete(Long id) {
 			restaurantDAO.delete(id);
 		}
@@ -43,5 +35,25 @@ import triphub.viewModel.RestaurantViewModel;
 		 public List<Restaurant> getAllRestaurant() {
 			 return restaurantDAO.getAllRestaurants();
 		 }
+
+		@Override
+		public void create(SubServicesViewModel restaurantvm) {
+			restaurantDAO.create(restaurantvm);			
+		}
+		
+		public List<Restaurant> getAllRestaurants() {
+			return restaurantDAO.getAllRestaurants();
+		}
+
+		@Override
+		public void read(Long id) {
+			restaurantDAO.read(id);			
+		}
+
+		@Override
+		public void update() {
+			Restaurant restaurant = new Restaurant();
+			restaurantDAO.update(restaurant);			
+		}
 
 	}

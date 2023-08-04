@@ -11,7 +11,6 @@ import triphub.dao.product.DestinationDAO;
 import triphub.dao.product.PriceDAO;
 import triphub.dao.product.ThemeDAO;
 import triphub.dao.product.TourPackageDAO;
-import triphub.dao.service.AddressDAO;
 import triphub.dao.service.RestaurantDAO;
 import triphub.entity.product.Destination;
 import triphub.entity.product.Price;
@@ -39,7 +38,7 @@ public class DataSeeder {
 	PriceDAO priceDao = new PriceDAO(em);
 	TourPackageDAO tpDao = new TourPackageDAO();	
 	RestaurantDAO rDAO = new RestaurantDAO(em);
-	AddressDAO addressDAO = new AddressDAO(em);
+//	AddressDAO addressDAO = new AddressDAO(em);
 
 
 	public void seedData() {
