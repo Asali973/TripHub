@@ -13,15 +13,12 @@
 //
 //import triphub.entity.util.Date;
 //
-//@Entity
+////@Entity
 //public class Service {
-//	@Id
-//    @GeneratedValue(strategy=GenerationType.AUTO)
+////	@Id
+////    @GeneratedValue(strategy=GenerationType.AUTO)
 //    private Long id;
 //	
-//	private Accommodation accommodation;
-//	private Restaurant restaurant;
-//	private Transportation transportation;
 //	private Price price;
 //	private boolean availability;
 //	private Date availableFrom;
@@ -36,24 +33,7 @@
 //	public void setId(Long id) {
 //		this.id = id;
 //	}
-//	public Accommodation getAccomodation() {
-//		return accomodation;
-//	}
-//	public void setAccomodation(Accommodation accomodation) {
-//		this.accomodation = accomodation;
-//	}
-//	public Restaurant getRestaurant() {
-//		return restaurant;
-//	}
-//	public void setRestaurant(Restaurant restaurant) {
-//		this.restaurant = restaurant;
-//	}
-//	public Transportation getTransportation() {
-//		return transportation;
-//	}
-//	public void setTransportation(Transportation transportation) {
-//		this.transportation = transportation;
-//	}
+//	
 //	public Price getPrice() {
 //		return price;
 //	}
