@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<title>Tour Packages</title>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+</h:head>
+<h:body>
+	<!-- Display the list -->
+	<h:form>
+		<h3>Available Tour Packages</h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Package Name</th>
+					<th>Price</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Country</th>
+					<th>Theme</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ui:repeat value="#{tourPackageBean.allTourPackages}" var="package">
+					<tr>
+						<td>#{package.name}</td>
+						<td>#{package.price.amount} #{package.price.currency}</td>
+						<td>#{package.destination.cityName}</td>
+						<td>#{package.destination.state}</td>
+						<td>#{package.destination.country}</td>
+						<td>#{package.theme.themeName}</td>
+						<td>
+							<!-- Link to tpUpdate.xhtml page with the name "update" -->
+							<h:link outcome="tpUpdate" styleClass="btn btn-primary" value="Update">
+								<f:param name="action" value="update" />
+								<f:param name="id" value="#{package.id}" />
+							</h:link>
+
+							<!-- Link to tpDelete.xhtml page with the name "delete" -->
+							<h:link outcome="tpDelete" styleClass="btn btn-danger" value="Delete"
+								onclick="return confirm('Are you sure you want to delete this tour package?');">
+								<f:param name="action" value="delete" />
+								<f:param name="id" value="#{package.id}" />
+							</h:link>
+						</td>
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+	</h:form>		
+	<h:form>
+		<h:commandButton value="Refresh List"
+			action="#{tourPackageBean.loadAllTourPackages}" />
+	</h:form>
+	</h:body>
+</html>
