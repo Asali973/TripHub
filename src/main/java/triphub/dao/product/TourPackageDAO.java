@@ -15,7 +15,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Predicate;
 import triphub.entity.product.Destination;
-import triphub.entity.product.Image;
+import triphub.entity.util.*;
 import triphub.entity.product.Price;
 import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
@@ -105,7 +105,7 @@ public class TourPackageDAO {
 
 		if (existingPackage != null) {
 			// Detach the existing package from the persistence context to avoid hibernate
-			// tracking changes in the images collection
+			// tracking changes in the pictures collection
 			em.detach(existingPackage);
 
 			boolean isModified = false;
@@ -128,11 +128,11 @@ public class TourPackageDAO {
 				isModified = true;
 			}
 
-			// If there are images in the new tourPackage, update the existing package
+			// If there are pictures in the new tourPackage, update the existing package
 			// without triggering the orphan removal behavior
 			// when the front is developed, we can rewrite it as above
-//		        if (tourPackageVm.getImagelinks() != null && !tourPackageVm.getImagelinks().isEmpty()) {
-//		            existingPackage.setImages(tourPackageVm.getImagelinks());
+//		        if (tourPackageVm.getPicturelinks() != null && !tourPackageVm.getPicturelinks().isEmpty()) {
+//		            existingPackage.setPictures(tourPackageVm.getPicturelinks());
 //		            isModified = true;
 //		        }
 
@@ -145,11 +145,11 @@ public class TourPackageDAO {
 			// Convert TourPackageFormViewModel to TourPackage entity
 			return create(tourPackageVm);
 
-//		        List<Image> newImages = new ArrayList<>();
-//		        if (tourPackageVm.getImagelinks() != null) {
-//		            newImages.addAll(tourPackageVm.getImagelinks());
+//		        List<Picture> newPictures = new ArrayList<>();
+//		        if (tourPackageVm.getPicturelinks() != null) {
+//		            newPictures.addAll(tourPackageVm.getPicturelinks());
 //		        }
-//		        newPackage.setImages(newImages);	     
+//		        newPackage.setPictures(newPictures);	     
 		}
 
 		// case 3: If no changes were made, return the existing package entity

@@ -4,16 +4,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
+
 import triphub.entity.user.*;
-import triphub.entity.util.Address;
-import triphub.entity.util.Administration;
-import triphub.entity.util.CompanyInfo;
-import triphub.entity.util.FinanceInfo;
-import triphub.entity.util.Picture;
-import triphub.helpers.PasswordUtils;
-import triphub.helpers.RegistrationException;
+import triphub.entity.util.*;
 import triphub.viewModel.UserViewModel;
 
 @Stateless
@@ -25,108 +19,100 @@ public class OrganizerDAO {
 	public OrganizerDAO() {
 	}
 
-//	public OrganizerDAO(EntityManager em) {
-//		this.em = em;
-//	}
-
 	public Organizer createOrganizer(UserViewModel form) {
 
-		// Create user
-		User user = new User();
-		user.setFirstName(form.getFirstName());
-		user.setLastName(form.getLastName());
-		user.setEmail(form.getEmail());
-		user.setPhoneNum(form.getPhoneNum());
-		user.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));
-		// Create address
-		Address address = new Address();
-		address.setNum(form.getNum());
-		address.setStreet(form.getStreet());
-		address.setCity(form.getCity());
-		address.setState(form.getState());
-		address.setCountry(form.getCountry());
-		address.setZipCode(form.getZipCode());
+		User user = User.createUserFromViewModel(form);
+		Address address = Address.createAddressFromViewModel(form);
 		user.setAddress(address);
-		// Create finance info
-		FinanceInfo finance = new FinanceInfo();
-		finance.setCCNumber(form.getCCNumber());
-		finance.setExpirationDate(form.getExpirationDate());
+
+		FinanceInfo finance = FinanceInfo.createFinanceInfoFromViewModel(form);
 		user.setFinance(finance);
-		// Create company info
-		CompanyInfo companyInfo = new CompanyInfo();
-		companyInfo.setName(form.getCompanyName());
 
-		// Set logo
-		Picture logo = new Picture();
-		logo.setLink(form.getCompanyLogoLink());
-		companyInfo.setLogo(logo);
+		CompanyInfo companyInfo = CompanyInfo.createCompanyInfoFromViewModel(form);
+		Administration administration = Administration.createAdministrationFromViewModel(form);
 
-		// Set company picture
-		Picture picture = new Picture();
-		picture.setLink(form.getCompanyPictureLink());
-		companyInfo.setPicture(picture);
-
-		// Create administration info
-		Administration administration = new Administration();
-		administration.setSiret(form.getSiret());
-		administration.setPhone(form.getPhone());
-		administration.setSector(form.getSector());
-		administration.setEmail(form.getAdminEmail());
-		
-		// Subscription info
-		// Add Subscription properties
-
-		// Create provider
 		Organizer organizer = new Organizer();
 		organizer.setUser(user);
+		organizer.setId(form.getOrganizerId());
 		organizer.setCompanyInfo(companyInfo);
 		organizer.setAdministration(administration);
-		
-		
+
 		em.persist(companyInfo);
 		em.persist(administration);
 		em.persist(finance);
 		em.persist(address);
 		em.persist(user);
 		em.persist(organizer);
+		em.flush();
 		return organizer;
 	}
 
-    public Organizer readOrganizer(Long id) {
-        return em.find(Organizer.class, id);
-    }
-    
-    public void deleteOrganizer(Long id) {
-        Organizer organizer = readOrganizer(id);
-        if (organizer != null) {
-            em.remove(organizer);
-        }
-    }
-    
-    public void updateOrganizer(Long id) {
-        Organizer organizer = readOrganizer(id);
-        if (organizer != null) {
-            em.merge(organizer);
-        }
-    }
-    
-    public Organizer findByEmailOrganizer(String email) throws RegistrationException {
-        TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user.email = :email", Organizer.class);
-        query.setParameter("email", email);
-        try {
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            throw new RegistrationException("Organizer with email " + email + " not found.");
-        }
-    }
-	
-	public Organizer findByUserOrganizer(User user) {
-	    try {
-	        TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user = :user", Organizer.class);
-	        query.setParameter("user", user);
-	        return query.getSingleResult();
-	    } catch (NoResultException e) {
-	        return null;
-	    }
+	public UserViewModel updateOrganizer(UserViewModel userViewModel) {
+		Organizer organizer = em.find(Organizer.class, userViewModel.getOrganizerId());
+		
+		if (organizer == null) {
+			return null;
+		}
+
+		organizer.updateOrganizerFromViewModel(userViewModel);
+
+		em.persist(organizer);
+		em.flush();
+
+		return userViewModel;
 	}
+
+	public UserViewModel initOrganizer(Long organizerId) {
+		Organizer organizer = em.find(Organizer.class, organizerId);
+		if (organizer == null) {
+			return null;
+		}
+
+		return organizer.initOrganizerViewModel();
+	}
+
+	public Organizer readOrganizer(Long id) {
+		return em.find(Organizer.class, id);
+	}
+
+	public void deleteOrganizer(Long id) {
+		Organizer organizer = em.find(Organizer.class, id);
+		if (organizer != null) {
+			em.remove(organizer);
+		}
+	}
+
+	public Organizer findByEmailOrganizer(String email) {
+		TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user.email = :email",
+				Organizer.class);
+		query.setParameter("email", email);
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	public Organizer findByUserOrganizer(User user) {
+		TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user = :user", Organizer.class);
+		query.setParameter("user", user);
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	public Organizer findOrganizerByUserId(Long userId) {
+		TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user.id = :userId",
+				Organizer.class);
+		query.setParameter("userId", userId);
+
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
 }

@@ -3,9 +3,17 @@ package triphub.viewModel;
 import java.io.Serializable;
 import java.util.Date;
 
+import triphub.entity.util.Picture;
+
 public class UserViewModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	private Long customerId;
+	private Long providerId;
+	private Long organizerId;
+	private Long superAdminId;
+	private Long userId;
 
 	private String firstName;
 	private String lastName;
@@ -13,6 +21,8 @@ public class UserViewModel implements Serializable {
 	private String phoneNum;
 	private String password;
 	private String confirmPassword;
+	
+	private String profilePicture;
 
 	private String num;
 	private String street;
@@ -32,6 +42,42 @@ public class UserViewModel implements Serializable {
 	private String phone;
 	private String sector;
 	private String adminEmail;
+	
+    public void clear() {
+        this.customerId = null;
+        this.providerId = null;
+        this.organizerId = null;
+        this.superAdminId = null;
+        this.userId = null;
+
+        this.firstName = "";
+        this.lastName = "";
+        this.email = "";
+        this.phoneNum = "";
+        this.password = "";
+        this.confirmPassword = "";
+        
+        this.profilePicture = "";
+
+        this.num = "";
+        this.street = "";
+        this.city = "";
+        this.state = "";
+        this.country = "";
+        this.zipCode = "";
+
+        this.CCNumber = "";
+        this.expirationDate = null;
+
+        this.companyName = "";
+        this.companyLogoLink = "";
+        this.companyPictureLink = "";
+
+        this.siret = "";
+        this.phone = "";
+        this.sector = "";
+        this.adminEmail = "";
+    }
 
 	public UserViewModel() {
 	}
@@ -203,5 +249,56 @@ public class UserViewModel implements Serializable {
 	public void setAdminEmail(String adminEmail) {
 		this.adminEmail = adminEmail;
 	}
+
+	public String getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
+	public Long getProviderId() {
+		return providerId;
+	}
+
+	public void setProviderId(Long providerId) {
+		this.providerId = providerId;
+	}
+
+	public Long getOrganizerId() {
+		return organizerId;
+	}
+
+	public void setOrganizerId(Long organizerId) {
+		this.organizerId = organizerId;
+	}
+
+	public Long getSuperAdminId() {
+		return superAdminId;
+	}
+
+	public void setSuperAdminId(Long superAdminId) {
+		this.superAdminId = superAdminId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	
+	
 
 }

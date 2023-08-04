@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 import triphub.entity.util.Address;
 import triphub.entity.util.FinanceInfo;
+import triphub.helpers.PasswordUtils;
+import triphub.viewModel.UserViewModel;
 
 @Entity
 public class User implements Serializable {
@@ -25,6 +27,33 @@ public class User implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     private FinanceInfo finance;
+    
+    public static User createUserFromViewModel(UserViewModel form) {
+        User user = new User();
+        user.setId(form.getUserId());
+        user.setFirstName(form.getFirstName());
+        user.setLastName(form.getLastName());
+        user.setEmail(form.getEmail());
+        user.setPhoneNum(form.getPhoneNum());
+        user.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));
+        return user;
+    }
+    
+    public void updateUserFromViewModel(UserViewModel form) {
+        this.setFirstName(form.getFirstName());
+        this.setLastName(form.getLastName());
+        this.setEmail(form.getEmail());
+        this.setPhoneNum(form.getPhoneNum());
+        this.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));
+    }
+    
+    public void initUserViewModel(UserViewModel userViewModel) {
+        userViewModel.setUserId(this.getId());
+        userViewModel.setFirstName(this.getFirstName());
+        userViewModel.setLastName(this.getLastName());
+        userViewModel.setEmail(this.getEmail());
+        userViewModel.setPhoneNum(this.getPhoneNum());
+    }
 
 	public Long getId() {
 		return id;

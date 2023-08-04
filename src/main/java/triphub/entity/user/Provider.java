@@ -6,6 +6,7 @@ import triphub.entity.product.Product;
 import triphub.entity.util.Administration;
 
 import triphub.entity.util.CompanyInfo;
+import triphub.viewModel.UserViewModel;
 
 @Entity
 public class Provider {
@@ -26,6 +27,28 @@ public class Provider {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Administration administration;
+	
+	public void updateProviderFromViewModel(UserViewModel form) {
+	    this.setId(form.getProviderId());
+	    this.getUser().updateUserFromViewModel(form);
+	    this.getUser().getAddress().updateAddressFromViewModel(form);
+	    this.getUser().getFinance().updateFinanceInfoFromViewModel(form);
+	    this.getCompanyInfo().updateCompanyInfoFromViewModel(form);
+	    this.getAdministration().updateAdministrationFromViewModel(form);
+	}
+
+	public UserViewModel initProviderViewModel() {
+	    UserViewModel form = new UserViewModel();
+	    this.getUser().initUserViewModel(form);
+	    this.getUser().getAddress().initAddressViewModel(form);
+	    this.getUser().getFinance().initFinanceInfoViewModel(form);
+	    this.getCompanyInfo().initCompanyInfoViewModel(form);
+	    this.getAdministration().initAdministrationViewModel(form);
+	    form.setProviderId(this.getId());
+
+	    return form;
+	}
+
 
 	public Long getId() {
 		return id;
