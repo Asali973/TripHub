@@ -51,13 +51,13 @@ public class TransportationDAO {
 		arrival.setCountry(transportationvm.getCountry());
 		arrival.setZipCode(transportationvm.getZipCode());
 
-		Picture picture = new Picture();
-		picture.setLink(transportationvm.getLink());
+//		Picture picture = new Picture();
+//		picture.setLink(transportationvm.getLink());
 
 		em.persist(transportation);
 		em.persist(departure);
 		em.persist(arrival);
-		em.persist(picture);
+//		em.persist(picture);
 		return transportation;
 	}
 

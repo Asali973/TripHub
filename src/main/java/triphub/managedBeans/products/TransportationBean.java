@@ -26,7 +26,7 @@ public class TransportationBean implements Serializable {
 		
 	}
 	
-	public Transportation create(SubServicesViewModel transportationvm) {
+	public Transportation create() {
 		return transportationService.create(transportationvm);
 	}
 	
@@ -57,6 +57,8 @@ public class TransportationBean implements Serializable {
 	public void setTransportationvm(SubServicesViewModel transportationvm) {
 		this.transportationvm = transportationvm;
 	}
-	
+	public TransportationType[] getAllTransportationTypes() {
+        return TransportationType.values();
+    }
 
 }
