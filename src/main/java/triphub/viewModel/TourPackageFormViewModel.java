@@ -11,7 +11,9 @@ public class TourPackageFormViewModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// TourPackage properties
 	private Long id;
+
 	private String name;
+
 
 	// Price properties
 	private BigDecimal amount;
@@ -134,6 +136,7 @@ public class TourPackageFormViewModel implements Serializable {
 		this.id = id;
 	}
 
+
 	public List<Picture> getPictureslinks() {
 		return pictureslinks;
 	}
@@ -151,3 +154,4 @@ public class TourPackageFormViewModel implements Serializable {
 	}
 
 }
+
