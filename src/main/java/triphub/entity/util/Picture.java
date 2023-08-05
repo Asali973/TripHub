@@ -2,6 +2,7 @@ package triphub.entity.util;
 
 import javax.persistence.*;
 
+import triphub.viewModel.TourPackageFormViewModel;
 import triphub.viewModel.UserViewModel;
 
 @Entity
@@ -28,7 +29,7 @@ public class Picture {
         userViewModel.setProfilePicture(this.getLink());
     }
 
-
+   
     // getters and setters
 
     public Long getId() {

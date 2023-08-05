@@ -46,19 +46,6 @@
 <!-- 			</navigation-case> -->
 <!-- 		</navigation-rule> -->
 
-	<navigation-rule>
-		<from-view-id>/views/product/TourpackageHome.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>tpUpdate</from-outcome>
-			<to-view-id>/tpUpdate.xhtml</to-view-id>
-		</navigation-case>
-
-
-		<navigation-case>
-			<from-outcome>tpDelete</from-outcome>
-			<to-view-id>/tpDelete.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
 
 	<!-- <navigation-rule> <from-view-id>/views/home.xhtml</from-view-id> <navigation-case> 
 		<from-outcome>registration</from-outcome> <to-view-id>/loginAndAccount/registration.xhtml</to-view-id> 

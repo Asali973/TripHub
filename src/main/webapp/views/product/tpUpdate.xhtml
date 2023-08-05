@@ -10,16 +10,19 @@
 </h:head>
 <h:body>
     <h:form>
+        <!-- Add a hidden input field for the "id" parameter -->
+        <h:inputHidden id="id" value="#{tourPackageBean.tourPackageVm.id}" />
+
         <h:outputLabel for="name" value="Name:" />
         <h:inputText id="name" value="#{tourPackageBean.tourPackageVm.name}" />
 
         <h:outputLabel for="price" value="Price:" />
         <h:inputText id="price" value="#{tourPackageBean.tourPackageVm.amount}"  />
         
-          <h:outputLabel for="currency" value="Currency:" />
+        <h:outputLabel for="currency" value="Currency:" />
         <h:inputText id="currency" value="#{tourPackageBean.tourPackageVm.currency}"  />
 
-         <h:outputLabel for="cityName" value="City:" />
+        <h:outputLabel for="cityName" value="City:" />
         <h:inputText id="cityName" value="#{tourPackageBean.tourPackageVm.cityName}" />
 
         <h:outputLabel for="state" value="State:" />
@@ -31,7 +34,9 @@
         <h:outputLabel for="themeName" value="Theme:" />
         <h:inputText id="themeName" value="#{tourPackageBean.tourPackageVm.themeName}" />
        
-        <h:commandButton value="Update" action="#{tourPackageBean.updatePackage()}" />
+      <h:commandButton value="Update" action="#{tourPackageBean.updatePackage}" />
+
     </h:form>
 </h:body>
+
 </html>

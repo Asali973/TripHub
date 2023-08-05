@@ -2,14 +2,16 @@ package triphub.viewModel;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+
+import triphub.entity.util.Picture;
 
 public class TourPackageFormViewModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	// TourPackage properties
 	private Long id;
-    private String name;
-
+	private String name;
 
 	// Price properties
 	private BigDecimal amount;
@@ -28,7 +30,26 @@ public class TourPackageFormViewModel implements Serializable {
 	private BigDecimal maxPrice = BigDecimal.ZERO;
 
 	// Image properties
-//    private List<Picture> pictureslinks;
+	private List<Picture> pictureslinks;
+	private String link;
+
+	public void clear() {
+
+		this.id=null;
+		this.name="";
+		
+		this.amount= null;
+		this.currency="";
+		
+		this.cityName="";
+		this.country="";
+		this.state="";
+		this.country="";
+		
+		this.pictureslinks=null;
+		
+		this.themeName="";
+	}
 
 	public TourPackageFormViewModel() {
 	}
@@ -105,7 +126,6 @@ public class TourPackageFormViewModel implements Serializable {
 		this.themeName = themeName;
 	}
 
-
 	public Long getId() {
 		return id;
 	}
@@ -114,16 +134,20 @@ public class TourPackageFormViewModel implements Serializable {
 		this.id = id;
 	}
 
-	
+	public List<Picture> getPictureslinks() {
+		return pictureslinks;
+	}
 
-//	public List<Image> getImagelinks() {
-//		return imagelinks;
-//	}
-//
-//	public void setImagelinks(List<Image> imagelinks) {
-//		this.imagelinks = imagelinks;
-//	}
+	public void setPictureslinks(List<Picture> pictureslinks) {
+		this.pictureslinks = pictureslinks;
+	}
 
-	
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
 
 }

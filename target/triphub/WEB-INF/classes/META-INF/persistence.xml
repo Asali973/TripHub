@@ -8,19 +8,11 @@
 
 	<!-- Unité de persistance : 1 unité par BDD (en mode ressources locale) -->
 	<persistence-unit name="triphub"
-<<<<<<< HEAD
 		transaction-type="JTA">
-
     
-		<jta-data-source>java:jboss/datasources/triphubDS</jta-data-source>	
-
-    
-
-=======
-		transaction-type="JTA">    
 		<jta-data-source>java:jboss/datasources/triphubDS</jta-data-source>	   
-	
->>>>>>> nwayDeleteNUpdate
+
+
 		<properties>
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL5Dialect" />

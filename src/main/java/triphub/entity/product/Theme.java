@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import triphub.viewModel.TourPackageFormViewModel;
+import triphub.viewModel.UserViewModel;
+
 @Entity
 public class Theme {
 	@Id
@@ -20,12 +23,22 @@ public class Theme {
 	public Theme() {}
 	
 
-	public Theme(String themeName) {
-		super();
+	public Theme(String themeName) {	
 		this.themeName = themeName;
 	}
-
-
+	public static Theme createThemeFromViewModel(TourPackageFormViewModel tourPackageVm) {
+		Theme theme = new Theme();
+		theme.setThemeName(tourPackageVm.getThemeName());
+		return theme;
+	}
+	public void  updateThemeFromViewModel(TourPackageFormViewModel tourPackageVm) {
+		this.setThemeName(tourPackageVm.getThemeName());
+	}
+	
+	public void initThemeViewModel(TourPackageFormViewModel tourPackageVm) {
+		tourPackageVm.setThemeName(this.getThemeName());
+	}
+	
 	public Long getId() {
 		return id;
 	}
