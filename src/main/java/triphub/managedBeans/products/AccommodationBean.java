@@ -15,7 +15,7 @@ import triphub.helpers.RegistrationException;
 import triphub.services.AccommodationService;
 import triphub.viewModel.AccommodationViewModel;
 
-@Named
+@Named("accommodationBean")
 @RequestScoped
 public class AccommodationBean implements Serializable {
 

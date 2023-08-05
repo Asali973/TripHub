@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import triphub.viewModel.TourPackageFormViewModel;
+
 @Entity
 public class Destination {
 	@Id
@@ -22,12 +24,31 @@ public class Destination {
 
 	public Destination() {}
 	public Destination(String cityName, String state, String country) {
-		super();
+		
 		this.cityName = cityName;
 		this.state = state;
 		this.country = country;
 	}
-
+	
+	public static Destination createDestinationFromViewModel(TourPackageFormViewModel tourPackageVm) {
+		Destination destination = new Destination();
+		destination.setCityName(tourPackageVm.getCityName());
+		destination.setState(tourPackageVm.getState());
+		destination.setCountry(tourPackageVm.getCountry());
+		return destination;
+	}
+	public void  updateDestinationFromViewModel(TourPackageFormViewModel tourPackageVm) {
+		this.setCityName(tourPackageVm.getCityName());
+		this.setState(tourPackageVm.getState());
+		this.setCountry(tourPackageVm.getCountry());
+	}
+	public void  initDestinationViewModel(TourPackageFormViewModel tourPackageVm) {
+		tourPackageVm.setCityName(this.getCityName());
+		tourPackageVm.setState(this.getState());
+		tourPackageVm.setCountry(this.getCountry());
+	}
+	
+	
 	public Long getId() {
 		return id;
 	}

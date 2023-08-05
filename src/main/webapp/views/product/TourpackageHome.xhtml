@@ -114,15 +114,15 @@
 						<td><h:form>
 								<!-- Update button -->
 								<h:commandButton value="Update"
-									action="#{tourPackageBean.updatePackage}"
+									 action="#{tourPackageBean.updatePackage}"
 									styleClass="btn btn-primary btn-sm">
 									<f:param name="id" value="#{package.id}" />
 								</h:commandButton>
 
 								<!-- Delete button -->
 								<h:commandButton value="Delete"
-									action="#{tourPackageBean.deletePackage}">
-									<f:ajax execute="@form" render="@form" />
+									action="#{tourPackageBean.deletePackage}"
+										styleClass="btn btn-primary btn-sm">
 										<f:param name="id" value="#{package.id}" />
 								</h:commandButton>
 
@@ -134,7 +134,7 @@
 
 		<!-- Add the form for toggling the create form container -->
 		<h:form>
-			<h:commandButton value="Refresh List"
+			<h:commandButton value="Display the list"
 				action="#{tourPackageBean.loadAllTourPackages}"
 				styleClass="btn btn-secondary" />
 		</h:form>

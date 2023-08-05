@@ -1,7 +1,6 @@
 /* registrationForm.css */
 
-.reg-form-container {
-	max-width: 500px;
+.reg-form-container {	
     margin: 0 auto;
     padding: 20px;
     border: 2px solid #ccc; 

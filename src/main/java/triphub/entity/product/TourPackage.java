@@ -1,5 +1,6 @@
 package triphub.entity.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import triphub.entity.util.Picture;
+import triphub.viewModel.TourPackageFormViewModel;
 
 @Entity
 public class TourPackage {
@@ -28,13 +30,13 @@ public class TourPackage {
 	@JoinColumn(name = "price_id")
 	private Price price;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Destination destination;
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    private Product item;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Theme theme;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
@@ -43,15 +45,47 @@ public class TourPackage {
 	public TourPackage() {
 	}
 
-	public TourPackage(String name, Price price, Destination destination, Theme theme, List<Picture> pictures) {
-		super();
-		this.name = name;
-		this.price = price;
-		this.destination = destination;
-		this.theme = theme;
-		this.pictures = pictures;
+	public static TourPackage createTourPackageFromViewModel(TourPackageFormViewModel tourPackageVm) {
+		TourPackage tourPackage = new TourPackage();
+
+		tourPackage.setId(tourPackageVm.getId());
+		tourPackage.setName(tourPackageVm.getName());
+
+		Price price = new Price(tourPackageVm.getAmount(), tourPackageVm.getCurrency());
+		Destination destination = new Destination(tourPackageVm.getCityName(), tourPackageVm.getState(),
+				tourPackageVm.getCountry());
+		Theme theme = new Theme(tourPackageVm.getThemeName());
+
+		tourPackage.setPrice(price);
+		tourPackage.setDestination(destination);
+		tourPackage.setTheme(theme);
+
+//	    List<Picture> pictures = tourPackageVm.getPictureslinks();
+//	    tourPackage.setPictures(pictures);    
+
+		return tourPackage;
 	}
 
+	public void updateTourPackageFormViewModel(TourPackageFormViewModel tourPackageVm) {
+		this.setName(tourPackageVm.getName());
+		this.setId(tourPackageVm.getId());
+		this.getPrice().updatePriceFromViewModel(tourPackageVm);
+		this.getDestination().updateDestinationFromViewModel(tourPackageVm);
+		this.getTheme().updateThemeFromViewModel(tourPackageVm);
+		// need to add picture soon
+	}
+
+	public TourPackageFormViewModel initTourPackageFormViewModel() {
+		TourPackageFormViewModel tourPackageVm = new TourPackageFormViewModel();
+
+		tourPackageVm.setId(this.getId());
+		tourPackageVm.setName(this.getName());
+		this.getPrice().initPriceViewModel(tourPackageVm);
+		this.getDestination().initDestinationViewModel(tourPackageVm);
+		this.getTheme().initThemeViewModel(tourPackageVm);
+		return tourPackageVm;
+	}
+//	tourPackageVm.setPictureslinks(this.getPictures());
 	// getters and setters
 	public Long getId() {
 		return id;
