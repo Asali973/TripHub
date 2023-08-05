@@ -1,76 +1,146 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"     
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-    <title>Tour Packages</title>    
+	<title>Tour Packages</title>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="regForm.css" />
+	<style>
+/* CSS to hide the create form container initially */
+#createFormContainer {
+	display: none;
+}
+</style>
 </h:head>
-<h:body> 
-        <div class="reg-form-container">
-    <h3>Add New Tour Package</h3>
-    <h:form>
-         <div class="reg-form-group">
-            <h:outputLabel for="name" value="Name:" />
-            <h:inputText id="name" value="#{tourPackageBean.tourPackageVm.name}" />
-     </div>
-       <div class="reg-form-group">
-            <h:outputLabel for="price" value="Price:" />
-            <h:inputText id="price" value="#{tourPackageBean.tourPackageVm.amount}" />
-     </div>
-     <div class="reg-form-group">
-            <h:outputLabel for="currency" value="Currency:" />
-            <h:inputText id="currency" value="#{tourPackageBean.tourPackageVm.currency}" />
-        </div>
-        <div class="reg-form-group">
-            <h:outputLabel for="cityName" value="City:" />
-            <h:inputText id="cityName" value="#{tourPackageBean.tourPackageVm.cityName}" />
-       </div>
-         <div class="reg-form-group">
-            <h:outputLabel for="state" value="State:" />
-            <h:inputText id="state" value="#{tourPackageBean.tourPackageVm.state}" />
-  </div>
-      <div class="reg-form-group">
-            <h:outputLabel for="country" value="Country:" />
-            <h:inputText id="country" value="#{tourPackageBean.tourPackageVm.country}" />
-     </div>
-     <div class="reg-form-group">
-            <h:outputLabel for="themeName" value="Theme:" />
-            <h:inputText id="themeName" value="#{tourPackageBean.tourPackageVm.themeName}" />
-   </div>    
-       <div class="reg-form-group">
-            <h:commandButton value="Add Package" action="#{tourPackageBean.createPackage}" />
-         </div> 
-    </h:form>
-  <h3>Available Tour Packages</h3>
-    <h:dataTable value="#{tourPackageBean.allTourPackages}" var="package" border="1">
-        <h:column>
-            <f:facet name="header">Package Name</f:facet>
-            #{package.name}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Price</f:facet>
-            #{package.price.amount} #{package.price.currency}
-        </h:column>
-        <h:column>
-            <f:facet name="header">City</f:facet>
-            #{package.destination.cityName}
-        </h:column>
-        <h:column>
-            <f:facet name="header">State</f:facet>
-            #{package.destination.state}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Country</f:facet>
-            #{package.destination.country}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Theme</f:facet>
-            #{package.theme.themeName}
-        </h:column>
-    </h:dataTable>
-         </div>
-   
+<h:body>
+	<button onclick="toggleCreateForm()">Show/Hide Create Form</button>
+	<div class="reg-form-container">
+		<!-- Show the create form -->
+		<div id="createFormContainer">
+			<h3>Add New Tour Package</h3>
+			<h:form>
+				<div class="reg-form-group">
+					<h:outputLabel for="name" value="Name:" />
+					<h:inputText id="name"
+						value="#{tourPackageBean.tourPackageVm.name}"
+						styleClass="reg-form-control" />
+				</div>
+				<div class="reg-form-group">
+					<h:outputLabel for="price" value="Price:" />
+					<h:inputText id="price"
+						value="#{tourPackageBean.tourPackageVm.amount}"
+						styleClass="reg-form-control" />
+				</div>
+				<div class="reg-form-group">
+					<h:outputLabel for="currency" value="Currency:" />
+					<h:inputText id="currency"
+						value="#{tourPackageBean.tourPackageVm.currency}"
+						styleClass="reg-form-control" />
+				</div>
+				<div class="reg-form-group">
+					<h:outputLabel for="cityName" value="City:" />
+					<h:inputText id="cityName"
+						value="#{tourPackageBean.tourPackageVm.cityName}"
+						styleClass="reg-form-control" />
+				</div>
+				<div class="reg-form-group">
+					<h:outputLabel for="state" value="State:" />
+					<h:inputText id="state"
+						value="#{tourPackageBean.tourPackageVm.state}"
+						styleClass="reg-form-control" />
+				</div>
+				<div class="reg-form-group">
+					<h:outputLabel for="country" value="Country:" />
+					<h:inputText id="country"
+						value="#{tourPackageBean.tourPackageVm.country}"
+						styleClass="reg-form-control" />
+				</div>
+				<div class="reg-form-group">
+					<h:outputLabel for="themeName" value="Theme:" />
+					<h:inputText id="themeName"
+						value="#{tourPackageBean.tourPackageVm.themeName}"
+						styleClass="reg-form-control" />
+				</div>
+				<div class="reg-form-group">
+					<h:commandButton value="Add Package"
+						action="#{tourPackageBean.createPackage}"
+						styleClass="btn btn-primary" />
+				</div>
+			</h:form>
+		</div>
+
+		<!-- Display the confirmation message when a new package is added -->
+		<ui:fragment
+			rendered="#{not empty tourPackageBean.lastTourPackageAdded}">
+			<div class="alert alert-success" role="alert">
+				<h3>Package Successfully Added</h3>
+				<p>Name: #{tourPackageBean.lastTourPackageAdded.name}</p>
+				<p>Price: #{tourPackageBean.lastTourPackageAdded.price.amount}
+					#{tourPackageBean.lastTourPackageAdded.price.currency}</p>
+				<!-- Add other details here -->
+			</div>
+		</ui:fragment>
+
+		<!-- Display the list -->
+		<h3>Available Tour Packages</h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Package Name</th>
+					<th>Price</th>
+					<th>Currency</th>
+					<th>City</th>
+					<th>State</th>
+					<th>Country</th>
+					<th>Theme</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<ui:repeat value="#{tourPackageBean.allTourPackages}" var="package">
+					<tr>
+						<td>#{package.id}</td>
+						<td>#{package.name}</td>
+						<td>#{package.price.amount}</td>
+						<td>#{package.price.currency}</td>
+						<td>#{package.destination.cityName}</td>
+						<td>#{package.destination.state}</td>
+						<td>#{package.destination.country}</td>
+						<td>#{package.theme.themeName}</td>
+						<td><h:form>
+								<!-- Update button -->
+								<h:commandButton value="Update"
+									action="#{tourPackageBean.updatePackage}"
+									styleClass="btn btn-primary btn-sm">
+									<f:param name="id" value="#{package.id}" />
+								</h:commandButton>
+
+								<!-- Delete button -->
+								<h:commandButton value="Delete"
+									action="#{tourPackageBean.deletePackage}">
+									<f:ajax execute="@form" render="@form" />
+										<f:param name="id" value="#{package.id}" />
+								</h:commandButton>
+
+							</h:form></td>
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+
+		<!-- Add the form for toggling the create form container -->
+		<h:form>
+			<h:commandButton value="Refresh List"
+				action="#{tourPackageBean.loadAllTourPackages}"
+				styleClass="btn btn-secondary" />
+		</h:form>
+	</div>
+
+	<h:outputScript library="javascript" name="createNdisplayList.js" />
+
 </h:body>
 </html>
