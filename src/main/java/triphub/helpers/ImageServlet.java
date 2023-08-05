@@ -12,7 +12,7 @@ import java.nio.file.Files;
 @WebServlet("/images/*")
 public class ImageServlet extends HttpServlet {
 
-    private static final String BASE_PATH = "/Users/brendan/EnvJEE/Tools/wildfly-18.0.0.Final/data/triphub/images";
+    private static final String BASE_PATH = "C:\\Users\\Marie LEVESQUE\\Desktop\\test";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
