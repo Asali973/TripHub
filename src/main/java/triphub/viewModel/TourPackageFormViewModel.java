@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.servlet.http.Part;
+
 import triphub.entity.util.Picture;
 
 public class TourPackageFormViewModel implements Serializable {
@@ -13,7 +15,6 @@ public class TourPackageFormViewModel implements Serializable {
 	private Long id;
 
 	private String name;
-
 
 	// Price properties
 	private BigDecimal amount;
@@ -32,28 +33,38 @@ public class TourPackageFormViewModel implements Serializable {
 	private BigDecimal maxPrice = BigDecimal.ZERO;
 
 	// Image properties
+	private String profilePicture;
 	private List<Picture> pictureslinks;
 	private String link;
 
 	public void clear() {
 
-		this.id=null;
-		this.name="";
-		
-		this.amount= null;
-		this.currency="";
-		
-		this.cityName="";
-		this.country="";
-		this.state="";
-		this.country="";
-		
-		this.pictureslinks=null;
-		
-		this.themeName="";
+		this.id = null;
+		this.name = "";
+
+		this.amount = null;
+		this.currency = "";
+
+		this.cityName = "";
+		this.country = "";
+		this.state = "";
+		this.country = "";
+
+		this.pictureslinks = null;
+
+		this.themeName = "";
 	}
 
 	public TourPackageFormViewModel() {
+	}
+
+
+	public String getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
 	}
 
 	public BigDecimal getMinPrice() {
@@ -136,7 +147,6 @@ public class TourPackageFormViewModel implements Serializable {
 		this.id = id;
 	}
 
-
 	public List<Picture> getPictureslinks() {
 		return pictureslinks;
 	}
@@ -154,4 +164,3 @@ public class TourPackageFormViewModel implements Serializable {
 	}
 
 }
-

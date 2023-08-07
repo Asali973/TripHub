@@ -1,43 +1,84 @@
-/* registrationForm.css */
-
-.reg-form-container {	
-    margin: 0 auto;
-    padding: 20px;
-    border: 2px solid #ccc; 
-    border-radius: 5px;
-    display: flex; 
-    padding: 20px;
-    flex-direction: column; /* Display children elements in a column layout */
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap; /* Allow children elements to wrap to the next line */
+body {
+    padding-top: 50px; /* Adjust this value as needed */
+}
+.reg-form-container {
+	padding-top: 20px;
+	margin: 0 auto;
+	padding: 20px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+	width: 80%; /* Set the container width to 80% of the page */
 }
 
-.reg-form-container h2 {
-    text-align: center;
-     margin-bottom: 20px; /* Center the h2 element */
+.reg-form-container h3 {
+	text-align: center;
+	margin-bottom: 20px;
 }
 
 .reg-form-group {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
+	width: 45%;
+	margin: 0 auto; /* Center the form groups horizontally */
 }
 
 .reg-form-control {
-    width: 100%;
-    padding: 10px;
-    border: none; /* Remove the default border */
-    border-bottom: 1px solid #ccc; /* Add a bottom border to the form fields */
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-bottom: 1px solid #1A1B41;
+	text-align: center; /* Center the text in the text fields */
 }
-
+.reg-form-container label {
+    font-weight: bold;
+}
 .reg-btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
+	background-color: #586994;
+	color: white;
+	border: none;
+	padding: 10px 15px;
+	border-radius: 5px;
+	cursor: pointer;
+	display: block; /* Make the button a block element to center it */
+	margin: 0 auto; /* Center the button horizontally */
 }
 
 .reg-btn-primary:hover {
-    background-color: #0056b3;
+	background-color: #1A1B41;
+}
+/* Custom CSS for the table */
+.table-container {
+	margin: 0 auto; /* Center the container horizontally */
+	width: 80%; /* Make the container take up 80% of the page width */
+	padding: 20px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+	margin-top: 20px;
+}
+
+.table-container h3 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.table {
+	width: 100%;
+}
+
+.table th, .table td {
+	text-align: center;
+	padding: 8px;
+}
+
+.table th {
+	background-color: #f2f2f2;
+}
+
+.table tbody tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+	background-color: #ddd;
 }

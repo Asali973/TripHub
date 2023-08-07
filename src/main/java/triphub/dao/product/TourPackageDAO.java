@@ -48,30 +48,19 @@ public class TourPackageDAO {
 		newPrice.setAmount(tourPackageVm.getAmount());
 		newPrice.setCurrency(tourPackageVm.getCurrency());
 		newPackage.setPrice(newPrice);
-
-//		 List<Picture> pictures = tourPackageVm.getPictureslinks();
-//		 newPackage.setPictures(pictures);    
-
+		
+//		List<Picture> pictures = tourPackageVm.getPictureslinks();
+//	    newPackage.setPictures(pictures);    
+	  
 		em.persist(newDestination);
 		em.persist(newTheme);
 		em.persist(newPrice);
 		em.persist(newPackage);
-//		em.persist(pictures);
+	//	em.persist(pictures);
 		em.flush();
 		return newPackage;
 	}
 
-//	public TourPackageFormViewModel updateTourPackage(TourPackageFormViewModel tourPackageVm) {
-//		TourPackage tourPackage = em.find(TourPackage.class, tourPackageVm.getId());
-//		if (tourPackage==null) {
-//			return null;
-//		}
-//		
-//		tourPackage.updateTourPackageFormViewModel(tourPackageVm);
-//		em.persist(tourPackage);
-//		em.flush();
-//		return tourPackageVm;
-//	}
 	public TourPackageFormViewModel updateTourPackage(TourPackageFormViewModel tourPackageVm) {
 
 		TourPackage tourPackage = em.find(TourPackage.class, tourPackageVm.getId());
@@ -80,14 +69,12 @@ public class TourPackageDAO {
 		}
 
 		tourPackage.updateTourPackageFormViewModel(tourPackageVm);
-		//em.getTransaction().begin();
-		tourPackage= em.merge(tourPackage);
-		//em.getTransaction().commit();
+		tourPackage = em.merge(tourPackage);
 		em.flush();
 
 		// Convert the updated entity back to the view model and return it
-		 return tourPackage.initTourPackageFormViewModel();
-		//return tourPackageVm;
+		return tourPackage.initTourPackageFormViewModel();
+		// return tourPackageVm;
 	}
 
 	public void delete(TourPackageFormViewModel tourPackageVm) {

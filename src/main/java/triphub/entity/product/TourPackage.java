@@ -60,8 +60,8 @@ public class TourPackage {
 		tourPackage.setDestination(destination);
 		tourPackage.setTheme(theme);
 
-//	    List<Picture> pictures = tourPackageVm.getPictureslinks();
-//	    tourPackage.setPictures(pictures);    
+	    List<Picture> pictures = tourPackageVm.getPictureslinks();
+	    tourPackage.setPictures(pictures);    
 
 		return tourPackage;
 	}
