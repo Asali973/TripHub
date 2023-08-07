@@ -26,6 +26,7 @@ import triphub.entity.product.Price;
 import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
 import triphub.helpers.FacesMessageUtil;
+import triphub.helpers.ImageHelper;
 import triphub.services.TourPackageService;
 import triphub.viewModel.TourPackageFormViewModel;
 
@@ -50,9 +51,9 @@ public class TourPackageBean implements Serializable {
 
 	public TourPackageBean() {
 		currencies = Arrays.asList("USD", "EUR", "GBP", "JPY", "CAD", "AUD", "CHF");
-		 tourPackageVm = new TourPackageFormViewModel();
-		 tourPackageVm.setCurrency("USD"); 
-		
+		tourPackageVm = new TourPackageFormViewModel();
+		tourPackageVm.setCurrency("USD");
+
 	}
 
 	@PostConstruct
@@ -71,8 +72,15 @@ public class TourPackageBean implements Serializable {
 	}
 
 	public void createPackage() {
-
+//		try {
+//			String profilePicName = ImageHelper.processProfilePicture(profilePicture);
+//			if (profilePicName != null) {
+//				tourPackageVm.setProfilePicture(profilePicName);
+//			}
 		lastTourPackageAdded = tourPackageService.createTourPackage(tourPackageVm);
+//		} catch (Exception e) {
+//			FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
+//		}
 		clear();
 	}
 
@@ -84,17 +92,20 @@ public class TourPackageBean implements Serializable {
 		try {
 			tourPackageVm.setCurrency(selectedCurrency);
 			tourPackageService.updateTourPackage(tourPackageVm);
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Tour package updated successfully!"));
 			
 			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
 			String redirectUrl = contextPath + "/views/product/tpUpdate.xhtml?faces-redirect=true&id="
 					+ tourPackageVm.getId();
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
+			
 		} catch (IllegalArgumentException e) {
 			FacesMessageUtil.addErrorMessage("Failed to update tour package: " + e.getMessage());
 		} catch (Exception e) {
 			FacesMessageUtil.addErrorMessage("Failed to update tour package. An unexpected error occurred.");
-		}
-		return null;
+		}clear();
+		return null;		
 	}
 
 	public void deletePackage() {
@@ -192,7 +203,7 @@ public class TourPackageBean implements Serializable {
 		}
 		return options;
 	}
-	
+
 	public void clear() {
 		tourPackageVm = new TourPackageFormViewModel();
 	}
@@ -287,5 +298,3 @@ public class TourPackageBean implements Serializable {
 	}
 
 }
-
-

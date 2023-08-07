@@ -13,8 +13,8 @@ public class TourPackageFormViewModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// TourPackage properties
 	private Long id;
-
 	private String name;
+	private String description;
 
 	// Price properties
 	private BigDecimal amount;
@@ -41,6 +41,7 @@ public class TourPackageFormViewModel implements Serializable {
 
 		this.id = null;
 		this.name = "";
+		this.description= "";
 
 		this.amount = null;
 		this.currency = "";
@@ -161,6 +162,14 @@ public class TourPackageFormViewModel implements Serializable {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

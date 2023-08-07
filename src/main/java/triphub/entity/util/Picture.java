@@ -29,6 +29,14 @@ public class Picture {
         userViewModel.setProfilePicture(this.getLink());
     }
 
+    public void updatePicFromViewModel(TourPackageFormViewModel form) {
+        this.setLink(form.getProfilePicture());
+    }
+    
+    public void initPicViewModel(TourPackageFormViewModel userViewModel) {
+        userViewModel.setProfilePicture(this.getLink());
+    }
+
    
     // getters and setters
 

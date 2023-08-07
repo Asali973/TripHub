@@ -113,10 +113,20 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="row">
+				<div class="row row-padding">
 					<div class="col-md-12">
 						<!-- Fifth Slot (full-width) -->
+						<div class="reg-form-group">
+							<h:outputLabel for="description" value="Description:" />
+							<h:inputText id="description"
+								value="#{tourPackageBean.tourPackageVm.description}"
+								styleClass="reg-form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row row-padding">
+					<div class="col-md-12">
+						<!-- Sixth Slot (full-width) -->
 						<div class="reg-form-group">
 							<h:commandButton value="Add Package"
 								action="#{tourPackageBean.createPackage}"
@@ -142,6 +152,7 @@
 				#{tourPackageBean.lastTourPackageAdded.destination.state}
 				#{tourPackageBean.lastTourPackageAdded.destination.country}</p>
 			<p>Name: #{tourPackageBean.lastTourPackageAdded.theme.themeName}</p>
+			<p>Description: #{tourPackageBean.lastTourPackageAdded.description}</p>
 		</div>
 	</ui:fragment>
 
@@ -159,6 +170,7 @@
 					<th>State</th>
 					<th>Country</th>
 					<th>Theme</th>
+					<th>Description</th>
 					<th>Modify</th>
 					<th>Delete</th>
 				</tr>
@@ -174,6 +186,7 @@
 						<td>#{package.destination.state}</td>
 						<td>#{package.destination.country}</td>
 						<td>#{package.theme.themeName}</td>
+						<td>#{package.description}</td>
 						<td><h:form>
 								<!-- Update button -->
 								<h:commandButton value="Update"

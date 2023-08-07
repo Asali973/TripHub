@@ -12,9 +12,9 @@
 </h:head>
 
 <h:body>
-			<h:form id="updatePackageForm" enctype="multipart/form-data">
-			<h:inputHidden id="id" value="#{tourPackageBean.tourPackageVm.id}" />
-			<div class="reg-form-container">
+	<h:form id="updatePackageForm" enctype="multipart/form-data">
+		<h:inputHidden id="id" value="#{tourPackageBean.tourPackageVm.id}" />
+		<div class="reg-form-container">
 			<h3>Update your Tour Package</h3>
 			<div class="row">
 				<div class="col-md-6">
@@ -34,16 +34,16 @@
 					</div>
 
 					<div class="reg-form-group">
-							<h:outputLabel for="currency" value="Currency:" />
-							<h:selectOneMenu id="currency"
-								value="#{tourPackageBean.selectedCurrency}"
-								styleClass="reg-form-control">
-								<f:selectItems value="#{tourPackageBean.currencies}" />
-							</h:selectOneMenu>
-							<!-- Use the tourPackageVm.currency value in an inputHidden field -->
-							<h:inputHidden id="currencyHidden"
-								value="#{tourPackageBean.tourPackageVm.currency}" />
-						</div>
+						<h:outputLabel for="currency" value="Currency:" />
+						<h:selectOneMenu id="currency"
+							value="#{tourPackageBean.selectedCurrency}"
+							styleClass="reg-form-control">
+							<f:selectItems value="#{tourPackageBean.currencies}" />
+						</h:selectOneMenu>
+						<!-- Use the tourPackageVm.currency value in an inputHidden field -->
+						<h:inputHidden id="currencyHidden"
+							value="#{tourPackageBean.tourPackageVm.currency}" />
+					</div>
 				</div>
 
 				<div class="col-md-6">
@@ -100,8 +100,18 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="row">
+			<div class="row row-padding">
+				<div class="col-md-12">
+					<!-- Fifth Slot (full-width) -->
+					<div class="reg-form-group">
+						<h:outputLabel for="description" value="Description:" />
+						<h:inputText id="description"
+							value="#{tourPackageBean.tourPackageVm.description}"
+							styleClass="reg-form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="row row-padding">
 				<div class="col-md-12">
 					<!-- Fifth Slot (full-width) -->
 					<div class="reg-form-group">
@@ -111,8 +121,11 @@
 					</div>
 				</div>
 			</div>
+			
 		</div>
-	</h:form>
+		 <div class="reg-form-group">
+                    <h:link value="Click here to check the updated Tour Package in the list!" outcome="/views/product/TourpackageHome.xhtml" styleClass="custom-link-button" />
+                </div>
+	</h:form>	
 </h:body>
-
 </html>
