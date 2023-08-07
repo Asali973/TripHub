@@ -3,17 +3,19 @@ package triphub.managedBeans.products;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
 
+
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
-import triphub.helpers.RegistrationException;
+
 import triphub.services.AccommodationService;
-import triphub.viewModel.AccommodationViewModel;
+
+import triphub.viewModel.SubServicesViewModel;
 
 @Named("accommodationBean")
 @RequestScoped
@@ -22,9 +24,9 @@ public class AccommodationBean implements Serializable {
 	@Inject
 	private AccommodationService accommodationService;
 	
-	private EntityManager em;
 	
-	private AccommodationViewModel accommodationVm = new AccommodationViewModel();
+	@Inject
+	private SubServicesViewModel accommodationVm = new SubServicesViewModel();
 	
 	private static final long serialVersionUID = 1L;
 
@@ -33,13 +35,13 @@ public class AccommodationBean implements Serializable {
 	}
 	
 	
-	public Accommodation create (AccommodationViewModel accommodationVm) {
-		return accommodationService.create(accommodationVm);
+	public void create () {
+		 accommodationService.create(accommodationVm);
 		
 	}
 	
-	public Accommodation  updateAccommodation(Accommodation accommodation) {
-		return accommodationService.updateAccommodation(accommodation);
+	public void  update(Accommodation accommodation) {
+		accommodationService.update(accommodation);
 	}
 	
 	public Accommodation findAccommodationByName(String nameAccommodation) {
@@ -47,7 +49,7 @@ public class AccommodationBean implements Serializable {
 	}
 	
 	public void deleteAccommodation(Long id) {
-		accommodationService.deleteAccommodation(id);
+		accommodationService.delete(id);
 	}
 
 	public List<Accommodation> findByType(AccommodationType AccommodationType){
@@ -66,24 +68,17 @@ public class AccommodationBean implements Serializable {
 	}
 
 
-	public EntityManager getEm() {
-		return em;
-	}
-
-
-	public void setEm(EntityManager em) {
-		this.em = em;
-	}
-
-
-	public AccommodationViewModel getAccommodationVm() {
+	public SubServicesViewModel getAccommodationVm() {
 		return accommodationVm;
 	}
 
 
-	public void setAccommodationVm(AccommodationViewModel accommodationVm) {
+	public void setAccommodationVm(SubServicesViewModel accommodationVm) {
 		this.accommodationVm = accommodationVm;
 	}
+
+
+	
 	
 	
 	
