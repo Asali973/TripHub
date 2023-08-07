@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.hibernate.mapping.Map;
 
@@ -41,94 +43,93 @@ public class TourPackageBean implements Serializable {
 	private TourPackage lastTourPackageAdded;
 	private TourPackage tourPackage;
 	private TourPackage selectedTourPackage;
+	private Part profilePicture;
+	private boolean deletionSuccessful;
+	private List<String> currencies;
+	private String selectedCurrency;
 
 	public TourPackageBean() {
+		currencies = Arrays.asList("USD", "EUR", "GBP", "JPY", "CAD", "AUD", "CHF");
+		 tourPackageVm = new TourPackageFormViewModel();
+		 tourPackageVm.setCurrency("USD"); 
+		
 	}
 
-	  @PostConstruct
-	    public void init() {
-		  allTourPackages = tourPackageService.getAllTourPackages();
-		  String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-		  if (id != null) {
-		      Long tourPackageId = Long.parseLong(id);
-		      FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTourPackageId", tourPackageId);
-		      tourPackageVm = tourPackageService.initTourPackage(tourPackageId);
-		      if (tourPackageVm == null) {
-		          FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
-		      }
-		  }
+	@PostConstruct
+	public void init() {
+		allTourPackages = tourPackageService.getAllTourPackages();
+		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+		if (id != null) {
+			Long tourPackageId = Long.parseLong(id);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTourPackageId",
+					tourPackageId);
+			tourPackageVm = tourPackageService.initTourPackage(tourPackageId);
+			if (tourPackageVm == null) {
+				FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
+			}
+		}
+	}
 
-	    }	  
-	  public String updatePackage() {
-	        try {
-	            tourPackageService.updateTourPackage(tourPackageVm);
-	            String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-	            String redirectUrl = contextPath + "/views/product/tpUpdate.xhtml?faces-redirect=true&id=" + tourPackageVm.getId();
-	            FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
-	        } catch (IllegalArgumentException e) {
-	            FacesMessageUtil.addErrorMessage("Failed to update tour package: " + e.getMessage());
-	        } catch (Exception e) {
-	            FacesMessageUtil.addErrorMessage("Failed to update tour package. An unexpected error occurred.");
-	        }
-	        return null;
-	    }
-	  
-//	  public String updatePackage() {
-//		  
-//		    Long selectedTourPackageId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("selectedTourPackageId");
-//		    if (selectedTourPackageId == null) {
-//		        FacesMessageUtil.addErrorMessage("Invalid request: Tour package ID not found in session.");
-//		        return null;
-//		    }
-//
-//		    TourPackageFormViewModel existingTourPackageVm = tourPackageService.initTourPackage(selectedTourPackageId);
-//		    if (existingTourPackageVm == null) {
-//		        FacesMessageUtil.addErrorMessage("Invalid request: Tour package does not exist.");
-//		        return null;
-//		    }
-//
-//		    try {
-//		        tourPackageService.updateTourPackage(existingTourPackageVm);
-//		        String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-//		        String redirectUrl = contextPath + "/views/product/tpUpdate.xhtml?faces-redirect=true&id=" + selectedTourPackageId;
-//		        FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
-//		    } catch (IllegalArgumentException e) {		    
-//		        FacesMessageUtil.addErrorMessage("Failed to update tour package: " + e.getMessage()); 
-//		        e.printStackTrace();
-//		    } catch (Exception e) {		     
-//		        FacesMessageUtil.addErrorMessage("Failed to update tour package. An unexpected error occurred.");
-//		        e.printStackTrace();
-//		    }
-//		    return null;
-//		}
+	public void createPackage() {
 
-	  public String deletePackage() {
-		  
-		    Long selectedTourPackageId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("selectedTourPackageId");
-		    if (selectedTourPackageId == null) {
-		        FacesMessageUtil.addErrorMessage("Invalid request: Tour package ID not found in session.");
-		        return null;
-		    }
+		lastTourPackageAdded = tourPackageService.createTourPackage(tourPackageVm);
+		clear();
+	}
 
-		    TourPackageFormViewModel existingTourPackageVm = tourPackageService.initTourPackage(selectedTourPackageId);
-		    if (existingTourPackageVm == null) {
-		        FacesMessageUtil.addErrorMessage("Invalid request: Tour package does not exist.");
-		        return null;
-		    }
+	public void loadAllTourPackages() {
+		allTourPackages = tourPackageService.getAllTourPackages();
+	}
 
-		    try {
-		        tourPackageService.deleteTourPackage(existingTourPackageVm);
-		        String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-		        String redirectUrl = contextPath + "/views/product/tpDelete.xhtml?faces-redirect=true&id=" + selectedTourPackageId;
-		        FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
-		    } catch (IllegalArgumentException e) {		    
-		        FacesMessageUtil.addErrorMessage("Failed to delete tour package: " + e.getMessage());
-		    } catch (Exception e) {		     
-		        FacesMessageUtil.addErrorMessage("Failed to delete  tour package. An unexpected error occurred.");
-		    }
-		    return null;
+	public String updatePackage() {
+		try {
+			tourPackageVm.setCurrency(selectedCurrency);
+			tourPackageService.updateTourPackage(tourPackageVm);
+			
+			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+			String redirectUrl = contextPath + "/views/product/tpUpdate.xhtml?faces-redirect=true&id="
+					+ tourPackageVm.getId();
+			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
+		} catch (IllegalArgumentException e) {
+			FacesMessageUtil.addErrorMessage("Failed to update tour package: " + e.getMessage());
+		} catch (Exception e) {
+			FacesMessageUtil.addErrorMessage("Failed to update tour package. An unexpected error occurred.");
+		}
+		return null;
+	}
+
+	public void deletePackage() {
+		Long selectedTourPackageId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("selectedTourPackageId");
+		if (selectedTourPackageId == null) {
+			FacesMessageUtil.addErrorMessage("Invalid request: Tour package ID not found in session.");
+			return;
 		}
 
+		TourPackageFormViewModel existingTourPackageVm = tourPackageService.initTourPackage(selectedTourPackageId);
+		if (existingTourPackageVm == null) {
+			FacesMessageUtil.addErrorMessage("Invalid request: Tour package does not exist.");
+			return;
+		}
+
+		FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add("confirmDelete();");
+	}
+
+	public String performDelete() {
+		Long selectedTourPackageId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("selectedTourPackageId");
+		TourPackageFormViewModel existingTourPackageVm = tourPackageService.initTourPackage(selectedTourPackageId);
+
+		if (existingTourPackageVm == null) {
+			FacesMessageUtil.addErrorMessage("Invalid request: Tour package does not exist.");
+			return "Tour package does not exist";
+		}
+
+		tourPackageService.deleteTourPackage(existingTourPackageVm);
+
+		deletionSuccessful = true;
+
+		return null;
+	}
 
 	public void initFormData(Long id) {
 		TourPackageFormViewModel temp = tourPackageService.initTourPackage(id);
@@ -139,19 +140,6 @@ public class TourPackageBean implements Serializable {
 		}
 	}
 
-
-	// Create
-	public void createPackage() {
-		lastTourPackageAdded = tourPackageService.createTourPackage(tourPackageVm);
-		clear();
-	}
-
-	// List
-	public void loadAllTourPackages() {
-		allTourPackages = tourPackageService.getAllTourPackages();
-	}
-
-	// Search
 	public void performAdvancedSearch() {
 		String name = tourPackageVm.getName();
 		String themeName = tourPackageVm.getThemeName();
@@ -204,13 +192,28 @@ public class TourPackageBean implements Serializable {
 		}
 		return options;
 	}
-
-	// Clear after creating new id (have to check again)
+	
 	public void clear() {
 		tourPackageVm = new TourPackageFormViewModel();
 	}
 
 	// GETTERS SETTERS
+	public String getSelectedCurrency() {
+		return selectedCurrency;
+	}
+
+	public void setSelectedCurrency(String selectedCurrency) {
+		this.selectedCurrency = selectedCurrency;
+	}
+
+	public List<String> getCurrencies() {
+		return currencies;
+	}
+
+	public void setCurrencies(List<String> currencies) {
+		this.currencies = currencies;
+	}
+
 	public List<BigDecimal> getMinPriceOptions() {
 		return generateNumberOptions(tourPackageVm.getMaxPrice());
 	}
@@ -266,23 +269,23 @@ public class TourPackageBean implements Serializable {
 	public void setTourPackageId(Long tourPackageId) {
 		this.tourPackageId = tourPackageId;
 	}
+
+	public Part getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(Part profilePicture) {
+		this.profilePicture = profilePicture;
+	}
+
+	public boolean isDeletionSuccessful() {
+		return deletionSuccessful;
+	}
+
+	public void setDeletionSuccessful(boolean deletionSuccessful) {
+		this.deletionSuccessful = deletionSuccessful;
+	}
+
 }
 
-//@PostConstruct // this one at least give me the package with chosen id//don't delete 
-//public void init() {
-//	allTourPackages = tourPackageService.getAllTourPackages();
-//	
-//    String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-//    if (id != null) {
-//        tourPackage = tourPackageService.getTourPackageById(Long.parseLong(id));           
-//        tourPackageVm.setId(tourPackage.getId());
-//        tourPackageVm.setName(tourPackage.getName());
-//        tourPackageVm.setAmount(tourPackage.getPrice().getAmount());
-//        tourPackageVm.setCurrency(tourPackage.getPrice().getCurrency());
-//        tourPackageVm.setCityName(tourPackage.getDestination().getCityName());
-//        tourPackageVm.setState(tourPackage.getDestination().getState());
-//        tourPackageVm.setCountry(tourPackage.getDestination().getCountry());
-//        tourPackageVm.setThemeName(tourPackage.getTheme().getThemeName());
-//    }
-//}
 
