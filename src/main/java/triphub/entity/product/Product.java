@@ -3,6 +3,7 @@ package triphub.entity.product;
 import javax.persistence.*;
 
 
+import triphub.entity.util.Picture;
 
 import java.util.List;
 
@@ -20,15 +21,16 @@ public class Product {
 //    @OneToOne(cascade = CascadeType.ALL)
 //    private Price price;
 //
-//    @ManyToOne
+//    @ManyToOne(cascade = CascadeType.ALL)
 //    private TourPackage tourPackage;
 //
-//    @ManyToOne
-//    private Service service;
-//
-//    @ManyToOne
-//    private Destination destination;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    private Service service;   
+//    
+//    private String Description;
 //
 //    @OneToOne(cascade = CascadeType.ALL)
-//    private Image image;
+//    private Picture picture;
+//    
+    
 }

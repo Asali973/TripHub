@@ -33,6 +33,7 @@ public class TourPackageDAO {
 
 		TourPackage newPackage = new TourPackage();
 		newPackage.setName(tourPackageVm.getName());
+		newPackage.setDescription(tourPackageVm.getDescription());
 
 		Destination newDestination = new Destination();
 		newDestination.setCityName(tourPackageVm.getCityName());

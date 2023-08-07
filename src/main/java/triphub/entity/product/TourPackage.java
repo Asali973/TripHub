@@ -25,6 +25,7 @@ public class TourPackage {
 	private Long id;
 
 	private String name;
+	private String description;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "price_id")
@@ -50,6 +51,7 @@ public class TourPackage {
 
 		tourPackage.setId(tourPackageVm.getId());
 		tourPackage.setName(tourPackageVm.getName());
+		tourPackage.setDescription(tourPackageVm.getDescription());
 
 		Price price = new Price(tourPackageVm.getAmount(), tourPackageVm.getCurrency());
 		Destination destination = new Destination(tourPackageVm.getCityName(), tourPackageVm.getState(),
@@ -60,8 +62,8 @@ public class TourPackage {
 		tourPackage.setDestination(destination);
 		tourPackage.setTheme(theme);
 
-	    List<Picture> pictures = tourPackageVm.getPictureslinks();
-	    tourPackage.setPictures(pictures);    
+//	    List<Picture> pictures = tourPackageVm.getPictureslinks();
+//	    tourPackage.setPictures(pictures);    
 
 		return tourPackage;
 	}
@@ -69,6 +71,7 @@ public class TourPackage {
 	public void updateTourPackageFormViewModel(TourPackageFormViewModel tourPackageVm) {
 		this.setName(tourPackageVm.getName());
 		this.setId(tourPackageVm.getId());
+		this.setDescription(tourPackageVm.getDescription());
 		this.getPrice().updatePriceFromViewModel(tourPackageVm);
 		this.getDestination().updateDestinationFromViewModel(tourPackageVm);
 		this.getTheme().updateThemeFromViewModel(tourPackageVm);
@@ -80,6 +83,7 @@ public class TourPackage {
 
 		tourPackageVm.setId(this.getId());
 		tourPackageVm.setName(this.getName());
+		tourPackageVm.setDescription(this.getDescription());
 		this.getPrice().initPriceViewModel(tourPackageVm);
 		this.getDestination().initDestinationViewModel(tourPackageVm);
 		this.getTheme().initThemeViewModel(tourPackageVm);
@@ -133,6 +137,14 @@ public class TourPackage {
 
 	public void setPictures(List<Picture> pictures) {
 		this.pictures = pictures;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

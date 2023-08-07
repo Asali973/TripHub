@@ -13,18 +13,21 @@
 //
 //import triphub.entity.util.Date;
 //
-////@Entity
+//@Entity
 //public class Service {
-////	@Id
-////    @GeneratedValue(strategy=GenerationType.AUTO)
+//	@Id
+//    @GeneratedValue(strategy=GenerationType.AUTO)
 //    private Long id;
-//	
+//	private Restaurant restuarant;
+//	private Accommodation accomodation;
+//	private Transportation transportation;
 //	private Price price;
 //	private boolean availability;
 //	private Date availableFrom;
 //	private Date availableTill;
 //	private Date startDate;
 //	private Date endDate;
+//	
 //	
 //	
 //	public Long getId() {
