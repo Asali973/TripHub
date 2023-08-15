@@ -8,9 +8,9 @@ import java.io.IOException;
 
 public class ImageHelper {
 
-   // private static final String BASE_PATH = "/Users/brendan/EnvJEE/Tools/wildfly-18.0.0.Final/data/triphub/images";
+   private static final String BASE_PATH = "/Users/brendan/EnvJEE/Tools/wildfly-18.0.0.Final/data/triphub/images";
     
-    private static final String BASE_PATH = "D/EnvJEE/Tools/wildfly-18.0.1.Final/data/triphub/images";
+    //private static final String BASE_PATH = "D/EnvJEE/Tools/wildfly-18.0.1.Final/data/triphub/images";
     
     public static String processProfilePicture(Part profilePicture) throws IOException {
         if (profilePicture != null) {

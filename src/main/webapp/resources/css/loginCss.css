@@ -13,6 +13,24 @@
 	border-radius: 20px;
 }
 
+#fileProfilePicLabel.form-control {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#fileLogoLabel.form-control {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
+
+
+
 .btn-outline-dark {
 	border-radius: 20px;
 }
@@ -32,8 +50,70 @@
 	justify-content: center;
 }
 
+
+
 .btn-custom:hover {
 	background-color: #FF4500; /* Darker shade for hover state */
+	color: white;
+}
+
+.btn-customUpdate {
+	background-color: black; /* You can choose your preferred color */
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 0.9em;
+	transition: all 0.3s;
+	height: 38px;
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-customUpdate:hover {
+	background-color: #170984; /* Darker shade for hover state */
+	color: white;
+}
+
+.btn-customDelete {
+	background-color: black; /* You can choose your preferred color */
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 0.9em;
+	transition: all 0.3s;
+	height: 38px;
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-customDelete:hover {
+	background-color: #A71D00; /* Darker shade for hover state */
+	color: white;
+}
+
+.btn-customUpload {
+	background-color: black; /* You can choose your preferred color */
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 0.9em;
+	transition: all 0.3s;
+	height: 38px;
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-customUpload:hover {
+	background-color: #033170; /* Darker shade for hover state */
 	color: white;
 }
 
@@ -46,7 +126,12 @@
 	font-size: 1.3em;
 }
 
- .success-message {
-        color: orange;
-        font-style: italic;
-    }
+.success-message {
+	color: orange;
+	font-style: italic;
+}
+
+
+.input-group {
+    display: flex;
+}

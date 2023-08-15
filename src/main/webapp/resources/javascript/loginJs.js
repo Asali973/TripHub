@@ -1,20 +1,29 @@
 $(document).ready(function() {
 	// Live email validation
 	$('#email').on('input', function() {
-		var input=$(this);
+		var input = $(this);
 		var re = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
-		var is_email=re.test(input.val());
-		if(is_email) {
+		var is_email = re.test(input.val());
+		if (is_email) {
 			input.removeClass("is-invalid").addClass("is-valid");
 		} else {
 			input.removeClass("is-valid").addClass("is-invalid");
 		}
 	});
 
+//	// Functionality for the "Upload" button
+//	$(".btn-customUpload").click(function() {
+//		// Trigger the file input click event
+//		$("#logoPicture").click();
+//	});
+
+	
+	
+
 	// Show/hide password
 	$('#togglePassword').click(function() {
 		var input = $('#password');
-		if(input.attr('type') == 'password') {
+		if (input.attr('type') == 'password') {
 			input.attr('type', 'text');
 		} else {
 			input.attr('type', 'password');
@@ -22,7 +31,7 @@ $(document).ready(function() {
 	});
 
 	// Custom form submission
-	$('#submitButton').click(function(e){
+	$('#submitButton').click(function(e) {
 		// Assume the form is valid initially
 		var isFormValid = true;
 

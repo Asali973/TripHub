@@ -189,6 +189,17 @@ public class UserService {
 	public UserViewModel updateOrganizer(UserViewModel userViewModel) {
 		return organizerDAO.updateOrganizer(userViewModel);
 	}
+	
+	public UserViewModel updateOrganizerWithImage(UserViewModel userViewModel) throws RegistrationException {
+
+		UserViewModel updatedUserViewModel = organizerDAO.updateOrganizer(userViewModel);
+
+		if (updatedUserViewModel != null) {
+			return updatedUserViewModel;
+		} else {
+			throw new RegistrationException("Failed to update organizer with id " + userViewModel.getOrganizerId());
+		}
+	}
 
 	public UserViewModel initOrganizer(Long organizerId) {
 		return organizerDAO.initOrganizer(organizerId);
