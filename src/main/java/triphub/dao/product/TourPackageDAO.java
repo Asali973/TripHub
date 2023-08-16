@@ -129,6 +129,7 @@ public class TourPackageDAO {
 
 	public List<TourPackage> advancedSearch(String city, String state, String country, BigDecimal minPrice,
 			BigDecimal maxPrice, String name, String themeName) {
+	
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<TourPackage> query = cb.createQuery(TourPackage.class);
 		Root<TourPackage> root = query.from(TourPackage.class);
@@ -171,61 +172,3 @@ public class TourPackageDAO {
 	}
 
 }
-//	public TourPackageFormViewModel createOrUpdate(TourPackageFormViewModel tourPackageVm) {
-//	    if (tourPackageVm == null) {
-//	        throw new IllegalArgumentException("TourPackageFormViewModel cannot be null.");
-//	    }
-//
-//	    // Check if the package already exists based on its unique identifier (e.g., id)
-//	    TourPackage existingPackage = findTourPackageById(tourPackageVm.getId());
-//
-//	    if (existingPackage != null) {
-//	        // Detach the existing package from the persistence context to avoid hibernate
-//	        // tracking changes in the images collection
-//	        em.detach(existingPackage);
-//
-//	        boolean isModified = false;
-//
-//	        // Compare attributes and update if necessary
-//	        if (!Objects.equals(existingPackage.getName(), tourPackageVm.getName())) {
-//	            existingPackage.setName(tourPackageVm.getName());
-//	            isModified = true;
-//	        }
-//
-//	        if (!Objects.equals(existingPackage.getPrice().getAmount(), tourPackageVm.getAmount())) {
-//	            existingPackage.getPrice().setAmount(tourPackageVm.getAmount());
-//	            isModified = true;
-//	        }
-//
-//	        if (!Objects.equals(existingPackage.getPrice().getCurrency(), tourPackageVm.getCurrency())) {
-//	            existingPackage.getPrice().setCurrency(tourPackageVm.getCurrency());
-//	            isModified = true;
-//	        }
-//
-//	        if (!Objects.equals(existingPackage.getTheme().getThemeName(), tourPackageVm.getThemeName())) {
-//	            Theme theme = new Theme();
-//	            theme.setThemeName(tourPackageVm.getThemeName());
-//	            existingPackage.setTheme(theme);
-//	            isModified = true;
-//	        }
-//	        
-////	        if (tourPackageVm.getImagelinks() != null && !tourPackageVm.getImagelinks().isEmpty()) {
-////	            existingPackage.setImages(tourPackageVm.getImagelinks());
-////	            isModified = true;
-////	        }
-//
-//	        // case 1: If changes were made, update the package
-//	        if (isModified) {
-//	            em.merge(existingPackage);
-//	        }
-//	    } else {
-//	        // case 2: if package doesn't exist, persist it as a new entity
-//	        // Convert TourPackageFormViewModel to TourPackage entity
-//	        TourPackage newPackage = create(tourPackageVm);
-//	        // Update the ID in the view model with the generated ID from the database
-//	        tourPackageVm.setId(newPackage.getId());
-//	    }
-//
-//	    // case 3: If no changes were made, return the existing tourPackageVm
-//	    return tourPackageVm;
-//	}

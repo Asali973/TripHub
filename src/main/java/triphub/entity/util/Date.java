@@ -8,7 +8,9 @@ public class Date {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Temporal(TemporalType.DATE)
     private java.util.Date date;
 
+    @Temporal(TemporalType.TIME)
     private java.util.Date time;
 }

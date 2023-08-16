@@ -34,9 +34,6 @@ public class TourPackage {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Destination destination;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Product item;
-
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Theme theme;
 
