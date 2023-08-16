@@ -119,7 +119,11 @@ public class CustomerBean implements Serializable {
 	    }
 	}
 	
-	
+	public String modifyCustomer(Customer customer) {
+	    userViewModel = customer.initCustomerViewModel();
+
+	    return "/views/logginAndAccount/ProfilUser?faces-redirect=true";
+	}
 
 
 	public Part getProfilePicture() {

@@ -109,4 +109,13 @@ public class UserDAO {
 			return null;
 		}
 	}
+	
+	public User findByUserId(Long userId) {
+		try {
+			return em.find(User.class, userId);
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
 }

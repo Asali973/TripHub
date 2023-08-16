@@ -118,6 +118,12 @@ public class SuperAdminBean implements Serializable {
 	        FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
 	    }
 	}
+	
+	public String modifySuperAdmin(SuperAdmin superAdmin) {
+	    userViewModel = superAdmin.initSuperAdminViewModel();
+
+	    return "modifySuperAdmin?faces-redirect=true";
+	}
 
 	public UserService getUserService() {
 		return userService;

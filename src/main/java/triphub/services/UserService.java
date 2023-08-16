@@ -51,6 +51,10 @@ public class UserService {
 	public UserViewModel initUser(Long userId) {
 		return userDAO.initUser(userId);
 	}
+	
+	public User findByUserId(Long userId) {
+	    return userDAO.findByUserId(userId);
+	}
 
 	// Methods related to customers
 	public Customer createCustomer(UserViewModel customerForm) throws RegistrationException {

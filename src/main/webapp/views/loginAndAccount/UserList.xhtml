@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>List Users</title>
+	<h:outputStylesheet library="css" name="listUser.css" />
+	<link
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		rel="stylesheet" />
+</h:head>
+
+<h:body>
+	<div class="container mt-5">
+		<ul class="nav nav-tabs border-bottom-0">
+			<li class="nav-item"><a class="nav-link active"
+				href="#providerTab" data-toggle="tab">Providers</a></li>
+			<li class="nav-item"><a class="nav-link" href="#organizerTab"
+				data-toggle="tab">Organizers</a></li>
+			<li class="nav-item"><a class="nav-link" href="#customerTab"
+				data-toggle="tab">Customers</a></li>
+			<li class="nav-item"><a class="nav-link" href="#superAdminTab"
+				data-toggle="tab">SuperAdmins</a></li>
+		</ul>
+		<div class="tab-content">
+			<h:form id="providerForm">
+				<div class="tab-pane active" id="providerTab">
+					<h2 class="card-title text-center mt-4 mb-4">Providers List</h2>
+					<h:dataTable value="#{providerBean.allProviders}" var="provider"
+						styleClass="table table-hover table-striped">
+						<h:column>
+							<f:facet name="header">Name</f:facet>
+                        #{provider.user.lastName}
+                    </h:column>
+						<h:column>
+							<f:facet name="header">First Name</f:facet>
+                        #{provider.user.firstName}
+                    </h:column>
+						<h:column>
+							<f:facet name="header">Email</f:facet>
+                        #{provider.user.email}
+                    </h:column>
+					</h:dataTable>
+				</div>
+			</h:form>
+
+			<h:form id="organizerForm">
+				<div class="tab-pane" id="organizerTab">
+					<h2 class="card-title text-center mt-4 mb-4">Organizers List</h2>
+					<h:dataTable value="#{organizerBean.allOrganizers}" var="organizer"
+						styleClass="table table-hover table-striped">
+						<h:column>
+							<f:facet name="header">Name</f:facet>
+                        #{organizer.user.lastName}
+                    </h:column>
+						<h:column>
+							<f:facet name="header">First Name</f:facet>
+                        #{organizer.user.firstName}
+                    </h:column>
+						<h:column>
+							<f:facet name="header">Email</f:facet>
+                        #{organizer.user.email}
+                    </h:column>
+					</h:dataTable>
+				</div>
+			</h:form>
+
+			<h:form id="customerForm">
+				<div class="tab-pane" id="customerTab">
+					<h2 class="card-title text-center mt-4 mb-4">Customers List</h2>
+					<h:dataTable value="#{customerBean.allCustomers}" var="customer"
+						styleClass="table table-hover table-striped">
+						<h:column>
+							<f:facet name="header">Name</f:facet>
+                        #{customer.user.lastName}
+                    </h:column>
+						<h:column>
+							<f:facet name="header">First Name</f:facet>
+                        #{customer.user.firstName}
+                    </h:column>
+						<h:column>
+							<f:facet name="header">Email</f:facet>
+                        #{customer.user.email}
+                    </h:column>
+						<h:column>
+							<f:facet name="header">Actions</f:facet>
+							<h:commandButton value="Delete"
+								action="#{customerBean.deleteCustomer}" class="btn btn-danger"
+								onclick="return confirm('Are you sure you want to delete?');" />
+							<h:commandButton value="Modify"
+								action="#{loginBean.loadUserData}" class="btn btn-primary">
+								<f:param name="selectedUserId" value="#{customer.user.id}" />
+							</h:commandButton>
+
+						</h:column>
+					</h:dataTable>
+				</div>
+			</h:form>
+
+			<h:form id="superAdminForm">
+				<div class="tab-pane" id="superAdminTab">
+					<h2 class="card-title text-center mt-4 mb-4">SuperAdmins List</h2>
+					<h:dataTable value="#{superAdminBean.allSuperAdmins}"
+						var="superAdmin" styleClass="table table-hover table-striped">
+						<h:column>
+							<f:facet name="header">Name</f:facet>
+                        #{superAdmin.user.lastName}
+                    </h:column>
+						<h:column>
+							<f:facet name="header">First Name</f:facet>
+                        #{superAdmin.user.firstName}
+                    </h:column>
+						<h:column>
+							<f:facet name="header">Email</f:facet>
+                        #{superAdmin.user.email}
+                    </h:column>
+						<h:column>
+							<f:facet name="header">Actions</f:facet>
+							<h:commandButton value="Delete"
+								action="#{superAdminBean.deleteSuperAdmin}"
+								class="btn btn-danger"
+								onclick="return confirm('Are you sure you want to delete?');" />
+							<h:commandButton value="Modify"
+								action="#{superAdminBean.modifySuperAdmin}"
+								class="btn btn-primary" />
+						</h:column>
+					</h:dataTable>
+				</div>
+			</h:form>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<!-- 	<h:outputScript library="javascript" name="effectListUser.js" /> -->
+</h:body>
+</html>
