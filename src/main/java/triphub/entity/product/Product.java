@@ -2,7 +2,7 @@ package triphub.entity.product;
 
 import javax.persistence.*;
 
-
+import triphub.entity.product.service.Service;
 import triphub.entity.util.Picture;
 
 import java.util.List;
@@ -12,25 +12,17 @@ public class Product {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+   
+    @OneToOne
+    private Price price;
 
-    private String name;
+    @OneToOne
+    @JoinColumn(name = "tour_package_id")
+    private TourPackage tourPackage;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Price totalPrice;
-//
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Price price;
-//
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    private TourPackage tourPackage;
-//
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    private Service service;   
-//    
-//    private String Description;
-//
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Picture picture;
-//    
-    
+    @OneToOne
+    @JoinColumn(name = "service_id")
+    private Service service;     
+   
+       
 }
