@@ -57,23 +57,23 @@ public class LoginBean implements Serializable {
 				this.userViewModel = userService.initOrganizer(organizer.getId());
 			}
 
-//			Provider provider = userService.findByUserProvider(user);
-//			if (provider != null) {
-//				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "provider");
-//				this.setUserType("provider");
-//				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("providerId",
-//						provider.getId());
-//				this.userViewModel = userService.initProvider(provider.getId());
-//			}
-//
-//			SuperAdmin superAdmin = userService.findByUserSuperAdmin(user);
-//			if (superAdmin != null) {
-//				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "superAdmin");
-//				this.setUserType("superAdmin");
-//				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("customerId",
-//						superAdmin.getId());
-//				this.userViewModel = userService.initSuperAdmin(superAdmin.getId());
-//			}
+			Provider provider = userService.findByUserProvider(user);
+			if (provider != null) {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "provider");
+				this.setUserType("provider");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("providerId",
+						provider.getId());
+				this.userViewModel = userService.initProvider(provider.getId());
+			}
+
+			SuperAdmin superAdmin = userService.findByUserSuperAdmin(user);
+			if (superAdmin != null) {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "superAdmin");
+				this.setUserType("superAdmin");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("superAdminId",
+						superAdmin.getId());
+				this.userViewModel = userService.initSuperAdmin(superAdmin.getId());
+			}
 
 			// Save the UserViewModel in the session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userViewModel",

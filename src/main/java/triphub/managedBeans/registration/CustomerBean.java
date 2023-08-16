@@ -1,6 +1,9 @@
 package triphub.managedBeans.registration;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -28,11 +31,13 @@ public class CustomerBean implements Serializable {
 	private UserViewModel userViewModel = new UserViewModel();
 
 	private Part profilePicture;
+	
+	private List<Customer> allCustomers;
 
 	public CustomerBean() {
 	}
 
-	public void register() {
+	public void register() throws IOException{
 		if (!userViewModel.getPassword().equals(userViewModel.getConfirmPassword())) {
 			FacesMessageUtil.addErrorMessage("Passwords do not match!");
 			return;
@@ -56,6 +61,10 @@ public class CustomerBean implements Serializable {
 
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer created successfully!", null));
+
+	        // Redirection to login.xhtml
+	        context.getExternalContext().redirect("/triphub/views/loginAndAccount/login.xhtml");
+	        
 		} catch (RegistrationException e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration failed: " + e.getMessage(), null));
@@ -80,6 +89,8 @@ public class CustomerBean implements Serializable {
 		if (customerId != null) {
 			initFormData(customerId);
 		}
+		
+	    allCustomers = userService.getAllCustomers();
 	}
 
 	public void updateCustomer() {
@@ -98,10 +109,17 @@ public class CustomerBean implements Serializable {
 	    try {
 	        userService.deleteCustomer(userViewModel.getCustomerId());
 	        FacesMessageUtil.addSuccessMessage("Customer deleted successfully!");
+	        
+	        FacesContext context = FacesContext.getCurrentInstance();
+
+	        context.getExternalContext().redirect("/triphub/views/home.xhtml");
+	        
 	    } catch (Exception e) {
 	        FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
 	    }
 	}
+	
+	
 
 
 	public Part getProfilePicture() {
@@ -118,5 +136,13 @@ public class CustomerBean implements Serializable {
 
 	public void setUserViewModel(UserViewModel userViewModel) {
 		this.userViewModel = userViewModel;
+	}
+	
+	public List<Customer> getAllCustomers() {
+	    return allCustomers;
+	}
+
+	public void setAllCustomers(List<Customer> allCustomers) {
+	    this.allCustomers = allCustomers;
 	}
 }

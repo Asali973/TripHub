@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<title>Create Customer</title>
@@ -14,9 +15,36 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-body">
-				<h2 class="card-title text-center mt-3">Create a new Customer
+				<h2 class="card-title text-center mt-3">Create a new customer
 					account</h2>
-				<h:form prependId="false">
+				<h:form prependId="false" enctype="multipart/form-data">
+					<!-- Profile Picture Upload -->
+					<div class="form-group">
+						<h:outputLabel for="logoPicture" />
+						<div class="input-group mt-3">
+							<!-- InputFile caché -->
+							<h:inputFile value="#{customerBean.profilePicture}"
+								id="profilePicture" styleClass="custom-file-input d-none"
+								onchange="updateProfilePicLabel(this);" />
+
+							<!-- Label pour afficher le chemin du fichier sélectionné -->
+							<label id="fileProfilePicLabel" class="form-control">Choose
+								your profile picture</label>
+
+							<!-- Bouton Upload -->
+							<div class="input-group-append">
+								<button type="button" class="btn btn-customUpload"
+									onclick="document.getElementById('profilePicture').click();">Upload</button>
+							</div>
+						</div>
+					</div>
+
+					<script type="text/javascript">
+    					function updateProfilePicLabel(inputElement) {
+        					var fileName = inputElement.value.split("\\").pop();
+       						 document.getElementById('fileProfilePicLabel').textContent = fileName || "No file selected";
+   						}
+						</script>
 					<button
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
 						type="button">Personal informations</button>
@@ -71,7 +99,7 @@
 
 					<!-- Address dépliable -->
 					<button
-						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
+						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
 						type="button" data-toggle="collapse" data-target="#addressSection"
 						aria-expanded="false" aria-controls="addressSection">Address
 						informations</button>
@@ -113,7 +141,7 @@
 
 					<!-- FinanceInfo dépliable -->
 					<button
-						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
+						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
 						type="button" data-toggle="collapse" data-target="#paymentSection"
 						aria-expanded="false" aria-controls="paymentSection">Payment
 						informations</button>

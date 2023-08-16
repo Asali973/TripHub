@@ -1,11 +1,14 @@
 package triphub.dao.user;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import triphub.entity.user.Customer;
 import triphub.entity.user.SuperAdmin;
 import triphub.entity.user.User;
 import triphub.entity.util.Address;
@@ -37,6 +40,7 @@ public class SuperAdminDAO {
 		pictureProfile.setLink(form.getProfilePicture());
 
 		SuperAdmin superAdmin = new SuperAdmin();
+		superAdmin.setId(form.getSuperAdminId());
 		superAdmin.setUser(user);
 		superAdmin.setPicture(pictureProfile);
 
@@ -84,14 +88,14 @@ public class SuperAdminDAO {
 		}
 	}
 
-	public SuperAdmin findByEmailSuperAdmin(String email) throws RegistrationException {
+	public SuperAdmin findByEmailSuperAdmin(String email) {
 		TypedQuery<SuperAdmin> query = em.createQuery("SELECT c FROM SuperAdmin c WHERE c.user.email = :email",
 				SuperAdmin.class);
 		query.setParameter("email", email);
 		try {
 			return query.getSingleResult();
 		} catch (NoResultException e) {
-			throw new RegistrationException("SuperAdmin with email " + email + " not found.");
+			return null;
 		}
 	}
 
@@ -116,6 +120,11 @@ public class SuperAdminDAO {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+	
+	public List<SuperAdmin> findAllSuperAdmins() {
+	    TypedQuery<SuperAdmin> query = em.createQuery("SELECT c FROM SuperAdmin c", SuperAdmin.class);
+	    return query.getResultList();
 	}
 
 }

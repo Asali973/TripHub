@@ -1,6 +1,6 @@
 .card {
 	margin: auto;
-	max-width: 500px;
+	max-width: 800px;
 	border-radius: 20px;
 	background-color: #F0F0F0;
 }
@@ -27,6 +27,19 @@
     border-bottom-right-radius: 0;
 }
 
+#fileLogoLabelP.form-control {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#fileProfilePicLabelS.form-control {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
 
 
 

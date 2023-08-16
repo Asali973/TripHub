@@ -1,6 +1,8 @@
 package triphub.managedBeans.registration;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -29,11 +31,13 @@ public class OrganizerBean implements Serializable {
     private UserViewModel userViewModel = new UserViewModel();
     private Part logoPicture;
     private Part companyPicture;
+    
+    private List<Organizer> allOrganizers;
 
     public OrganizerBean() {
     }
    
-    public void register() {
+    public void register() throws IOException{
         if (!userViewModel.getPassword().equals(userViewModel.getConfirmPassword())) {
             FacesMessageUtil.addErrorMessage("Passwords do not match!");
             return;
@@ -57,6 +61,10 @@ public class OrganizerBean implements Serializable {
 
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Organizer created successfully!", null));
+			
+	        // Redirection to login.xhtml
+	        context.getExternalContext().redirect("/triphub/views/loginAndAccount/login.xhtml");
+	        
 		} catch (RegistrationException e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration failed: " + e.getMessage(), null));
@@ -81,6 +89,8 @@ public class OrganizerBean implements Serializable {
 		if (organizerId != null) {
 			initFormData(organizerId);
 		}
+		
+		allOrganizers = userService.getAllOrganizers();
 	}
 
 	public void updateOrganizer() {
@@ -103,6 +113,11 @@ public class OrganizerBean implements Serializable {
 	    try {
 	        userService.deleteOrganizer(userViewModel.getOrganizerId());
 	        FacesMessageUtil.addSuccessMessage("Organizer deleted successfully!");
+	        
+	        FacesContext context = FacesContext.getCurrentInstance();
+
+	        context.getExternalContext().redirect("/triphub/views/home.xhtml");
+	        
 	    } catch (Exception e) {
 	        FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
 	    }
@@ -140,6 +155,12 @@ public class OrganizerBean implements Serializable {
 		this.companyPicture = companyPicture;
 	}
     
-	
+    public List<Organizer> getAllOrganizers() {
+        return allOrganizers;
+    }
+
+    public void setAllOrganizers(List<Organizer> allOrganizers) {
+        this.allOrganizers = allOrganizers;
+    }
     
 }
