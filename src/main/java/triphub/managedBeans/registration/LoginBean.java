@@ -1,6 +1,7 @@
 package triphub.managedBeans.registration;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -24,6 +25,8 @@ public class LoginBean implements Serializable {
 	private UserService userService;
 
 	private UserViewModel userViewModel = new UserViewModel();
+	
+	private String userType;
 
 	public LoginBean() {
 	}
@@ -42,6 +45,7 @@ public class LoginBean implements Serializable {
 			Customer customer = userService.findByUserCustomer(user);
 			if (customer != null) {
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "customer");
+				this.setUserType("customer");
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("customerId",
 						customer.getId());
 				this.userViewModel = userService.initCustomer(customer.getId());
@@ -49,21 +53,26 @@ public class LoginBean implements Serializable {
 			Organizer organizer = userService.findByUserOrganizer(user);
 			if (organizer != null) {
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "organizer");
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("oranizerId", organizer.getId());
+				this.setUserType("organizer");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("organizerId", organizer.getId());
 				this.userViewModel = userService.initOrganizer(organizer.getId());
 			}
 
 			Provider provider = userService.findByUserProvider(user);
 			if (provider != null) {
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "provider");
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("providerId", provider.getId());
+				this.setUserType("provider");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("providerId",
+						provider.getId());
 				this.userViewModel = userService.initProvider(provider.getId());
 			}
 
 			SuperAdmin superAdmin = userService.findByUserSuperAdmin(user);
 			if (superAdmin != null) {
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "superAdmin");
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("customerId", superAdmin.getId());
+				this.setUserType("superAdmin");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("superAdminId",
+						superAdmin.getId());
 				this.userViewModel = userService.initSuperAdmin(superAdmin.getId());
 			}
 
@@ -75,6 +84,77 @@ public class LoginBean implements Serializable {
 		}
 		return "login";
 	}
+	
+	public String loadUserData() {
+	    Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+	    String userIdParam = params.get("selectedUserId");
+	    
+	    System.out.println("selectedUserId: " + userIdParam);
+	    Long userId = null;
+
+	    if (userIdParam != null) {
+	        try {
+	            userId = Long.parseLong(userIdParam);
+	        } catch (NumberFormatException e) {
+	        }
+	    }
+
+	    if (userId != null) {
+	        User user = userService.findByUserId(userId);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userId", user.getId());
+	        System.out.println("User retrieved: " + user);
+
+			// Initialize the UserViewModel
+			initUserData(user.getId());
+
+			Customer customer = userService.findByUserCustomer(user);
+			if (customer != null) {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "customer");
+				this.setUserType("customer");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("customerId",
+						customer.getId());
+				this.userViewModel = userService.initCustomer(customer.getId());
+			}
+			Organizer organizer = userService.findByUserOrganizer(user);
+			if (organizer != null) {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "organizer");
+				this.setUserType("organizer");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("organizerId", organizer.getId());
+				this.userViewModel = userService.initOrganizer(organizer.getId());
+			}
+
+			Provider provider = userService.findByUserProvider(user);
+			if (provider != null) {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "provider");
+				this.setUserType("provider");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("providerId",
+						provider.getId());
+				this.userViewModel = userService.initProvider(provider.getId());
+			}
+
+			SuperAdmin superAdmin = userService.findByUserSuperAdmin(user);
+			if (superAdmin != null) {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "superAdmin");
+				this.setUserType("superAdmin");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("superAdminId",
+						superAdmin.getId());
+				this.userViewModel = userService.initSuperAdmin(superAdmin.getId());
+			}
+
+			// Save the UserViewModel in the session
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userViewModel",
+					this.userViewModel);
+
+			return "/views/loginAndAccount/ProfileUser.xhtml?faces-redirect=true";
+		}
+		return null;
+	}
+	
+
+
+
+
 
 	@PostConstruct
 	public void init() {
@@ -122,4 +202,14 @@ public class LoginBean implements Serializable {
 	public void setUserViewModel(UserViewModel userViewModel) {
 		this.userViewModel = userViewModel;
 	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	
+	
 }

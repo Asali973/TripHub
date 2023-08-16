@@ -18,6 +18,7 @@ public class SuperAdmin {
 	private Picture picture;
 	
     public void updateSuperAdminFromViewModel(UserViewModel form) {
+    	this.setId(form.getSuperAdminId());
         this.getUser().updateUserFromViewModel(form);
         this.getUser().getAddress().updateAddressFromViewModel(form);
         this.getUser().getFinance().updateFinanceInfoFromViewModel(form);

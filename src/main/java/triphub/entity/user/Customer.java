@@ -31,7 +31,10 @@ public class Customer {
 	    this.getUser().initUserViewModel(userViewModel);
 	    this.getUser().getAddress().initAddressViewModel(userViewModel);
 	    this.getUser().getFinance().initFinanceInfoViewModel(userViewModel);
-	    this.getPicture().initPictureViewModel(userViewModel);	  
+	    Picture picture = this.getPicture();
+	    if (picture != null) {
+	        picture.initPictureViewModel(userViewModel);
+	    }  
 	    userViewModel.setCustomerId(this.getId());
 
 	    return userViewModel;

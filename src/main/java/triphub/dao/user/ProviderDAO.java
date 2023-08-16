@@ -1,5 +1,7 @@
 package triphub.dao.user;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -113,6 +115,11 @@ public class ProviderDAO {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+	
+	public List<Provider> findAllProviders() {
+	    TypedQuery<Provider> query = em.createQuery("SELECT c FROM Provider c", Provider.class);
+	    return query.getResultList();
 	}
 
 }

@@ -1,10 +1,14 @@
 package triphub.dao.user;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.Part;
 
 import triphub.entity.user.*;
 import triphub.entity.util.*;
@@ -113,6 +117,11 @@ public class OrganizerDAO {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+	
+	public List<Organizer> findAllOrganizers() {
+		TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c", Organizer.class);
+		return query.getResultList();
 	}
 
 }

@@ -1,5 +1,7 @@
 package triphub.services;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -49,6 +51,10 @@ public class UserService {
 	public UserViewModel initUser(Long userId) {
 		return userDAO.initUser(userId);
 	}
+	
+	public User findByUserId(Long userId) {
+	    return userDAO.findByUserId(userId);
+	}
 
 	// Methods related to customers
 	public Customer createCustomer(UserViewModel customerForm) throws RegistrationException {
@@ -68,6 +74,10 @@ public class UserService {
 
 	public void deleteCustomer(Long id) {
 		customerDAO.deleteCustomer(id);
+	}
+
+	public UserViewModel updateCustomer(UserViewModel form) {
+		return customerDAO.updateCustomer(form);
 	}
 
 	public UserViewModel updateCustomerWithImage(UserViewModel userViewModel) throws RegistrationException {
@@ -92,6 +102,10 @@ public class UserService {
 	public UserViewModel initCustomer(Long customerId) {
 		return customerDAO.initCustomer(customerId);
 	}
+	
+    public List<Customer> getAllCustomers() {
+        return customerDAO.findAllCustomers();
+    }
 
 	// Methods related to SuperAdmin
 	public SuperAdmin createSuperAdmin(UserViewModel superAdminForm) throws RegistrationException {
@@ -113,14 +127,18 @@ public class UserService {
 		superAdminDAO.deleteSuperAdmin(id);
 	}
 
-	public UserViewModel updateSuperAdmin(UserViewModel userViewModel) throws RegistrationException {
+	public UserViewModel updateSuperAdmin(UserViewModel form) {
+		return superAdminDAO.updateSuperAdmin(form);
+	}
+
+	public UserViewModel updateSuperAdminWithImage(UserViewModel userViewModel) throws RegistrationException {
 
 		UserViewModel updatedUserViewModel = superAdminDAO.updateSuperAdmin(userViewModel);
 
 		if (updatedUserViewModel != null) {
 			return updatedUserViewModel;
 		} else {
-			throw new RegistrationException("Failed to update SuperAdmin with id " + userViewModel.getSuperAdminId());
+			throw new RegistrationException("Failed to update superAdmin with id " + userViewModel.getSuperAdminId());
 		}
 	}
 
@@ -135,6 +153,10 @@ public class UserService {
 	public UserViewModel initSuperAdmin(Long superAdminId) {
 		return superAdminDAO.initSuperAdmin(superAdminId);
 	}
+	
+    public List<SuperAdmin> getAllSuperAdmins() {
+        return superAdminDAO.findAllSuperAdmins();
+    }
 
 	// Methods related to Provider
 	public Provider createProvider(UserViewModel providerForm) throws RegistrationException {
@@ -149,6 +171,17 @@ public class UserService {
 
 	public UserViewModel updateProvider(UserViewModel form) {
 		return providerDAO.updateProvider(form);
+	}
+
+	public UserViewModel updateProviderWithImage(UserViewModel userViewModel) throws RegistrationException {
+
+		UserViewModel updatedUserViewModel = providerDAO.updateProvider(userViewModel);
+
+		if (updatedUserViewModel != null) {
+			return updatedUserViewModel;
+		} else {
+			throw new RegistrationException("Failed to update provider with id " + userViewModel.getProviderId());
+		}
 	}
 
 	public UserViewModel initProvider(Long id) {
@@ -174,6 +207,10 @@ public class UserService {
 	public Provider findProviderByUserId(Long userId) {
 		return providerDAO.findProviderByUserId(userId);
 	}
+	
+    public List<Provider> getAllProviders() {
+        return providerDAO.findAllProviders();
+    }
 
 	// Methods related to Organizer
 	public Organizer createOrganizer(UserViewModel organizerForm) throws RegistrationException {
@@ -188,6 +225,17 @@ public class UserService {
 
 	public UserViewModel updateOrganizer(UserViewModel userViewModel) {
 		return organizerDAO.updateOrganizer(userViewModel);
+	}
+
+	public UserViewModel updateOrganizerWithImage(UserViewModel userViewModel) throws RegistrationException {
+
+		UserViewModel updatedUserViewModel = organizerDAO.updateOrganizer(userViewModel);
+
+		if (updatedUserViewModel != null) {
+			return updatedUserViewModel;
+		} else {
+			throw new RegistrationException("Failed to update organizer with id " + userViewModel.getOrganizerId());
+		}
 	}
 
 	public UserViewModel initOrganizer(Long organizerId) {
@@ -213,5 +261,9 @@ public class UserService {
 	public Organizer findOrganizerByUserId(Long userId) {
 		return organizerDAO.findOrganizerByUserId(userId);
 	}
+	
+    public List<Organizer> getAllOrganizers() {
+        return organizerDAO.findAllOrganizers();
+    }
 
 }

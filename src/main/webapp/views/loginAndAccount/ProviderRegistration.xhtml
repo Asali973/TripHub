@@ -1,106 +1,157 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<title>Create Provider</title>
+	<h:outputStylesheet library="css" name="loginCss.css" />
 	<link
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		rel="stylesheet" />
-	<!-- 	<link href="css/style.css" rel="stylesheet" /> -->
-	<style>
-.card {
-	margin: auto;
-	max-width: 900px;
-}
-
-.container {
-	margin-top: 50px;
-}
-</style>
+	<h:outputStylesheet library="css" name="loginCss.css" />
 </h:head>
 <h:body>
 	<div class="container">
 		<div class="card">
 			<div class="card-body">
-				<h2 class="card-title text-center mt-3">Create a new Provider
+				<h2 class="card-title text-center mt-3">Create a new provider
 					account</h2>
-				<h:form>
+				<h:form prependId="false" enctype="multipart/form-data">
+					<!-- Profile Logo Picture Upload -->
+					<div class="form-group">
+						<h:outputLabel for="logoPictureP" />
+						<div class="input-group mt-3">
+							<!-- InputFile caché -->
+							<h:inputFile value="#{providerBean.logoPicture}"
+								id="logoPictureP" styleClass="custom-file-input d-none"
+								onchange="updateLogoLabelP(this);" />
+
+							<!-- Label pour afficher le chemin du fichier sélectionné -->
+							<label id="fileLogoLabelP" class="form-control">Choose
+								your profile picture</label>
+
+							<!-- Bouton Upload -->
+							<div class="input-group-append">
+								<button type="button" class="btn btn-customUpload"
+									onclick="document.getElementById('logoPictureP').click();">Upload</button>
+							</div>
+						</div>
+					</div>
+
+					<script type="text/javascript">
+    					function updateLogoLabelP(inputElement) {
+        					var fileName = inputElement.value.split("\\").pop();
+       						 document.getElementById('fileLogoLabelP').textContent = fileName || "No file selected";
+   						}
+						</script>
+
+
+
 					<button
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
-						type="button">Personal informations</button>
+						type="button">Company informations</button>
+
 					<div class="form-group mt-4">
-						<h:outputLabel for="firstname" value="First Name*:" required="true"
-							requiredMessage="First name is required." />
-						<h:inputText id="firstname" value="#{providerBean.userViewModel.firstName}"
-							class="form-control" required="true" />
-					</div>
-					<div class="form-group">
-						<h:outputLabel for="lastname" value="Last Name*:" required="true"
-							requiredMessage="Last name is required." />
-						<h:inputText id="lastname" value="#{providerBean.userViewModel.lastName}"
-							class="form-control" required="true" />
-					</div>
-					<div class="form-group">
-						<h:outputLabel for="email" value="Email*:" required="true"
-							requiredMessage="Email is required." />
-						<h:inputText id="email" value="#{providerBean.userViewModel.email}"
-							class="form-control" required="true" />
-					</div>
-					<div class="form-group">
-						<h:outputLabel for="phoneNum" value="Phone Number:" />
-						<h:inputText id="phoneNum" value="#{providerBean.userViewModel.phoneNum}"
+						<h:outputLabel for="companyNameP" value="Company Name*:"
+							required="true" requiredMessage="Company name is required." />
+						<h:inputText id="companyNameP"
+							value="#{providerBean.userViewModel.companyName}"
 							class="form-control" />
 					</div>
 					<div class="form-group">
-						<h:outputLabel for="password" value="Password*:" required="true"
-							requiredMessage="Please enter a password." />
-						<h:inputSecret id="password" value="#{providerBean.userViewModel.password}"
+						<h:outputLabel for="siretP" value="Siret*:" required="true"
+							requiredMessage="Company siret is required." />
+						<h:inputText id="siretP"
+							value="#{providerBean.userViewModel.siret}" class="form-control" />
+					</div>
+					<div class="form-group">
+						<h:outputLabel for="firstnameP" value="Contact First Name*:"
+							required="true" requiredMessage="First name is required." />
+						<h:inputText id="firstnameP"
+							value="#{providerBean.userViewModel.firstName}"
 							class="form-control" required="true" />
 					</div>
 					<div class="form-group">
-						<h:outputLabel for="confirmPassword" value="Confirm Password*:"
-							required="true" requiredMessage="Please confirm your password." />
-						<h:inputSecret id="confirmPassword"
-							value="#{providerBean.userViewModel.confirmPassword}" class="form-control"
+						<h:outputLabel for="lastnameP" value="Contact Last Name*:"
+							required="true" requiredMessage="Last name is required." />
+						<h:inputText id="lastnameP"
+							value="#{providerBean.userViewModel.lastName}"
+							class="form-control" required="true" />
+					</div>
+					<div class="form-group">
+						<h:outputLabel for="emailP" value="Email*:" required="true"
+							requiredMessage="Email is required." />
+						<h:inputText id="emailP"
+							value="#{providerBean.userViewModel.email}" class="form-control"
 							required="true" />
+					</div>
+					<div class="form-group">
+						<h:outputLabel for="phoneNumP" value="Phone Number:" />
+						<h:inputText id="phoneNumP"
+							value="#{providerBean.userViewModel.phoneNum}"
+							class="form-control" />
+					</div>
+					<div class="form-group">
+						<h:outputLabel for="passwordP" value="Password*:" required="true"
+							requiredMessage="Please enter a password." />
+						<div class="input-group">
+							<h:inputSecret id="passwordP"
+								value="#{providerBean.userViewModel.password}"
+								class="form-control" required="true" />
+							<div class="input-group-append">
+								<button id="togglePasswordP" type="button"
+									class="btn btn-custom">Show/Hide</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<h:outputLabel for="confirmPasswordP" value="Confirm Password*:"
+							required="true" requiredMessage="Please confirm your password." />
+						<h:inputSecret id="confirmPasswordP"
+							value="#{providerBean.userViewModel.confirmPassword}"
+							class="form-control" required="true" />
 					</div>
 
 					<!-- Address dépliable -->
 					<button
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
-						type="button" data-toggle="collapse" data-target="#addressSection"
-						aria-expanded="false" aria-controls="addressSection">Address
-						informations</button>
-					<div class="collapse" id="addressSection">
+						type="button" data-toggle="collapse"
+						data-target="#addressSectionP" aria-expanded="false"
+						aria-controls="addressSectionP">Address informations</button>
+					<div class="collapse" id="addressSectionP">
 						<div class="form-group mt-4">
-							<h:outputLabel for="num" value="Number:" />
-							<h:inputText id="num" value="#{providerBean.userViewModel.num}"
+							<h:outputLabel for="numP" value="Number:" />
+							<h:inputText id="numP" value="#{providerBean.userViewModel.num}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<h:outputLabel for="street" value="Street:" />
-							<h:inputText id="street" value="#{providerBean.userViewModel.street}"
+							<h:outputLabel for="streetP" value="Street:" />
+							<h:inputText id="streetP"
+								value="#{providerBean.userViewModel.street}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<h:outputLabel for="city" value="City:" />
-							<h:inputText id="city" value="#{providerBean.userViewModel.city}"
+							<h:outputLabel for="cityP" value="City:" />
+							<h:inputText id="cityP"
+								value="#{providerBean.userViewModel.city}" class="form-control" />
+						</div>
+						<div class="form-group">
+							<h:outputLabel for="stateP" value="State:" />
+							<h:inputText id="stateP"
+								value="#{providerBean.userViewModel.state}" class="form-control" />
+						</div>
+						<div class="form-group">
+							<h:outputLabel for="countryP" value="Country:" />
+							<h:inputText id="countryP"
+								value="#{providerBean.userViewModel.country}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<h:outputLabel for="state" value="State:" />
-							<h:inputText id="state" value="#{providerBean.userViewModel.state}"
-								class="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel for="country" value="Country:" />
-							<h:inputText id="country" value="#{providerBean.userViewModel.country}"
-								class="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel for="zipCode" value="Zip Code:" />
-							<h:inputText id="zipCode" value="#{providerBean.userViewModel.zipCode}"
+							<h:outputLabel for="zipCodeP" value="Zip Code:" />
+							<h:inputText id="zipCodeP"
+								value="#{providerBean.userViewModel.zipCode}"
 								class="form-control" />
 						</div>
 					</div>
@@ -110,47 +161,23 @@
 					<button
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
 						type="button" data-toggle="collapse"
-						data-target="#paymentInfoSection" aria-expanded="false"
-						aria-controls="paymentInfoSection">Payment informations</button>
-					<div class="collapse" id="paymentInfoSection">
+						data-target="#paymentInfoSectionP" aria-expanded="false"
+						aria-controls="paymentInfoSectionP">Payment informations</button>
+					<div class="collapse" id="paymentInfoSectionP">
 						<div class="form-group mt-4">
-							<h:outputLabel for="CCNumber" value="Credit Card Number:" />
-							<h:inputText id="CCNumber" value="#{providerBean.userViewModel.CCNumber}"
+							<h:outputLabel for="CCNumberP" value="Credit Card Number:" />
+							<h:inputText id="CCNumberP"
+								value="#{providerBean.userViewModel.CCNumber}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<h:outputLabel for="expirationDate"
+							<h:outputLabel for="expirationDateP"
 								value="Expiration Date (MM/DD/YYYY):" />
-							<h:inputText id="expirationDate"
-								value="#{providerBean.userViewModel.expirationDate}" class="form-control">
+							<h:inputText id="expirationDateP"
+								value="#{providerBean.userViewModel.expirationDate}"
+								class="form-control">
 								<f:convertDateTime pattern="MM/dd/yyyy" />
 							</h:inputText>
-						</div>
-					</div>
-
-
-					<!-- Company Information dépliable -->
-					<button
-						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
-						type="button" data-toggle="collapse"
-						data-target="#companyInfoSection" aria-expanded="false"
-						aria-controls="companyInfoSection">Company informations</button>
-					<div class="collapse" id="companyInfoSection">
-						<div class="form-group mt-4">
-							<h:outputLabel for="companyName" value="Company Name:" />
-							<h:inputText id="companyName" value="#{providerBean.userViewModel.companyName}"
-								class="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel for="companyLogoLink" value="Company Logo Link:" />
-							<h:inputText id="companyLogoLink"
-								value="#{providerBean.userViewModel.companyLogoLink}" class="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel for="companyPictureLink"
-								value="Company Picture Link:" />
-							<h:inputText id="companyPictureLink"
-								value="#{providerBean.userViewModel.companyPictureLink}" class="form-control" />
 						</div>
 					</div>
 
@@ -158,43 +185,40 @@
 					<button
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
 						type="button" data-toggle="collapse"
-						data-target="#adminInfoSection" aria-expanded="false"
-						aria-controls="adminInfoSection">Administration
+						data-target="#adminInfoSectionP" aria-expanded="false"
+						aria-controls="adminInfoSectionP">Administration
 						informations</button>
-					<div class="collapse" id="adminInfoSection">
-
+					<div class="collapse" id="adminInfoSectionP">
 						<div class="form-group mt-4">
-							<h:outputLabel for="siret" value="Siret:" />
-							<h:inputText id="siret" value="#{providerBean.userViewModel.siret}"
+							<h:outputLabel for="phoneP" value="Phone:" />
+							<h:inputText id="phoneP"
+								value="#{providerBean.userViewModel.phone}" class="form-control" />
+						</div>
+						<div class="form-group">
+							<h:outputLabel for="sectorP" value="Sector:" />
+							<h:inputText id="sectorP"
+								value="#{providerBean.userViewModel.sector}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<h:outputLabel for="phone" value="Phone:" />
-							<h:inputText id="phone" value="#{providerBean.userViewModel.phone}"
-								class="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel for="sector" value="Sector:" />
-							<h:inputText id="sector" value="#{providerBean.userViewModel.sector}"
-								class="form-control" />
-						</div>
-						<div class="form-group">
-							<h:outputLabel for="adminEmail" value="Admin Email:" />
-							<h:inputText id="adminEmail" value="#{providerBean.userViewModel.adminEmail}"
+							<h:outputLabel for="adminEmailP" value="Admin Email:" />
+							<h:inputText id="adminEmailP"
+								value="#{providerBean.userViewModel.adminEmail}"
 								class="form-control" />
 						</div>
 					</div>
-					<div class="form-group mt-4">
-						<h:commandButton value="Submit" action="#{providerBean.register}"
-							class="btn btn-primary" />
+					<div class="form-group mt-4 d-flex justify-content-center">
+						<h:commandButton value="Sign up"
+							action="#{providerBean.register}"
+							class="btn btn-custom btn-custom-signup" id="submitButtonP" />
 					</div>
 				</h:form>
 			</div>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<h:outputScript library="javascript" name="loginJs.js" />
 </h:body>
 </html>

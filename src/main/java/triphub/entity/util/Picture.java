@@ -26,7 +26,9 @@ public class Picture {
     }
     
     public void initPictureViewModel(UserViewModel userViewModel) {
-        userViewModel.setProfilePicture(this.getLink());
+        if (userViewModel != null) {
+            userViewModel.setProfilePicture(this.getLink());
+        }
     }
 
     public void updatePicFromViewModel(TourPackageFormViewModel form) {
