@@ -2,17 +2,20 @@ package triphub.services;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
+
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.TypedQuery;
+
 
 import triphub.dao.service.AccommodationDAO;
+import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
-import triphub.helpers.RegistrationException;
-import triphub.viewModel.AccommodationViewModel;
-@Stateless
-public class AccommodationService {
+
+import triphub.viewModel.SubServicesViewModel;
+
+@ApplicationScoped
+public class AccommodationService implements ServiceInterface {
 	
 	@Inject
 	private AccommodationDAO accommodationDao;
@@ -28,27 +31,47 @@ public class AccommodationService {
 		
 	}
 	
-	public Accommodation create (AccommodationViewModel accommodationVm) {
-		return accommodationDao.create(accommodationVm);
+
+	@Override
+	public void create(SubServicesViewModel accommodationVm) {
+		accommodationDao.create(accommodationVm);
+		
+	}
+
+	@Override
+	public void read(Long id) {
+		accommodationDao.read(id);
+		
+	}
+
+	@Override
+	public void update () {
+		
+		
+	}
+
+	@Override
+	public void delete(Long id) {
+		accommodationDao.delete(id);
 		
 	}
 	
-	public Accommodation  updateAccommodation(Accommodation accommodation) {
-		return accommodationDao.updateAccommodation(accommodation);
+	public void update(Accommodation accommodation) {
+		accommodationDao.update(accommodation);
 	}
 	
+
 	public Accommodation findAccommodationByName(String nameAccommodation) {
 		return accommodationDao.findAccommodationByName(nameAccommodation);
-	}
-	
-	public void deleteAccommodation(Long id) {
-		accommodationDao.deleteAccommodation(id);
 	}
 	
 	public List<Accommodation> findByType(AccommodationType AccommodationType){
 		return accommodationDao.findByType(AccommodationType);
 	}
 	
+	public List<Accommodation> getAllAccommodation() {
+		return accommodationDao.getAllAccommodation();
+	}
 	
  
 }

@@ -3,17 +3,22 @@ package triphub.managedBeans.products;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
 
+
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
-import triphub.helpers.RegistrationException;
+import triphub.entity.product.service.transportation.Transportation;
+import triphub.entity.product.service.transportation.TransportationType;
 import triphub.services.AccommodationService;
-import triphub.viewModel.AccommodationViewModel;
+
+import triphub.viewModel.SubServicesViewModel;
 
 @Named("accommodationBean")
 @RequestScoped
@@ -22,9 +27,9 @@ public class AccommodationBean implements Serializable {
 	@Inject
 	private AccommodationService accommodationService;
 	
-	private EntityManager em;
 	
-	private AccommodationViewModel accommodationVm = new AccommodationViewModel();
+	@Inject
+	private SubServicesViewModel accommodationVm = new SubServicesViewModel();
 	
 	private static final long serialVersionUID = 1L;
 
@@ -33,13 +38,14 @@ public class AccommodationBean implements Serializable {
 	}
 	
 	
-	public Accommodation create (AccommodationViewModel accommodationVm) {
-		return accommodationService.create(accommodationVm);
+	public void create () {
+		 accommodationService.create(accommodationVm);
+		 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Accommodation added successfully !"));
 		
 	}
 	
-	public Accommodation  updateAccommodation(Accommodation accommodation) {
-		return accommodationService.updateAccommodation(accommodation);
+	public void  update(Accommodation accommodation) {
+		accommodationService.update(accommodation);
 	}
 	
 	public Accommodation findAccommodationByName(String nameAccommodation) {
@@ -47,14 +53,17 @@ public class AccommodationBean implements Serializable {
 	}
 	
 	public void deleteAccommodation(Long id) {
-		accommodationService.deleteAccommodation(id);
+		accommodationService.delete(id);
 	}
 
 	public List<Accommodation> findByType(AccommodationType AccommodationType){
 		return accommodationService.findByType(AccommodationType);
 	}
 	
-	
+	 public List<Accommodation> getAllAccommodation() {
+		 return accommodationService.getAllAccommodation();
+	 }
+
 
 	public AccommodationService getAccommodationService() {
 		return accommodationService;
@@ -66,24 +75,20 @@ public class AccommodationBean implements Serializable {
 	}
 
 
-	public EntityManager getEm() {
-		return em;
-	}
-
-
-	public void setEm(EntityManager em) {
-		this.em = em;
-	}
-
-
-	public AccommodationViewModel getAccommodationVm() {
+	public SubServicesViewModel getAccommodationVm() {
 		return accommodationVm;
 	}
 
 
-	public void setAccommodationVm(AccommodationViewModel accommodationVm) {
+	public void setAccommodationVm(SubServicesViewModel accommodationVm) {
 		this.accommodationVm = accommodationVm;
 	}
+	
+	public AccommodationType[] getAllAccommodationTypes() {
+        return AccommodationType.values();
+    }
+
+	
 	
 	
 	
