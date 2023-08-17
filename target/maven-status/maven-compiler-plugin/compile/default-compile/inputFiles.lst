@@ -1,3 +1,4 @@
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/PremiumCustom.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/SubscriptionType.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/transportation/Transportation.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/Theme.java
@@ -16,9 +17,11 @@
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/Date.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/TourPackageFormViewModel.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/TourPackage.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/StandardCustom.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/Administration.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/product/TourPackageDAO.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/Customization.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/DeluxeCustom.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/registration/LoginBean.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/LoginViewModel.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/SuperAdmin.java
@@ -30,12 +33,14 @@
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/ServiceInterface.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/TransportationViewModel.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/Provider.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/ColorScheme.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/service/TransportationDAO.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/main/JPAUtil.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/TourPackageService.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/Price.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/SubService.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/user/ProviderDAO.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/CustomElement.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/UserService.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/products/TourPackageBean.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/product/PriceDAO.java
@@ -46,6 +51,7 @@
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/Picture.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/Service.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/product/SubServiceDAO.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/FooterLayout.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/TransportationService.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/RestaurantViewModel.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/user/UserDAO.java
@@ -53,9 +59,11 @@
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/transportation/TransportationType.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/service/AccommodationDAO.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/user/SuperAdminDAO.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/HeaderLayout.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/product/ThemeDAO.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/products/SubServiceBean.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/Destination.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/BodyLayout.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/main/main.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/SubServiceService.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/AccommodationViewModel.java

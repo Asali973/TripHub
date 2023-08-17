@@ -19,9 +19,45 @@ public class Subscription {
 
     @Enumerated(EnumType.STRING)
     private SubscriptionType type;
-//
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Customization customization;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Customization customization;
+    
+    public boolean allowsCustomTheme() {
+        switch(this.type) {
+            case PREMIUM: return true;
+            default: return false;
+        }
+    }
+
+    public boolean allowsCustomLogo() {
+        switch(this.type) {
+            case DELUXE:
+            case PREMIUM:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean allowsLayoutChange() {
+        switch(this.type) {
+            case DELUXE:
+            case PREMIUM:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean allowsDarkTheme() {
+        switch(this.type) {
+            case PREMIUM:
+                return true;
+            default:
+                return false;
+        }
+    }
 
 	public Long getId() {
 		return id;
@@ -54,6 +90,16 @@ public class Subscription {
 	public void setType(SubscriptionType type) {
 		this.type = type;
 	}
+
+	public Customization getCustomization() {
+		return customization;
+	}
+
+	public void setCustomization(Customization customization) {
+		this.customization = customization;
+	}
+	
+	
     
     
     

@@ -2,16 +2,21 @@ package triphub.managedBeans.registration;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import triphub.entity.subscription.Subscription;
+import triphub.entity.subscription.SubscriptionType;
 import triphub.entity.user.Organizer;
 import triphub.helpers.FacesMessageUtil;
 import triphub.helpers.ImageHelper;
@@ -31,6 +36,9 @@ public class OrganizerBean implements Serializable {
     private UserViewModel userViewModel = new UserViewModel();
     private Part logoPicture;
     private Part companyPicture;
+    
+    private Subscription subscription;
+
     
     private List<Organizer> allOrganizers;
 
@@ -122,6 +130,65 @@ public class OrganizerBean implements Serializable {
 	        FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
 	    }
 	}
+	
+    public void saveSubscription() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+        Long organizerId = (Long) session.getAttribute("organizerId");
+
+        // Récupération de la souscription depuis UserViewModel
+        Subscription chosenSubscription = new Subscription();
+
+        if (organizerId != null && chosenSubscription != null) {
+            userService.updateSubscriptionForOrganizer(organizerId, chosenSubscription);
+            FacesMessageUtil.addSuccessMessage("Subscription saved successfully!");
+        }
+    }
+
+	
+
+	
+	public void updateGraphicSettings() {
+	    try {
+	        userViewModel = userService.updateGraphicSettings(userViewModel);
+	        FacesMessageUtil.addSuccessMessage("Graphic settings updated successfully!");
+	    } catch (Exception e) {
+	        FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
+	    }
+	}
+	
+//	public void updateSubscription() {
+//	    try {
+//	        userService.updateOrganizerSubscription(userViewModel.getOrganizerId(), subscription);
+//	        FacesMessageUtil.addSuccessMessage("Subscription updated successfully!");
+//	    } catch (Exception e) {
+//	        FacesMessageUtil.addErrorMessage("Subscription update failed: " + e.getMessage());
+//	    }
+//	}
+//	
+//	public List<SelectItem> getAvailableSubscriptions() {
+//	    List<SelectItem> items = new ArrayList<>();
+//	    for (SubscriptionType type : SubscriptionType.values()) {
+//	        items.add(new SelectItem(type, type.toString()));
+//	    }
+//	    return items;
+//	}
+//
+//	public Subscription getSubscription() {
+//	    if (subscription == null) {
+//	        subscription = userService.getOrganizerSubscription(userViewModel.getOrganizerId());
+//	        if(subscription == null) {
+//	            subscription = new Subscription(); // ou une autre action par défaut
+//	        }
+//	    }
+//	    return subscription;
+//	}
+
+
+
+	public void setSubscription(Subscription subscription) {
+	    this.subscription = subscription;
+	}
 
 	public UserService getUserService() {
 		return userService;
@@ -162,5 +229,7 @@ public class OrganizerBean implements Serializable {
     public void setAllOrganizers(List<Organizer> allOrganizers) {
         this.allOrganizers = allOrganizers;
     }
+    
+    
     
 }

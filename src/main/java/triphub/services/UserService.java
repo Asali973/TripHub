@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import triphub.dao.user.*;
+import triphub.entity.subscription.Subscription;
 import triphub.entity.user.*;
 import triphub.helpers.RegistrationException;
 import triphub.viewModel.UserViewModel;
@@ -264,6 +265,26 @@ public class UserService {
 	
     public List<Organizer> getAllOrganizers() {
         return organizerDAO.findAllOrganizers();
+    }
+    
+    public void updateSubscriptionForOrganizer(Long organizerId, Subscription subscription) {
+    	organizerDAO.updateSubscriptionForOrganizer(organizerId, subscription);
+    }
+    
+    public Subscription getSubscriptionForOrganizer(Long organizerId) {
+    	return organizerDAO.getSubscriptionForOrganizer(organizerId);
+    }
+    
+//    public void updateOrganizerSubscription(Long organizerId, Subscription subscription) {
+//        organizerDAO.updateOrganizerSubscription(organizerId, subscription);
+//    }
+//
+//    public Subscription getOrganizerSubscription(Long organizerId) {
+//        return organizerDAO.getOrganizerSubscription(organizerId);
+//    }
+    
+    public UserViewModel updateGraphicSettings(UserViewModel userViewModel) {
+        return organizerDAO.updateGraphicSettings(userViewModel);
     }
 
 }

@@ -2,6 +2,7 @@ package triphub.entity.user;
 
 import javax.persistence.*;
 
+import triphub.entity.subscription.Customization;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.util.Administration;
 import triphub.entity.util.CompanyInfo;
@@ -49,6 +50,24 @@ public class Organizer {
 	    userViewModel.setOrganizerId(this.getId());
 
 	    return userViewModel;
+	}
+	
+	public void updateGraphicSettingsFromViewModel(UserViewModel form) {
+	    if(this.getSubscription() != null && this.getSubscription().getCustomization() != null) {
+	        Customization customization = this.getSubscription().getCustomization();
+	        customization.setPrimaryColor(form.getPrimaryColor());
+	        customization.setSecondaryColor(form.getSecondaryColor());
+	        customization.setPrimaryFont(form.getPrimaryFont());
+	        customization.setSecondaryFont(form.getSecondaryFont());
+	        customization.setLogoUrl(form.getLogoUrl());
+	        customization.setBackgroundUrl(form.getBackgroundUrl());
+	        customization.setLayoutType(form.getLayoutType());
+	        customization.setUseHeader(form.isUseHeader());
+	        customization.setUseFooter(form.isUseFooter());
+	        customization.setShowSidebar(form.isShowSidebar());
+	        customization.setStickySidebar(form.isStickySidebar());
+	        customization.setUseDarkTheme(form.isUseDarkTheme());
+	    }
 	}
 
 

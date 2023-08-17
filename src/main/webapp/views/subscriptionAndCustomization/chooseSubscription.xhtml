@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Selection d'Abonnement</title>
+</h:head>
+<h:body>
+
+<h:form id="subscriptionForm">
+    <h:outputLabel value="Choisissez votre type d'abonnement:" for="subscriptionType" />
+
+    <!-- Dropdown pour la sélection de l'abonnement -->
+    <h:selectOneMenu id="subscriptionType" value="#{organizerBean.userViewModel.type}">
+        <f:selectItem itemLabel="Standard" itemValue="STANDARD" />
+        <f:selectItem itemLabel="Deluxe" itemValue="DELUXE" />
+        <f:selectItem itemLabel="Premium" itemValue="PREMIUM" />
+    </h:selectOneMenu>
+
+    <h:commandButton value="Souscrire" action="#{organizerBean.saveSubscription}" />
+</h:form>
+
+</h:body>
+</html>
