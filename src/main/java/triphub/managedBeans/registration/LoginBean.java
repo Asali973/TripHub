@@ -80,8 +80,20 @@ public class LoginBean implements Serializable {
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userViewModel",
 					this.userViewModel);
 
-			return "/views/home?faces-redirect=true";
-		}
+			//return "/views/home?faces-redirect=true";
+			
+			  switch (this.userType) {
+	            case "customer":
+	                return "/views/customer_home?faces-redirect=true";
+	            case "organizer":
+	                return "/views/organizer_home?faces-redirect=true";
+	            case "provider":
+	                return "/views/provider_home?faces-redirect=true";
+	            case "superAdmin":
+	                return "/views/superadmin_home?faces-redirect=true";
+	        }
+	    }
+		
 		return "login";
 	}
 	
