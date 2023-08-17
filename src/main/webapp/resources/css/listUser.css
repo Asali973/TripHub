@@ -33,3 +33,106 @@ h2.card-title {
     border-bottom: 1px solid #d5d8dc;
     padding-bottom: 15px;
 }
+
+.btn-custom {
+	background-color: black; /* You can choose your preferred color */
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 0.9em;
+	transition: all 0.3s;
+	height: 38px;
+	width: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+
+.btn-custom:hover {
+	background-color: #FF4500; /* Darker shade for hover state */
+	color: white;
+}
+
+.btn-customUpdate {
+	background-color: black; /* You can choose your preferred color */
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 0.9em;
+	transition: all 0.3s;
+	height: 38px;
+	width: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-customUpdate:hover {
+	background-color: #170984; /* Darker shade for hover state */
+	color: white;
+}
+
+.btn-customDelete {
+	background-color: black; /* You can choose your preferred color */
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 0.9em;
+	transition: all 0.3s;
+	height: 38px;
+	width: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-customDelete:hover {
+	background-color: #A71D00; /* Darker shade for hover state */
+	color: white;
+}
+
+.container {
+	margin-top: 50px;
+}
+
+.form-control {
+	border-radius: 20px;
+}
+
+.btn-outline-dark {
+	border-radius: 20px;
+}
+
+.card {
+	margin: auto;
+	max-width: 800px;
+	border-radius: 20px;
+	background-color: #F0F0F0;
+}
+
+.container {
+	margin-top: 50px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f6f6f6; /* Couleur de fond au survol d'une ligne */
+}
+
+.table thead th {
+    border-bottom: 2px solid #2c3e50; /* Bordure inférieure pour les en-têtes de colonnes */
+    background-color: #f0f0f0;  /* Couleur d'arrière-plan pour les en-têtes de colonnes */
+}
+
+.table {
+    margin-top: 20px;  /* Espacement au-dessus du tableau */
+}
+
+/* Ajout de styles pour les boutons pour les différencier davantage */
+.btn-outline-dark {
+    border-width: 2px;  /* Épaisseur de la bordure des boutons */
+}
