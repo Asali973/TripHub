@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
- <faces-config version="2.2"
+<faces-config version="2.2"
 
 		xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -16,6 +16,41 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+
+ <!-- Navigation rules for different user types -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>/views/customer_home</from-outcome>
+            <to-view-id>/views/customer_home.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>/views/organizer_home</from-outcome>
+            <to-view-id>/views/organizer_home.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>/views/provider_home</from-outcome>
+            <to-view-id>/views/provider_home.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>/views/superadmin_home</from-outcome>
+            <to-view-id>/views/superadmin_home.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+
 
 
 <!-- 		<navigation-rule> -->
