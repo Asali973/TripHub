@@ -22,7 +22,9 @@ public class Picture {
     
     
     public void updatePictureFromViewModel(UserViewModel form) {
+    	if (form != null) {
         this.setLink(form.getProfilePicture());
+    	}
     }
     
     public void initPictureViewModel(UserViewModel userViewModel) {

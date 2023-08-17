@@ -2,16 +2,21 @@ package triphub.managedBeans.registration;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import triphub.entity.subscription.Subscription;
+import triphub.entity.subscription.SubscriptionType;
 import triphub.entity.user.Organizer;
 import triphub.helpers.FacesMessageUtil;
 import triphub.helpers.ImageHelper;
@@ -31,7 +36,7 @@ public class OrganizerBean implements Serializable {
     private UserViewModel userViewModel = new UserViewModel();
     private Part logoPicture;
     private Part companyPicture;
-    
+ 
     private List<Organizer> allOrganizers;
 
     public OrganizerBean() {
@@ -122,6 +127,28 @@ public class OrganizerBean implements Serializable {
 	        FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
 	    }
 	}
+	
+    public void saveSubscription() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+        Long organizerId = (Long) session.getAttribute("organizerId");
+
+        Subscription chosenSubscription = new Subscription();
+
+        if (organizerId != null && chosenSubscription != null) {
+            userService.updateSubscription(organizerId, chosenSubscription);
+            FacesMessageUtil.addSuccessMessage("Subscription saved successfully!");
+        }
+    }
+
+	public void updateGraphicSettings() {
+	    try {
+	        userViewModel = userService.updateGraphicSettings(userViewModel);
+	        FacesMessageUtil.addSuccessMessage("Graphic settings updated successfully!");
+	    } catch (Exception e) {
+	        FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
+	    }
+	}
 
 	public UserService getUserService() {
 		return userService;
@@ -162,5 +189,7 @@ public class OrganizerBean implements Serializable {
     public void setAllOrganizers(List<Organizer> allOrganizers) {
         this.allOrganizers = allOrganizers;
     }
+    
+    
     
 }

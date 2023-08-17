@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.Part;
 
+import triphub.entity.subscription.Subscription;
 import triphub.entity.user.*;
 import triphub.entity.util.*;
 import triphub.viewModel.UserViewModel;
@@ -50,7 +51,22 @@ public class OrganizerDAO {
 		em.flush();
 		return organizer;
 	}
+	
+	public UserViewModel updateGraphicSettings(UserViewModel userViewModel) {
+	    Organizer organizer = em.find(Organizer.class, userViewModel.getOrganizerId());
+	    
+	    if (organizer == null) {
+	        return null;
+	    }
 
+	    organizer.updateGraphicSettingsFromViewModel(userViewModel);
+
+	    em.persist(organizer);
+	    em.flush();
+
+	    return userViewModel;
+	}
+	
 	public UserViewModel updateOrganizer(UserViewModel userViewModel) {
 		Organizer organizer = em.find(Organizer.class, userViewModel.getOrganizerId());
 		
@@ -122,6 +138,23 @@ public class OrganizerDAO {
 	public List<Organizer> findAllOrganizers() {
 		TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c", Organizer.class);
 		return query.getResultList();
+	}
+	
+	public void updateSubscription(Long organizerId, Subscription subscription) {
+	    Organizer organizer = em.find(Organizer.class, organizerId);
+	    if (organizer != null) {
+	        if (subscription.getId() == null) {
+	            em.persist(subscription);
+	        }
+	        organizer.setSubscription(subscription);
+	        em.persist(organizer);
+	        em.flush();
+	    }
+	}
+
+	public Subscription getSubscriptionForOrganizer(Long organizerId) {
+	    Organizer organizer = em.find(Organizer.class, organizerId);
+	    return organizer != null ? organizer.getSubscription() : null;
 	}
 
 }

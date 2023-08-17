@@ -3,6 +3,16 @@ package triphub.viewModel;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import triphub.entity.product.Price;
+import triphub.entity.subscription.Customization;
+import triphub.entity.subscription.Subscription;
+import triphub.entity.subscription.SubscriptionType;
 import triphub.entity.util.Picture;
 
 public class UserViewModel implements Serializable {
@@ -42,6 +52,28 @@ public class UserViewModel implements Serializable {
 	private String phone;
 	private String sector;
 	private String adminEmail;
+	
+    private Long id;
+
+    private Subscription subscription; 
+
+    private Price price;
+    private int duration;
+    private SubscriptionType type;
+    private Customization customization;
+	
+	private String primaryColor;
+	private String secondaryColor;
+	private String primaryFont;
+	private String secondaryFont;
+	private String logoUrl;
+	private String backgroundUrl;
+	private Customization.LayoutType layoutType;
+	private boolean useHeader;
+	private boolean useFooter;
+	private boolean showSidebar;
+	private boolean stickySidebar;
+	private boolean useDarkTheme;
 	
     public void clear() {
         this.customerId = null;
@@ -296,6 +328,154 @@ public class UserViewModel implements Serializable {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public String getPrimaryColor() {
+		return primaryColor;
+	}
+
+	public void setPrimaryColor(String primaryColor) {
+		this.primaryColor = primaryColor;
+	}
+
+	public String getSecondaryColor() {
+		return secondaryColor;
+	}
+
+	public void setSecondaryColor(String secondaryColor) {
+		this.secondaryColor = secondaryColor;
+	}
+
+	public String getPrimaryFont() {
+		return primaryFont;
+	}
+
+	public void setPrimaryFont(String primaryFont) {
+		this.primaryFont = primaryFont;
+	}
+
+	public String getSecondaryFont() {
+		return secondaryFont;
+	}
+
+	public void setSecondaryFont(String secondaryFont) {
+		this.secondaryFont = secondaryFont;
+	}
+
+	public String getLogoUrl() {
+		return logoUrl;
+	}
+
+	public void setLogoUrl(String logoUrl) {
+		this.logoUrl = logoUrl;
+	}
+
+	public String getBackgroundUrl() {
+		return backgroundUrl;
+	}
+
+	public void setBackgroundUrl(String backgroundUrl) {
+		this.backgroundUrl = backgroundUrl;
+	}
+
+	public Customization.LayoutType getLayoutType() {
+		return layoutType;
+	}
+
+	public void setLayoutType(Customization.LayoutType layoutType) {
+		this.layoutType = layoutType;
+	}
+
+	public boolean isUseHeader() {
+		return useHeader;
+	}
+
+	public void setUseHeader(boolean useHeader) {
+		this.useHeader = useHeader;
+	}
+
+	public boolean isUseFooter() {
+		return useFooter;
+	}
+
+	public void setUseFooter(boolean useFooter) {
+		this.useFooter = useFooter;
+	}
+
+	public boolean isShowSidebar() {
+		return showSidebar;
+	}
+
+	public void setShowSidebar(boolean showSidebar) {
+		this.showSidebar = showSidebar;
+	}
+
+	public boolean isStickySidebar() {
+		return stickySidebar;
+	}
+
+	public void setStickySidebar(boolean stickySidebar) {
+		this.stickySidebar = stickySidebar;
+	}
+
+	public boolean isUseDarkTheme() {
+		return useDarkTheme;
+	}
+
+	public void setUseDarkTheme(boolean useDarkTheme) {
+		this.useDarkTheme = useDarkTheme;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Price getPrice() {
+		return price;
+	}
+
+	public void setPrice(Price price) {
+		this.price = price;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public SubscriptionType getType() {
+		return type;
+	}
+
+	public void setType(SubscriptionType type) {
+		this.type = type;
+	}
+
+	public Customization getCustomization() {
+		return customization;
+	}
+
+	public void setCustomization(Customization customization) {
+		this.customization = customization;
+	}
+
+	public Subscription getSubscription() {
+		return subscription;
+	}
+
+	public void setSubscription(Subscription subscription) {
+		this.subscription = subscription;
 	}
 
 	
