@@ -140,10 +140,10 @@ public class OrganizerDAO {
 		return query.getResultList();
 	}
 	
-	public void updateSubscriptionForOrganizer(Long organizerId, Subscription subscription) {
+	public void updateSubscription(Long organizerId, Subscription subscription) {
 	    Organizer organizer = em.find(Organizer.class, organizerId);
 	    if (organizer != null) {
-	        if (subscription.getId() == null) { // Vérifiez si l'ID de la souscription est nul, indiquant qu'il s'agit d'une nouvelle entrée.
+	        if (subscription.getId() == null) {
 	            em.persist(subscription);
 	        }
 	        organizer.setSubscription(subscription);
@@ -152,41 +152,9 @@ public class OrganizerDAO {
 	    }
 	}
 
-	
 	public Subscription getSubscriptionForOrganizer(Long organizerId) {
 	    Organizer organizer = em.find(Organizer.class, organizerId);
 	    return organizer != null ? organizer.getSubscription() : null;
 	}
-
-	
-//	public List<Subscription> getAllSubscriptions() {
-//	    TypedQuery<Subscription> query = em.createQuery("SELECT s FROM Subscription s", Subscription.class);
-//	    return query.getResultList();
-//	}
-
-	
-	
-//	public void updateOrganizerSubscription(Long organizerId, Subscription subscription) {
-//	    Organizer organizer = em.find(Organizer.class, organizerId);
-//	    if (organizer != null) {
-//	        if (subscription.getId() == null) { // Si c'est une nouvelle souscription
-//	            em.persist(subscription); // Vous persistez la nouvelle souscription
-//	        } else {
-//	            em.merge(subscription); // Vous mettez à jour une souscription existante
-//	        }
-//	        organizer.setSubscription(subscription);
-//	        em.merge(organizer);
-//	        em.flush();
-//	    }
-//	}
-//
-//
-//	public Subscription getOrganizerSubscription(Long organizerId) {
-//	    Organizer organizer = em.find(Organizer.class, organizerId);
-//	    if (organizer != null) {
-//	        return organizer.getSubscription();
-//	    }
-//	    return null;
-//	}
 
 }

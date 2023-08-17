@@ -36,10 +36,7 @@ public class OrganizerBean implements Serializable {
     private UserViewModel userViewModel = new UserViewModel();
     private Part logoPicture;
     private Part companyPicture;
-    
-    private Subscription subscription;
-
-    
+ 
     private List<Organizer> allOrganizers;
 
     public OrganizerBean() {
@@ -136,18 +133,14 @@ public class OrganizerBean implements Serializable {
         HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
         Long organizerId = (Long) session.getAttribute("organizerId");
 
-        // Récupération de la souscription depuis UserViewModel
         Subscription chosenSubscription = new Subscription();
 
         if (organizerId != null && chosenSubscription != null) {
-            userService.updateSubscriptionForOrganizer(organizerId, chosenSubscription);
+            userService.updateSubscription(organizerId, chosenSubscription);
             FacesMessageUtil.addSuccessMessage("Subscription saved successfully!");
         }
     }
 
-	
-
-	
 	public void updateGraphicSettings() {
 	    try {
 	        userViewModel = userService.updateGraphicSettings(userViewModel);
@@ -155,39 +148,6 @@ public class OrganizerBean implements Serializable {
 	    } catch (Exception e) {
 	        FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
 	    }
-	}
-	
-//	public void updateSubscription() {
-//	    try {
-//	        userService.updateOrganizerSubscription(userViewModel.getOrganizerId(), subscription);
-//	        FacesMessageUtil.addSuccessMessage("Subscription updated successfully!");
-//	    } catch (Exception e) {
-//	        FacesMessageUtil.addErrorMessage("Subscription update failed: " + e.getMessage());
-//	    }
-//	}
-//	
-//	public List<SelectItem> getAvailableSubscriptions() {
-//	    List<SelectItem> items = new ArrayList<>();
-//	    for (SubscriptionType type : SubscriptionType.values()) {
-//	        items.add(new SelectItem(type, type.toString()));
-//	    }
-//	    return items;
-//	}
-//
-//	public Subscription getSubscription() {
-//	    if (subscription == null) {
-//	        subscription = userService.getOrganizerSubscription(userViewModel.getOrganizerId());
-//	        if(subscription == null) {
-//	            subscription = new Subscription(); // ou une autre action par défaut
-//	        }
-//	    }
-//	    return subscription;
-//	}
-
-
-
-	public void setSubscription(Subscription subscription) {
-	    this.subscription = subscription;
 	}
 
 	public UserService getUserService() {

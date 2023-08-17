@@ -25,7 +25,6 @@ public class Customization {
     private boolean stickySidebar;
     private boolean useDarkTheme;
 
-    //... Getters, setters, etc.
 
     public enum LayoutType {
         STANDARD, GRID, LIST

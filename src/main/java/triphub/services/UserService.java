@@ -267,21 +267,14 @@ public class UserService {
         return organizerDAO.findAllOrganizers();
     }
     
-    public void updateSubscriptionForOrganizer(Long organizerId, Subscription subscription) {
-    	organizerDAO.updateSubscriptionForOrganizer(organizerId, subscription);
+    public void updateSubscription(Long organizerId, Subscription subscription) {
+    	organizerDAO.updateSubscription(organizerId, subscription);
     }
     
-    public Subscription getSubscriptionForOrganizer(Long organizerId) {
+    public Subscription getSubscription(Long organizerId) {
     	return organizerDAO.getSubscriptionForOrganizer(organizerId);
     }
     
-//    public void updateOrganizerSubscription(Long organizerId, Subscription subscription) {
-//        organizerDAO.updateOrganizerSubscription(organizerId, subscription);
-//    }
-//
-//    public Subscription getOrganizerSubscription(Long organizerId) {
-//        return organizerDAO.getOrganizerSubscription(organizerId);
-//    }
     
     public UserViewModel updateGraphicSettings(UserViewModel userViewModel) {
         return organizerDAO.updateGraphicSettings(userViewModel);
