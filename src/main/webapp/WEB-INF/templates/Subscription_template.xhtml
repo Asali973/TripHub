@@ -12,9 +12,9 @@
 
     <title>Trip Hub</title>        
 </h:head>
-<h:body>
+<h:body class="template-body">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
+        <div class="template-container">
             <!-- Brand/logo -->
             <a class="navbar-brand" href="#"> Logo upload here</a>
 
@@ -31,7 +31,7 @@
                         <a class="nav-link" href="/triphub/views/home.xhtml">Back to TripHub</a>
                     </li>                    
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Manage Subscription</a>
+                        <a class="nav-link" href="/triphub/views/subscriptionAndCustomization/chooseSubscription.xhtml">Manage Subscription</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/triphub/views/organizer_session/customized_org-home.xhtml">Proceed to your space</a>
@@ -42,11 +42,11 @@
     </nav>
 
     <!-- Add  page content here -->
-    <div class="container">
+    <div class="template-container">
         <ui:insert name="content" />
     </div>
      <!-- Footer section -->
-    <footer class="footer bg-light mt-5 py-3">
+    <footer class="template-footer bg-light mt-5 py-3">
         <div class="container text-center">
             <p>© 2023 Trip Hub. All rights reserved.</p>
             <ul class="list-inline social-icons">

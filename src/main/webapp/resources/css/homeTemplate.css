@@ -1,21 +1,21 @@
 
- html {
+
+ html, body {
   height: 100%;
 }
 
-.template-body {
+body {
   display: flex ;
   flex-direction: column;
-  margin: 0 !important;
-  height: 100%;
+
 }
 
-.template-container {
+.container {
   flex: 1; /* Make the container fill the available space */
   /* Add any other styling for the container */
 }
 
-.template-footer {
+.footer {
   height: 80px; /* Set the height of the footer */
   background-color: #f8f9fa;
   /* Add any other styling for the footer */
