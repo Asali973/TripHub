@@ -8,7 +8,7 @@ body {
 	border: 2px solid #ccc;
 	border-radius: 5px;
 	background-color: #f9f9f9;
-	width: 80%; /* Set the container width to 80% of the page */
+	width: 100%; /* Set the container width to 80% of the page */
 }
 
 .reg-form-container h3 {
@@ -55,6 +55,7 @@ body {
 	border-radius: 5px;
 	background-color: #f9f9f9;
 	margin-top: 20px;
+	width: 100%;
 }
 
 .table-container h3 {
@@ -89,11 +90,25 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: flex; /* Adjust the width as needed */
+    width: flex; /* Adjust the width if needed */
     padding: 8px 16px;
     background-color: #586994;
     color: #fff;
     border-radius: 4px;
     text-decoration: none;
     text-align: center;
+}
+.advanced-search-link {
+    display: inline-block; /* Display as a block to control width */
+    margin-top: 20px; 
+}
+.button-container {
+    display: flex;
+    justify-content: center; /* Distribute space between the two elements */
+    margin-top: 20px;
+    align-items: center; /* Align elements vertically center */
+}
+.button-row {
+    display: flex;
+    align-items: center; /* Vertically align items within the row */
 }
