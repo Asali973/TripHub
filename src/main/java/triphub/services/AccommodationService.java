@@ -45,7 +45,7 @@ public class AccommodationService implements ServiceInterface {
 	}
 
 	@Override
-	public void update () {
+	public void update (SubServicesViewModel accommodationvm) {
 		
 		
 	}

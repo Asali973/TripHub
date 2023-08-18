@@ -38,7 +38,7 @@ public class TransportationService implements ServiceInterface{
 	}
 
 	@Override
-	public void update() {
+	public void update(SubServicesViewModel transportationvm) {
 		// TODO Auto-generated method stub
 		
 	}

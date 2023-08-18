@@ -13,7 +13,6 @@ import javax.persistence.TypedQuery;
 import triphub.entity.product.service.accommodation.Accommodation;
 import triphub.entity.product.service.accommodation.AccommodationType;
 import triphub.entity.util.Address;
-import triphub.viewModel.AccommodationViewModel;
 import triphub.viewModel.SubServicesViewModel;
 
 @Stateless
@@ -44,11 +43,11 @@ public class AccommodationDAO {
 //		accommodation.setPicture(picture);
 
 		Address addressAccommodation = new Address();
-		addressAccommodation.setNum(accommodationVm.getNum());
-		addressAccommodation.setStreet(accommodationVm.getStreet());
-		addressAccommodation.setCity(accommodationVm.getCity());
-		addressAccommodation.setState(accommodationVm.getState());
-		addressAccommodation.setCountry(accommodationVm.getCountry());
+		addressAccommodation.setNum(accommodationVm.getAddress().getNum());
+		addressAccommodation.setStreet(accommodationVm.getAddress().getStreet());
+		addressAccommodation.setCity(accommodationVm.getAddress().getCity());
+		addressAccommodation.setState(accommodationVm.getAddress().getState());
+		addressAccommodation.setCountry(accommodationVm.getAddress().getCountry());
 		accommodation.setAddress(addressAccommodation);
 
 //		em.persist(picture);

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import triphub.entity.product.service.accommodation.AccommodationType;
 import triphub.entity.product.service.transportation.TransportationType;
+import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.entity.util.PictureType;
 
@@ -11,6 +12,8 @@ public class SubServicesViewModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Long id;
+	
 	private String name;
 
 	private AccommodationType accommodationType;
@@ -19,13 +22,7 @@ public class SubServicesViewModel implements Serializable {
 	// Solely for Restaurant
 	private String description;
 
-	// Address Attributes
-	private String num;
-	private String street;
-	private String city;
-	private String state;
-	private String country;
-	private String zipCode;
+	private Address address = new Address();
 
 	// Image attributes
 	private int size;
@@ -67,53 +64,53 @@ public class SubServicesViewModel implements Serializable {
 		this.description = description;
 	}
 
-	public String getNum() {
-		return num;
-	}
-
-	public void setNum(String num) {
-		this.num = num;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
+//	public String getNum() {
+//		return num;
+//	}
+//
+//	public void setNum(String num) {
+//		this.num = num;
+//	}
+//
+//	public String getStreet() {
+//		return street;
+//	}
+//
+//	public void setStreet(String street) {
+//		this.street = street;
+//	}
+//
+//	public String getCity() {
+//		return city;
+//	}
+//
+//	public void setCity(String city) {
+//		this.city = city;
+//	}
+//
+//	public String getState() {
+//		return state;
+//	}
+//
+//	public void setState(String state) {
+//		this.state = state;
+//	}
+//
+//	public String getCountry() {
+//		return country;
+//	}
+//
+//	public void setCountry(String country) {
+//		this.country = country;
+//	}
+//
+//	public String getZipCode() {
+//		return zipCode;
+//	}
+//
+//	public void setZipCode(String zipCode) {
+//		this.zipCode = zipCode;
+//	}
 
 	public String getLink() {
 		return link;
@@ -153,6 +150,22 @@ public class SubServicesViewModel implements Serializable {
 
 	public void setAltText(String altText) {
 		this.altText = altText;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 }
