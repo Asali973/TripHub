@@ -69,6 +69,17 @@ public class Organizer {
 	        customization.setUseDarkTheme(form.isUseDarkTheme());
 	    }
 	}
+	
+    public Subscription toSubscription() {
+        if (this.subscription == null) {
+            this.subscription = new Subscription();
+        }
+        return this.subscription;
+    }
+    
+    public Customization toCustomization() {
+        return this.toSubscription().toCustomization();
+    }
 
 
 	public Long getId() {

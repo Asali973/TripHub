@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Observe Graphic Settings</title>
+    <!-- Here, you can use styles dynamically from the userViewModel -->
+    <style>
+/*         body { */
+/*             background-image: url('#{organizerBean.userViewModel.backgroundUrl}'); */
+/*             color: #{organizerBean.userViewModel.primaryColor}; */
+/*             font-family: #{organizerBean.userViewModel.primaryFont}; */
+/*         } */
+        
+        .secondary {
+            color: #{organizerBean.userViewModel.secondaryColor};
+            font-family: #{organizerBean.userViewModel.secondaryFont};
+        }
+        
+                .primary {
+            color: #{organizerBean.userViewModel.primaryColor};
+            font-family: #{organizerBean.userViewModel.primaryFont};
+        }
+
+    </style>
+</h:head>
+<h:body>
+    <h1>Welcome to the Preview</h1>
+    div
+    <p class="secondary">This is some sample text to observe the secondary font and color.</p>
+    <p class="primary">This is some sample text to observe the primary font and color.</p>
+    
+
+</h:body>
+</html>

@@ -15,6 +15,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import triphub.entity.subscription.Customization;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.subscription.SubscriptionType;
 import triphub.entity.user.Organizer;
@@ -80,6 +81,15 @@ public class OrganizerBean implements Serializable {
 		UserViewModel temp = userService.initOrganizer(organizerId);
 		if (temp != null) {
 			this.userViewModel = temp;
+			
+	        // Récupérer l'objet Customization de l'Organizer et le stocker dans userViewModel
+	        Customization customization = userService.getCustomizationForOrganizer(organizerId);
+	        if(customization != null) {
+	            userViewModel.setPrimaryColor(customization.getPrimaryColor());
+	            userViewModel.setSecondaryColor(customization.getSecondaryColor());
+	            userViewModel.setPrimaryFont(customization.getPrimaryFont());
+	            userViewModel.setSecondaryFont(customization.getSecondaryFont());
+	        }
 		} else {
 			FacesMessageUtil.addErrorMessage("Initialization failed: Organizer does not exist");
 		}
@@ -140,6 +150,7 @@ public class OrganizerBean implements Serializable {
             FacesMessageUtil.addSuccessMessage("Subscription saved successfully!");
         }
     }
+    
 
 	public void updateGraphicSettings() {
 	    try {
@@ -150,6 +161,8 @@ public class OrganizerBean implements Serializable {
 	    }
 	}
 
+
+	
 	public UserService getUserService() {
 		return userService;
 	}

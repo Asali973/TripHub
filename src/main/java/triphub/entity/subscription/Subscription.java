@@ -58,6 +58,13 @@ public class Subscription {
                 return false;
         }
     }
+    
+    public Customization toCustomization() {
+        if (this.customization == null) {
+            this.customization = new Customization();
+        }
+        return this.customization;
+    }
 
 	public Long getId() {
 		return id;

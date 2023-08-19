@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.Part;
 
+import triphub.entity.subscription.Customization;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.user.*;
 import triphub.entity.util.*;
@@ -54,18 +55,46 @@ public class OrganizerDAO {
 	
 	public UserViewModel updateGraphicSettings(UserViewModel userViewModel) {
 	    Organizer organizer = em.find(Organizer.class, userViewModel.getOrganizerId());
-	    
+
 	    if (organizer == null) {
 	        return null;
 	    }
 
-	    organizer.updateGraphicSettingsFromViewModel(userViewModel);
+	    Customization customization;
+	    if (organizer.getSubscription() != null && organizer.getSubscription().getCustomization() != null) {
+	        customization = organizer.getSubscription().getCustomization();
+	    } else {
+	        
+	        customization = new Customization();
+	        em.persist(customization);
+	        organizer.getSubscription().setCustomization(customization);
+	    }
 
-	    em.persist(organizer);
+	    customization.setPrimaryColor(userViewModel.getPrimaryColor());
+	    customization.setSecondaryColor(userViewModel.getSecondaryColor());
+	    customization.setPrimaryFont(userViewModel.getPrimaryFont());
+	    customization.setSecondaryFont(userViewModel.getSecondaryFont());
+	    customization.setLogoUrl(userViewModel.getLogoUrl());
+	    customization.setBackgroundUrl(userViewModel.getBackgroundUrl());
+	    customization.setLayoutType(userViewModel.getLayoutType());
+	    customization.setUseHeader(userViewModel.isUseHeader());
+	    customization.setUseFooter(userViewModel.isUseFooter());
+	    customization.setShowSidebar(userViewModel.isShowSidebar());
+	    customization.setStickySidebar(userViewModel.isStickySidebar());
+	    customization.setUseDarkTheme(userViewModel.isUseDarkTheme());
+
+
+	    if (customization.getId() != null) {
+	        customization = em.merge(customization);
+	    }
+
+	    em.merge(organizer.getSubscription());
+	    em.merge(organizer);
 	    em.flush();
 
 	    return userViewModel;
 	}
+
 	
 	public UserViewModel updateOrganizer(UserViewModel userViewModel) {
 		Organizer organizer = em.find(Organizer.class, userViewModel.getOrganizerId());
@@ -151,7 +180,7 @@ public class OrganizerDAO {
 	        em.flush();
 	    }
 	}
-
+	
 	public Subscription getSubscriptionForOrganizer(Long organizerId) {
 	    Organizer organizer = em.find(Organizer.class, organizerId);
 	    return organizer != null ? organizer.getSubscription() : null;

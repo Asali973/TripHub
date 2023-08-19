@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import triphub.dao.user.*;
+import triphub.entity.subscription.Customization;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.user.*;
 import triphub.helpers.RegistrationException;
@@ -274,6 +275,15 @@ public class UserService {
     public Subscription getSubscription(Long organizerId) {
     	return organizerDAO.getSubscriptionForOrganizer(organizerId);
     }
+    
+    public Customization getCustomizationForOrganizer(Long organizerId) {
+        Organizer organizer = organizerDAO.readOrganizer(organizerId); // ou tout autre moyen que vous utilisez pour obtenir Organizer
+        if(organizer != null && organizer.getSubscription() != null) {
+            return organizer.getSubscription().getCustomization();
+        }
+        return null;
+    }
+
     
     
     public UserViewModel updateGraphicSettings(UserViewModel userViewModel) {
