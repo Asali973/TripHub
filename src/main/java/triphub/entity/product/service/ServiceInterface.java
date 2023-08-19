@@ -1,12 +1,17 @@
 package triphub.entity.product.service;
 
+import java.util.List;
+
 import triphub.viewModel.SubServicesViewModel;
 
-public interface ServiceInterface {
+public interface ServiceInterface<T> {
 
-	void create(SubServicesViewModel subservicevm);
-	void read(Long id);
-	void update(SubServicesViewModel subservicevm);
-	void delete(Long id);
+	T create(SubServicesViewModel subservicevm);
+	T read(Long id);
+	SubServicesViewModel update(SubServicesViewModel subservicevm);
+	void delete(SubServicesViewModel subservicevm);
+	SubServicesViewModel initSubService(Long id);
+	List<T> getAll();
+	T findByName(String name);
 	
 }
