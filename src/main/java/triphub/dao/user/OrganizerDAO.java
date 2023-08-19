@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 import javax.servlet.http.Part;
 
 import triphub.entity.subscription.Customization;
+import triphub.entity.subscription.Layout;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.user.*;
 import triphub.entity.util.*;
@@ -60,14 +61,18 @@ public class OrganizerDAO {
 	        return null;
 	    }
 
-	    Customization customization;
-	    if (organizer.getSubscription() != null && organizer.getSubscription().getCustomization() != null) {
-	        customization = organizer.getSubscription().getCustomization();
-	    } else {
-	        
+	    Subscription subscription = organizer.getSubscription();
+	    if (subscription == null) {
+	        subscription = new Subscription();
+	        organizer.setSubscription(subscription);
+	        em.persist(subscription);
+	    }
+
+	    Customization customization = subscription.getCustomization();
+	    if (customization == null) {
 	        customization = new Customization();
+	        subscription.setCustomization(customization);
 	        em.persist(customization);
-	        organizer.getSubscription().setCustomization(customization);
 	    }
 
 	    customization.setPrimaryColor(userViewModel.getPrimaryColor());
@@ -76,24 +81,40 @@ public class OrganizerDAO {
 	    customization.setSecondaryFont(userViewModel.getSecondaryFont());
 	    customization.setLogoUrl(userViewModel.getLogoUrl());
 	    customization.setBackgroundUrl(userViewModel.getBackgroundUrl());
-	    customization.setLayoutType(userViewModel.getLayoutType());
-	    customization.setUseHeader(userViewModel.isUseHeader());
-	    customization.setUseFooter(userViewModel.isUseFooter());
-	    customization.setShowSidebar(userViewModel.isShowSidebar());
-	    customization.setStickySidebar(userViewModel.isStickySidebar());
-	    customization.setUseDarkTheme(userViewModel.isUseDarkTheme());
-
-
-	    if (customization.getId() != null) {
-	        customization = em.merge(customization);
+	    
+	    // Set the Layout for Customization directly using userViewModel.layout
+	    if (userViewModel.getLayout() != null) {
+	        customization.setLayout(userViewModel.getLayout());
+	        userViewModel.setXhtmlFile(userViewModel.getLayout().getXhtmlFile());
+	        System.out.println("xhtmlFile value: " + userViewModel.getXhtmlFile());
 	    }
 
-	    em.merge(organizer.getSubscription());
+//	    // Set the Layout for Customization
+//	    if (userViewModel.getLayoutName() != null && !userViewModel.getLayoutName().isEmpty()) {
+//	        try {
+//	            Layout layout = em.createQuery("SELECT l FROM Layout l WHERE l.name = :layoutName", Layout.class)
+//	                              .setParameter("layoutName", userViewModel.getLayoutName())
+//	                              .getSingleResult();
+//	            if (layout != null) {
+//	                customization.setLayout(layout);
+//	                userViewModel.setXhtmlFile(layout.getXhtmlFile()); // Set the xhtmlFile for the UserViewModel
+//	            }
+//	        } catch (NoResultException e) {
+//	            // Handle the case where no layout is found with the provided name
+//	            System.err.println("No layout found with name: " + userViewModel.getLayoutName());
+//	        }
+//	    }
+
+	    if (customization.getId() != null) {
+	        em.merge(customization);
+	    }
+
+	    em.merge(subscription);
 	    em.merge(organizer);
-	    em.flush();
 
 	    return userViewModel;
 	}
+
 
 	
 	public UserViewModel updateOrganizer(UserViewModel userViewModel) {

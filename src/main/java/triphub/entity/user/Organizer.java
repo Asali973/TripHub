@@ -61,12 +61,7 @@ public class Organizer {
 	        customization.setSecondaryFont(form.getSecondaryFont());
 	        customization.setLogoUrl(form.getLogoUrl());
 	        customization.setBackgroundUrl(form.getBackgroundUrl());
-	        customization.setLayoutType(form.getLayoutType());
-	        customization.setUseHeader(form.isUseHeader());
-	        customization.setUseFooter(form.isUseFooter());
-	        customization.setShowSidebar(form.isShowSidebar());
-	        customization.setStickySidebar(form.isStickySidebar());
-	        customization.setUseDarkTheme(form.isUseDarkTheme());
+	        customization.setLayout(form.getLayout());
 	    }
 	}
 	

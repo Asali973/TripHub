@@ -15,7 +15,9 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import triphub.dao.customization.DatabaseLayoutDAO;
 import triphub.entity.subscription.Customization;
+import triphub.entity.subscription.Layout;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.subscription.SubscriptionType;
 import triphub.entity.user.Organizer;
@@ -31,12 +33,17 @@ public class OrganizerBean implements Serializable {
 
     @Inject
     private UserService userService;
+    
+    @Inject
+    private DatabaseLayoutDAO layoutDAO;
 
     private static final long serialVersionUID = 1L;
 
     private UserViewModel userViewModel = new UserViewModel();
     private Part logoPicture;
     private Part companyPicture;
+    
+    private List<Layout> availableLayouts;
  
     private List<Organizer> allOrganizers;
 
@@ -82,7 +89,6 @@ public class OrganizerBean implements Serializable {
 		if (temp != null) {
 			this.userViewModel = temp;
 			
-	        // Récupérer l'objet Customization de l'Organizer et le stocker dans userViewModel
 	        Customization customization = userService.getCustomizationForOrganizer(organizerId);
 	        if(customization != null) {
 	            userViewModel.setPrimaryColor(customization.getPrimaryColor());
@@ -106,6 +112,8 @@ public class OrganizerBean implements Serializable {
 		}
 		
 		allOrganizers = userService.getAllOrganizers();
+		
+		availableLayouts = layoutDAO.getAllLayouts();
 	}
 
 	public void updateOrganizer() {
@@ -202,6 +210,26 @@ public class OrganizerBean implements Serializable {
     public void setAllOrganizers(List<Organizer> allOrganizers) {
         this.allOrganizers = allOrganizers;
     }
+
+	public DatabaseLayoutDAO getLayoutDAO() {
+		return layoutDAO;
+	}
+
+	public void setLayoutDAO(DatabaseLayoutDAO layoutDAO) {
+		this.layoutDAO = layoutDAO;
+	}
+
+	public List<Layout> getAvailableLayouts() {
+		return availableLayouts;
+	}
+
+	public void setAvailableLayouts(List<Layout> availableLayouts) {
+		this.availableLayouts = availableLayouts;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
     
     
     

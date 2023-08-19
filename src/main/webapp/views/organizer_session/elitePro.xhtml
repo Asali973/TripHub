@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<link
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<h:head>
+		<link rel="stylesheet" href="path_to_bootstrap.css" />
+		<style>
+/* Custom CSS for Elite Pro layout */
+.header, .footer {
+	background-color: #888;
+	color: white;
+	padding: 1rem;
+	text-align: center;
+}
+
+.sidebar {
+	background-color: #aaa;
+	padding: 1rem;
+}
+
+.main-content {
+	background-color: #e5e5e5;
+	padding: 1rem;
+	border-radius: 5px;
+}
+
+.brand {
+	font-weight: bold;
+	font-size: 1.9rem;
+}
+</style>
+	</h:head>
+	<h:body>
+		<div class="header">
+			<span class="brand">Elite Pro</span> Header
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-3 sidebar">Elite Pro Sidebar content</div>
+				<div class="col-9 main-content">Elite Pro Main content</div>
+			</div>
+		</div>
+		<div class="footer">Elite Pro Footer</div>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	</h:body>
+</html>

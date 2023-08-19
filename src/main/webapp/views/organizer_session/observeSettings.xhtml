@@ -3,23 +3,23 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
     <title>Observe Graphic Settings</title>
-    <!-- Here, you can use styles dynamically from the userViewModel -->
     <style>
-/*         body { */
-/*             background-image: url('#{organizerBean.userViewModel.backgroundUrl}'); */
-/*             color: #{organizerBean.userViewModel.primaryColor}; */
-/*             font-family: #{organizerBean.userViewModel.primaryFont}; */
-/*         } */
+         body { 
+             background-image: url('#{organizerBean.userViewModel.backgroundUrl}'); 
+            color: #{organizerBean.userViewModel.primaryColor}; 
+          font-family: #{organizerBean.userViewModel.primaryFont}; 
+       } 
         
         .secondary {
             color: #{organizerBean.userViewModel.secondaryColor};
             font-family: #{organizerBean.userViewModel.secondaryFont};
         }
         
-                .primary {
+        .primary {
             color: #{organizerBean.userViewModel.primaryColor};
             font-family: #{organizerBean.userViewModel.primaryFont};
         }
@@ -28,7 +28,9 @@
 </h:head>
 <h:body>
     <h1>Welcome to the Preview</h1>
-    div
+<!--     <ui:include src="#{organizerBean.userViewModel.xhtmlFile}" /> -->
+    <h:outputText value="Test static value" />
+<h:outputText value="#{organizerBean.userViewModel.xhtmlFile}" />
     <p class="secondary">This is some sample text to observe the secondary font and color.</p>
     <p class="primary">This is some sample text to observe the primary font and color.</p>
     

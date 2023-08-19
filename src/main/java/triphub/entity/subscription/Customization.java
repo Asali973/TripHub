@@ -16,19 +16,19 @@ public class Customization {
     private String logoUrl;
     private String backgroundUrl;
 
-    @Enumerated(EnumType.STRING)
-    private LayoutType layoutType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "layout_id")
+    private Layout layout;
+    
+    
 
-    private boolean useHeader;
-    private boolean useFooter;
-    private boolean showSidebar;
-    private boolean stickySidebar;
-    private boolean useDarkTheme;
+	public Layout getLayout() {
+		return layout;
+	}
 
-
-    public enum LayoutType {
-        STANDARD, GRID, LIST
-    }
+	public void setLayout(Layout layout) {
+		this.layout = layout;
+	}
 
 	public Long getId() {
 		return id;
@@ -86,53 +86,6 @@ public class Customization {
 		this.backgroundUrl = backgroundUrl;
 	}
 
-	public LayoutType getLayoutType() {
-		return layoutType;
-	}
-
-	public void setLayoutType(LayoutType layoutType) {
-		this.layoutType = layoutType;
-	}
-
-	public boolean isUseHeader() {
-		return useHeader;
-	}
-
-	public void setUseHeader(boolean useHeader) {
-		this.useHeader = useHeader;
-	}
-
-	public boolean isUseFooter() {
-		return useFooter;
-	}
-
-	public void setUseFooter(boolean useFooter) {
-		this.useFooter = useFooter;
-	}
-
-	public boolean isShowSidebar() {
-		return showSidebar;
-	}
-
-	public void setShowSidebar(boolean showSidebar) {
-		this.showSidebar = showSidebar;
-	}
-
-	public boolean isStickySidebar() {
-		return stickySidebar;
-	}
-
-	public void setStickySidebar(boolean stickySidebar) {
-		this.stickySidebar = stickySidebar;
-	}
-
-	public boolean isUseDarkTheme() {
-		return useDarkTheme;
-	}
-
-	public void setUseDarkTheme(boolean useDarkTheme) {
-		this.useDarkTheme = useDarkTheme;
-	}
     
     
 }

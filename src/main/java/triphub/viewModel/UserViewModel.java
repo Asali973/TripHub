@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 
 import triphub.entity.product.Price;
 import triphub.entity.subscription.Customization;
+import triphub.entity.subscription.Layout;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.subscription.SubscriptionType;
 import triphub.entity.util.Picture;
@@ -68,12 +69,10 @@ public class UserViewModel implements Serializable {
 	private String secondaryFont;
 	private String logoUrl;
 	private String backgroundUrl;
-	private Customization.LayoutType layoutType;
-	private boolean useHeader;
-	private boolean useFooter;
-	private boolean showSidebar;
-	private boolean stickySidebar;
-	private boolean useDarkTheme;
+
+	private Layout layout;
+    private String layoutName;
+    private String xhtmlFile; 
 	
     public void clear() {
         this.customerId = null;
@@ -378,53 +377,7 @@ public class UserViewModel implements Serializable {
 		this.backgroundUrl = backgroundUrl;
 	}
 
-	public Customization.LayoutType getLayoutType() {
-		return layoutType;
-	}
 
-	public void setLayoutType(Customization.LayoutType layoutType) {
-		this.layoutType = layoutType;
-	}
-
-	public boolean isUseHeader() {
-		return useHeader;
-	}
-
-	public void setUseHeader(boolean useHeader) {
-		this.useHeader = useHeader;
-	}
-
-	public boolean isUseFooter() {
-		return useFooter;
-	}
-
-	public void setUseFooter(boolean useFooter) {
-		this.useFooter = useFooter;
-	}
-
-	public boolean isShowSidebar() {
-		return showSidebar;
-	}
-
-	public void setShowSidebar(boolean showSidebar) {
-		this.showSidebar = showSidebar;
-	}
-
-	public boolean isStickySidebar() {
-		return stickySidebar;
-	}
-
-	public void setStickySidebar(boolean stickySidebar) {
-		this.stickySidebar = stickySidebar;
-	}
-
-	public boolean isUseDarkTheme() {
-		return useDarkTheme;
-	}
-
-	public void setUseDarkTheme(boolean useDarkTheme) {
-		this.useDarkTheme = useDarkTheme;
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -476,6 +429,32 @@ public class UserViewModel implements Serializable {
 
 	public void setSubscription(Subscription subscription) {
 		this.subscription = subscription;
+	}
+
+	public Layout getLayout() {
+		return layout;
+	}
+
+	public void setLayout(Layout layout) {
+		this.layout = layout;
+	}
+
+
+
+	public String getLayoutName() {
+		return layoutName;
+	}
+
+	public void setLayoutName(String layoutName) {
+		this.layoutName = layoutName;
+	}
+
+	public String getXhtmlFile() {
+		return xhtmlFile;
+	}
+
+	public void setXhtmlFile(String xhtmlFile) {
+		this.xhtmlFile = xhtmlFile;
 	}
 
 	

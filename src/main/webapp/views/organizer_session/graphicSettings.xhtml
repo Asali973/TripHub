@@ -1,41 +1,54 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
-    <title>Graphic Settings</title>
+	<title>Graphic Settings</title>
 </h:head>
 
 <h:body>
-    <h:form>
-        <h:panelGrid columns="2">
-            <h:outputText value="Primary Color:" />
-            <h:inputText id="primaryColor" a:type="color" value="#{organizerBean.userViewModel.primaryColor}" />
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputText value="Primary Color:" />
+			<h:inputText id="primaryColor" a:type="color"
+				value="#{organizerBean.userViewModel.primaryColor}" />
 
-            <h:outputText value="Secondary Color:" />
-            <h:inputText id="secondaryColor" a:type="color" value="#{organizerBean.userViewModel.secondaryColor}" />
+			<h:outputText value="Secondary Color:" />
+			<h:inputText id="secondaryColor" a:type="color"
+				value="#{organizerBean.userViewModel.secondaryColor}" />
 
-            <h:outputText value="Primary Font:" />
-            <h:selectOneMenu value="#{organizerBean.userViewModel.primaryFont}">
-                <f:selectItem itemLabel="Arial" itemValue="Arial" />
-                <f:selectItem itemLabel="Verdana" itemValue="Verdana" />
-                <f:selectItem itemLabel="Times New Roman" itemValue="Times New Roman" />
-            </h:selectOneMenu>
+			<h:outputText value="Primary Font:" />
+			<h:selectOneMenu value="#{organizerBean.userViewModel.primaryFont}">
+				<f:selectItem itemLabel="Arial" itemValue="Arial" />
+				<f:selectItem itemLabel="Verdana" itemValue="Verdana" />
+				<f:selectItem itemLabel="Times New Roman"
+					itemValue="Times New Roman" />
+			</h:selectOneMenu>
 
-            <h:outputText value="Secondary Font:" />
-            <h:selectOneMenu value="#{organizerBean.userViewModel.secondaryFont}">
-                <f:selectItem itemLabel="Arial" itemValue="Arial" />
-                <f:selectItem itemLabel="Verdana" itemValue="Verdana" />
-                <f:selectItem itemLabel="Times New Roman" itemValue="Times New Roman" />
-            </h:selectOneMenu>
+			<h:outputText value="Secondary Font:" />
+			<h:selectOneMenu value="#{organizerBean.userViewModel.secondaryFont}">
+				<f:selectItem itemLabel="Arial" itemValue="Arial" />
+				<f:selectItem itemLabel="Verdana" itemValue="Verdana" />
+				<f:selectItem itemLabel="Times New Roman"
+					itemValue="Times New Roman" />
+			</h:selectOneMenu>
 
-        </h:panelGrid>
+			<h:outputText value="Select Layout:" />
+			<h:selectOneMenu value="#{organizerBean.userViewModel.layout}">
+				<f:selectItems value="#{organizerBean.availableLayouts}"
+					itemLabel="#{organizerBean.userViewModel.layout.name}" itemValue="#{organizerBean.userViewModel.layout}" />
+			</h:selectOneMenu>
 
-        <h:commandButton value="Update" action="#{organizerBean.updateGraphicSettings}" />
-        <h:commandButton value="spaceCustom" action="/views/organizer_session/observeSettings?faces-redirect=true" />
+		</h:panelGrid>
 
-    </h:form>
+
+		<h:commandButton value="Update"
+			action="#{organizerBean.updateGraphicSettings}" />
+		<h:commandButton value="spaceCustom"
+			action="/views/organizer_session/observeSettings?faces-redirect=true" />
+
+	</h:form>
 </h:body>
 </html>
