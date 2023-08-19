@@ -36,20 +36,20 @@ public class TransportationDAO {
 		transportation.setDescription(transportationvm.getDescription());
 
 		Address departure = new Address();
-		departure.setNum(transportationvm.getNum());
-		departure.setStreet(transportationvm.getStreet());
-		departure.setCity(transportationvm.getCity());
-		departure.setState(transportationvm.getState());
-		departure.setCountry(transportationvm.getCountry());
-		departure.setZipCode(transportationvm.getZipCode());
+		departure.setNum(transportationvm.getAddress().getNum());
+		departure.setStreet(transportationvm.getAddress().getStreet());
+		departure.setCity(transportationvm.getAddress().getCity());
+		departure.setState(transportationvm.getAddress().getState());
+		departure.setCountry(transportationvm.getAddress().getCountry());
+		departure.setZipCode(transportationvm.getAddress().getZipCode());
 
 		Address arrival = new Address();
-		arrival.setNum(transportationvm.getNum());
-		arrival.setStreet(transportationvm.getStreet());
-		arrival.setCity(transportationvm.getCity());
-		arrival.setState(transportationvm.getState());
-		arrival.setCountry(transportationvm.getCountry());
-		arrival.setZipCode(transportationvm.getZipCode());
+		arrival.setNum(transportationvm.getAddress().getNum());
+		arrival.setStreet(transportationvm.getAddress().getStreet());
+		arrival.setCity(transportationvm.getAddress().getCity());
+		arrival.setState(transportationvm.getAddress().getState());
+		arrival.setCountry(transportationvm.getAddress().getCountry());
+		arrival.setZipCode(transportationvm.getAddress().getZipCode());
 
 //		Picture picture = new Picture();
 //		picture.setLink(transportationvm.getLink());

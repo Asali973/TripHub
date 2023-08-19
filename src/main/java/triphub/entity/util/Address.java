@@ -2,6 +2,7 @@ package triphub.entity.util;
 
 import javax.persistence.*;
 
+import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.UserViewModel;
 
 @Entity
@@ -57,6 +58,14 @@ public class Address {
 	    userViewModel.setState(this.getState());
 	    userViewModel.setCountry(this.getCountry());
 	    userViewModel.setZipCode(this.getZipCode());
+	}
+	public void initAddressViewModel(SubServicesViewModel subservicesvm) {
+		subservicesvm.getAddress().setNum(this.getNum());
+		subservicesvm.getAddress().setStreet(this.getStreet());
+		subservicesvm.getAddress().setCity(this.getCity());
+		subservicesvm.getAddress().setState(this.getState());
+		subservicesvm.getAddress().setCountry(this.getCountry());
+		subservicesvm.getAddress().setZipCode(this.getZipCode());
 	}
 
 	public Long getId() {
