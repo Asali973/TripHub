@@ -3,6 +3,7 @@ package triphub.dao.service;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -15,7 +16,7 @@ import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.TourPackageFormViewModel;
 
-@Stateless
+@ApplicationScoped
 public class RestaurantDAO implements ServiceInterface {
 
 	@PersistenceContext

@@ -52,7 +52,7 @@ public class Transportation {
 	}
 
 	public void updateTransportation(SubServicesViewModel restaurantvm) {
-		this.setName(restaurantvm.getName());
+		//this.setName(restaurantvm.getName());
 		this.setId(restaurantvm.getId());
 		this.setDescription(restaurantvm.getDescription());
 		// need to add picture soon
@@ -62,10 +62,10 @@ public class Transportation {
 		SubServicesViewModel restaurantvm = new SubServicesViewModel();
 		Address address = new Address();
 		restaurantvm.setId(this.getId());
-		restaurantvm.setName(this.getName());
-		restaurantvm.setAddress(this.getAddress());
-		restaurantvm.setDescription(this.getDescription());
-		this.getAddress().initAddressViewModel(restaurantvm);
+	//	restaurantvm.setName(this.getName());
+	//	restaurantvm.setAddress(this.getAddress());
+	//	restaurantvm.setDescription(this.getDescription());
+	//	this.getAddress().initAddressViewModel(restaurantvm);
 		return restaurantvm;
 	}
 

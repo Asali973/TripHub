@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
+import triphub.viewModel.SubServicesViewModel;
 
 @Entity
 public class Accommodation {
@@ -41,8 +42,29 @@ public class Accommodation {
 		this.description = description;
 	}
 
+	public void updateAccommodationViewModel(SubServicesViewModel accommodationvm) {
+		this.setName(accommodationvm.getName());
+		this.setAddress(accommodationvm.getAddress());
+		this.setAccommodationType(accommodationvm.getAccommodationType());
+		this.setId(accommodationvm.getId());
+		this.setDescription(accommodationvm.getDescription());
+		// need to add picture soon
+		
+		
+	}public SubServicesViewModel initAccommodationViewModel() {
+		SubServicesViewModel accommodationvm = new SubServicesViewModel();
+		accommodationvm.setId(this.getId());
+		accommodationvm.setName(this.getName());
+		accommodationvm.setAddress(this.getAddress());
+		accommodationvm.setAccommodationType(this.getAccommodationType());
+		accommodationvm.setDescription(this.getDescription());
+		this.getAddress().initAddressViewModel(accommodationvm);
+		return accommodationvm;
+	}
+	
 
-
+	// getters - setters 
+	
 	public Long getId() {
 		return id;
 	}
