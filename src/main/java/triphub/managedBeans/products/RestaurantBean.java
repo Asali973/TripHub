@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.restaurant.Restaurant;
 import triphub.helpers.FacesMessageUtil;
 import triphub.services.RestaurantService;

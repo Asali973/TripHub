@@ -46,10 +46,8 @@ public class Restaurant {
 
 	public SubServicesViewModel initRestaurantViewModel() {
 		SubServicesViewModel restaurantvm = new SubServicesViewModel();
-		Address address = new Address();
-		restaurantvm.setId(this.getId());
-		restaurantvm.setName(this.getName());
-		restaurantvm.setAddress(this.getAddress());
+		Address address = new Address(restaurantvm.getAddress().getNum(), restaurantvm.getAddress().getStreet(), restaurantvm.getAddress().getCity(), restaurantvm.getAddress().getState(), restaurantvm.getAddress().getCountry(), restaurantvm.getAddress().getZipCode());
+		restaurantvm.setAddress(address);
 		restaurantvm.setDescription(this.getDescription());
 		this.getAddress().initAddressViewModel(restaurantvm);
 		return restaurantvm;

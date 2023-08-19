@@ -20,7 +20,7 @@ public class Transportation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String nameTransportation;
+	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address departure;
@@ -43,7 +43,7 @@ public class Transportation {
 	public Transportation(String nameTransportation, Address departure, Address arrival,
 			TransportationType transportation, Picture picture, String description) {
 		super();
-		this.nameTransportation = nameTransportation;
+		this.name = nameTransportation;
 		this.departure = departure;
 		this.arrival = arrival;
 		this.transportation = transportation;
@@ -51,22 +51,31 @@ public class Transportation {
 		this.description = description;
 	}
 
-	public void updateTransportation(SubServicesViewModel restaurantvm) {
-		this.setName(restaurantvm.getName());
-		this.setId(restaurantvm.getId());
-		this.setDescription(restaurantvm.getDescription());
+	public void updateTransportation(SubServicesViewModel transportationvm) {
+		this.setName(transportationvm.getName());
+		this.setId(transportationvm.getId());
+		this.setDescription(transportationvm.getDescription());
 		// need to add picture soon
 	}
 
-	public SubServicesViewModel initRestaurantViewModel() {
-		SubServicesViewModel restaurantvm = new SubServicesViewModel();
-		Address address = new Address();
-		restaurantvm.setId(this.getId());
-		restaurantvm.setName(this.getName());
-		restaurantvm.setAddress(this.getAddress());
-		restaurantvm.setDescription(this.getDescription());
-		this.getAddress().initAddressViewModel(restaurantvm);
-		return restaurantvm;
+	public SubServicesViewModel initTransportationViewModel() {
+		SubServicesViewModel transportationvm = new SubServicesViewModel();
+		Address departure = new Address(transportationvm.getAddress().getNum(), transportationvm.getAddress().getStreet(), transportationvm.getAddress().getCity(), transportationvm.getAddress().getState(), transportationvm.getAddress().getCountry(), transportationvm.getAddress().getZipCode());
+		Address arrival = new Address(transportationvm.getAddress().getNum(), transportationvm.getAddress().getStreet(), transportationvm.getAddress().getCity(), transportationvm.getAddress().getState(), transportationvm.getAddress().getCountry(), transportationvm.getAddress().getZipCode());
+
+		
+		transportationvm.setId(this.getId());
+		transportationvm.setName(this.getName());
+		transportationvm.setAddress(this.getDeparture());
+		transportationvm.setDescription(this.getDescription());
+		this.getDeparture().initAddressViewModel(transportationvm);
+		Address arrival = new Address();
+		transportationvm.setId(this.getId());
+		transportationvm.setName(this.getName());
+		transportationvm.setAddress(this.getArrival());
+		transportationvm.setDescription(this.getDescription());
+		this.getArrival().initAddressViewModel(transportationvm);
+		return transportationvm;
 	}
 
 	public Picture getPicture() {
@@ -109,12 +118,12 @@ public class Transportation {
 		this.transportation = transportation;
 	}
 
-	public String getNameTransportation() {
-		return nameTransportation;
+	public String getName() {
+		return name;
 	}
 
-	public void setNameTransportation(String nameTransportation) {
-		this.nameTransportation = nameTransportation;
+	public void setName(String nameTransportation) {
+		this.name = nameTransportation;
 	}
 
 	public String getDescription() {

@@ -2,21 +2,19 @@ package triphub.dao.service;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.restaurant.Restaurant;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
-import triphub.viewModel.TourPackageFormViewModel;
 
-@Stateless
-public class RestaurantDAO implements ServiceInterface {
+@ApplicationScoped
+public class RestaurantDAO implements ServiceInterface{
 
 	@PersistenceContext
 	private EntityManager em;
@@ -59,7 +57,6 @@ public class RestaurantDAO implements ServiceInterface {
 		return restaurant;
 	}
 
-
 	@Override
 	public SubServicesViewModel update(SubServicesViewModel restaurantvm) {
 
@@ -89,7 +86,6 @@ public class RestaurantDAO implements ServiceInterface {
 		
 	}
 	
-
 	@Override
 	public SubServicesViewModel initSubService(Long id) {
 		Restaurant restaurant = em.find(Restaurant.class, id);
@@ -99,20 +95,18 @@ public class RestaurantDAO implements ServiceInterface {
 		return restaurant.initRestaurantViewModel();
 	}
 	
-	
 	@Override
 	public Restaurant read(Long id) {
 		return em.find(Restaurant.class, id);
 	}
 
-	
 	@Override
 	public List<Restaurant> getAll() {
 		TypedQuery<Restaurant> query = em.createQuery("SELECT d FROM Restaurant d", Restaurant.class);
 
 		return query.getResultList();
 	}
-
+	
 	@Override
 	public Restaurant findByName(String name) {
 		TypedQuery<Restaurant> query = em.createQuery("SELECT r FROM Restaurant r WHERE r.name = :name", Restaurant.class);

@@ -2,7 +2,6 @@ package triphub.services;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
