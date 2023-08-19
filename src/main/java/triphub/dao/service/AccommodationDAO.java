@@ -1,22 +1,24 @@
 package triphub.dao.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import javax.ejb.Stateless;
+
+
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
+
 
 import javax.persistence.TypedQuery;
 
+import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.accommodation.Accommodation;
-import triphub.entity.product.service.accommodation.AccommodationType;
+
 import triphub.entity.util.Address;
 import triphub.viewModel.SubServicesViewModel;
 
-@Stateless
-public class AccommodationDAO {
+@ApplicationScoped
+public class AccommodationDAO implements ServiceInterface {
 
 	@PersistenceContext
 	private EntityManager em;
@@ -58,52 +60,82 @@ public class AccommodationDAO {
 
 		return accommodation;
 	}
+	
+	@Override
+	public SubServicesViewModel update(SubServicesViewModel accommodationvm) {
+		
+		Accommodation accommodation = em.find(Accommodation.class, accommodationvm.getId());
+		if (accommodation == null) {
+			throw new IllegalArgumentException("Accommodation with ID " + accommodationvm.getId() + " not found.");
+		}
 
+		accommodation.updateAccommodationViewModel(accommodationvm);
+		accommodation = em.merge(accommodation);
+		em.flush();
+
+		// Convert the updated entity back to the view model and return it
+		return accommodation.initAccommodationViewModel();
+	
+	}
+	
+	@Override
+	public void delete(SubServicesViewModel accommodationvm) {
+		
+		Accommodation accommodation = em.find(Accommodation.class, accommodationvm.getId());
+		if (accommodation == null) {
+			throw new IllegalArgumentException("Accommodation with ID " + accommodationvm.getId() + " not found.");
+		}
+		accommodation.updateAccommodationViewModel(accommodationvm);
+		em.remove(accommodationvm);
+		em.flush();
+		
+	}
+
+	@Override
+	public SubServicesViewModel initSubService(Long id) {
+		Accommodation accommodation = em.find(Accommodation.class, id);
+		if (accommodation == null) {
+		return null;
+		}
+		return accommodation.initAccommodationViewModel();
+	}
+	
+	@Override
 	public Accommodation read(Long id) {
 		return em.find(Accommodation.class, id);
 	}
+	
+	@Override
+	public List<Accommodation> getAll() {
+		TypedQuery<Accommodation> query = em.createQuery("SELECT a FROM Accommodation a", Accommodation.class);
 
-	// Méthode pour modifer une entité Accommodation
-	public void update(Accommodation accommodation) {
-		if (accommodation != null) {
-			// Mettre à jour l'entité dans la base de données
-			em.merge(accommodation);
-
-		}
-
-	}
-
-	// Méthode pour supprimer une entité Accommodation en utilisant son id
-	public void delete(Long id) {
-		// Rechercher l'entité Accommodation par son id
-		Accommodation accommodationToDelete = em.find(Accommodation.class, id);
-
-		// Vérifier si l'entité existe
-		if (accommodationToDelete != null) {
-			// Supprimer l'entité de la base de données
-			em.remove(accommodationToDelete);
-		}
-	}
-
-	public Accommodation findAccommodationByName(String nameAccommodation) {
-		TypedQuery<Accommodation> query = em.createQuery(
-				"SELECT a FROM Accommodation a WHERE a.nameAccommodation = :nameAccommodation", Accommodation.class);
-		query.setParameter("nameAccommodation", nameAccommodation);
-
-		return query.getSingleResult();
-
-	}
-
-	public List<Accommodation> findByType(AccommodationType AccommodationType) {
-		TypedQuery<Accommodation> query = em.createQuery(
-				"SELECT a FROM Accommodation a WHERE a.accommodation = :accommodation", Accommodation.class);
-		query.setParameter("accommodation", AccommodationType);
 		return query.getResultList();
 	}
 
-	public List<Accommodation> getAllAccommodation() {
-		TypedQuery<Accommodation> query = em.createQuery("SELECT t FROM Transportation t", Accommodation.class);
-		return query.getResultList();
+	
+	@Override
+	public Accommodation findByName(String name) {
+		TypedQuery<Accommodation> query = em.createQuery("SELECT a FROM Accommodation a WHERE a.name = :name", Accommodation.class);
+		query.setParameter("name", name);
+
+		List<Accommodation> accommodations = query.getResultList();
+		return accommodations.isEmpty() ? null : accommodations.get(0);
+	}
+	
+	
+	@Override
+	public Accommodation findById(Long id) {
+		return em.find(Accommodation.class,id);
 	}
 
+
+	
+
+
+	
+
+	
+	
+
+	
 }
