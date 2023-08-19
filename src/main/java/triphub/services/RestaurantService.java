@@ -7,6 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import triphub.dao.service.RestaurantDAO;
+import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.restaurant.Restaurant;
 import triphub.helpers.FacesMessageUtil;
@@ -28,32 +29,27 @@ public class RestaurantService implements ServiceInterface {
 		this.restaurantDAO = restaurantDAO;
 	}
 
-	public void delete(Long id) {
-		restaurantDAO.delete(id);
-	}
-
 	public List<Restaurant> getAllRestaurant() {
-		return restaurantDAO.getAllRestaurants();
+		return restaurantDAO.getAll();
+	}
+
+
+	
+	
+	@Override
+	public Restaurant create(SubServicesViewModel restaurantvm) {
+		return restaurantDAO.create(restaurantvm);
 	}
 
 	@Override
-	public void create(SubServicesViewModel restaurantvm) {
-		restaurantDAO.create(restaurantvm);
-	}
-
-	public List<Restaurant> getAllRestaurants() {
-		return restaurantDAO.getAllRestaurants();
+	public Restaurant read(Long id) {
+		return restaurantDAO.read(id);
 	}
 
 	@Override
-	public void read(Long id) {
-		restaurantDAO.read(id);
-	}
-
-	@Override
-	public void update(SubServicesViewModel restaurantvm) {
+	public SubServicesViewModel update(SubServicesViewModel restaurantvm) {
 		try {
-			restaurantDAO.updateRestaurant(restaurantvm);
+			restaurantDAO.update(restaurantvm);
 		} catch (IllegalArgumentException e) {
 			// Handle the case when the tour package with the provided ID was not found in
 			// the DAO
@@ -63,5 +59,35 @@ public class RestaurantService implements ServiceInterface {
 			// process
 			FacesMessageUtil.addErrorMessage("Failed to update restaurant. An unexpected error occurred.");
 		}
+		return restaurantvm;
+	}
+
+	@Override
+	public void delete(SubServicesViewModel restaurantvm) {
+		restaurantDAO.delete(restaurantvm);		
+	}
+
+	@Override
+	public SubServicesViewModel initSubService(Long id) {
+		 Restaurant restaurant = restaurantDAO.findById(id);
+	        if (restaurant == null) {
+	            return null;
+	        }
+	        return restaurant.initRestaurantViewModel();
+	}
+
+	@Override
+	public List<Restaurant> getAll() {
+		return restaurantDAO.getAll();
+	}
+
+	@Override
+	public Restaurant findByName(String name) {
+		return restaurantDAO.findByName(name);
+	}
+
+	@Override
+	public Restaurant findById(Long id) {
+		return restaurantDAO.findById(id);
 	}
 }

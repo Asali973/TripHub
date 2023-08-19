@@ -122,4 +122,9 @@ public class RestaurantDAO implements ServiceInterface {
 		return restaurants.isEmpty() ? null : restaurants.get(0);
 	}
 
+	@Override
+	public Restaurant findById(Long id) {
+		return em.find(Restaurant.class,id);
+	}
+
 }

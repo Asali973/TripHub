@@ -13,5 +13,6 @@ public interface ServiceInterface<T> {
 	SubServicesViewModel initSubService(Long id);
 	List<T> getAll();
 	T findByName(String name);
+	T findById(Long id);
 	
 }
