@@ -16,7 +16,7 @@ public class Customization {
     private String logoUrl;
     private String backgroundUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "layout_id")
     private Layout layout;
     

@@ -27,7 +27,7 @@ public class DatabaseLayoutDAO {
         checkAndCreateLayout("Advanced+", "/triphub/views/organizer_session/advancedPlus.xhtml");
         checkAndCreateLayout("Elite", "/triphub/views/organizer_session/elite.xhtml");
         checkAndCreateLayout("Elite+", "/triphub/views/organizer_session/elitePlus.xhtml");
-        checkAndCreateLayout("Elite Pro", "/triphub/views/organizer_session/elitePro.xhtml");
+        checkAndCreateLayout("Elite Pro", "/triphu/views/organizer_session/elitePro.xhtml");
     }
 
 	private void checkAndCreateLayout(String layoutName, String xhtmlPath) {

@@ -111,6 +111,9 @@ public class OrganizerDAO {
 
 	    em.merge(subscription);
 	    em.merge(organizer);
+	    
+	    System.out.println("Final xhtmlFile value before returning: " + userViewModel.getXhtmlFile());
+
 
 	    return userViewModel;
 	}

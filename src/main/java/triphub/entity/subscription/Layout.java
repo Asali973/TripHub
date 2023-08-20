@@ -15,7 +15,7 @@ public class Layout {
     private String name;
     private String xhtmlFile;
     
-    @OneToMany(mappedBy = "layout", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "layout", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Customization> customizations = new ArrayList<>();
     
     @Override

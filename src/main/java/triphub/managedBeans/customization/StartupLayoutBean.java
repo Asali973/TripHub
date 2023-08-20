@@ -11,23 +11,23 @@ import triphub.dao.customization.DatabaseLayoutDAO;
 
 
 
-@Singleton
-@Startup
-public class StartupLayoutBean {
-	
-    @Inject
-    private DatabaseLayoutDAO layoutDAO ;
-    
-    
-
-    public StartupLayoutBean() {
-	}
-
-
-
-    @PostConstruct
-    public void onStartup() {
-        layoutDAO.initializeLayouts();
-    }
-
-}
+//@Singleton
+//@Startup
+//public class StartupLayoutBean {
+//	
+//    @Inject
+//    private DatabaseLayoutDAO layoutDAO ;
+//    
+//    
+//
+//    public StartupLayoutBean() {
+//	}
+//
+//
+//
+//    @PostConstruct
+//    public void onStartup() {
+//        layoutDAO.initializeLayouts();
+//    }
+//
+//}

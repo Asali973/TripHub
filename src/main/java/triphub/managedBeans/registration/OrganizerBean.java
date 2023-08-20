@@ -89,13 +89,23 @@ public class OrganizerBean implements Serializable {
 		if (temp != null) {
 			this.userViewModel = temp;
 			
+	        // Récupérer le Layout pour l'organisateur
+	        Layout layout = userService.getLayoutForOrganizer(organizerId);
+	        if (layout != null) {
+	            userViewModel.setXhtmlFile(layout.getXhtmlFile());
+	            userViewModel.setLayoutName(layout.getName());
+	        }
+			
 	        Customization customization = userService.getCustomizationForOrganizer(organizerId);
 	        if(customization != null) {
 	            userViewModel.setPrimaryColor(customization.getPrimaryColor());
 	            userViewModel.setSecondaryColor(customization.getSecondaryColor());
 	            userViewModel.setPrimaryFont(customization.getPrimaryFont());
 	            userViewModel.setSecondaryFont(customization.getSecondaryFont());
+	            
 	        }
+	        
+			
 		} else {
 			FacesMessageUtil.addErrorMessage("Initialization failed: Organizer does not exist");
 		}
@@ -163,6 +173,8 @@ public class OrganizerBean implements Serializable {
 	public void updateGraphicSettings() {
 	    try {
 	        userViewModel = userService.updateGraphicSettings(userViewModel);
+	        System.out.println("Final xhtmlFileBEAN value before returning: " + userViewModel.getXhtmlFile());
+
 	        FacesMessageUtil.addSuccessMessage("Graphic settings updated successfully!");
 	    } catch (Exception e) {
 	        FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
