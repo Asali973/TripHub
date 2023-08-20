@@ -71,7 +71,6 @@ public class RestaurantDAO implements ServiceInterface{
 
 		// Convert the updated entity back to the view model and return it
 		return restaurant.initRestaurantViewModel();
-		// return tourPackageVm;
 	}
 
 	@Override

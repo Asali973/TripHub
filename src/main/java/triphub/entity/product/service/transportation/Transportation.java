@@ -51,29 +51,23 @@ public class Transportation {
 		this.description = description;
 	}
 
-	public void updateTransportation(SubServicesViewModel transportationvm) {
+	public void updateTransportationViewModel(SubServicesViewModel transportationvm) {
 		this.setName(transportationvm.getName());
 		this.setId(transportationvm.getId());
+		this.setDeparture(transportationvm.getAddress());
+		this.setArrival(transportationvm.getAddress());
 		this.setDescription(transportationvm.getDescription());
 		// need to add picture soon
 	}
 
 	public SubServicesViewModel initTransportationViewModel() {
-		SubServicesViewModel transportationvm = new SubServicesViewModel();
-		Address departure = new Address(transportationvm.getAddress().getNum(), transportationvm.getAddress().getStreet(), transportationvm.getAddress().getCity(), transportationvm.getAddress().getState(), transportationvm.getAddress().getCountry(), transportationvm.getAddress().getZipCode());
-		Address arrival = new Address(transportationvm.getAddress().getNum(), transportationvm.getAddress().getStreet(), transportationvm.getAddress().getCity(), transportationvm.getAddress().getState(), transportationvm.getAddress().getCountry(), transportationvm.getAddress().getZipCode());
-
-		
-		transportationvm.setId(this.getId());
-		transportationvm.setName(this.getName());
-		transportationvm.setAddress(this.getDeparture());
-		transportationvm.setDescription(this.getDescription());
-		this.getDeparture().initAddressViewModel(transportationvm);
-		Address arrival = new Address();
+		SubServicesViewModel transportationvm = new SubServicesViewModel();	
 		transportationvm.setId(this.getId());
 		transportationvm.setName(this.getName());
 		transportationvm.setAddress(this.getArrival());
+		transportationvm.setAddress(this.getDeparture());
 		transportationvm.setDescription(this.getDescription());
+		this.getDeparture().initAddressViewModel(transportationvm);
 		this.getArrival().initAddressViewModel(transportationvm);
 		return transportationvm;
 	}

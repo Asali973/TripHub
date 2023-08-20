@@ -83,7 +83,7 @@ public class RestaurantBean implements Serializable {
 		return null;		
 	}
 
- void clear() {
+	public void clear() {
 		restaurantvm = new SubServicesViewModel();
 	}
 
