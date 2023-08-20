@@ -1,10 +1,7 @@
 package triphub.entity.user;
 
 import javax.persistence.*;
-
-import triphub.entity.product.Product;
 import triphub.entity.util.Administration;
-
 import triphub.entity.util.CompanyInfo;
 import triphub.viewModel.UserViewModel;
 

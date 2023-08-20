@@ -59,7 +59,9 @@ public class TourPackageBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		allTourPackages = tourPackageService.getAllTourPackages();
+
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+
 		if (id != null) {
 			Long tourPackageId = Long.parseLong(id);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTourPackageId",
@@ -69,6 +71,23 @@ public class TourPackageBean implements Serializable {
 				FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
 			}
 		}
+
+		if (id != null) {
+			Long tourPackageId = Long.parseLong(id);
+			// Fetch the selected tour package using tourPackageService
+			selectedTourPackage = tourPackageService.getTourPackageById(tourPackageId);
+
+			if (selectedTourPackage == null) {
+				FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
+			}
+		}
+
+	}
+
+	public String loadAllTourPackages() {
+		allTourPackages = tourPackageService.getAllTourPackages();
+
+		return "tourPackages";
 	}
 
 	public void createPackage() {
@@ -84,8 +103,14 @@ public class TourPackageBean implements Serializable {
 		clear();
 	}
 
-	public void loadAllTourPackages() {
-		allTourPackages = tourPackageService.getAllTourPackages();
+	public String viewDetails(long packageId) {
+		// Fetch package details based on packageId and store in selectedPackage
+		// property
+		selectedTourPackage = tourPackageService.getTourPackageById(packageId);
+
+		// Return navigation outcome for the details page
+		return "details"; // This should match the name of your details.xhtml page without the .xhtml
+							// extension
 	}
 
 	public String updatePackage() {
@@ -94,18 +119,19 @@ public class TourPackageBean implements Serializable {
 			tourPackageService.updateTourPackage(tourPackageVm);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Tour package updated successfully!"));
-			
+
 			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
 			String redirectUrl = contextPath + "/views/product/tpUpdate.xhtml?faces-redirect=true&id="
 					+ tourPackageVm.getId();
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
-			
+
 		} catch (IllegalArgumentException e) {
 			FacesMessageUtil.addErrorMessage("Failed to update tour package: " + e.getMessage());
 		} catch (Exception e) {
 			FacesMessageUtil.addErrorMessage("Failed to update tour package. An unexpected error occurred.");
-		}clear();
-		return null;		
+		}
+		clear();
+		return null;
 	}
 
 	public void deletePackage() {
