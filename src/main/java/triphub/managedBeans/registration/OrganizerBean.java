@@ -118,13 +118,13 @@ public class OrganizerBean implements Serializable {
 
 	    if (organizerId != null) {
 	        initFormData(organizerId);
-	        Organizer organizer = userService.readOrganizer(organizerId); // Assuming you have a method like this
-	        //Subscription subscription = organizer.getSubscription();
+	        Organizer organizer = userService.readOrganizer(organizerId);
+	        
 
 	        if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
 	            SubscriptionType type = organizer.getSubscription().getType();
 	            availableLayouts = determineAvailableLayouts(type);
-	            // Assurez-vous d'avoir une valeur par défaut pour le layout, par exemple, le premier layout disponible.
+	            
 	            if (!availableLayouts.isEmpty()) {
 	                userViewModel.setLayout(availableLayouts.get(0));
 	            }
@@ -132,28 +132,13 @@ public class OrganizerBean implements Serializable {
 	            Layout basicLayout = layoutDAO.getLayoutByName("Basic");
 	            availableLayouts = new ArrayList<>();
 	            availableLayouts.add(basicLayout);
-	            userViewModel.setLayout(basicLayout); // Ici, nous définissons la valeur par défaut comme étant le layout "Basic".
+	            userViewModel.setLayout(basicLayout);
 	        }
 	    } else {
 	        allOrganizers = userService.getAllOrganizers();
-	        availableLayouts = layoutDAO.getAllLayouts(); // This can be removed if you do not wish to initialize availableLayouts without an organizer.
+	        availableLayouts = layoutDAO.getAllLayouts(); 
 	    }
 	}
-
-//	@PostConstruct
-//	public void init() {
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-//		Long organizerId = (Long) session.getAttribute("organizerId");
-//
-//		if (organizerId != null) {
-//			initFormData(organizerId);
-//		}
-//
-//		allOrganizers = userService.getAllOrganizers();
-//
-//		availableLayouts = layoutDAO.getAllLayouts();
-//	}
 
 	public void updateOrganizer() {
 		try {
@@ -191,8 +176,8 @@ public class OrganizerBean implements Serializable {
 	    Long organizerId = (Long) session.getAttribute("organizerId");
 
 	    Subscription chosenSubscription = new Subscription();
-	    chosenSubscription.setType(userViewModel.getType()); // Ceci est la partie manquante
-
+	    chosenSubscription.setType(userViewModel.getType());
+	    
 	    if (organizerId != null && chosenSubscription != null) {
 	        userService.updateSubscription(organizerId, chosenSubscription);
 	        FacesMessageUtil.addSuccessMessage("Subscription saved successfully!");
