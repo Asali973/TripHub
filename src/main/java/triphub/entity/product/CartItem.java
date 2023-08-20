@@ -39,7 +39,7 @@ public class CartItem {
 	private Date dateOfOrder;
 	
 	@Transient
-    private int newQuantity;
+    private int newQuantity =1;
 	
 	public Long getId() {
 		return id;
