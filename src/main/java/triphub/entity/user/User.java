@@ -2,8 +2,11 @@ package triphub.entity.user;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
-
+import triphub.entity.product.CartItem;
 import triphub.entity.util.Address;
 import triphub.entity.util.FinanceInfo;
 import triphub.helpers.PasswordUtils;
@@ -27,6 +30,12 @@ public class User implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     private FinanceInfo finance;
+    
+    @OneToMany(mappedBy = "user")
+    private List<CartItem> cartItems = new ArrayList<>();
+    
+    @Column(name = "cart_total")
+    private BigDecimal cartTotal;
     
     public static User createUserFromViewModel(UserViewModel form) {
         User user = new User();
@@ -54,7 +63,7 @@ public class User implements Serializable {
         userViewModel.setEmail(this.getEmail());
         userViewModel.setPhoneNum(this.getPhoneNum());
     }
-
+ 
 	public Long getId() {
 		return id;
 	}
@@ -117,6 +126,10 @@ public class User implements Serializable {
 
 	public void setFinance(FinanceInfo finance) {
 		this.finance = finance;
+	}
+
+	public void setCartTotal(BigDecimal totalPrice) {
+	    this.cartTotal = totalPrice;
 	}
 	
     
