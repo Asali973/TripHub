@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 
 import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
-import triphub.entity.product.service.restaurant.Restaurant;
+import triphub.entity.service.Restaurant;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;

@@ -13,5 +13,6 @@ public interface ICartService {
 	    List<Object> getCartItemsByUser(User user);
 	    BigDecimal calculateTotalPrice(List<CartItem> cartItems);
 	    List<CartItem> getCartItemsWithTourPackages();
+	    void updateCartItem(CartItem cartItem);
 	
 }

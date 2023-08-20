@@ -2,6 +2,7 @@ package triphub.services;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -47,8 +48,10 @@ public class CartService implements ICartService {
 
     private void addToCart(TourPackage tourPackage, User user) {
         CartItem cartItem = new CartItem();
-        cartItem.setUser(user);
+        cartItem.setUser(user);        
         cartItem.setTourPackage(tourPackage);
+        cartItem.setDateOfOrder(new Date());
+        cartItem.setQuantity(1);
         
         cartItemDAO.addToCart(cartItem);
 
@@ -61,7 +64,8 @@ public class CartService implements ICartService {
         CartItem cartItem = new CartItem();
         cartItem.setUser(user);
         cartItem.setService(service);
-        
+        cartItem.setDateOfOrder(new Date());
+        cartItem.setQuantity(1);
         cartItemDAO.addToCart(cartItem);
 
         // Optionally, you can recalculate the total price and update the user's cart
@@ -102,17 +106,28 @@ public class CartService implements ICartService {
     
     @Override
     public void removeFromCart(Long cartItemId, User user) {
-    	  cartItemDAO.deleteCartItemById(cartItemId);
-    	  //  recalculate the total price and update the user's cart
-         // User user = ...; // Get the user based on the context
-    	  BigDecimal totalPrice = calculateTotalPrice(cartItemDAO.getCartItemsByUser(user));
-          user.setCartTotal(totalPrice);
+        cartItemDAO.deleteCartItemById(cartItemId);
+
+        // Recalculate the total price and update the user's cart
+        BigDecimal totalPrice = calculateTotalPrice(cartItemDAO.getCartItemsByUser(user));
+        user.setCartTotal(totalPrice);
+
+        // Update the cart items' quantities (example: set to 0)
+        List<CartItem> cartItems = cartItemDAO.getCartItemsByUser(user);
+        for (CartItem cartItem : cartItems) {
+            cartItem.setQuantity(0);
+            cartItemDAO.updateCartItem(cartItem);
+        }
     }
-    
     @Override
     public List<CartItem> getCartItemsWithTourPackages() {
         return cartItemDAO.getCartItemsWithTourPackages();
     }
+    @Override
+    public void updateCartItem(CartItem cartItem) {
+        cartItemDAO.updateCartItem(cartItem);
+    }
+    
 }
 
 

@@ -2,6 +2,9 @@ package triphub.managedBeans.products;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -28,7 +32,7 @@ public class CartBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private ICartService iCartService;
-
+	private CartItem cartItem;
 	private List<CartItem> cartItems;
 	private TourPackage selectedTourPackage;
 	@Inject
@@ -38,6 +42,8 @@ public class CartBean implements Serializable {
 	@Inject
 	private TourPackageService tourPackageService;
 	private Long selectedPackageId;
+	private int selectedQuantity;
+	private Date dateOfPurchase;
 
 	@PostConstruct
 	public void init() {
@@ -69,35 +75,40 @@ public class CartBean implements Serializable {
 	}
 
 	public String addToCart() {
-		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		String selectedPackageIdParam = params.get("selectedPackageId");
+	    Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+	    String selectedPackageIdParam = params.get("selectedPackageId");
+	    String selectedQuantityParam = params.get("quantity");
 
-		if (selectedPackageIdParam != null) {
-			Long selectedPackageId = Long.parseLong(selectedPackageIdParam);
+	    if (selectedPackageIdParam != null) {
+	        Long selectedPackageId = Long.parseLong(selectedPackageIdParam);
+	        int selectedQuantity = Integer.parseInt(selectedQuantityParam);
+	        TourPackage selectedTourPackage = tourPackageService.getTourPackageById(selectedPackageId);
 
-			TourPackage selectedTourPackage = tourPackageService.getTourPackageById(selectedPackageId);
+	        if (selectedTourPackage != null) {
+	            User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
 
-			if (selectedTourPackage != null) {
-				User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+	            CartItem cartItem = new CartItem();
+	            cartItem.setTourPackage(selectedTourPackage);
+	            cartItem.setQuantity(selectedQuantity);
+	          
 
-				iCartService.addToCart(selectedTourPackage, user);
+	            iCartService.addToCart(selectedTourPackage, user);
 
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-						"Added to Cart", selectedTourPackage.getName() + " added to your cart."));
+	            // Set the date of purchase here, after the item is successfully added to the cart
+	            dateOfPurchase = new Date();
 
-				// Redirect to the Cart Page
-				try {
-					FacesContext.getCurrentInstance().getExternalContext().redirect("cart.xhtml");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			} else {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Selected tour package not found."));
-			}
-		}
-		return null; // Return null to stay on the same page
+	            // Redirect to the Cart Page
+	            try {
+	                FacesContext.getCurrentInstance().getExternalContext().redirect("cart.xhtml");
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	    return null; // Return null to stay on the same page
 	}
+
+
 
 	public void initUserData(Long userId) {
 		UserViewModel temp = userService.initUser(userId);
@@ -108,7 +119,58 @@ public class CartBean implements Serializable {
 		}
 	}
 
+	public BigDecimal calculateTotalPrice(List<CartItem> cartItems) {
+	    BigDecimal totalPrice = BigDecimal.ZERO;
+	    for (CartItem cartItem : cartItems) {
+	        BigDecimal itemPrice = BigDecimal.ZERO;
+	        
+	        if (cartItem.getTourPackage() != null) {
+	            itemPrice = cartItem.getTourPackage().getPrice().getAmount();
+	        } else if (cartItem.getService() != null) {
+	            itemPrice = cartItem.getService().getPrice().getAmount();
+	        }
+	        
+	        totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(cartItem.getNewQuantity())));
+	    }
+	    return totalPrice;
+	}
+
+	public void removeFromCart(Long cartItemId, User user) {
+
+		iCartService.removeFromCart(cartItemId, user);
+
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed from Cart", "Item removed from your cart."));
+	}
+
+	public List<SelectItem> getQuantityOptions() {
+		List<SelectItem> options = new ArrayList<>();
+		// adjust the range based on requirements
+		for (int i = 1; i <= 10; i++) {
+			options.add(new SelectItem(i, String.valueOf(i)));
+		}
+		return options;
+	}
 	
+	public void updateCartItemQuantity(CartItem cartItem) {
+	    // Retrieve the User object from the session map
+	    User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+
+	    if (user != null) {
+	        if (cartItem.getNewQuantity() > 0) {
+	            cartItem.setQuantity(cartItem.getNewQuantity());
+	            iCartService.updateCartItem(cartItem);
+	        } else if (cartItem.getNewQuantity() == 0) {
+	            // Remove the cart item if the new quantity is set to 0
+	            iCartService.removeFromCart(cartItem.getId(), user);
+	        } else {
+	            // Handle other cases or invalid input as needed
+	        }
+	    } else {
+	        // Handle the case when the user is not available in the session
+	    }
+	}
+
 
 	public List<CartItem> getCartItems() {
 		return cartItems;
@@ -174,4 +236,38 @@ public class CartBean implements Serializable {
 		this.userService = userService;
 	}
 
+	public CartItem getCartItem() {
+		return cartItem;
+	}
+
+	public void setCartItem(CartItem cartItem) {
+		this.cartItem = cartItem;
+	}
+
+	public int getSelectedQuantity() {
+		return selectedQuantity;
+	}
+
+	public void setSelectedQuantity(int selectedQuantity) {
+		this.selectedQuantity = selectedQuantity;
+	}
+
+	public Date getDateOfPurchase() {
+		return dateOfPurchase;
+	}
+
+	public void setDateOfPurchase(Date dateOfPurchase) {
+		this.dateOfPurchase = dateOfPurchase;
+	}
+	
 }
+
+//<h:form>
+//<h:selectOneMenu id="quantitySelect" value="#{cartBean.selectedQuantity}">
+//    <f:selectItems value="#{cartBean.quantityOptions}" />
+//</h:selectOneMenu>
+//<h:commandButton value="Add to Cart" action="#{cartBean.addToCart}">
+//<f:param name="selectedPackageId" value="#{param.id}" />
+//<f:param name="quantity" value="#{cartBean.selectedQuantity}" />
+//</h:commandButton>
+//</h:form>

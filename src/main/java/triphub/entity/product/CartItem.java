@@ -6,9 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import triphub.entity.product.service.Service;
 import triphub.entity.user.User;
+
+import java.util.Date;
 
 @Entity
 public class CartItem {
@@ -30,6 +35,12 @@ public class CartItem {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateOfOrder;
+	
+	@Transient
+    private int newQuantity;
+	
 	public Long getId() {
 		return id;
 	}
@@ -68,6 +79,22 @@ public class CartItem {
 
 	public void setService(Service service) {
 		this.service = service;
+	}
+
+	public Date getDateOfOrder() {
+		return dateOfOrder;
+	}
+
+	public void setDateOfOrder(Date dateOfOrder) {
+		this.dateOfOrder = dateOfOrder;
+	}
+
+	public int getNewQuantity() {
+		return newQuantity;
+	}
+
+	public void setNewQuantity(int newQuantity) {
+		this.newQuantity = newQuantity;
 	}
 
 }

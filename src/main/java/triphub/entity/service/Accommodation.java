@@ -1,7 +1,8 @@
-package triphub.entity.product.service.accommodation;
+package triphub.entity.service;
 
 import javax.persistence.*;
 
+import triphub.entity.product.service.Service;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
@@ -27,6 +28,8 @@ public class Accommodation {
 	
 	private String description;
 	
+	@OneToOne(mappedBy = "accommodation")
+    private Service service;
 
 	public Accommodation() {
 	}

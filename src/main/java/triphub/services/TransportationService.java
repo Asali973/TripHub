@@ -8,8 +8,8 @@ import javax.inject.Inject;
 
 import triphub.dao.service.TransportationDAO;
 import triphub.entity.product.service.ServiceInterface;
-import triphub.entity.product.service.transportation.Transportation;
-import triphub.entity.product.service.transportation.TransportationType;
+import triphub.entity.service.Transportation;
+import triphub.entity.service.TransportationType;
 import triphub.viewModel.SubServicesViewModel;
 
 @ApplicationScoped
