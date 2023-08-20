@@ -19,7 +19,7 @@ import triphub.entity.util.Picture;
 public class UserViewModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long customerId;
 	private Long providerId;
 	private Long organizerId;
@@ -32,7 +32,7 @@ public class UserViewModel implements Serializable {
 	private String phoneNum;
 	private String password;
 	private String confirmPassword;
-	
+
 	private String profilePicture;
 
 	private String num;
@@ -53,16 +53,17 @@ public class UserViewModel implements Serializable {
 	private String phone;
 	private String sector;
 	private String adminEmail;
-	
-    private Long id;
 
-    private Subscription subscription; 
+	private Long id;
 
-    private Price price;
-    private int duration;
-    private SubscriptionType type;
-    private Customization customization;
+	private Subscription subscription;
+
+	private Price price;
+	private int duration;
+	private SubscriptionType type;
 	
+	private Customization customization;
+
 	private String primaryColor;
 	private String secondaryColor;
 	private String primaryFont;
@@ -71,44 +72,45 @@ public class UserViewModel implements Serializable {
 	private String backgroundUrl;
 
 	private Layout layout;
-    private String layoutName;
-    private String xhtmlFile; 
 	
-    public void clear() {
-        this.customerId = null;
-        this.providerId = null;
-        this.organizerId = null;
-        this.superAdminId = null;
-        this.userId = null;
+	private String layoutName;
+	private String xhtmlFile;
 
-        this.firstName = "";
-        this.lastName = "";
-        this.email = "";
-        this.phoneNum = "";
-        this.password = "";
-        this.confirmPassword = "";
-        
-        this.profilePicture = "";
+	public void clear() {
+		this.customerId = null;
+		this.providerId = null;
+		this.organizerId = null;
+		this.superAdminId = null;
+		this.userId = null;
 
-        this.num = "";
-        this.street = "";
-        this.city = "";
-        this.state = "";
-        this.country = "";
-        this.zipCode = "";
+		this.firstName = "";
+		this.lastName = "";
+		this.email = "";
+		this.phoneNum = "";
+		this.password = "";
+		this.confirmPassword = "";
 
-        this.CCNumber = "";
-        this.expirationDate = null;
+		this.profilePicture = "";
 
-        this.companyName = "";
-        this.companyLogoLink = "";
-        this.companyPictureLink = "";
+		this.num = "";
+		this.street = "";
+		this.city = "";
+		this.state = "";
+		this.country = "";
+		this.zipCode = "";
 
-        this.siret = "";
-        this.phone = "";
-        this.sector = "";
-        this.adminEmail = "";
-    }
+		this.CCNumber = "";
+		this.expirationDate = null;
+
+		this.companyName = "";
+		this.companyLogoLink = "";
+		this.companyPictureLink = "";
+
+		this.siret = "";
+		this.phone = "";
+		this.sector = "";
+		this.adminEmail = "";
+	}
 
 	public UserViewModel() {
 	}
@@ -377,8 +379,6 @@ public class UserViewModel implements Serializable {
 		this.backgroundUrl = backgroundUrl;
 	}
 
-
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -439,8 +439,6 @@ public class UserViewModel implements Serializable {
 		this.layout = layout;
 	}
 
-
-
 	public String getLayoutName() {
 		return layoutName;
 	}
@@ -456,8 +454,5 @@ public class UserViewModel implements Serializable {
 	public void setXhtmlFile(String xhtmlFile) {
 		this.xhtmlFile = xhtmlFile;
 	}
-
-	
-	
 
 }

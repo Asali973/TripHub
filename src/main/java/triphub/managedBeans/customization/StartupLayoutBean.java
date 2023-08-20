@@ -7,27 +7,19 @@ import javax.inject.Inject;
 
 import triphub.dao.customization.DatabaseLayoutDAO;
 
-
-
-
-
 @Singleton
 @Startup
 public class StartupLayoutBean {
-	
-    @Inject
-    private DatabaseLayoutDAO layoutDAO ;
-    
-    
 
-    public StartupLayoutBean() {
+	@Inject
+	private DatabaseLayoutDAO layoutDAO;
+
+	public StartupLayoutBean() {
 	}
 
-
-
-    @PostConstruct
-    public void onStartup() {
-        layoutDAO.initializeLayouts();
-    }
+	@PostConstruct
+	public void onStartup() {
+		layoutDAO.initializeLayouts();
+	}
 
 }

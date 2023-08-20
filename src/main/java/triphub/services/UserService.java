@@ -31,10 +31,6 @@ public class UserService {
 	@Inject
 	private UserDAO userDAO;
 
-//    public UserService(CustomerDAO customerDAO) {
-//        this.customerDAO = customerDAO;
-//    }
-
 	public UserService() {
 	}
 
@@ -54,9 +50,9 @@ public class UserService {
 	public UserViewModel initUser(Long userId) {
 		return userDAO.initUser(userId);
 	}
-	
+
 	public User findByUserId(Long userId) {
-	    return userDAO.findByUserId(userId);
+		return userDAO.findByUserId(userId);
 	}
 
 	// Methods related to customers
@@ -105,10 +101,10 @@ public class UserService {
 	public UserViewModel initCustomer(Long customerId) {
 		return customerDAO.initCustomer(customerId);
 	}
-	
-    public List<Customer> getAllCustomers() {
-        return customerDAO.findAllCustomers();
-    }
+
+	public List<Customer> getAllCustomers() {
+		return customerDAO.findAllCustomers();
+	}
 
 	// Methods related to SuperAdmin
 	public SuperAdmin createSuperAdmin(UserViewModel superAdminForm) throws RegistrationException {
@@ -156,10 +152,10 @@ public class UserService {
 	public UserViewModel initSuperAdmin(Long superAdminId) {
 		return superAdminDAO.initSuperAdmin(superAdminId);
 	}
-	
-    public List<SuperAdmin> getAllSuperAdmins() {
-        return superAdminDAO.findAllSuperAdmins();
-    }
+
+	public List<SuperAdmin> getAllSuperAdmins() {
+		return superAdminDAO.findAllSuperAdmins();
+	}
 
 	// Methods related to Provider
 	public Provider createProvider(UserViewModel providerForm) throws RegistrationException {
@@ -210,10 +206,10 @@ public class UserService {
 	public Provider findProviderByUserId(Long userId) {
 		return providerDAO.findProviderByUserId(userId);
 	}
-	
-    public List<Provider> getAllProviders() {
-        return providerDAO.findAllProviders();
-    }
+
+	public List<Provider> getAllProviders() {
+		return providerDAO.findAllProviders();
+	}
 
 	// Methods related to Organizer
 	public Organizer createOrganizer(UserViewModel organizerForm) throws RegistrationException {
@@ -264,40 +260,40 @@ public class UserService {
 	public Organizer findOrganizerByUserId(Long userId) {
 		return organizerDAO.findOrganizerByUserId(userId);
 	}
-	
-    public List<Organizer> getAllOrganizers() {
-        return organizerDAO.findAllOrganizers();
-    }
-    
-    public void updateSubscription(Long organizerId, Subscription subscription) {
-    	organizerDAO.updateSubscription(organizerId, subscription);
-    }
-    
-    public Subscription getSubscription(Long organizerId) {
-    	return organizerDAO.getSubscriptionForOrganizer(organizerId);
-    }
-    
-    public Customization getCustomizationForOrganizer(Long organizerId) {
-        Organizer organizer = organizerDAO.readOrganizer(organizerId); // ou tout autre moyen que vous utilisez pour obtenir Organizer
-        if(organizer != null && organizer.getSubscription() != null) {
-            return organizer.getSubscription().getCustomization();
-        }
-        return null;
-    }
 
-    
-    public Layout getLayoutForOrganizer(Long organizerId) {
-        Organizer organizer = organizerDAO.readOrganizer(organizerId);
-        if(organizer != null 
-            && organizer.getSubscription() != null 
-            && organizer.getSubscription().getCustomization() != null) {
-            return organizer.getSubscription().getCustomization().getLayout();
-        }
-        return null;
-    }
-    
-    public UserViewModel updateGraphicSettings(UserViewModel userViewModel) {
-        return organizerDAO.updateGraphicSettings(userViewModel);
-    }
+	public List<Organizer> getAllOrganizers() {
+		return organizerDAO.findAllOrganizers();
+	}
+
+	// Methods related to Organizer subscription
+	public void updateSubscription(Long organizerId, Subscription subscription) {
+		organizerDAO.updateSubscription(organizerId, subscription);
+	}
+
+	public Subscription getSubscription(Long organizerId) {
+		return organizerDAO.getSubscriptionForOrganizer(organizerId);
+	}
+
+	// Methods related to Organizer customization
+	public Customization getCustomizationForOrganizer(Long organizerId) {
+		Organizer organizer = organizerDAO.readOrganizer(organizerId);
+		if (organizer != null && organizer.getSubscription() != null) {
+			return organizer.getSubscription().getCustomization();
+		}
+		return null;
+	}
+
+	public Layout getLayoutForOrganizer(Long organizerId) {
+		Organizer organizer = organizerDAO.readOrganizer(organizerId);
+		if (organizer != null && organizer.getSubscription() != null
+				&& organizer.getSubscription().getCustomization() != null) {
+			return organizer.getSubscription().getCustomization().getLayout();
+		}
+		return null;
+	}
+
+	public UserViewModel updateGraphicSettings(UserViewModel userViewModel) {
+		return organizerDAO.updateGraphicSettings(userViewModel);
+	}
 
 }

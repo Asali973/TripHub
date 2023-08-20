@@ -1,6 +1,5 @@
 package triphub.dao.user;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -8,10 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.servlet.http.Part;
-
 import triphub.entity.subscription.Customization;
-import triphub.entity.subscription.Layout;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.user.*;
 import triphub.entity.util.*;
@@ -53,76 +49,56 @@ public class OrganizerDAO {
 		em.flush();
 		return organizer;
 	}
-	
+
 	public UserViewModel updateGraphicSettings(UserViewModel userViewModel) {
-	    Organizer organizer = em.find(Organizer.class, userViewModel.getOrganizerId());
+		Organizer organizer = em.find(Organizer.class, userViewModel.getOrganizerId());
 
-	    if (organizer == null) {
-	        return null;
-	    }
+		if (organizer == null) {
+			return null;
+		}
 
-	    Subscription subscription = organizer.getSubscription();
-	    if (subscription == null) {
-	        subscription = new Subscription();
-	        organizer.setSubscription(subscription);
-	        em.persist(subscription);
-	    }
+		Subscription subscription = organizer.getSubscription();
+		if (subscription == null) {
+			subscription = new Subscription();
+			organizer.setSubscription(subscription);
+			em.persist(subscription);
+		}
 
-	    Customization customization = subscription.getCustomization();
-	    if (customization == null) {
-	        customization = new Customization();
-	        subscription.setCustomization(customization);
-	        em.persist(customization);
-	    }
+		Customization customization = subscription.getCustomization();
+		if (customization == null) {
+			customization = new Customization();
+			subscription.setCustomization(customization);
+			em.persist(customization);
+		}
 
-	    customization.setPrimaryColor(userViewModel.getPrimaryColor());
-	    customization.setSecondaryColor(userViewModel.getSecondaryColor());
-	    customization.setPrimaryFont(userViewModel.getPrimaryFont());
-	    customization.setSecondaryFont(userViewModel.getSecondaryFont());
-	    customization.setLogoUrl(userViewModel.getLogoUrl());
-	    customization.setBackgroundUrl(userViewModel.getBackgroundUrl());
-	    
-	    // Set the Layout for Customization directly using userViewModel.layout
-	    if (userViewModel.getLayout() != null) {
-	        customization.setLayout(userViewModel.getLayout());
-	        userViewModel.setXhtmlFile(userViewModel.getLayout().getXhtmlFile());
-	        System.out.println("xhtmlFile value: " + userViewModel.getXhtmlFile());
-	    }
+		customization.setPrimaryColor(userViewModel.getPrimaryColor());
+		customization.setSecondaryColor(userViewModel.getSecondaryColor());
+		customization.setPrimaryFont(userViewModel.getPrimaryFont());
+		customization.setSecondaryFont(userViewModel.getSecondaryFont());
+		customization.setLogoUrl(userViewModel.getLogoUrl());
+		customization.setBackgroundUrl(userViewModel.getBackgroundUrl());
 
-//	    // Set the Layout for Customization
-//	    if (userViewModel.getLayoutName() != null && !userViewModel.getLayoutName().isEmpty()) {
-//	        try {
-//	            Layout layout = em.createQuery("SELECT l FROM Layout l WHERE l.name = :layoutName", Layout.class)
-//	                              .setParameter("layoutName", userViewModel.getLayoutName())
-//	                              .getSingleResult();
-//	            if (layout != null) {
-//	                customization.setLayout(layout);
-//	                userViewModel.setXhtmlFile(layout.getXhtmlFile()); // Set the xhtmlFile for the UserViewModel
-//	            }
-//	        } catch (NoResultException e) {
-//	            // Handle the case where no layout is found with the provided name
-//	            System.err.println("No layout found with name: " + userViewModel.getLayoutName());
-//	        }
-//	    }
+		if (userViewModel.getLayout() != null) {
+			customization.setLayout(userViewModel.getLayout());
+			userViewModel.setXhtmlFile(userViewModel.getLayout().getXhtmlFile());
+			System.out.println("xhtmlFile value: " + userViewModel.getXhtmlFile());
+		}
 
-	    if (customization.getId() != null) {
-	        em.merge(customization);
-	    }
+		if (customization.getId() != null) {
+			em.merge(customization);
+		}
 
-	    em.merge(subscription);
-	    em.merge(organizer);
-	    
-	    System.out.println("Final xhtmlFile value before returning: " + userViewModel.getXhtmlFile());
+		em.merge(subscription);
+		em.merge(organizer);
 
+		System.out.println("Final xhtmlFile value before returning: " + userViewModel.getXhtmlFile());
 
-	    return userViewModel;
+		return userViewModel;
 	}
 
-
-	
 	public UserViewModel updateOrganizer(UserViewModel userViewModel) {
 		Organizer organizer = em.find(Organizer.class, userViewModel.getOrganizerId());
-		
+
 		if (organizer == null) {
 			return null;
 		}
@@ -187,27 +163,27 @@ public class OrganizerDAO {
 			return null;
 		}
 	}
-	
+
 	public List<Organizer> findAllOrganizers() {
 		TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c", Organizer.class);
 		return query.getResultList();
 	}
-	
+
 	public void updateSubscription(Long organizerId, Subscription subscription) {
-	    Organizer organizer = em.find(Organizer.class, organizerId);
-	    if (organizer != null) {
-	        if (subscription.getId() == null) {
-	            em.persist(subscription);
-	        }
-	        organizer.setSubscription(subscription);
-	        em.persist(organizer);
-	        em.flush();
-	    }
+		Organizer organizer = em.find(Organizer.class, organizerId);
+		if (organizer != null) {
+			if (subscription.getId() == null) {
+				em.persist(subscription);
+			}
+			organizer.setSubscription(subscription);
+			em.persist(organizer);
+			em.flush();
+		}
 	}
-	
+
 	public Subscription getSubscriptionForOrganizer(Long organizerId) {
-	    Organizer organizer = em.find(Organizer.class, organizerId);
-	    return organizer != null ? organizer.getSubscription() : null;
+		Organizer organizer = em.find(Organizer.class, organizerId);
+		return organizer != null ? organizer.getSubscription() : null;
 	}
 
 }

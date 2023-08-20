@@ -35,11 +35,12 @@
 					itemValue="Times New Roman" />
 			</h:selectOneMenu>
 
-			<h:outputText value="Select Layout:" />
+			<h:outputText value="Select a template for your space:" />
 			<h:selectOneMenu value="#{organizerBean.userViewModel.layout}">
 				<f:selectItems value="#{organizerBean.availableLayouts}"
-					itemLabel="#{organizerBean.userViewModel.layout}" itemValue="#{organizerBean.userViewModel.layout}" />
+					itemLabel="#{layout.name}" itemValue="#{layout}" var="layout" />
 			</h:selectOneMenu>
+
 
 		</h:panelGrid>
 

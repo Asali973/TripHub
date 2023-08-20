@@ -28,12 +28,13 @@ public class LayoutConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value == null) {
+        if (!(value instanceof Layout) || ((Layout) value).getId() == null) {
             return "";
         }
 
         return String.valueOf(((Layout) value).getId());
     }
+
 
     private DatabaseLayoutDAO getLayoutDAO() {
         if (layoutDAO == null) {

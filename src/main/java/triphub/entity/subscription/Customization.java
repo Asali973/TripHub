@@ -5,22 +5,20 @@ import javax.persistence.*;
 @Entity
 public class Customization {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String primaryColor;
-    private String secondaryColor;
-    private String primaryFont;
-    private String secondaryFont;
-    private String logoUrl;
-    private String backgroundUrl;
+	private String primaryColor;
+	private String secondaryColor;
+	private String primaryFont;
+	private String secondaryFont;
+	private String logoUrl;
+	private String backgroundUrl;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "layout_id")
-    private Layout layout;
-    
-    
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "layout_id")
+	private Layout layout;
 
 	public Layout getLayout() {
 		return layout;
@@ -86,6 +84,4 @@ public class Customization {
 		this.backgroundUrl = backgroundUrl;
 	}
 
-    
-    
 }
