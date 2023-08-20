@@ -50,7 +50,34 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
+<navigation-rule>
+    <from-view-id>/views/organizer_session/packages.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>details</from-outcome>
+        <to-view-id>/details.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
 
+<navigation-rule>
+    <from-view-id>*</from-view-id>
+    <navigation-case>
+        <from-outcome>tourPackages</from-outcome>
+        <to-view-id>/views/product/TourpackageHome.xhtml</to-view-id>
+    </navigation-case>
+    <navigation-case>
+        <from-outcome>tourPackages</from-outcome>
+        <to-view-id>/views/organizer_session/packages.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
+
+<navigation-rule>
+    <from-view-id>/views/organizer_session/details.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>cart</from-outcome>
+        <to-view-id>/views/organizer_session/cart.xhtml</to-view-id>
+        <redirect />
+    </navigation-case>    
+</navigation-rule>
 
 
 <!-- 		<navigation-rule> -->
