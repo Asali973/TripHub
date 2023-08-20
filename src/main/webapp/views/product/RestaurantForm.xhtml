@@ -30,7 +30,7 @@
 					</div>
 				</div>
 
-				<!-- Departure dépliable -->
+				<!-- Addresse dépliable -->
 				<div class="col-md-12 mt-4">
 					<button
 						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
@@ -41,37 +41,37 @@
 						<div class="form-group mt-4">
 							<h:outputLabel for="DepartureNum" value="Number:" />
 							<h:inputText id="DepartureNum"
-								value="#{restaurantBean.restaurantvm.num}"
+								value="#{restaurantBean.restaurantvm.address.num}"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<h:outputLabel for="DepartureStreet" value="Street:" />
 							<h:inputText id="DepartureStreet"
-								value="#{restaurantBean.restaurantvm.street}"
+								value="#{restaurantBean.restaurantvm.address.street}"
 								class="form-control" />
 						</div>
 						<div class="form-group mt-4">
 							<h:outputLabel for="DepartureCity" value="City:" />
 							<h:inputText id="DepartureCity"
-								value="#{restaurantBean.restaurantvm.city}"
+								value="#{restaurantBean.restaurantvm.address.city}"
 								class="form-control" />
 						</div>
 						<div class="form-group mt-4">
 							<h:outputLabel for="DepartureState" value="State:" />
 							<h:inputText id="DepartureState"
-								value="#{restaurantBean.restaurantvm.state}"
+								value="#{restaurantBean.restaurantvm.address.state}"
 								class="form-control" />
 						</div>
 						<div class="form-group mt-4">
 							<h:outputLabel for="DepartureCountry" value="Country:" />
 							<h:inputText id="DepartureCountry"
-								value="#{restaurantBean.restaurantvm.country}"
+								value="#{restaurantBean.restaurantvm.address.country}"
 								class="form-control" />
 						</div>
 						<div class="form-group mt-4">
 							<h:outputLabel for="DepartureZipCode" value="Zip Code:" />
 							<h:inputText id="DepartureZipCode"
-								value="#{restaurantBean.restaurantvm.zipCode}"
+								value="#{restaurantBean.restaurantvm.address.zipCode}"
 								class="form-control" />
 						</div>
 					</div>

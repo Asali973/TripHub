@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import triphub.entity.util.Address;
+import triphub.viewModel.SubServicesViewModel;
+import triphub.viewModel.TourPackageFormViewModel;
 
 @Entity
 public class Restaurant {
@@ -16,10 +18,10 @@ public class Restaurant {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nameRestaurant;
+	private String name;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private Address addressRestaurant;
+	private Address address;
 	
 	private String description;
 
@@ -27,13 +29,32 @@ public class Restaurant {
 	public Restaurant () {
 	}
 	
-	public Restaurant(String nameRestaurant, Address addressRestaurant, String description) {
+	public Restaurant(String name, Address address, String description) {
 		super();
-		this.nameRestaurant = nameRestaurant;
-		this.addressRestaurant = addressRestaurant;
+		this.name = name;
+		this.address = address;
 		this.description = description;
 	}
 
+	
+	public void updateRestaurantViewModel(SubServicesViewModel restaurantvm) {
+		this.setName(restaurantvm.getName());
+		this.setId(restaurantvm.getId());
+		this.setDescription(restaurantvm.getDescription());
+		// need to add picture soon
+	}
+
+	public SubServicesViewModel initRestaurantViewModel() {
+		SubServicesViewModel restaurantvm = new SubServicesViewModel();
+		Address address = new Address();
+		restaurantvm.setId(this.getId());
+		restaurantvm.setName(this.getName());
+		restaurantvm.setAddress(this.getAddress());
+		restaurantvm.setDescription(this.getDescription());
+		this.getAddress().initAddressViewModel(restaurantvm);
+		return restaurantvm;
+	}
+	
 	
 	// Getters - Setters
 	public Long getId() {
@@ -45,21 +66,21 @@ public class Restaurant {
 	}
 
 	
-	public String getNameRestaurant() {
-		return nameRestaurant;
+	public String getName() {
+		return name;
 	}
 
-	public void setNameRestaurant(String name) {
-		this.nameRestaurant = name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	
-	public Address getAddressRestaurant() {
-		return addressRestaurant;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setAddressRestaurant(Address addressRestaurant) {
-		this.addressRestaurant = addressRestaurant;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	

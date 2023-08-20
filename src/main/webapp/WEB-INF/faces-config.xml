@@ -52,6 +52,7 @@
         <to-view-id>/details.xhtml</to-view-id>
     </navigation-case>
 </navigation-rule>
+
 <navigation-rule>
     <from-view-id>*</from-view-id>
     <navigation-case>
@@ -63,13 +64,14 @@
         <to-view-id>/views/organizer_session/packages.xhtml</to-view-id>
     </navigation-case>
 </navigation-rule>
+
 <navigation-rule>
     <from-view-id>/views/organizer_session/details.xhtml</from-view-id>
     <navigation-case>
         <from-outcome>cart</from-outcome>
         <to-view-id>/views/organizer_session/cart.xhtml</to-view-id>
         <redirect />
-    </navigation-case>
+    </navigation-case>    
 </navigation-rule>
 	<application />
 </faces-config>

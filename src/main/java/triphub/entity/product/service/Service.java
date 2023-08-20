@@ -42,7 +42,8 @@ public class Service {
     @JoinColumn(name = "tillDate_id")
     private Date availableTill;
   
-
+//    @OneToOne( cascade = CascadeType.ALL)
+//    private Product product;
   
 			
 	public Restaurant getRestaurant() {
