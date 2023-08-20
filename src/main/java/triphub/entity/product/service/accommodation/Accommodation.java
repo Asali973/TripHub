@@ -25,6 +25,7 @@ public class Accommodation {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Picture picture;
 	
+	@Lob
 	private String description;
 	
 

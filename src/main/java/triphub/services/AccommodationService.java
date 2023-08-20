@@ -6,7 +6,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
-
+import javax.transaction.Transactional;
 
 import triphub.dao.service.AccommodationDAO;
 import triphub.entity.product.service.ServiceInterface;
@@ -37,6 +37,7 @@ public class AccommodationService implements ServiceInterface {
 		return accommodationDAO.getAll();
 	}
 	
+	@Transactional
 	@Override
 	public Accommodation create(SubServicesViewModel accommodationvm) {
 	
