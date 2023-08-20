@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 
 import triphub.entity.product.Price;
 import triphub.entity.subscription.Customization;
+import triphub.entity.subscription.Layout;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.subscription.SubscriptionType;
 import triphub.entity.util.Picture;
@@ -18,7 +19,7 @@ import triphub.entity.util.Picture;
 public class UserViewModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long customerId;
 	private Long providerId;
 	private Long organizerId;
@@ -31,7 +32,7 @@ public class UserViewModel implements Serializable {
 	private String phoneNum;
 	private String password;
 	private String confirmPassword;
-	
+
 	private String profilePicture;
 
 	private String num;
@@ -52,64 +53,64 @@ public class UserViewModel implements Serializable {
 	private String phone;
 	private String sector;
 	private String adminEmail;
-	
-    private Long id;
 
-    private Subscription subscription; 
+	private Long id;
 
-    private Price price;
-    private int duration;
-    private SubscriptionType type;
-    private Customization customization;
+	private Subscription subscription;
+
+	private Price price;
+	private int duration;
+	private SubscriptionType type;
 	
+	private Customization customization;
+
 	private String primaryColor;
 	private String secondaryColor;
 	private String primaryFont;
 	private String secondaryFont;
 	private String logoUrl;
 	private String backgroundUrl;
-	private Customization.LayoutType layoutType;
-	private boolean useHeader;
-	private boolean useFooter;
-	private boolean showSidebar;
-	private boolean stickySidebar;
-	private boolean useDarkTheme;
+
+	private Layout layout;
 	
-    public void clear() {
-        this.customerId = null;
-        this.providerId = null;
-        this.organizerId = null;
-        this.superAdminId = null;
-        this.userId = null;
+	private String layoutName;
+	private String xhtmlFile;
 
-        this.firstName = "";
-        this.lastName = "";
-        this.email = "";
-        this.phoneNum = "";
-        this.password = "";
-        this.confirmPassword = "";
-        
-        this.profilePicture = "";
+	public void clear() {
+		this.customerId = null;
+		this.providerId = null;
+		this.organizerId = null;
+		this.superAdminId = null;
+		this.userId = null;
 
-        this.num = "";
-        this.street = "";
-        this.city = "";
-        this.state = "";
-        this.country = "";
-        this.zipCode = "";
+		this.firstName = "";
+		this.lastName = "";
+		this.email = "";
+		this.phoneNum = "";
+		this.password = "";
+		this.confirmPassword = "";
 
-        this.CCNumber = "";
-        this.expirationDate = null;
+		this.profilePicture = "";
 
-        this.companyName = "";
-        this.companyLogoLink = "";
-        this.companyPictureLink = "";
+		this.num = "";
+		this.street = "";
+		this.city = "";
+		this.state = "";
+		this.country = "";
+		this.zipCode = "";
 
-        this.siret = "";
-        this.phone = "";
-        this.sector = "";
-        this.adminEmail = "";
-    }
+		this.CCNumber = "";
+		this.expirationDate = null;
+
+		this.companyName = "";
+		this.companyLogoLink = "";
+		this.companyPictureLink = "";
+
+		this.siret = "";
+		this.phone = "";
+		this.sector = "";
+		this.adminEmail = "";
+	}
 
 	public UserViewModel() {
 	}
@@ -378,54 +379,6 @@ public class UserViewModel implements Serializable {
 		this.backgroundUrl = backgroundUrl;
 	}
 
-	public Customization.LayoutType getLayoutType() {
-		return layoutType;
-	}
-
-	public void setLayoutType(Customization.LayoutType layoutType) {
-		this.layoutType = layoutType;
-	}
-
-	public boolean isUseHeader() {
-		return useHeader;
-	}
-
-	public void setUseHeader(boolean useHeader) {
-		this.useHeader = useHeader;
-	}
-
-	public boolean isUseFooter() {
-		return useFooter;
-	}
-
-	public void setUseFooter(boolean useFooter) {
-		this.useFooter = useFooter;
-	}
-
-	public boolean isShowSidebar() {
-		return showSidebar;
-	}
-
-	public void setShowSidebar(boolean showSidebar) {
-		this.showSidebar = showSidebar;
-	}
-
-	public boolean isStickySidebar() {
-		return stickySidebar;
-	}
-
-	public void setStickySidebar(boolean stickySidebar) {
-		this.stickySidebar = stickySidebar;
-	}
-
-	public boolean isUseDarkTheme() {
-		return useDarkTheme;
-	}
-
-	public void setUseDarkTheme(boolean useDarkTheme) {
-		this.useDarkTheme = useDarkTheme;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -478,7 +431,28 @@ public class UserViewModel implements Serializable {
 		this.subscription = subscription;
 	}
 
-	
-	
+	public Layout getLayout() {
+		return layout;
+	}
+
+	public void setLayout(Layout layout) {
+		this.layout = layout;
+	}
+
+	public String getLayoutName() {
+		return layoutName;
+	}
+
+	public void setLayoutName(String layoutName) {
+		this.layoutName = layoutName;
+	}
+
+	public String getXhtmlFile() {
+		return xhtmlFile;
+	}
+
+	public void setXhtmlFile(String xhtmlFile) {
+		this.xhtmlFile = xhtmlFile;
+	}
 
 }

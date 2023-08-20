@@ -8,7 +8,93 @@
     PATH="/views/home.xhtml" TARGET="rules:#views#home.xhtml"
     TITLE="login" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#views#loginAndAccount#login.xhtml:1"
+   NAME="item1" PATH="/views/loginAndAccount/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#views#home.xhtml" NAME="output"
+    PATH="/views/home.xhtml" TARGET="rules:#views#home.xhtml"
+    TITLE="login" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#views#home.xhtml" PATH="/views/home.xhtml"
   SHAPE="240,369,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,465,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="#views#customer_home::#views#customer_home.xhtml" NAME="output"
+    PATH="/views/customer_home.xhtml"
+    TARGET="rules:#views#customer_home.xhtml"
+    TITLE="/views/customer_home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:1" PATH="*" SHAPE="32,577,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:1" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="#views#organizer_home::#views#organizer_home.xhtml"
+    NAME="output" PATH="/views/organizer_home.xhtml"
+    TARGET="rules:#views#organizer_home.xhtml"
+    TITLE="/views/organizer_home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:2" PATH="*" SHAPE="32,689,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:2" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="#views#provider_home::#views#provider_home.xhtml" NAME="output"
+    PATH="/views/provider_home.xhtml"
+    TARGET="rules:#views#provider_home.xhtml"
+    TITLE="/views/provider_home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:3" PATH="*" SHAPE="32,801,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:3" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="#views#superadmin_home::#views#superadmin_home.xhtml"
+    NAME="output" PATH="/views/superadmin_home.xhtml"
+    TARGET="rules:#views#superadmin_home.xhtml"
+    TITLE="/views/superadmin_home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#customer_home.xhtml"
+  PATH="/views/customer_home.xhtml" SHAPE="240,481,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#provider_home.xhtml"
+  PATH="/views/provider_home.xhtml" SHAPE="240,705,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#superadmin_home.xhtml"
+  PATH="/views/superadmin_home.xhtml" SHAPE="240,817,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#organizer_home.xhtml"
+  PATH="/views/organizer_home.xhtml" SHAPE="240,593,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*:4" PATH="*" SHAPE="32,945,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:4" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="#views#customer_home::#views#customer_home.xhtml" NAME="output"
+    PATH="/views/customer_home.xhtml"
+    TARGET="rules:#views#customer_home.xhtml"
+    TITLE="/views/customer_home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:5" PATH="*" SHAPE="32,1057,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:5" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="#views#organizer_home::#views#organizer_home.xhtml"
+    NAME="output" PATH="/views/organizer_home.xhtml"
+    TARGET="rules:#views#organizer_home.xhtml"
+    TITLE="/views/organizer_home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:6" PATH="*" SHAPE="32,1169,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:6" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="#views#provider_home::#views#provider_home.xhtml" NAME="output"
+    PATH="/views/provider_home.xhtml"
+    TARGET="rules:#views#provider_home.xhtml"
+    TITLE="/views/provider_home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:7" PATH="*" SHAPE="32,1281,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:7" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="#views#superadmin_home::#views#superadmin_home.xhtml"
+    NAME="output" PATH="/views/superadmin_home.xhtml"
+    TARGET="rules:#views#superadmin_home.xhtml"
+    TITLE="/views/superadmin_home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>
