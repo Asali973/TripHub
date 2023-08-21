@@ -44,13 +44,13 @@ public class Restaurant {
 	public void updateRestaurantViewModel(SubServicesViewModel restaurantvm) {
 		this.setName(restaurantvm.getName());
 		this.setId(restaurantvm.getId());
+		this.getAddress().updateAddressFromViewModel(restaurantvm);
 		this.setDescription(restaurantvm.getDescription());
 		// need to add picture soon
 	}
 
 	public SubServicesViewModel initRestaurantViewModel() {
 		SubServicesViewModel restaurantvm = new SubServicesViewModel();
-		Address address = new Address();
 		restaurantvm.setId(this.getId());
 		restaurantvm.setName(this.getName());
 		restaurantvm.setAddress(this.getAddress());

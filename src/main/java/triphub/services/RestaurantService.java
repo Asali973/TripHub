@@ -2,7 +2,6 @@ package triphub.services;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
@@ -29,12 +28,7 @@ public class RestaurantService implements ServiceInterface {
 		this.restaurantDAO = restaurantDAO;
 	}
 
-	public List<Restaurant> getAllRestaurant() {
-		return restaurantDAO.getAll();
-	}
 
-
-	
 	
 	@Override
 	public Restaurant create(SubServicesViewModel restaurantvm) {
