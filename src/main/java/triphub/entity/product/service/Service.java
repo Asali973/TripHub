@@ -10,11 +10,10 @@ import javax.persistence.OneToOne;
 
 import triphub.entity.product.Price;
 import triphub.entity.product.service.accommodation.Accommodation;
-import triphub.entity.product.service.restaurant.Restaurant;
-import triphub.entity.product.service.transportation.Transportation;
-
-
 import triphub.entity.util.Date;
+
+import triphub.viewModel.SubServicesViewModel;
+
 
 @Entity
 public class Service {
@@ -22,7 +21,9 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+	@OneToOne(mappedBy = "service")
+    private Accommodation accommodation;
+    
     @OneToOne(cascade = CascadeType.ALL)
     private Price price;
 
@@ -34,9 +35,32 @@ public class Service {
     @JoinColumn(name = "tillDate_id")
     private Date availableTill;
   
-//    @OneToOne( cascade = CascadeType.ALL)
-//    private Product product;
+    public static Service createServiceFromViewModel(SubServicesViewModel form) {
+       Service service = new Service();
+        service.setId(form.getId());
+        service.setPrice(form.getPrice());
+        service.setAvailability(form.isAvailability());
+        service.setAvailableFrom(form.getAvailableFrom());
+        service.setAvailableTill(form.getAvailableTill());
+        return service;
+    }
 
+    public void updateServiceFromViewModel(SubServicesViewModel form) {
+         this.setPrice(form.getPrice());
+         this.setAvailability(form.isAvailability());
+         this.setAvailableFrom(form.getAvailableFrom());
+         this.setAvailableTill(form.getAvailableTill());
+    }
+    
+    public void initServiceViewModel(SubServicesViewModel form) {
+        form.setId(this.getId());
+        form.setPrice(this.getPrice());
+        form.setAvailability(this.isAvailability());
+        form.setAvailableFrom(this.getAvailableFrom());
+        form.setAvailableTill(this.getAvailableTill());
+    }
+ 
+    
 	public Long getId() {
 		return id;
 	}

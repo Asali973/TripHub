@@ -22,8 +22,12 @@ public class Accommodation {
 	@Enumerated(EnumType.STRING)
 	private AccommodationType accommodationType;
 
+	
+	//@OneToOne(mappedBy = "accommodation")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Service service;
+
+	
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Picture picture;
@@ -114,4 +118,11 @@ public class Accommodation {
 		this.description = description;
 	}
 
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
+	}
 }

@@ -112,6 +112,15 @@
 								characters remaining</small>
 						</div>
 					</div>
+					
+					<div class="form-group mt-4">
+						<h:outputLabel for="Price" value="Price*:"
+							required="true" requiredMessage="Price is required." />
+						<h:inputText id="price"
+							value="#{accommodationBean.accommodationVm.price.amount}"
+							class="form-control" required="true" />
+					</div>
+					
 
 					<div class="form-group mt-4 d-flex justify-content-center">
 						<h:messages class="text-center" id="messages" globalOnly="true"
