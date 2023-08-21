@@ -12,6 +12,8 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+
+	
  <!-- Navigation rules for different user types -->
     <navigation-rule>
         <from-view-id>*</from-view-id>

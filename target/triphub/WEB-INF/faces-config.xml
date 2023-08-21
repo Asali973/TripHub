@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <faces-config version="2.2"
-
 		xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-
 		http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
-
 	<navigation-rule>
 		<from-view-id>/views/loginAndAccount/login.xhtml</from-view-id>
 		<navigation-case>
@@ -17,6 +13,7 @@
 		</navigation-case>
 	</navigation-rule>
 
+	
  <!-- Navigation rules for different user types -->
     <navigation-rule>
         <from-view-id>*</from-view-id>
@@ -50,78 +47,33 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
+<navigation-rule>
+    <from-view-id>/views/organizer_session/packages.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>details</from-outcome>
+        <to-view-id>/details.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
 
+<navigation-rule>
+    <from-view-id>*</from-view-id>
+    <navigation-case>
+        <from-outcome>tourPackages</from-outcome>
+        <to-view-id>/views/product/TourpackageHome.xhtml</to-view-id>
+    </navigation-case>
+    <navigation-case>
+        <from-outcome>tourPackages</from-outcome>
+        <to-view-id>/views/organizer_session/packages.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
 
-
-<!-- 		<navigation-rule> -->
-<!-- 			<from-view-id>/views/home.xhtml</from-view-id> -->
-<!-- 			<navigation-case> -->
-<!-- 				<from-outcome>registration</from-outcome> -->
-<!-- 				<to-view-id>/loginAndAccount/registration.xhtml</to-view-id> -->
-<!-- 				<redirect /> -->
-<!-- 			</navigation-case> -->
-<!-- 			<navigation-case> -->
-<!-- 				<from-outcome>login</from-outcome> -->
-<!-- 				<to-view-id>/loginAndAccount/login.xhtml</to-view-id> -->
-<!-- 				<redirect /> -->
-<!-- 			</navigation-case> -->
-<!-- 			<navigation-case> -->
-<!-- 				<from-outcome>tourPackageHome</from-outcome> -->
-<!-- 				<to-view-id>/product/TourpackageHome.xhtml</to-view-id> -->
-<!-- 			</navigation-case> -->
-<!-- 			<navigation-case> -->
-<!-- 				<from-outcome>tpAdvancedSearch</from-outcome> -->
-<!-- 				<to-view-id>/product/TpAdvancedSearch.xhtml</to-view-id> -->
-<!-- 			</navigation-case> -->
-<!-- 			<navigation-case> -->
-<!-- 				<from-outcome>transportationForm</from-outcome> -->
-<!-- 				<to-view-id>/product/TransportationForm.xhtml</to-view-id> -->
-<!-- 			</navigation-case> -->
-<!-- 		</navigation-rule> -->
-
-
-	<!-- <navigation-rule> <from-view-id>/views/home.xhtml</from-view-id> <navigation-case> 
-		<from-outcome>registration</from-outcome> <to-view-id>/loginAndAccount/registration.xhtml</to-view-id> 
-		<redirect /> </navigation-case> <navigation-case> <from-outcome>login</from-outcome> 
-		<to-view-id>/loginAndAccount/login.xhtml</to-view-id> <redirect /> </navigation-case> 
-		<navigation-case> <from-outcome>tourPackageHome</from-outcome> <to-view-id>/product/TourpackageHome.xhtml</to-view-id> 
-		</navigation-case> <navigation-case> <from-outcome>tpAdvancedSearch</from-outcome> 
-		<to-view-id>/product/TpAdvancedSearch.xhtml</to-view-id> </navigation-case> 
-		</navigation-rule> -->
-
-	<!-- <converter> <converter-id>imageConverter</converter-id> <converter-class>triphub.entity.util.ImageConverter</converter-class> 
-		</converter> -->
-
-	<!-- <navigation-rule> -->
-	<!-- <from-view-id>/views/loginAndAccount/login.xhtml</from-view-id> -->
-	<!-- <navigation-case> -->
-	<!-- <from-outcome>login</from-outcome> -->
-	<!-- <to-view-id>/views/home.xhtml</to-view-id> -->
-	<!-- <redirect /> -->
-	<!-- </navigation-case> -->
-	<!-- </navigation-rule> -->
-
-	<!-- <navigation-rule> -->
-	<!-- <from-view-id>/views/home.xhtml</from-view-id> -->
-	<!-- <navigation-case> -->
-	<!-- <from-outcome>registration</from-outcome> -->
-	<!-- <to-view-id>/loginAndAccount/registration.xhtml</to-view-id> -->
-	<!-- <redirect /> -->
-	<!-- </navigation-case> -->
-	<!-- <navigation-case> -->
-	<!-- <from-outcome>login</from-outcome> -->
-	<!-- <to-view-id>/loginAndAccount/login.xhtml</to-view-id> -->
-	<!-- <redirect /> -->
-	<!-- </navigation-case> -->
-	<!-- <navigation-case> -->
-	<!-- <from-outcome>tourPackageHome</from-outcome> -->
-	<!-- <to-view-id>TourpackageHome.xhtml</to-view-id> -->
-	<!-- <redirect /> -->
-	<!-- </navigation-case> -->
-	<!-- </navigation-rule> -->
-
+<navigation-rule>
+    <from-view-id>/views/organizer_session/details.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>cart</from-outcome>
+        <to-view-id>/views/organizer_session/cart.xhtml</to-view-id>
+        <redirect />
+    </navigation-case>    
+</navigation-rule>
 	<application />
 </faces-config>
-
-
-

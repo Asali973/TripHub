@@ -10,29 +10,14 @@
 
 <ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
 	<ui:define name="content">
-		<p>This is the home page. Add our content here.</p>
 		<h:body>
 			<h2>Welcome to Triphub!</h2>
 			<h:form>
 
-				<h:commandButton value="Login" action="loginAndAccount/login" />
-				<h:commandButton value="Profile"
-					action="loginAndAccount/ProfileUser" />
-
-				<h:commandButton value="Create a customer account"
-					action="loginAndAccount/CustomerRegistration" />
-
-				<h:commandButton value="Create a provider account"
-					action="loginAndAccount/ProviderRegistration" />
-
-				<h:commandButton value="Create an organizer account"
-					action="loginAndAccount/OrganizerRegistration" />
-
-				<h:commandButton value="Create a superAdmin account"
-					action="loginAndAccount/SuperAdminRegistration" />
-
-				<h:commandButton value="Users list"
-					action="loginAndAccount/UserList" />
+				<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
+					<h:commandButton value="Users list"
+						action="loginAndAccount/UserList" />
+				</h:panelGroup>
 
 				<h:commandButton value="Choose Subscription"
 					action="subscriptionAndCustomization/chooseSubscription" />
