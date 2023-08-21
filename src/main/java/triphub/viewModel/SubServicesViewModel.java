@@ -1,7 +1,7 @@
 package triphub.viewModel;
 
 import java.io.Serializable;
-
+import java.time.LocalDate;
 
 import triphub.entity.product.Price;
 import triphub.entity.service.AccommodationType;
@@ -25,8 +25,8 @@ public class SubServicesViewModel implements Serializable {
 	private String name;
 	
 	private boolean availability;
-	private Date availableFrom;
-	private Date availableTill;
+	private LocalDate availableFrom;
+	private LocalDate availableTill;
 	
 
 	private Date startDate;
@@ -153,19 +153,19 @@ public class SubServicesViewModel implements Serializable {
 		this.availability = availability;
 	}
 
-	public Date getAvailableFrom() {
+	public LocalDate getAvailableFrom() {
 		return availableFrom;
 	}
 
-	public void setAvailableFrom(Date availableFrom) {
+	public void setAvailableFrom(LocalDate availableFrom) {
 		this.availableFrom = availableFrom;
 	}
 
-	public Date getAvailableTill() {
+	public LocalDate getAvailableTill() {
 		return availableTill;
 	}
 
-	public void setAvailableTill(Date availableTill) {
+	public void setAvailableTill(LocalDate availableTill) {
 		this.availableTill = availableTill;
 	}
 
