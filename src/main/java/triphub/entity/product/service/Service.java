@@ -22,7 +22,7 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-   
+
     @OneToOne(cascade = CascadeType.ALL)
     private Price price;
 
@@ -36,7 +36,6 @@ public class Service {
   
 //    @OneToOne( cascade = CascadeType.ALL)
 //    private Product product;
-  
 
 	public Long getId() {
 		return id;
