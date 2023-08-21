@@ -6,7 +6,7 @@ import java.util.List;
 import triphub.entity.product.CartItem;
 import triphub.entity.user.User;
 
-public interface ICartService {
+public interface ICartService  {
 	
 	  void addToCart(Object cartItemObject, User user);
 	// public void addToCart(Object cartItemObject, User user, int quantity);

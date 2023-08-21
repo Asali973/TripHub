@@ -1,5 +1,7 @@
 package triphub.entity.product.service;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,8 @@ import triphub.entity.service.Transportation;
 import triphub.entity.util.Date;
 
 @Entity
-public class Service {
+public class Service implements Serializable{
+	private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -1,5 +1,6 @@
 package triphub.services;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,8 +20,8 @@ import triphub.entity.product.service.Service;
 import triphub.entity.user.User;
 
 @Stateless
-public class CartService implements ICartService {
-
+public class CartService implements ICartService,Serializable {
+	private static final long serialVersionUID = 1L;
     @Inject
     private TourPackageDAO tourPackageDAO;
 

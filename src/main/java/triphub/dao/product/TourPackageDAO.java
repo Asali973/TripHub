@@ -1,5 +1,6 @@
 package triphub.dao.product;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,8 @@ import triphub.entity.product.TourPackage;
 import triphub.viewModel.TourPackageFormViewModel;
 
 @Stateless
-public class TourPackageDAO {
+public class TourPackageDAO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@PersistenceContext(unitName = "triphub")
 	private EntityManager em;
 
