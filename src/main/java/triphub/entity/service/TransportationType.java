@@ -1,4 +1,4 @@
-package triphub.entity.product.service.transportation;
+package triphub.entity.service;
 
 public enum TransportationType {
 	Plane("Plane"),

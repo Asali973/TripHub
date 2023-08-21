@@ -7,9 +7,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+
+import triphub.entity.product.Theme;
 import triphub.entity.product.service.ServiceInterface;
-import triphub.entity.product.service.transportation.Transportation;
-import triphub.entity.product.service.transportation.TransportationType;
+import triphub.entity.service.Accommodation;
+import triphub.entity.service.Transportation;
+import triphub.entity.service.TransportationType;
+
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;

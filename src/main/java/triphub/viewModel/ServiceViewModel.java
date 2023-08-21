@@ -1,9 +1,9 @@
 package triphub.viewModel;
 
 import triphub.entity.product.Price;
-import triphub.entity.product.service.accommodation.Accommodation;
-import triphub.entity.product.service.restaurant.Restaurant;
-import triphub.entity.product.service.transportation.Transportation;
+import triphub.entity.service.Accommodation;
+import triphub.entity.service.Restaurant;
+import triphub.entity.service.Transportation;
 import triphub.entity.util.Date;
 
 public class ServiceViewModel {

@@ -4,11 +4,14 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
+import triphub.entity.product.service.Service;
 import triphub.entity.user.User;
 
 @Stateless
@@ -19,6 +22,11 @@ public class CartItemDAO {
 
     public void addToCart(CartItem cartItem) {
         em.persist(cartItem);
+        em.flush();
+    }
+    public void updateCartItem(CartItem cartItem) {
+        em.merge(cartItem);
+        em.flush();
     }
 
     public void deleteCartItemById(Long cartItemId) {
@@ -50,4 +58,47 @@ public class CartItemDAO {
 
         return cartItems;
     }
+    public CartItem getCartItemByTourPackageAndUser(TourPackage tourPackage, User user) {
+        TypedQuery<CartItem> query = em.createQuery(
+            "SELECT c FROM CartItem c WHERE c.tourPackage = :tourPackage AND c.user = :user",
+            CartItem.class
+        );
+        query.setParameter("tourPackage", tourPackage);
+        query.setParameter("user", user);
+
+        List<CartItem> results = query.getResultList();
+
+        if (results.isEmpty()) {
+            return null;
+        } else if (results.size() == 1) {
+            return results.get(0);
+        } else {
+            // Handle multiple matches (log an error, return a specific result, etc.)
+            // For example, you might throw an exception:
+            throw new NonUniqueResultException("Multiple cart items found for the given criteria");
+        }
+    }
+
+    public CartItem getCartItemByServiceAndUser(Service service, User user) {
+        TypedQuery<CartItem> query = em.createQuery(
+            "SELECT c FROM CartItem c WHERE c.user = :user AND c.service = :service",
+            CartItem.class
+        );
+        query.setParameter("user", user);
+        query.setParameter("service", service);
+
+        List<CartItem> results = query.getResultList();
+
+        if (results.isEmpty()) {
+            return null;
+        } else if (results.size() == 1) {
+            return results.get(0);
+        } else {
+            // Handle multiple matches (log an error, return a specific result, etc.)
+            // For example, you might throw an exception:
+            throw new NonUniqueResultException("Multiple cart items found for the given criteria");
+        }
+    }
+
+
 }

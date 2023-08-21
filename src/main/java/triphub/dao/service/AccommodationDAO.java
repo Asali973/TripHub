@@ -14,8 +14,12 @@ import javax.persistence.TypedQuery;
 import triphub.entity.product.Price;
 import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
+
 import triphub.entity.product.service.ServiceType;
-import triphub.entity.product.service.accommodation.Accommodation;
+
+
+
+import triphub.entity.service.Accommodation;
 
 import triphub.entity.util.Address;
 import triphub.viewModel.SubServicesViewModel;

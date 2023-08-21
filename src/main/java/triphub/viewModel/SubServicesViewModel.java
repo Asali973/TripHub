@@ -2,12 +2,11 @@ package triphub.viewModel;
 
 import java.io.Serializable;
 
+
 import triphub.entity.product.Price;
-import triphub.entity.product.service.accommodation.Accommodation;
-import triphub.entity.product.service.accommodation.AccommodationType;
-import triphub.entity.product.service.restaurant.Restaurant;
-import triphub.entity.product.service.transportation.Transportation;
-import triphub.entity.product.service.transportation.TransportationType;
+import triphub.entity.service.AccommodationType;
+import triphub.entity.service.TransportationType;
+
 import triphub.entity.util.Address;
 import triphub.entity.util.Date;
 import triphub.entity.util.Picture;

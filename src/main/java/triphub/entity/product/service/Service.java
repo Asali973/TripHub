@@ -37,6 +37,7 @@ public class Service {
     @JoinColumn(name = "tillDate_id")
     private Date availableTill;
   
+
     public static Service createServiceFromViewModel(SubServicesViewModel form) {
        Service service = new Service();
       //  service.setId(form.getId());
@@ -64,6 +65,7 @@ public class Service {
     }
  
     
+
 	public Long getId() {
 		return id;
 	}

@@ -10,10 +10,12 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import triphub.entity.product.service.restaurant.Restaurant;
-import triphub.entity.product.service.transportation.Transportation;
-import triphub.entity.product.service.transportation.TransportationType;
+
+import triphub.entity.service.Transportation;
+import triphub.entity.service.TransportationType;
+
 import triphub.helpers.FacesMessageUtil;
+
 import triphub.services.TransportationService;
 import triphub.viewModel.SubServicesViewModel;
 

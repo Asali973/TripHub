@@ -10,8 +10,7 @@ import javax.transaction.Transactional;
 
 import triphub.dao.service.AccommodationDAO;
 import triphub.entity.product.service.ServiceInterface;
-import triphub.entity.product.service.accommodation.Accommodation;
-
+import triphub.entity.service.Accommodation;
 import triphub.helpers.FacesMessageUtil;
 import triphub.viewModel.SubServicesViewModel;
 
@@ -36,7 +35,7 @@ public class AccommodationService implements ServiceInterface {
 	public List<Accommodation> getAllAccommodation() {
 		return accommodationDAO.getAll();
 	}
-	
+
 	@Transactional
 	@Override
 	public Accommodation create(SubServicesViewModel accommodationvm) {
