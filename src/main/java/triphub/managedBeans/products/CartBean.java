@@ -75,6 +75,41 @@ public class CartBean implements Serializable {
 
 	}
 
+//	public String addToCart() {
+//	    Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+//	    String selectedPackageIdParam = params.get("selectedPackageId");
+//	    String selectedQuantityParam = params.get("quantity");
+//
+//	    if (selectedPackageIdParam != null) {
+//	        Long selectedPackageId = Long.parseLong(selectedPackageIdParam);
+//	        int selectedQuantity = Integer.parseInt(selectedQuantityParam);
+//	        TourPackage selectedTourPackage = tourPackageService.getTourPackageById(selectedPackageId);
+//
+//	        if (selectedTourPackage != null) {
+//	            User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+//
+//	            CartItem cartItem = new CartItem();
+//	            cartItem.setTourPackage(selectedTourPackage);
+//	            cartItem.setQuantity(selectedQuantity);
+//	          
+//	            //cartItems.add(cartItem);// Here I add new item to list
+//	            iCartService.addToCart(selectedTourPackage, user);
+//
+//	            // Set the date of purchase here, after the item is successfully added to the cart
+//	            dateOfPurchase = new Date();
+//
+//	            // Redirect to the Cart Page
+//	            try {
+//	                FacesContext.getCurrentInstance().getExternalContext().redirect("cart.xhtml");
+//	            } catch (IOException e) {
+//	                e.printStackTrace();
+//	            }
+//	        }
+//	    }
+//	    return null; // Return null to stay on the same page
+//	}
+
+
 	public String addToCart() {
 	    Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 	    String selectedPackageIdParam = params.get("selectedPackageId");
@@ -88,12 +123,7 @@ public class CartBean implements Serializable {
 	        if (selectedTourPackage != null) {
 	            User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
 
-	            CartItem cartItem = new CartItem();
-	            cartItem.setTourPackage(selectedTourPackage);
-	            cartItem.setQuantity(selectedQuantity);
-	          
-	            //cartItems.add(cartItem);// Here I add new item to list
-	            iCartService.addToCart(selectedTourPackage, user);
+	            iCartService.addToCart(selectedTourPackage, user, selectedQuantity); // Use the updated addToCart method
 
 	            // Set the date of purchase here, after the item is successfully added to the cart
 	            dateOfPurchase = new Date();
@@ -108,8 +138,6 @@ public class CartBean implements Serializable {
 	    }
 	    return null; // Return null to stay on the same page
 	}
-
-
 
 	public void initUserData(Long userId) {
 		UserViewModel temp = userService.initUser(userId);
@@ -133,8 +161,9 @@ public class CartBean implements Serializable {
 	        }
 	        
 	        // Use the sum of existing quantity and new quantity for the calculation
-	        int totalQuantity = cartItem.getQuantity() + cartItem.getNewQuantity();
-	        totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(totalQuantity)));
+	      //  int totalQuantity = cartItem.getQuantity() + cartItem.getNewQuantity();
+	       // totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(totalQuantity)));
+	        totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
 	    }
 	    
 	    return totalPrice;
@@ -161,9 +190,9 @@ public class CartBean implements Serializable {
 	public void updateCartItemQuantity(CartItem cartItem) {
 	    // Retrieve the User object from the session map
 	    User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-
+//&& cartItem.getNewQuantity() != cartItem.getQuantity()
 	    if (user != null) {
-	        if (cartItem.getNewQuantity() > 0 && cartItem.getNewQuantity() != cartItem.getQuantity()) { //
+	        if (cartItem.getNewQuantity() > 0 ) { //
 	            cartItem.setQuantity(cartItem.getNewQuantity());
 	            iCartService.updateCartItem(cartItem);
 	        } else if (cartItem.getNewQuantity() == 0) {

@@ -32,19 +32,6 @@ public class CartItemDAO implements Serializable {
 		em.flush();
 	}
 
-//    public CartItem addFromCartViewModel (CartViewModel Cartvm, Long userId) {   
-//        CartItem item = new CartItem();	       
-//        item.setQuantity(Cartvm.getQuantity());
-//        item.setDateOfOrder(Cartvm.getDateOfOrder());
-//        item.setId(Cartvm.getId());
-//        
-//        User user = userDAO.findByUserId(userId).getFirstName()
-//     
-//       
-//
-//        return item;
-//    }
-
 	public void updateCartItem(CartItem cartItem) {
 		em.merge(cartItem);
 		em.flush();
@@ -54,6 +41,7 @@ public class CartItemDAO implements Serializable {
 		CartItem cartItem = em.find(CartItem.class, cartItemId);
 		if (cartItem != null) {
 			em.remove(cartItem);
+			em.flush();
 		}
 	}
 
@@ -78,23 +66,31 @@ public class CartItemDAO implements Serializable {
 		return cartItems;
 	}
 
-	public CartItem getCartItemByTourPackageAndUser(TourPackage tourPackage, User user) {
-		TypedQuery<CartItem> query = em.createQuery(
-				"SELECT c FROM CartItem c WHERE c.tourPackage = :tourPackage AND c.user = :user", CartItem.class);
-		query.setParameter("tourPackage", tourPackage);
-		query.setParameter("user", user);
+//	public CartItem getCartItemByTourPackageAndUser(TourPackage tourPackage, User user) {
+//		TypedQuery<CartItem> query = em.createQuery(
+//				"SELECT c FROM CartItem c WHERE c.tourPackage = :tourPackage AND c.user = :user", CartItem.class);
+//		query.setParameter("tourPackage", tourPackage);
+//		query.setParameter("user", user);
+//
+//		List<CartItem> results = query.getResultList();
+//
+//		if (results.isEmpty()) {
+//			return null;
+//		} else if (results.size() == 1) {
+//			return results.get(0);
+//		} else {
+//			// Handle multiple matches (log an error, return a specific result, etc.)
+//			// For example, you might throw an exception:
+//			throw new NonUniqueResultException("Multiple cart items found for the given criteria");
+//		}
+//	}
+	public List<CartItem> getCartItemsByTourPackageAndUser(TourPackage tourPackage, User user) {
+	    TypedQuery<CartItem> query = em.createQuery(
+	        "SELECT c FROM CartItem c WHERE c.tourPackage = :tourPackage AND c.user = :user", CartItem.class);
+	    query.setParameter("tourPackage", tourPackage);
+	    query.setParameter("user", user);
 
-		List<CartItem> results = query.getResultList();
-
-		if (results.isEmpty()) {
-			return null;
-		} else if (results.size() == 1) {
-			return results.get(0);
-		} else {
-			// Handle multiple matches (log an error, return a specific result, etc.)
-			// For example, you might throw an exception:
-			throw new NonUniqueResultException("Multiple cart items found for the given criteria");
-		}
+	    return query.getResultList();
 	}
 
 	public CartItem getCartItemByServiceAndUser(Service service, User user) {
