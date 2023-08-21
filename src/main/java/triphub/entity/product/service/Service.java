@@ -9,11 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import triphub.entity.product.Price;
-import triphub.entity.product.service.accommodation.Accommodation;
-import triphub.entity.product.service.restaurant.Restaurant;
-import triphub.entity.product.service.transportation.Transportation;
-
-
+import triphub.entity.service.Accommodation;
+import triphub.entity.service.Restaurant;
+import triphub.entity.service.Transportation;
 import triphub.entity.util.Date;
 
 @Entity
@@ -33,9 +31,36 @@ public class Service {
     @JoinColumn(name = "tillDate_id")
     private Date availableTill;
   
-//    @OneToOne( cascade = CascadeType.ALL)
-//    private Product product;
- 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Restaurant restaurant;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Accommodation accommodation;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Transportation transportation;
+
+    
+			
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+	public Accommodation getAccommodation() {
+		return accommodation;
+	}
+	public void setAccommodation(Accommodation accommodation) {
+		this.accommodation = accommodation;
+	}
+	public Transportation getTransportation() {
+		return transportation;
+	}
+	public void setTransportation(Transportation transportation) {
+		this.transportation = transportation;
+	}
+
 	public Long getId() {
 		return id;
 	}

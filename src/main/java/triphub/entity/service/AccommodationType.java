@@ -1,4 +1,4 @@
-package triphub.entity.product.service.accommodation;
+package triphub.entity.service;
 
 public enum AccommodationType {
 	Hotel ("Hotel"),

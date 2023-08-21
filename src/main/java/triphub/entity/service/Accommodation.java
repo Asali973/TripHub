@@ -1,4 +1,4 @@
-package triphub.entity.product.service.accommodation;
+package triphub.entity.service;
 
 import javax.persistence.*;
 
@@ -22,8 +22,8 @@ public class Accommodation {
 	@Enumerated(EnumType.STRING)
 	private AccommodationType accommodationType;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	private Service service;
+//	@OneToOne(cascade = CascadeType.ALL)
+//	private Service service;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Picture picture;
@@ -31,8 +31,16 @@ public class Accommodation {
 	@Lob
 	private String description;
 
+	
+	@OneToOne(mappedBy = "accommodation")
+    private Service service;
+
 	public Accommodation() {
 	}
+	
+	
+
+
 
 	public Accommodation(String name, Address address, AccommodationType accommodationType, Picture picture,
 			String description) {

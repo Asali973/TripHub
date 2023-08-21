@@ -73,5 +73,13 @@
         <redirect />
     </navigation-case>    
 </navigation-rule>
+
+<managed-bean>
+    <managed-bean-name>cartBean</managed-bean-name>
+    <managed-bean-class>triphub.managedBeans.products.CartBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+</managed-bean>
+
+
 	<application />
 </faces-config>

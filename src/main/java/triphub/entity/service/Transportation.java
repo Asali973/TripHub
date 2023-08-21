@@ -1,4 +1,4 @@
-package triphub.entity.product.service.transportation;
+package triphub.entity.service;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

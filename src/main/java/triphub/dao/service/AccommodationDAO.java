@@ -12,8 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.product.service.ServiceInterface;
-import triphub.entity.product.service.accommodation.Accommodation;
-
+import triphub.entity.service.Accommodation;
 import triphub.entity.util.Address;
 import triphub.viewModel.SubServicesViewModel;
 

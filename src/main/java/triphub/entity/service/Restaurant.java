@@ -1,4 +1,4 @@
-package triphub.entity.product.service.restaurant;
+package triphub.entity.service;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
