@@ -8,10 +8,11 @@ import triphub.entity.user.User;
 
 public interface ICartService {
 	
-	    void addToCart(Object cartItemObject, User user);
+	  void addToCart(Object cartItemObject, User user);
+	// public void addToCart(Object cartItemObject, User user, int quantity);
 	    void removeFromCart(Long cartItemId, User user);
-	    List<Object> getCartItemsByUser(User user);
-	    BigDecimal calculateTotalPrice(List<CartItem> cartItems);
+	    List<CartItem> getCartItemsByUser(User user);	  
 	    List<CartItem> getCartItemsWithTourPackages();
-	
+	    void updateCartItem(CartItem cartItem);
+	    BigDecimal calculateTotalPrice(List<CartItem> cartItems);
 }

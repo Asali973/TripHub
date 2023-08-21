@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.TourPackageFormViewModel;
 
 @Entity
@@ -36,6 +37,7 @@ public class Price {
 		price.setCurrency(tourPackageVm.getCurrency());
 		return price;
 	}
+	
 	public void  updatePriceFromViewModel(TourPackageFormViewModel tourPackageVm) {
 		this.setAmount(tourPackageVm.getAmount());
 		this.setCurrency(tourPackageVm.getCurrency());
@@ -45,6 +47,24 @@ public class Price {
 		tourPackageVm.setCurrency(this.getCurrency());
 	}
 
+	public static Price createPriceFromViewModel(SubServicesViewModel serviceVm) {
+		Price price= new Price();
+		price.setAmount(serviceVm.getPrice().getAmount());
+		price.setCurrency(serviceVm.getPrice().getCurrency());
+		return price;
+	}
+	
+	public void  updatePriceFromViewModel(SubServicesViewModel servicevm) {
+		this.setAmount(servicevm.getPrice().getAmount());
+		this.setCurrency(servicevm.getPrice().getCurrency());
+	}
+	
+	public void  initPriceViewModel(SubServicesViewModel servicevm) {
+		servicevm.getPrice().setAmount(this.getAmount());
+		servicevm.getPrice().setCurrency(this.getCurrency());
+	}
+	
+	
 	public BigDecimal getAmount() {
 		return amount;
 	}

@@ -2,27 +2,44 @@ package triphub.viewModel;
 
 import java.io.Serializable;
 
-import triphub.entity.product.service.accommodation.AccommodationType;
-import triphub.entity.product.service.transportation.TransportationType;
+
+import triphub.entity.product.Price;
+import triphub.entity.service.AccommodationType;
+import triphub.entity.service.TransportationType;
+
 import triphub.entity.util.Address;
+import triphub.entity.util.Date;
 import triphub.entity.util.Picture;
 import triphub.entity.util.PictureType;
 
 public class SubServicesViewModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	
+
+
 
 	private Long id;
 	
 	private String name;
+	
+	private boolean availability;
+	private Date availableFrom;
+	private Date availableTill;
+	
+
+	private Date startDate;
+	private Date endDate;
 
 	private AccommodationType accommodationType;
 	private TransportationType transportationType;
 
-	// Solely for Restaurant
+	
 	private String description;
 
 	private Address address = new Address();
+	private Price price= new Price();
 
 	// Image attributes
 	private int size;
@@ -63,54 +80,6 @@ public class SubServicesViewModel implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-//	public String getNum() {
-//		return num;
-//	}
-//
-//	public void setNum(String num) {
-//		this.num = num;
-//	}
-//
-//	public String getStreet() {
-//		return street;
-//	}
-//
-//	public void setStreet(String street) {
-//		this.street = street;
-//	}
-//
-//	public String getCity() {
-//		return city;
-//	}
-//
-//	public void setCity(String city) {
-//		this.city = city;
-//	}
-//
-//	public String getState() {
-//		return state;
-//	}
-//
-//	public void setState(String state) {
-//		this.state = state;
-//	}
-//
-//	public String getCountry() {
-//		return country;
-//	}
-//
-//	public void setCountry(String country) {
-//		this.country = country;
-//	}
-//
-//	public String getZipCode() {
-//		return zipCode;
-//	}
-//
-//	public void setZipCode(String zipCode) {
-//		this.zipCode = zipCode;
-//	}
 
 	public String getLink() {
 		return link;
@@ -167,5 +136,56 @@ public class SubServicesViewModel implements Serializable {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+	public Price getPrice() {
+		return price;
+	}
+
+	public void setPrice(Price price) {
+		this.price = price;
+	}
+
+	public boolean isAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(boolean availability) {
+		this.availability = availability;
+	}
+
+	public Date getAvailableFrom() {
+		return availableFrom;
+	}
+
+	public void setAvailableFrom(Date availableFrom) {
+		this.availableFrom = availableFrom;
+	}
+
+	public Date getAvailableTill() {
+		return availableTill;
+	}
+
+	public void setAvailableTill(Date availableTill) {
+		this.availableTill = availableTill;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	
+	
+	
 
 }

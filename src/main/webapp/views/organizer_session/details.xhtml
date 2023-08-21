@@ -25,8 +25,8 @@
 /* Add any additional styling as needed */
 </style>
 </h:head>
-<h:body>
 
+<h:body>
 	<h1>Package Details</h1>
 
 	<h2>#{tourPackageBean.selectedTourPackage != null ?
@@ -40,10 +40,11 @@
 		#{tourPackageBean.selectedTourPackage.destination.country}</p>
 	<p>Theme: #{tourPackageBean.selectedTourPackage.theme.themeName}</p>
 	<h2>Itinerary</h2>
-	<h:form>
-		<h:commandButton value="Add to Cart" action="#{cartBean.addToCart}">
-			<f:param name="selectedPackageId" value="#{param.id}" />
-		</h:commandButton>
-	</h:form>
+	 <h:form>
+      <h:commandButton value="Add to Cart" action="#{cartBean.addToCart}">
+    <f:param name="selectedPackageId" value="#{param.id}" />
+    <f:param name="quantity" value="#{cartBean.selectedQuantity}" />
+</h:commandButton>
+    </h:form>
 </h:body>
 </html>
