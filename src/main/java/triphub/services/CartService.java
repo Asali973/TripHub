@@ -72,24 +72,64 @@ public class CartService implements ICartService {
         BigDecimal totalPrice = calculateTotalPrice(cartItemDAO.getCartItemsByUser(user));
         user.setCartTotal(totalPrice);
     }
+    
+//    @Override
+//    public void addToCart(Object cartItemObject, User user, int quantity) {    
+//
+//        if (cartItemObject instanceof TourPackage) {
+//            TourPackage tourPackage = (TourPackage) cartItemObject;
+//            CartItem existingCartItem = cartItemDAO.getCartItemByTourPackageAndUser(tourPackage, user);
+//
+//            if (existingCartItem != null) {
+//                // If the cart item already exists, update the quantity
+//                existingCartItem.setQuantity(existingCartItem.getQuantity() + quantity);
+//                existingCartItem.setTotalPrice(existingCartItem.getTotalPrice().add(tourPackage.getPrice().getAmount().multiply(BigDecimal.valueOf(quantity))));
+//                cartItemDAO.updateCartItem(existingCartItem);
+//            } else {
+//                // If the cart item doesn't exist, create a new one
+//                CartItem newCartItem = new CartItem();
+//                newCartItem.setUser(user);
+//                newCartItem.setTourPackage(tourPackage);
+//                newCartItem.setQuantity(quantity);
+//                newCartItem.setTotalPrice(tourPackage.getPrice().getAmount().multiply(BigDecimal.valueOf(quantity)));
+//                newCartItem.setDateOfOrder(new Date());
+//                cartItemDAO.addToCart(newCartItem);
+//            }
+//        } else if (cartItemObject instanceof Service) {
+//            Service service = (Service) cartItemObject;
+//            CartItem existingCartItem = cartItemDAO.getCartItemByServiceAndUser(service, user);
+//
+//            if (existingCartItem != null) {
+//                // If the cart item already exists, update the quantity
+//                existingCartItem.setQuantity(existingCartItem.getQuantity() + quantity);
+//                existingCartItem.setTotalPrice(existingCartItem.getTotalPrice().add(service.getPrice().getAmount().multiply(BigDecimal.valueOf(quantity))));
+//                cartItemDAO.updateCartItem(existingCartItem);
+//            } else {
+//                // If the cart item doesn't exist, create a new one
+//                CartItem newCartItem = new CartItem();
+//                newCartItem.setUser(user);
+//                newCartItem.setService(service);
+//                newCartItem.setQuantity(quantity);
+//                newCartItem.setTotalPrice(service.getPrice().getAmount().multiply(BigDecimal.valueOf(quantity)));
+//                newCartItem.setDateOfOrder(new Date());
+//                cartItemDAO.addToCart(newCartItem);
+//            }
+//        }
+//    }
 
-   
+
+
     @Override
-    public List<Object> getCartItemsByUser(User user) {
-        List<Object> cartItems = new ArrayList<>();
+    public List<CartItem> getCartItemsByUser(User user) {
+        List<CartItem> cartItems = new ArrayList<>();
         List<CartItem> cartItemEntities = cartItemDAO.getCartItemsByUser(user);
         
         for (CartItem cartItem : cartItemEntities) {
-            if (cartItem.getTourPackage() != null) {
-                cartItems.add(cartItem.getTourPackage());
-            } else if (cartItem.getService() != null) {
-                cartItems.add(cartItem.getService());
-            }
-            // Adjust the conditions based on your cart item structure
+            cartItems.add(cartItem);
         }
         return cartItems;
     }
-
+    
     @Override
     public BigDecimal calculateTotalPrice(List<CartItem> cartItems) {
         BigDecimal totalPrice = BigDecimal.ZERO;

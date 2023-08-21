@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -65,12 +66,19 @@ public class CartItemDAO {
         query.setParameter("tourPackage", tourPackage);
         query.setParameter("user", user);
 
-        try {
-            return query.getSingleResult();
-        } catch (NoResultException e) {
+        List<CartItem> results = query.getResultList();
+
+        if (results.isEmpty()) {
             return null;
+        } else if (results.size() == 1) {
+            return results.get(0);
+        } else {
+            // Handle multiple matches (log an error, return a specific result, etc.)
+            // For example, you might throw an exception:
+            throw new NonUniqueResultException("Multiple cart items found for the given criteria");
         }
     }
+
     public CartItem getCartItemByServiceAndUser(Service service, User user) {
         TypedQuery<CartItem> query = em.createQuery(
             "SELECT c FROM CartItem c WHERE c.user = :user AND c.service = :service",
@@ -79,11 +87,18 @@ public class CartItemDAO {
         query.setParameter("user", user);
         query.setParameter("service", service);
 
-        try {
-            return query.getSingleResult();
-        } catch (NoResultException e) {
+        List<CartItem> results = query.getResultList();
+
+        if (results.isEmpty()) {
             return null;
+        } else if (results.size() == 1) {
+            return results.get(0);
+        } else {
+            // Handle multiple matches (log an error, return a specific result, etc.)
+            // For example, you might throw an exception:
+            throw new NonUniqueResultException("Multiple cart items found for the given criteria");
         }
     }
+
 
 }

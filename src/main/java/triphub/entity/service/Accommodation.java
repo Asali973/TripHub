@@ -35,7 +35,6 @@ public class Accommodation {
 	}
 	
 	
-
 	public Accommodation(String name, Address address, AccommodationType accommodationType, Picture picture,
 			String description) {
 		this.name = name;

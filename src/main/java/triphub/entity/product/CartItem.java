@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 import triphub.entity.product.service.Service;
 import triphub.entity.user.User;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -39,8 +40,9 @@ public class CartItem {
 	private Date dateOfOrder;
 	
 	@Transient
-    private int newQuantity =1;
+    private int newQuantity = 1;
 	
+	private BigDecimal totalPrice;
 	public Long getId() {
 		return id;
 	}
@@ -95,6 +97,14 @@ public class CartItem {
 
 	public void setNewQuantity(int newQuantity) {
 		this.newQuantity = newQuantity;
+	}
+
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 }
