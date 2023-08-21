@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.restaurant.Restaurant;
 import triphub.helpers.FacesMessageUtil;
 import triphub.services.RestaurantService;
@@ -82,7 +83,7 @@ public class RestaurantBean implements Serializable {
 		return null;		
 	}
 
- void clear() {
+	public void clear() {
 		restaurantvm = new SubServicesViewModel();
 	}
 
