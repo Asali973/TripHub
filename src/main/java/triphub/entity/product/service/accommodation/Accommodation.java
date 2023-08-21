@@ -3,9 +3,12 @@ package triphub.entity.product.service.accommodation;
 import javax.persistence.*;
 
 import triphub.entity.product.service.Service;
+import triphub.entity.user.User;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
+import triphub.helpers.PasswordUtils;
 import triphub.viewModel.SubServicesViewModel;
+import triphub.viewModel.UserViewModel;
 
 @Entity
 public class Accommodation {
@@ -22,12 +25,9 @@ public class Accommodation {
 	@Enumerated(EnumType.STRING)
 	private AccommodationType accommodationType;
 
-	
-	//@OneToOne(mappedBy = "accommodation")
+	// @OneToOne(mappedBy = "accommodation")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Service service;
-
-	
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Picture picture;
@@ -47,11 +47,21 @@ public class Accommodation {
 		this.description = description;
 	}
 
+	public static Accommodation createAccommodationFromViewModel(SubServicesViewModel accommodationvm) {
+		Accommodation accommodation = new Accommodation();
+		accommodation.setId(accommodationvm.getId());
+		accommodation.setName(accommodationvm.getName());
+		accommodation.setAddress(accommodationvm.getAddress());
+		accommodation.setAccommodationType(accommodationvm.getAccommodationType());
+		accommodation.setDescription(accommodationvm.getDescription());
+		return accommodation;
+	}
+
 	public void updateAccommodationViewModel(SubServicesViewModel accommodationvm) {
+		this.setId(accommodationvm.getId());
 		this.setName(accommodationvm.getName());
 		this.setAddress(accommodationvm.getAddress());
 		this.setAccommodationType(accommodationvm.getAccommodationType());
-		this.setId(accommodationvm.getId());
 		this.setDescription(accommodationvm.getDescription());
 		// need to add picture soon
 

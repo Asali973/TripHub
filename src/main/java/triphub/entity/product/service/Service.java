@@ -2,6 +2,8 @@ package triphub.entity.product.service;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import triphub.entity.product.Price;
-import triphub.entity.product.service.accommodation.Accommodation;
+
 import triphub.entity.util.Date;
 
 import triphub.viewModel.SubServicesViewModel;
@@ -21,8 +23,8 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-	@OneToOne(mappedBy = "service")
-    private Accommodation accommodation;
+    @Enumerated(EnumType.STRING)
+	private ServiceType type;
     
     @OneToOne(cascade = CascadeType.ALL)
     private Price price;
@@ -37,7 +39,8 @@ public class Service {
   
     public static Service createServiceFromViewModel(SubServicesViewModel form) {
        Service service = new Service();
-        service.setId(form.getId());
+      //  service.setId(form.getId());
+       
         service.setPrice(form.getPrice());
         service.setAvailability(form.isAvailability());
         service.setAvailableFrom(form.getAvailableFrom());
@@ -91,6 +94,14 @@ public class Service {
 	}
 	public void setAvailableTill(Date availableTill) {
 		this.availableTill = availableTill;
+	}
+
+	public ServiceType getType() {
+		return type;
+	}
+
+	public void setType(ServiceType type) {
+		this.type = type;
 	}
 
 	

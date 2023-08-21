@@ -14,8 +14,9 @@ import javax.persistence.TypedQuery;
 import triphub.entity.product.Price;
 import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
+import triphub.entity.product.service.ServiceType;
 import triphub.entity.product.service.accommodation.Accommodation;
-import triphub.entity.user.User;
+
 import triphub.entity.util.Address;
 import triphub.viewModel.SubServicesViewModel;
 
@@ -38,18 +39,21 @@ public class AccommodationDAO implements ServiceInterface {
 		// create service 
 		
 		Service service = Service.createServiceFromViewModel(accommodationVm);
+		service.setType(ServiceType.Accommodation);
 		
 		Price price = Price.createPriceFromViewModel(accommodationVm);
 		service.setPrice(price);
 		
-		
 		// creer a Accommodation
 		Accommodation accommodation = new Accommodation();
-		accommodationVm.setId(accommodationVm.getId());
+		accommodation.setId(accommodationVm.getId());
 		accommodation.setName(accommodationVm.getName());
 		accommodation.setDescription(accommodationVm.getDescription());
 		accommodation.setService(service);
 		accommodation.setAccommodationType(accommodationVm.getAccommodationType());
+		
+		
+		
 
 //		Picture picture = new Picture();
 //		picture.setLink(formService.getLink());
@@ -63,11 +67,14 @@ public class AccommodationDAO implements ServiceInterface {
 		addressAccommodation.setCountry(accommodationVm.getAddress().getCountry());
 		accommodation.setAddress(addressAccommodation);
 		
+		
+		
+		
 
 //		em.persist(picture)
+		em.persist(service);
 		em.persist(price);
 		em.persist(addressAccommodation);
-		em.persist(service);
 		em.persist(accommodation);
 		em.flush();
 		return accommodation;
