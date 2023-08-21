@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import triphub.entity.product.service.Service;
 import triphub.entity.util.Address;
 import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.TourPackageFormViewModel;
@@ -23,6 +24,9 @@ public class Restaurant {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Service service;
+
 	private String description;
 
 	

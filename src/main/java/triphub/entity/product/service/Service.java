@@ -25,8 +25,7 @@ public class Service {
     @OneToOne(cascade = CascadeType.ALL)
     private Restaurant restaurant;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Accommodation accommodation;
+   
 
     @OneToOne(cascade = CascadeType.ALL)
     private Transportation transportation;

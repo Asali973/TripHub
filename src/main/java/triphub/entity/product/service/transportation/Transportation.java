@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import triphub.entity.product.service.Service;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
@@ -20,7 +21,13 @@ public class Transportation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Service service;
+
 	private String name;
+
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address departure;
