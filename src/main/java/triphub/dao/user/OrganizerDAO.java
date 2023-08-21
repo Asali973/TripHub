@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import triphub.entity.subscription.Customization;
 import triphub.entity.subscription.Subscription;
+import triphub.entity.subscription.SubscriptionType;
 import triphub.entity.user.*;
 import triphub.entity.util.*;
 import triphub.viewModel.UserViewModel;
@@ -33,12 +34,19 @@ public class OrganizerDAO {
 
 		CompanyInfo companyInfo = CompanyInfo.createCompanyInfoFromViewModel(form);
 		Administration administration = Administration.createAdministrationFromViewModel(form);
+		
+		Subscription defaultSubscription = new Subscription();
+		defaultSubscription.setType(SubscriptionType.STANDARD);
+		em.persist(defaultSubscription);
+		
 
 		Organizer organizer = new Organizer();
 		organizer.setUser(user);
 		organizer.setId(form.getOrganizerId());
 		organizer.setCompanyInfo(companyInfo);
 		organizer.setAdministration(administration);
+		organizer.setSubscription(defaultSubscription);
+		
 
 		em.persist(companyInfo);
 		em.persist(administration);

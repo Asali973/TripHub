@@ -1,5 +1,6 @@
 package triphub.managedBeans.registration;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 import org.mindrot.jbcrypt.BCrypt;
 
-@Named
+@Named("loginBean")
 @SessionScoped
 public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -193,10 +194,13 @@ public class LoginBean implements Serializable {
 		}
 	}
 
-	public String logout() {
-		// Invalidate session
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "login?faces-redirect=true";
+	public void logout() {
+	    // Invalidate session
+	    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+	    try {
+	        FacesContext.getCurrentInstance().getExternalContext().redirect("/triphub/views/home.xhtml");
+	    } catch (IOException e) {
+	    }
 	}
 
 	public UserService getUserService() {
@@ -222,6 +226,11 @@ public class LoginBean implements Serializable {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	
 	
 }

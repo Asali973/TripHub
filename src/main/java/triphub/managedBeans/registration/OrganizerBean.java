@@ -201,12 +201,12 @@ public class OrganizerBean implements Serializable {
 	        case STANDARD:
 	            break;
 	        case DELUXE:
-	            //addLayoutToList(layouts, "Basic");
+	            addLayoutToList(layouts, "Basic");
 	            addLayoutToList(layouts, "Advanced");
 	            addLayoutToList(layouts, "Advanced+");
 	            break;
 	        case PREMIUM:
-	            //addLayoutToList(layouts, "Standard");
+	            addLayoutToList(layouts, "Basic");
 	            addLayoutToList(layouts, "Advanced");
 	            addLayoutToList(layouts, "Advanced+");
 	            addLayoutToList(layouts, "Elite");

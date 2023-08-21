@@ -1,36 +1,104 @@
-
-
- html, body {
-  height: 100%;
+html, body {
+	height: 100%;
 }
 
 body {
-  display: flex ;
-  flex-direction: column;
-
+	display: flex;
+	flex-direction: column;
+	font-family: 'Arial', sans-serif;
+	background-color: #f4f5f7;
 }
 
 .container {
-  flex: 1; /* Make the container fill the available space */
-  /* Add any other styling for the container */
+	flex: 1; /* Make the container fill the available space */
+}
+
+.navbar {
+	background-color: #242c3d;
+	box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+	color: #ffffff;
+}
+
+.navbar-brand {
+	font-weight: bold;
+}
+
+/* Changement de couleur */
+.navbar-nav .nav-link:hover {
+	color: #007bff;  /* Vous pouvez remplacer cette couleur par celle de votre choix */
+}
+
+/* Sous-ligne */
+.navbar-nav .nav-link:hover {
+	text-decoration: underline;
+}
+
+/* Transformation (agrandissement) */
+.navbar-nav .nav-link {
+	transition: transform 0.3s;  /* Assurez-vous d'ajouter une transition pour que l'effet soit fluide */
+}
+
+.navbar-nav .nav-link:hover {
+	transform: scale(1.1);  /* Le lien sera agrandi de 10% lorsqu'il est survolé */
+}
+
+/* Ombre */
+.navbar-nav .nav-link:hover {
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  /* Ajoute une ombre avec un léger flou */
 }
 
 .footer {
-  height: 80px; /* Set the height of the footer */
-  background-color: #f8f9fa;
-  /* Add any other styling for the footer */
+	height: 80px; 
+	background-color: #242c3d;
+	color: #ffffff;
+	border-top: none;
+}
+
+.footer a {
+	color: #ffffff;
+}
+
+.footer a:hover {
+	color: #50b3a2;
+}
+
+.social-icons a {
+	font-size: 1.5rem;
+	margin: 0 10px;
+	transition: color 0.3s;
+	color: #ffffff;
+}
+
+.social-icons a:hover {
+	color: #50b3a2;
 }
 
 .social-icons {
-            list-style: none;
-            padding: 0;
-        }
+	list-style: none;
+	padding: 0;
+}
 
-        .social-icons li {
-            display: inline-block;
-            margin-right: 10px;
-        }
+.social-icons li {
+	display: inline-block;
+	margin-right: 10px;
+}
 
-        .social-icons li:last-child {
-            margin-right: 0;
-        }
+.social-icons li:last-child {
+	margin-right: 0;
+}
+
+.navbar, .footer {
+    border-radius: 0px; /* Ajoute des coins arrondis */
+    background-image: linear-gradient(to right, #1f2b47, #242c3d); /* Gradient léger */
+}
+
+.navbar-nav .nav-link, .footer a {
+    transition: all 0.3s; /* Transition douce pour tous les changements */
+}
+
+.social-icons a:hover {
+    transform: rotate(15deg); /* Rotation douce sur les icônes de médias sociaux */
+}
