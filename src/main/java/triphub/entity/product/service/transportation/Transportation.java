@@ -26,7 +26,6 @@ public class Transportation {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Service service;
 
-
 	private String name;
 
 
