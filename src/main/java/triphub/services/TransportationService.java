@@ -8,8 +8,12 @@ import javax.inject.Inject;
 
 import triphub.dao.service.TransportationDAO;
 import triphub.entity.product.service.ServiceInterface;
+
 import triphub.entity.service.Transportation;
 import triphub.entity.service.TransportationType;
+
+import triphub.helpers.FacesMessageUtil;
+
 import triphub.viewModel.SubServicesViewModel;
 
 @ApplicationScoped
@@ -47,64 +51,72 @@ public class TransportationService implements ServiceInterface{
 		return transportationDAO.findByType(transportationType);
 	}
 
-	public List<Transportation> getAllTransportation() {
-		return transportationDAO.getAllTransportation();
-	}
-	
-	public void update(Transportation transportation) {
-		transportationDAO.update(transportation);
-	}
 
-	public void delete(Long id) {
-		transportationDAO.delete(id);
+	@Override
+	public SubServicesViewModel create(SubServicesViewModel transportationvm) {
+		try {
+			transportationDAO.update(transportationvm);
+		} catch (IllegalArgumentException e) {
+			// Handle the case when the tour package with the provided ID was not found in
+			// the DAO
+			FacesMessageUtil.addErrorMessage("Failed to update restaurant: " + e.getMessage());
+		} catch (Exception e) {
+			// Handle any other unexpected exceptions that might occur during the update
+			// process
+			FacesMessageUtil.addErrorMessage("Failed to update restaurant. An unexpected error occurred.");
+		}
+		return transportationvm;	}
+
+	@Override
+	public Transportation read(Long id) {
+		return transportationDAO.read(id);		
 	}
 
 	@Override
-	public Object create(SubServicesViewModel subservicevm) {
-		// TODO Auto-generated method stub
-		return null;
+	public SubServicesViewModel update(SubServicesViewModel transportationvm) {
+		try {
+			transportationDAO.update(transportationvm);
+		} catch (IllegalArgumentException e) {
+			// Handle the case when the tour package with the provided ID was not found in
+			// the DAO
+			FacesMessageUtil.addErrorMessage("Failed to update restaurant: " + e.getMessage());
+		} catch (Exception e) {
+			// Handle any other unexpected exceptions that might occur during the update
+			// process
+			FacesMessageUtil.addErrorMessage("Failed to update restaurant. An unexpected error occurred.");
+		}
+		return transportationvm;
 	}
 
-	@Override
-	public Object read(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	public SubServicesViewModel update(SubServicesViewModel subservicevm) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(SubServicesViewModel subservicevm) {
-		// TODO Auto-generated method stub
+	public void delete(SubServicesViewModel transportationvm) {
+		transportationDAO.delete(transportationvm);		
 		
 	}
 
 	@Override
 	public SubServicesViewModel initSubService(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Transportation transportation = transportationDAO.findById(id);
+        if (transportation == null) {
+            return null;
+        }
+        return transportation.initTransportationViewModel();
 	}
 
 	@Override
-	public List getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Transportation> getAll() {
+		return transportationDAO.getAll();
 	}
 
 	@Override
-	public Object findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Transportation findByName(String name) {
+		return transportationDAO.findByName(name);
 	}
 
 	@Override
-	public Object findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Transportation findById(Long id) {
+		return transportationDAO.findById(id);
 	}
 
 

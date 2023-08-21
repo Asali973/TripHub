@@ -67,6 +67,15 @@ public class Address {
 		subservicesvm.getAddress().setCountry(this.getCountry());
 		subservicesvm.getAddress().setZipCode(this.getZipCode());
 	}
+	
+	public void updateAddressFromViewModel(SubServicesViewModel form) {
+		this.setNum(form.getAddress().getNum());
+		this.setStreet(form.getAddress().getStreet());
+		this.setCity(form.getAddress().getCity());
+		this.setState(form.getAddress().getState());
+		this.setCountry(form.getAddress().getCountry());
+		this.setZipCode(form.getAddress().getZipCode());
+	}
 
 	public Long getId() {
 		return id;

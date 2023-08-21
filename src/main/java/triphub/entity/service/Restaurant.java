@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import triphub.entity.product.service.Service;
 import triphub.entity.util.Address;
 import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.TourPackageFormViewModel;
@@ -23,6 +24,9 @@ public class Restaurant {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Service service;
+
 	private String description;
 
 	
@@ -40,13 +44,13 @@ public class Restaurant {
 	public void updateRestaurantViewModel(SubServicesViewModel restaurantvm) {
 		this.setName(restaurantvm.getName());
 		this.setId(restaurantvm.getId());
+		this.getAddress().updateAddressFromViewModel(restaurantvm);
 		this.setDescription(restaurantvm.getDescription());
 		// need to add picture soon
 	}
 
 	public SubServicesViewModel initRestaurantViewModel() {
 		SubServicesViewModel restaurantvm = new SubServicesViewModel();
-		Address address = new Address();
 		restaurantvm.setId(this.getId());
 		restaurantvm.setName(this.getName());
 		restaurantvm.setAddress(this.getAddress());

@@ -35,6 +35,7 @@ public class AccommodationService implements ServiceInterface {
 	public List<Accommodation> getAllAccommodation() {
 		return accommodationDAO.getAll();
 	}
+
 	@Transactional
 	@Override
 	public Accommodation create(SubServicesViewModel accommodationvm) {

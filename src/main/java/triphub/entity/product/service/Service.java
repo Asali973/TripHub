@@ -21,15 +21,6 @@ public class Service {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Restaurant restaurant;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Accommodation accommodation;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Transportation transportation;
-
-    @OneToOne(cascade = CascadeType.ALL)
     private Price price;
 
     private boolean availability;
@@ -40,7 +31,16 @@ public class Service {
     @JoinColumn(name = "tillDate_id")
     private Date availableTill;
   
+    @OneToOne(cascade = CascadeType.ALL)
+    private Restaurant restaurant;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Accommodation accommodation;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Transportation transportation;
+
+    
 			
 	public Restaurant getRestaurant() {
 		return restaurant;
@@ -60,6 +60,7 @@ public class Service {
 	public void setTransportation(Transportation transportation) {
 		this.transportation = transportation;
 	}
+
 	public Long getId() {
 		return id;
 	}

@@ -2,22 +2,24 @@ package triphub.dao.service;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
+
 import triphub.entity.product.Theme;
+import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.service.Accommodation;
 import triphub.entity.service.Transportation;
 import triphub.entity.service.TransportationType;
+
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
 
-@Stateless
-public class TransportationDAO {
+@ApplicationScoped
+public class TransportationDAO implements ServiceInterface{
 	@PersistenceContext
 	private EntityManager em;
 
@@ -27,11 +29,12 @@ public class TransportationDAO {
 
 	public TransportationDAO() {
 	}
-
+	
+	@Override
 	public Transportation create(SubServicesViewModel transportationvm) {
 
 		Transportation transportation = new Transportation();
-		transportation.setNameTransportation(transportationvm.getName());
+		transportation.setName(transportationvm.getName());
 		transportation.setTransportation(transportationvm.getTransportationType());
 		transportation.setDescription(transportationvm.getDescription());
 
@@ -66,22 +69,6 @@ public class TransportationDAO {
 		return transportation;
 	}
 
-	public Transportation read(Long id) {
-		return em.find(Transportation.class, id);
-	}
-
-	public void update(Transportation transportation) {
-		if (transportation != null) {
-			em.merge(transportation);
-		}
-	}
-
-	public void delete(Long id) {
-		Transportation transportation = em.find(Transportation.class, id);
-		if (transportation != null) {
-			em.remove(transportation);
-		}
-	}
 
 	public List<Transportation> findByType(TransportationType transportationType) {
 		TypedQuery<Transportation> query = em.createQuery(
@@ -90,9 +77,68 @@ public class TransportationDAO {
 		return query.getResultList();
 	}
 
-	public List<Transportation> getAllTransportation() {
+
+
+	@Override
+	public SubServicesViewModel update(SubServicesViewModel transportationvm) {
+		Transportation transportation = em.find(Transportation.class, transportationvm.getId());
+		if (transportation == null) {
+			throw new IllegalArgumentException("Restaurant with ID " + transportationvm.getId() + " not found.");
+		}
+
+		transportation.updateTransportationViewModel(transportationvm);
+		transportation = em.merge(transportation);
+		em.flush();
+
+		// Convert the updated entity back to the view model and return it
+		return transportation.initTransportationViewModel();
+	}
+
+	@Override
+	public void delete(SubServicesViewModel transportationvm) {
+		Transportation transportation = em.find(Transportation.class, transportationvm.getId());
+		if (transportation == null) {
+			throw new IllegalArgumentException("Restaurant with ID " + transportationvm.getId() + " not found.");
+		}
+		transportation.updateTransportationViewModel(transportationvm);
+		em.remove(transportation);
+		em.flush();
+	}
+
+	@Override
+	public SubServicesViewModel initSubService(Long id) {
+		Transportation transportation = em.find(Transportation.class, id);
+		if (transportation == null) {
+		return null;
+		}
+		return transportation.initTransportationViewModel();
+	}
+
+	@Override
+	public Transportation read(Long id) {
+		return em.find(Transportation.class, id);
+	}
+	
+	@Override
+	public List<Transportation> getAll() {
 		TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation t", Transportation.class);
+
 		return query.getResultList();
+	}
+
+	@Override
+	public Transportation findByName(String name) {
+		TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation t WHERE t.name = :name", Transportation.class);
+		query.setParameter("name", name);
+
+		List<Transportation> transportations = query.getResultList();
+		return transportations.isEmpty() ? null : transportations.get(0);
+	}
+
+	@Override
+	public Transportation findById(Long id) {
+		return em.find(Transportation.class,id);
+
 	}
 
 }

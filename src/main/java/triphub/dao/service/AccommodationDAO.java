@@ -54,9 +54,7 @@ public class AccommodationDAO implements ServiceInterface {
 //		em.persist(picture);
 		em.persist(addressAccommodation);
 		em.persist(accommodation);
-
-		accommodation.setAddress(addressAccommodation);
-
+		em.flush();
 		return accommodation;
 	}
 	

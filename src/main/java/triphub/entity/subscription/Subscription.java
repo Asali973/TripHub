@@ -8,56 +8,65 @@ import java.util.List;
 
 @Entity
 public class Subscription {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne
-    private Price price;
+	@ManyToOne
+	private Price price;
 
-    private int duration;
+	private int duration;
 
-    @Enumerated(EnumType.STRING)
-    private SubscriptionType type;
+	@Enumerated(EnumType.STRING)
+	private SubscriptionType type;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Customization customization;
-    
-    public boolean allowsCustomTheme() {
-        switch(this.type) {
-            case PREMIUM: return true;
-            default: return false;
-        }
-    }
+	@OneToOne(cascade = CascadeType.ALL)
+	private Customization customization;
 
-    public boolean allowsCustomLogo() {
-        switch(this.type) {
-            case DELUXE:
-            case PREMIUM:
-                return true;
-            default:
-                return false;
-        }
-    }
+	public boolean allowsCustomTheme() {
+		switch (this.type) {
+		case PREMIUM:
+			return true;
+		default:
+			return false;
+		}
+	}
 
-    public boolean allowsLayoutChange() {
-        switch(this.type) {
-            case DELUXE:
-            case PREMIUM:
-                return true;
-            default:
-                return false;
-        }
-    }
+	public boolean allowsCustomLogo() {
+		switch (this.type) {
+		case DELUXE:
+		case PREMIUM:
+			return true;
+		default:
+			return false;
+		}
+	}
 
-    public boolean allowsDarkTheme() {
-        switch(this.type) {
-            case PREMIUM:
-                return true;
-            default:
-                return false;
-        }
-    }
+	public boolean allowsLayoutChange() {
+		switch (this.type) {
+		case DELUXE:
+		case PREMIUM:
+			return true;
+		default:
+			return false;
+		}
+	}
+
+	public boolean allowsDarkTheme() {
+		switch (this.type) {
+		case PREMIUM:
+			return true;
+		default:
+			return false;
+		}
+	}
+
+	public Customization toCustomization() {
+		if (this.customization == null) {
+			this.customization = new Customization();
+		}
+		return this.customization;
+	}
 
 	public Long getId() {
 		return id;
@@ -98,9 +107,5 @@ public class Subscription {
 	public void setCustomization(Customization customization) {
 		this.customization = customization;
 	}
-	
-	
-    
-    
-    
+
 }
