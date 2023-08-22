@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import triphub.dao.service.RestaurantDAO;
 import triphub.entity.product.TourPackage;
@@ -29,7 +30,7 @@ public class RestaurantService implements ServiceInterface {
 	}
 
 
-	
+	@Transactional
 	@Override
 	public Restaurant create(SubServicesViewModel restaurantvm) {
 		return restaurantDAO.create(restaurantvm);

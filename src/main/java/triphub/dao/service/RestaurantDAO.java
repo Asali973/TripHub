@@ -48,6 +48,7 @@ public class RestaurantDAO implements ServiceInterface{
 		
 		// Create Restaurant
 		Restaurant restaurant = new Restaurant();
+		restaurant.setId(restaurantvm.getId());
 		restaurant.setName(restaurantvm.getName());
 		restaurant.setDescription(restaurantvm.getDescription());
 		restaurant.setService(service);
@@ -69,8 +70,9 @@ public class RestaurantDAO implements ServiceInterface{
 //		picture.setLink(formService.getLink());
 //		restaurant.setPicture(picture);
 
-		em.persist(service);
+		
 		em.persist(price);
+		em.persist(service);
 		em.persist(address);
 		em.persist(restaurant);
 //		em.persist(picture);

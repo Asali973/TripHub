@@ -45,6 +45,7 @@ public class Restaurant {
 		restaurant.setName(restaurantvm.getName());
 		restaurant.setAddress(restaurantvm.getAddress());
 		restaurant.setDescription(restaurantvm.getDescription());
+		restaurant.setService(restaurantvm.getService());
 		return restaurant;
 	}
 
