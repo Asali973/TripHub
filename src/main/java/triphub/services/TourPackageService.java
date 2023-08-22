@@ -1,5 +1,6 @@
 package triphub.services;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -12,7 +13,8 @@ import triphub.viewModel.TourPackageFormViewModel;
 
 
 @Stateless
-public class TourPackageService {
+public class TourPackageService implements Serializable{
+	private static final long serialVersionUID = 1L;
     @Inject
     private TourPackageDAO tourPackageDAO;
     

@@ -9,7 +9,7 @@ import triphub.entity.user.User;
 public interface ICartService {
 	
 	  void addToCart(Object cartItemObject, User user);
-	// public void addToCart(Object cartItemObject, User user, int quantity);
+	 public void addToCart(Object cartItemObject, User user, int quantity);
 	    void removeFromCart(Long cartItemId, User user);
 	    List<CartItem> getCartItemsByUser(User user);	  
 	    List<CartItem> getCartItemsWithTourPackages();

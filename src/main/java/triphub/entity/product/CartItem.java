@@ -12,12 +12,15 @@ import javax.persistence.Transient;
 
 import triphub.entity.product.service.Service;
 import triphub.entity.user.User;
+import triphub.viewModel.CartViewModel;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-public class CartItem {
+public class CartItem implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -40,9 +43,24 @@ public class CartItem {
 	private Date dateOfOrder;
 	
 	@Transient
-    private int newQuantity = 1;
+    private int newQuantity = quantity ;
 	
 	private BigDecimal totalPrice;
+	
+	
+	
+	 
+	
+	 public void updateFromCartItemViewModel(CartViewModel viewModel) {
+	        this.setQuantity(viewModel.getQuantity());
+	        
+	      
+	    }
+	public void setQuantity(int quantity) {		
+		this.quantity = quantity;
+		
+	}
+		
 	public Long getId() {
 		return id;
 	}
@@ -55,9 +73,7 @@ public class CartItem {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+	
 
 	public User getUser() {
 		return user;
@@ -105,6 +121,16 @@ public class CartItem {
 
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CartItem [id=").append(id).append(", tourPackage=").append(tourPackage).append(", service=")
+				.append(service).append(", quantity=").append(quantity).append(", user=").append(user)
+				.append(", dateOfOrder=").append(dateOfOrder).append(", newQuantity=").append(newQuantity)
+				.append(", totalPrice=").append(totalPrice).append("]");
+		return builder.toString();
 	}
 
 }

@@ -1,8 +1,10 @@
 package triphub.entity.product.service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+
 import java.util.Date;
+
+import java.io.Serializable;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,15 +18,15 @@ import javax.persistence.OneToOne;
 
 import triphub.entity.product.Price;
 
-
-
 import triphub.viewModel.SubServicesViewModel;
 
 @Entity
-public class Service {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+
+public class Service implements Serializable{
+	private static final long serialVersionUID = 1L;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
 	@Enumerated(EnumType.STRING)
 	private ServiceType type;
