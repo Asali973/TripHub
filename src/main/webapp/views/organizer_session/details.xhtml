@@ -27,6 +27,8 @@
 </h:head>
 
 <h:body>
+ <ui:composition template="/WEB-INF/templates/organizer_template.xhtml">
+        <ui:define name="content">
 	<h1>Package Details</h1>
 
 	<h2>#{tourPackageBean.selectedTourPackage != null ?
@@ -46,5 +48,7 @@
     <f:param name="quantity" value="#{cartBean.selectedQuantity}" />
 </h:commandButton>
     </h:form>
+            </ui:define>
+    </ui:composition>
 </h:body>
 </html>
