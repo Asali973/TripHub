@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 
 import triphub.dao.service.AccommodationDAO;
 import triphub.entity.product.service.ServiceInterface;
-import triphub.entity.service.Accommodation;
+import triphub.entity.subservices.Accommodation;
 import triphub.helpers.FacesMessageUtil;
 import triphub.viewModel.SubServicesViewModel;
 
