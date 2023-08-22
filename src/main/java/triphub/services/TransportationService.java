@@ -52,8 +52,8 @@ public class TransportationService implements ServiceInterface {
 		return transportationDAO.read(id);
 	}
 
-	@Override
-	public SubServicesViewModel update(SubServicesViewModel transportationvm) {
+	
+	public void update(SubServicesViewModel transportationvm) {
 		try {
 			transportationDAO.update(transportationvm);
 		} catch (IllegalArgumentException e) {
@@ -65,7 +65,7 @@ public class TransportationService implements ServiceInterface {
 			// process
 			FacesMessageUtil.addErrorMessage("Failed to update transportation. An unexpected error occurred.");
 		}
-		return transportationvm;
+		
 	}
 
 	@Override

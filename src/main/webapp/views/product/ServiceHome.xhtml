@@ -3,13 +3,14 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:define name="content">
 <h:head>
  <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Tour Packages</title>
+	<title>Accommodation</title>
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 	<h:outputStylesheet library="css" name="regForm.css" />
 	<style>
@@ -21,70 +22,132 @@
 </h:head>
 <h:body>
 
-	<div class="text-center">
-		<button class="reg-btn-primary" onclick="toggleCreateForm()">Show/Hide
-			Add a service</button>
-	</div>
+	<div style="display: flex; justify-content: space-evenly;">
+    <div>
+    <h:outputLink value="/triphub/views/product/AccommodationForm.xhtml" styleClass="reg-btn-primary">accommodation </h:outputLink>
+        <button class="reg-btn-primary" onclick="toggleCreateForm()">Show/Hide Add an accommodation</button>
+    </div>
+    
+    <div>
+        <button class="reg-btn-primary" onclick="toggleCreateForm()">Show/Hide Add a transportation</button>
+    </div>
+    
+    <div>
+        <button class="reg-btn-primary" onclick="toggleCreateForm()">Show/Hide Add a Restaurant</button>
+    </div>
+</div>
 
 	<div class="reg-form-container">
 		<!-- Show the create form -->
 		<div id="createFormContainer">
 
 			<h:form id="createForm" enctype="multipart/form-data">
-				<h3>Add New Tour Package</h3>
+				<h3>Add New Service</h3>
 				<div class="row">
+				
 					<div class="col-md-6">
 						<!-- First Slot (left column) -->
 						<div class="reg-form-group">
-							<h:outputLabel for="name" value="Name:" />
+							<h:outputLabel for="name" value="Name*:" 
+							required="true" requiredMessage="Name is required." />
 							<h:inputText id="name"
-								value="#{tourPackageBean.tourPackageVm.name}"
-								styleClass="reg-form-control" />
+								value="#{accommodationBean.accommodationVm.name}"
+								class="form-control" required="true" />
 						</div>
-
+						
 						<div class="reg-form-group">
-							<h:outputLabel for="price" value="Price:" />
-							<h:inputText id="price"
-								value="#{tourPackageBean.tourPackageVm.amount}"
-								styleClass="reg-form-control" />
-						</div>
+						<h:outputLabel for="typeAccommodation"
+							value="Type Accommodation :" required="true"
+							requiredMessage="Type accommodation is required." />
 
-						<div class="reg-form-group">
-							<h:outputLabel for="currency" value="Currency:" />
-							<h:selectOneMenu id="currency"
-								value="#{tourPackageBean.selectedCurrency}"
-								styleClass="reg-form-control">
-								<f:selectItems value="#{tourPackageBean.currencies}" />
-							</h:selectOneMenu>
-							<!-- Use the tourPackageVm.currency value in an inputHidden field -->
-							<h:inputHidden id="currencyHidden"
-								value="#{tourPackageBean.tourPackageVm.currency}" />
-						</div>
+						<h:selectOneMenu id="typeAccommodation"
+							value="#{accommodationBean.accommodationVm.accommodationType}"
+							class="form-control" required="true">
+							<f:selectItems value="#{accommodationBean.allAccommodationTypes}"
+								var="type" itemValue="#{type}" itemLabel="#{type.label}" />
 
-
+						</h:selectOneMenu>
 					</div>
+					
+						<div class="reg-form-group">
+						<h:outputLabel for="Price" value="Currency*:" required="true"
+							requiredMessage="Currency is required." />
+						<h:selectOneMenu id="typeCurrency"
+							value="#{accommodationBean.accommodationVm.currencyType}"
+							class="form-control" required="true">
+							<f:selectItems value="#{accommodationBean.allCurrencyTypes}"
+								var="type" itemValue="#{type}" itemLabel="#{type.label}" />
 
+						</h:selectOneMenu>
+					</div>
+					
+				
+					<div class="reg-form-group">
+							<h:outputLabel for="availableFrom" value="Available From:" />
+							 <input
+							type="date" id="availableFrom" class="form-control"
+							value="#{accommodationBean.accommodationVm.availableFrom}" />
+						</div>
+						
+						<div class="reg-form-group">
+							<h:outputLabel for="availableTil" value="Available Until*" />
+							<input
+							type="date" id="availableTill" class="form-control"
+							value="#{accommodationBean.accommodationVm.availableTill}" />
+						</div>
+							<div class="reg-form-group">
+						<h:outputLabel for="Price" value="Price*:" required="true"
+							requiredMessage="Price is required." />
+						<h:inputText id="price"
+							value="#{accommodationBean.accommodationVm.price.amount}"
+							class="form-control" required="true" />
+					</div>
+						
+				
+					</div>
+					
 					<div class="col-md-6">
 						<!-- Second Slot (right column) -->
 						<div class="reg-form-group">
+							<h:outputLabel for="num" value="Number:" />
+							<h:inputText id="num"
+								value="#{accommodationBean.accommodationVm.address.num}"
+								class="form-control" />
+						</div>
+						
+						<div class="reg-form-group">
+							<h:outputLabel for="street" value="Street:" />
+							<h:inputText id="street"
+								value="#{accommodationBean.accommodationVm.address.street}"
+								class="form-control" />
+						</div>
+						
+						<div class="reg-form-group">
 							<h:outputLabel for="cityName" value="City:" />
 							<h:inputText id="cityName"
-								value="#{tourPackageBean.tourPackageVm.cityName}"
-								styleClass="reg-form-control" />
+								value="#{accommodationBean.accommodationVm.address.city}"
+								class="form-control" />
 						</div>
 
 						<div class="reg-form-group">
 							<h:outputLabel for="state" value="State:" />
 							<h:inputText id="state"
-								value="#{tourPackageBean.tourPackageVm.state}"
-								styleClass="reg-form-control" />
+								value="#{accommodationBean.accommodationVm.address.state}"
+								class="form-control" />
 						</div>
 
 						<div class="reg-form-group">
 							<h:outputLabel for="country" value="Country:" />
 							<h:inputText id="country"
-								value="#{tourPackageBean.tourPackageVm.country}"
-								styleClass="reg-form-control" />
+								value="#{accommodationBean.accommodationVm.address.country}"
+								class="form-control" />
+						</div>
+						
+						<div class="reg-form-group">
+							<h:outputLabel for="zipCode" value="Zip Code:" />
+							<h:inputText id="zipCode"
+								value="#{accommodationBean.accommodationVm.address.zipCode}"
+								class="form-control" />
 						</div>
 					</div>
 				</div>
@@ -92,13 +155,11 @@
 				<div class="row">
 					<div class="col-md-6">
 						<!-- Third Slot (left column) -->
-						<div class="reg-form-group">
-							<h:outputLabel for="themeName" value="Theme:" />
-							<h:inputText id="themeName"
-								value="#{tourPackageBean.tourPackageVm.themeName}"
-								styleClass="reg-form-control" />
-						</div>
-					</div>
+											</div>
+					
+						<!-- Third Slot (left column) -->
+						
+					
 
 					<div class="col-md-6">
 						<!-- Fourth Slot (right column) -->
@@ -123,18 +184,23 @@
 						<!-- Fifth Slot (full-width) -->
 						<div class="reg-form-group">
 							<h:outputLabel for="description" value="Description:" />
-							<h:inputText id="description"
-								value="#{tourPackageBean.tourPackageVm.description}"
-								styleClass="reg-form-control" />
+							<h:inputTextarea id="description"
+								value="#{accommodationBean.accommodationVm.description}"
+								class="form-control" rows="4" maxlength="500"
+								oninput="updateCharCount(this)"></h:inputTextarea>
+							<small id="charCount">#{500 -
+								fn:length(accommodationBean.accommodationVm.description)}
+								characters remaining</small>
 						</div>
 					</div>
 				</div>
+				
 				<div class="row row-padding">
 					<div class="col-md-12">
 						<!-- Sixth Slot (full-width) -->
 						<div class="reg-form-group">
-							<h:commandButton value="Add Package"
-								action="#{tourPackageBean.createPackage}"
+							<h:commandButton value="Add Service"
+								action="#{accommodationBean.create}"
 								styleClass="reg-btn-primary" />
 						</div>
 					</div>
@@ -163,50 +229,59 @@
 
 	<!-- Display the list -->
 	<div class="table-container">
-		<h3>Available Tour Packages</h3>
+		<h3>Available Accommodation</h3>
 		<table class="table">
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Package Name</th>
+					<th>Accommodation Name</th>
 					<th>Price</th>
 					<th>Currency</th>
+					<th>Number</th>
+					<th>Street</th>
 					<th>City</th>
 					<th>State</th>
+					<th>ZipCode</th>
 					<th>Country</th>
-					<th>Theme</th>
+					<th>availableFrom</th>
+					<th>availableUntil</th>
 					<th>Description</th>
-					<th>Modify</th>
+					<th>Update</th>
 					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
-				<ui:repeat value="#{tourPackageBean.allTourPackages}" var="package">
+				<ui:repeat value="#{accommodationBean.allAccommodation}" var="accommodation">
 					<tr>
-						<td>#{package.id}</td>
-						<td>#{package.name}</td>
-						<td>#{package.price.amount}</td>
-						<td>#{package.price.currency}</td>
-						<td>#{package.destination.cityName}</td>
-						<td>#{package.destination.state}</td>
-						<td>#{package.destination.country}</td>
-						<td>#{package.theme.themeName}</td>
-						<td>#{package.description}</td>
+						<td>#{accommodation.id}</td>
+						<td>#{accommodation.name}</td>
+						<td>#{accommodation.service.price.amount}</td>
+						<td>#{accommodation.service.price.currency}</td>
+						<td>#{accommodation.address.num}</td>
+						<td>#{accommodation.address.street}</td>
+						<td>#{accommodation.address.city}</td>
+						<td>#{accommodation.address.state}</td>
+						<td>#{accommodation.address.zipCode}</td>
+						<td>#{accommodation.address.country}</td>
+						<td>#{accommodation.service.availableFrom}</td>
+						<td>#{accommodation.service.availableTill}</td>
+						<td>#{accommodation.description}</td>
+						
 						<td><h:form>
 								<!-- Update button -->
 								<h:commandButton value="Update"
-									action="#{tourPackageBean.updatePackage}"
+									action="#{accommodationBean.updateAccommodation}"
 									styleClass="reg-btn-primary btn-sm">
-									<f:param name="id" value="#{package.id}" />
+									<f:param name="id" value="#{accommodation.id}" />
 								</h:commandButton>
 							</h:form></td>
 						<td><h:form>
 								<!-- Delete button -->
 								<h:commandButton value="Delete"
-									actionListener="#{tourPackageBean.performDelete}"
+									actionListener="#{accommodationBean.deleteAccommodation}"
 									styleClass="reg-btn-primary btn-sm"
 									onclick="return confirmDelete();">
-									<f:param name="id" value="#{package.id}" />
+									<f:param name="id" value="#{accommodation.id}" />
 								</h:commandButton>
 							</h:form></td>
 					</tr>
@@ -226,7 +301,7 @@
                     <div class="text-center">
                         <!-- Refresh the list button -->
                         <h:commandButton value="Refresh the list"
-                                         action="#{tourPackageBean.loadAllTourPackages}"
+                                         action="#{accommodationBean.loadAllAccommodations}"
                                          styleClass="reg-btn-primary mr-2" />
                     </div>
                 

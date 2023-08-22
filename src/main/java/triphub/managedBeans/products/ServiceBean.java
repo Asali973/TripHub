@@ -1,5 +1,7 @@
 package triphub.managedBeans.products;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,7 +18,7 @@ import triphub.viewModel.SubServicesViewModel;
 
 @Named("serviceBean")
 @RequestScoped
-public class ServiceBean {
+public class ServiceBean implements Serializable {
 
 	@Inject
 	private ServiceService serviceService;
@@ -25,6 +27,8 @@ public class ServiceBean {
 	private SubServicesViewModel servicevm;
 	
 	private static final long serialVersionUID = 1L;
+	
+	private ServiceType selectedServiceType;
 	
 	private List<Service> allServices;
 
@@ -38,20 +42,39 @@ public class ServiceBean {
 		this.setAllServices(allServices);
 	}
 	
+//	@PostConstruct
+//	public void init() {
+//		setAllServices(serviceService.getAll());
+//		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+//		if (id != null) {
+//			Long serviceId = Long.parseLong(id);
+//			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedServiceId",
+//					serviceId);
+//			servicevm = serviceService.initService(serviceId);
+//			if (servicevm == null) {
+//				FacesMessageUtil.addErrorMessage("Initialization failed: Service does not exist");
+//			}
+//		}
+//	}
+	
 	@PostConstruct
-	public void init() {
-		setAllServices(serviceService.getAll());
-		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-		if (id != null) {
-			Long serviceId = Long.parseLong(id);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedServiceId",
-					serviceId);
-			servicevm = serviceService.initService(serviceId);
-			if (servicevm == null) {
-				FacesMessageUtil.addErrorMessage("Initialization failed: Service does not exist");
-			}
-		}
-	}
+    public void init() {
+        // Initialize other properties
+        selectedServiceType = null; // Initialize the selected service type
+    }
+    public List<Service> getFilteredServices() {
+        List<Service> filteredServices = new ArrayList<>();
+        if (selectedServiceType == null) {
+            filteredServices = allServices;
+        } else {
+            for (Service service : allServices) {
+                if (service.getType() == selectedServiceType) {
+                    filteredServices.add(service);
+                }
+            }
+        }
+        return filteredServices;
+    }
 
 	public List<Service> getAllServices() {
 		return allServices;
@@ -71,6 +94,22 @@ public class ServiceBean {
 
 	public void setServicevm(SubServicesViewModel servicevm) {
 		this.servicevm = servicevm;
+	}
+
+	public ServiceService getServiceService() {
+		return serviceService;
+	}
+
+	public void setServiceService(ServiceService serviceService) {
+		this.serviceService = serviceService;
+	}
+
+	public ServiceType getSelectedServiceType() {
+		return selectedServiceType;
+	}
+
+	public void setSelectedServiceType(ServiceType selectedServiceType) {
+		this.selectedServiceType = selectedServiceType;
 	}
 	
 }

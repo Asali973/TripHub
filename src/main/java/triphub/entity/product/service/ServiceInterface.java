@@ -8,7 +8,8 @@ public interface ServiceInterface<T> {
 
 	T create(SubServicesViewModel subservicevm);
 	T read(Long id);
-	SubServicesViewModel update(SubServicesViewModel subservicevm);
+	//SubServicesViewModel update(SubServicesViewModel subservicevm);
+	//void update(SubServicesViewModel subservicevm);
 	void delete(SubServicesViewModel subservicevm);
 	SubServicesViewModel initSubService(Long id);
 	List<T> getAll();
