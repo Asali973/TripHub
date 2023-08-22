@@ -16,8 +16,9 @@
 
 </h:head>
 <h:body>
+<div class="content-wrapper">
 	<nav class="navbar navbar-expand-lg navbar-dark">
-		<div class="container">
+		<div class="container-fluid">
 			<!-- Brand/logo -->
 			<a class="navbar-brand" href="/triphub/views/home.xhtml"> <h:graphicImage
 					library="images" name="logoheader.png" alt="Trip Hub"
@@ -100,11 +101,12 @@
 	</nav>
 
 	<!-- Add  page content here -->
-	<div class="container mt-4">
+	<div class="container-fluid mt-4">
 		<ui:insert name="content" />
 	</div>
+	</div>
 	<!-- Footer section -->
-	<footer class="footer">
+	<footer class="footer sticky-footer">
 		<div class="container text-center">
 			<p>© 2023 Trip Hub. All rights reserved.</p>
 			<ul class="list-inline social-icons">
