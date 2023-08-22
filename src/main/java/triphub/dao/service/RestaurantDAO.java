@@ -6,7 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import triphub.entity.product.Price;
+import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
+import triphub.entity.product.service.ServiceType;
 import triphub.entity.service.Restaurant;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
@@ -29,10 +32,25 @@ public class RestaurantDAO implements ServiceInterface{
 	@Override
 	public Restaurant create(SubServicesViewModel restaurantvm) {
 
+
+		// create service 
+		
+		Service service = Service.createServiceFromViewModel(restaurantvm);
+		service.setType(ServiceType.RESTAURANT);
+		
+		Price price = Price.createPriceFromViewModel(restaurantvm);
+		service.setPrice(price);
+		
+		service.setAvailability(restaurantvm.isAvailability());
+		service.setAvailableFrom(restaurantvm.getAvailableFrom());
+		service.setAvailableTill(restaurantvm.getAvailableTill());
+		
+		
 		// Create Restaurant
 		Restaurant restaurant = new Restaurant();
 		restaurant.setName(restaurantvm.getName());
 		restaurant.setDescription(restaurantvm.getDescription());
+		restaurant.setService(service);
 
 		// Create Address
 		Address address = new Address();
@@ -42,18 +60,22 @@ public class RestaurantDAO implements ServiceInterface{
 		address.setState(restaurantvm.getAddress().getState());
 		address.setCountry(restaurantvm.getAddress().getCountry());
 		address.setZipCode(restaurantvm.getAddress().getZipCode());
+		
+		restaurant.setAddress(address);
+
 
 		// Set Picture
 //		Picture picture = new Picture();
 //		picture.setLink(formService.getLink());
 //		restaurant.setPicture(picture);
 
-
-		em.persist(restaurant);
+		em.persist(service);
+		em.persist(price);
 		em.persist(address);
+		em.persist(restaurant);
 //		em.persist(picture);
+		em.flush();
 		
-		restaurant.setAddress(address);
 		return restaurant;
 	}
 

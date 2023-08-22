@@ -45,7 +45,7 @@ public class RestaurantService implements ServiceInterface {
 		try {
 			restaurantDAO.update(restaurantvm);
 		} catch (IllegalArgumentException e) {
-			// Handle the case when the tour package with the provided ID was not found in
+			// Handle the case when the restaurant with the provided ID was not found in
 			// the DAO
 			FacesMessageUtil.addErrorMessage("Failed to update restaurant: " + e.getMessage());
 		} catch (Exception e) {

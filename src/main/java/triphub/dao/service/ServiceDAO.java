@@ -1,9 +1,9 @@
 package triphub.dao.service;
 
+
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -11,10 +11,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.product.service.Service;
-import triphub.entity.product.service.ServiceInterface;
-
-import triphub.entity.user.User;
-import triphub.viewModel.SubServicesViewModel;
 
 @Stateless
 public class ServiceDAO  {
@@ -58,7 +54,11 @@ public class ServiceDAO  {
 		}
 	}
 
+	public List<Service> getAll() {
+		TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s", Service.class);
 
+		return query.getResultList();
+	}
 	
 	
 }

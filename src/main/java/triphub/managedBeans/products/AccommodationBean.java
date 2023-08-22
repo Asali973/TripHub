@@ -9,12 +9,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
+
 
 import triphub.entity.service.Accommodation;
 import triphub.entity.service.AccommodationType;
-import triphub.entity.service.Transportation;
-import triphub.entity.service.TransportationType;
 import triphub.helpers.FacesMessageUtil;
 import triphub.services.AccommodationService;
 

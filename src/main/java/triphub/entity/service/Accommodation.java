@@ -35,16 +35,11 @@ public class Accommodation {
 
 	@Lob
 	private String description;
-
-	
 	
 
 	public Accommodation() {
 	}
 	
-	
-
-
 
 	public Accommodation(String name, Address address, AccommodationType accommodationType, Picture picture,
 			String description) {

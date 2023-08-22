@@ -7,10 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-
-import triphub.entity.product.Theme;
+import triphub.entity.product.Price;
+import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
-import triphub.entity.service.Accommodation;
+import triphub.entity.product.service.ServiceType;
 import triphub.entity.service.Transportation;
 import triphub.entity.service.TransportationType;
 
@@ -33,11 +33,25 @@ public class TransportationDAO implements ServiceInterface{
 	@Override
 	public Transportation create(SubServicesViewModel transportationvm) {
 
+		// create service
+		Service service = Service.createServiceFromViewModel(transportationvm);
+		service.setType(ServiceType.TRANSPORTATION);
+		
+		Price price = Price.createPriceFromViewModel(transportationvm);
+		service.setPrice(price);
+		
+		service.setAvailability(transportationvm.isAvailability());
+		service.setAvailableFrom(transportationvm.getAvailableFrom());
+		service.setAvailableTill(transportationvm.getAvailableTill());
+		
+		// create transportation
 		Transportation transportation = new Transportation();
 		transportation.setName(transportationvm.getName());
 		transportation.setTransportation(transportationvm.getTransportationType());
 		transportation.setDescription(transportationvm.getDescription());
+		transportation.setService(service);
 
+		// create departure
 		Address departure = new Address();
 		departure.setNum(transportationvm.getAddress().getNum());
 		departure.setStreet(transportationvm.getAddress().getStreet());
@@ -46,6 +60,8 @@ public class TransportationDAO implements ServiceInterface{
 		departure.setCountry(transportationvm.getAddress().getCountry());
 		departure.setZipCode(transportationvm.getAddress().getZipCode());
 
+		
+		// create arrival
 		Address arrival = new Address();
 		arrival.setNum(transportationvm.getAddress().getNum());
 		arrival.setStreet(transportationvm.getAddress().getStreet());
@@ -54,16 +70,21 @@ public class TransportationDAO implements ServiceInterface{
 		arrival.setCountry(transportationvm.getAddress().getCountry());
 		arrival.setZipCode(transportationvm.getAddress().getZipCode());
 
+		//create departure/arrival in transportation
+		transportation.setDeparture(departure);
+	    transportation.setArrival(arrival);
+	    
 //		Picture picture = new Picture();
 //		picture.setLink(transportationvm.getLink());
 
-		em.persist(transportation);
+	    em.persist(service);
+	    em.persist(price);
 		em.persist(departure);
 		em.persist(arrival);
+		em.persist(transportation);
 //		em.persist(picture);
 		
-		transportation.setDeparture(departure);
-	    transportation.setArrival(arrival);
+		
 	    
 	    
 		return transportation;

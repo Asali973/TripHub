@@ -56,15 +56,16 @@ public class Service {
          this.setAvailableTill(form.getAvailableTill());
     }
     
-    public void initServiceViewModel(SubServicesViewModel form) {
+    public SubServicesViewModel initServiceViewModel() {
+    	SubServicesViewModel form = new SubServicesViewModel();
         form.setId(this.getId());
         form.setPrice(this.getPrice());
         form.setAvailability(this.isAvailability());
         form.setAvailableFrom(this.getAvailableFrom());
         form.setAvailableTill(this.getAvailableTill());
+        return form;
     }
- 
-    
+     
 
 	public Long getId() {
 		return id;
