@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import triphub.dao.service.RestaurantDAO;
 import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
-import triphub.entity.service.Restaurant;
+import triphub.entity.subservices.Restaurant;
 import triphub.helpers.FacesMessageUtil;
 import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.TourPackageFormViewModel;

@@ -10,9 +10,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-
-import triphub.entity.service.Accommodation;
-import triphub.entity.service.AccommodationType;
+import triphub.entity.subservices.Accommodation;
+import triphub.entity.subservices.AccommodationType;
+import triphub.entity.util.CurrencyType;
 import triphub.helpers.FacesMessageUtil;
 import triphub.services.AccommodationService;
 
@@ -136,6 +136,10 @@ public class AccommodationBean implements Serializable {
 	
 	public AccommodationType[] getAllAccommodationTypes() {
         return AccommodationType.values();
+    }
+	
+	public CurrencyType[] getAllCurrencyTypes() {
+        return CurrencyType.values();
     }
 
 	public List<Accommodation> getAllAccommodations() {

@@ -19,16 +19,6 @@ public class ServiceDAO  {
 	@PersistenceContext
 	private EntityManager em;
 	
-	@Inject
-	private AccommodationDAO accommodationDAO;
-	
-	@Inject
-	private RestaurantDAO restaurantDAO;
-	
-	@Inject
-	private TransportationDAO transportationDAO;
-	
-	
 	
 	public ServiceDAO() {
 		

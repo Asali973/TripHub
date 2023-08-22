@@ -11,9 +11,8 @@ import triphub.entity.product.Price;
 import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.ServiceType;
-import triphub.entity.service.Transportation;
-import triphub.entity.service.TransportationType;
-
+import triphub.entity.subservices.Transportation;
+import triphub.entity.subservices.TransportationType;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;

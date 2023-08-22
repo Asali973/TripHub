@@ -1,10 +1,10 @@
 package triphub.viewModel;
 
 import triphub.entity.product.Price;
-import triphub.entity.service.Accommodation;
-import triphub.entity.service.Restaurant;
-import triphub.entity.service.Transportation;
-import triphub.entity.util.Date;
+import triphub.entity.subservices.Accommodation;
+import triphub.entity.subservices.Restaurant;
+import triphub.entity.subservices.Transportation;
+import triphub.entity.util.Calendar;
 
 public class ServiceViewModel {
 
@@ -13,10 +13,10 @@ public class ServiceViewModel {
 	private Transportation transportation;
 	private Price price;
 	private boolean availability;
-	private Date availableFrom;
-	private Date availableTill;
-	private Date startDate;
-	private Date endDate;
+	private Calendar availableFrom;
+	private Calendar availableTill;
+	private Calendar startDate;
+	private Calendar endDate;
 	
 	
 	public Accommodation getAccomodation() {
@@ -49,28 +49,28 @@ public class ServiceViewModel {
 	public void setAvailability(boolean availability) {
 		this.availability = availability;
 	}
-	public Date getAvailableFrom() {
+	public Calendar getAvailableFrom() {
 		return availableFrom;
 	}
-	public void setAvailableFrom(Date availableFrom) {
+	public void setAvailableFrom(Calendar availableFrom) {
 		this.availableFrom = availableFrom;
 	}
-	public Date getAvailableTill() {
+	public Calendar getAvailableTill() {
 		return availableTill;
 	}
-	public void setAvailableTill(Date availableTill) {
+	public void setAvailableTill(Calendar availableTill) {
 		this.availableTill = availableTill;
 	}
-	public Date getStartDate() {
+	public Calendar getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(Calendar startDate) {
 		this.startDate = startDate;
 	}
-	public Date getEndDate() {
+	public Calendar getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
 	}
 	

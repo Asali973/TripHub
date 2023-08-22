@@ -1,5 +1,7 @@
 package triphub.entity.product.service;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,7 +14,7 @@ import javax.persistence.OneToOne;
 
 import triphub.entity.product.Price;
 
-import triphub.entity.util.Date;
+import triphub.entity.util.Calendar;
 
 import triphub.viewModel.SubServicesViewModel;
 
@@ -30,10 +32,10 @@ public class Service {
     private Price price;
 
     private boolean availability;
-    @OneToOne
+   
     @JoinColumn(name = "fromDate_id")
     private Date availableFrom;
-    @OneToOne
+   
     @JoinColumn(name = "tillDate_id")
     private Date availableTill;
   

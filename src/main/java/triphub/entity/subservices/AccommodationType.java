@@ -1,9 +1,9 @@
-package triphub.entity.service;
+package triphub.entity.subservices;
 
 public enum AccommodationType {
 	Hotel ("Hotel"),
 	BnB("BnB"), 
-	PrivateAccom ("Private Accommodation"), 
+	GuestRoom ("Guestroom"), 
 	Cottage ("Cottage"), 
 	Camping ("Camping");
 

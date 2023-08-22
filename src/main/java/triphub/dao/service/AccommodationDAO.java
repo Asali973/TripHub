@@ -13,10 +13,9 @@ import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
 
 import triphub.entity.product.service.ServiceType;
-
-import triphub.entity.service.Accommodation;
-
+import triphub.entity.subservices.Accommodation;
 import triphub.entity.util.Address;
+import triphub.entity.util.Calendar;
 import triphub.viewModel.SubServicesViewModel;
 
 @ApplicationScoped
@@ -42,10 +41,10 @@ public class AccommodationDAO implements ServiceInterface {
 
 		Price price = Price.createPriceFromViewModel(accommodationVm);
 		service.setPrice(price);
-
+		
+		service.setAvailableFrom(accommodationVm.getAvailableFrom()); // Set the newly created instance
+		service.setAvailableTill(accommodationVm.getAvailableTill()); // Set the newly created instance
 		service.setAvailability(accommodationVm.isAvailability());
-		service.setAvailableFrom(accommodationVm.getAvailableFrom());
-		service.setAvailableTill(accommodationVm.getAvailableTill());
 
 		// creer a Accommodation
 		Accommodation accommodation = new Accommodation();
@@ -70,8 +69,8 @@ public class AccommodationDAO implements ServiceInterface {
 		accommodation.setAddress(addressAccommodation);
 
 //		em.persist(picture)
-		em.persist(service);
 		em.persist(price);
+		em.persist(service);
 		em.persist(addressAccommodation);
 		em.persist(accommodation);
 		em.flush();

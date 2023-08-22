@@ -1,14 +1,14 @@
 package triphub.viewModel;
 
 import java.io.Serializable;
-
+import java.util.Date;
 
 import triphub.entity.product.Price;
-import triphub.entity.service.AccommodationType;
-import triphub.entity.service.TransportationType;
-
+import triphub.entity.subservices.AccommodationType;
+import triphub.entity.subservices.TransportationType;
 import triphub.entity.util.Address;
-import triphub.entity.util.Date;
+import triphub.entity.util.Calendar;
+import triphub.entity.util.CurrencyType;
 import triphub.entity.util.Picture;
 import triphub.entity.util.PictureType;
 
@@ -16,8 +16,6 @@ public class SubServicesViewModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	
-
 
 
 	private Long id;
@@ -27,19 +25,26 @@ public class SubServicesViewModel implements Serializable {
 	private boolean availability;
 	private Date availableFrom;
 	private Date availableTill;
-	
-
-	private Date startDate;
-	private Date endDate;
 
 	private AccommodationType accommodationType;
 	private TransportationType transportationType;
+	
+	private CurrencyType currencyType;
 
 	
 	private String description;
 
 	private Address address = new Address();
 	private Price price= new Price();
+	private Calendar date = new Calendar();
+
+	public Calendar getDate() {
+		return date;
+	}
+
+	public void setDate(Calendar date) {
+		this.date = date;
+	}
 
 	// Image attributes
 	private int size;
@@ -169,23 +174,15 @@ public class SubServicesViewModel implements Serializable {
 		this.availableTill = availableTill;
 	}
 
-	public Date getEndDate() {
-		return endDate;
+
+	public CurrencyType getCurrencyType() {
+		return currencyType;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	public Date getStartDate() {
-		return startDate;
+	public void setCurrencyType(CurrencyType currencyType) {
+		this.currencyType = currencyType;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	
-	
 	
 
 }

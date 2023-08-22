@@ -5,11 +5,12 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:head>
 	<title>Offer a Accommodation</title>
-	<h:outputStylesheet library="css" name="loginCss.css" />
+	<h:outputStylesheet library="css" name="serviceCrud.css" />
 	<link
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		rel="stylesheet" />
-	<h:outputStylesheet library="css" name="loginCss.css" />
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
 </h:head>
 <h:body>
 	<div class="container">
@@ -100,7 +101,7 @@
 						data-target="#descriptionSection" aria-expanded="false"
 						aria-controls="descriptionSection">Description</button>
 					<div class="collapse" id="descriptionSection">
-					
+
 						<div class="form-group mt-4">
 							<h:outputLabel for="description" value="Description:" />
 							<h:inputTextarea id="description"
@@ -112,15 +113,46 @@
 								characters remaining</small>
 						</div>
 					</div>
-					
 					<div class="form-group mt-4">
-						<h:outputLabel for="Price" value="Price*:"
-							required="true" requiredMessage="Price is required." />
+						<label for="availableFrom">Available From*:</label> <input
+							type="date" id="availableFrom" class="form-control"
+							value="#{accommodationBean.accommodationVm.availableFrom}"
+							required="true" requiredMessage="Date is required." />
+					</div>
+
+					<div class="form-group mt-4">
+						<label for="availableTil">Available Until*:</label> <input
+							type="date" id="availableTil" class="form-control"
+							value="#{accommodationBean.accommodationVm.availableTill}"
+							required="true" requiredMessage="Date is required." />
+					</div>
+
+					<div class="form-group mt-4">
+						<label for="availability">Click here to make your service available to our partners:</label>
+						<div class="toggle-button">
+							<input type="checkbox" id="availability" class="toggle-input" /><label
+								for="availability" class="toggle-label" />
+						</div>
+					</div>
+					<div class="form-group mt-4">
+						<h:outputLabel for="Price" value="Price*:" required="true"
+							requiredMessage="Price is required." />
 						<h:inputText id="price"
 							value="#{accommodationBean.accommodationVm.price.amount}"
 							class="form-control" required="true" />
 					</div>
-					
+					<div class="form-group mt-4">
+						<h:outputLabel for="Price" value="Currency*:" required="true"
+							requiredMessage="Currency is required." />
+						<h:selectOneMenu id="typeCurrency"
+							value="#{accommodationBean.accommodationVm.currencyType}"
+							class="form-control" required="true">
+							<f:selectItems value="#{accommodationBean.allCurrencyTypes}"
+								var="type" itemValue="#{type}" itemLabel="#{type.label}" />
+
+						</h:selectOneMenu>
+					</div>
+
 
 					<div class="form-group mt-4 d-flex justify-content-center">
 						<h:messages class="text-center" id="messages" globalOnly="true"
@@ -139,19 +171,10 @@
 
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script>
-    function updateCharCount(textarea) {
-        const maxLength = 500;
-        const currentLength = textarea.value.length;
-        const remainingChars = maxLength - currentLength;
-
-        const charCountElement = document.getElementById('charCount');
-        charCountElement.innerText = remainingChars + " characters remaining";
-    }
-    var descriptionTextarea = document.getElementById('description');
-	  var defaultValue = "#{accommodationBean.accommodationVm.description}";
-	  descriptionTextarea.value = defaultValue;
-</script>
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+	</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
+	<h:outputScript library="javascript" name="servicesCrud.js" />
 </h:body>
 </html>

@@ -1,4 +1,4 @@
-package triphub.entity.service;
+package triphub.entity.subservices;
 
 import javax.persistence.*;
 

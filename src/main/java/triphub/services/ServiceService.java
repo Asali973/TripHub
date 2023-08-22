@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import triphub.dao.service.ServiceDAO;
 import triphub.entity.product.service.Service;
-import triphub.entity.service.Restaurant;
+import triphub.entity.subservices.Restaurant;
 import triphub.viewModel.SubServicesViewModel;
 
 @ApplicationScoped
