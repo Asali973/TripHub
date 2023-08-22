@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initialize flatpickr for availableTil date
-    flatpickr("#availableTil", {
+    flatpickr("#availableTill", {
         dateFormat: "Y-m-d", // Format the date as "YYYY-MM-DD"
         required: true
     });

@@ -42,12 +42,13 @@ public class Accommodation {
 	
 
 	public Accommodation(String name, Address address, AccommodationType accommodationType, Picture picture,
-			String description) {
+			String description, Service service) {
 		this.name = name;
 		this.address = address;
 		this.accommodationType = accommodationType;
 		this.picture = picture;
 		this.description = description;
+		this.service = service;
 	}
 
 	public static Accommodation createAccommodationFromViewModel(SubServicesViewModel accommodationvm) {
@@ -57,6 +58,7 @@ public class Accommodation {
 		accommodation.setAddress(accommodationvm.getAddress());
 		accommodation.setAccommodationType(accommodationvm.getAccommodationType());
 		accommodation.setDescription(accommodationvm.getDescription());
+		accommodation.setService(accommodationvm.getService());
 		return accommodation;
 	}
 
