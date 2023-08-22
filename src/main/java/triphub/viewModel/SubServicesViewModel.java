@@ -9,6 +9,7 @@ import triphub.entity.service.TransportationType;
 
 import triphub.entity.util.Address;
 import triphub.entity.util.Date;
+
 import triphub.entity.util.Picture;
 import triphub.entity.util.PictureType;
 
@@ -25,8 +26,8 @@ public class SubServicesViewModel implements Serializable {
 	private String name;
 	
 	private boolean availability;
-	private LocalDate availableFrom;
-	private LocalDate availableTill;
+	private Date availableFrom;
+	private Date availableTill;
 	
 
 	private Date startDate;
@@ -153,19 +154,21 @@ public class SubServicesViewModel implements Serializable {
 		this.availability = availability;
 	}
 
-	public LocalDate getAvailableFrom() {
+
+
+	public Date getAvailableFrom() {
 		return availableFrom;
 	}
 
-	public void setAvailableFrom(LocalDate availableFrom) {
+	public void setAvailableFrom(Date availableFrom) {
 		this.availableFrom = availableFrom;
 	}
 
-	public LocalDate getAvailableTill() {
+	public Date getAvailableTill() {
 		return availableTill;
 	}
 
-	public void setAvailableTill(LocalDate availableTill) {
+	public void setAvailableTill(Date availableTill) {
 		this.availableTill = availableTill;
 	}
 

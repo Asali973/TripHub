@@ -62,6 +62,8 @@ public class Accommodation {
 		accommodation.setAddress(accommodationvm.getAddress());
 		accommodation.setAccommodationType(accommodationvm.getAccommodationType());
 		accommodation.setDescription(accommodationvm.getDescription());
+		
+
 		return accommodation;
 	}
 
@@ -70,7 +72,7 @@ public class Accommodation {
 		this.setName(accommodationvm.getName());
 		this.setAddress(accommodationvm.getAddress());
 		this.setAccommodationType(accommodationvm.getAccommodationType());
-		this.setDescription(accommodationvm.getDescription());
+		this.setDescription(accommodationvm.getDescription());		
 		// need to add picture soon
 
 	}
