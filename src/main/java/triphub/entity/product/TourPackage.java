@@ -41,8 +41,7 @@ public class TourPackage implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
 	private List<Picture> pictures;
 	
-//	 @OneToOne(cascade = CascadeType.ALL)
-//    private Product product;
+
 
 	public TourPackage() {
 	}

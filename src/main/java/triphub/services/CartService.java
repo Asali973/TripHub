@@ -174,7 +174,10 @@ public class CartService implements ICartService,Serializable {
     public void updateCartItem(CartItem cartItem) {
         cartItemDAO.updateCartItem(cartItem);
     }
-    
+    @Override
+    public List<CartItem> getCartItemsWithProducts() {
+    	return cartItemDAO.getCartItemsWithProducts();
+    }
 }
 
 

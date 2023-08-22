@@ -150,15 +150,6 @@ public class AccommodationDAO implements ServiceInterface {
 	public Accommodation findById(Long id) {
 		return em.find(Accommodation.class,id);
 	}
-
-
 	
 
-
-	
-
-	
-	
-
-	
 }

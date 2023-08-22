@@ -1,5 +1,6 @@
 package triphub.services;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -14,8 +15,8 @@ import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.TourPackageFormViewModel;
 
 @ApplicationScoped
-public class RestaurantService implements ServiceInterface {
-
+public class RestaurantService implements ServiceInterface,Serializable {
+	private static final long serialVersionUID = 1L;
 	@Inject
 	private RestaurantDAO restaurantDAO;
 

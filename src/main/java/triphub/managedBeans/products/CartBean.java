@@ -23,15 +23,21 @@ import javax.servlet.http.HttpSession;
 
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
+import triphub.entity.service.Accommodation;
+import triphub.entity.service.Restaurant;
+import triphub.entity.service.Transportation;
 import triphub.entity.user.User;
 import triphub.helpers.FacesMessageUtil;
+import triphub.services.AccommodationService;
 import triphub.services.ICartService;
+import triphub.services.RestaurantService;
 import triphub.services.TourPackageService;
+import triphub.services.TransportationService;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 
 @Named("cartBean")
-@SessionScoped
+@RequestScoped
 public class CartBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -41,30 +47,75 @@ public class CartBean implements Serializable {
 	private TourPackageService tourPackageService;
 	@Inject
 	private UserService userService;
-
+	@Inject
+	AccommodationService accommodationService;
+	@Inject
+	RestaurantService  restaurantService;	
+	@Inject
+	TransportationService transportationService;
+	@Inject
+	private TourPackageBean tourPackageBean;
+	@Inject 
+	private AccommodationBean accoBean;
+	
+	private UserViewModel userViewModel = new UserViewModel();
+	
 	private CartItem currentCartItem;
 	private List<CartItem> cartItems;
 	private TourPackage selectedTourPackage;
-
-	private UserViewModel userViewModel = new UserViewModel();
-	@Inject
-	private TourPackageBean tourPackageBean;
-
+	private Accommodation selectedAccommodation;
+	private Restaurant selectedRestaurant;
+	private Transportation selectedTransportation;
 	private Long selectedPackageId;
 	private int selectedQuantity;
 	private Date dateOfPurchase;
 
 	@PostConstruct
 	public void init() {
-		cartItems = iCartService.getCartItemsWithTourPackages();
+		//cartItems = iCartService.getCartItemsWithTourPackages();
+		cartItems = iCartService.getCartItemsWithProducts();
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-		if (id != null) {
-			Long tourPackageId = Long.parseLong(id);
-			selectedTourPackage = tourPackageService.getTourPackageById(tourPackageId);
-			if (selectedTourPackage == null) {
-				// Handle case where tour package is not found
-			}
+		String type = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("type");
+
+		if (id != null && type != null) {
+		    Long entityId = Long.parseLong(id);
+
+		    switch (type) {
+		        case "tourPackage":
+		            selectedTourPackage = tourPackageService.getTourPackageById(entityId);
+		            if (selectedTourPackage == null) {
+		                // Handle case where tour package is not found
+		            }
+		            break;
+
+		        case "accommodation":
+		            selectedAccommodation = accommodationService.findById(entityId);
+		            if (selectedAccommodation == null) {
+		                // Handle case where accommodation is not found
+		            }
+		            break;
+
+		        case "restaurant":
+		            selectedRestaurant = restaurantService.findById(entityId);
+		            if (selectedRestaurant == null) {
+		                // Handle case where restaurant is not found
+		            }
+		            break;
+
+		        case "transportation":
+		            selectedTransportation = transportationService.findById(entityId);
+		            if (selectedTransportation == null) {
+		                // Handle case where transportation is not found
+		            }
+		            break;
+
+		        default:
+		            // Handle case where the type is unknown or not provided
+		            break;
+		    }
 		}
+
+		
 
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
@@ -144,13 +195,14 @@ public class CartBean implements Serializable {
 		return totalPrice;
 	}
 
-	public void removeFromCart(Long cartItemId, User user) {
+	public String removeFromCart(Long cartItemId, User user) {
+	    iCartService.removeFromCart(cartItemId, user);
+	    FacesContext.getCurrentInstance().addMessage(null,
+	            new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed from Cart", "Item removed from your cart."));
 
-		iCartService.removeFromCart(cartItemId, user);
-
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed from Cart", "Item removed from your cart."));
+	    return "cart?faces-redirect=true";
 	}
+
 
 	public List<SelectItem> getQuantityOptions() {
 		List<SelectItem> options = new ArrayList<>();

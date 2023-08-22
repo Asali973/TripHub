@@ -1,5 +1,6 @@
 package triphub.services;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -15,24 +16,20 @@ import triphub.helpers.FacesMessageUtil;
 import triphub.viewModel.SubServicesViewModel;
 
 @ApplicationScoped
-public class AccommodationService implements ServiceInterface {
-	
+public class AccommodationService implements ServiceInterface,Serializable {
+	private static final long serialVersionUID = 1L;
 	@Inject
 	@Default
-	private AccommodationDAO accommodationDAO;
+	private AccommodationDAO accommodationDAO;	
 	
-	
-
 	public AccommodationService() {
 		
 	}
-
 	public AccommodationService(AccommodationDAO accommodationDao) {
 		this.accommodationDAO= accommodationDao;
 		
 	}
-	
-	public List<Accommodation> getAllAccommodation() {
+		public List<Accommodation> getAllAccommodation() {
 		return accommodationDAO.getAll();
 	}
 
