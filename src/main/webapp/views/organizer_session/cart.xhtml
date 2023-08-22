@@ -40,7 +40,8 @@
                     <th>Date Time</th>
                     <th>User</th>
                     <th>Quantity</th>
-                    <th>Update Quantity</th>                   
+                    <th>Update Quantity</th>  
+                     <th>Remove</th>                 
                 </tr>
             </thead>
           <tbody>
@@ -61,6 +62,9 @@
                 <h:inputText value="#{item.newQuantity}" />
                 <h:commandButton value="Add" action="#{cartBean.updateCartItemQuantity(item)}" />
             </td>
+              <td>
+                    <h:commandButton value="Remove" action="#{cartBean.removeFromCart(item.id, item.user)}" immediate="true" />
+                </td>
         </tr>
     </ui:repeat>
 </tbody>

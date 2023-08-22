@@ -270,7 +270,7 @@ public class UserService implements Serializable{
 	public void updateSubscription(Long organizerId, Subscription subscription) {
 		organizerDAO.updateSubscription(organizerId, subscription);
 	}
-
+//this one to display in cart bean 
 	public Subscription getSubscription(Long organizerId) {
 		return organizerDAO.getSubscriptionForOrganizer(organizerId);
 	}
