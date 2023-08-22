@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import triphub.entity.subservices.Restaurant;
+import triphub.entity.util.CurrencyType;
 import triphub.helpers.FacesMessageUtil;
 import triphub.services.RestaurantService;
 import triphub.viewModel.SubServicesViewModel;
@@ -34,10 +35,11 @@ public class RestaurantBean implements Serializable {
 		this.allRestaurants = allRestaurants;
 	}
 
-	public RestaurantBean(RestaurantService restaurantService, SubServicesViewModel restaurantvm) {
-		super();
+	public RestaurantBean(RestaurantService restaurantService, SubServicesViewModel restaurantvm, List<Restaurant> allRestaurants) {
+		
 		this.restaurantService = restaurantService;
 		this.restaurantvm = restaurantvm;
+		this.allRestaurants = allRestaurants;
 	}
 
 	public RestaurantBean() {
@@ -105,6 +107,10 @@ public class RestaurantBean implements Serializable {
 	
 	public List<Restaurant> getAllRestaurants() {
 		return restaurantService.getAll();
+	}
+	
+	public CurrencyType[] getAllCurrencyTypes() {
+		return CurrencyType.values();
 	}
 
 	public RestaurantService getRestaurantService() {

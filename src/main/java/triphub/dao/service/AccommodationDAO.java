@@ -65,6 +65,7 @@ public class AccommodationDAO implements ServiceInterface {
 		addressAccommodation.setCity(accommodationVm.getAddress().getCity());
 		addressAccommodation.setState(accommodationVm.getAddress().getState());
 		addressAccommodation.setCountry(accommodationVm.getAddress().getCountry());
+		addressAccommodation.setZipCode(accommodationVm.getAddress().getZipCode());
 
 		accommodation.setAddress(addressAccommodation);
 
