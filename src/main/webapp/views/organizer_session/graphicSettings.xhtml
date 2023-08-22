@@ -2,54 +2,82 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<h:head>
-	<title>Graphic Settings</title>
-</h:head>
 
 <h:body>
-	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputText value="Primary Color:" />
-			<h:inputText id="primaryColor" a:type="color"
-				value="#{organizerBean.userViewModel.primaryColor}" />
 
-			<h:outputText value="Secondary Color:" />
-			<h:inputText id="secondaryColor" a:type="color"
-				value="#{organizerBean.userViewModel.secondaryColor}" />
+	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
 
-			<h:outputText value="Primary Font:" />
-			<h:selectOneMenu value="#{organizerBean.userViewModel.primaryFont}">
-				<f:selectItem itemLabel="Arial" itemValue="Arial" />
-				<f:selectItem itemLabel="Verdana" itemValue="Verdana" />
-				<f:selectItem itemLabel="Times New Roman"
-					itemValue="Times New Roman" />
-			</h:selectOneMenu>
+		<ui:define name="additionalHeadContent">
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
 
-			<h:outputText value="Secondary Font:" />
-			<h:selectOneMenu value="#{organizerBean.userViewModel.secondaryFont}">
-				<f:selectItem itemLabel="Arial" itemValue="Arial" />
-				<f:selectItem itemLabel="Verdana" itemValue="Verdana" />
-				<f:selectItem itemLabel="Times New Roman"
-					itemValue="Times New Roman" />
-			</h:selectOneMenu>
+			<h:outputStylesheet library="css" name="organizer_home.css" />
 
-			<h:outputText value="Select a template for your space:" />
-			<h:selectOneMenu value="#{organizerBean.userViewModel.layout}">
-				<f:selectItems value="#{organizerBean.availableLayouts}"
-					itemLabel="#{layout.name}" itemValue="#{layout}" var="layout" />
-			</h:selectOneMenu>
+		</ui:define>
+		<ui:define name="content">
+			<div class="container mt-5">
+				<div class="card">
+					<div class="card-body">
+						<h2 class="card-title text-center mt-3">Customize your home page</h2>
+						<h:form>
+							<div class="mt-4">
+								<h:outputText value="Primary Color:" class="d-block mb-2" />
+								<h:inputText id="primaryColor" a:type="color"
+									class="form-control mb-3"
+									value="#{organizerBean.userViewModel.primaryColor}" />
 
+								<h:outputText value="Secondary Color:" class="d-block mb-2" />
+								<h:inputText id="secondaryColor" a:type="color"
+									class="form-control mb-3"
+									value="#{organizerBean.userViewModel.secondaryColor}" />
 
-		</h:panelGrid>
+								<h:outputText value="Primary Font:" class="d-block mb-2" />
+								<h:selectOneMenu
+									value="#{organizerBean.userViewModel.primaryFont}"
+									class="form-control mb-3">
+									<f:selectItem itemLabel="Arial" itemValue="Arial" />
+									<f:selectItem itemLabel="Verdana" itemValue="Verdana" />
+									<f:selectItem itemLabel="Times New Roman"
+										itemValue="Times New Roman" />
+								</h:selectOneMenu>
 
+								<h:outputText value="Secondary Font:" class="d-block mb-2" />
+								<h:selectOneMenu
+									value="#{organizerBean.userViewModel.secondaryFont}"
+									class="form-control mb-3">
+									<f:selectItem itemLabel="Arial" itemValue="Arial" />
+									<f:selectItem itemLabel="Verdana" itemValue="Verdana" />
+									<f:selectItem itemLabel="Times New Roman"
+										itemValue="Times New Roman" />
+								</h:selectOneMenu>
 
-		<h:commandButton value="Update"
-			action="#{organizerBean.updateGraphicSettings}" />
-		<h:commandButton value="spaceCustom"
-			action="/views/organizer_session/observeSettings?faces-redirect=true" />
+								<h:outputText value="Select a template for your space:"
+									class="d-block mb-2" />
+								<h:selectOneMenu value="#{organizerBean.userViewModel.layout}"
+									class="form-control mb-3">
+									<f:selectItems value="#{organizerBean.availableLayouts}"
+										itemLabel="#{layout.name}" itemValue="#{layout}" var="layout" />
+								</h:selectOneMenu>
+							</div>
 
-	</h:form>
+							<div class="mt-3">
+								<h:commandButton value="Update" class="btn btn-primary mr-2"
+									action="#{organizerBean.updateGraphicSettings}" />
+								<h:commandButton value="spaceCustom" class="btn btn-secondary"
+									action="/views/organizer_session/observeSettings?faces-redirect=true" />
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

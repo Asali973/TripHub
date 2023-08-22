@@ -9,6 +9,10 @@
 			<link
 				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+
 			<h:outputStylesheet library="css" name="organizer_home.css" />
 		</ui:define>
 		<ui:define name="content">
@@ -17,25 +21,47 @@
 					<div class="card-body">
 						<h2 class="card-title text-center mt-3">Welcome to your
 							setting page!</h2>
-						<p>This is the home page for organizers. You can choose
-							subscription here</p>
+						<h5 class="card-title text-center mt-5">This is the home page
+							for organizers. You can choose subscription here</h5>
 						<!-- Add your specific organizer-related content here -->
 
-<h:form>
-    <div class="d-flex justify-content-center">
-        <h:commandButton value="Set your graphic settings"
-            action="organizer_session/graphicSettings"
-            class="btn btn-custom1" />
+						<h:form>
+							<div class="row mt-5">
+								<!-- Customize your space Card -->
+								<div class="col-md-4">
+									<div class="card clickable-card"
+										onclick="window.location.href='/triphub/views/organizer_session/graphicSettings.xhtml'">
+										<div class="card-body">
+											<h4 class="card-title">Customization</h4>
+											<p>Customize your space with graphical options and
+												features here.</p>
+										</div>
+									</div>
+								</div>
 
-        <h:commandButton value="Access your home page"
-            action="organizer_session/observeSettings"
-            class="btn btn-custom2 ml-2" />
+								<!-- Access your home page Card -->
+								<div class="col-md-4">
+									<div class="card clickable-card"
+										onclick="window.location.href='/triphub/views/organizer_session/observeSettings.xhtml'">
+										<div class="card-body">
+											<h4 class="card-title">Your home page</h4>
+											<p>Access your home page.</p>
+										</div>
+									</div>
+								</div>
 
-        <h:commandButton value="Choose your subscription"
-            action="subscriptionAndCustomization/chooseSubscription"
-            class="btn btn-custom3 ml-2" />
-    </div>
-</h:form>
+								<!-- Choose your subscription Card -->
+								<div class="col-md-4">
+									<div class="card clickable-card"
+										onclick="window.location.href='/triphub/views/subscriptionAndCustomization/chooseSubscription.xhtml'">
+										<div class="card-body">
+											<h4 class="card-title">Your subscription</h4>
+											<p>Choose the best subscription for you.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</h:form>
 					</div>
 				</div>
 			</div>
