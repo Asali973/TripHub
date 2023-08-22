@@ -3,7 +3,9 @@ package triphub.services;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import triphub.dao.service.TransportationDAO;
 import triphub.entity.product.service.ServiceInterface;
@@ -17,6 +19,7 @@ import triphub.viewModel.SubServicesViewModel;
 public class TransportationService implements ServiceInterface {
 
 	@Inject
+	@Default
 	private TransportationDAO transportationDAO;
 
 	public TransportationService() {
@@ -30,20 +33,18 @@ public class TransportationService implements ServiceInterface {
 		return transportationDAO.findByType(transportationType);
 	}
 
+	@Transactional
 	@Override
-	public SubServicesViewModel create(SubServicesViewModel transportationvm) {
+	public Transportation create(SubServicesViewModel transportationvm) {
+		
 		try {
-			transportationDAO.update(transportationvm);
-		} catch (IllegalArgumentException e) {
-			// Handle the case when the transportation with the provided ID was not found in
-			// the DAO
-			FacesMessageUtil.addErrorMessage("Failed to update restaurant: " + e.getMessage());
-		} catch (Exception e) {
-			// Handle any other unexpected exceptions that might occur during the update
-			// process
-			FacesMessageUtil.addErrorMessage("Failed to update restaurant. An unexpected error occurred.");
-		}
-		return transportationvm;
+            transportationDAO.create(transportationvm); // Call create() method of DAO
+        } catch (Exception e) {
+            // Handle any unexpected exceptions that might occur during the create process
+            FacesMessageUtil.addErrorMessage("Failed to create transportation. An unexpected error occurred.");
+        }
+			return transportationDAO.create(transportationvm);
+		
 	}
 
 	@Override
