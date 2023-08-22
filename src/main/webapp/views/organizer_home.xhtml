@@ -1,31 +1,46 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:head>
-    <title>Organizer Home Page</title>
-</h:head>
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:body>
-    <ui:composition template="/WEB-INF/templates/Subscription_template.xhtml">
-        <ui:define name="content">
-            <!-- Add your organizer-specific content here -->
-            <h1>Welcome, Organizer!</h1>
-            <p>This is the home page for organizers. You can choose subscription here </p>
-            <!-- Add your specific organizer-related content here -->
-            
-            <h:form>
+	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+		<ui:define name="additionalHeadContent">
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<h:outputStylesheet library="css" name="organizer_home.css" />
+		</ui:define>
+		<ui:define name="content">
+			<div class="containerForm">
+				<div class="card">
+					<div class="card-body">
+						<h2 class="card-title text-center mt-3">Welcome to your
+							setting page!</h2>
+						<p>This is the home page for organizers. You can choose
+							subscription here</p>
+						<!-- Add your specific organizer-related content here -->
 
+<h:form>
+    <div class="d-flex justify-content-center">
+        <h:commandButton value="Set your graphic settings"
+            action="organizer_session/graphicSettings"
+            class="btn btn-custom1" />
 
-				<h:commandButton value="graphicSettings" action="organizer_session/graphicSettings" />
+        <h:commandButton value="Access your home page"
+            action="organizer_session/observeSettings"
+            class="btn btn-custom2 ml-2" />
 
-				
-				<h:commandButton value="spaceCustom" action="organizer_session/observeSettings" />
-				
-				
-			</h:form>
-        </ui:define>
-    </ui:composition>
+        <h:commandButton value="Choose your subscription"
+            action="subscriptionAndCustomization/chooseSubscription"
+            class="btn btn-custom3 ml-2" />
+    </div>
+</h:form>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>
 

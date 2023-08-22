@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,10 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import triphub.entity.product.Price;
-import triphub.entity.service.Accommodation;
-import triphub.entity.service.Restaurant;
-import triphub.entity.service.Transportation;
+
 import triphub.entity.util.Date;
+
+import triphub.viewModel.SubServicesViewModel;
+
 
 @Entity
 public class Service implements Serializable{
@@ -23,6 +26,9 @@ public class Service implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+	private ServiceType type;
+    
     @OneToOne(cascade = CascadeType.ALL)
     private Price price;
 
@@ -34,35 +40,34 @@ public class Service implements Serializable{
     @JoinColumn(name = "tillDate_id")
     private Date availableTill;
   
-    @OneToOne(cascade = CascadeType.ALL)
-    private Restaurant restaurant;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Accommodation accommodation;
+    public static Service createServiceFromViewModel(SubServicesViewModel form) {
+       Service service = new Service();
+      //  service.setId(form.getId());
+       
+        service.setPrice(form.getPrice());
+        service.setAvailability(form.isAvailability());
+        service.setAvailableFrom(form.getAvailableFrom());
+        service.setAvailableTill(form.getAvailableTill());
+        return service;
+    }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Transportation transportation;
-
+    public void updateServiceFromViewModel(SubServicesViewModel form) {
+         this.setPrice(form.getPrice());
+         this.setAvailability(form.isAvailability());
+         this.setAvailableFrom(form.getAvailableFrom());
+         this.setAvailableTill(form.getAvailableTill());
+    }
     
-			
-	public Restaurant getRestaurant() {
-		return restaurant;
-	}
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
-	}
-	public Accommodation getAccommodation() {
-		return accommodation;
-	}
-	public void setAccommodation(Accommodation accommodation) {
-		this.accommodation = accommodation;
-	}
-	public Transportation getTransportation() {
-		return transportation;
-	}
-	public void setTransportation(Transportation transportation) {
-		this.transportation = transportation;
-	}
+    public void initServiceViewModel(SubServicesViewModel form) {
+        form.setId(this.getId());
+        form.setPrice(this.getPrice());
+        form.setAvailability(this.isAvailability());
+        form.setAvailableFrom(this.getAvailableFrom());
+        form.setAvailableTill(this.getAvailableTill());
+    }
+ 
+    
 
 	public Long getId() {
 		return id;
@@ -94,6 +99,14 @@ public class Service implements Serializable{
 	}
 	public void setAvailableTill(Date availableTill) {
 		this.availableTill = availableTill;
+	}
+
+	public ServiceType getType() {
+		return type;
+	}
+
+	public void setType(ServiceType type) {
+		this.type = type;
 	}
 
 	

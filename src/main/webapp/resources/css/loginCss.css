@@ -1,51 +1,70 @@
 .card {
 	margin: auto;
 	max-width: 800px;
-	border-radius: 20px;
-	background-color: #F0F0F0;
+	background-color: rgba(255, 255, 255, 0.074);
+	border-radius: 5%;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(20px); /* Ajout de l'effet de flou */
+	opacity: 0.9;
+	padding: 50px;
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	margin-bottom: 30px;
 }
 
-.container {
+.containerForm {
 	margin-top: 50px;
 }
 
-.form-control {
-	border-radius: 20px;
-}
-
 #fileProfilePicLabel.form-control {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 #fileLogoLabel.form-control {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 #fileLogoLabelP.form-control {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 #fileProfilePicLabelS.form-control {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
 }
-
-
-
 
 .btn-outline-dark {
 	border-radius: 20px;
+}
+
+.btn-custom2 {
+	background-color: black; /* You can choose your preferred color */
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 0.9em;
+	transition: all 0.3s;
+	height: 38px;
+	width: 210px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-custom2:hover {
+	background-color: #FF4500; /* Darker shade for hover state */
+	color: white;
 }
 
 .btn-custom {
@@ -62,8 +81,6 @@
 	align-items: center;
 	justify-content: center;
 }
-
-
 
 .btn-custom:hover {
 	background-color: #FF4500; /* Darker shade for hover state */
@@ -144,7 +161,27 @@
 	font-style: italic;
 }
 
-
 .input-group {
-    display: flex;
+	display: flex;
 }
+
+.form-control {
+	border-radius: 20px;
+}
+
+.no-wrap {
+	white-space: nowrap;
+}
+
+.flex-form-group {
+	display: flex;
+	align-items: center; /* Alignement vertical au centre */
+}
+
+.flex-form-group>h:outputLabel {
+	margin-right: 10px; /* Espacement entre le label et l'input */
+}
+
+
+
+
