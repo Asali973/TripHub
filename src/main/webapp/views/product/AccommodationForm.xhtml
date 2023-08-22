@@ -151,7 +151,6 @@
 						</h:selectOneMenu>
 					</div>
 
-
 					<div class="form-group mt-4 d-flex justify-content-center">
 						<h:messages class="text-center" id="messages" globalOnly="true"
 							layout="table" styleClass="success-message" />
@@ -166,6 +165,24 @@
 			</h:form>
 		</div>
 	</div>
+	
+	<td><h:form>
+								<!-- Update button -->
+								<h:commandButton value="Update"
+									action="#{accommodationBean.updateAccommodation()}"
+									styleClass="reg-btn-primary btn-sm">
+									<f:param name="id" value="#{accommodation.id}" />
+								</h:commandButton>
+							</h:form></td>
+						<td><h:form>
+								<!-- Delete button -->
+								<h:commandButton value="Delete"
+									actionListener="#{accommodationBean.deleteAccommodation()}"
+									styleClass="reg-btn-primary btn-sm"
+									onclick="return confirmDelete();">
+									<f:param name="id" value="#{accommodation.id}" />
+								</h:commandButton>
+							</h:form></td>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script

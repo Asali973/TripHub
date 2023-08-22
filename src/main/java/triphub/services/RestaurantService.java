@@ -41,8 +41,8 @@ public class RestaurantService implements ServiceInterface {
 		return restaurantDAO.read(id);
 	}
 
-	@Override
-	public SubServicesViewModel update(SubServicesViewModel restaurantvm) {
+	
+	public void update(SubServicesViewModel restaurantvm) {
 		try {
 			restaurantDAO.update(restaurantvm);
 		} catch (IllegalArgumentException e) {
@@ -54,7 +54,7 @@ public class RestaurantService implements ServiceInterface {
 			// process
 			FacesMessageUtil.addErrorMessage("Failed to update restaurant. An unexpected error occurred.");
 		}
-		return restaurantvm;
+		
 	}
 
 	@Override

@@ -48,8 +48,8 @@ public class AccommodationService implements ServiceInterface {
 		return accommodationDAO.read(id) ;
 	}
 	
-	@Override
-	public SubServicesViewModel update(SubServicesViewModel accommodationvm) {
+	
+	public void update(SubServicesViewModel accommodationvm) {
 		try {
 			accommodationDAO.update(accommodationvm);
 		} catch (IllegalArgumentException e) {
@@ -61,7 +61,7 @@ public class AccommodationService implements ServiceInterface {
 			// process
 			FacesMessageUtil.addErrorMessage("Failed to update accommodation. An unexpected error occurred.");
 		}
-		return accommodationvm;
+		
 	}
 
 

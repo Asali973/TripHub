@@ -31,7 +31,7 @@ import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 
 @Named("cartBean")
-@SessionScoped
+@RequestScoped
 public class CartBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
