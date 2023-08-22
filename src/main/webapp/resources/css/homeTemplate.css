@@ -7,15 +7,30 @@ body {
 	flex-direction: column;
 	font-family: 'Arial', sans-serif;
 	background-color: #f4f5f7;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+
+
+.content-wrapper {
+	flex: 1;
+	/* permet à ce div de prendre tout l'espace disponible, poussant ainsi le footer vers le bas */
+}
+
+.sticky-footer {
+	flex-shrink: 0;
+	/* empêche le footer de réduire s'il y a beaucoup de contenu sur la page */
 }
 
 .container {
-	flex: 1; /* Make the container fill the available space */
+	flex: 1;
 }
 
 .navbar {
 	background-color: #242c3d;
-	box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+	box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand, .navbar-nav .nav-link {
@@ -28,7 +43,8 @@ body {
 
 /* Changement de couleur */
 .navbar-nav .nav-link:hover {
-	color: #007bff;  /* Vous pouvez remplacer cette couleur par celle de votre choix */
+	color: #007bff;
+	/* Vous pouvez remplacer cette couleur par celle de votre choix */
 }
 
 /* Sous-ligne */
@@ -38,20 +54,23 @@ body {
 
 /* Transformation (agrandissement) */
 .navbar-nav .nav-link {
-	transition: transform 0.3s;  /* Assurez-vous d'ajouter une transition pour que l'effet soit fluide */
+	transition: transform 0.3s;
+	/* Assurez-vous d'ajouter une transition pour que l'effet soit fluide */
 }
 
 .navbar-nav .nav-link:hover {
-	transform: scale(1.1);  /* Le lien sera agrandi de 10% lorsqu'il est survolé */
+	transform: scale(1.1);
+	/* Le lien sera agrandi de 10% lorsqu'il est survolé */
 }
 
 /* Ombre */
 .navbar-nav .nav-link:hover {
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  /* Ajoute une ombre avec un léger flou */
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	/* Ajoute une ombre avec un léger flou */
 }
 
 .footer {
-	height: 80px; 
+	height: 80px;
 	background-color: #242c3d;
 	color: #ffffff;
 	border-top: none;
@@ -91,14 +110,16 @@ body {
 }
 
 .navbar, .footer {
-    border-radius: 0px; /* Ajoute des coins arrondis */
-    background-image: linear-gradient(to right, #1f2b47, #242c3d); /* Gradient léger */
+	border-radius: 0px; /* Ajoute des coins arrondis */
+	background-image: linear-gradient(to right, #1f2b47, #242c3d);
+	/* Gradient léger */
 }
 
 .navbar-nav .nav-link, .footer a {
-    transition: all 0.3s; /* Transition douce pour tous les changements */
+	transition: all 0.3s; /* Transition douce pour tous les changements */
 }
 
 .social-icons a:hover {
-    transform: rotate(15deg); /* Rotation douce sur les icônes de médias sociaux */
+	transform: rotate(15deg);
+	/* Rotation douce sur les icônes de médias sociaux */
 }
