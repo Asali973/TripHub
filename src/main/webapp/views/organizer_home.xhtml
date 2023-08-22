@@ -1,31 +1,72 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:head>
-    <title>Organizer Home Page</title>
-</h:head>
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:body>
-    <ui:composition template="/WEB-INF/templates/Subscription_template.xhtml">
-        <ui:define name="content">
-            <!-- Add your organizer-specific content here -->
-            <h1>Welcome, Organizer!</h1>
-            <p>This is the home page for organizers. You can choose subscription here </p>
-            <!-- Add your specific organizer-related content here -->
-            
-            <h:form>
+	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+		<ui:define name="additionalHeadContent">
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
 
+			<h:outputStylesheet library="css" name="organizer_home.css" />
+		</ui:define>
+		<ui:define name="content">
+			<div class="containerForm">
+				<div class="card">
+					<div class="card-body">
+						<h2 class="card-title text-center mt-3">Welcome to your
+							setting page!</h2>
+						<h5 class="card-title text-center mt-5">This is the home page
+							for organizers. You can choose subscription here</h5>
+						<!-- Add your specific organizer-related content here -->
 
-				<h:commandButton value="graphicSettings" action="organizer_session/graphicSettings" />
+						<h:form>
+							<div class="row mt-5">
+								<!-- Customize your space Card -->
+								<div class="col-md-4">
+									<div class="card clickable-card"
+										onclick="window.location.href='/triphub/views/organizer_session/graphicSettings.xhtml'">
+										<div class="card-body">
+											<h4 class="card-title">Customization</h4>
+											<p>Customize your space with graphical options and
+												features here.</p>
+										</div>
+									</div>
+								</div>
 
-				
-				<h:commandButton value="spaceCustom" action="organizer_session/observeSettings" />
-				
-				
-			</h:form>
-        </ui:define>
-    </ui:composition>
+								<!-- Access your home page Card -->
+								<div class="col-md-4">
+									<div class="card clickable-card"
+										onclick="window.location.href='/triphub/views/organizer_session/observeSettings.xhtml'">
+										<div class="card-body">
+											<h4 class="card-title">Your home page</h4>
+											<p>Access your home page.</p>
+										</div>
+									</div>
+								</div>
+
+								<!-- Choose your subscription Card -->
+								<div class="col-md-4">
+									<div class="card clickable-card"
+										onclick="window.location.href='/triphub/views/subscriptionAndCustomization/chooseSubscription.xhtml'">
+										<div class="card-body">
+											<h4 class="card-title">Your subscription</h4>
+											<p>Choose the best subscription for you.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>
 

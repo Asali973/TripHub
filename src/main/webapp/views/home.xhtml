@@ -1,77 +1,89 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<h:head>
-	<title>Welcome to Triphub</title>
-</h:head>
+<h:body>
+	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+		<ui:define name="additionalHeadContent">
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+			<h:outputStylesheet library="css" name="organizer_home.css" />
+		</ui:define>
 
-<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
-	<ui:define name="content">
-		<p>This is the home page. Add our content here.</p>
-		<h:body>
-			<h2>Welcome to Triphub!</h2>
-			<h:form>
-
-				<h:commandButton value="Login" action="loginAndAccount/login" />
-				<h:commandButton value="Profile"
-					action="loginAndAccount/ProfileUser" />
-
-				<h:commandButton value="Create a customer account"
-					action="loginAndAccount/CustomerRegistration" />
-
-				<h:commandButton value="Create a provider account"
-					action="loginAndAccount/ProviderRegistration" />
-
-				<h:commandButton value="Create an organizer account"
-					action="loginAndAccount/OrganizerRegistration" />
-
-				<h:commandButton value="Create a superAdmin account"
-					action="loginAndAccount/SuperAdminRegistration" />
-
-				<h:commandButton value="Users list"
-					action="loginAndAccount/UserList" />
-
-				<h:commandButton value="Choose Subscription"
-					action="subscriptionAndCustomization/chooseSubscription" />
-
-				<h:commandButton value="Create Accommodation"
-					action="product/AccommodationForm" />
-				<h:commandButton value="Create Transportation"
-					action="product/TransportationForm" />
-				<h:commandButton value="Search your Tour Packages"
-					action="product/TpAdvancedSearch" />
-				<h:commandButton value="Go to Tour Packages"
-					action="product/TourpackageHome" />
-
-				<h:commandButton value="Create Restaurant"
-					action="product/RestaurantForm" />
-				<h:commandButton value="Update Restaurant"
-					action="product/RestaurantUpdate" />
+		<ui:define name="content">
+			<div class="container mt-5">
+				<div class="card">
+					<div
+						class="card-body d-flex flex-column justify-content-center align-items-center">
+						<h:graphicImage library="images" name="logobody.png"
+							alt="Your Image Description" class="img-fluid mb-4"
+							style="width: 800px; height: 230px;" />
 
 
 
+						<h1 class="text-center mb-5">Your journey begins here:
+							effortless travel planning and selling with TripHub.</h1>
 
-			</h:form>
-			<h:panelGroup rendered="#{sessionScope.userType eq 'customer'}">
-				<p>Welcome, dear customer!</p>
-			</h:panelGroup>
 
-			<h:panelGroup rendered="#{sessionScope.userType eq 'organizer'}">
-				<p>Welcome, dear organizer!</p>
-			</h:panelGroup>
+						<h:form>
 
-			<h:panelGroup rendered="#{sessionScope.userType eq 'provider'}">
-				<p>Welcome, dear provider!</p>
-			</h:panelGroup>
 
-			<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
-				<p>Welcome, dear super admin!</p>
-			</h:panelGroup>
-		</h:body>
-	</ui:define>
-</ui:composition>
+
+							<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
+								<h:commandButton value="Users list"
+									action="loginAndAccount/UserList" />
+							</h:panelGroup>
+
+							<h:commandButton value="Choose Subscription"
+								action="subscriptionAndCustomization/chooseSubscription" />
+
+							<h:commandButton value="Create Accommodation"
+								action="product/AccommodationForm" />
+							<h:commandButton value="Create Transportation"
+								action="product/TransportationForm" />
+							<h:commandButton value="Search your Tour Packages"
+								action="product/TpAdvancedSearch" />
+							<h:commandButton value="Go to Tour Packages"
+								action="product/TourpackageHome" />
+
+							<h:commandButton value="Create Restaurant"
+								action="product/RestaurantForm" />
+							<h:commandButton value="Update Restaurant"
+								action="product/RestaurantUpdate" />
+
+
+
+
+						</h:form>
+						<h:panelGroup rendered="#{sessionScope.userType eq 'customer'}">
+							<p>Welcome, dear customer!</p>
+						</h:panelGroup>
+
+						<h:panelGroup rendered="#{sessionScope.userType eq 'organizer'}">
+							<p>Welcome, dear organizer!</p>
+						</h:panelGroup>
+
+						<h:panelGroup rendered="#{sessionScope.userType eq 'provider'}">
+							<p>Welcome, dear provider!</p>
+						</h:panelGroup>
+
+						<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
+							<p>Welcome, dear super admin!</p>
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
 
 </html>

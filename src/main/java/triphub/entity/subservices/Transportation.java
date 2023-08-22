@@ -1,4 +1,4 @@
-package triphub.entity.service;
+package triphub.entity.subservices;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,13 +21,10 @@ public class Transportation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-
-	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Service service;
 
 	private String name;
-
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address departure;
@@ -40,17 +37,17 @@ public class Transportation {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Picture picture;
-	
+
 	private String description;
 
 	public Transportation() {
 
 	}
 
-	public Transportation(String nameTransportation, Address departure, Address arrival,
-			TransportationType transportation, Picture picture, String description) {
+	public Transportation(String name, Address departure, Address arrival, TransportationType transportation,
+			Picture picture, String description) {
 		super();
-		this.name = nameTransportation;
+		this.name = name;
 		this.departure = departure;
 		this.arrival = arrival;
 		this.transportation = transportation;
@@ -68,7 +65,7 @@ public class Transportation {
 	}
 
 	public SubServicesViewModel initTransportationViewModel() {
-		SubServicesViewModel transportationvm = new SubServicesViewModel();	
+		SubServicesViewModel transportationvm = new SubServicesViewModel();
 		transportationvm.setId(this.getId());
 		transportationvm.setName(this.getName());
 		transportationvm.setAddress(this.getArrival());
@@ -133,6 +130,14 @@ public class Transportation {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
 	}
 
 }

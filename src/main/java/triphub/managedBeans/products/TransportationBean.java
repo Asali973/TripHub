@@ -10,10 +10,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-
-import triphub.entity.service.Transportation;
-import triphub.entity.service.TransportationType;
-
+import triphub.entity.subservices.Transportation;
+import triphub.entity.subservices.TransportationType;
 import triphub.helpers.FacesMessageUtil;
 
 import triphub.services.TransportationService;

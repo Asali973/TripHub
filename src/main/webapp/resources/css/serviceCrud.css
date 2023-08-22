@@ -2,21 +2,14 @@
 	margin: auto;
 	max-width: 800px;
 	background-color: rgba(255, 255, 255, 0.074);
-	border-radius: 15px;
+	border-radius: 5%;
 	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 	backdrop-filter: blur(20px); /* Ajout de l'effet de flou */
 	opacity: 0.9;
-	padding: 15px 40px;
+	padding: 50px;
 	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-	margin-bottom: 50px;
-	margin-top: 50px;
-
+	margin-bottom: 30px;
 }
-
-body, h1, h2, h3, h4, h5, p, a {
-    font-family: 'Poppins', sans-serif;
-}
-
 
 .containerForm {
 	margin-top: 50px;
@@ -161,15 +154,6 @@ body, h1, h2, h3, h4, h5, p, a {
 	align-items: center;
 	justify-content: center;
 	font-size: 1.3em;
-	position: relative;
-	/* Ajouté pour permettre le positionnement absolu de la flèche */
-	overflow: hidden;
-	
-}
-
-.btn-custom-signup:hover {
-	background-color: #035b0f; /* Darker shade for hover state */
-	color: white;
 }
 
 .success-message {
@@ -198,23 +182,34 @@ body, h1, h2, h3, h4, h5, p, a {
 	margin-right: 10px; /* Espacement entre le label et l'input */
 }
 
-.btn-custom-signup span {
-	margin-right: 10px; /* Espacement entre le texte et la flèche */
-}
 
-.arrow-right {
+
+.toggle-button {
 	display: inline-block;
-	transition: transform 0.2s ease-out; /* Animation lisse */
-	position: relative; /* Pour le déplacement */
-	left: 0; /* Position initiale */
+	position: relative;
+	width: 60px;
+	height: 30px;
 }
 
-.btn-custom-signup:hover .arrow-right {
-	transform: translateX(5px);
-	/* Déplace la flèche de 5px à droite lors du survol */
+.toggle-input {
+	display: none;
 }
 
-.btn-custom-signup:active .arrow-right {
-	transform: translateX(10px);
-	/* Déplace la flèche de 10px à droite lors du clic */
+.toggle-label {
+	display: block;
+	position: absolute;
+	width: 50%;
+	height: 100%;
+	background-color: #ccc;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.toggle-input:checked+.toggle-label {
+	background-color: #2196F3;
+}
+
+/* Optional styling for the label text */
+label[for="availability"] {
+	margin-left: 10px;
 }

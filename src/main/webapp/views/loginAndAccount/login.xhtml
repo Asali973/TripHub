@@ -1,31 +1,49 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-   
-<h:head>
-   
-    <title>Login</title>
-</h:head>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:body>
-<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
-    <ui:define name="content">
-        <div class="reg-form-container">
-            <h2>Login Form</h2>
-            <h:form>
-                <div class="reg-form-group">
-                    <h:outputLabel for="email" value="Email:"/>
-                    <h:inputText id="email" value="#{loginBean.userViewModel.email}" class="reg-form-control"/>
-                </div>
-                <div class="reg-form-group">
-                    <h:outputLabel for="password" value="Password:"/>
-                    <h:inputSecret id="password" value="#{loginBean.userViewModel.password}" class="reg-form-control"/>
-                </div>
-                <h:commandButton value="Login" action="#{loginBean.login}" styleClass="reg-btn-primary"/>
-            </h:form>
-        </div>
-    </ui:define>
-</ui:composition>
+	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+		<ui:define name="additionalHeadContent">
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+			<h:outputStylesheet library="css" name="loginCss.css" />
+		</ui:define>
+		<ui:define name="content">
+			<div class="containerForm">
+				<div class="card">
+					<div class="card-body">
+						<h2 class="card-title text-center mt-3">Sign In</h2>
+						<h:form>
+							<div class="form-group">
+								<h:outputLabel for="email" value="Email:" />
+								<h:inputText id="email" value="#{loginBean.userViewModel.email}"
+									class="form-control" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel for="password" value="Password:" />
+								<h:inputSecret id="password"
+									value="#{loginBean.userViewModel.password}"
+									class="form-control" />
+							</div>
+							<div class="form-group mt-4 d-flex justify-content-center">
+								<h:commandButton value="Login" action="#{loginBean.login}"
+									class="btn btn-custom btn-custom-signup" />
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<h:outputScript library="javascript" name="loginJs.js" />
 </h:body>
 </html>

@@ -26,53 +26,54 @@
 </style>
 </h:head>
 <h:body>
-	<h:form>
-		<h1>Your Cart</h1>
-		<h:outputText value="Date of Purchase: #{cartBean.dateOfPurchase}">
-			<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
-		</h:outputText>
+  <h:form>
+        <h1>Your Cart</h1>
+        <h:outputText value="Date of Purchase: #{cartBean.dateOfPurchase}">
+            <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+        </h:outputText>
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Item</th>
-					<th>Price</th>
-					<th>Date Time</th>
-					<th>User</th>
-					<th>Add more Items</th>
-					<th>Remove Item</th>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Date Time</th>
+                    <th>User</th>
+                    <th>Quantity</th>
+                    <th>Update Quantity</th>                   
+                </tr>
+            </thead>
+          <tbody>
+    <ui:repeat value="#{cartBean.cartItems}" var="item">
+        <tr>
+            <td><h:outputText value="#{item.tourPackage.name}" /></td>
+            <td><h:outputText
+                    value="#{item.tourPackage.price.amount} #{item.tourPackage.price.currency}" /></td>
+            <td><h:outputText value="#{item.dateOfOrder}">
+                    <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+                </h:outputText></td>
+            <td><h:outputText
+                    value="#{item.user.firstName} #{item.user.lastName}" /></td>
+            <td>
+                <h:outputText value="#{item.quantity}" />
+            </td>
+            <td>
+                <h:inputText value="#{item.newQuantity}" />
+                <h:commandButton value="Add" action="#{cartBean.updateCartItemQuantity(item)}" />
+            </td>
+        </tr>
+    </ui:repeat>
+</tbody>
 
-				</tr>
-			</thead>
-			<tbody>
-				<ui:repeat value="#{cartBean.cartItems}" var="item">
-					<tr>
-						<td><h:outputText value="#{item.tourPackage.name}" /></td>
-						<td><h:outputText
-								value="#{item.tourPackage.price.amount} #{item.tourPackage.price.currency}" /></td>
-						<td><h:outputText value="#{item.dateOfOrder}">
-								<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
-							</h:outputText></td>
-						<td><h:outputText
-								value="#{item.user.firstName} #{item.user.lastName}" /></td>
-						<td><h:selectOneMenu value="#{item.quantity}">
-								<f:selectItems value="#{cartBean.quantityOptions}" />
-							</h:selectOneMenu> <h:commandButton value="Update"
-								action="#{cartBean.updateCartItemQuantity(item)}" /></td>
-						<td><h:commandButton value="Remove"
-								action="#{cartBean.removeFromCart(item)}" /></td>
-					</tr>
-				</ui:repeat>
-			</tbody>
-		</table>
-		<h:outputText
-			value="Total Price: #{cartBean.calculateTotalPrice(cartBean.cartItems)} #{cartBean.cartItems[0].tourPackage.price.currency}" />
+        </table>     
+  <h:outputText value="Total Price: #{cartBean.calculateTotalPrice(cartBean.cartItems)} #{cartBean.cartItems[0].tourPackage.price.currency}" />
 
-		<h:button value="Continue Shopping"
-			outcome="/views/organizer_session/homeForWebsite.xhtml" />
-			<h:button value="Checkout" outcome="/views/organizer_session/CheckOut.xhtml" />
-			
-	</h:form>
+        <h:button value="Continue Shopping" outcome="/views/organizer_session/homeForWebsite.xhtml" />
+        <!-- Add the h:link component to transfer data to CheckOut.xhtml -->
+<h:commandButton value="Proceed to Checkout" action="#{cartBean.goToCheckout}" />
+
+
+    </h:form>
 </h:body>
 
 </html>

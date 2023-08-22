@@ -1,5 +1,6 @@
 package triphub.entity.product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +19,8 @@ import triphub.entity.util.Picture;
 import triphub.viewModel.TourPackageFormViewModel;
 
 @Entity
-public class TourPackage {
-
+public class TourPackage implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -48,7 +49,6 @@ public class TourPackage {
 
 	public static TourPackage createTourPackageFromViewModel(TourPackageFormViewModel tourPackageVm) {
 		TourPackage tourPackage = new TourPackage();
-
 		tourPackage.setId(tourPackageVm.getId());
 		tourPackage.setName(tourPackageVm.getName());
 		tourPackage.setDescription(tourPackageVm.getDescription());

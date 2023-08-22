@@ -44,7 +44,7 @@ public class User implements Serializable {
         user.setLastName(form.getLastName());
         user.setEmail(form.getEmail());
         user.setPhoneNum(form.getPhoneNum());
-        user.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));
+        user.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));        
         return user;
     }
     

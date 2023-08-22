@@ -5,13 +5,12 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:head>
 	<title>Offer a Accommodation</title>
-	<h:outputStylesheet library="css" name="loginCss.css" />
+	<h:outputStylesheet library="css" name="serviceCrud.css" />
 	<link
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		rel="stylesheet" />
 	<link rel="stylesheet"
 		href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
-	<h:outputStylesheet library="css" name="loginCss.css" />
 </h:head>
 <h:body>
 	<div class="container">
@@ -114,55 +113,20 @@
 								characters remaining</small>
 						</div>
 					</div>
-
-					<style>
-.toggle-button {
-	display: inline-block;
-	position: relative;
-	width: 60px;
-	height: 30px;
-}
-
-.toggle-input {
-	display: none;
-}
-
-.toggle-label {
-	display: block;
-	position: absolute;
-	width: 50%;
-	height: 100%;
-	background-color: #ccc;
-	cursor: pointer;
-	transition: background-color 0.2s;
-}
-
-.toggle-input:checked+.toggle-label {
-	background-color: #2196F3;
-}
-
-/* Optional styling for the label text */
-label[for="availability"] {
-	margin-left: 10px;
-}
-</style>
-
 					<div class="form-group mt-4">
 						<label for="availableFrom">Available From*:</label> <input
-							type="text" id="availableFrom" class="form-control"
-							value="#{accommodationBean.accommodationVm.availableFrom}"
-							required="true" requiredMessage="Date is required." />
+							type="date" id="availableFrom" class="form-control"
+							value="#{accommodationBean.accommodationVm.availableFrom}" />
 					</div>
 
 					<div class="form-group mt-4">
 						<label for="availableTil">Available Until*:</label> <input
-							type="text" id="availableTil" class="form-control"
-							value="#{accommodationBean.accommodationVm.availableTill}"
-							required="true" requiredMessage="Date is required." />
+							type="date" id="availableTill" class="form-control"
+							value="#{accommodationBean.accommodationVm.availableTill}" />
 					</div>
 
 					<div class="form-group mt-4">
-						<label for="availability">Availability:</label>
+						<label for="availability">Click here to make your service available to our partners:</label>
 						<div class="toggle-button">
 							<input type="checkbox" id="availability" class="toggle-input" /><label
 								for="availability" class="toggle-label" />
@@ -174,6 +138,17 @@ label[for="availability"] {
 						<h:inputText id="price"
 							value="#{accommodationBean.accommodationVm.price.amount}"
 							class="form-control" required="true" />
+					</div>
+					<div class="form-group mt-4">
+						<h:outputLabel for="Price" value="Currency*:" required="true"
+							requiredMessage="Currency is required." />
+						<h:selectOneMenu id="typeCurrency"
+							value="#{accommodationBean.accommodationVm.currencyType}"
+							class="form-control" required="true">
+							<f:selectItems value="#{accommodationBean.allCurrencyTypes}"
+								var="type" itemValue="#{type}" itemLabel="#{type.label}" />
+
+						</h:selectOneMenu>
 					</div>
 
 
@@ -198,34 +173,6 @@ label[for="availability"] {
 	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
-	<script>
-	
-    const toggleInput = document.querySelector('.toggle-input');
-    const toggleLabel = document.querySelector('.toggle-label');
-
-    toggleLabel.addEventListener('click', () => {
-        toggleInput.checked = !toggleInput.checked;
-    });
-
-	flatpickr("#availableFrom", {
-        dateFormat: "Y-m-d", // Format the date as "YYYY-MM-DD"
-        required: true
-    });
-	flatpickr("#availableTil", {
-        dateFormat: "Y-m-d", // Format the date as "YYYY-MM-DD"
-        required: true
-    });
-    function updateCharCount(textarea) {
-        const maxLength = 500;
-        const currentLength = textarea.value.length;
-        const remainingChars = maxLength - currentLength;
-
-        const charCountElement = document.getElementById('charCount');
-        charCountElement.innerText = remainingChars + " characters remaining";
-    }
-    var descriptionTextarea = document.getElementById('description');
-	  var defaultValue = "#{accommodationBean.accommodationVm.description}";
-	  descriptionTextarea.value = defaultValue;
-</script>
+	<h:outputScript library="javascript" name="servicesCrud.js" />
 </h:body>
 </html>

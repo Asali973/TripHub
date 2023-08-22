@@ -1,4 +1,4 @@
-package triphub.entity.service;
+package triphub.entity.subservices;
 
 import javax.persistence.*;
 
@@ -35,24 +35,20 @@ public class Accommodation {
 
 	@Lob
 	private String description;
-
-	
 	
 
 	public Accommodation() {
 	}
 	
-	
-
-
 
 	public Accommodation(String name, Address address, AccommodationType accommodationType, Picture picture,
-			String description) {
+			String description, Service service) {
 		this.name = name;
 		this.address = address;
 		this.accommodationType = accommodationType;
 		this.picture = picture;
 		this.description = description;
+		this.service = service;
 	}
 
 	public static Accommodation createAccommodationFromViewModel(SubServicesViewModel accommodationvm) {
@@ -62,8 +58,7 @@ public class Accommodation {
 		accommodation.setAddress(accommodationvm.getAddress());
 		accommodation.setAccommodationType(accommodationvm.getAccommodationType());
 		accommodation.setDescription(accommodationvm.getDescription());
-		
-
+		accommodation.setService(accommodationvm.getService());
 		return accommodation;
 	}
 
@@ -72,7 +67,7 @@ public class Accommodation {
 		this.setName(accommodationvm.getName());
 		this.setAddress(accommodationvm.getAddress());
 		this.setAccommodationType(accommodationvm.getAccommodationType());
-		this.setDescription(accommodationvm.getDescription());		
+		this.setDescription(accommodationvm.getDescription());
 		// need to add picture soon
 
 	}
