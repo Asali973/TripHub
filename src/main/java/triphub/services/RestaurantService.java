@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import triphub.dao.service.RestaurantDAO;
 import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
-import triphub.entity.service.Restaurant;
+import triphub.entity.subservices.Restaurant;
 import triphub.helpers.FacesMessageUtil;
 import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.TourPackageFormViewModel;
@@ -45,7 +45,7 @@ public class RestaurantService implements ServiceInterface {
 		try {
 			restaurantDAO.update(restaurantvm);
 		} catch (IllegalArgumentException e) {
-			// Handle the case when the tour package with the provided ID was not found in
+			// Handle the case when the restaurant with the provided ID was not found in
 			// the DAO
 			FacesMessageUtil.addErrorMessage("Failed to update restaurant: " + e.getMessage());
 		} catch (Exception e) {
