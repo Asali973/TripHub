@@ -37,14 +37,8 @@ public class AccommodationDAO implements ServiceInterface {
 		// create service
 
 		Service service = Service.createServiceFromViewModel(accommodationVm);
-<<<<<<< HEAD
-		service.setType(ServiceType.Accommodation);
-		
-		
-=======
 		service.setType(ServiceType.ACCOMMODATION);
 
->>>>>>> ee02e0c618515e26155ec1b5fd6d58ff30874155
 		Price price = Price.createPriceFromViewModel(accommodationVm);
 		service.setPrice(price);
 		
