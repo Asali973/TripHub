@@ -199,6 +199,7 @@ public class OrganizerBean implements Serializable {
 
 	    switch (type) {
 	        case STANDARD:
+	        	addLayoutToList(layouts, "Basic");
 	            break;
 	        case DELUXE:
 	            addLayoutToList(layouts, "Basic");

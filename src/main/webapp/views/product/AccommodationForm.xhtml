@@ -101,32 +101,35 @@
 						data-target="#descriptionSection" aria-expanded="false"
 						aria-controls="descriptionSection">Description</button>
 					<div class="collapse" id="descriptionSection">
-
 						<div class="form-group mt-4">
 							<h:outputLabel for="description" value="Description:" />
-							<h:inputTextarea id="description"
-								value="#{accommodationBean.accommodationVm.description}"
-								class="form-control" rows="4" maxlength="500"
-								oninput="updateCharCount(this)"></h:inputTextarea>
-							<small id="charCount">#{500 -
-								fn:length(accommodationBean.accommodationVm.description)}
-								characters remaining</small>
-						</div>
+							 <h:inputTextarea id="description"
+                             value="#{accommodationBean.accommodationVm.description}"
+                             class="form-control" rows="4" maxlength="500"
+                             oninput="updateCharCount(this)"></h:inputTextarea>
+            <small id="charCount">500 characters remaining</small>
+        </div>
 					</div>
 					<div class="form-group mt-4">
-						<label for="availableFrom">Available From*:</label> <input
-							type="date" id="availableFrom" class="form-control"
+						<label for="availableFrom">Available From*:</label>
+						<h:inputHidden id="hiddenAvailableFrom" type="date"
+							class="form-control"
 							value="#{accommodationBean.accommodationVm.availableFrom}" />
+						<input type="text" id="availableFromPicker"
+							placeholder="Select Date..." />
 					</div>
 
 					<div class="form-group mt-4">
-						<label for="availableTil">Available Until*:</label> <input
-							type="date" id="availableTill" class="form-control"
+						<label for="availableTill">Available Until*:</label>
+						<h:inputHidden id="hiddenAvailableTill" type ="date" class="form-control"
 							value="#{accommodationBean.accommodationVm.availableTill}" />
+						<input type="text" id="availableTillPicker"
+							placeholder="Select Date..." />
 					</div>
 
 					<div class="form-group mt-4">
-						<label for="availability">Click here to make your service available to our partners:</label>
+						<label for="availability">Click here to make your service
+							available to our partners:</label>
 						<div class="toggle-button">
 							<input type="checkbox" id="availability" class="toggle-input" /><label
 								for="availability" class="toggle-label" />

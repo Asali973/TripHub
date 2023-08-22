@@ -11,6 +11,9 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import triphub.entity.product.service.Service;
+import triphub.entity.service.Accommodation;
+import triphub.entity.service.Restaurant;
+import triphub.entity.service.Transportation;
 import triphub.entity.user.User;
 import triphub.viewModel.CartViewModel;
 
@@ -33,6 +36,18 @@ public class CartItem implements Serializable {
 	@JoinColumn(name = "service_id")
 	private Service service;
 
+	@ManyToOne
+	@JoinColumn(name = "accommodation_id")
+	private Accommodation accommodation;
+
+	@ManyToOne
+	@JoinColumn(name = "restaurant_id")
+	private Restaurant restaurant;
+
+	@ManyToOne
+	@JoinColumn(name = "transportation_id")
+	private Transportation transportation;
+
 	private int quantity;
 
 	@ManyToOne
@@ -41,26 +56,22 @@ public class CartItem implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateOfOrder;
-	
+
 	@Transient
-    private int newQuantity = quantity ;
-	
+	private int newQuantity = quantity;
+
 	private BigDecimal totalPrice;
-	
-	
-	
-	 
-	
-	 public void updateFromCartItemViewModel(CartViewModel viewModel) {
-	        this.setQuantity(viewModel.getQuantity());
-	        
-	      
-	    }
-	public void setQuantity(int quantity) {		
-		this.quantity = quantity;
-		
+
+	public void updateFromCartItemViewModel(CartViewModel viewModel) {
+		this.setQuantity(viewModel.getQuantity());
+
 	}
-		
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -72,8 +83,6 @@ public class CartItem implements Serializable {
 	public int getQuantity() {
 		return quantity;
 	}
-
-	
 
 	public User getUser() {
 		return user;
@@ -123,14 +132,30 @@ public class CartItem implements Serializable {
 		this.totalPrice = totalPrice;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CartItem [id=").append(id).append(", tourPackage=").append(tourPackage).append(", service=")
-				.append(service).append(", quantity=").append(quantity).append(", user=").append(user)
-				.append(", dateOfOrder=").append(dateOfOrder).append(", newQuantity=").append(newQuantity)
-				.append(", totalPrice=").append(totalPrice).append("]");
-		return builder.toString();
+	public Accommodation getAccommodation() {
+		return accommodation;
 	}
+
+	public void setAccommodation(Accommodation accommodation) {
+		this.accommodation = accommodation;
+	}
+
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+
+	public Transportation getTransportation() {
+		return transportation;
+	}
+
+	public void setTransportation(Transportation transportation) {
+		this.transportation = transportation;
+	}
+
+	
 
 }

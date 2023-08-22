@@ -15,6 +15,9 @@ import triphub.dao.user.UserDAO;
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.Service;
+import triphub.entity.service.Accommodation;
+import triphub.entity.service.Restaurant;
+import triphub.entity.service.Transportation;
 import triphub.entity.user.User;
 import triphub.viewModel.CartViewModel;
 
@@ -64,6 +67,31 @@ public class CartItemDAO implements Serializable {
 		}
 
 		return cartItems;
+	}
+
+	public List<CartItem> getCartItemsWithProducts() {
+	    TypedQuery<CartItem> query = em.createQuery("SELECT c FROM CartItem c", CartItem.class);
+	    List<CartItem> cartItems = query.getResultList();
+
+	    for (CartItem item : cartItems) {
+	        // You don't need to fetch these entities again if you've set up your JPA relationships correctly 
+	        // with lazy loading because the entities will be fetched automatically when accessed.	     
+
+	        if (item.getTourPackage() != null) {
+	            item.setTourPackage(em.find(TourPackage.class, item.getTourPackage().getId()));
+	        } 
+	        if (item.getAccommodation() != null) {
+	            item.setAccommodation(em.find(Accommodation.class, item.getAccommodation().getId()));
+	        } 
+	        if (item.getRestaurant() != null) {
+	            item.setRestaurant(em.find(Restaurant.class, item.getRestaurant().getId()));
+	        } 
+	        if (item.getTransportation() != null) {
+	            item.setTransportation(em.find(Transportation.class, item.getTransportation().getId()));
+	        }
+	    }
+
+	    return cartItems;
 	}
 
 //	public CartItem getCartItemByTourPackageAndUser(TourPackage tourPackage, User user) {

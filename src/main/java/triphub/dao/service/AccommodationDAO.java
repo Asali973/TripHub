@@ -146,4 +146,5 @@ public class AccommodationDAO implements ServiceInterface {
 		return em.find(Accommodation.class, id);
 	}
 
+
 }

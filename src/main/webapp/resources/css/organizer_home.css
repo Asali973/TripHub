@@ -1,140 +1,54 @@
-.card {
-	margin: auto;
-	max-width: 1500px;
-	background-color: rgba(255, 255, 255, 0.2);
-	/* Plus subtile translucidité */
-	border-radius: 15px; /* Rayon d'angle plus doux pour un look moderne */
-	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-	/* Ombre douce et subtile pour un look flottant */
-	backdrop-filter: blur(15px);
-	/* Flou modéré pour un effet de frosted glass */
-	opacity: 1;
-	/* Rendons-le complètement visible, le flou et la translucidité donneront déjà un effet transparent */
-	padding: 30px 40px;
-	/* Padding modéré pour un espace intérieur équilibré */
-	transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow
-		0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-	/* Effet de transition sur le transform et l'ombre pour un effet "hover" plus doux */
-	margin-bottom: 30px;
-	
-}
-
 body, h1, h2, h3, h4, h5, p, a {
     font-family: 'Poppins', sans-serif;
 }
 
+.card, .card2 {
+    margin: auto;
+    max-width: 1500px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(15px);
+    opacity: 1;
+    padding: 30px 40px;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-bottom: 30px;
+}
 
+.card2 {
+    max-width: 2000px;
+    padding: 30px 20px;
+}
 
 .containerForm {
-	margin-top: 50px;
+    margin-top: 50px;
 }
 
-#fileProfilePicLabel.form-control {
-	border-top-left-radius: 20px;
-	border-bottom-left-radius: 20px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+.container-fluid {
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
-#fileLogoLabel.form-control {
-	border-top-left-radius: 20px;
-	border-bottom-left-radius: 20px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+.clickable-card, .clickable-card2, .clickable-card3  {
+	color: #ffffff;
+	background-color: #374565;
+    cursor: pointer;
+    padding: 20px;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: flex-start;
+    height: 300px !important;
 }
 
-#fileLogoLabelP.form-control {
-	border-top-left-radius: 20px;
-	border-bottom-left-radius: 20px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+.clickable-card2 {
+	background-color: B7D6FF;
+
 }
 
-#fileProfilePicLabelS.form-control {
-	border-top-left-radius: 20px;
-	border-bottom-left-radius: 20px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-}
+.clickable-card3 {
+	background-color: B7D6FF;
 
-.btn-outline-dark {
-	border-radius: 20px;
-}
-
-.btn-custom1 {
-	background-color: black;
-	color: white;
-	border: none;
-	border-radius: 20px;
-	padding: 10px 20px;
-	font-size: 0.9em;
-	transition: all 0.3s;
-	height: 38px;
-	width: 210px;
-}
-
-.btn-custom1:hover {
-	background-color: #000b73; /* Darker shade for hover state */
-	color: white;
-}
-
-.btn-custom2 {
-	background-color: black;
-	color: white;
-	border: none;
-	border-radius: 20px;
-	padding: 10px 20px;
-	font-size: 0.9em;
-	transition: all 0.3s;
-	height: 38px;
-	width: 210px;
-}
-
-.btn-custom2:hover {
-	background-color: #17330d; /* Darker shade for hover state */
-	color: white;
-}
-
-.btn-custom3 {
-	background-color: black;
-	color: white;
-	border: none;
-	border-radius: 20px;
-	padding: 10px 20px;
-	font-size: 0.9em;
-	transition: all 0.3s;
-	height: 38px;
-	width: 210px;
-}
-
-.btn-custom3:hover {
-	background-color: #730e18; /* Darker shade for hover state */
-	color: white;
-}
-
-.btn-custom {
-	background-color: black; /* You can choose your preferred color */
-	color: white;
-	border: none;
-	border-radius: 20px;
-	padding: 10px 20px;
-	font-size: 0.9em;
-	transition: all 0.3s;
-	height: 38px;
-	width: 100px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.clickable-card {
-	cursor: pointer;
-	height: 250px; /* Hauteur fixe pour la carte */
-	display: flex;
-	flex-direction: column;
-	justify-content: center; /* Centrer le contenu verticalement */
-	padding-left: 20px; /* Espace fixe à gauche */
-	padding-right: 20px; /* Espace fixe à droite */
 }
 
 .clickable-card:hover {
@@ -143,6 +57,75 @@ body, h1, h2, h3, h4, h5, p, a {
 
 @media (max-width: 767px) {
     .col-md-4 {
-        margin-bottom: 30px; /* Espacement entre les cartes */
+        margin-bottom: 30px;
     }
+}
+
+.clickable-card h4 {
+    margin-bottom: 0;
+}
+
+.btn-outline-dark {
+    border-radius: 20px;
+}
+
+/* Combining common styles for btn-custom* */
+.btn-custom, .btn-custom1, .btn-custom2, .btn-custom3 {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 0.9em;
+    transition: all 0.3s;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-custom:hover,
+.btn-custom1:hover {
+    background-color: #000b73;
+}
+
+.btn-custom2:hover {
+    background-color: #17330d;
+}
+
+.btn-custom3:hover {
+    background-color: #730e18;
+}
+
+.btn-custom {
+    width: 100px;
+}
+
+.btn-custom1, .btn-custom2, .btn-custom3 {
+    width: 210px;
+}
+
+.btn-primary {
+    background-color: #164359;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #8e5e23;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+    outline: none;
+}
+
+.form-control {
+    border-radius: 20px;
+    border: 3px solid #ccc;
 }

@@ -27,6 +27,8 @@
 </style>
 </h:head>
 <h:body>
+<ui:composition template="/WEB-INF/templates/organizer_template.xhtml">
+        <ui:define name="content">
 	<h1>Tour Packages</h1>
 	<div class="tour-packages">
 		<!-- Loop through tour packages and generate flex boxes -->
@@ -44,5 +46,7 @@
 </ui:repeat>
 
 	</div>
+	  </ui:define>
+    </ui:composition>
 </h:body>
 </html>
