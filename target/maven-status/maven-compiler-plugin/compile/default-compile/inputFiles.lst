@@ -9,6 +9,7 @@ D:\Trip hub\TripHub\src\main\java\triphub\entity\user\Provider.java
 D:\Trip hub\TripHub\src\main\java\triphub\dao\user\ProviderDAO.java
 D:\Trip hub\TripHub\src\main\java\triphub\viewModel\ServiceViewModel.java
 D:\Trip hub\TripHub\src\main\java\triphub\dao\service\AddressDAO.java
+D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\products\CartSessionBean.java
 D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\registration\LoginBean.java
 D:\Trip hub\TripHub\src\main\java\triphub\dao\service\RestaurantDAO.java
 D:\Trip hub\TripHub\src\main\java\triphub\helpers\LayoutConverter.java
@@ -57,6 +58,7 @@ D:\Trip hub\TripHub\src\main\java\triphub\main\main.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\service\AccommodationType.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\user\SuperAdmin.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\product\TourPackage.java
+D:\Trip hub\TripHub\src\main\java\triphub\managedBeans\products\CheckoutBean.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\product\Theme.java
 D:\Trip hub\TripHub\src\main\java\triphub\entity\subscription\Customization.java
 D:\Trip hub\TripHub\src\main\java\triphub\dao\customization\DatabaseLayoutDAO.java

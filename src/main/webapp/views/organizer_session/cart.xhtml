@@ -69,7 +69,10 @@
   <h:outputText value="Total Price: #{cartBean.calculateTotalPrice(cartBean.cartItems)} #{cartBean.cartItems[0].tourPackage.price.currency}" />
 
         <h:button value="Continue Shopping" outcome="/views/organizer_session/homeForWebsite.xhtml" />
-         <h:button value="CheckOut" outcome="/views/organizer_session/CheckOut.xhtml" />
+        <!-- Add the h:link component to transfer data to CheckOut.xhtml -->
+<h:commandButton value="Proceed to Checkout" action="#{cartBean.goToCheckout}" />
+
+
     </h:form>
 </h:body>
 
