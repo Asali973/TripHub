@@ -110,29 +110,41 @@
 							<small id="charCount">500 characters remaining</small>
 						</div>
 					</div>
-					<div class="reg-form-group mt-4">
-					<h:outputLabel for="availableTill" value="Available Till:" />
-						<h:inputText id="availableTill" type="date"
-							value="#{accommodationBean.accommodationVm.availableTill}"
-							class="form-control date piker" >
-							<f:convertDateTime pattern="dd/MM/yyyy"  />
+					
+					<div class="form-group mt-4">
+						<label for="availableFrom">Available From*:</label>
+
+						<h:inputText id="availableFrom"
+							value="#{accommodationBean.accommodationVm.availableFrom}"
+							class="form-control date-picker">
+							<f:convertDateTime pattern="yyyy-MM-dd" timeZone="UTC"
+								type="date" />
 						</h:inputText>
+          
 					</div>
 
-					<div class="reg-form-group mt-4">
-						<h:outputLabel for="availableFrom" value="Available From:" />
-						<input type="date" id="availableFrom" class="form-control"
-							value="#{accommodationBean.accommodationVm.availableFrom}" />
+					<div class="form-group mt-4">
+						<label for="availableTill">Available Until*:</label>
+
+						<h:inputText id="availableTill"
+							value="#{accommodationBean.accommodationVm.availableTill}"
+							class="form-control date-picker">
+							<f:convertDateTime pattern="yyyy-MM-dd" timeZone="UTC"
+								type="date" />
+						</h:inputText>
+
+>>>>>>> 298f082d6a3ea1152c0b6d2ee151fe9c220eb8a4
 					</div>
 
 					<div class="form-group mt-4">
 						<label for="availability">Click here to make your service
 							available to our partners:</label>
 						<div class="toggle-button">
-							<input type="checkbox" id="availability" class="toggle-input" /><label
-								for="availability" class="toggle-label" />
+							<h:selectBooleanCheckbox id="availability"
+								value="#{accommodationBean.accommodationVm.availability}" />
 						</div>
 					</div>
+					
 					<div class="form-group mt-4">
 						<h:outputLabel for="Price" value="Price*:" required="true"
 							requiredMessage="Price is required." />
@@ -191,6 +203,16 @@
 	</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
+		<script>
+    $(document).ready(function(){
+        // initialiser flatpickr pour les champs avec la classe date-picker
+        $(".date-picker").flatpickr({
+            dateFormat: "Y-m-d",
+            enableTime: false
+        });
+    });
+</script>
+		
 	<h:outputScript library="javascript" name="servicesCrud.js" />
 </h:body>
 </html>

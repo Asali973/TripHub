@@ -2,6 +2,7 @@ package triphub.dao.service;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,8 +18,8 @@ import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
 
-@ApplicationScoped
-public class TransportationDAO implements ServiceInterface{
+@Stateless
+public class TransportationDAO{
 	@PersistenceContext
 	private EntityManager em;
 
@@ -29,7 +30,7 @@ public class TransportationDAO implements ServiceInterface{
 	public TransportationDAO() {
 	}
 	
-	@Override
+
 	public Transportation create(SubServicesViewModel transportationvm) {
 
 		// create service
@@ -112,7 +113,7 @@ public class TransportationDAO implements ServiceInterface{
 		return transportation.initTransportationViewModel();
 	}
 
-	@Override
+	
 	public void delete(SubServicesViewModel transportationvm) {
 	    Transportation transportation = em.find(Transportation.class, transportationvm.getId());
 	    if (transportation == null) {
@@ -123,7 +124,7 @@ public class TransportationDAO implements ServiceInterface{
 	}
 
 
-	@Override
+	
 	public SubServicesViewModel initSubService(Long id) {
 		Transportation transportation = em.find(Transportation.class, id);
 		if (transportation == null) {
@@ -132,19 +133,19 @@ public class TransportationDAO implements ServiceInterface{
 		return transportation.initTransportationViewModel();
 	}
 
-	@Override
+	
 	public Transportation read(Long id) {
 		return em.find(Transportation.class, id);
 	}
 	
-	@Override
+	
 	public List<Transportation> getAll() {
 		TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation t", Transportation.class);
 
 		return query.getResultList();
 	}
 
-	@Override
+	
 	public Transportation findByName(String name) {
 		TypedQuery<Transportation> query = em.createQuery("SELECT t FROM Transportation t WHERE t.name = :name", Transportation.class);
 		query.setParameter("name", name);
@@ -153,7 +154,6 @@ public class TransportationDAO implements ServiceInterface{
 		return transportations.isEmpty() ? null : transportations.get(0);
 	}
 
-	@Override
 	public Transportation findById(Long id) {
 		return em.find(Transportation.class,id);
 

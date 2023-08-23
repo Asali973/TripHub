@@ -8,25 +8,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
-
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
 
-import triphub.entity.subservices.Restaurant;
-import triphub.entity.subservices.Transportation;
-import triphub.entity.subservices.Accommodation;
+
+import triphub.entity.subservices.*;
+
+
 import triphub.entity.user.User;
 import triphub.helpers.FacesMessageUtil;
 import triphub.services.AccommodationService;
@@ -51,72 +48,82 @@ public class CartBean implements Serializable {
 	@Inject
 	AccommodationService accommodationService;
 	@Inject
-	RestaurantService  restaurantService;	
+	RestaurantService restaurantService;
 	@Inject
 	TransportationService transportationService;
 	@Inject
 	private TourPackageBean tourPackageBean;
-	@Inject 
-	private AccommodationBean accoBean;
-	
+	@Inject
+	private AccommodationBean accommodationBean;
+	@Inject
+	private RestaurantBean restaurantBean;
+	@Inject
+	private TransportationBean transportationBean;
+	@Inject
+	private ServiceBean serviceBean;
 	private UserViewModel userViewModel = new UserViewModel();
-	
+
 	private CartItem currentCartItem;
 	private List<CartItem> cartItems;
+	private Restaurant selectedRestaurant;
 	private TourPackage selectedTourPackage;
 	private Accommodation selectedAccommodation;
-	private Restaurant selectedRestaurant;
 	private Transportation selectedTransportation;
 	private Long selectedPackageId;
+	private Long selectedRestaurantId;
+	private Long selectedAccommodationId;
+	private Long selectedTransportationId;
 	private int selectedQuantity;
 	private Date dateOfPurchase;
 
+	private String restaurantName;
+	private BigDecimal restaurantPrice;
+	private String restaurantCurrency;
+
 	@PostConstruct
 	public void init() {
-		//cartItems = iCartService.getCartItemsWithTourPackages();
+		// cartItems = iCartService.getCartItemsWithTourPackages();
 		cartItems = iCartService.getCartItemsWithProducts();
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 		String type = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("type");
 
 		if (id != null && type != null) {
-		    Long entityId = Long.parseLong(id);
+			Long entityId = Long.parseLong(id);
 
-		    switch (type) {
-		        case "tourPackage":
-		            selectedTourPackage = tourPackageService.getTourPackageById(entityId);
-		            if (selectedTourPackage == null) {
-		                // Handle case where tour package is not found
-		            }
-		            break;
+			switch (type) {
+			case "tourPackage":
+				selectedTourPackage = tourPackageService.getTourPackageById(entityId);
+				if (selectedTourPackage == null) {
 
-		        case "accommodation":
-		            selectedAccommodation = accommodationService.findById(entityId);
-		            if (selectedAccommodation == null) {
-		                // Handle case where accommodation is not found
-		            }
-		            break;
+				}
+				break;
 
-		        case "restaurant":
-		            selectedRestaurant = restaurantService.findById(entityId);
-		            if (selectedRestaurant == null) {
-		                // Handle case where restaurant is not found
-		            }
-		            break;
+			case "accommodation":
+				selectedAccommodation = accommodationService.findById(entityId);
+				if (selectedAccommodation == null) {
 
-		        case "transportation":
-		            selectedTransportation = transportationService.findById(entityId);
-		            if (selectedTransportation == null) {
-		                // Handle case where transportation is not found
-		            }
-		            break;
+				}
+				break;
 
-		        default:
-		            // Handle case where the type is unknown or not provided
-		            break;
-		    }
+			case "restaurant":
+				selectedRestaurant = restaurantService.findById(entityId);
+				if (selectedRestaurant == null) {
+
+				}
+				break;
+
+			case "transportation":
+				selectedTransportation = transportationService.findById(entityId);
+				if (selectedTransportation == null) {
+
+				}
+				break;
+
+			default:
+
+				break;
+			}
 		}
-
-		
 
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
@@ -137,32 +144,74 @@ public class CartBean implements Serializable {
 
 	public String addToCart() {
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		String selectedPackageIdParam = params.get("selectedPackageId");
-		String selectedQuantityParam = params.get("quantity");
+		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+		
+		// For each product type, call the corresponding method:
+		addTourPackageToCart(user, params.get("selectedPackageId"), params.get("quantity"));
+		addAccommodationToCart(user, params.get("selectedAccommodationId"), params.get("quantity"));
+		addRestaurantToCart(user, params.get("selectedRestaurantId"), params.get("quantity"));
+		addTransportationToCart(user, params.get("selectedTransportationId"), params.get("quantity"));
 
-		if (selectedPackageIdParam != null) {
-			Long selectedPackageId = Long.parseLong(selectedPackageIdParam);
-			int selectedQuantity = Integer.parseInt(selectedQuantityParam);
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("cart.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null; // Return null to stay on the same page
+	}
+
+	public void addTourPackageToCart(User user, String productId, String quantity) {
+		if (productId != null) {
+			Long selectedPackageId = Long.parseLong(productId);
+			int selectedQuantity = Integer.parseInt(quantity);
 			TourPackage selectedTourPackage = tourPackageService.getTourPackageById(selectedPackageId);
 
 			if (selectedTourPackage != null) {
-				User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-
-				iCartService.addToCart(selectedTourPackage, user, selectedQuantity); // Use the updated addToCart method
-
-				// Set the date of purchase here, after the item is successfully added to the
-				// cart
+				iCartService.addToCart(selectedTourPackage, user, selectedQuantity);
 				dateOfPurchase = new Date();
-
-				// Redirect to the Cart Page
-				try {
-					FacesContext.getCurrentInstance().getExternalContext().redirect("cart.xhtml");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 		}
-		return null; // Return null to stay on the same page
+	}
+
+	public void addAccommodationToCart(User user, String productId, String quantity) {
+		if (productId != null) {
+			Long selectedAccommodationId = Long.parseLong(productId);
+			int selectedQuantity = Integer.parseInt(quantity);
+			Accommodation selectedAccommodation = accommodationService.findById(selectedAccommodationId);
+
+			if (selectedAccommodation != null) {
+				iCartService.addToCart(selectedAccommodation, user, selectedQuantity);
+				dateOfPurchase = new Date();
+			}
+		}
+	}
+
+	public void addRestaurantToCart(User user, String productId, String quantity) {
+		if (productId != null ) {
+			Long selectedRestaurantId = Long.parseLong(productId);
+			int selectedQuantity = Integer.parseInt(quantity);
+
+			Restaurant selectedRestaurant = restaurantService.findById(selectedRestaurantId);
+
+			if (selectedRestaurant != null) {			
+				iCartService.addToCart(selectedRestaurant, user, selectedQuantity);
+				dateOfPurchase = new Date();
+			}
+		}
+	}
+
+	public void addTransportationToCart(User user, String productId, String quantity) {
+		if (productId != null) {
+			Long selectedTransportationId = Long.parseLong(productId);
+			int selectedQuantity = Integer.parseInt(quantity);
+			Transportation selectedTransportation = transportationService.findById(selectedTransportationId);
+
+			if (selectedTransportation != null) {
+				iCartService.addToCart(selectedTransportation, user, selectedQuantity);
+				dateOfPurchase = new Date();
+			}
+		}
 	}
 
 	public void initUserData(Long userId) {
@@ -186,10 +235,6 @@ public class CartBean implements Serializable {
 				itemPrice = cartItem.getService().getPrice().getAmount();
 			}
 
-			// Use the sum of existing quantity and new quantity for the calculation
-			// int totalQuantity = cartItem.getQuantity() + cartItem.getNewQuantity();
-			// totalPrice =
-			// totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(totalQuantity)));
 			totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
 		}
 
@@ -197,17 +242,16 @@ public class CartBean implements Serializable {
 	}
 
 	public String removeFromCart(Long cartItemId, User user) {
-	    iCartService.removeFromCart(cartItemId, user);
-	    FacesContext.getCurrentInstance().addMessage(null,
-	            new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed from Cart", "Item removed from your cart."));
+		iCartService.removeFromCart(cartItemId, user);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed from Cart", "Item removed from your cart."));
 
-	    return "cart?faces-redirect=true";
+		return "cart?faces-redirect=true";
 	}
-
 
 	public List<SelectItem> getQuantityOptions() {
 		List<SelectItem> options = new ArrayList<>();
-		// adjust the range based on requirements
+
 		for (int i = 1; i <= 10; i++) {
 			options.add(new SelectItem(i, String.valueOf(i)));
 		}
@@ -217,19 +261,19 @@ public class CartBean implements Serializable {
 	public void updateCartItemQuantity(CartItem cartItem) {
 		// Retrieve the User object from the session map
 		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-//&& cartItem.getNewQuantity() != cartItem.getQuantity()
+		// && cartItem.getNewQuantity() != cartItem.getQuantity()
 		if (user != null) {
-			if (cartItem.getNewQuantity() > 0) { //
+			if (cartItem.getNewQuantity() > 0) {
 				cartItem.setQuantity(cartItem.getNewQuantity());
 				iCartService.updateCartItem(cartItem);
 			} else if (cartItem.getNewQuantity() == 0) {
 				// Remove the cart item if the new quantity is set to 0
 				iCartService.removeFromCart(cartItem.getId(), user);
 			} else {
-				// Handle other cases or invalid input as needed
+				// TODO: Handle other cases or invalid input as needed
 			}
 		} else {
-			// Handle the case when the user is not available in the session
+			// TODO: Handle the case when the user is not available in the session
 		}
 	}
 
@@ -251,7 +295,7 @@ public class CartBean implements Serializable {
 		if (checkoutBean != null) {
 			checkoutBean.setCartItems(cartItems);
 			checkoutBean.setTotalPrice(calculateTotalPrice(cartItems));
-			
+
 		}
 		return "checkout.xhtml?faces-redirect=true"; // Navigate to checkout page
 	}
@@ -346,48 +390,158 @@ public class CartBean implements Serializable {
 		this.dateOfPurchase = dateOfPurchase;
 	}
 
+	public CartItem getCurrentCartItem() {
+		return currentCartItem;
+	}
+
+	public void setCurrentCartItem(CartItem currentCartItem) {
+		this.currentCartItem = currentCartItem;
+	}
+
+	public Accommodation getSelectedAccommodation() {
+		return selectedAccommodation;
+	}
+
+	public void setSelectedAccommodation(Accommodation selectedAccommodation) {
+		this.selectedAccommodation = selectedAccommodation;
+	}
+
+	public Restaurant getSelectedRestaurant() {
+		return selectedRestaurant;
+	}
+
+	public void setSelectedRestaurant(Restaurant selectedRestaurant) {
+		this.selectedRestaurant = selectedRestaurant;
+	}
+
+	public Transportation getSelectedTransportation() {
+		return selectedTransportation;
+	}
+
+	public void setSelectedTransportation(Transportation selectedTransportation) {
+		this.selectedTransportation = selectedTransportation;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public RestaurantBean getRestauBean() {
+		return restaurantBean;
+	}
+
+	public void setRestauBean(RestaurantBean restauBean) {
+		this.restaurantBean = restauBean;
+	}
+
+	public TransportationBean getTransBean() {
+		return transportationBean;
+	}
+
+	public void setTransBean(TransportationBean transBean) {
+		this.transportationBean = transBean;
+	}
+
+	public AccommodationBean getAccommodationBean() {
+		return accommodationBean;
+	}
+
+	public void setAccommodationBean(AccommodationBean accommodationBean) {
+		this.accommodationBean = accommodationBean;
+	}
+
+	public RestaurantBean getRestaurantBean() {
+		return restaurantBean;
+	}
+
+	public void setRestaurantBean(RestaurantBean restaurantBean) {
+		this.restaurantBean = restaurantBean;
+	}
+
+	public TransportationBean getTransportationBean() {
+		return transportationBean;
+	}
+
+	public void setTransportationBean(TransportationBean transportationBean) {
+		this.transportationBean = transportationBean;
+	}
+
+	public Long getSelectedRestaurantId() {
+		return selectedRestaurantId;
+	}
+
+	public void setSelectedRestaurantId(Long selectedRestaurantId) {
+		this.selectedRestaurantId = selectedRestaurantId;
+	}
+
+	public Long getSelectedAccommodationId() {
+		return selectedAccommodationId;
+	}
+
+	public void setSelectedAccommodationId(Long selectedAccommodationId) {
+		this.selectedAccommodationId = selectedAccommodationId;
+	}
+
+	public Long getSelectedTransportationId() {
+		return selectedTransportationId;
+	}
+
+	public void setSelectedTransportationId(Long selectedTransportationId) {
+		this.selectedTransportationId = selectedTransportationId;
+	}
+
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
+	}
+
+	public BigDecimal getRestaurantPrice() {
+		return restaurantPrice;
+	}
+
+	public void setRestaurantPrice(BigDecimal restaurantPrice) {
+		this.restaurantPrice = restaurantPrice;
+	}
+
+	public String getRestaurantCurrency() {
+		return restaurantCurrency;
+	}
+
+	public void setRestaurantCurrency(String restaurantCurrency) {
+		this.restaurantCurrency = restaurantCurrency;
+	}
+
 }
 
+//prototype method
 //public String addToCart() {
 //Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 //String selectedPackageIdParam = params.get("selectedPackageId");
 //String selectedQuantityParam = params.get("quantity");
 //
 //if (selectedPackageIdParam != null) {
-//    Long selectedPackageId = Long.parseLong(selectedPackageIdParam);
-//    int selectedQuantity = Integer.parseInt(selectedQuantityParam);
-//    TourPackage selectedTourPackage = tourPackageService.getTourPackageById(selectedPackageId);
+//	Long selectedPackageId = Long.parseLong(selectedPackageIdParam);
+//	int selectedQuantity = Integer.parseInt(selectedQuantityParam);
+//	TourPackage selectedTourPackage = tourPackageService.getTourPackageById(selectedPackageId);
 //
-//    if (selectedTourPackage != null) {
-//        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+//	if (selectedTourPackage != null) {
+//		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
 //
-//        CartItem cartItem = new CartItem();
-//        cartItem.setTourPackage(selectedTourPackage);
-//        cartItem.setQuantity(selectedQuantity);
-//      
-//        //cartItems.add(cartItem);// Here I add new item to list
-//        iCartService.addToCart(selectedTourPackage, user);
+//		iCartService.addToCart(selectedTourPackage, user, selectedQuantity); 
+//		
+//		dateOfPurchase = new Date();
 //
-//        // Set the date of purchase here, after the item is successfully added to the cart
-//        dateOfPurchase = new Date();
-//
-//        // Redirect to the Cart Page
-//        try {
-//            FacesContext.getCurrentInstance().getExternalContext().redirect("cart.xhtml");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+//		try {
+//			FacesContext.getCurrentInstance().getExternalContext().redirect("cart.xhtml");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 //}
 //return null; // Return null to stay on the same page
 //}
-
-//<h:form>
-//<h:selectOneMenu id="quantitySelect" value="#{cartBean.selectedQuantity}">
-//    <f:selectItems value="#{cartBean.quantityOptions}" />
-//</h:selectOneMenu>
-//<h:commandButton value="Add to Cart" action="#{cartBean.addToCart}">
-//<f:param name="selectedPackageId" value="#{param.id}" />
-//<f:param name="quantity" value="#{cartBean.selectedQuantity}" />
-//</h:commandButton>
-//</h:form>
+//<h:inputText id="availableFrom" value="#{restaurantBean.selectedRestaurant.service.availableFrom}" styleClass="datePicker" />
+//<h:inputText id="availableTill" value="#{restaurantBean.selectedRestaurant.service.availableTill}" styleClass="datePicker" />

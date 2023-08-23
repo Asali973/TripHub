@@ -23,7 +23,6 @@ import triphub.entity.product.Price;
 import triphub.viewModel.SubServicesViewModel;
 
 @Entity
-
 public class Service implements Serializable{
 	private static final long serialVersionUID = 1L;
   @Id
@@ -38,12 +37,17 @@ public class Service implements Serializable{
 
 	private boolean availability;
 	
-	@Temporal(value =TemporalType.DATE)
+
 	@JoinColumn(name = "fromDate_id")
+	@Temporal(TemporalType.DATE)
 	private Date availableFrom;
+
+
+
 	
-	@Temporal(value =TemporalType.DATE)
+
 	@JoinColumn(name = "tillDate_id")
+	@Temporal(TemporalType.DATE)
 	private Date availableTill;
 
 	public static Service createServiceFromViewModel(SubServicesViewModel form) {

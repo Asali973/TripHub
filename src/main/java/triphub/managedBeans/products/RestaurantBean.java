@@ -31,9 +31,7 @@ public class RestaurantBean implements Serializable {
 	
 	private List<Restaurant> allRestaurants;
 
-	public void setAllRestaurants(List<Restaurant> allRestaurants) {
-		this.allRestaurants = allRestaurants;
-	}
+	private Restaurant selectedRestaurant;
 
 	public RestaurantBean(RestaurantService restaurantService, SubServicesViewModel restaurantvm, List<Restaurant> allRestaurants) {
 		
@@ -58,6 +56,16 @@ public class RestaurantBean implements Serializable {
 				FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist");
 			}
 		}
+		if (id != null) {
+		    Long restaurantId = Long.parseLong(id);
+		    // Fetch the selected restaurant using restaurantService
+		    selectedRestaurant = restaurantService.findById(restaurantId);
+
+		    if (selectedRestaurant == null) {
+		        FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist");
+		    }
+		}
+
 	}
 
 	public void create() {
@@ -120,13 +128,30 @@ public class RestaurantBean implements Serializable {
 	public void setRestaurantService(RestaurantService restaurantService) {
 		this.restaurantService = restaurantService;
 	}
-
+	
 	public SubServicesViewModel getRestaurantvm() {
 		return restaurantvm;
 	}
 
 	public void setRestaurantvm(SubServicesViewModel restaurantvm) {
 		this.restaurantvm = restaurantvm;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+
+	public void setAllRestaurants(List<Restaurant> allRestaurants) {
+		this.allRestaurants = allRestaurants;
+	}
+
+	public Restaurant getSelectedRestaurant() {
+		return selectedRestaurant;
+	}
+
+	public void setSelectedRestaurant(Restaurant selectedRestaurant) {
+		this.selectedRestaurant = selectedRestaurant;
 	}
 
 }

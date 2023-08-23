@@ -11,7 +11,7 @@
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-	<title>Tour Packages</title>
+	<title>Transports</title>
 	<style>
 .tour-packages {
 	display: flex;
@@ -27,23 +27,20 @@
 </style>
 </h:head>
 <h:body>
-<ui:composition template="/WEB-INF/templates/organizer_template.xhtml">
-        <ui:define name="content">
-	<h1>Tour Packages</h1>
+	<h1>Find Out the best deals for your Travels all around the World</h1>
 	<div class="tour-packages">
 		<!-- Loop through tour packages and generate flex boxes -->
-		<ui:repeat value="#{tourPackageBean.allTourPackages}" var="package">
+		<ui:repeat value="#{transportationBean.allTransportations}" var="transport">
     <div class="tour-package">
-        <h2>#{package.name}</h2>
-        <p>Description: #{package.description}</p>
-        <p>Price: #{package.price.amount} #{package.price.currency}</p>
-        <p>Destination: #{package.destination.cityName}, #{package.destination.state}, #{package.destination.country}</p>
-        <p>Theme: #{package.theme.themeName}</p>
-    <a href="details.xhtml?id=#{package.id}" class="btn btn-primary">View Details</a>
+        <h2>#{transport.name}</h2>
+        <p>Description: #{transport.description}</p>
+        <p>Price: #{transport.service.price.amount} #{transport.service.price.currency}</p>
+        <p>Mode of Transportation: #{transport.transportation}</p>       
+        <a href="details.xhtml?id=#{transport.id}" class="btn btn-primary">View Details</a>
     </div>
 </ui:repeat>
+
+
 	</div>
-	  </ui:define>
-    </ui:composition>
 </h:body>
 </html>

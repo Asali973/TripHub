@@ -1,6 +1,8 @@
 package triphub.dao.service;
 
 import java.util.List;
+
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,8 +17,8 @@ import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
 
-@ApplicationScoped
-public class RestaurantDAO implements ServiceInterface{
+@Stateless
+public class RestaurantDAO  {
 
 
 	@PersistenceContext
@@ -29,7 +31,7 @@ public class RestaurantDAO implements ServiceInterface{
 		this.em = em;
 		}
 
-	@Override
+
 	public Restaurant create(SubServicesViewModel restaurantvm) {
 
 
@@ -98,7 +100,7 @@ public class RestaurantDAO implements ServiceInterface{
 		return restaurant.initRestaurantViewModel();
 	}
 
-	@Override
+
 	public void delete(SubServicesViewModel restaurantvm) {
 		Restaurant restaurant = em.find(Restaurant.class, restaurantvm.getId());
 		if (restaurant == null) {
@@ -110,7 +112,7 @@ public class RestaurantDAO implements ServiceInterface{
 		
 	}
 	
-	@Override
+
 	public SubServicesViewModel initSubService(Long id) {
 		Restaurant restaurant = em.find(Restaurant.class, id);
 		if (restaurant == null) {
@@ -119,19 +121,18 @@ public class RestaurantDAO implements ServiceInterface{
 		return restaurant.initRestaurantViewModel();
 	}
 	
-	@Override
+
 	public Restaurant read(Long id) {
 		return em.find(Restaurant.class, id);
 	}
 
-	@Override
 	public List<Restaurant> getAll() {
 		TypedQuery<Restaurant> query = em.createQuery("SELECT d FROM Restaurant d", Restaurant.class);
 
 		return query.getResultList();
 	}
 	
-	@Override
+
 	public Restaurant findByName(String name) {
 		TypedQuery<Restaurant> query = em.createQuery("SELECT r FROM Restaurant r WHERE r.name = :name", Restaurant.class);
 		query.setParameter("name", name);
@@ -140,7 +141,7 @@ public class RestaurantDAO implements ServiceInterface{
 		return restaurants.isEmpty() ? null : restaurants.get(0);
 	}
 
-	@Override
+	
 	public Restaurant findById(Long id) {
 		return em.find(Restaurant.class,id);
 	}
