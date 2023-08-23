@@ -61,6 +61,16 @@ public class OrganizerBean implements Serializable {
 			if (email != null) {
 				throw new RegistrationException("This email is already used");
 			}
+			
+			// Uploading the pictures and setting the links to userViewModel
+			String logoPicName = ImageHelper.processProfilePicture(logoPicture);
+			String companyPicName = ImageHelper.processProfilePicture(companyPicture);
+			if (logoPicName != null) {
+				userViewModel.setCompanyLogoLink(logoPicName);
+			}
+			if (companyPicName != null) {
+				userViewModel.setCompanyPictureLink(companyPicName);
+			}
 
 			Organizer newOrganizer = userService.createOrganizer(userViewModel);
 

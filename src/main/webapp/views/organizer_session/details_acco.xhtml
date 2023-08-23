@@ -31,13 +31,13 @@
 	<h2>#{accommodationBean.selectedAccommodation != null ?
 		accommodationBean.selectedAccommodation.name : 'Accommodation Not Found'}</h2>
 	<p>Description: #{accommodationBean.selectedAccommodation.description}</p>
-	<p>Price: #{accommodationBean.selectedAccommodation.price.amount}
-		#{accommodationBean.selectedAccommodation.price.currency}</p>
+	<p>Price: #{accommodationBean.selectedAccommodation.service.price.amount}
+		#{accommodationBean.selectedAccommodation.service.price.currency}</p>
 	<p>Location:
-		#{accommodationBean.selectedAccommodation.address.cityName},
+		#{accommodationBean.selectedAccommodation.address.city},
 		#{accommodationBean.selectedAccommodation.address.state},
 		#{accommodationBean.selectedAccommodation.address.country}</p>
-	<p>Type: #{accommodationBean.selectedAccommodation.type}</p>
+	<p>Type: #{accommodationBean.selectedAccommodation.accommodationType}</p>
 	<h2>Facilities</h2>
 	<!-- Here you can list the facilities or amenities for the accommodation -->
 	

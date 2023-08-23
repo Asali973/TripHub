@@ -67,6 +67,7 @@ public class Service implements Serializable{
 		this.setAvailableTill(form.getAvailableTill());
 	}
 
+
 	public SubServicesViewModel initServiceViewModel() {
 		SubServicesViewModel form = new SubServicesViewModel();
 		//form.setId(this.getId());
@@ -76,6 +77,14 @@ public class Service implements Serializable{
 		form.setAvailableFrom(this.getAvailableFrom());
 		form.setAvailableTill(this.getAvailableTill());
 		return form;
+
+	public void initServiceViewModel(SubServicesViewModel form) {
+	    form.setId(this.getId());
+	    this.getPrice().initPriceViewModel(form);
+	    form.setAvailability(this.isAvailability());
+	    form.setAvailableFrom(this.getAvailableFrom());
+	    form.setAvailableTill(this.getAvailableTill());
+r
 	}
 	
 	public void initServiceViewModel(SubServicesViewModel form) {
@@ -86,6 +95,7 @@ public class Service implements Serializable{
 	    form.setAvailableTill(this.getAvailableTill());
 	    this.getPrice().initPriceViewModel(form);
 	}
+
 
 	public Long getId() {
 		return id;

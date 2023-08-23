@@ -33,10 +33,13 @@ public class ServiceService {
 	}
 	
 	public SubServicesViewModel initService(Long id) {
-		 Service service = serviceDAO.findById(id);
-	        if (service == null) {
-	            return null;
-	        }
-	        return service.initServiceViewModel();
+	    Service service = serviceDAO.findById(id);
+	    if (service == null) {
+	        return null;
+	    }
+	    SubServicesViewModel serviceVM = new SubServicesViewModel();
+	    service.initServiceViewModel(serviceVM);
+	    return serviceVM;
 	}
+
 }

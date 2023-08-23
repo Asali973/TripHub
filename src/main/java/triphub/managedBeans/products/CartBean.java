@@ -17,6 +17,10 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+
+import triphub.dao.service.AccommodationDAO;
+import triphub.dao.service.RestaurantDAO;
+import triphub.dao.service.TransportationDAO;
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
 
@@ -61,6 +65,15 @@ public class CartBean implements Serializable {
 	private TransportationBean transportationBean;
 	@Inject
 	private ServiceBean serviceBean;
+	
+	@Inject
+	private AccommodationDAO accomodationDAO;
+
+	@Inject
+	private RestaurantDAO restaurantDAO;
+
+	@Inject
+	private TransportationDAO transportationDAO;
 	private UserViewModel userViewModel = new UserViewModel();
 
 	private CartItem currentCartItem;
@@ -99,21 +112,21 @@ public class CartBean implements Serializable {
 				break;
 
 			case "accommodation":
-				selectedAccommodation = accommodationService.findById(entityId);
+				selectedAccommodation = accomodationDAO.findById(entityId);
 				if (selectedAccommodation == null) {
 
 				}
 				break;
 
 			case "restaurant":
-				selectedRestaurant = restaurantService.findById(entityId);
+				selectedRestaurant = restaurantDAO.findById(entityId);
 				if (selectedRestaurant == null) {
 
 				}
 				break;
 
 			case "transportation":
-				selectedTransportation = transportationService.findById(entityId);
+				selectedTransportation = transportationDAO.findById(entityId);
 				if (selectedTransportation == null) {
 
 				}
@@ -175,18 +188,41 @@ public class CartBean implements Serializable {
 			}
 		}
 	}
-
+	
+//	public void addAccommodationToCart(User user, String productId, String quantity) {
+//		if (productId != null) {
+//			Long selectedAccommodationId = Long.parseLong(productId);
+//			int selectedQuantity = Integer.parseInt(quantity);
+//			Accommodation selectedAccommodation = accomodationDAO.findById(selectedAccommodationId);
+//
+//			if (selectedAccommodation != null) {
+//				iCartService.addToCart(selectedAccommodation, user, selectedQuantity);
+//				dateOfPurchase = new Date();
+//			}
+//		}
+//	}
 	public void addAccommodationToCart(User user, String productId, String quantity) {
-		if (productId != null) {
-			Long selectedAccommodationId = Long.parseLong(productId);
-			int selectedQuantity = Integer.parseInt(quantity);
-			Accommodation selectedAccommodation = accommodationService.findById(selectedAccommodationId);
+	    if (productId != null) {
+	        Long selectedAccommodationId = Long.parseLong(productId);
+	        int selectedQuantity = Integer.parseInt(quantity);
 
-			if (selectedAccommodation != null) {
-				iCartService.addToCart(selectedAccommodation, user, selectedQuantity);
-				dateOfPurchase = new Date();
-			}
-		}
+	        Accommodation selectedAccommodation = accomodationDAO.findById(selectedAccommodationId);
+
+	        if (selectedAccommodation != null) {
+	            // Debugging print statements for name and price
+	            System.out.println("Accommodation Name: " + selectedAccommodation.getName());
+	            if (selectedAccommodation.getService() != null && selectedAccommodation.getService().getPrice() != null) {
+	                System.out.println("Accommodation Price: " + selectedAccommodation.getService().getPrice().getAmount());
+	            } else {
+	                System.out.println("Service or Price information is missing for the selected accommodation.");
+	            }
+
+	            iCartService.addToCart(selectedAccommodation, user, selectedQuantity);
+	            dateOfPurchase = new Date();
+	        } else {
+	            System.out.println("Accommodation not found for ID: " + selectedAccommodationId);
+	        }
+	    }
 	}
 
 	public void addRestaurantToCart(User user, String productId, String quantity) {
@@ -194,7 +230,7 @@ public class CartBean implements Serializable {
 			Long selectedRestaurantId = Long.parseLong(productId);
 			int selectedQuantity = Integer.parseInt(quantity);
 
-			Restaurant selectedRestaurant = restaurantService.findById(selectedRestaurantId);
+			Restaurant selectedRestaurant = restaurantDAO.findById(selectedRestaurantId);
 
 			if (selectedRestaurant != null) {			
 				iCartService.addToCart(selectedRestaurant, user, selectedQuantity);
@@ -207,7 +243,7 @@ public class CartBean implements Serializable {
 		if (productId != null) {
 			Long selectedTransportationId = Long.parseLong(productId);
 			int selectedQuantity = Integer.parseInt(quantity);
-			Transportation selectedTransportation = transportationService.findById(selectedTransportationId);
+			Transportation selectedTransportation = transportationDAO.findById(selectedTransportationId);
 
 			if (selectedTransportation != null) {
 				iCartService.addToCart(selectedTransportation, user, selectedQuantity);
@@ -226,22 +262,31 @@ public class CartBean implements Serializable {
 	}
 
 	public BigDecimal calculateTotalPrice(List<CartItem> cartItems) {
-		BigDecimal totalPrice = BigDecimal.ZERO;
+	    BigDecimal totalPrice = BigDecimal.ZERO;
 
-		for (CartItem cartItem : cartItems) {
-			BigDecimal itemPrice = BigDecimal.ZERO;
+	    for (CartItem cartItem : cartItems) {
+	    	
+	        BigDecimal itemPrice = BigDecimal.ZERO;
 
-			if (cartItem.getTourPackage() != null) {
-				itemPrice = cartItem.getTourPackage().getPrice().getAmount();
-			} else if (cartItem.getService() != null) {
-				itemPrice = cartItem.getService().getPrice().getAmount();
-			}
+	        if (cartItem.getTourPackage() != null) {
+	            itemPrice = cartItem.getTourPackage().getPrice().getAmount();
+	        } else if (cartItem.getRestaurant() != null) {
+	            itemPrice = cartItem.getRestaurant().getService().getPrice().getAmount();
+	        } else if (cartItem.getAccommodation() != null) {
+	        	 System.out.println("CartItem in ManagedBean: " + cartItem);
+		    	    System.out.println("Accommodation Name: " + cartItem.getAccommodation().getName());
+		    	    System.out.println("Accommodation Price: " + cartItem.getAccommodation().getService().getPrice().getAmount());
+	            itemPrice = cartItem.getAccommodation().getService().getPrice().getAmount();
+	        } else if (cartItem.getTransportation() != null) {
+	            itemPrice = cartItem.getTransportation().getService().getPrice().getAmount();
+	        }
 
-			totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
-		}
+	        totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+	    }
 
-		return totalPrice;
+	    return totalPrice;
 	}
+
 
 	public String removeFromCart(Long cartItemId, User user) {
 		iCartService.removeFromCart(cartItemId, user);

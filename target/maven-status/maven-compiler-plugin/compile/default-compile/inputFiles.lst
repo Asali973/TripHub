@@ -23,6 +23,7 @@
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/Customization.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/registration/LoginBean.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/LoginViewModel.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/products/DetailsBean.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/SuperAdmin.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/PictureDAO.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/registration/OrganizerBean.java

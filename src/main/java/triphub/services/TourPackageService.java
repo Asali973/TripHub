@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import triphub.dao.product.TourPackageDAO;
+import triphub.dao.user.OrganizerDAO;
 import triphub.entity.product.TourPackage;
 import triphub.helpers.FacesMessageUtil;
 import triphub.viewModel.TourPackageFormViewModel;
@@ -17,6 +18,9 @@ public class TourPackageService implements Serializable{
 	private static final long serialVersionUID = 1L;
     @Inject
     private TourPackageDAO tourPackageDAO;
+    
+    @Inject
+    private OrganizerDAO organizerDAO;
     
     public TourPackageService() {}
 
@@ -32,8 +36,8 @@ public class TourPackageService implements Serializable{
     	return tourPackageDAO.findPackageByName(packageName);
     }
 
-    public TourPackage  createTourPackage(TourPackageFormViewModel tourPackageVm) {
-    	return   tourPackageDAO.create(tourPackageVm);
+    public TourPackage  createTourPackage(TourPackageFormViewModel tourPackageVm, Long organizerId) {
+    	return   tourPackageDAO.create(tourPackageVm, organizerId);
     }
 
 
@@ -67,6 +71,10 @@ public class TourPackageService implements Serializable{
     public List<TourPackage> advancedSearch(String city, String state, String country, BigDecimal minPrice, BigDecimal maxPrice, String name, String themeName) {
         return tourPackageDAO.advancedSearch(city, state, country, minPrice, maxPrice, name, themeName);
     }
+    
+	public List<TourPackage> getTourPackagesForOrganizer(Long organizerId) {
+		return tourPackageDAO.getTourPackagesForOrganizer(organizerId);
+	}
     
 }
 
