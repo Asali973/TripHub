@@ -1,0 +1,175 @@
+<ui:composition template="/WEB-INF/templates/organizer_template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<ui:define name="content">
+		<h:head>
+			<meta charset="UTF-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<title>Service Management</title>
+			<h:outputStylesheet library="css" name="bootstrap.min.css" />
+			<style>
+.toggle-link {
+	cursor: pointer;
+	text-decoration: none;
+	color: blue;
+}
+.columns-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 1;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+</style>
+			<script>
+			function toggleAccommodationSearch() {
+			    var searchPanel = document.getElementById('mainForm:accommodationPanelGroup');
+
+			    if (searchPanel.style.display === 'none') {
+			        searchPanel.style.display = 'block';
+			    } else {
+			        searchPanel.style.display = 'none';
+			    }
+			}
+			
+    </script>
+		</h:head>
+
+
+		<h:body>
+			<div class="columns-container">
+				<div class="column">
+					<!-- Accommodation Advanced Search -->
+					<h:form id="mainForm">
+						<h3 class="toggle-link" onclick="toggleAccommodationSearch()">Search
+							our accommodations</h3>
+						<h:panelGroup id="accommodationPanelGroup" style="display: none;">
+							<h:panelGrid columns="2">
+								<h:outputText value="Available From:" />
+								<h:inputText value="#{serviceBean.searchAvailableFrom}"
+									class="form-control date-picker">
+									<f:convertDateTime pattern="yyyy-MM-dd" timeZone="UTC"
+										type="date" />
+								</h:inputText>
+
+								<h:outputText value="Available Till:" />
+								<h:inputText value="#{serviceBean.searchAvailableTill}"
+									class="form-control date-picker">
+									<f:convertDateTime pattern="yyyy-MM-dd" timeZone="UTC"
+										type="date" />
+								</h:inputText>
+
+								<h:outputText value="Accommodation Name:" />
+								<h:inputText value="#{serviceBean.searchAccommodationName}" />
+
+								<h:outputText value="Accommodation City:" />
+								<h:inputText value="#{serviceBean.searchAccommodationCity}" />
+
+								<h:outputText value="Accommodation Country:" />
+								<h:inputText value="#{serviceBean.searchAccommodationCountry}" />
+								<h:selectOneMenu
+									value="#{serviceBean.selectedAccommodationType}">
+									<f:selectItem itemValue="#{null}" itemLabel="Any Type" />
+									<f:selectItems value="#{serviceBean.allAccommodationTypes}"
+										var="type" itemValue="#{type}" itemLabel="#{type.label}" />
+								</h:selectOneMenu>
+							</h:panelGrid>
+							<h:commandButton value="Search"
+								action="#{serviceBean.performAdvancedSearch}" />
+							<!-- Accommodation List -->
+							<h3>Accommodation List:</h3>
+							<h:dataTable value="#{accommodationBean.allAccommodations}"
+								var="accommodation">
+								<h:column>
+									<f:facet name="header">Name</f:facet>
+                            #{accommodation.name}
+                        </h:column>
+								<h:column>
+									<f:facet name="header">Address</f:facet>
+                            #{accommodation.address.street}, #{accommodation.address.city}, #{accommodation.address.country}
+                        </h:column>
+								<h:column>
+									<f:facet name="header">Accommodation Type</f:facet>
+                            #{accommodation.accommodationType.label}
+                        </h:column>
+								<!-- Add more columns for other characteristics such as description, picture, etc. -->
+							</h:dataTable>
+						</h:panelGroup>
+					</h:form>
+				</div>
+
+				<div class="column">
+					<h:form>
+						<h:panelGrid columns="2">
+							<!-- Transportation Advanced Search -->
+							<h3>Transportation Advanced Search:</h3>
+							<h:outputLabel for="transportationFrom" value="Available From:" />
+							<h:inputText id="transportationFrom"
+								value="#{serviceBean.searchAvailableFrom}" />
+							<h:outputLabel for="transportationTill" value="Available Till:" />
+							<h:inputText id="transportationTill"
+								value="#{serviceBean.searchAvailableTill}" />
+							<h:commandButton value="Search Transportation"
+								action="#{serviceBean.performAdvancedSearchTransportations}" />
+						</h:panelGrid>
+
+						<!-- Transportation List -->
+						<h3>Transportation List:</h3>
+						<ul>
+							<ui:repeat var="transportation"
+								value="#{serviceBean.transportationList}">
+								<li>#{transportation.name}</li>
+							</ui:repeat>
+						</ul>
+					</h:form>
+				</div>
+
+				<div class="column">
+					<!-- Restaurant Advanced Search -->
+					<h:form>
+						<h:panelGrid columns="2">
+							<h3>Restaurant Advanced Search:</h3>
+							<h:outputLabel for="restaurantFrom" value="Available From:" />
+							<h:inputText id="restaurantFrom"
+								value="#{serviceBean.searchAvailableFrom}" />
+							<h:outputLabel for="restaurantTill" value="Available Till:" />
+							<h:inputText id="restaurantTill"
+								value="#{serviceBean.searchAvailableTill}" />
+
+							<h:commandButton value="Search Restaurants"
+								action="#{serviceBean.performAdvancedSearchRestaurants}" />
+						</h:panelGrid>
+						
+						<!-- Restaurant List -->
+						<h3>Restaurant List:</h3>
+						<ul>
+							<ui:repeat var="restaurant" value="#{serviceBean.restaurantList}">
+								<li>#{restaurant.name}</li>
+							</ui:repeat>
+						</ul>
+						
+					</h:form>
+				
+				</div>
+				</div>
+				<script>
+    $(document).ready(function(){
+        // initialiser flatpickr pour les champs avec la classe date-picker
+        $(".date-picker").flatpickr({
+            dateFormat: "Y-m-d",
+            enableTime: false
+        });
+    });
+</script>
+		</h:body>
+
+	</ui:define>
+</ui:composition>
