@@ -141,6 +141,8 @@ public class CartBean implements Serializable {
 		}
 
 	}
+	
+
 
 	public String addToCart() {
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -390,12 +392,39 @@ public class CartBean implements Serializable {
 		this.dateOfPurchase = dateOfPurchase;
 	}
 
+
+	public AccommodationService getAccommodationService() {
+		return accommodationService;
+	}
+
+	public void setAccommodationService(AccommodationService accommodationService) {
+		this.accommodationService = accommodationService;
+	}
+
+	public RestaurantService getRestaurantService() {
+		return restaurantService;
+	}
+
+	public void setRestaurantService(RestaurantService restaurantService) {
+		this.restaurantService = restaurantService;
+	}
+
+	public TransportationService getTransportationService() {
+		return transportationService;
+	}
+
+	public void setTransportationService(TransportationService transportationService) {
+		this.transportationService = transportationService;
+	}
+
+
 	public CartItem getCurrentCartItem() {
 		return currentCartItem;
 	}
 
 	public void setCurrentCartItem(CartItem currentCartItem) {
 		this.currentCartItem = currentCartItem;
+
 	}
 
 	public Accommodation getSelectedAccommodation() {

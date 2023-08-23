@@ -16,35 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleInput.checked = !toggleInput.checked;
     });
 
-    // Initialize flatpickr for availableFrom date
-    flatpickr("#availableFromPicker", {
-        dateFormat: "Y-m-d", // Format the date as "YYYY-MM-DD"
-        required: true
+    $(document).ready(function(){
+        // initialiser flatpickr pour les champs avec la classe date-picker
+        $(".date-picker").flatpickr({
+            dateFormat: "Y-m-d",
+            enableTime: false
+        });
     });
 
-    // Initialize flatpickr for availableTil date
-    flatpickr("#availableTillPicker", {
-        dateFormat: "Y-m-d", // Format the date as "YYYY-MM-DD"
-        required: true
-    });
-//document.addEventListener("DOMContentLoaded", function() {
-//    // Initialize flatpickr for availableFromPicker
-//    flatpickr("#availableFromPicker", {
-//        dateFormat: "Y-m-d",
-//        required: true,
-//        onChange: function(selectedDates, dateStr) {
-//            document.getElementById("hiddenAvailableFrom").value = dateStr;
-//        }
-//    });
-//    // Initialize flatpickr for availableTillPicker
-//    flatpickr("#availableTillPicker", {
-//        dateFormat: "Y-m-d",
-//        required: true,
-//        onChange: function(selectedDates, dateStr) {
-//            document.getElementById("hiddenAvailableTill").value = dateStr;
-//        }
-//    });
-//});
+
     // Function to update character count for a textarea
 function updateCharCount(textarea) {
         const maxLength = 500;
