@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:body>
 	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
@@ -13,8 +13,12 @@
 				}
 			</script>
 
-			<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
-			<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet" />
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
 			<h:outputStylesheet library="css" name="organizer_home.css" />
 		</ui:define>
 
@@ -22,18 +26,24 @@
 			<div class="containerForm">
 				<div class="card">
 					<div class="card-body">
-						<h1 class="card-title text-center mt-3">Select your subscription plan</h1>
+						<h1 class="card-title text-center mt-3">Select your
+							subscription plan</h1>
 
 						<h:form id="subscriptionForm">
 							<div class="row mt-5">
-							
+
 								<div class="col-md-4">
-									<div class="card clickable-card" onclick="triggerButton('subscriptionForm:standardButton')">
+									<div class="card clickable-card"
+										onclick="triggerButton('subscriptionForm:standardButton')">
 										<div class="card-body d-flex flex-column">
 											<div class="flex-fill d-flex flex-column">
 												<h4 class="card-title">Standard</h4>
 												<br />
-												<p>Access to the Basic template.<br /><br /><br /></p>
+												<p>
+													Access to the Basic template.<br />
+													<br />
+													<br />
+												</p>
 											</div>
 											<div class="pt-3 d-flex justify-content-around">
 												<i class="fa-solid fa-star fa-2x"></i>
@@ -42,55 +52,74 @@
 									</div>
 								</div>
 
-								<h:commandButton id="standardButton" style="display: none" action="#{organizerBean.saveSubscription}">
-									<f:setPropertyActionListener target="#{organizerBean.userViewModel.type}" value="STANDARD" />
+								<h:commandButton id="standardButton" style="display: none"
+									action="#{organizerBean.saveSubscription}">
+									<f:setPropertyActionListener
+										target="#{organizerBean.userViewModel.type}" value="STANDARD" />
 								</h:commandButton>
 
 								<div class="col-md-4">
-									<div class="card clickable-card" onclick="triggerButton('subscriptionForm:deluxeButton')">
+									<div class="card clickable-card"
+										onclick="triggerButton('subscriptionForm:deluxeButton')">
 										<div class="card-body d-flex flex-column">
 											<div class="flex-fill d-flex flex-column">
 												<h4 class="card-title">Deluxe</h4>
 												<br />
-												<p>Standard subscription template, and access to the Advanced templates.<br /><br /></p>
+												<p>
+													Standard subscription template, and access to the Advanced
+													templates.<br />
+													<br />
+												</p>
 											</div>
 											<div class="pt-3 d-flex justify-content-around mt-auto">
-												<i class="fa-solid fa-star fa-2x"></i> 
-												<i class="fa-solid fa-star fa-2x"></i>
+												<i class="fa-solid fa-star fa-2x"></i> <i
+													class="fa-solid fa-star fa-2x"></i>
 											</div>
 										</div>
 									</div>
 								</div>
 
-								<h:commandButton id="deluxeButton" style="display: none" action="#{organizerBean.saveSubscription}">
-									<f:setPropertyActionListener target="#{organizerBean.userViewModel.type}" value="DELUXE" />
+								<h:commandButton id="deluxeButton" style="display: none"
+									action="#{organizerBean.saveSubscription}">
+									<f:setPropertyActionListener
+										target="#{organizerBean.userViewModel.type}" value="DELUXE" />
 								</h:commandButton>
 
 								<div class="col-md-4">
-									<div class="card clickable-card" onclick="triggerButton('subscriptionForm:premiumButton')">
+									<div class="card clickable-card"
+										onclick="triggerButton('subscriptionForm:premiumButton')">
 										<div class="card-body d-flex flex-column">
 											<div class="flex-fill d-flex flex-column">
 												<h4 class="card-title">Premium</h4>
 												<br />
-												<p>Standard and Deluxe subscription templates, and access to the Elite templates.</p>
+												<p>Standard and Deluxe subscription templates, and
+													access to the Elite templates.</p>
 											</div>
 											<div class="pt-3 d-flex justify-content-around mt-auto">
-												<i class="fa-solid fa-star fa-2x"></i> 
-												<i class="fa-solid fa-star fa-2x"></i> 
-												<i class="fa-solid fa-star fa-2x"></i>
+												<i class="fa-solid fa-star fa-2x"></i> <i
+													class="fa-solid fa-star fa-2x"></i> <i
+													class="fa-solid fa-star fa-2x"></i>
 											</div>
 										</div>
 									</div>
 								</div>
 
-								<h:commandButton id="premiumButton" style="display: none" action="#{organizerBean.saveSubscription}">
-									<f:setPropertyActionListener target="#{organizerBean.userViewModel.type}" value="PREMIUM" />
+								<h:commandButton id="premiumButton" style="display: none"
+									action="#{organizerBean.saveSubscription}">
+									<f:setPropertyActionListener
+										target="#{organizerBean.userViewModel.type}" value="PREMIUM" />
 								</h:commandButton>
-							</div> <!-- This is the closing tag for <div class="row mt-5 d-flex align-items-start"> -->
-						</h:form> <!-- This is the closing tag for <h:form id="subscriptionForm"> -->
-					</div> <!-- This is the closing tag for <div class="card-body"> -->
-				</div> <!-- This is the closing tag for <div class="card"> -->
-			</div> <!-- This is the closing tag for <div class="containerForm"> -->
+							</div>
+
+							<div class="mt-3 d-flex justify-content-center">
+								<h:commandButton value="Back to settings space"
+									class="btn btn-primary mr-2"
+									action="/views/organizer_home?faces-redirect=true" />
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
 		</ui:define>
 	</ui:composition>
 </h:body>
