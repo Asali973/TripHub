@@ -2,7 +2,9 @@ package triphub.dao.service;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -18,11 +20,12 @@ import triphub.entity.util.Address;
 import triphub.entity.util.Calendar;
 import triphub.viewModel.SubServicesViewModel;
 
-@ApplicationScoped
-public class AccommodationDAO implements ServiceInterface {
+@Stateless
+public class AccommodationDAO{
 
 	@PersistenceContext
 	private EntityManager em;
+	
 
 	public AccommodationDAO(EntityManager em) {
 		this.em = em;
@@ -98,7 +101,7 @@ public class AccommodationDAO implements ServiceInterface {
 	
 
 
-	@Override
+
 	public void delete(SubServicesViewModel accommodationvm) {
 
 		Accommodation accommodation = em.find(Accommodation.class, accommodationvm.getId());
@@ -111,7 +114,7 @@ public class AccommodationDAO implements ServiceInterface {
 
 	}
 
-	@Override
+	
 	public SubServicesViewModel initSubService(Long id) {
 		Accommodation accommodation = em.find(Accommodation.class, id);
 		if (accommodation == null) {
@@ -120,19 +123,19 @@ public class AccommodationDAO implements ServiceInterface {
 		return accommodation.initAccommodationViewModel();
 	}
 
-	@Override
+
 	public Accommodation read(Long id) {
 		return em.find(Accommodation.class, id);
 	}
 
-	@Override
+
 	public List<Accommodation> getAll() {
 		TypedQuery<Accommodation> query = em.createQuery("SELECT a FROM Accommodation a", Accommodation.class);
 
 		return query.getResultList();
 	}
 
-	@Override
+	
 	public Accommodation findByName(String name) {
 		TypedQuery<Accommodation> query = em.createQuery("SELECT a FROM Accommodation a WHERE a.name = :name",
 				Accommodation.class);
@@ -142,7 +145,7 @@ public class AccommodationDAO implements ServiceInterface {
 		return accommodations.isEmpty() ? null : accommodations.get(0);
 	}
 
-	@Override
+
 	public Accommodation findById(Long id) {
 		return em.find(Accommodation.class, id);
 	}
