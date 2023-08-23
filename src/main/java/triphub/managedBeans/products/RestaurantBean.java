@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import triphub.dao.service.RestaurantDAO;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.util.CurrencyType;
 import triphub.helpers.FacesMessageUtil;
@@ -28,6 +29,7 @@ public class RestaurantBean implements Serializable {
 
 	@Inject
 	private SubServicesViewModel restaurantvm = new SubServicesViewModel();
+	@Inject RestaurantDAO restaurantDao;
 	
 	private List<Restaurant> allRestaurants;
 
@@ -59,7 +61,7 @@ public class RestaurantBean implements Serializable {
 		if (id != null) {
 		    Long restaurantId = Long.parseLong(id);
 		    // Fetch the selected restaurant using restaurantService
-		    selectedRestaurant = restaurantService.findById(restaurantId);
+		    selectedRestaurant = restaurantDao.findById(restaurantId);
 
 		    if (selectedRestaurant == null) {
 		        FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist");

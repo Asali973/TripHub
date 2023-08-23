@@ -33,10 +33,6 @@ public class CartItem implements Serializable {
 	private TourPackage tourPackage;
 
 	@ManyToOne
-	@JoinColumn(name = "service_id")
-	private Service service;
-
-	@ManyToOne
 	@JoinColumn(name = "accommodation_id")
 	private Accommodation accommodation;
 
@@ -100,13 +96,13 @@ public class CartItem implements Serializable {
 		this.tourPackage = tourPackage;
 	}
 
-	public Service getService() {
-		return service;
-	}
-
-	public void setService(Service service) {
-		this.service = service;
-	}
+//	public Service getService() {
+//		return service;
+//	}
+//
+//	public void setService(Service service) {
+//		this.service = service;
+//	}
 
 	public Date getDateOfOrder() {
 		return dateOfOrder;

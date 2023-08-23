@@ -64,18 +64,18 @@ public class CartService implements ICartService, Serializable {
 		user.setCartTotal(totalPrice);
 	}
 
-	private void addToCart(Service service, User user) {
-		CartItem cartItem = new CartItem();
-		cartItem.setUser(user);
-		cartItem.setService(service);
-		cartItem.setDateOfOrder(new Date());
-		cartItem.setQuantity(1);
-		cartItemDAO.addToCart(cartItem);
-
-		// Optionally, you can recalculate the total price and update the user's cart
-		BigDecimal totalPrice = calculateTotalPrice(cartItemDAO.getCartItemsByUser(user));
-		user.setCartTotal(totalPrice);
-	}
+//	private void addToCart(Service service, User user) {
+//		CartItem cartItem = new CartItem();
+//		cartItem.setUser(user);
+//		cartItem.setService(service);
+//		cartItem.setDateOfOrder(new Date());
+//		cartItem.setQuantity(1);
+//		cartItemDAO.addToCart(cartItem);
+//
+//		// Optionally, you can recalculate the total price and update the user's cart
+//		BigDecimal totalPrice = calculateTotalPrice(cartItemDAO.getCartItemsByUser(user));
+//		user.setCartTotal(totalPrice);
+//	}
 
 	@Override
 	public void addToCart(Object cartItemObject, User user, int quantity) {
@@ -108,7 +108,7 @@ public class CartService implements ICartService, Serializable {
 				cartItemDAO.addToCart(newCartItem);
 			}
 		} else if (cartItemObject instanceof Accommodation) {
-			Accommodation accommodation = (Accommodation) cartItemObject;
+			Accommodation accommodation = (Accommodation) cartItemObject;			
 			List<CartItem> existingCartItems = cartItemDAO.getCartItemsByAccommodationAndUser(accommodation, user);
 
 			if (!existingCartItems.isEmpty()) {
@@ -127,8 +127,8 @@ public class CartService implements ICartService, Serializable {
 
 				CartItem newCartItem = new CartItem();
 				newCartItem.setUser(user);
-				newCartItem.setAccommodation(accommodation);
-				newCartItem.setQuantity(quantity);
+				newCartItem.setAccommodation(accommodation);			
+				newCartItem.setQuantity(1);
 				newCartItem.setTotalPrice(
 						accommodation.getService().getPrice().getAmount().multiply(BigDecimal.valueOf(quantity)));
 				newCartItem.setDateOfOrder(new Date());
@@ -155,7 +155,7 @@ public class CartService implements ICartService, Serializable {
 				CartItem newCartItem = new CartItem();
 				newCartItem.setUser(user);
 				newCartItem.setRestaurant(restaurant);
-				newCartItem.setQuantity(quantity);
+				newCartItem.setQuantity(1);
 				newCartItem.setTotalPrice(
 						restaurant.getService().getPrice().getAmount().multiply(BigDecimal.valueOf(quantity)));
 				newCartItem.setDateOfOrder(new Date());
@@ -183,7 +183,7 @@ public class CartService implements ICartService, Serializable {
 				CartItem newCartItem = new CartItem();
 				newCartItem.setUser(user);
 				newCartItem.setTransportation(transportation);
-				newCartItem.setQuantity(quantity);
+				newCartItem.setQuantity(1);
 				newCartItem.setTotalPrice(
 						transportation.getService().getPrice().getAmount().multiply(BigDecimal.valueOf(quantity)));
 				newCartItem.setDateOfOrder(new Date());
@@ -209,16 +209,27 @@ public class CartService implements ICartService, Serializable {
 
 	@Override
 	public BigDecimal calculateTotalPrice(List<CartItem> cartItems) {
-		BigDecimal totalPrice = BigDecimal.ZERO;
-		for (CartItem cartItem : cartItems) {
-			if (cartItem.getTourPackage() != null) {
-				totalPrice = totalPrice.add(cartItem.getTourPackage().getPrice().getAmount());
-			} else if (cartItem.getService() != null) {
-				totalPrice = totalPrice.add(cartItem.getService().getPrice().getAmount());
-			}
-		}
-		return totalPrice;
+	    BigDecimal totalPrice = BigDecimal.ZERO;
+
+	    for (CartItem cartItem : cartItems) {
+	        BigDecimal itemPrice = BigDecimal.ZERO;
+
+	        if (cartItem.getTourPackage() != null) {
+	            itemPrice = cartItem.getTourPackage().getPrice().getAmount();
+	        } else if (cartItem.getRestaurant() != null) {
+	            itemPrice = cartItem.getRestaurant().getService().getPrice().getAmount();
+	        } else if (cartItem.getAccommodation() != null) {
+	            itemPrice = cartItem.getAccommodation().getService().getPrice().getAmount();
+	        } else if (cartItem.getTransportation() != null) {
+	            itemPrice = cartItem.getTransportation().getService().getPrice().getAmount();
+	        }
+
+	        totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+	    }
+
+	    return totalPrice;
 	}
+
 
 	@Override
 	public void removeFromCart(Long cartItemId, User user) {
