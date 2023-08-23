@@ -12,8 +12,6 @@ body {
 	min-height: 100vh;
 }
 
-
-
 .content-wrapper {
 	flex: 1;
 	/* permet à ce div de prendre tout l'espace disponible, poussant ainsi le footer vers le bas */
@@ -32,6 +30,8 @@ body {
 	background-color: #242c3d;
 	box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
 }
+
+
 
 .navbar-brand, .navbar-nav .nav-link {
 	color: #ffffff;
