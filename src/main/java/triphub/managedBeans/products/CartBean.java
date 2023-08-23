@@ -23,9 +23,7 @@ import javax.servlet.http.HttpSession;
 
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
-import triphub.entity.service.Accommodation;
-import triphub.entity.service.Restaurant;
-import triphub.entity.service.Transportation;
+import triphub.entity.subservices.*;
 import triphub.entity.user.User;
 import triphub.helpers.FacesMessageUtil;
 import triphub.services.AccommodationService;

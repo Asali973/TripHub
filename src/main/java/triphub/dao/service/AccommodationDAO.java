@@ -34,51 +34,52 @@ public class AccommodationDAO implements ServiceInterface {
 
 	public Accommodation create(SubServicesViewModel accommodationVm) {
 
-		// create service
+	    // Create Service
+	    Service service = Service.createServiceFromViewModel(accommodationVm);
+	    service.setType(ServiceType.ACCOMMODATION);
 
-		Service service = Service.createServiceFromViewModel(accommodationVm);
-		service.setType(ServiceType.ACCOMMODATION);
+	    // Create Price
+	    Price price = Price.createPriceFromViewModel(accommodationVm);
+	    service.setPrice(price);
 
-		Price price = Price.createPriceFromViewModel(accommodationVm);
-		service.setPrice(price);
-		
-		service.setAvailableFrom(accommodationVm.getAvailableFrom()); // Set the newly created instance
-		service.setAvailableTill(accommodationVm.getAvailableTill()); // Set the newly created instance
-		service.setAvailability(accommodationVm.isAvailability());
+	    service.setAvailableFrom(accommodationVm.getAvailableFrom());
+	    service.setAvailableTill(accommodationVm.getAvailableTill());
+	    service.setAvailability(accommodationVm.isAvailability());
 
-		// creer a Accommodation
-		Accommodation accommodation = new Accommodation();
-		accommodation.setId(accommodationVm.getId());
-		accommodation.setName(accommodationVm.getName());
-		accommodation.setDescription(accommodationVm.getDescription());
-		accommodation.setService(service);
-		accommodation.setAccommodationType(accommodationVm.getAccommodationType());
+	    // Persist Service and Price 
+	    em.persist(price);
+	    em.persist(service);
 
-//		Picture picture = new Picture();
-//		picture.setLink(formService.getLink());
-//		accommodation.setPicture(picture);
+	    // Create Accommodation
+	    Accommodation accommodation = new Accommodation();
+	    accommodation.setId(accommodationVm.getId());
+	    accommodation.setName(accommodationVm.getName());
+	    accommodation.setDescription(accommodationVm.getDescription());
+	    accommodation.setService(service);
+	    accommodation.setAccommodationType(accommodationVm.getAccommodationType());
 
-		// Create Address
-		Address addressAccommodation = new Address();
-		addressAccommodation.setNum(accommodationVm.getAddress().getNum());
-		addressAccommodation.setStreet(accommodationVm.getAddress().getStreet());
-		addressAccommodation.setCity(accommodationVm.getAddress().getCity());
-		addressAccommodation.setState(accommodationVm.getAddress().getState());
-		addressAccommodation.setCountry(accommodationVm.getAddress().getCountry());
-		addressAccommodation.setZipCode(accommodationVm.getAddress().getZipCode());
+	    // Create Address
+	    Address addressAccommodation = new Address();
+	    addressAccommodation.setNum(accommodationVm.getAddress().getNum());
+	    addressAccommodation.setStreet(accommodationVm.getAddress().getStreet());
+	    addressAccommodation.setCity(accommodationVm.getAddress().getCity());
+	    addressAccommodation.setState(accommodationVm.getAddress().getState());
+	    addressAccommodation.setCountry(accommodationVm.getAddress().getCountry());
+	    addressAccommodation.setZipCode(accommodationVm.getAddress().getZipCode());
 
-		accommodation.setAddress(addressAccommodation);
+	    // Persist Address
+	    em.persist(addressAccommodation);
 
-//		em.persist(picture)
-		em.persist(price);
-		em.persist(service);
-		em.persist(addressAccommodation);
-		em.persist(accommodation);
-		em.flush();
-		return accommodation;
+	    // Link the Address to the Accommodation
+	    accommodation.setAddress(addressAccommodation);
+
+	    // Persist Accommodation
+	    em.persist(accommodation);
+	    em.flush();
+
+	    return accommodation;
 	}
 
-	
 	public SubServicesViewModel update(SubServicesViewModel accommodationvm) {
 
 		Accommodation accommodation = em.find(Accommodation.class, accommodationvm.getId());
