@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Update Transportation</title>
+	<h:outputStylesheet library="css" name="serviceCrud.css" />
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
+</h:head>
+<h:body>
+	<div class="container">
+		<div class="card">
+			<h:form prependId="false">
+				<div class="card-body">
+					<h2 class="card-title text-center mt-3">Update Transportation</h2>
+					<!-- Display transportation info for update -->
+					<!-- Use the existing template to display transportation info -->
+
+					<!-- Use a h:inputHidden field to store the selected transportation ID -->
+					<h:inputHidden id="selectedTransportationId" value="#{transportationBean.selectedTransportationId}" />
+					
+					<!-- Update button -->
+					<div class="form-group mt-4 d-flex justify-content-center">
+						<h:commandButton value="Update" action="#{transportationBean.updateSelectedTransportation}"
+							styleClass="btn btn-custom btn-custom-signup" id="updateButton" />
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+	</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
+	<h:outputScript library="javascript" name="servicesCrud.js" /></h:body>
+</html>

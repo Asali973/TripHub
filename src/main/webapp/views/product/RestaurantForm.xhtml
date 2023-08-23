@@ -5,6 +5,8 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:head>
 	<title>Add Transportation</title>
+		<h:outputScript library="javascript" name="servicesCrud.js" />
+	
 	<h:outputStylesheet library="css" name="serviceCrud.css" />
 	<link
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -101,26 +103,37 @@
 								characters remaining</small>
 						</div>
 					</div>
-						<div class="form-group mt-4">
-						<label for="availableFrom">Available From*:</label> <input
-							type="date" id="availableFrom" class="form-control"
-							value="#{restaurantBean.restaurantvm.availableFrom}" />
+					<div class="form-group mt-4">
+						<label for="availableFrom">Available From*:</label>
+
+						<h:inputText id="availableFrom"
+							value="#{accommodationBean.accommodationVm.availableFrom}"
+							class="form-control date-picker">
+							<f:convertDateTime pattern="yyyy-MM-dd" timeZone="UTC"
+								type="date" />
+						</h:inputText>
+          
 					</div>
 
 					<div class="form-group mt-4">
-						<label for="availableTil">Available Until*:</label> <input
-							type="date" id="availableTill" class="form-control"
-							value="#{restaurantBean.restaurantvm.availableTill}" />
-					</div>
+						<label for="availableTill">Available Until*:</label>
 
+						<h:inputText id="availableTill"
+							value="#{accommodationBean.accommodationVm.availableTill}"
+							class="form-control date-picker">
+							<f:convertDateTime pattern="yyyy-MM-dd" timeZone="UTC"
+								type="date" />
+						</h:inputText>
+
+					</div>
 					<div class="form-group mt-4">
-						<label for="availability">Click here to make your service available to our partners:</label>
+						<label for="availability">Click here to make your service
+							available to our partners:</label>
 						<div class="toggle-button">
-							<input type="checkbox" id="availability" class="toggle-input" /><label
-								for="availability" class="toggle-label" />
+							<h:selectBooleanCheckbox id="availability"
+								value="#{accommodationBean.accommodationVm.availability}" />
 						</div>
 					</div>
-					
 					<div class="form-group mt-4">
 						<h:outputLabel for="Price" value="Price*:" required="true"
 							requiredMessage="Price is required." />
@@ -160,6 +173,15 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+			<script>
+    $(document).ready(function(){
+        // initialiser flatpickr pour les champs avec la classe date-picker
+        $(".date-picker").flatpickr({
+            dateFormat: "Y-m-d",
+            enableTime: false
+        });
+    });
+</script>
 	
     <script
 		src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
