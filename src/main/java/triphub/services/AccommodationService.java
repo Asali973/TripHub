@@ -73,8 +73,10 @@ public class AccommodationService implements ServiceInterface,Serializable {
 	public SubServicesViewModel initSubService(Long id) {
 		 Accommodation accommodation = accommodationDAO.findById(id);
 	        if (accommodation == null) {
+	        	
 	            return null;
 	        }
+	        System.out.println("accommodationService apres find : " + accommodation);
 	        return accommodation.initAccommodationViewModel();
 	}
 
