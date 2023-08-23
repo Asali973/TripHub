@@ -38,7 +38,7 @@ public class Service implements Serializable{
 	private boolean availability;
 	
 
-	@JoinColumn(name = "fromDate_id")
+	@JoinColumn(name = "availableFrom_id")
 	@Temporal(TemporalType.DATE)
 	private Date availableFrom;
 
@@ -54,7 +54,6 @@ public class Service implements Serializable{
 		Service service = new Service();
 		service.setPrice(form.getPrice());
 		service.setAvailability(form.isAvailability());
-
 		service.setAvailableFrom(form.getAvailableFrom());
 		service.setAvailableTill(form.getAvailableTill());
 
@@ -70,12 +69,22 @@ public class Service implements Serializable{
 
 	public SubServicesViewModel initServiceViewModel() {
 		SubServicesViewModel form = new SubServicesViewModel();
-		form.setId(this.getId());
+		//form.setId(this.getId());
+		// TODO id service n'a pas d'attribut dans subservice view model 
 		form.setPrice(this.getPrice());
 		form.setAvailability(this.isAvailability());
 		form.setAvailableFrom(this.getAvailableFrom());
 		form.setAvailableTill(this.getAvailableTill());
 		return form;
+	}
+	
+	public void initServiceViewModel(SubServicesViewModel form) {
+	 //   form.setId(this.getId());
+		// TODO id service n'a pas d'attribut dans subservice view model
+	    form.setAvailability(this.isAvailability());
+	    form.setAvailableFrom(this.getAvailableFrom());
+	    form.setAvailableTill(this.getAvailableTill());
+	    this.getPrice().initPriceViewModel(form);
 	}
 
 	public Long getId() {
@@ -124,6 +133,12 @@ public class Service implements Serializable{
 
 	public void setType(ServiceType type) {
 		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "Service [id=" + id + ", type=" + type + ", price=" + price + ", availability=" + availability
+				+ ", availableFrom=" + availableFrom + ", availableTill=" + availableTill + "]";
 	}
 
 }

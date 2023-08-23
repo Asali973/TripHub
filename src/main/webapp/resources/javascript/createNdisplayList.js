@@ -24,3 +24,12 @@ function toggleCreateForm() {
         alert("Deletion of tour package successful.");
     }
 
+    function confirmDeleteAccom() {
+        var result = confirm("Are you sure that you want to delete this item?");
+        return result;
+    }
+
+    function showDeleteSuccessMessage() {
+        alert("Deletion of Accommodation successful.");
+    }
+

@@ -67,8 +67,9 @@ public class Accommodation {
 		this.setName(accommodationvm.getName());
 		this.setAddress(accommodationvm.getAddress());
 		this.setAccommodationType(accommodationvm.getAccommodationType());
+		this.setService(accommodationvm.getService());
 		this.setDescription(accommodationvm.getDescription());
-		// need to add picture soon
+		// need to add picture 
 
 	}
 
@@ -79,9 +80,12 @@ public class Accommodation {
 		accommodationvm.setAddress(this.getAddress());
 		accommodationvm.setAccommodationType(this.getAccommodationType());
 		accommodationvm.setDescription(this.getDescription());
-		this.getAddress().initAddressViewModel(accommodationvm);
+		//this.getAddress().initAddressViewModel(accommodationvm);
+		this.getService().initServiceViewModel(accommodationvm);
 		return accommodationvm;
 	}
+	
+	
 
 	// getters - setters
 
@@ -140,4 +144,13 @@ public class Accommodation {
 	public void setService(Service service) {
 		this.service = service;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Accommodation [id=" + id + ", name=" + name + ", address=" + address + ", accommodationType="
+				+ accommodationType + ", service=" + service + ", picture=" + picture + ", description=" + description
+				+ "]";
+	}
+	
 }
