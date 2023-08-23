@@ -38,13 +38,12 @@ public class TransportationService implements ServiceInterface {
 	public Transportation create(SubServicesViewModel transportationvm) {
 		
 		try {
-            transportationDAO.create(transportationvm); // Call create() method of DAO
+            return transportationDAO.create(transportationvm); // Call create() method of DAO
         } catch (Exception e) {
             // Handle any unexpected exceptions that might occur during the create process
             FacesMessageUtil.addErrorMessage("Failed to create transportation. An unexpected error occurred.");
         }
-			return transportationDAO.create(transportationvm);
-		
+		return null;		
 	}
 
 	@Override
