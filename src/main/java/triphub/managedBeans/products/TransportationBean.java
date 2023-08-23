@@ -30,6 +30,7 @@ public class TransportationBean implements Serializable {
 	private SubServicesViewModel transportationvm = new SubServicesViewModel();
 
 	private List<Transportation> allTransportations;
+	private Transportation selectedTransportation;
 
 	public TransportationBean() {
 
@@ -45,18 +46,31 @@ public class TransportationBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		allTransportations = transportationService.getAll();
-		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-		if (id != null) {
-			Long restaurantId = Long.parseLong(id);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTransportationId",
-					restaurantId);
-			transportationvm = transportationService.initSubService(restaurantId);
-			if (transportationvm == null) {
-				FacesMessageUtil.addErrorMessage("Initialization failed: Transportation does not exist");
-			}
-		}
+	    allTransportations = transportationService.getAll();
+	    
+	    String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+	    
+	    if (id != null) {
+	        Long transportationId = Long.parseLong(id);
+	        
+	        // Store the selected transportation id in the session
+	        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTransportationId", transportationId);
+	        
+	        // Fetch the selected transportation using transportationService
+	        selectedTransportation = transportationService.findById(transportationId);
+	        
+	        if (selectedTransportation == null) {
+	            FacesMessageUtil.addErrorMessage("Initialization failed: Transportation does not exist");
+	        }
+	        
+	        // Assuming you also need to initialize a Transportation ViewModel
+	        transportationvm = transportationService.initSubService(transportationId);
+	        if (transportationvm == null) {
+	            FacesMessageUtil.addErrorMessage("Initialization failed: Transportation ViewModel does not exist");
+	        }
+	    }
 	}
+
 
 	public void create() {
 		transportationService.create(transportationvm);
@@ -126,6 +140,34 @@ public class TransportationBean implements Serializable {
 
 	public TransportationType[] getAllTransportationTypes() {
 		return TransportationType.values();
+	}
+
+	public TransportationService getTransportationService() {
+		return transportationService;
+	}
+
+	public void setTransportationService(TransportationService transportationService) {
+		this.transportationService = transportationService;
+	}
+
+	public List<Transportation> getAllTransportations() {
+		return allTransportations;
+	}
+
+	public void setAllTransportations(List<Transportation> allTransportations) {
+		this.allTransportations = allTransportations;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Transportation getSelectedTransportation() {
+		return selectedTransportation;
+	}
+
+	public void setSelectedTransportation(Transportation selectedTransportation) {
+		this.selectedTransportation = selectedTransportation;
 	}
 
 }

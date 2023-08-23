@@ -31,6 +31,7 @@ public class AccommodationBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<Accommodation> allAccommodations;
+	private Accommodation selectedAccommodation;
 
 	public AccommodationBean() {
 
@@ -45,17 +46,29 @@ public class AccommodationBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		allAccommodations = accommodationService.getAll();
-		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-		if (id != null) {
-			Long accommodationId = Long.parseLong(id);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedAccommodationId",
-					accommodationId);
-			accommodationVm = accommodationService.initSubService(accommodationId);
-			if (accommodationVm == null) {
-				FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
-			}
-		}
+	    allAccommodations = accommodationService.getAll();
+	    
+	    String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+	    
+	    if (id != null) {
+	        Long accommodationId = Long.parseLong(id);
+	        
+	        // Store the selected accommodation id in the session
+	        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedAccommodationId", accommodationId);
+	        
+	        // Fetch the selected accommodation using accommodationService
+	        selectedAccommodation = accommodationService.findById(accommodationId);
+	        
+	        if (selectedAccommodation == null) {
+	            FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
+	        }
+	        
+	        // initialize an Accommodation ViewModel
+	        accommodationVm = accommodationService.initSubService(accommodationId);
+	        if (accommodationVm == null) {
+	            FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation ViewModel does not exist");
+	        }
+	    }
 	}
 
 	public void create() {
@@ -141,6 +154,14 @@ public class AccommodationBean implements Serializable {
 
 	public void setAllAccommodations(List<Accommodation> allAccommodations) {
 		this.allAccommodations = allAccommodations;
+	}
+
+	public Accommodation getSelectedAccommodation() {
+		return selectedAccommodation;
+	}
+
+	public void setSelectedAccommodation(Accommodation selectedAccommodation) {
+		this.selectedAccommodation = selectedAccommodation;
 	}
 
 }

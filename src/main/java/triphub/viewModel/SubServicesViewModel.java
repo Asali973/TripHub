@@ -1,6 +1,7 @@
 package triphub.viewModel;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -41,7 +42,8 @@ public class SubServicesViewModel implements Serializable {
 	private Price price= new Price();
 	private Service service = new Service();
 
-
+	private BigDecimal amount;
+	private String currency;
 
 	// Image attributes
 	private int size;
@@ -194,6 +196,22 @@ public class SubServicesViewModel implements Serializable {
 
 	public void setService(Service service) {
 		this.service = service;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
 	

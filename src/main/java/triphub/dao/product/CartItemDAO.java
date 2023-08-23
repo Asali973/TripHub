@@ -15,9 +15,9 @@ import triphub.dao.user.UserDAO;
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.Service;
-import triphub.entity.service.Accommodation;
-import triphub.entity.service.Restaurant;
-import triphub.entity.service.Transportation;
+import triphub.entity.subservices.Accommodation;
+import triphub.entity.subservices.Restaurant;
+import triphub.entity.subservices.Transportation;
 import triphub.entity.user.User;
 import triphub.viewModel.CartViewModel;
 
@@ -121,23 +121,30 @@ public class CartItemDAO implements Serializable {
 	    return query.getResultList();
 	}
 
-	public CartItem getCartItemByServiceAndUser(Service service, User user) {
-		TypedQuery<CartItem> query = em
-				.createQuery("SELECT c FROM CartItem c WHERE c.user = :user AND c.service = :service", CartItem.class);
-		query.setParameter("user", user);
-		query.setParameter("service", service);
+	public List<CartItem> getCartItemsByAccommodationAndUser(Accommodation accommodation, User user) {
+	    TypedQuery<CartItem> query = em.createQuery(
+	        "SELECT c FROM CartItem c WHERE c.accommodation = :accommodation AND c.user = :user", CartItem.class);
+	    query.setParameter("accommodation", accommodation);
+	    query.setParameter("user", user);
 
-		List<CartItem> results = query.getResultList();
+	    return query.getResultList();
+	}
 
-		if (results.isEmpty()) {
-			return null;
-		} else if (results.size() == 1) {
-			return results.get(0);
-		} else {
-			// Handle multiple matches (log an error, return a specific result, etc.)
-			// For example, you might throw an exception:
-			throw new NonUniqueResultException("Multiple cart items found for the given criteria");
-		}
+	public List<CartItem> getCartItemsByRestaurantAndUser(Restaurant restaurant, User user) {
+	    TypedQuery<CartItem> query = em.createQuery(
+	        "SELECT c FROM CartItem c WHERE c.restaurant = :restaurant AND c.user = :user", CartItem.class);
+	    query.setParameter("restaurant", restaurant);
+	    query.setParameter("user", user);
+
+	    return query.getResultList();
+	}
+	public List<CartItem> getCartItemsByTransportationAndUser(Transportation transportation, User user) {
+	    TypedQuery<CartItem> query = em.createQuery(
+	        "SELECT c FROM CartItem c WHERE c.transportation = :transportation AND c.user = :user", CartItem.class);
+	    query.setParameter("transportation", transportation);
+	    query.setParameter("user", user);
+
+	    return query.getResultList();
 	}
 
 }

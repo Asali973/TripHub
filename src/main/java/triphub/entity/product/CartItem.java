@@ -11,9 +11,9 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import triphub.entity.product.service.Service;
-import triphub.entity.service.Accommodation;
-import triphub.entity.service.Restaurant;
-import triphub.entity.service.Transportation;
+import triphub.entity.subservices.Accommodation;
+import triphub.entity.subservices.Restaurant;
+import triphub.entity.subservices.Transportation;
 import triphub.entity.user.User;
 import triphub.viewModel.CartViewModel;
 

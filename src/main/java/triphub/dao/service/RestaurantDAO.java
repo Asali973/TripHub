@@ -1,6 +1,8 @@
 package triphub.dao.service;
 
 import java.util.List;
+
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
