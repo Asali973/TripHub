@@ -106,9 +106,9 @@
     TITLE="accommodations" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#views#product#ServiceHome.xhtml"
-  PATH="/views/product/ServiceHome.xhtml" SHAPE="272,1409,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#views#organizer_session#Acommodation.xhtml"
   PATH="/views/organizer_session/Acommodation.xhtml"
   SHAPE="256,1553,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#product#ServiceHome.xhtml"
+  PATH="/views/product/ServiceHome.xhtml" SHAPE="272,1409,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
