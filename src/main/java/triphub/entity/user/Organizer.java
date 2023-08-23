@@ -1,7 +1,11 @@
 package triphub.entity.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
+import triphub.entity.product.TourPackage;
 import triphub.entity.subscription.Customization;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.util.Administration;
@@ -30,6 +34,10 @@ public class Organizer {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Subscription subscription;
+	
+	@OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<TourPackage> tourPackages = new ArrayList<>();
+
 	
 	public void updateOrganizerFromViewModel(UserViewModel form) {
 	    this.setId(form.getOrganizerId());
@@ -116,6 +124,15 @@ public class Organizer {
 	public void setSubscription(Subscription subscription) {
 		this.subscription = subscription;
 	}
+
+	public List<TourPackage> getTourPackages() {
+		return tourPackages;
+	}
+
+	public void setTourPackages(List<TourPackage> tourPackages) {
+		this.tourPackages = tourPackages;
+	}
+	
 	
 	
 }

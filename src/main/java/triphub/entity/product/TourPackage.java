@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import triphub.entity.user.Organizer;
 import triphub.entity.util.Picture;
 import triphub.viewModel.TourPackageFormViewModel;
 
@@ -38,8 +39,15 @@ public class TourPackage implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Theme theme;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
-	private List<Picture> pictures;
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
+	private Picture picture;
+	
+
+	
+	@ManyToOne
+	@JoinColumn(name="organizer_id")
+	private Organizer organizer;
+
 	
 
 
@@ -51,6 +59,10 @@ public class TourPackage implements Serializable {
 		tourPackage.setId(tourPackageVm.getId());
 		tourPackage.setName(tourPackageVm.getName());
 		tourPackage.setDescription(tourPackageVm.getDescription());
+		
+		Picture picture = new Picture();
+		picture.setLink(tourPackageVm.getLink());
+		tourPackage.setPicture(picture);
 
 		Price price = new Price(tourPackageVm.getAmount(), tourPackageVm.getCurrency());
 		Destination destination = new Destination(tourPackageVm.getCityName(), tourPackageVm.getState(),
@@ -74,7 +86,11 @@ public class TourPackage implements Serializable {
 		this.getPrice().updatePriceFromViewModel(tourPackageVm);
 		this.getDestination().updateDestinationFromViewModel(tourPackageVm);
 		this.getTheme().updateThemeFromViewModel(tourPackageVm);
-		// need to add picture soon
+		
+        Picture picture = new Picture();
+        picture.setLink(tourPackageVm.getLink());
+        this.setPicture(picture);
+
 	}
 
 	public TourPackageFormViewModel initTourPackageFormViewModel() {
@@ -86,6 +102,10 @@ public class TourPackage implements Serializable {
 		this.getPrice().initPriceViewModel(tourPackageVm);
 		this.getDestination().initDestinationViewModel(tourPackageVm);
 		this.getTheme().initThemeViewModel(tourPackageVm);
+		
+        if (this.getPicture() != null) {
+        	tourPackageVm.setLink(this.getPicture().getLink());
+        }
 		return tourPackageVm;
 	}
 //	tourPackageVm.setPictureslinks(this.getPictures());
@@ -130,12 +150,14 @@ public class TourPackage implements Serializable {
 		this.theme = theme;
 	}
 
-	public List<Picture> getPictures() {
-		return pictures;
+
+
+	public Picture getPicture() {
+		return picture;
 	}
 
-	public void setPictures(List<Picture> pictures) {
-		this.pictures = pictures;
+	public void setPicture(Picture picture) {
+		this.picture = picture;
 	}
 
 	public String getDescription() {
@@ -146,4 +168,13 @@ public class TourPackage implements Serializable {
 		this.description = description;
 	}
 
+	public Organizer getOrganizer() {
+		return organizer;
+	}
+
+	public void setOrganizer(Organizer organizer) {
+		this.organizer = organizer;
+	}
+
+	
 }

@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.TypedQuery;
 
 import triphub.dao.user.*;
+import triphub.entity.product.TourPackage;
 import triphub.entity.subscription.Customization;
 import triphub.entity.subscription.Layout;
 import triphub.entity.subscription.Subscription;
@@ -274,7 +276,18 @@ public class UserService implements Serializable{
 	public Subscription getSubscription(Long organizerId) {
 		return organizerDAO.getSubscriptionForOrganizer(organizerId);
 	}
+	
+	
+	
+	
+	
 
+
+	
+	
+	
+	
+	
 	// Methods related to Organizer customization
 	public Customization getCustomizationForOrganizer(Long organizerId) {
 		Organizer organizer = organizerDAO.readOrganizer(organizerId);
