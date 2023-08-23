@@ -1,7 +1,6 @@
 package triphub.viewModel;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 
 import triphub.entity.product.Price;
@@ -10,7 +9,6 @@ import triphub.entity.product.service.ServiceType;
 import triphub.entity.subservices.AccommodationType;
 import triphub.entity.subservices.TransportationType;
 import triphub.entity.util.Address;
-import triphub.entity.util.Calendar;
 import triphub.entity.util.CurrencyType;
 import triphub.entity.util.Picture;
 import triphub.entity.util.PictureType;
@@ -38,6 +36,8 @@ public class SubServicesViewModel implements Serializable {
 	private String description;
 
 	private Address address = new Address();
+	private Address departure  = new Address();
+	private Address arrival = new Address();
 	private Price price= new Price();
 	private Service service = new Service();
 
@@ -194,6 +194,22 @@ public class SubServicesViewModel implements Serializable {
 
 	public void setService(Service service) {
 		this.service = service;
+	}
+
+	public Address getDeparture() {
+		return departure;
+	}
+
+	public void setDeparture(Address departure) {
+		this.departure = departure;
+	}
+
+	public Address getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(Address arrival) {
+		this.arrival = arrival;
 	}
 
 	

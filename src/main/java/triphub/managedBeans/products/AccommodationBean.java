@@ -57,7 +57,14 @@ public class AccommodationBean implements Serializable {
 			}
 		}
 	}
+	
+	public String loadAllAccommodations() {
+		allAccommodations = accommodationService.getAll();
 
+		return "accommodations";
+	}
+
+	
 	public void create() {
 		accommodationService.create(accommodationVm);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Accommodation added successfully !"));
@@ -71,7 +78,7 @@ public class AccommodationBean implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Accommodation updated successfully!"));
 
 			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-			String redirectUrl = contextPath + "/views/product/AccommodationUpdate.xhtml?faces-redirect=true&id="
+			String redirectUrl = contextPath + "/views/product/AccomUpdate.xhtml?faces-redirect=true&id="
 					+ accommodationVm.getId();
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 

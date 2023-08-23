@@ -45,21 +45,33 @@ public class Transportation {
 	}
 
 	public Transportation(String name, Address departure, Address arrival, TransportationType transportation,
-			Picture picture, String description) {
-		super();
+			Picture picture, String description, Service service) {
 		this.name = name;
 		this.departure = departure;
 		this.arrival = arrival;
 		this.transportation = transportation;
 		this.picture = picture;
 		this.description = description;
+		this.service = service;
+	}
+	
+	public static Transportation createTransportationFromViewModel(SubServicesViewModel transportationvm) {
+		Transportation transportation = new Transportation();
+		transportation.setId(transportationvm.getId());
+		transportation.setName(transportationvm.getName());
+		transportation.setDeparture(transportationvm.getDeparture());
+		transportation.setArrival(transportationvm.getArrival());
+		transportation.setTransportation(transportationvm.getTransportationType());
+		transportation.setDescription(transportationvm.getDescription());
+		transportation.setService(transportationvm.getService());
+		return transportation;
 	}
 
 	public void updateTransportationViewModel(SubServicesViewModel transportationvm) {
-		this.setName(transportationvm.getName());
 		this.setId(transportationvm.getId());
-		this.setDeparture(transportationvm.getAddress());
-		this.setArrival(transportationvm.getAddress());
+		this.setName(transportationvm.getName());
+		this.setDeparture(transportationvm.getDeparture());
+		this.setArrival(transportationvm.getArrival());
 		this.setDescription(transportationvm.getDescription());
 		// need to add picture soon
 	}
@@ -68,8 +80,8 @@ public class Transportation {
 		SubServicesViewModel transportationvm = new SubServicesViewModel();
 		transportationvm.setId(this.getId());
 		transportationvm.setName(this.getName());
-		transportationvm.setAddress(this.getArrival());
-		transportationvm.setAddress(this.getDeparture());
+		transportationvm.setDeparture(this.getDeparture());
+		transportationvm.setArrival(this.getArrival());
 		transportationvm.setDescription(this.getDescription());
 		this.getDeparture().initAddressViewModel(transportationvm);
 		this.getArrival().initAddressViewModel(transportationvm);

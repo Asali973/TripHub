@@ -80,8 +80,6 @@ public class AccommodationDAO implements ServiceInterface {
 	    return accommodation;
 	}
 
-
-	@Override
 	public SubServicesViewModel update(SubServicesViewModel accommodationvm) {
 
 		Accommodation accommodation = em.find(Accommodation.class, accommodationvm.getId());
@@ -97,6 +95,8 @@ public class AccommodationDAO implements ServiceInterface {
 		return accommodation.initAccommodationViewModel();
 
 	}
+	
+
 
 	@Override
 	public void delete(SubServicesViewModel accommodationvm) {

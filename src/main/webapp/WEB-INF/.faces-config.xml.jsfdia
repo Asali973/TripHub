@@ -92,4 +92,23 @@
   PATH="/views/superadmin_home.xhtml" SHAPE="240,817,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#views#organizer_home.xhtml"
   PATH="/views/organizer_home.xhtml" SHAPE="240,593,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*:5" PATH="*" SHAPE="48,1393,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:5" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="accommodations::#views#product#ServiceHome.xhtml" NAME="output"
+    PATH="/views/product/ServiceHome.xhtml"
+    TARGET="rules:#views#product#ServiceHome.xhtml"
+    TITLE="accommodations" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="accommodations::#views#organizer_session#Acommodation.xhtml"
+    NAME="output1" PATH="/views/organizer_session/Acommodation.xhtml"
+    TARGET="rules:#views#organizer_session#Acommodation.xhtml"
+    TITLE="accommodations" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#product#ServiceHome.xhtml"
+  PATH="/views/product/ServiceHome.xhtml" SHAPE="272,1409,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#organizer_session#Acommodation.xhtml"
+  PATH="/views/organizer_session/Acommodation.xhtml"
+  SHAPE="256,1553,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
