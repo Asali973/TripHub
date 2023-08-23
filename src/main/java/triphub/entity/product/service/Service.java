@@ -15,13 +15,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import triphub.entity.product.Price;
 
 import triphub.viewModel.SubServicesViewModel;
 
 @Entity
-
 public class Service implements Serializable{
 	private static final long serialVersionUID = 1L;
   @Id
@@ -37,9 +38,12 @@ public class Service implements Serializable{
 	private boolean availability;
 
 	@JoinColumn(name = "fromDate_id")
+	@Temporal(TemporalType.DATE)
 	private Date availableFrom;
 
+	
 	@JoinColumn(name = "tillDate_id")
+	@Temporal(TemporalType.DATE)
 	private Date availableTill;
 
 	public static Service createServiceFromViewModel(SubServicesViewModel form) {
