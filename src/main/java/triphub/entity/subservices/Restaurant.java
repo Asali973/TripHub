@@ -58,14 +58,18 @@ public class Restaurant {
 	}
 
 	public SubServicesViewModel initRestaurantViewModel() {
-		SubServicesViewModel restaurantvm = new SubServicesViewModel();
-		restaurantvm.setId(this.getId());
-		restaurantvm.setName(this.getName());
-		restaurantvm.setAddress(this.getAddress());
-		restaurantvm.setDescription(this.getDescription());
-		this.getAddress().initAddressViewModel(restaurantvm);
-		return restaurantvm;
+	    SubServicesViewModel restaurantvm = new SubServicesViewModel();
+	    
+	    restaurantvm.setId(this.getId());
+	    restaurantvm.setName(this.getName());
+	    restaurantvm.setAddress(this.getAddress());
+	    restaurantvm.setDescription(this.getDescription()); 
+	    this.getAddress().initAddressViewModel(restaurantvm);    
+	    this.getService().initServiceViewModel(restaurantvm);
+
+	    return restaurantvm;
 	}
+
 
 	// Getters - Setters
 	public Long getId() {
