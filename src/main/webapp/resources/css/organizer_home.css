@@ -106,7 +106,7 @@ body, h1, h2, h3, h4, h5, p, a {
 }
 
 .btn-primary {
-    background-color: #164359;
+    background-color: rgb(22, 67, 89);
     border: none;
     color: white;
     padding: 10px 20px;

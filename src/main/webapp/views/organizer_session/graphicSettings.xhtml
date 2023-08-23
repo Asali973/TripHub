@@ -25,7 +25,8 @@
 			<div class="container mt-5">
 				<div class="card">
 					<div class="card-body">
-						<h2 class="card-title text-center mt-3">Customize your home page</h2>
+						<h2 class="card-title text-center mt-3">Customize your home
+							page</h2>
 						<h:form>
 							<div class="mt-4">
 								<h:outputText value="Primary Color:" class="d-block mb-2" />
@@ -67,11 +68,12 @@
 								</h:selectOneMenu>
 							</div>
 
-							<div class="mt-3">
+							<div class="mt-3 d-flex justify-content-center">
 								<h:commandButton value="Update" class="btn btn-primary mr-2"
 									action="#{organizerBean.updateGraphicSettings}" />
-								<h:commandButton value="spaceCustom" class="btn btn-secondary"
-									action="/views/organizer_session/observeSettings?faces-redirect=true" />
+								<h:commandButton value="Back to settings space"
+									class="btn btn-primary mr-2"
+									action="/views/organizer_home?faces-redirect=true" />
 							</div>
 						</h:form>
 					</div>
