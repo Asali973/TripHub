@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import triphub.entity.product.Price;
 
@@ -35,10 +37,12 @@ public class Service implements Serializable{
 	private Price price;
 
 	private boolean availability;
-
+	
+	@Temporal(value =TemporalType.DATE)
 	@JoinColumn(name = "fromDate_id")
 	private Date availableFrom;
-
+	
+	@Temporal(value =TemporalType.DATE)
 	@JoinColumn(name = "tillDate_id")
 	private Date availableTill;
 

@@ -103,28 +103,26 @@
 					<div class="collapse" id="descriptionSection">
 						<div class="form-group mt-4">
 							<h:outputLabel for="description" value="Description:" />
-							 <h:inputTextarea id="description"
-                             value="#{accommodationBean.accommodationVm.description}"
-                             class="form-control" rows="4" maxlength="500"
-                             oninput="updateCharCount(this)"></h:inputTextarea>
-            <small id="charCount">500 characters remaining</small>
-        </div>
+							<h:inputTextarea id="description"
+								value="#{accommodationBean.accommodationVm.description}"
+								class="form-control" rows="4" maxlength="500"
+								oninput="updateCharCount(this)"></h:inputTextarea>
+							<small id="charCount">500 characters remaining</small>
+						</div>
 					</div>
-					<div class="form-group mt-4">
-						<label for="availableFrom">Available From*:</label>
-						<h:inputHidden id="hiddenAvailableFrom" type="date"
-							class="form-control"
-							value="#{accommodationBean.accommodationVm.availableFrom}" />
-						<input type="text" id="availableFromPicker"
-							placeholder="Select Date..." />
+					<div class="reg-form-group mt-4">
+					<h:outputLabel for="availableTill" value="Available Till:" />
+						<h:inputText id="availableTill" type="date"
+							value="#{accommodationBean.accommodationVm.availableTill}"
+							class="form-control date piker" >
+							<f:convertDateTime pattern="dd/MM/yyyy"  />
+						</h:inputText>
 					</div>
 
-					<div class="form-group mt-4">
-						<label for="availableTill">Available Until*:</label>
-						<h:inputHidden id="hiddenAvailableTill" type ="date" class="form-control"
-							value="#{accommodationBean.accommodationVm.availableTill}" />
-						<input type="text" id="availableTillPicker"
-							placeholder="Select Date..." />
+					<div class="reg-form-group mt-4">
+						<h:outputLabel for="availableFrom" value="Available From:" />
+						<input type="date" id="availableFrom" class="form-control"
+							value="#{accommodationBean.accommodationVm.availableFrom}" />
 					</div>
 
 					<div class="form-group mt-4">
@@ -168,24 +166,24 @@
 			</h:form>
 		</div>
 	</div>
-	
+
 	<td><h:form>
-								<!-- Update button -->
-								<h:commandButton value="Update"
-									action="#{accommodationBean.updateAccommodation()}"
-									styleClass="reg-btn-primary btn-sm">
-									<f:param name="id" value="#{accommodation.id}" />
-								</h:commandButton>
-							</h:form></td>
-						<td><h:form>
-								<!-- Delete button -->
-								<h:commandButton value="Delete"
-									actionListener="#{accommodationBean.deleteAccommodation()}"
-									styleClass="reg-btn-primary btn-sm"
-									onclick="return confirmDelete();">
-									<f:param name="id" value="#{accommodation.id}" />
-								</h:commandButton>
-							</h:form></td>
+			<!-- Update button -->
+			<h:commandButton value="Update"
+				action="#{accommodationBean.updateAccommodation()}"
+				styleClass="reg-btn-primary btn-sm">
+				<f:param name="id" value="#{accommodation.id}" />
+			</h:commandButton>
+		</h:form></td>
+	<td><h:form>
+			<!-- Delete button -->
+			<h:commandButton value="Delete"
+				actionListener="#{accommodationBean.deleteAccommodation()}"
+				styleClass="reg-btn-primary btn-sm"
+				onclick="return confirmDelete();">
+				<f:param name="id" value="#{accommodation.id}" />
+			</h:commandButton>
+		</h:form></td>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script

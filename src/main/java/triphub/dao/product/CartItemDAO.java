@@ -15,9 +15,9 @@ import triphub.dao.user.UserDAO;
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.Service;
-import triphub.entity.service.Accommodation;
-import triphub.entity.service.Restaurant;
-import triphub.entity.service.Transportation;
+import triphub.entity.subservices.Accommodation;
+import triphub.entity.subservices.Restaurant;
+import triphub.entity.subservices.Transportation;
 import triphub.entity.user.User;
 import triphub.viewModel.CartViewModel;
 
