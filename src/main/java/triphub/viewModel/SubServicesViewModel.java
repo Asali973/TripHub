@@ -214,6 +214,7 @@ public class SubServicesViewModel implements Serializable {
 
 	public void setCurrency(String currency) {
 		this.currency = currency;
+	}
 
 	public Address getDeparture() {
 		return departure;
