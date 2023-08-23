@@ -36,12 +36,16 @@ public class Service implements Serializable{
 	private Price price;
 
 	private boolean availability;
+	
 
 	@JoinColumn(name = "fromDate_id")
 	@Temporal(TemporalType.DATE)
 	private Date availableFrom;
 
+
+
 	
+
 	@JoinColumn(name = "tillDate_id")
 	@Temporal(TemporalType.DATE)
 	private Date availableTill;
