@@ -11,7 +11,6 @@ import triphub.entity.product.service.ServiceType;
 import triphub.entity.subservices.AccommodationType;
 import triphub.entity.subservices.TransportationType;
 import triphub.entity.util.Address;
-import triphub.entity.util.Calendar;
 import triphub.entity.util.CurrencyType;
 import triphub.entity.util.Picture;
 import triphub.entity.util.PictureType;
@@ -39,6 +38,8 @@ public class SubServicesViewModel implements Serializable {
 	private String description;
 
 	private Address address = new Address();
+	private Address departure  = new Address();
+	private Address arrival = new Address();
 	private Price price= new Price();
 	private Service service = new Service();
 
@@ -198,6 +199,7 @@ public class SubServicesViewModel implements Serializable {
 		this.service = service;
 	}
 
+
 	public BigDecimal getAmount() {
 		return amount;
 	}
@@ -212,6 +214,22 @@ public class SubServicesViewModel implements Serializable {
 
 	public void setCurrency(String currency) {
 		this.currency = currency;
+
+	public Address getDeparture() {
+		return departure;
+	}
+
+	public void setDeparture(Address departure) {
+		this.departure = departure;
+	}
+
+	public Address getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(Address arrival) {
+		this.arrival = arrival;
+
 	}
 
 	

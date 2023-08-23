@@ -19,9 +19,9 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
-import triphub.entity.subservices.Accommodation;
-import triphub.entity.subservices.Restaurant;
-import triphub.entity.subservices.Transportation;
+
+import triphub.entity.subservices.*;
+
 import triphub.entity.user.User;
 import triphub.helpers.FacesMessageUtil;
 import triphub.services.AccommodationService;

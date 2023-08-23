@@ -46,6 +46,7 @@ public class TransportationDAO implements ServiceInterface{
 		
 		// create transportation
 		Transportation transportation = new Transportation();
+		transportation.setId(transportationvm.getId());
 		transportation.setName(transportationvm.getName());
 		transportation.setTransportation(transportationvm.getTransportationType());
 		transportation.setDescription(transportationvm.getDescription());
@@ -53,22 +54,22 @@ public class TransportationDAO implements ServiceInterface{
 
 		// create departure
 		Address departure = new Address();
-		departure.setNum(transportationvm.getAddress().getNum());
-		departure.setStreet(transportationvm.getAddress().getStreet());
-		departure.setCity(transportationvm.getAddress().getCity());
-		departure.setState(transportationvm.getAddress().getState());
-		departure.setCountry(transportationvm.getAddress().getCountry());
-		departure.setZipCode(transportationvm.getAddress().getZipCode());
+		departure.setNum(transportationvm.getDeparture().getNum());
+		departure.setStreet(transportationvm.getDeparture().getStreet());
+		departure.setCity(transportationvm.getDeparture().getCity());
+		departure.setState(transportationvm.getDeparture().getState());
+		departure.setCountry(transportationvm.getDeparture().getCountry());
+		departure.setZipCode(transportationvm.getDeparture().getZipCode());
 
 		
 		// create arrival
 		Address arrival = new Address();
-		arrival.setNum(transportationvm.getAddress().getNum());
-		arrival.setStreet(transportationvm.getAddress().getStreet());
-		arrival.setCity(transportationvm.getAddress().getCity());
-		arrival.setState(transportationvm.getAddress().getState());
-		arrival.setCountry(transportationvm.getAddress().getCountry());
-		arrival.setZipCode(transportationvm.getAddress().getZipCode());
+		arrival.setNum(transportationvm.getArrival().getNum());
+		arrival.setStreet(transportationvm.getArrival().getStreet());
+		arrival.setCity(transportationvm.getArrival().getCity());
+		arrival.setState(transportationvm.getArrival().getState());
+		arrival.setCountry(transportationvm.getArrival().getCountry());
+		arrival.setZipCode(transportationvm.getArrival().getZipCode());
 
 		//create departure/arrival in transportation
 		transportation.setDeparture(departure);
@@ -84,9 +85,6 @@ public class TransportationDAO implements ServiceInterface{
 		em.persist(transportation);
 //		em.persist(picture);
 		
-		
-	    
-	    
 		return transportation;
 	}
 
@@ -100,7 +98,7 @@ public class TransportationDAO implements ServiceInterface{
 
 
 
-	@Override
+	
 	public SubServicesViewModel update(SubServicesViewModel transportationvm) {
 		Transportation transportation = em.find(Transportation.class, transportationvm.getId());
 		if (transportation == null) {
@@ -117,14 +115,14 @@ public class TransportationDAO implements ServiceInterface{
 
 	@Override
 	public void delete(SubServicesViewModel transportationvm) {
-		Transportation transportation = em.find(Transportation.class, transportationvm.getId());
-		if (transportation == null) {
-			throw new IllegalArgumentException("Restaurant with ID " + transportationvm.getId() + " not found.");
-		}
-		transportation.updateTransportationViewModel(transportationvm);
-		em.remove(transportation);
-		em.flush();
+	    Transportation transportation = em.find(Transportation.class, transportationvm.getId());
+	    if (transportation == null) {
+	        throw new IllegalArgumentException("Transportation with ID " + transportationvm.getId() + " not found.");
+	    }
+	    em.remove(transportation); // Remove the entity directly
+	    em.flush();
 	}
+
 
 	@Override
 	public SubServicesViewModel initSubService(Long id) {

@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import triphub.entity.subservices.Transportation;
 import triphub.entity.subservices.TransportationType;
+import triphub.entity.util.CurrencyType;
 import triphub.helpers.FacesMessageUtil;
 
 import triphub.services.TransportationService;
@@ -46,6 +47,7 @@ public class TransportationBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+
 	    allTransportations = transportationService.getAll();
 	    
 	    String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
@@ -69,6 +71,7 @@ public class TransportationBean implements Serializable {
 	            FacesMessageUtil.addErrorMessage("Initialization failed: Transportation ViewModel does not exist");
 	        }
 	    }
+
 	}
 
 
@@ -81,34 +84,25 @@ public class TransportationBean implements Serializable {
 //		return transportationService.read(id);
 //	} 
 //	
-	public String update(Transportation transportation) {
+	public String update() {
 		try {
 			transportationService.update(transportationvm);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Transportation updated successfully!"));
 
-			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-			String redirectUrl = contextPath + "/views/product/transportationUpdate.xhtml?faces-redirect=true&id="
-					+ transportationvm.getId();
-			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
-
+			return "transportationUpdate.xhtml?faces-redirect=true&id=" + transportationvm.getId();
 		} catch (IllegalArgumentException e) {
 			FacesMessageUtil.addErrorMessage("Failed to update Transportation: " + e.getMessage());
 		} catch (Exception e) {
 			FacesMessageUtil.addErrorMessage("Failed to update Transportation. An unexpected error occurred.");
 		}
-		clear();
 		return null;
 	}
 
-	public void clear() {
-		transportationvm = new SubServicesViewModel();
-	}
-	
 	public void delete() {
 		Long selectedTransportationId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.get("selectedTransportationId");
-		if ( selectedTransportationId == null) {
+		if (selectedTransportationId == null) {
 			FacesMessageUtil.addErrorMessage("Invalid request: Transportation ID not found in session.");
 			return;
 		}
@@ -118,9 +112,7 @@ public class TransportationBean implements Serializable {
 			FacesMessageUtil.addErrorMessage("Invalid request: Transportation does not exist.");
 			return;
 		}
-
-		FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add("confirmDelete();");
-	}	
+	}
 
 	public List<Transportation> findByType(TransportationType transportationType) {
 		return transportationService.findByType(transportationType);
@@ -168,6 +160,11 @@ public class TransportationBean implements Serializable {
 
 	public void setSelectedTransportation(Transportation selectedTransportation) {
 		this.selectedTransportation = selectedTransportation;
+	}
+
+
+	public CurrencyType[] getAllCurrencyTypes() {
+		return CurrencyType.values();
 	}
 
 }

@@ -43,6 +43,7 @@ public class RestaurantDAO implements ServiceInterface{
 		Price price = Price.createPriceFromViewModel(restaurantvm);
 		service.setPrice(price);
 		
+		
 		service.setAvailability(restaurantvm.isAvailability());
 		service.setAvailableFrom(restaurantvm.getAvailableFrom());
 		service.setAvailableTill(restaurantvm.getAvailableTill());
@@ -83,7 +84,7 @@ public class RestaurantDAO implements ServiceInterface{
 		return restaurant;
 	}
 
-	@Override
+	
 	public SubServicesViewModel update(SubServicesViewModel restaurantvm) {
 
 		Restaurant restaurant = em.find(Restaurant.class, restaurantvm.getId());
