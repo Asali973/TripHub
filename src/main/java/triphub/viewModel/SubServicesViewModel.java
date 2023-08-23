@@ -1,5 +1,5 @@
 package triphub.viewModel;
-
+// TODO voir plus de cohrence entre subservice view model et les entités
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -231,6 +231,17 @@ public class SubServicesViewModel implements Serializable {
 	public void setArrival(Address arrival) {
 		this.arrival = arrival;
 
+	}
+
+	@Override
+	public String toString() {
+		return "SubServicesViewModel [id=" + id + ", name=" + name + ", availability=" + availability
+				+ ", availableFrom=" + availableFrom + ", availableTill=" + availableTill + ", accommodationType="
+				+ accommodationType + ", transportationType=" + transportationType + ", currencyType=" + currencyType
+				+ ", serviceType=" + serviceType + ", description=" + description + ", address=" + address
+				+ ", departure=" + departure + ", arrival=" + arrival + ", price=" + price + ", service=" + service
+				+ ", amount=" + amount + ", currency=" + currency + ", size=" + size + ", weight=" + weight + ", link="
+				+ link + ", type=" + type + ", altText=" + altText + "]";
 	}
 
 	

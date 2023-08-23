@@ -9,11 +9,16 @@
 	<title>Update Tour Package</title>
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 	<h:outputStylesheet library="css" name="regForm.css" />
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
 </h:head>
 
 <h:body>
 	<h:form id="updateAccommodation" enctype="multipart/form-data">
-		<h:inputHidden id="id" value="#{accommodationBean.accommodationVm.id}" />
+		<h:inputHidden id="id" value="#{accommodationBean.accommodationVm.id}"
+		
+		 />
+		<!-- TODO ajouter les id des objets adress, service, price  -->
 		<div class="reg-form-container">
 			<h3>Update your Accommodation</h3>
 			<div class="row">
@@ -53,29 +58,38 @@
 
 						</h:selectOneMenu>
 					</div>
-					
-				
-					<div class="reg-form-group">
-							<h:outputLabel for="availableFrom" value="Available From:" />
-							 <input
-							type="date" id="availableFrom" class="form-control"
-							value="#{accommodationBean.accommodationVm.availableFrom}" />
-						</div>
+			
 						
 						<div class="reg-form-group">
-							<h:outputLabel for="availableTil" value="Available Until*" />
-							<input
-							type="date" id="availableTill" class="form-control"
-							value="#{accommodationBean.accommodationVm.availableTill}" />
+						<h:outputLabel for="availableFrom">Available From*:</h:outputLabel>
+
+						<h:inputText id="availableFrom"
+							value="#{accommodationBean.accommodationVm.availableFrom}"
+							class="form-control date-picker">
+							<f:convertDateTime pattern="yyyy-MM-dd" timeZone="UTC"
+								type="date" />
+						</h:inputText>
+          
+					</div>
+
+					<div class="reg-form-group">
+						<h:outputLabel for="availableTill">Available Until*:</h:outputLabel>
+
+						<h:inputText id="availableTill"
+							value="#{accommodationBean.accommodationVm.availableTill}"
+							class="form-control date-picker">
+							<f:convertDateTime pattern="yyyy-MM-dd" timeZone="UTC"
+								type="date" />
+						</h:inputText>
+						
 						</div>
-							<div class="reg-form-group">
+						<div class="reg-form-group">
 						<h:outputLabel for="Price" value="Price*:" required="true"
 							requiredMessage="Price is required." />
 						<h:inputText id="price"
 							value="#{accommodationBean.accommodationVm.price.amount}"
 							class="form-control" required="true" />
 					</div>
-						
 				
 					</div>
 					
@@ -126,13 +140,6 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-6">
-						<!-- Third Slot (left column) -->
-											</div>
-					
-						<!-- Third Slot (left column) -->
-						
-					
 
 					<div class="col-md-6">
 						<!-- Fourth Slot (right column) -->
@@ -173,16 +180,38 @@
 					<!-- Fifth Slot (full-width) -->
 					<div class="reg-form-group">
 						<h:commandButton value="Update"
-							actionListener="#{accommodationBean.updateAccommodation}"
-							styleClass="reg-btn-primary" />
+							action="#{accommodationBean.updateAccommodation}"
+							styleClass="reg-btn-primary">
+							<f:param name="id" value="#{accommodationBean.accommodationVm.id}" />
+						</h:commandButton>h:commandButton
 					</div>
 				</div>
 			</div>
 			
 		</div>
 		 <div class="reg-form-group">
-                    <h:link value="Click here to check the updated Accommodation in the list!" outcome="/views/product/ServiceHome.xhtml" styleClass="custom-link-button" />
+                    <h:link value="Click here to check the updated Accommodation in the list!" outcome="/views/product/AccommodationForm.xhtml" styleClass="custom-link-button" />
                 </div>
 	</h:form>	
+	<h:outputScript library="javascript" name="createNdisplayList.js" />
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+	</script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
+		<script>
+    $(document).ready(function(){
+        // initialiser flatpickr pour les champs avec la classe date-picker
+        $(".date-picker").flatpickr({
+            dateFormat: "Y-m-d",
+            enableTime: false
+        });
+    });
+</script>
+		
+	<h:outputScript library="javascript" name="servicesCrud.js" />
 </h:body>
 </html>
