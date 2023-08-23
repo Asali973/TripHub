@@ -34,7 +34,7 @@ public class TourPackageFormViewModel implements Serializable {
 
 	// Image properties
 	private String profilePicture;
-	private List<Picture> pictureslinks;
+	private Picture picture;
 	private String link;
 
 	public void clear() {
@@ -51,7 +51,7 @@ public class TourPackageFormViewModel implements Serializable {
 		this.state = "";
 		this.country = "";
 
-		this.pictureslinks = null;
+		this.picture = null;
 
 		this.themeName = "";
 	}
@@ -148,12 +148,14 @@ public class TourPackageFormViewModel implements Serializable {
 		this.id = id;
 	}
 
-	public List<Picture> getPictureslinks() {
-		return pictureslinks;
+
+
+	public Picture getPicture() {
+		return picture;
 	}
 
-	public void setPictureslinks(List<Picture> pictureslinks) {
-		this.pictureslinks = pictureslinks;
+	public void setPicture(Picture picture) {
+		this.picture = picture;
 	}
 
 	public String getLink() {
