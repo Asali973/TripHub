@@ -6,6 +6,7 @@
     transform-origin: center left;
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
     outline: 1px solid var(--background-border);
+    height: auto; /* Ajustement automatique de la hauteur */
 }
 
 .card-styling:hover {
