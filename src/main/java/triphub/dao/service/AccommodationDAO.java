@@ -2,7 +2,9 @@ package triphub.dao.service;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -23,6 +25,7 @@ public class AccommodationDAO implements ServiceInterface {
 
 	@PersistenceContext
 	private EntityManager em;
+	
 
 	public AccommodationDAO(EntityManager em) {
 		this.em = em;
