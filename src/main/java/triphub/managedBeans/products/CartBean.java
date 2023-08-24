@@ -192,41 +192,19 @@ public class CartBean implements Serializable {
 		}
 	}
 	
-//	public void addAccommodationToCart(User user, String productId, String quantity) {
-//		if (productId != null) {
-//			Long selectedAccommodationId = Long.parseLong(productId);
-//			int selectedQuantity = Integer.parseInt(quantity);
-//			Accommodation selectedAccommodation = accomodationDAO.findById(selectedAccommodationId);
-//
-//			if (selectedAccommodation != null) {
-//				iCartService.addToCart(selectedAccommodation, user, selectedQuantity);
-//				dateOfPurchase = new Date();
-//			}
-//		}
-//	}
 	public void addAccommodationToCart(User user, String productId, String quantity) {
-	    if (productId != null) {
-	        Long selectedAccommodationId = Long.parseLong(productId);
-	        int selectedQuantity = Integer.parseInt(quantity);
+		if (productId != null) {
+			Long selectedAccommodationId = Long.parseLong(productId);
+			int selectedQuantity = Integer.parseInt(quantity);
+			Accommodation selectedAccommodation = accomodationDAO.findById(selectedAccommodationId);
 
-	        Accommodation selectedAccommodation = accomodationDAO.findById(selectedAccommodationId);
-
-	        if (selectedAccommodation != null) {
-	            // Debugging print statements for name and price
-	            System.out.println("Accommodation Name: " + selectedAccommodation.getName());
-	            if (selectedAccommodation.getService() != null && selectedAccommodation.getService().getPrice() != null) {
-	                System.out.println("Accommodation Price: " + selectedAccommodation.getService().getPrice().getAmount());
-	            } else {
-	                System.out.println("Service or Price information is missing for the selected accommodation.");
-	            }
-
-	            iCartService.addToCart(selectedAccommodation, user, selectedQuantity);
-	            dateOfPurchase = new Date();
-	        } else {
-	            System.out.println("Accommodation not found for ID: " + selectedAccommodationId);
-	        }
-	    }
+			if (selectedAccommodation != null) {
+				iCartService.addToCart(selectedAccommodation, user, selectedQuantity);
+				dateOfPurchase = new Date();
+			}
+		}
 	}
+	
 
 	public void addRestaurantToCart(User user, String productId, String quantity) {
 		if (productId != null ) {
@@ -275,12 +253,12 @@ public class CartBean implements Serializable {
 	            itemPrice = cartItem.getTourPackage().getPrice().getAmount();
 	        } else if (cartItem.getRestaurant() != null) {
 	            itemPrice = cartItem.getRestaurant().getService().getPrice().getAmount();
-	        } else if (cartItem.getAccommodation() != null) {
-	        	 System.out.println("CartItem in ManagedBean: " + cartItem);
-		    	    System.out.println("Accommodation Name: " + cartItem.getAccommodation().getName());
-		    	    System.out.println("Accommodation Price: " + cartItem.getAccommodation().getService().getPrice().getAmount());
+	        } else if (cartItem.getAccommodation() != null) {	        	
 	            itemPrice = cartItem.getAccommodation().getService().getPrice().getAmount();
 	        } else if (cartItem.getTransportation() != null) {
+	        	 System.out.println("CartItem in CartBean: " + cartItem);
+		    	    System.out.println("Transportation Name: " + cartItem.getTransportation().getName());
+		    	    System.out.println("Transportation Price: " + cartItem.getTransportation().getService().getPrice().getAmount());
 	            itemPrice = cartItem.getTransportation().getService().getPrice().getAmount();
 	        }
 

@@ -16,7 +16,6 @@ import triphub.dao.service.RestaurantDAO;
 import triphub.dao.service.TransportationDAO;
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
-import triphub.entity.product.service.Service;
 import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
@@ -39,43 +38,7 @@ public class CartService implements ICartService, Serializable {
 	@Inject
 	private CartItemDAO cartItemDAO;
 
-	@Override
-	public void addToCart(Object cartItemObject, User user) {
-		if (cartItemObject instanceof TourPackage) {
-			TourPackage tourPackage = (TourPackage) cartItemObject;
-			addToCart(tourPackage, user);
-		} else if (cartItemObject instanceof Service) {
-			Service service = (Service) cartItemObject;
-			addToCart(service, user);
-		}
-	}
-
-	private void addToCart(TourPackage tourPackage, User user) {
-		CartItem cartItem = new CartItem();
-		cartItem.setUser(user);
-		cartItem.setTourPackage(tourPackage);
-		cartItem.setDateOfOrder(new Date());
-		cartItem.setQuantity(1);
-
-		cartItemDAO.addToCart(cartItem);
-
-		// Optionally, you can recalculate the total price and update the user's cart
-		BigDecimal totalPrice = calculateTotalPrice(cartItemDAO.getCartItemsByUser(user));
-		user.setCartTotal(totalPrice);
-	}
-
-//	private void addToCart(Service service, User user) {
-//		CartItem cartItem = new CartItem();
-//		cartItem.setUser(user);
-//		cartItem.setService(service);
-//		cartItem.setDateOfOrder(new Date());
-//		cartItem.setQuantity(1);
-//		cartItemDAO.addToCart(cartItem);
-//
-//		// Optionally, you can recalculate the total price and update the user's cart
-//		BigDecimal totalPrice = calculateTotalPrice(cartItemDAO.getCartItemsByUser(user));
-//		user.setCartTotal(totalPrice);
-//	}
+	
 
 	@Override
 	public void addToCart(Object cartItemObject, User user, int quantity) {

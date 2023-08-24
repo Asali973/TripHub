@@ -8,7 +8,7 @@ import triphub.entity.user.User;
 
 public interface ICartService {
 
-	void addToCart(Object cartItemObject, User user);
+	
 
 	public void addToCart(Object cartItemObject, User user, int quantity);
 
