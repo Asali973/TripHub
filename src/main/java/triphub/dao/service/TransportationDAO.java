@@ -99,7 +99,7 @@ public class TransportationDAO{
 	    
 //		Picture picture = new Picture();
 //		picture.setLink(transportationvm.getLink());
-
+	    em.persist(picture);
 	    em.persist(service);
 	    em.persist(price);
 		em.persist(departure);

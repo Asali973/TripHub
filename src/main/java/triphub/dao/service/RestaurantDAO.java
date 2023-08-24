@@ -63,6 +63,7 @@ public class RestaurantDAO  {
 		Picture picture = new Picture();
 		picture.setLink(restaurantvm.getLink());
 		restaurantvm.setPicture(picture);
+		em.persist(picture);
 
 		// Create Address
 		Address address = new Address();

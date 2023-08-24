@@ -67,6 +67,7 @@ public class AccommodationDAO {
 		Picture picture = new Picture();
 		picture.setLink(accommodationVm.getLink());
 		accommodationVm.setPicture(picture);
+		em.persist(picture);
 
 	    // Create Accommodation
 	    Accommodation accommodation = new Accommodation();
