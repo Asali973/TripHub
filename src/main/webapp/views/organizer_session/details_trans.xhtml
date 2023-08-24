@@ -28,19 +28,16 @@
 <h:body>
 	<h1>Transportation Details</h1>
 
-	<h2>#{transportationBean.selectedTransportation} != null ?
-		transportBean.selectedTransport.name : 'Transport Not Found'}</h2>
-	<p>Description: #{transportBean.selectedTransport.description}</p>
-	<p>Price: #{transportBean.selectedTransport.price.amount}
-		#{transportBean.selectedTransport.price.currency}</p>
-	<p>From: #{transportBean.selectedTransport.origin}</p>
-	<p>To: #{transportBean.selectedTransport.destination}</p>
-	<p>Type: #{transportBean.selectedTransport.type}</p>
-	<p>Duration: #{transportBean.selectedTransport.duration}</p>
-	
-	<h:form>
+	<h2>#{transportationBean.selectedTransportation != null ? transportationBean.selectedTransportation.name : 'Transport Not Found'}</h2>
+	<p>Description: #{transportationBean.selectedTransportation.description}</p>
+	<p>Price: #{transportationBean.selectedTransportation.service.price.amount}
+		#{transportationBean.selectedTransportation.service.price.currency}</p>
+	<p>From: #{transportationBean.selectedTransportation.departure.city}</p>
+	<p>To: #{transportationBean.selectedTransportation.arrival.city}</p>
+	<p>Type: #{transportationBean.selectedTransportation.transportationType}</p>
+			<h:form>
       <h:commandButton value="Add to Cart" action="#{cartBean.addToCart}">
-        <f:param name="selectedTransportId" value="#{param.id}" />
+        <f:param name="selectedTransportationId" value="#{param.id}" />
         <f:param name="quantity" value="#{cartBean.selectedQuantity}" />
       </h:commandButton>
     </h:form>
