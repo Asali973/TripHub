@@ -54,6 +54,8 @@ public class AccommodationDAO {
 
 	    // Create Price
 	    Price price = Price.createPriceFromViewModel(accommodationVm);
+	    price.setAmount(accommodationVm.getPrice().getAmount());
+	    price.setCurrency(accommodationVm.getCurrencyType().getLabel());        
 	    service.setPrice(price);
 
 	    service.setAvailableFrom(accommodationVm.getAvailableFrom());
