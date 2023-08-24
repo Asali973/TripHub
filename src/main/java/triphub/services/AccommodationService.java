@@ -109,5 +109,13 @@ public class AccommodationService implements ServiceInterface,Serializable {
 		return accommodationDAO.findById(id);
 	}
 	
+	public List<Accommodation> getAccommodationForOrganizer(Long organizerId) {
+		return accommodationDAO.getAccommodationForOrganizer(organizerId);
+	}
+	
+	public List<Accommodation> getAccommodationForProvider(Long providerId) {
+		return accommodationDAO.getAccommodationForProvider(providerId);
+	}
+	
  
 }

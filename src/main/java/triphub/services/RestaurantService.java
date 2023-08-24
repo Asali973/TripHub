@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import triphub.dao.service.RestaurantDAO;
 import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
+import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
 import triphub.helpers.FacesMessageUtil;
@@ -99,5 +100,13 @@ public class RestaurantService implements ServiceInterface,Serializable {
 	@Override
 	public Restaurant findById(Long id) {
 		return restaurantDAO.findById(id);
+	}
+	
+	public List<Restaurant> getRestaurantForOrganizer(Long organizerId) {
+		return restaurantDAO.getRestaurantForOrganizer(organizerId);
+	}
+	
+	public List<Restaurant> getRestaurantForProvider(Long providerId) {
+		return restaurantDAO.getRestaurantForProvider(providerId);
 	}
 }

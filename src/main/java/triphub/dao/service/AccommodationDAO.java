@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.product.Price;
+import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
 
@@ -20,6 +21,7 @@ import triphub.entity.user.Organizer;
 import triphub.entity.user.Provider;
 import triphub.entity.util.Address;
 import triphub.entity.util.Calendar;
+import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
 
 @Stateless
@@ -61,6 +63,10 @@ public class AccommodationDAO {
 	    // Persist Service and Price 
 	    em.persist(price);
 	    em.persist(service);
+	    
+		Picture picture = new Picture();
+		picture.setLink(accommodationVm.getLink());
+		accommodationVm.setPicture(picture);
 
 	    // Create Accommodation
 	    Accommodation accommodation = new Accommodation();
@@ -164,6 +170,18 @@ public class AccommodationDAO {
 
 	public Accommodation findById(Long id) {
 		return em.find(Accommodation.class, id);
+	}
+	
+	public List<Accommodation> getAccommodationForOrganizer(Long organizerId) {
+	    TypedQuery<Accommodation> query = em.createQuery("SELECT tp FROM Accommodation tp WHERE tp.organizer.id = :organizerId", Accommodation.class);
+	    query.setParameter("organizerId", organizerId);
+	    return query.getResultList();
+	}
+	
+	public List<Accommodation> getAccommodationForProvider(Long providerId) {
+	    TypedQuery<Accommodation> query = em.createQuery("SELECT tp FROM Accommodation tp WHERE tp.organizer.id = :providerId", Accommodation.class);
+	    query.setParameter("providerId", providerId);
+	    return query.getResultList();
 	}
 
 }

@@ -12,6 +12,7 @@ import triphub.entity.product.Price;
 import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.ServiceType;
+import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.user.Organizer;
 import triphub.entity.user.Provider;
@@ -50,6 +51,7 @@ public class RestaurantDAO  {
 		service.setAvailableFrom(restaurantvm.getAvailableFrom());
 		service.setAvailableTill(restaurantvm.getAvailableTill());
 		
+
 		
 		// Create Restaurant
 		Restaurant restaurant = new Restaurant();
@@ -57,6 +59,10 @@ public class RestaurantDAO  {
 		restaurant.setName(restaurantvm.getName());
 		restaurant.setDescription(restaurantvm.getDescription());
 		restaurant.setService(service);
+		
+		Picture picture = new Picture();
+		picture.setLink(restaurantvm.getLink());
+		restaurantvm.setPicture(picture);
 
 		// Create Address
 		Address address = new Address();
@@ -84,17 +90,13 @@ public class RestaurantDAO  {
 	    }
 
 
-		// Set Picture
-//		Picture picture = new Picture();
-//		picture.setLink(formService.getLink());
-//		restaurant.setPicture(picture);
 
 		
 		em.persist(price);
 		em.persist(service);
 		em.persist(address);
 		em.persist(restaurant);
-//		em.persist(picture);
+
 		em.flush();
 		
 		return restaurant;
@@ -160,6 +162,18 @@ public class RestaurantDAO  {
 	
 	public Restaurant findById(Long id) {
 		return em.find(Restaurant.class,id);
+	}
+	
+	public List<Restaurant> getRestaurantForOrganizer(Long organizerId) {
+	    TypedQuery<Restaurant> query = em.createQuery("SELECT tp FROM Restaurant tp WHERE tp.organizer.id = :organizerId", Restaurant.class);
+	    query.setParameter("organizerId", organizerId);
+	    return query.getResultList();
+	}
+	
+	public List<Restaurant> getRestaurantForProvider(Long providerId) {
+	    TypedQuery<Restaurant> query = em.createQuery("SELECT tp FROM Restaurant tp WHERE tp.organizer.id = :providerId", Restaurant.class);
+	    query.setParameter("providerId", providerId);
+	    return query.getResultList();
 	}
 
 }

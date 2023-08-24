@@ -13,6 +13,7 @@ import triphub.entity.product.Price;
 import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.ServiceType;
+import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
 import triphub.entity.subservices.TransportationType;
 import triphub.entity.user.Organizer;
@@ -54,6 +55,10 @@ public class TransportationDAO{
 		transportation.setTransportation(transportationvm.getTransportationType());
 		transportation.setDescription(transportationvm.getDescription());
 		transportation.setService(service);
+		
+		Picture picture = new Picture();
+		picture.setLink(transportationvm.getLink());
+		transportationvm.setPicture(picture);
 
 		// create departure
 		Address departure = new Address();
@@ -174,6 +179,20 @@ public class TransportationDAO{
 	public Transportation findById(Long id) {
 		return em.find(Transportation.class,id);
 
+	}
+	
+	public List<Transportation> getTransportationForOrganizer(Long organizerId) {
+		TypedQuery<Transportation> query = em
+				.createQuery("SELECT tp FROM Transportation tp WHERE tp.organizer.id = :organizerId", Transportation.class);
+		query.setParameter("organizerId", organizerId);
+		return query.getResultList();
+	}
+
+	public List<Transportation> getTransportationForProvider(Long providerId) {
+		TypedQuery<Transportation> query = em
+				.createQuery("SELECT tp FROM Transportation tp WHERE tp.organizer.id = :providerId", Transportation.class);
+		query.setParameter("providerId", providerId);
+		return query.getResultList();
 	}
 
 }
