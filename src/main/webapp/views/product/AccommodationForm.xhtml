@@ -216,97 +216,9 @@
 				</div>
 			</div>
 
-
-
-
-			<!-- Display the list -->
-			<div class="table-container">
-				<h3>Available Accommodation</h3>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Accommodation Name</th>
-							<th>Price</th>
-							<th>Currency</th>
-							<th>Number</th>
-							<th>Street</th>
-							<th>City</th>
-							<th>State</th>
-							<th>ZipCode</th>
-							<th>Country</th>
-							<th>availableFrom</th>
-							<th>availableUntil</th>
-							<th>Description</th>
-							<th>Update</th>
-							<th>Delete</th>
-						</tr>
-					</thead>
-					<tbody>
-						<ui:repeat value="#{accommodationBean.allAccommodation}"
-							var="accommodation">
-							<tr>
-								<td>#{accommodation.id}</td>
-								<td>#{accommodation.name}</td>
-								<td>#{accommodation.service.price.amount}</td>
-								<td>#{accommodation.service.price.currency}</td>
-								<td>#{accommodation.address.num}</td>
-								<td>#{accommodation.address.street}</td>
-								<td>#{accommodation.address.city}</td>
-								<td>#{accommodation.address.state}</td>
-								<td>#{accommodation.address.zipCode}</td>
-								<td>#{accommodation.address.country}</td>
-								<td>#{accommodation.service.availableFrom}</td>
-								<td>#{accommodation.service.availableTill}</td>
-								<td>#{accommodation.description}</td>
-
-								<td><h:form>
-										<!-- Update button -->
-										<h:commandButton value="Update"
-											action="#{accommodationBean.initFormUpdate}"
-											styleClass="reg-btn-primary btn-sm">
-											<f:param name="id" value="#{accommodation.id}" />
-										</h:commandButton>
-									</h:form></td>
-								<td><h:form>
-										<!-- Delete button -->
-										<h:commandButton value="Delete"
-											actionListener="#{accommodationBean.deleteAccommodation}"
-											styleClass="reg-btn-primary btn-sm"
-											onclick="return confirmDeleteAccom();">
-											<f:param name="id" />
-										</h:commandButton>
-									</h:form></td>
-							</tr>
-						</ui:repeat>
-
-						<h:panelGroup rendered="#{accommodation.deletionSuccessful}">
-							<div class="alert alert-success" role="alert">Deletion of
-								Accommodation is successful, please refresh the list.</div>
-						</h:panelGroup>
-					</tbody>
-				</table>
-			</div>
-			<div class="button-container">
-				<h:form>
-					<div class="button-row">
-						<div class="text-center">
-							<!-- Refresh the list button -->
-							<h:commandButton value="Refresh the list"
-								action="#{accommodationBean.loadAllAccommodations}"
-								styleClass="reg-btn-primary mr-2" />
-						</div>
-
-
-					<div class="form-group mt-4 d-flex justify-content-center">
-						<h:commandButton value="Add" action="#{accommodationBean.create}"
-							styleClass="btn btn-custom btn-custom-signup" id="submitButton"
-							update="messages" />
-					</div>
-				</div>
-			</h:form>
-		</div>
-	</div>
+			
+	
+	
 
 	<!-- Display the list -->
 	<div class="table-container">
@@ -385,9 +297,7 @@
                                          styleClass="reg-btn-primary mr-2" />
                     </div>
                 
-                    <div class="text-center">
-                        <!-- Advanced Search link -->
-                        <h:outputLink value="/triphub/views/product/TpAdvancedSearch.xhtml" styleClass="reg-btn-primary">
+                    
 
 						<div class="text-center">
 							<!-- Advanced Search link -->
@@ -398,7 +308,8 @@
                             Advanced Search
                         </h:outputLink>
 						</div>
-					</div>
+						
+				</div>
 				</h:form>
 			</div>
 
