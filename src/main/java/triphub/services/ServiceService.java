@@ -1,5 +1,6 @@
 package triphub.services;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -46,16 +47,16 @@ public class ServiceService {
 		return service.initServiceViewModel();
 	}
 
-	public List<Accommodation> advancedSearchAccommodations(String accommodationName, String accommodationCity,
-			String accommodationCountry, AccommodationType accommodationType) {
-		return serviceDAO.advancedSearchAccommodations(accommodationName, accommodationCity, accommodationCountry,
+	public List<Accommodation> advancedSearchAccommodations(String city, String country, BigDecimal minPrice,
+            BigDecimal maxPrice, String name, AccommodationType accommodationType) {
+		return serviceDAO.advancedSearchAccommodations(city, country, minPrice, maxPrice, name,
 				accommodationType);
 	}
 
-	public List<Transportation> advancedSearchTransportations(String name,
-			String departureCity, String departureCountry, String arrivalCity, String arrivalCountry,
-			TransportationType transportationType) {
-		return serviceDAO.advancedSearchTransportations(name, departureCity, departureCountry,arrivalCity, arrivalCountry, transportationType);
+	public List<Transportation> advancedSearchTransportations(String departureCity, String departureCountry, String arrivalCity, String arrivalCountry,
+			BigDecimal minPrice, BigDecimal maxPrice, String name, TransportationType transportationType) {
+		return serviceDAO.advancedSearchTransportations(departureCity, departureCountry, arrivalCity, arrivalCountry, minPrice, maxPrice, name,
+				transportationType);
 	}
 
 	public List<Restaurant> advancedSearchRestaurants(String name, String city, String country) {

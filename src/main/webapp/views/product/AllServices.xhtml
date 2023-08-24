@@ -63,28 +63,40 @@
 							our accommodations</h3>
 						<h:panelGroup id="accommodationPanelGroup" style="display: none;">
 							<h:panelGrid columns="2">
-								<h:outputText value="Name:" />
-								<h:inputText value="#{serviceBean.searchAccommodationName}" />
+								<h:outputLabel for="accommodationName" value="Name:" />
+								<h:inputText id="accommodationName"
+									value="#{serviceBean.searchAccommodationName}" />
 
-								<h:outputText value="City:" />
-								<h:inputText value="#{serviceBean.searchAccommodationCity}" />
+								<h:outputLabel for="accommodationCity" value="City:" />
+								<h:inputText id="accommodationCity"
+									value="#{serviceBean.searchAccommodationCity}" />
 
-								<h:outputText value="Country:" />
-								<h:inputText value="#{serviceBean.searchAccommodationCountry}" />
+								<h:outputLabel for="accommodationCountry" value="Country:" />
+								<h:inputText id="accommodationCountry"
+									value="#{serviceBean.searchAccommodationCountry}" />
+
+								<h:outputLabel for="minPrice" value="Min Price:" />
+								<h:inputText id="minPrice" value="#{serviceBean.minPrice}" />
+
+								<h:outputLabel for="maxPrice" value="Max Price:" />
+								<h:inputText id="maxPrice" value="#{serviceBean.maxPrice}" />
 
 								<h:selectOneMenu
 									value="#{serviceBean.selectedAccommodationType}">
 									<f:selectItem itemValue="#{null}" itemLabel="Any Type" />
 									<f:selectItems
-										value="#{accommodationBean.allAccommodationTypes}" var="type"
-										itemValue="#{type}" itemLabel="#{type.label}" />
+										value="#{accommodationBean.allAccommodationTypes}"
+										var="accommodationType" itemValue="#{accommodationType}"
+										itemLabel="#{accommodationType.label}" />
 								</h:selectOneMenu>
+
+								<h:commandButton value="Search Accommodation"
+									action="#{serviceBean.advancedSearchAccommodation}" />
 							</h:panelGrid>
-							<h:commandButton value="Search Accommodations"
-								action="#{serviceBean.advancedSearchAccommodation}" />
 						</h:panelGroup>
 					</h:form>
 				</div>
+
 
 				<div class="column">
 					<!-- Transportation Advanced Search -->
@@ -93,41 +105,49 @@
 							our transportations</h3>
 						<h:panelGroup id="transportationPanelGroup" style="display: none;">
 							<h:panelGrid columns="2">
-								<h:outputLabel for="transportationName" value="Name:" />
-								<h:inputText id="transportationName"
-									value="#{serviceBean.searchTransportationName}" />
-
 								<h:outputLabel for="departureCity" value="Departure City:" />
 								<h:inputText id="departureCity"
 									value="#{serviceBean.searchDepartureCity}" />
-
-								<h:outputLabel for="departureCountry" value="Departure Country:" />
+									
+								<h:outputLabel for="departureCountry" value="Departure Country" />
 								<h:inputText id="departureCountry"
 									value="#{serviceBean.searchDepartureCountry}" />
 
 								<h:outputLabel for="arrivalCity" value="Arrival City:" />
 								<h:inputText id="arrivalCity"
 									value="#{serviceBean.searchArrivalCity}" />
-
-								<h:outputLabel for="arrivalCountry" value="Arrival Country:" />
+								<h:outputLabel for="arrivalCountry" value="Arrival Country" />
 								<h:inputText id="arrivalCountry"
 									value="#{serviceBean.searchArrivalCountry}" />
 
-								<h:selectOneMenu
+								<h:outputLabel for="minPrice" value="Minimum Price:" />
+								<h:inputText id="minPrice" value="#{serviceBean.minPrice}" />
+
+								<h:outputLabel for="maxPrice" value="Maximum Price:" />
+								<h:inputText id="maxPrice" value="#{serviceBean.maxPrice}" />
+
+								<h:outputLabel for="transportationName" value="Name:" />
+								<h:inputText id="transportationName"
+									value="#{serviceBean.searchTransportationName}" />
+
+								<h:outputLabel for="selectedTransportationType"
+									value="Transportation Type:" />
+								<h:selectOneMenu id="selectedTransportationType"
 									value="#{serviceBean.selectedTransportationType}">
 									<f:selectItem itemValue="#{null}" itemLabel="Any Type" />
 									<f:selectItems
 										value="#{transportationBean.allTransportationTypes}"
-										var="transportationType" itemValue="#{transportationType}" itemLabel="#{transportationType.label}" />
+										var="transportationType" itemValue="#{transportationType}"
+										itemLabel="#{transportationType.label}" />
 								</h:selectOneMenu>
 
 								<h:commandButton value="Search Transportation"
 									action="#{serviceBean.advancedSearchTransportation}" />
 							</h:panelGrid>
-
 						</h:panelGroup>
 					</h:form>
 				</div>
+
 
 				<div class="column">
 					<!-- Restaurant Advanced Search -->

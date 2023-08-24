@@ -1,6 +1,7 @@
 package triphub.managedBeans.products;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +37,8 @@ public class ServiceBean implements Serializable {
 	private ServiceType selectedServiceType;
 	private List<Service> allServices;
 
+	private BigDecimal minPrice;
+	private BigDecimal maxPrice;
 
 	private ServiceType accommodationType;
 	private ServiceType transportationType;
@@ -96,29 +99,19 @@ public class ServiceBean implements Serializable {
 	}
 
 	public void advancedSearchAccommodation() {
-	    accommodationList = serviceService.advancedSearchAccommodations(searchAccommodationName,
-	        searchAccommodationCity, searchAccommodationCountry, selectedAccommodationType
-	    );
+		accommodationList = serviceService.advancedSearchAccommodations(searchAccommodationCity,searchAccommodationCountry,
+				minPrice, maxPrice, searchAccommodationName, selectedAccommodationType);
 	}
 
 	public void advancedSearchTransportation() {
-	    transportationList = serviceService.advancedSearchTransportations(
-	        searchTransportationName,
-	        searchDepartureCity, 
-	        searchDepartureCountry,
-	        searchArrivalCity,
-	        searchArrivalCountry,
-	        selectedTransportationType
-	    );
+		transportationList = serviceService.advancedSearchTransportations(searchDepartureCity, searchDepartureCountry, searchArrivalCity, searchArrivalCountry,
+				minPrice, maxPrice, searchTransportationName, selectedTransportationType);
 	}
 
 	public void advancedSearchRestaurant() {
-	    restaurantList = serviceService.advancedSearchRestaurants(searchRestaurantName,
-	        searchRestaurantCity, searchRestaurantCountry
-	    );
+		restaurantList = serviceService.advancedSearchRestaurants(searchRestaurantName, searchRestaurantCity,
+				searchRestaurantCountry);
 	}
-
-
 
 	public List<Service> getAllServices() {
 		return allServices;
@@ -156,7 +149,6 @@ public class ServiceBean implements Serializable {
 		this.selectedServiceType = selectedServiceType;
 	}
 
-	
 	public ServiceType getAccommodationType() {
 		return accommodationType;
 	}
@@ -307,6 +299,22 @@ public class ServiceBean implements Serializable {
 
 	public void setSearchArrivalCountry(String searchArrivalCountry) {
 		this.searchArrivalCountry = searchArrivalCountry;
+	}
+
+	public BigDecimal getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(BigDecimal minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public BigDecimal getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(BigDecimal maxPrice) {
+		this.maxPrice = maxPrice;
 	}
 
 }

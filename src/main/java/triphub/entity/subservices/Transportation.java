@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import triphub.entity.product.service.Service;
@@ -27,9 +28,11 @@ public class Transportation {
 	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "departure")
 	private Address departure;
 
 	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "arrival")
 	private Address arrival;
 
 	@Enumerated(EnumType.STRING)
