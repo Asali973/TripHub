@@ -62,7 +62,7 @@ public class RestaurantDAO  {
 		
 		Picture picture = new Picture();
 		picture.setLink(restaurantvm.getLink());
-		restaurantvm.setPicture(picture);
+		restaurant.setPicture(picture);
 		em.persist(picture);
 
 		// Create Address
@@ -81,13 +81,13 @@ public class RestaurantDAO  {
 	        if (organizer == null) {
 	            throw new IllegalArgumentException("Organizer with ID " + userId + " not found.");
 	        }
-	        restaurant.setOrganizer(organizer); // Supposons que cette méthode existe
+	        restaurant.setOrganizer(organizer);
 	    } else if ("provider".equals(userType)) {
 	        Provider provider = em.find(Provider.class, userId);
 	        if (provider == null) {
 	            throw new IllegalArgumentException("Provider with ID " + userId + " not found.");
 	        }
-	        restaurant.setProvider(provider); // Supposons que cette méthode existe
+	        restaurant.setProvider(provider);
 	    }
 
 

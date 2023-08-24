@@ -19,14 +19,28 @@ font-family
 
 
 
+
+
+
 :
 
 
- 
+
+
+
+
 
 
 #{
 organizerBean
+
+
+
+
+
+
+
+
 
 
 
@@ -36,7 +50,23 @@ organizerBean
 
 
 
+
+
+
+
+
+
+
+
 .primaryFont
+
+
+
+
+
+
+
+
 
 
 
@@ -54,14 +84,38 @@ font-family
 
 
 
+
+
+
+
+
+
+
+
 :
+
+
+
+
 
 
  
 
 
+
+
+
+
 #{
 organizerBean
+
+
+
+
+
+
+
+
 
 
 
@@ -71,7 +125,23 @@ organizerBean
 
 
 
+
+
+
+
+
+
+
+
 .secondaryFont
+
+
+
+
+
+
+
+
 
 
 
@@ -88,14 +158,20 @@ font-family
 
 
 
+
+
 :
 
 
- 
+
+
+
 
 
 #{
 organizerBean
+
+
 
 
 
@@ -105,7 +181,23 @@ organizerBean
 
 
 
+
+
+
+
+
+
+
+
 .primaryFont
+
+
+
+
+
+
+
+
 
 
 
@@ -126,23 +218,147 @@ organizerBean
 	<p class="primary">This is some sample text to observe the primary
 		font and color.</p>
 
+	<h2>Available Tour Packages</h2>
+
 	<h:dataTable value="#{tourPackageBean.currentUserTourPackages}"
 		var="tourPackage">
 		<h:column>
-			<f:facet name="header">Nom</f:facet>
+			<f:facet name="header">Title</f:facet>
         #{tourPackage.name}
     </h:column>
+
 		<h:column>
-			<f:facet name="header">Prix</f:facet>
-        #{tourPackage.price.amount} #{tourPackage.price.currency}
-    </h:column>
-		<h:column>
-			<f:facet name="header">Picture</f:facet>
+			<f:facet name="header"></f:facet>
 			<h:graphicImage value="/images/#{tourPackage.picture.link}"
-				alt="Tour package picture" />
+				height="150" alt="Tour package picture" />
 		</h:column>
 
-		<!-- Ajoutez d'autres colonnes pour d'autres propriétés de TourPackage si nécessaire -->
+		<h:column>
+			<f:facet name="header">Price</f:facet>
+        #{tourPackage.price.amount} #{tourPackage.price.currency}
+    </h:column>
 	</h:dataTable>
+	
+	
+
+	<h2>Available Accommodations</h2>
+	<h:dataTable value="#{accommodationBean.currentUserAccommodations}"
+		var="accommodation">
+		<h:column>
+			<f:facet name="header">Title</f:facet>
+        #{accommodation.name}
+    </h:column>
+
+		<h:column>
+			<f:facet name="header"></f:facet>
+			<h:graphicImage value="/images/#{accommodation.picture.link}"
+				height="150" alt="Tour package picture" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Type</f:facet>
+        #{accommodation.accommodationType}
+    </h:column>
+
+		<h:column>
+			<f:facet name="header">Price</f:facet>
+        #{accommodation.service.price.amount} #{accommodation.service.price.currency}
+    </h:column>
+
+		<h:column>
+			<f:facet name="header">Availability</f:facet>
+			<h:outputText value="Available"
+				rendered="#{accommodation.service.availability}" />
+			<h:outputText value="Not Available"
+				rendered="#{not accommodation.service.availability}" />
+		</h:column>
+		
+				<h:column>
+			<f:facet name="header">Description</f:facet>
+        #{accommodation.description} 
+    </h:column>
+    	</h:dataTable>
+
+
+
+
+	<h2>Available Restaurants</h2>
+	<h:dataTable value="#{restaurantBean.currentUserRestaurants}"
+		var="restaurant">
+		<h:column>
+			<f:facet name="header">Title</f:facet>
+        #{restaurant.name}
+    </h:column>
+
+		<h:column>
+			<f:facet name="header"></f:facet>
+			<h:graphicImage value="/images/#{restaurant.picture.link}"
+				height="150" alt="Tour package picture" />
+		</h:column>
+
+
+		<h:column>
+			<f:facet name="header">Price</f:facet>
+        #{restaurant.service.price.amount} #{restaurant.service.price.currency}
+    </h:column>
+
+		<h:column>
+			<f:facet name="header">Availability</f:facet>
+			<h:outputText value="Available"
+				rendered="#{restaurant.service.availability}" />
+			<h:outputText value="Not Available"
+				rendered="#{not restaurant.service.availability}" />
+		</h:column>
+		
+				<h:column>
+			<f:facet name="header">Description</f:facet>
+        #{restaurant.description} 
+    </h:column>
+    
+    </h:dataTable>
+    
+    
+    
+    
+    	<h2>Available Transportations</h2>
+	<h:dataTable value="#{transportationBean.currentUserTransportations}"
+		var="transportation">
+		<h:column>
+			<f:facet name="header">Title</f:facet>
+        #{transportation.name}
+    </h:column>
+
+		<h:column>
+			<f:facet name="header"></f:facet>
+			<h:graphicImage value="/images/#{transportation.picture.link}"
+				height="150" alt="Tour package picture" />
+		</h:column>
+
+
+		<h:column>
+			<f:facet name="header">Price</f:facet>
+        #{transportation.service.price.amount} #{transportation.service.price.currency}
+    </h:column>
+
+		<h:column>
+			<f:facet name="header">Availability</f:facet>
+			<h:outputText value="Available"
+				rendered="#{transportation.service.availability}" />
+			<h:outputText value="Not Available"
+				rendered="#{not transportation.service.availability}" />
+		</h:column>
+		
+				<h:column>
+			<f:facet name="header">Description</f:facet>
+        #{transportation.description} 
+    </h:column>
+    	</h:dataTable>
+    
+    
+    
+
+
+		
+
 </h:body>
 </html>

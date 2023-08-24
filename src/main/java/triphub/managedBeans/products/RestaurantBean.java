@@ -56,28 +56,55 @@ public class RestaurantBean implements Serializable {
 	
 	@PostConstruct
 	public void init() {
-		allRestaurants = restaurantService.getAll();
-		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-		if (id != null) {
-			Long restaurantId = Long.parseLong(id);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedRestaurantId",
-					restaurantId);
-			restaurantvm = restaurantService.initSubService(restaurantId);
-			if (restaurantvm == null) {
-				FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist");
-			}
-		}
-		if (id != null) {
-		    Long restaurantId = Long.parseLong(id);
-		    // Fetch the selected restaurant using restaurantService
-		    selectedRestaurant = restaurantDao.findById(restaurantId);
+	    allRestaurants = restaurantService.getAll();
 
-		    if (selectedRestaurant == null) {
-		        FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist");
-		    }
-		}
+	    String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
+	    if (id != null && !id.isEmpty()) {
+	        Long restaurantId = Long.parseLong(id);
+
+	        
+	        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedRestaurantId", restaurantId);
+	        
+	        
+	        restaurantvm = restaurantService.initSubService(restaurantId);
+	        if (restaurantvm == null) {
+	            FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist for the view model");
+	        }
+	        
+
+	        selectedRestaurant = restaurantDao.findById(restaurantId);
+	        if (selectedRestaurant == null) {
+	            FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist in the database");
+	        }
+	    }
 	}
+
+	
+//	@PostConstruct
+//	public void init() {
+//		allRestaurants = restaurantService.getAll();
+//		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+//		if (id != null) {
+//			Long restaurantId = Long.parseLong(id);
+//			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedRestaurantId",
+//					restaurantId);
+//			restaurantvm = restaurantService.initSubService(restaurantId);
+//			if (restaurantvm == null) {
+//				FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist");
+//			}
+//		}
+//		if (id != null) {
+//		    Long restaurantId = Long.parseLong(id);
+//		    // Fetch the selected restaurant using restaurantService
+//		    selectedRestaurant = restaurantDao.findById(restaurantId);
+//
+//		    if (selectedRestaurant == null) {
+//		        FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist");
+//		    }
+//		}
+//
+//	}
 	
 	public void create() {
 
