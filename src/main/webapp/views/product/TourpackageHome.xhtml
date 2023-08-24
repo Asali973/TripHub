@@ -26,8 +26,8 @@
 		<ui:define name="content">
 
 			<div class="text-center">
-				<button class="reg-btn-primary" onclick="toggleCreateForm()">Show/Hide
-					Create Form</button>
+				<button class="reg-btn-primary" onclick="toggleCreateForm()">
+					Create new Package </button>
 			</div>
 
 			<div class="reg-form-container">
@@ -64,8 +64,6 @@
 									<h:inputHidden id="currencyHidden"
 										value="#{tourPackageBean.tourPackageVm.currency}" />
 								</div>
-
-
 							</div>
 
 							<div class="col-md-6">
@@ -103,8 +101,6 @@
 										styleClass="reg-form-control" />
 								</div>
 							</div>
-
-
 						</div>
 
 						<script type="text/javascript">
@@ -164,23 +160,25 @@
 			</div>
 
 			<!-- Display the confirmation message when a new package is added -->
-			<ui:fragment
-				rendered="#{not empty tourPackageBean.lastTourPackageAdded}">
-				<div class="alert alert-success" role="alert">
-					<h3>Package Successfully Added</h3>
-					<p>Name: #{tourPackageBean.lastTourPackageAdded.name}</p>
-					<p>Price: #{tourPackageBean.lastTourPackageAdded.price.amount}
-						#{tourPackageBean.lastTourPackageAdded.price.currency}</p>
-					<p>Name:
-						#{tourPackageBean.lastTourPackageAdded.destination.cityName}
-						#{tourPackageBean.lastTourPackageAdded.destination.state}
-						#{tourPackageBean.lastTourPackageAdded.destination.country}</p>
-					<p>Name:
-						#{tourPackageBean.lastTourPackageAdded.theme.themeName}</p>
-					<p>Description:
-						#{tourPackageBean.lastTourPackageAdded.description}</p>
-				</div>
-			</ui:fragment>
+			<!-- Wrapper div to center content both horizontally and vertically -->
+
+
+    <!-- Display the confirmation message when a new package is added -->
+    <ui:fragment rendered="#{not empty tourPackageBean.lastTourPackageAdded}">
+        <!-- Inner div with centered text -->
+        <div class="alert alert-success" role="alert" style="text-align: center;margin: 0 auto; max-width: 30%;background-color: #C8E0F4;">
+            <h3>Package Successfully Added</h3>
+            <p>Name: #{tourPackageBean.lastTourPackageAdded.name}</p>
+            <p>Price: #{tourPackageBean.lastTourPackageAdded.price.amount}
+                #{tourPackageBean.lastTourPackageAdded.price.currency}</p>
+            <p>Name: #{tourPackageBean.lastTourPackageAdded.destination.cityName}
+                #{tourPackageBean.lastTourPackageAdded.destination.state}
+                #{tourPackageBean.lastTourPackageAdded.destination.country}</p>
+            <p>Name: #{tourPackageBean.lastTourPackageAdded.theme.themeName}</p>
+            <p>Description: #{tourPackageBean.lastTourPackageAdded.description}</p>
+        </div>
+    </ui:fragment>
+
 
 			<!-- Display the list -->
 			<div class="table-container">

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
-
-<h:head>
-	<title>Advanced Search - Tour Packages</title>
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-</h:head>
 <h:body>
+<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+<ui:define name="additionalHeadContent">
+
+	</ui:define>
+
+
+		<ui:define name="content">
 	<div class="container mt-5">
 		<h3>Advanced Search</h3>
 		<h:form id="formId">
@@ -98,6 +101,7 @@
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+	</ui:define>
+	</ui:composition>
 </h:body>
 </html>
