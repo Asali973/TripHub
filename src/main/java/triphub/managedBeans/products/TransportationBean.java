@@ -230,4 +230,14 @@ public class TransportationBean implements Serializable {
 		return CurrencyType.values();
 	}
 
+	public Part getPictureTransport() {
+		return pictureTransport;
+	}
+
+	public void setPictureTransport(Part pictureTransport) {
+		this.pictureTransport = pictureTransport;
+	}
+
+	
+	
 }
