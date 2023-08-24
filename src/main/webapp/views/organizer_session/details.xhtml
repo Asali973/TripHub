@@ -28,7 +28,7 @@
 
 <h:body>
 	<h1>Package Details</h1>
-
+	
 	<h2>#{tourPackageBean.selectedTourPackage != null ?
 		tourPackageBean.selectedTourPackage.name : 'Package Not Found'}</h2>
 	<p>Description: #{tourPackageBean.selectedTourPackage.description}</p>
@@ -41,7 +41,7 @@
 	<p>Theme: #{tourPackageBean.selectedTourPackage.theme.themeName}</p>
 	<h2>Itinerary</h2>
 	 <h:form>
-    <h:commandButton value="Add to Cart" action="#{cartSessionBean.handleAddToCart(tourPackageBean.selectedTourPackage, cartBean.selectedQuantity)}">
+    <h:commandButton value="Add to Cart" action="#{cartSessionBean.handleAddToCart('TourPackage', 1)}">
     <f:param name="selectedPackageId" value="#{param.id}" />
     <f:param name="quantity" value="#{cartBean.selectedQuantity}" />
 </h:commandButton>

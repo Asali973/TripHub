@@ -45,7 +45,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<ui:repeat value="#{cartBean.cartItems}" var="item">
+				<ui:repeat value="#{cartSessionBean.sessionCartItems}" var="item">
 					<tr>
 						<td><h:outputText rendered="#{item.tourPackage != null}"
 								value="#{item.tourPackage.name}" /> <h:outputText
@@ -65,18 +65,14 @@
 								value="#{item.transportation.service.price.amount} #{item.transportation.service.price.currency}" />
 						</td>
 						<!-- Other columns remain the same -->
-						<td><h:outputText value="#{item.dateOfOrder}">
+						<td><h:outputText value="#{item.date}">
 								<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
 							</h:outputText></td>
 						<td><h:outputText
-								value="#{item.user.firstName} #{item.user.lastName}" /></td>
-						<td><h:outputText value="#{item.quantity}" /></td>
-						<td><h:inputText value="#{item.newQuantity}" /> <h:commandButton
-								value="Add" action="#{cartBean.updateCartItemQuantity(item)}" />
-						</td>
-						<td><h:commandButton value="Remove"
-								action="#{cartBean.removeFromCart(item.id, item.user)}"
-								immediate="true" /></td>
+								value="Placeholder" /></td>
+								<td><h:outputText
+								value="#{item.quantity}" /></td>
+						
 					</tr>
 				</ui:repeat>
 

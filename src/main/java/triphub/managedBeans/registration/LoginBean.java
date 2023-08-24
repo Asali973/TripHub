@@ -30,7 +30,12 @@ public class LoginBean implements Serializable {
 	private UserViewModel userViewModel = new UserViewModel();
 	
 	private String userType;
+	
+	private User user = new User();
 
+	public User getUser() {
+		return user;
+	}
 	public LoginBean() {
 	}
 	public boolean isLoggedIn() {
@@ -186,7 +191,7 @@ public class LoginBean implements Serializable {
 	public void init() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-		User user = (User) session.getAttribute("user");
+		user = (User) session.getAttribute("user");
 		Long customerId = (Long) session.getAttribute("customerId");
 		Long userId = (Long) session.getAttribute("userId");
 		Long superAdminId = (Long) session.getAttribute("superAdminId");

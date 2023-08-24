@@ -83,7 +83,7 @@
     <from-view-id>/views/organizer_session/details.xhtml</from-view-id>
     
     <navigation-case>
-        <from-outcome>/views/organizer_session/cart.xhtml</from-outcome>
+        <from-outcome>/cart.xhtml?faces-redirect=true</from-outcome>
         <to-view-id>/views/organizer_session/cart.xhtml</to-view-id>
         <redirect />
     </navigation-case>
@@ -95,11 +95,9 @@
     </navigation-case>
     
 </navigation-rule>
-
-
 <managed-bean>
-    <managed-bean-name>cartBean</managed-bean-name>
-    <managed-bean-class>triphub.managedBeans.products.CartBean</managed-bean-class>
+    <managed-bean-name>cartSessionBean</managed-bean-name>
+    <managed-bean-class>triphub.managedBeans.products.CartSessionBean</managed-bean-class>
     <managed-bean-scope>session</managed-bean-scope>
 </managed-bean>
 
