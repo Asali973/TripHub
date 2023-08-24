@@ -13,6 +13,8 @@ import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.product.service.ServiceType;
 import triphub.entity.subservices.Restaurant;
+import triphub.entity.user.Organizer;
+import triphub.entity.user.Provider;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
@@ -32,7 +34,7 @@ public class RestaurantDAO  {
 		}
 
 
-	public Restaurant create(SubServicesViewModel restaurantvm) {
+	public Restaurant create(SubServicesViewModel restaurantvm, Long userId, String userType) {
 
 
 		// create service 
@@ -66,6 +68,20 @@ public class RestaurantDAO  {
 		address.setZipCode(restaurantvm.getAddress().getZipCode());
 		
 		restaurant.setAddress(address);
+		
+	    if ("organizer".equals(userType)) {
+	        Organizer organizer = em.find(Organizer.class, userId);
+	        if (organizer == null) {
+	            throw new IllegalArgumentException("Organizer with ID " + userId + " not found.");
+	        }
+	        restaurant.setOrganizer(organizer); // Supposons que cette méthode existe
+	    } else if ("provider".equals(userType)) {
+	        Provider provider = em.find(Provider.class, userId);
+	        if (provider == null) {
+	            throw new IllegalArgumentException("Provider with ID " + userId + " not found.");
+	        }
+	        restaurant.setProvider(provider); // Supposons que cette méthode existe
+	    }
 
 
 		// Set Picture

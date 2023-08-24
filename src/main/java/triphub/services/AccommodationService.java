@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import triphub.dao.service.AccommodationDAO;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.subservices.Accommodation;
+import triphub.entity.subservices.Restaurant;
 import triphub.helpers.FacesMessageUtil;
 import triphub.viewModel.SubServicesViewModel;
 
@@ -33,11 +34,24 @@ public class AccommodationService implements ServiceInterface,Serializable {
 		return accommodationDAO.getAll();
 	}
 
+//	@Transactional
+//	@Override
+//	public Accommodation create(SubServicesViewModel accommodationvm) {
+//	
+//		return accommodationDAO.create(accommodationvm);
+//	}
+	
 	@Transactional
 	@Override
-	public Accommodation create(SubServicesViewModel accommodationvm) {
-	
-		return accommodationDAO.create(accommodationvm);
+	public Accommodation create(SubServicesViewModel accommodationvm, Long userId, String userType) {
+		
+		try {
+            return accommodationDAO.create(accommodationvm, userId, userType); // Call create() method of DAO
+        } catch (Exception e) {
+            // Handle any unexpected exceptions that might occur during the create process
+            FacesMessageUtil.addErrorMessage("Failed to create restaurant. An unexpected error occurred.");
+        }
+		return null;		
 	}
 	
 	@Override

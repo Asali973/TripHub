@@ -8,12 +8,14 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import triphub.dao.service.TransportationDAO;
+import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.subservices.Transportation;
 import triphub.entity.subservices.TransportationType;
 import triphub.helpers.FacesMessageUtil;
 
 import triphub.viewModel.SubServicesViewModel;
+import triphub.viewModel.TourPackageFormViewModel;
 
 @ApplicationScoped
 public class TransportationService implements ServiceInterface {
@@ -35,16 +37,18 @@ public class TransportationService implements ServiceInterface {
 
 	@Transactional
 	@Override
-	public Transportation create(SubServicesViewModel transportationvm) {
+	public Transportation create(SubServicesViewModel transportationvm, Long userId, String userType) {
 		
 		try {
-            return transportationDAO.create(transportationvm); // Call create() method of DAO
+            return transportationDAO.create(transportationvm, userId, userType); // Call create() method of DAO
         } catch (Exception e) {
             // Handle any unexpected exceptions that might occur during the create process
             FacesMessageUtil.addErrorMessage("Failed to create transportation. An unexpected error occurred.");
         }
 		return null;		
 	}
+	
+
 
 	@Override
 	public Transportation read(Long id) {
