@@ -48,6 +48,8 @@ public class TourPackageBean implements Serializable {
 	private boolean deletionSuccessful;
 	private List<String> currencies;
 	private String selectedCurrency;
+	
+	private Part picturePackage;
 
 	public TourPackageBean() {
 		currencies = Arrays.asList("USD", "EUR", "GBP", "JPY", "CAD", "AUD", "CHF");
@@ -62,7 +64,7 @@ public class TourPackageBean implements Serializable {
 
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
-		if (id != null) {
+		if (id != null  && !id.isEmpty()) {
 			Long tourPackageId = Long.parseLong(id);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTourPackageId",
 					tourPackageId);
@@ -72,7 +74,7 @@ public class TourPackageBean implements Serializable {
 			}
 		}
 
-		if (id != null) {
+		if (id != null  && !id.isEmpty()) {
 			Long tourPackageId = Long.parseLong(id);
 			// Fetch the selected tour package using tourPackageService
 			selectedTourPackage = tourPackageService.getTourPackageById(tourPackageId);
@@ -90,18 +92,42 @@ public class TourPackageBean implements Serializable {
 		return "tourPackages";
 	}
 
+//	public void createPackage() {
+////		try {
+////			String profilePicName = ImageHelper.processProfilePicture(profilePicture);
+////			if (profilePicName != null) {
+////				tourPackageVm.setProfilePicture(profilePicName);
+////			}
+//		lastTourPackageAdded = tourPackageService.createTourPackage(tourPackageVm);
+////		} catch (Exception e) {
+////			FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
+////		}
+//		clear();
+//	}
+	
 	public void createPackage() {
-//		try {
-//			String profilePicName = ImageHelper.processProfilePicture(profilePicture);
-//			if (profilePicName != null) {
-//				tourPackageVm.setProfilePicture(profilePicName);
-//			}
-		lastTourPackageAdded = tourPackageService.createTourPackage(tourPackageVm);
-//		} catch (Exception e) {
-//			FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
-//		}
-		clear();
+	    try {
+	        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	        Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
+
+	        if (organizerId == null) {
+	            FacesMessageUtil.addErrorMessage("No organizerId found in session.");
+	            return;
+	        }
+	        
+			// Uploading the picture and setting the link to ViewModel
+			String picName= ImageHelper.processProfilePicture(picturePackage);
+			if (picName != null) {
+				tourPackageVm.setLink(picName);
+			}
+
+	        lastTourPackageAdded = tourPackageService.createTourPackage(tourPackageVm, organizerId);
+	    } catch (Exception e) {
+	        FacesMessageUtil.addErrorMessage("Creation failed: " + e.getMessage());
+	    }
+	    clear();
 	}
+
 
 	public String viewDetails(long packageId) {
 		// Fetch package details based on packageId and store in selectedPackage
@@ -229,6 +255,18 @@ public class TourPackageBean implements Serializable {
 		}
 		return options;
 	}
+	
+	
+	public List<TourPackage> getCurrentUserTourPackages() {
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
+	    if (organizerId == null) {
+	        return new ArrayList<>(); // Retournez une liste vide ou null selon votre choix.
+	    }
+	    return tourPackageService.getTourPackagesForOrganizer(organizerId);
+	}
+
+	
 
 	public void clear() {
 		tourPackageVm = new TourPackageFormViewModel();
@@ -322,6 +360,24 @@ public class TourPackageBean implements Serializable {
 	public void setDeletionSuccessful(boolean deletionSuccessful) {
 		this.deletionSuccessful = deletionSuccessful;
 	}
+
+	public TourPackageService getTourPackageService() {
+		return tourPackageService;
+	}
+
+	public void setTourPackageService(TourPackageService tourPackageService) {
+		this.tourPackageService = tourPackageService;
+	}
+
+	public Part getPicturePackage() {
+		return picturePackage;
+	}
+
+	public void setPicturePackage(Part picturePackage) {
+		this.picturePackage = picturePackage;
+	}
+	
+	
 
 }
 //// document.addEventListener('DOMContentLoaded', function() {

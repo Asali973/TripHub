@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
+import triphub.entity.product.TourPackage;
 import triphub.entity.subscription.Customization;
 import triphub.entity.subscription.Subscription;
 import triphub.entity.subscription.SubscriptionType;
@@ -193,5 +195,7 @@ public class OrganizerDAO {
 		Organizer organizer = em.find(Organizer.class, organizerId);
 		return organizer != null ? organizer.getSubscription() : null;
 	}
+	
+
 
 }

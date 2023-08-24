@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.servlet.http.Part;
 import javax.persistence.criteria.Predicate;
 import triphub.entity.product.Destination;
 
@@ -20,6 +21,7 @@ import triphub.entity.util.*;
 import triphub.entity.product.Price;
 import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
+import triphub.entity.user.Organizer;
 import triphub.viewModel.TourPackageFormViewModel;
 
 @Stateless
@@ -27,15 +29,26 @@ public class TourPackageDAO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@PersistenceContext(unitName = "triphub")
 	private EntityManager em;
+	
+	
 
 	public TourPackageDAO() {
 	}
 
-	public TourPackage create(TourPackageFormViewModel tourPackageVm) {
-
+	public TourPackage create(TourPackageFormViewModel tourPackageVm, Long organizerId) {
+		
+	    Organizer organizer = em.find(Organizer.class, organizerId);
+	    if (organizer == null) {
+	        throw new IllegalArgumentException("Organizer with ID " + organizerId + " not found.");
+	    }
 		TourPackage newPackage = new TourPackage();
 		newPackage.setName(tourPackageVm.getName());
 		newPackage.setDescription(tourPackageVm.getDescription());
+		newPackage.setOrganizer(organizer);
+		
+		Picture picture = new Picture();
+		picture.setLink(tourPackageVm.getLink());
+		newPackage.setPicture(picture);
 
 		Destination newDestination = new Destination();
 		newDestination.setCityName(tourPackageVm.getCityName());
@@ -54,11 +67,12 @@ public class TourPackageDAO implements Serializable {
 		
 //		List<Picture> pictures = tourPackageVm.getPictureslinks();
 //	    newPackage.setPictures(pictures);    
-	  
+		em.persist(picture);
 		em.persist(newDestination);
 		em.persist(newTheme);
 		em.persist(newPrice);
 		em.persist(newPackage);
+
 	//	em.persist(pictures);
 		em.flush();
 		return newPackage;
@@ -171,6 +185,12 @@ public class TourPackageDAO implements Serializable {
 
 		TypedQuery<TourPackage> typedQuery = em.createQuery(query);
 		return typedQuery.getResultList();
+	}
+	
+	public List<TourPackage> getTourPackagesForOrganizer(Long organizerId) {
+	    TypedQuery<TourPackage> query = em.createQuery("SELECT tp FROM TourPackage tp WHERE tp.organizer.id = :organizerId", TourPackage.class);
+	    query.setParameter("organizerId", organizerId);
+	    return query.getResultList();
 	}
 
 }

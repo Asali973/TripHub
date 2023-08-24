@@ -3,6 +3,8 @@ package triphub.entity.subservices;
 import javax.persistence.*;
 
 import triphub.entity.product.service.Service;
+import triphub.entity.user.Organizer;
+import triphub.entity.user.Provider;
 import triphub.entity.user.User;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
@@ -30,11 +32,19 @@ public class Accommodation {
 	private Service service;
 
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
 	private Picture picture;
 
 	
 	private String description;
+	
+	@ManyToOne
+	@JoinColumn(name="provider_id")
+	private Provider provider;
+	
+	@ManyToOne
+	@JoinColumn(name="organizer_id")
+	private Organizer organizer;
 	
 
 	public Accommodation() {
@@ -59,6 +69,12 @@ public class Accommodation {
 		accommodation.setAccommodationType(accommodationvm.getAccommodationType());
 		accommodation.setDescription(accommodationvm.getDescription());
 		accommodation.setService(accommodationvm.getService());
+		
+		
+		Picture picture = new Picture();
+		picture.setLink(accommodationvm.getLink());
+		accommodation.setPicture(picture);
+		
 		return accommodation;
 	}
 
@@ -68,7 +84,12 @@ public class Accommodation {
 		this.setAddress(accommodationvm.getAddress());
 		this.setAccommodationType(accommodationvm.getAccommodationType());
 		this.setDescription(accommodationvm.getDescription());
-		// need to add picture soon
+		this.getService().updateServiceFromViewModel(accommodationvm); // il manquait cette ligne 
+		// need to add picture 
+		
+        Picture picture = new Picture();
+        picture.setLink(accommodationvm.getLink());
+        this.setPicture(picture);
 
 	}
 
@@ -79,9 +100,17 @@ public class Accommodation {
 		accommodationvm.setAddress(this.getAddress());
 		accommodationvm.setAccommodationType(this.getAccommodationType());
 		accommodationvm.setDescription(this.getDescription());
-		this.getAddress().initAddressViewModel(accommodationvm);
+		//this.getAddress().initAddressViewModel(accommodationvm);
+		this.getService().initServiceViewModel(accommodationvm);
+		
+        if (this.getPicture() != null) {
+        	accommodationvm.setLink(this.getPicture().getLink());
+        }
+        
 		return accommodationvm;
 	}
+	
+	
 
 	// getters - setters
 
@@ -140,4 +169,35 @@ public class Accommodation {
 	public void setService(Service service) {
 		this.service = service;
 	}
+
+
+
+	public Provider getProvider() {
+		return provider;
+	}
+
+
+	public void setProvider(Provider provider) {
+		this.provider = provider;
+	}
+
+
+	public Organizer getOrganizer() {
+		return organizer;
+	}
+
+
+	public void setOrganizer(Organizer organizer) {
+		this.organizer = organizer;
+	}
+	
+
+	@Override
+	public String toString() {
+		return "Accommodation [id=" + id + ", name=" + name + ", address=" + address + ", accommodationType="
+				+ accommodationType + ", service=" + service + ", picture=" + picture + ", description=" + description
+				+ "]";
+	}
+
+	
 }

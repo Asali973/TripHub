@@ -11,21 +11,24 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.product.Price;
+import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
 
 import triphub.entity.product.service.ServiceType;
 import triphub.entity.subservices.Accommodation;
+import triphub.entity.user.Organizer;
+import triphub.entity.user.Provider;
 import triphub.entity.util.Address;
 import triphub.entity.util.Calendar;
+import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
 
 @Stateless
-public class AccommodationDAO{
+public class AccommodationDAO {
 
 	@PersistenceContext
 	private EntityManager em;
-	
 
 	public AccommodationDAO(EntityManager em) {
 		this.em = em;
@@ -35,10 +38,18 @@ public class AccommodationDAO{
 	public AccommodationDAO() {
 	}
 
-	public Accommodation create(SubServicesViewModel accommodationVm) {
+	public Accommodation create(SubServicesViewModel accommodationVm, Long userId, String userType) {
+
 
 	    // Create Service
 	    Service service = Service.createServiceFromViewModel(accommodationVm);
+    
+    		// Create Service
+		// Service service = Service.createServiceFromViewModel(accommodationVm);
+		// service.setType(ServiceType.ACCOMMODATION);
+
+		// Service service = new Service();
+    
 	    service.setType(ServiceType.ACCOMMODATION);
 
 	    // Create Price
@@ -54,6 +65,8 @@ public class AccommodationDAO{
 	    // Persist Service and Price 
 	    em.persist(price);
 	    em.persist(service);
+	    
+
 
 	    // Create Accommodation
 	    Accommodation accommodation = new Accommodation();
@@ -62,6 +75,11 @@ public class AccommodationDAO{
 	    accommodation.setDescription(accommodationVm.getDescription());
 	    accommodation.setService(service);
 	    accommodation.setAccommodationType(accommodationVm.getAccommodationType());
+	    
+		Picture picture = new Picture();
+		picture.setLink(accommodationVm.getLink());
+		accommodation.setPicture(picture);
+		em.persist(picture);
 
 	    // Create Address
 	    Address addressAccommodation = new Address();
@@ -77,12 +95,27 @@ public class AccommodationDAO{
 
 	    // Link the Address to the Accommodation
 	    accommodation.setAddress(addressAccommodation);
+	    
+	    if ("organizer".equals(userType)) {
+	        Organizer organizer = em.find(Organizer.class, userId);
+	        if (organizer == null) {
+	            throw new IllegalArgumentException("Organizer with ID " + userId + " not found.");
+	        }
+	        accommodation.setOrganizer(organizer);
+	    } else if ("provider".equals(userType)) {
+	        Provider provider = em.find(Provider.class, userId);
+	        if (provider == null) {
+	            throw new IllegalArgumentException("Provider with ID " + userId + " not found.");
+	        }
+	        accommodation.setProvider(provider);
+	    }
 
 	    // Persist Accommodation
 	    em.persist(accommodation);
 	    em.flush();
 
 	    return accommodation;
+
 	}
 
 	public SubServicesViewModel update(SubServicesViewModel accommodationvm) {
@@ -93,16 +126,15 @@ public class AccommodationDAO{
 		}
 
 		accommodation.updateAccommodationViewModel(accommodationvm);
+	
 		accommodation = em.merge(accommodation);
 		em.flush();
 
 		// Convert the updated entity back to the view model and return it
 		return accommodation.initAccommodationViewModel();
-
-	}
 	
 
-
+	}
 
 	public void delete(SubServicesViewModel accommodationvm) {
 
@@ -111,12 +143,11 @@ public class AccommodationDAO{
 			throw new IllegalArgumentException("Accommodation with ID " + accommodationvm.getId() + " not found.");
 		}
 		accommodation.updateAccommodationViewModel(accommodationvm);
-		em.remove(accommodationvm);
+		em.remove(accommodation);
 		em.flush();
 
 	}
 
-	
 	public SubServicesViewModel initSubService(Long id) {
 		Accommodation accommodation = em.find(Accommodation.class, id);
 		if (accommodation == null) {
@@ -125,11 +156,9 @@ public class AccommodationDAO{
 		return accommodation.initAccommodationViewModel();
 	}
 
-
 	public Accommodation read(Long id) {
 		return em.find(Accommodation.class, id);
 	}
-
 
 	public List<Accommodation> getAll() {
 		TypedQuery<Accommodation> query = em.createQuery("SELECT a FROM Accommodation a", Accommodation.class);
@@ -137,7 +166,6 @@ public class AccommodationDAO{
 		return query.getResultList();
 	}
 
-	
 	public Accommodation findByName(String name) {
 		TypedQuery<Accommodation> query = em.createQuery("SELECT a FROM Accommodation a WHERE a.name = :name",
 				Accommodation.class);
@@ -147,10 +175,20 @@ public class AccommodationDAO{
 		return accommodations.isEmpty() ? null : accommodations.get(0);
 	}
 
-
 	public Accommodation findById(Long id) {
 		return em.find(Accommodation.class, id);
 	}
-
+	
+	public List<Accommodation> getAccommodationForOrganizer(Long organizerId) {
+	    TypedQuery<Accommodation> query = em.createQuery("SELECT tp FROM Accommodation tp WHERE tp.organizer.id = :organizerId", Accommodation.class);
+	    query.setParameter("organizerId", organizerId);
+	    return query.getResultList();
+	}
+	
+	public List<Accommodation> getAccommodationForProvider(Long providerId) {
+	    TypedQuery<Accommodation> query = em.createQuery("SELECT tp FROM Accommodation tp WHERE tp.organizer.id = :providerId", Accommodation.class);
+	    query.setParameter("providerId", providerId);
+	    return query.getResultList();
+	}
 
 }

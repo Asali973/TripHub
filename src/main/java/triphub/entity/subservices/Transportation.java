@@ -8,9 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+
+import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToOne;
 
 import triphub.entity.product.service.Service;
+import triphub.entity.user.Organizer;
+import triphub.entity.user.Provider;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
@@ -38,10 +43,22 @@ public class Transportation {
 	@Enumerated(EnumType.STRING)
 	private TransportationType transportationType;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
 	private Picture picture;
 
 	private String description;
+	
+	
+	
+	@ManyToOne
+	@JoinColumn(name="provider_id")
+	private Provider provider;
+	
+	@ManyToOne
+	@JoinColumn(name="organizer_id")
+	private Organizer organizer;
+	
+	
 
 	public Transportation() {
 
@@ -67,6 +84,11 @@ public class Transportation {
 		transportation.setTransportationType(transportationvm.getTransportationType());
 		transportation.setDescription(transportationvm.getDescription());
 		transportation.setService(transportationvm.getService());
+		
+		Picture picture = new Picture();
+		picture.setLink(transportationvm.getLink());
+		transportation.setPicture(picture);
+		
 		return transportation;
 	}
 
@@ -76,7 +98,11 @@ public class Transportation {
 		this.setDeparture(transportationvm.getDeparture());
 		this.setArrival(transportationvm.getArrival());
 		this.setDescription(transportationvm.getDescription());
-		// need to add picture soon
+		
+        Picture picture = new Picture();
+        picture.setLink(transportationvm.getLink());
+        this.setPicture(picture);
+
 	}
 
 	public SubServicesViewModel initTransportationViewModel() {
@@ -88,6 +114,11 @@ public class Transportation {
 		transportationvm.setDescription(this.getDescription());
 		this.getDeparture().initAddressViewModel(transportationvm);
 		this.getArrival().initAddressViewModel(transportationvm);
+		
+        if (this.getPicture() != null) {
+        	transportationvm.setLink(this.getPicture().getLink());
+        }
+        
 		return transportationvm;
 	}
 
@@ -154,5 +185,22 @@ public class Transportation {
 	public void setService(Service service) {
 		this.service = service;
 	}
+
+	public Provider getProvider() {
+		return provider;
+	}
+
+	public void setProvider(Provider provider) {
+		this.provider = provider;
+	}
+
+	public Organizer getOrganizer() {
+		return organizer;
+	}
+
+	public void setOrganizer(Organizer organizer) {
+		this.organizer = organizer;
+	}
+	
 
 }

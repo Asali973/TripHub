@@ -12,7 +12,9 @@ import javax.persistence.Transient;
 
 import triphub.entity.product.service.Service;
 
+
 import triphub.entity.subservices.*;
+
 
 import triphub.entity.user.User;
 import triphub.viewModel.CartViewModel;
@@ -31,10 +33,6 @@ public class CartItem implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private TourPackage tourPackage;
-
-	@ManyToOne
-	@JoinColumn(name = "service_id")
-	private Service service;
 
 	@ManyToOne
 	@JoinColumn(name = "accommodation_id")
@@ -100,13 +98,13 @@ public class CartItem implements Serializable {
 		this.tourPackage = tourPackage;
 	}
 
-	public Service getService() {
-		return service;
-	}
-
-	public void setService(Service service) {
-		this.service = service;
-	}
+//	public Service getService() {
+//		return service;
+//	}
+//
+//	public void setService(Service service) {
+//		this.service = service;
+//	}
 
 	public Date getDateOfOrder() {
 		return dateOfOrder;

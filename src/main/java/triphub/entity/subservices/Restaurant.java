@@ -5,10 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import triphub.entity.product.service.Service;
+import triphub.entity.user.Organizer;
+import triphub.entity.user.Provider;
 import triphub.entity.util.Address;
+import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.TourPackageFormViewModel;
 
@@ -28,6 +33,17 @@ public class Restaurant {
 	private Service service;
 
 	private String description;
+	
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
+	private Picture picture;
+	
+	@ManyToOne
+	@JoinColumn(name="provider_id")
+	private Provider provider;
+	
+	@ManyToOne
+	@JoinColumn(name="organizer_id")
+	private Organizer organizer;
 
 	public Restaurant() {
 	}
@@ -46,6 +62,11 @@ public class Restaurant {
 		restaurant.setAddress(restaurantvm.getAddress());
 		restaurant.setDescription(restaurantvm.getDescription());
 		restaurant.setService(restaurantvm.getService());
+		
+		Picture picture = new Picture();
+		picture.setLink(restaurantvm.getLink());
+		restaurant.setPicture(picture);
+		
 		return restaurant;
 	}
 
@@ -54,18 +75,31 @@ public class Restaurant {
 		this.setName(restaurantvm.getName());
 		this.getAddress().updateAddressFromViewModel(restaurantvm);
 		this.setDescription(restaurantvm.getDescription());
-		// need to add picture soon
+		
+        Picture picture = new Picture();
+        picture.setLink(restaurantvm.getLink());
+        this.setPicture(picture);
+        
+
 	}
 
 	public SubServicesViewModel initRestaurantViewModel() {
-		SubServicesViewModel restaurantvm = new SubServicesViewModel();
-		restaurantvm.setId(this.getId());
-		restaurantvm.setName(this.getName());
-		restaurantvm.setAddress(this.getAddress());
-		restaurantvm.setDescription(this.getDescription());
-		this.getAddress().initAddressViewModel(restaurantvm);
-		return restaurantvm;
+	    SubServicesViewModel restaurantvm = new SubServicesViewModel();
+	    
+	    restaurantvm.setId(this.getId());
+	    restaurantvm.setName(this.getName());
+	    restaurantvm.setAddress(this.getAddress());
+	    restaurantvm.setDescription(this.getDescription()); 
+	    this.getAddress().initAddressViewModel(restaurantvm);    
+	    this.getService().initServiceViewModel(restaurantvm);
+	    
+        if (this.getPicture() != null) {
+        	restaurantvm.setLink(this.getPicture().getLink());
+        }
+
+	    return restaurantvm;
 	}
+
 
 	// Getters - Setters
 	public Long getId() {
@@ -107,5 +141,31 @@ public class Restaurant {
 	public void setService(Service service) {
 		this.service = service;
 	}
+
+	public Provider getProvider() {
+		return provider;
+	}
+
+	public void setProvider(Provider provider) {
+		this.provider = provider;
+	}
+
+	public Organizer getOrganizer() {
+		return organizer;
+	}
+
+	public void setOrganizer(Organizer organizer) {
+		this.organizer = organizer;
+	}
+
+	public Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
+	
+	
 
 }

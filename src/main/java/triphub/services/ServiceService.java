@@ -40,12 +40,14 @@ public class ServiceService {
 	}
 
 	public SubServicesViewModel initService(Long id) {
-		Service service = serviceDAO.findById(id);
-		if (service == null) {
-			return null;
-		}
-		return service.initServiceViewModel();
-	}
+ Service service = serviceDAO.findById(id);
+	    if (service == null) {
+	        return null;
+	    }
+	    SubServicesViewModel serviceVM = new SubServicesViewModel();
+	    service.initServiceViewModel(serviceVM);
+	    return serviceVM;
+  }
 
 	public List<Accommodation> advancedSearchAccommodations(String city, String country, BigDecimal minPrice,
             BigDecimal maxPrice, String name, AccommodationType accommodationType) {
@@ -61,6 +63,7 @@ public class ServiceService {
 
 	public List<Restaurant> advancedSearchRestaurants(String name, String city, String country, BigDecimal minPrice, BigDecimal maxPrice) {
 		return serviceDAO.advancedSearchRestaurants(name, city, country, minPrice, maxPrice);
+
 	}
 
 }
