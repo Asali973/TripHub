@@ -1,5 +1,5 @@
 package triphub.entity.product;
-
+//TODO gerer currency ne s'ffiche pas 
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
@@ -80,5 +80,12 @@ public class Price {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
+
+	@Override
+	public String toString() {
+		return "Price [id=" + id + ", amount=" + amount + ", currency=" + currency + ", tourPackage=" + tourPackage
+				+ "]";
+	}
+	
 
 }

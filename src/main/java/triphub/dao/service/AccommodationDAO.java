@@ -23,11 +23,10 @@ import triphub.entity.util.Calendar;
 import triphub.viewModel.SubServicesViewModel;
 
 @Stateless
-public class AccommodationDAO{
+public class AccommodationDAO {
 
 	@PersistenceContext
 	private EntityManager em;
-	
 
 	public AccommodationDAO(EntityManager em) {
 		this.em = em;
@@ -39,8 +38,16 @@ public class AccommodationDAO{
 
 	public Accommodation create(SubServicesViewModel accommodationVm, Long userId, String userType) {
 
+
 	    // Create Service
 	    Service service = Service.createServiceFromViewModel(accommodationVm);
+    
+    		// Create Service
+		// Service service = Service.createServiceFromViewModel(accommodationVm);
+		// service.setType(ServiceType.ACCOMMODATION);
+
+		// Service service = new Service();
+    
 	    service.setType(ServiceType.ACCOMMODATION);
 
 	    // Create Price
@@ -97,6 +104,7 @@ public class AccommodationDAO{
 	    em.flush();
 
 	    return accommodation;
+
 	}
 
 	public SubServicesViewModel update(SubServicesViewModel accommodationvm) {
@@ -114,9 +122,6 @@ public class AccommodationDAO{
 		return accommodation.initAccommodationViewModel();
 
 	}
-	
-
-
 
 	public void delete(SubServicesViewModel accommodationvm) {
 
@@ -130,7 +135,6 @@ public class AccommodationDAO{
 
 	}
 
-	
 	public SubServicesViewModel initSubService(Long id) {
 		Accommodation accommodation = em.find(Accommodation.class, id);
 		if (accommodation == null) {
@@ -139,11 +143,9 @@ public class AccommodationDAO{
 		return accommodation.initAccommodationViewModel();
 	}
 
-
 	public Accommodation read(Long id) {
 		return em.find(Accommodation.class, id);
 	}
-
 
 	public List<Accommodation> getAll() {
 		TypedQuery<Accommodation> query = em.createQuery("SELECT a FROM Accommodation a", Accommodation.class);
@@ -151,7 +153,6 @@ public class AccommodationDAO{
 		return query.getResultList();
 	}
 
-	
 	public Accommodation findByName(String name) {
 		TypedQuery<Accommodation> query = em.createQuery("SELECT a FROM Accommodation a WHERE a.name = :name",
 				Accommodation.class);
@@ -161,10 +162,8 @@ public class AccommodationDAO{
 		return accommodations.isEmpty() ? null : accommodations.get(0);
 	}
 
-
 	public Accommodation findById(Long id) {
 		return em.find(Accommodation.class, id);
 	}
-
 
 }
