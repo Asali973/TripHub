@@ -71,9 +71,17 @@
   PATH="/views/organizer_session/details.xhtml" SHAPE="32,1169,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#views#organizer_session#details.xhtml:0"
    NAME="item" PATH="/views/organizer_session/details.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="cart::#views#organizer_session#cart.xhtml"
+   <PROCESS-ITEM-OUTPUT
+    ID="#views#organizer_session#cart.xhtml::#views#organizer_session#cart.xhtml"
     NAME="output" PATH="/views/organizer_session/cart.xhtml"
-    TARGET="rules:#views#organizer_session#cart.xhtml" TITLE="cart" model-entity="JSFProcessItemOutput"/>
+    TARGET="rules:#views#organizer_session#cart.xhtml"
+    TITLE="/views/organizer_session/cart.xhtml" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="register::#views#loginAndAccount#CustomerRegistration.xhtml"
+    NAME="output1"
+    PATH="/views/loginAndAccount/CustomerRegistration.xhtml"
+    TARGET="rules:#views#loginAndAccount#CustomerRegistration.xhtml"
+    TITLE="register" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#views#home.xhtml" PATH="/views/home.xhtml"
@@ -111,4 +119,8 @@
   SHAPE="256,1553,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#views#product#ServiceHome.xhtml"
   PATH="/views/product/ServiceHome.xhtml" SHAPE="272,1409,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#views#loginAndAccount#CustomerRegistration.xhtml"
+  PATH="/views/loginAndAccount/CustomerRegistration.xhtml"
+  SHAPE="256,1697,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

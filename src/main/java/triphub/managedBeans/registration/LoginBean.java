@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import triphub.entity.user.*;
 import triphub.helpers.FacesMessageUtil;
+import triphub.managedBeans.products.CartBean;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 import org.mindrot.jbcrypt.BCrypt;
@@ -24,17 +25,25 @@ public class LoginBean implements Serializable {
 
 	@Inject
 	private UserService userService;
-
+	@Inject
+private CartBean cartBean;
 	private UserViewModel userViewModel = new UserViewModel();
 	
 	private String userType;
 
 	public LoginBean() {
 	}
+	public boolean isLoggedIn() {
+	    return userViewModel != null;
+	}
+	public String redirectToLogin() {
+	    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("intendedAction", "viewCart");
+	    return "/CustomerRegistration.xhtml?faces-redirect=true";
+	}
 
 	public String login() {
 		User user = userService.findByEmailUser(userViewModel.getEmail());
-
+		 String intendedAction = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("intendedAction");
 		if (user != null && BCrypt.checkpw(userViewModel.getPassword(), user.getPassword())) {
 			// Add user object to the session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
@@ -80,12 +89,16 @@ public class LoginBean implements Serializable {
 			// Save the UserViewModel in the session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userViewModel",
 					this.userViewModel);
-
-			//return "/views/home?faces-redirect=true";
+			
+			if ("viewCart".equals(intendedAction)) {
+			    cartBean.addToCart(); // Use CartBean method because this relies on UI parameters
+			    return "/cart.xhtml?faces-redirect=true";
+			}
+				
 			
 			  switch (this.userType) {
 	            case "customer":
-	                return "/views/customer_home?faces-redirect=true";
+	                return "/views/organizer_session/homeForWebsite?faces-redirect=true";
 	            case "organizer":
 	                return "/views/organizer_home?faces-redirect=true";
 	            case "provider":

@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -40,7 +41,8 @@ import triphub.viewModel.UserViewModel;
 @RequestScoped
 public class CartBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	@Inject
+	private CartSessionBean cartSessionBean;
 	@Inject
 	private ICartService iCartService;
 	@Inject
@@ -62,14 +64,11 @@ public class CartBean implements Serializable {
 	@Inject
 	private TransportationBean transportationBean;
 	@Inject
-	private ServiceBean serviceBean;
-	
+	private ServiceBean serviceBean;	
 	@Inject
 	private AccommodationDAO accomodationDAO;
-
 	@Inject
 	private RestaurantDAO restaurantDAO;
-
 	@Inject
 	private TransportationDAO transportationDAO;
 	private UserViewModel userViewModel = new UserViewModel();

@@ -1,5 +1,6 @@
 package triphub.services;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -7,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import triphub.dao.product.CartItemDAO;
@@ -21,6 +24,7 @@ import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
 import triphub.entity.user.User;
+import triphub.managedBeans.products.CartSessionBean;
 
 @Stateless
 public class CartService implements ICartService, Serializable {
@@ -80,7 +84,7 @@ public class CartService implements ICartService, Serializable {
 	@Override
 	public void addToCart(Object cartItemObject, User user, int quantity) {
 		if (cartItemObject instanceof TourPackage) {
-
+			 
 			TourPackage tourPackage = (TourPackage) cartItemObject;
 			List<CartItem> existingCartItems = cartItemDAO.getCartItemsByTourPackageAndUser(tourPackage, user);
 
@@ -190,11 +194,32 @@ public class CartService implements ICartService, Serializable {
 				cartItemDAO.addToCart(newCartItem);
 			}
 		}
+		 BigDecimal totalPrice;
+		 if (user != null) {
+		        totalPrice = calculateTotalPrice(cartItemDAO.getCartItemsByUser(user));
+		        user.setCartTotal(totalPrice);
+		    } else {
+		        // If the user isn't logged in, we might still want to calculate the total price based on the session cart items.
+		        // This is an assumption. Modify based on your needs.
+		        CartSessionBean cartSessionBean = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{cartSessionBean}", CartSessionBean.class);
+		        totalPrice = cartSessionBean.calculateTotalPriceForSession();
 
-		// Recalculate the total price and update the user's cart total
-		BigDecimal totalPrice = calculateTotalPrice(cartItemDAO.getCartItemsByUser(user));
-		user.setCartTotal(totalPrice);
-	}
+
+		        // Save the calculated totalPrice to the session
+		        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("temporaryTotalPrice", totalPrice);
+
+		        // Optionally, you might want to add a message for the user
+		        FacesMessage message = new FacesMessage("Please register or login to continue.");
+		        FacesContext.getCurrentInstance().addMessage(null, message);
+
+		        // Redirect to the registration page
+		        try {
+		            FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/triphub/views/loginAndAccount/CustomerRegistration.xhtml");
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		}
 
 	@Override
 	public List<CartItem> getCartItemsByUser(User user) {

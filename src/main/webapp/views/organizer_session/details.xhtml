@@ -41,10 +41,12 @@
 	<p>Theme: #{tourPackageBean.selectedTourPackage.theme.themeName}</p>
 	<h2>Itinerary</h2>
 	 <h:form>
-      <h:commandButton value="Add to Cart" action="#{cartBean.addToCart}">
+    <h:commandButton value="Add to Cart" action="#{cartSessionBean.handleAddToCart(tourPackageBean.selectedTourPackage, cartBean.selectedQuantity)}">
     <f:param name="selectedPackageId" value="#{param.id}" />
     <f:param name="quantity" value="#{cartBean.selectedQuantity}" />
 </h:commandButton>
+
+    
     </h:form>
 </h:body>
 </html>
