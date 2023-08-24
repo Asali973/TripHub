@@ -162,6 +162,9 @@ public class CartBean implements Serializable {
 		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
 		
 		// For each product type, call the corresponding method:
+		for (Map.Entry<String, String> param : params.entrySet()) {
+			System.out.println("Key = " + param.getKey() + " - Value = " + param.getValue());
+		}
 		addTourPackageToCart(user, params.get("selectedPackageId"), params.get("quantity"));
 		addAccommodationToCart(user, params.get("selectedAccommodationId"), params.get("quantity"));
 		addRestaurantToCart(user, params.get("selectedRestaurantId"), params.get("quantity"));
