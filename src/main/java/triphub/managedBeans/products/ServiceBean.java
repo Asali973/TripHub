@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -35,25 +34,31 @@ public class ServiceBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private ServiceType selectedServiceType;
-
 	private List<Service> allServices;
 
-	private Date searchAvailableFrom;
-	private Date searchAvailableTill;
+
 	private ServiceType accommodationType;
 	private ServiceType transportationType;
 	private ServiceType restaurantType;
 
-	private List<Transportation> transportationList;
 	private List<Restaurant> restaurantList;
-	
+	private String searchRestaurantName;
+	private String searchRestaurantCity;
+	private String searchRestaurantCountry;
+
 	private List<Accommodation> accommodationList;
 	private AccommodationType selectedAccommodationType;
-    private String searchAccommodationName;
-    private String searchAccommodationCity;
-    private String searchAccommodationCountry;
-    
+	private String searchAccommodationName;
+	private String searchAccommodationCity;
+	private String searchAccommodationCountry;
 
+	private List<Transportation> transportationList;
+	private TransportationType selectedTransportationType;
+	private String searchTransportationName;
+	private String searchDepartureCity;
+	private String searchDepartureCountry;
+	private String searchArrivalCity;
+	private String searchArrivalCountry;
 
 	public ServiceBean() {
 	}
@@ -69,7 +74,8 @@ public class ServiceBean implements Serializable {
 	public void init() {
 		// Initialize other properties
 		selectedServiceType = null; // Initialize the selected service type
-	    selectedAccommodationType = null; // Initialize the selected accommodation type
+		selectedAccommodationType = null; // Initialize the selected accommodation type
+		selectedTransportationType = null; // Initialize the selected accommodation type
 		accommodationList = new ArrayList<>();
 		transportationList = new ArrayList<>();
 		restaurantList = new ArrayList<>();// Initialize the selected service type
@@ -89,22 +95,27 @@ public class ServiceBean implements Serializable {
 		return filteredServices;
 	}
 
-	public void performAdvancedSearch() {
-	    if (selectedServiceType == ServiceType.ACCOMMODATION) {
-	        accommodationList = serviceService.advancedSearchAccommodations(
-	            searchAvailableFrom, searchAvailableTill, searchAccommodationName, searchAccommodationCity, searchAccommodationCountry, selectedAccommodationType);
-	    } else if (selectedServiceType == ServiceType.TRANSPORTATION) {
-	        transportationList = serviceService.advancedSearchTransportations(
-	            searchAvailableFrom, searchAvailableTill, selectedServiceType);
-	    } else if (selectedServiceType == ServiceType.RESTAURANT) {
-	        restaurantList = serviceService.advancedSearchRestaurants(
-	            searchAvailableFrom, searchAvailableTill, selectedServiceType);
-	    }
+	public void advancedSearchAccommodation() {
+	    accommodationList = serviceService.advancedSearchAccommodations(searchAccommodationName,
+	        searchAccommodationCity, searchAccommodationCountry, selectedAccommodationType
+	    );
 	}
 
-	public AccommodationType[] getAllAccommodationTypes() {
-        return AccommodationType.values();
-    }
+	public void advancedSearchTransportation() {
+	    transportationList = serviceService.advancedSearchTransportations(
+	        searchTransportationName,
+	        searchDepartureCity, searchDepartureCountry, searchArrivalCity,
+	        searchArrivalCountry, selectedTransportationType
+	    );
+	}
+
+	public void advancedSearchRestaurant() {
+	    restaurantList = serviceService.advancedSearchRestaurants(searchRestaurantName,
+	        searchRestaurantCity, searchRestaurantCountry
+	    );
+	}
+
+
 
 	public List<Service> getAllServices() {
 		return allServices;
@@ -142,22 +153,7 @@ public class ServiceBean implements Serializable {
 		this.selectedServiceType = selectedServiceType;
 	}
 
-	public Date getSearchAvailableFrom() {
-		return searchAvailableFrom;
-	}
-
-	public void setSearchAvailableFrom(Date searchAvailableFrom) {
-		this.searchAvailableFrom = searchAvailableFrom;
-	}
-
-	public Date getSearchAvailableTill() {
-		return searchAvailableTill;
-	}
-
-	public void setSearchAvailableTill(Date searchAvailableTill) {
-		this.searchAvailableTill = searchAvailableTill;
-	}
-
+	
 	public ServiceType getAccommodationType() {
 		return accommodationType;
 	}
@@ -207,11 +203,11 @@ public class ServiceBean implements Serializable {
 	}
 
 	public AccommodationType getSelectedAccommodationType() {
-	    return selectedAccommodationType;
+		return selectedAccommodationType;
 	}
 
 	public void setSelectedAccommodationType(AccommodationType selectedAccommodationType) {
-	    this.selectedAccommodationType = selectedAccommodationType;
+		this.selectedAccommodationType = selectedAccommodationType;
 	}
 
 	public String getSearchAccommodationName() {
@@ -237,7 +233,77 @@ public class ServiceBean implements Serializable {
 	public void setSearchAccommodationCountry(String searchAccommodationCountry) {
 		this.searchAccommodationCountry = searchAccommodationCountry;
 	}
-	
-	
+
+	public String getSearchRestaurantName() {
+		return searchRestaurantName;
+	}
+
+	public void setSearchRestaurantName(String searchRestaurantName) {
+		this.searchRestaurantName = searchRestaurantName;
+	}
+
+	public String getSearchRestaurantCity() {
+		return searchRestaurantCity;
+	}
+
+	public void setSearchRestaurantCity(String searchRestaurantCity) {
+		this.searchRestaurantCity = searchRestaurantCity;
+	}
+
+	public String getSearchRestaurantCountry() {
+		return searchRestaurantCountry;
+	}
+
+	public void setSearchRestaurantCountry(String searchRestaurantCountry) {
+		this.searchRestaurantCountry = searchRestaurantCountry;
+	}
+
+	public TransportationType getSelectedTransportationType() {
+		return selectedTransportationType;
+	}
+
+	public void setSelectedTransportationType(TransportationType selectedTransportationType) {
+		this.selectedTransportationType = selectedTransportationType;
+	}
+
+	public String getSearchTransportationName() {
+		return searchTransportationName;
+	}
+
+	public void setSearchTransportationName(String searchTransportationName) {
+		this.searchTransportationName = searchTransportationName;
+	}
+
+	public String getSearchDepartureCity() {
+		return searchDepartureCity;
+	}
+
+	public void setSearchDepartureCity(String searchDepartureCity) {
+		this.searchDepartureCity = searchDepartureCity;
+	}
+
+	public String getSearchDepartureCountry() {
+		return searchDepartureCountry;
+	}
+
+	public void setSearchDepartureCountry(String searchDepartureCountry) {
+		this.searchDepartureCountry = searchDepartureCountry;
+	}
+
+	public String getSearchArrivalCity() {
+		return searchArrivalCity;
+	}
+
+	public void setSearchArrivalCity(String searchArrivalCity) {
+		this.searchArrivalCity = searchArrivalCity;
+	}
+
+	public String getSearchArrivalCountry() {
+		return searchArrivalCountry;
+	}
+
+	public void setSearchArrivalCountry(String searchArrivalCountry) {
+		this.searchArrivalCountry = searchArrivalCountry;
+	}
 
 }

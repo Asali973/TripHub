@@ -1,87 +1,90 @@
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/SubscriptionType.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/products/CartBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/Theme.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/service/AddressDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/products/TransportationBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/helpers/AuthenticationException.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/UserViewModel.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/ImageConverter.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/Product.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/helpers/PasswordUtils.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/CurrencyType.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/AccommodationService.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/Calendar.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subservices/Accommodation.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/Customer.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/product/DestinationDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/CartItem.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/TourPackageFormViewModel.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/TourPackage.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/Administration.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/product/CartItemDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/product/TourPackageDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/Customization.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/registration/LoginBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/LoginViewModel.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/SuperAdmin.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/PictureDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/registration/OrganizerBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/customization/StartupLayoutBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/main/DataSeeder.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/registration/SuperAdminBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/ServiceInterface.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subservices/Transportation.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/ICartService.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/Provider.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subservices/AccommodationType.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/service/TransportationDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/main/JPAUtil.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/TourPackageService.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/Price.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/user/ProviderDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/UserService.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/products/TourPackageBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/product/PriceDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/helpers/FacesMessageUtil.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/registration/ProviderBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/Address.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/products/ServiceBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/SubServicesViewModel.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/Picture.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/customization/DatabaseLayoutDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/service/ServiceDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/Service.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/Layout.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/TransportationService.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/user/UserDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/CartService.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/CartViewModel.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/helpers/ImageServlet.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/service/AccommodationDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subservices/TransportationType.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/user/SuperAdminDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subservices/Restaurant.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/product/ThemeDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/products/CheckoutBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/ServiceService.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/Destination.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/main/main.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/helpers/RegistrationException.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/User.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/helpers/ImageHelper.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/ServiceViewModel.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/ServiceType.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/FinanceInfo.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/RestaurantService.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/products/RestaurantBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/user/OrganizerDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/Subscription.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/service/RestaurantDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/registration/CustomerBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/managedBeans/products/AccommodationBean.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/PictureType.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/main/DataSeedTest.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/CompanyInfo.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/user/CustomerDAO.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/helpers/LayoutConverter.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/user/Organizer.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\registration\CustomerBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\services\CartService.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\viewModel\TourPackageFormViewModel.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\viewModel\UserViewModel.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\product\service\ServiceInterface.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\subservices\Accommodation.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\helpers\PasswordUtils.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\product\Price.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\products\TourPackageBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\user\Organizer.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\subscription\Layout.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\main\JPAUtil.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\registration\SuperAdminBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\service\RestaurantDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\service\ServiceDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\product\DestinationDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\product\TourPackage.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\subservices\AccommodationType.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\subscription\Customization.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\util\Calendar.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\product\service\ServiceType.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\main\DataSeeder.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\subscription\Subscription.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\services\ICartService.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\registration\ProviderBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\services\TransportationService.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\subservices\TransportationType.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\user\SuperAdmin.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\viewModel\CartViewModel.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\products\TransportationBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\util\Picture.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\product\ThemeDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\services\ServiceService.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\helpers\RegistrationException.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\product\PriceDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\subservices\AccommodationTypeConverter.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\user\CustomerDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\services\UserService.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\PictureDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\user\User.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\util\Address.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\main\main.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\registration\LoginBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\product\service\Service.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\product\Destination.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\products\RestaurantBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\viewModel\LoginViewModel.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\service\AccommodationDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\viewModel\ServiceViewModel.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\user\SuperAdminDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\services\TourPackageService.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\products\CartBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\service\AddressDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\helpers\ImageServlet.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\product\TourPackageDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\subservices\Restaurant.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\customization\DatabaseLayoutDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\products\CheckoutBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\products\DetailsBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\product\service\ServiceService.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\user\OrganizerDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\subscription\SubscriptionType.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\user\Provider.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\services\RestaurantService.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\customization\StartupLayoutBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\helpers\FacesMessageUtil.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\product\Product.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\helpers\AuthenticationException.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\util\Administration.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\helpers\ImageHelper.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\helpers\LayoutConverter.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\viewModel\SubServicesViewModel.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\services\AccommodationService.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\product\CartItemDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\user\UserDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\service\TransportationDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\main\DataSeedTest.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\product\Theme.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\user\Customer.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\util\CompanyInfo.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\util\ImageConverter.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\util\CurrencyType.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\dao\user\ProviderDAO.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\product\CartItem.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\registration\OrganizerBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\subservices\Transportation.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\util\PictureType.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\entity\util\FinanceInfo.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\products\ServiceBean.java
+C:\Users\Marie LEVESQUE\OneDrive\Documents\ISIKA\MODULE 3\PROJET 3\TripHub\src\main\java\triphub\managedBeans\products\AccommodationBean.java

@@ -33,7 +33,7 @@ public class Transportation {
 	private Address arrival;
 
 	@Enumerated(EnumType.STRING)
-	private TransportationType transportation;
+	private TransportationType type;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Picture picture;
@@ -44,12 +44,12 @@ public class Transportation {
 
 	}
 
-	public Transportation(String name, Address departure, Address arrival, TransportationType transportation,
+	public Transportation(String name, Address departure, Address arrival, TransportationType type,
 			Picture picture, String description, Service service) {
 		this.name = name;
 		this.departure = departure;
 		this.arrival = arrival;
-		this.transportation = transportation;
+		this.type = type;
 		this.picture = picture;
 		this.description = description;
 		this.service = service;
@@ -61,7 +61,7 @@ public class Transportation {
 		transportation.setName(transportationvm.getName());
 		transportation.setDeparture(transportationvm.getDeparture());
 		transportation.setArrival(transportationvm.getArrival());
-		transportation.setTransportation(transportationvm.getTransportationType());
+		transportation.setType(transportationvm.getTransportationType());
 		transportation.setDescription(transportationvm.getDescription());
 		transportation.setService(transportationvm.getService());
 		return transportation;
@@ -120,12 +120,12 @@ public class Transportation {
 		this.arrival = arrival;
 	}
 
-	public TransportationType getTransportation() {
-		return transportation;
+	public TransportationType getType() {
+		return type;
 	}
 
-	public void setTransportation(TransportationType transportation) {
-		this.transportation = transportation;
+	public void setType(TransportationType type) {
+		this.type = type;
 	}
 
 	public String getName() {

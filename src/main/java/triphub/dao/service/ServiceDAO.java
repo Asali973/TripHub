@@ -17,6 +17,7 @@ import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.AccommodationType;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
+import triphub.entity.subservices.TransportationType;
 
 @Stateless
 public class ServiceDAO  {
@@ -57,18 +58,14 @@ public class ServiceDAO  {
 	}
 	
 	public List<Accommodation> advancedSearchAccommodations(
-		    Date availableFrom, Date availableTill, String name, String city, String country, AccommodationType accommodationType) {
+		   String name, String city, String country, AccommodationType accommodationType) {
 		    
 		    TypedQuery<Accommodation> query = em.createQuery(
-		        "SELECT a FROM Accommodation a WHERE a.service.availableFrom <= :availableFrom " +
-		        "AND a.service.availableTill >= :availableTill " +
-		        "AND a.name LIKE :name " +
+		        "SELECT a FROM Accommodation a WHERE a.name LIKE :name " +
 		        "AND a.address.city LIKE :city " +
 		        "AND a.address.country LIKE :country " +
 		        "AND a.accommodationType = :accommodationType", Accommodation.class);
-		    
-		    query.setParameter("availableFrom", availableFrom);
-		    query.setParameter("availableTill", availableTill);
+
 		    query.setParameter("name", "%" + name + "%"); // Using % for partial matching
 		    query.setParameter("city", "%" + city + "%"); // Using % for partial matching
 		    query.setParameter("country", "%" + country + "%"); // Using % for partial matching
@@ -79,23 +76,42 @@ public class ServiceDAO  {
 
 
 
-    public List<Transportation> advancedSearchTransportations(Date availableFrom, Date availableTill, ServiceType type) {
-        TypedQuery<Transportation> query = em.createQuery(
-                "SELECT t FROM Transportation t WHERE t.availableFrom >= :availableFrom AND t.availableTill <= :availableTill AND t.type = :type",
-                Transportation.class);
-        query.setParameter("availableFrom", availableFrom);
-        query.setParameter("availableTill", availableTill);
-        query.setParameter("type", type);
-        return query.getResultList();
-    }
+	public List<Transportation> advancedSearchTransportations(
+	        String name, String departureCity, String departureCountry,
+	        String arrivalCity, String arrivalCountry, TransportationType type) {
 
-    public List<Restaurant> advancedSearchRestaurants(Date availableFrom, Date availableTill, ServiceType type) {
-        TypedQuery<Restaurant> query = em.createQuery(
-                "SELECT r FROM Restaurant r WHERE r.availableFrom >= :availableFrom AND r.availableTill <= :availableTill AND r.type = :type",
-                Restaurant.class);
-        query.setParameter("availableFrom", availableFrom);
-        query.setParameter("availableTill", availableTill);
-        query.setParameter("type", type);
-        return query.getResultList();
-    }
+	    TypedQuery<Transportation> query = em.createQuery(
+	            "SELECT t FROM Transportation t WHERE t.name LIKE :name " +
+	            "AND t.departure.city LIKE :departureCity " +
+	            "AND t.departure.country LIKE :departureCountry " +
+	            "AND t.arrival.city LIKE :arrivalCity " +
+	            "AND t.arrival.country LIKE :arrivalCountry " +
+	            "AND t.type = :type", Transportation.class);
+
+	    query.setParameter("name", "%" + name + "%"); // Using % for partial matching
+	    query.setParameter("departureCity", "%" + departureCity + "%");
+	    query.setParameter("departureCountry", "%" + departureCountry + "%");
+	    query.setParameter("arrivalCity", "%" + arrivalCity + "%");
+	    query.setParameter("arrivalCountry", "%" + arrivalCountry + "%");
+	    query.setParameter("type", type);
+	    
+	    return query.getResultList();
+	}
+
+
+	public List<Restaurant> advancedSearchRestaurants(
+	        String name, String city, String country) {
+
+	    TypedQuery<Restaurant> query = em.createQuery(
+	            "SELECT r FROM Restaurant r WHERE r.name LIKE :name " +
+	            "AND r.address.city LIKE :city " +
+	            "AND r.address.country LIKE :country ", Restaurant.class);
+
+	    query.setParameter("name", "%" + name + "%"); // Using % for partial matching
+	    query.setParameter("city", "%" + city + "%");
+	    query.setParameter("country", "%" + country + "%");
+	    
+	    return query.getResultList();
+	}
+
 }

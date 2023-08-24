@@ -13,6 +13,7 @@ import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.AccommodationType;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
+import triphub.entity.subservices.TransportationType;
 import triphub.viewModel.SubServicesViewModel;
 
 @ApplicationScoped
@@ -36,28 +37,29 @@ public class ServiceService {
 	public List<Service> getAll() {
 		return serviceDAO.getAll();
 	}
-	
+
 	public SubServicesViewModel initService(Long id) {
-		 Service service = serviceDAO.findById(id);
-	        if (service == null) {
-	            return null;
-	        }
-	        return service.initServiceViewModel();
-	}
-	
-	public List<Accommodation> advancedSearchAccommodations(
-		    Date availableFrom, Date availableTill, String accommodationName,
-		    String accommodationCity, String accommodationCountry, AccommodationType accommodationType) {
-			return serviceDAO.advancedSearchAccommodations(availableFrom, availableTill, accommodationName, accommodationCity, accommodationCountry, accommodationType);
+		Service service = serviceDAO.findById(id);
+		if (service == null) {
+			return null;
+		}
+		return service.initServiceViewModel();
 	}
 
+	public List<Accommodation> advancedSearchAccommodations(String accommodationName, String accommodationCity,
+			String accommodationCountry, AccommodationType accommodationType) {
+		return serviceDAO.advancedSearchAccommodations(accommodationName, accommodationCity, accommodationCountry,
+				accommodationType);
+	}
 
-	    public List<Transportation> advancedSearchTransportations(Date availableFrom, Date availableTill, ServiceType type) {
-	        return serviceDAO.advancedSearchTransportations(availableFrom, availableTill, type);
-	    }
+	public List<Transportation> advancedSearchTransportations(String name, String departureCity,
+			String departureCountry, String arrivalCity, String arrivalCountry, TransportationType type) {
+		return serviceDAO.advancedSearchTransportations(name, departureCity, departureCountry, arrivalCity,
+				arrivalCountry, type);
+	}
 
-	    public List<Restaurant> advancedSearchRestaurants(Date availableFrom, Date availableTill, ServiceType type) {
-	        return serviceDAO.advancedSearchRestaurants(availableFrom, availableTill, type);
-	    }
+	public List<Restaurant> advancedSearchRestaurants(String name, String city, String country) {
+		return serviceDAO.advancedSearchRestaurants(name, city, country);
+	}
 
 }
