@@ -24,7 +24,7 @@ import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
 import triphub.entity.user.User;
-import triphub.managedBeans.products.CartSessionBean;
+
 
 @Stateless
 public class CartService implements ICartService, Serializable {
@@ -42,7 +42,9 @@ public class CartService implements ICartService, Serializable {
 	private TransportationDAO transportationDAO;
 	@Inject
 	private CartItemDAO cartItemDAO;
-
+	
+//	@Inject
+//	private CartSessionBean cartSessionBean;
 	@Override
 	public void addToCart(Object cartItemObject, User user) {
 		if (cartItemObject instanceof TourPackage) {
@@ -201,12 +203,12 @@ public class CartService implements ICartService, Serializable {
 		    } else {
 		        // If the user isn't logged in, we might still want to calculate the total price based on the session cart items.
 		        // This is an assumption. Modify based on your needs.
-		        CartSessionBean cartSessionBean = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{cartSessionBean}", CartSessionBean.class);
-		        totalPrice = cartSessionBean.calculateTotalPriceForSession();
+		       // CartSessionBean cartSessionBean = FacesContext.getCurrentInstance().getApplication().evaluateExpressionGet(FacesContext.getCurrentInstance(), "#{cartSessionBean}", CartSessionBean.class);
+		      //  totalPrice = cartSessionBean.calculateTotalPriceForSession();
 
 
 		        // Save the calculated totalPrice to the session
-		        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("temporaryTotalPrice", totalPrice);
+		       // FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("temporaryTotalPrice", totalPrice);
 
 		        // Optionally, you might want to add a message for the user
 		        FacesMessage message = new FacesMessage("Please register or login to continue.");

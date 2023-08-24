@@ -26,7 +26,7 @@ public class LoginBean implements Serializable {
 	@Inject
 	private UserService userService;
 	@Inject
-private CartBean cartBean;
+	private CartBean cartBean;
 	private UserViewModel userViewModel = new UserViewModel();
 	
 	private String userType;

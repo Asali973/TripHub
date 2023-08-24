@@ -41,8 +41,8 @@ import triphub.viewModel.UserViewModel;
 @RequestScoped
 public class CartBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Inject
-	private CartSessionBean cartSessionBean;
+//	@Inject
+//	private CartSessionBean cartSessionBean;
 	@Inject
 	private ICartService iCartService;
 	@Inject
@@ -63,8 +63,6 @@ public class CartBean implements Serializable {
 	private RestaurantBean restaurantBean;
 	@Inject
 	private TransportationBean transportationBean;
-	@Inject
-	private ServiceBean serviceBean;	
 	@Inject
 	private AccommodationDAO accomodationDAO;
 	@Inject
