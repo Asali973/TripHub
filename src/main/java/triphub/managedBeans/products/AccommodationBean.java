@@ -199,7 +199,7 @@ public class AccommodationBean implements Serializable {
 			return;
 		}
 
-		FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add("confirmDelete();");
+		FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add("confirmDeleteAccom();");
 	}
 
 	public String performDelete() {
