@@ -37,7 +37,7 @@ public class TransportationBean implements Serializable {
 
 	private List<Transportation> allTransportations;
 	private Transportation selectedTransportation;
-	
+
 	private Part pictureTransport;
 	private String picName;
 
@@ -55,47 +55,46 @@ public class TransportationBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		allTransportations = transportationService.getAll();
 
-	    allTransportations = transportationService.getAll();
-	    
-	    String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-	    
-	    if (id != null) {
-	        Long transportationId = Long.parseLong(id);
-	        
-	        // Store the selected transportation id in the session
-	        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTransportationId", transportationId);
-	        
-	        // Fetch the selected transportation using transportationService
-	        selectedTransportation = transportationService.findById(transportationId);
-	        
-	        if (selectedTransportation == null) {
-	            FacesMessageUtil.addErrorMessage("Initialization failed: Transportation does not exist");
-	        }
-	        
-	        // Assuming you also need to initialize a Transportation ViewModel
-	        transportationvm = transportationService.initSubService(transportationId);
-	        if (transportationvm == null) {
-	            FacesMessageUtil.addErrorMessage("Initialization failed: Transportation ViewModel does not exist");
-	        }
-	    }
+		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
+		if (id != null && !id.isEmpty()) {
+			Long transportationId = Long.parseLong(id);
+
+			// Store the selected transportation id in the session
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTransportationId",
+					transportationId);
+
+			// Fetch the selected transportation using transportationService
+			selectedTransportation = transportationService.findById(transportationId);
+			if (selectedTransportation == null) {
+				FacesMessageUtil
+						.addErrorMessage("Initialization failed: Transportation does not exist in the database");
+			}
+
+			// Initialize a Transportation ViewModel or fetch specific data
+			transportationvm = transportationService.initSubService(transportationId);
+			if (transportationvm == null) {
+				FacesMessageUtil.addErrorMessage("Initialization failed: Transportation ViewModel does not exist");
+			}
+		}
 	}
 
-	
 	public void create() {
 
-	    String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userType");
-	    
-        Long userId;
-        if ("organizer".equals(userType)) {
-            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("organizerId");
-        } else if ("provider".equals(userType)) {
-            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("providerId");
-        } else {
-            userId = null;
-        }
-        
+		String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("userType");
+
+		Long userId;
+		if ("organizer".equals(userType)) {
+			userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("organizerId");
+		} else if ("provider".equals(userType)) {
+			userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("providerId");
+		} else {
+			userId = null;
+		}
+
 		// Uploading the picture and setting the link to ViewModel
 		try {
 			picName = ImageHelper.processProfilePicture(pictureTransport);
@@ -107,9 +106,9 @@ public class TransportationBean implements Serializable {
 			transportationvm.setLink(picName);
 		}
 
-	    transportationService.create(transportationvm, userId, userType);
+		transportationService.create(transportationvm, userId, userType);
 
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Transport added successfully !"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Transport added successfully !"));
 
 	}
 
@@ -151,31 +150,29 @@ public class TransportationBean implements Serializable {
 			return;
 		}
 	}
-	
+
 	public List<Transportation> getCurrentUserTransportations() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
-        String userType = (String) externalContext.getSessionMap().get("userType");
+		String userType = (String) externalContext.getSessionMap().get("userType");
 
-        if ("organizer".equals(userType)) {
-            Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
-            if (organizerId == null) {
-                return new ArrayList<>();
-            }
-            return transportationService.getTransportationForOrganizer(organizerId);
-        } 
-        else if ("provider".equals(userType)) {
-            Long providerId = (Long) externalContext.getSessionMap().get("providerId");
-            if (providerId == null) {
-                return new ArrayList<>();
-            }
-            return transportationService.getTransportationForProvider(providerId); 
-        } 
-        else {
- 
-            return new ArrayList<>();
-        }
-    }
+		if ("organizer".equals(userType)) {
+			Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
+			if (organizerId == null) {
+				return new ArrayList<>();
+			}
+			return transportationService.getTransportationForOrganizer(organizerId);
+		} else if ("provider".equals(userType)) {
+			Long providerId = (Long) externalContext.getSessionMap().get("providerId");
+			if (providerId == null) {
+				return new ArrayList<>();
+			}
+			return transportationService.getTransportationForProvider(providerId);
+		} else {
+
+			return new ArrayList<>();
+		}
+	}
 
 	public List<Transportation> findByType(TransportationType transportationType) {
 		return transportationService.findByType(transportationType);
@@ -225,7 +222,6 @@ public class TransportationBean implements Serializable {
 		this.selectedTransportation = selectedTransportation;
 	}
 
-
 	public CurrencyType[] getAllCurrencyTypes() {
 		return CurrencyType.values();
 	}
@@ -238,6 +234,4 @@ public class TransportationBean implements Serializable {
 		this.pictureTransport = pictureTransport;
 	}
 
-	
-	
 }

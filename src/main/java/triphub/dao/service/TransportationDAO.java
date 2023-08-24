@@ -58,7 +58,7 @@ public class TransportationDAO{
 		
 		Picture picture = new Picture();
 		picture.setLink(transportationvm.getLink());
-		transportationvm.setPicture(picture);
+		transportation.setPicture(picture);
 
 		// create departure
 		Address departure = new Address();

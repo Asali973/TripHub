@@ -58,40 +58,64 @@ public class AccommodationBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-
 		allAccommodations = accommodationService.getAll();
 
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
-		if (id != null) {
+		if (id != null && !id.isEmpty()) {
 			Long accommodationId = Long.parseLong(id);
-			System.out.println("affiche accommodation id dans init  " + accommodationId);
-			System.out.println("affiche accommodationvm dans init  " + accommodationVm);
-			// TODO modifier pour stocker l'accommodation choisie et non pas que l'Id
 
-			// Store the selected accommodation id in the session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedAccommodationId",
 					accommodationId);
 
-			// Fetch the selected accommodation using accommodationService
 			accommodationVm = accommodationService.initSubService(accommodationId);
-			System.out.println("accommodation bean init " + accommodationVm);
 			if (accommodationVm == null) {
 				FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
 			}
+
+			selectedAccommodation = accommodationService.getAccommodationById(accommodationId);
+			if (selectedAccommodation == null) {
+				FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
+			}
 		}
+	}
+
+//	@PostConstruct
+//	public void init() {
+//
+//		allAccommodations = accommodationService.getAll();
+//
+//		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+//
+//		if (id != null) {
+//			Long accommodationId = Long.parseLong(id);
+//			System.out.println("affiche accommodation id dans init  " + accommodationId);
+//			System.out.println("affiche accommodationvm dans init  " + accommodationVm);
+//			// TODO modifier pour stocker l'accommodation choisie et non pas que l'Id
+//
+//			// Store the selected accommodation id in the session
+//			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedAccommodationId",
+//					accommodationId);
+//
+//			// Fetch the selected accommodation using accommodationService
+//			accommodationVm = accommodationService.initSubService(accommodationId);
+//			System.out.println("accommodation bean init " + accommodationVm);
+//			if (accommodationVm == null) {
+//				FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
+//			}
+//		}
 
 //		if (id != null) {
 //			FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
 
-		// initialize an Accommodation ViewModel
-		// accommodationVm = accommodationService.initSubService(accommodationId);
-		// if (accommodationVm == null) {
-		// FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation
-		// ViewModel does not exist");
-		// }
-		// }
-	}
+	// initialize an Accommodation ViewModel
+	// accommodationVm = accommodationService.initSubService(accommodationId);
+	// if (accommodationVm == null) {
+	// FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation
+	// ViewModel does not exist");
+	// }
+	// }
+//	}
 
 	public String loadAllAccommodations() {
 		allAccommodations = accommodationService.getAll();
@@ -115,7 +139,7 @@ public class AccommodationBean implements Serializable {
 
 		// Uploading the picture and setting the link to ViewModel
 		try {
-			String picName= ImageHelper.processProfilePicture(pictureAccommodation);
+			String picName = ImageHelper.processProfilePicture(pictureAccommodation);
 			if (picName != null) {
 				accommodationVm.setLink(picName);
 			}
@@ -123,7 +147,6 @@ public class AccommodationBean implements Serializable {
 
 			e.printStackTrace();
 		}
-
 
 		accommodationService.create(accommodationVm, userId, userType);
 
@@ -218,31 +241,29 @@ public class AccommodationBean implements Serializable {
 
 		return null;
 	}
-	
+
 	public List<Accommodation> getCurrentUserAccommodations() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
-        String userType = (String) externalContext.getSessionMap().get("userType");
+		String userType = (String) externalContext.getSessionMap().get("userType");
 
-        if ("organizer".equals(userType)) {
-            Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
-            if (organizerId == null) {
-                return new ArrayList<>();
-            }
-            return accommodationService.getAccommodationForOrganizer(organizerId);
-        } 
-        else if ("provider".equals(userType)) {
-            Long providerId = (Long) externalContext.getSessionMap().get("providerId");
-            if (providerId == null) {
-                return new ArrayList<>();
-            }
-            return accommodationService.getAccommodationForProvider(providerId); 
-        } 
-        else {
- 
-            return new ArrayList<>();
-        }
-    }
+		if ("organizer".equals(userType)) {
+			Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
+			if (organizerId == null) {
+				return new ArrayList<>();
+			}
+			return accommodationService.getAccommodationForOrganizer(organizerId);
+		} else if ("provider".equals(userType)) {
+			Long providerId = (Long) externalContext.getSessionMap().get("providerId");
+			if (providerId == null) {
+				return new ArrayList<>();
+			}
+			return accommodationService.getAccommodationForProvider(providerId);
+		} else {
+
+			return new ArrayList<>();
+		}
+	}
 
 	public List<Accommodation> getAllAccommodation() {
 		return accommodationService.getAllAccommodation();
@@ -319,6 +340,5 @@ public class AccommodationBean implements Serializable {
 	public void setPictureAccommodation(Part pictureAccommodation) {
 		this.pictureAccommodation = pictureAccommodation;
 	}
-	
-	
+
 }

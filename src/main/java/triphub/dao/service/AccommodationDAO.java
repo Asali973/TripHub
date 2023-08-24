@@ -64,10 +64,7 @@ public class AccommodationDAO {
 	    em.persist(price);
 	    em.persist(service);
 	    
-		Picture picture = new Picture();
-		picture.setLink(accommodationVm.getLink());
-		accommodationVm.setPicture(picture);
-		em.persist(picture);
+
 
 	    // Create Accommodation
 	    Accommodation accommodation = new Accommodation();
@@ -76,6 +73,11 @@ public class AccommodationDAO {
 	    accommodation.setDescription(accommodationVm.getDescription());
 	    accommodation.setService(service);
 	    accommodation.setAccommodationType(accommodationVm.getAccommodationType());
+	    
+		Picture picture = new Picture();
+		picture.setLink(accommodationVm.getLink());
+		accommodation.setPicture(picture);
+		em.persist(picture);
 
 	    // Create Address
 	    Address addressAccommodation = new Address();
@@ -97,13 +99,13 @@ public class AccommodationDAO {
 	        if (organizer == null) {
 	            throw new IllegalArgumentException("Organizer with ID " + userId + " not found.");
 	        }
-	        accommodation.setOrganizer(organizer); // Supposons que cette méthode existe
+	        accommodation.setOrganizer(organizer);
 	    } else if ("provider".equals(userType)) {
 	        Provider provider = em.find(Provider.class, userId);
 	        if (provider == null) {
 	            throw new IllegalArgumentException("Provider with ID " + userId + " not found.");
 	        }
-	        accommodation.setProvider(provider); // Supposons que cette méthode existe
+	        accommodation.setProvider(provider);
 	    }
 
 	    // Persist Accommodation

@@ -39,10 +39,12 @@ public class Transportation {
 	@Enumerated(EnumType.STRING)
 	private TransportationType transportation;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
 	private Picture picture;
 
 	private String description;
+	
+	
 	
 	@ManyToOne
 	@JoinColumn(name="provider_id")
@@ -78,6 +80,11 @@ public class Transportation {
 		transportation.setTransportation(transportationvm.getTransportationType());
 		transportation.setDescription(transportationvm.getDescription());
 		transportation.setService(transportationvm.getService());
+		
+		Picture picture = new Picture();
+		picture.setLink(transportationvm.getLink());
+		transportation.setPicture(picture);
+		
 		return transportation;
 	}
 
@@ -87,7 +94,11 @@ public class Transportation {
 		this.setDeparture(transportationvm.getDeparture());
 		this.setArrival(transportationvm.getArrival());
 		this.setDescription(transportationvm.getDescription());
-		// need to add picture soon
+		
+        Picture picture = new Picture();
+        picture.setLink(transportationvm.getLink());
+        this.setPicture(picture);
+
 	}
 
 	public SubServicesViewModel initTransportationViewModel() {
@@ -99,6 +110,11 @@ public class Transportation {
 		transportationvm.setDescription(this.getDescription());
 		this.getDeparture().initAddressViewModel(transportationvm);
 		this.getArrival().initAddressViewModel(transportationvm);
+		
+        if (this.getPicture() != null) {
+        	transportationvm.setLink(this.getPicture().getLink());
+        }
+        
 		return transportationvm;
 	}
 
