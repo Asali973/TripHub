@@ -38,6 +38,8 @@ public class TransportationDAO{
 		service.setType(ServiceType.TRANSPORTATION);
 		
 		Price price = Price.createPriceFromViewModel(transportationvm);
+		 price.setAmount(transportationvm.getPrice().getAmount());
+		    price.setCurrency(transportationvm.getCurrencyType().getLabel());   
 		service.setPrice(price);
 		
 		service.setAvailability(transportationvm.isAvailability());

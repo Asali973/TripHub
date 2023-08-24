@@ -165,12 +165,10 @@
 									value="#{serviceBean.searchRestaurantCountry}" />
 
 								<h:outputLabel for="minPrice" value="Min Price:" />
-								<h:inputText id="minPrice"
-									value="#{serviceBean.minPrice}" />
+								<h:inputText id="minPrice" value="#{serviceBean.minPrice}" />
 
 								<h:outputLabel for="maxPrice" value="Max Price:" />
-								<h:inputText id="maxPrice"
-									value="#{serviceBean.maxPrice}" />
+								<h:inputText id="maxPrice" value="#{serviceBean.maxPrice}" />
 
 								<h:commandButton value="Search Restaurants"
 									action="#{serviceBean.advancedSearchRestaurant}" />
@@ -205,7 +203,9 @@
 						<h:column>
 							<h:outputText value="#{accommodation.service.price.amount}" />
 						</h:column>
-
+						<h:column>
+							<h:outputText value="#{accommodation.service.price.currency}" />
+						</h:column>
 						<!-- Add more columns for other data -->
 					</h:dataTable>
 				</h:panelGroup>
@@ -221,7 +221,28 @@
 							<h:outputText value="#{transportation.name}" />
 						</h:column>
 						<h:column>
+							<h:outputText value="#{transportation.departure.city}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{transportation.departure.country}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{transportation.arrival.city}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{transportation.arrival.country}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{transportation.service.price.amount}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{transportation.service.price.currency}" />
+						</h:column>
+						<h:column>
 							<h:outputText value="#{transportation.transportationType}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{transportation.description}" />
 						</h:column>
 					</h:dataTable>
 				</h:panelGroup>
@@ -237,6 +258,18 @@
 						<!-- Display relevant data from your result list -->
 						<h:column>
 							<h:outputText value="#{restaurant.name}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{restaurant.address.city}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{restaurant.address.country}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{transportation.service.price.amount}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{transportation.service.price.currency}" />
 						</h:column>
 						<!-- Add more columns for other data -->
 					</h:dataTable>
