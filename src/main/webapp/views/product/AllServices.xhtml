@@ -97,21 +97,21 @@
 								<h:inputText id="transportationName"
 									value="#{serviceBean.searchTransportationName}" />
 
-<!-- 								<h:outputLabel for="departureCity" value="Departure City:" /> -->
-<!-- 								<h:inputText id="departureCity" -->
-<!-- 									value="#{serviceBean.searchDepartureCity}" /> -->
+								<h:outputLabel for="departureCity" value="Departure City:" />
+								<h:inputText id="departureCity"
+									value="#{serviceBean.searchDepartureCity}" />
 
-<!-- 								<h:outputLabel for="departureCountry" value="Departure Country:" /> -->
-<!-- 								<h:inputText id="departureCountry" -->
-<!-- 									value="#{serviceBean.searchDepartureCountry}" /> -->
+								<h:outputLabel for="departureCountry" value="Departure Country:" />
+								<h:inputText id="departureCountry"
+									value="#{serviceBean.searchDepartureCountry}" />
 
-<!-- 								<h:outputLabel for="arrivalCity" value="Arrival City:" /> -->
-<!-- 								<h:inputText id="arrivalCity" -->
-<!-- 									value="#{serviceBean.searchArrivalCity}" /> -->
+								<h:outputLabel for="arrivalCity" value="Arrival City:" />
+								<h:inputText id="arrivalCity"
+									value="#{serviceBean.searchArrivalCity}" />
 
-<!-- 								<h:outputLabel for="arrivalCountry" value="Arrival Country:" /> -->
-<!-- 								<h:inputText id="arrivalCountry" -->
-<!-- 									value="#{serviceBean.searchArrivalCountry}" /> -->
+								<h:outputLabel for="arrivalCountry" value="Arrival Country:" />
+								<h:inputText id="arrivalCountry"
+									value="#{serviceBean.searchArrivalCountry}" />
 
 								<h:selectOneMenu
 									value="#{serviceBean.selectedTransportationType}">
@@ -197,7 +197,7 @@
 							<h:outputText value="#{transportation.name}" />
 						</h:column>
 						<h:column>
-							<h:outputText value="#{transportation.type}" />
+							<h:outputText value="#{transportation.transportationType}" />
 						</h:column>
 					</h:dataTable>
 				</h:panelGroup>

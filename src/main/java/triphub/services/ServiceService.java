@@ -53,9 +53,9 @@ public class ServiceService {
 	}
 
 	public List<Transportation> advancedSearchTransportations(String name,
-//			String departureCity, String departureCountry, String arrivalCity, String arrivalCountry, *
+			String departureCity, String departureCountry, String arrivalCity, String arrivalCountry,
 			TransportationType transportationType) {
-		return serviceDAO.advancedSearchTransportations(name, transportationType);
+		return serviceDAO.advancedSearchTransportations(name, departureCity, departureCountry,arrivalCity, arrivalCountry, transportationType);
 	}
 
 	public List<Restaurant> advancedSearchRestaurants(String name, String city, String country) {

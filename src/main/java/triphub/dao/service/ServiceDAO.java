@@ -78,26 +78,32 @@ public class ServiceDAO  {
 
 	public List<Transportation> advancedSearchTransportations(
 	        String name, 
-//	        String departureCity, String departureCountry, String arrivalCity, String arrivalCountry,
+	        String departureCity, String departureCountry, String arrivalCity, String arrivalCountry,
 	        TransportationType transportationType) {
 
 	    TypedQuery<Transportation> query = em.createQuery(
-	            "SELECT t FROM Transportation t WHERE t.name LIKE :name " +
-//	            "AND t.departure.city LIKE :departureCity " +
-//	            "AND t.departure.country LIKE :departureCountry " +
-//	            "AND t.arrival.city LIKE :arrivalCity " +
-//	            "AND t.arrival.country LIKE :arrivalCountry " +
+	            "SELECT t FROM Transportation t " +
+	            "JOIN t.departure d " +  // Joining with the departure Address entity
+	            "JOIN t.arrival a " +    // Joining with the arrival Address entity
+	            "WHERE t.name LIKE :name " +
+	            "AND d.city LIKE :departureCity " +
+	            "AND d.country LIKE :departureCountry " +
+	            "AND a.city LIKE :arrivalCity " +
+	            "AND a.country LIKE :arrivalCountry " +
 	            "AND t.transportationType = :transportationType", Transportation.class);
 
 	    query.setParameter("name", "%" + name + "%"); // Using % for partial matching
-//	    query.setParameter("departureCity", "%" + departureCity + "%");
-//	    query.setParameter("departureCountry", "%" + departureCountry + "%");
-//	    query.setParameter("arrivalCity", "%" + arrivalCity + "%");
-//	    query.setParameter("arrivalCountry", "%" + arrivalCountry + "%");
+	    query.setParameter("departureCity", "%" + departureCity + "%");
+	    query.setParameter("departureCountry", "%" + departureCountry + "%");
+	    query.setParameter("arrivalCity", "%" + arrivalCity + "%");
+	    query.setParameter("arrivalCountry", "%" + arrivalCountry + "%");
 	    query.setParameter("transportationType", transportationType);
 	    
 	    return query.getResultList();
 	}
+
+
+
 
 
 	public List<Restaurant> advancedSearchRestaurants(

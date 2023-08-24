@@ -104,6 +104,10 @@ public class ServiceBean implements Serializable {
 	public void advancedSearchTransportation() {
 	    transportationList = serviceService.advancedSearchTransportations(
 	        searchTransportationName,
+	        searchDepartureCity, 
+	        searchDepartureCountry,
+	        searchArrivalCity,
+	        searchArrivalCountry,
 	        selectedTransportationType
 	    );
 	}

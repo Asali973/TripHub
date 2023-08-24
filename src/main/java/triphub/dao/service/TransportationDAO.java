@@ -60,6 +60,9 @@ public class TransportationDAO{
 		departure.setState(transportationvm.getDeparture().getState());
 		departure.setCountry(transportationvm.getDeparture().getCountry());
 		departure.setZipCode(transportationvm.getDeparture().getZipCode());
+		em.persist(departure);
+		transportation.setDeparture(departure);
+
 
 		
 		// create arrival
@@ -70,9 +73,7 @@ public class TransportationDAO{
 		arrival.setState(transportationvm.getArrival().getState());
 		arrival.setCountry(transportationvm.getArrival().getCountry());
 		arrival.setZipCode(transportationvm.getArrival().getZipCode());
-
-		//create departure/arrival in transportation
-		transportation.setDeparture(departure);
+		em.persist(arrival);
 	    transportation.setArrival(arrival);
 	    
 //		Picture picture = new Picture();
@@ -80,8 +81,6 @@ public class TransportationDAO{
 
 	    em.persist(service);
 	    em.persist(price);
-		em.persist(departure);
-		em.persist(arrival);
 		em.persist(transportation);
 //		em.persist(picture);
 		
