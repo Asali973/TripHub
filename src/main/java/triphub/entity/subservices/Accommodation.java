@@ -32,7 +32,7 @@ public class Accommodation {
 	private Service service;
 
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
 	private Picture picture;
 
 	
@@ -69,6 +69,12 @@ public class Accommodation {
 		accommodation.setAccommodationType(accommodationvm.getAccommodationType());
 		accommodation.setDescription(accommodationvm.getDescription());
 		accommodation.setService(accommodationvm.getService());
+		
+		
+		Picture picture = new Picture();
+		picture.setLink(accommodationvm.getLink());
+		accommodation.setPicture(picture);
+		
 		return accommodation;
 	}
 
@@ -80,6 +86,10 @@ public class Accommodation {
 		this.setDescription(accommodationvm.getDescription());
 		this.getService().updateServiceFromViewModel(accommodationvm); // il manquait cette ligne 
 		// need to add picture 
+		
+        Picture picture = new Picture();
+        picture.setLink(accommodationvm.getLink());
+        this.setPicture(picture);
 
 	}
 
@@ -92,6 +102,11 @@ public class Accommodation {
 		accommodationvm.setDescription(this.getDescription());
 		//this.getAddress().initAddressViewModel(accommodationvm);
 		this.getService().initServiceViewModel(accommodationvm);
+		
+        if (this.getPicture() != null) {
+        	accommodationvm.setLink(this.getPicture().getLink());
+        }
+        
 		return accommodationvm;
 	}
 	

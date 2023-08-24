@@ -42,6 +42,8 @@ public class TransportationDAO{
 		service.setType(ServiceType.TRANSPORTATION);
 		
 		Price price = Price.createPriceFromViewModel(transportationvm);
+		 price.setAmount(transportationvm.getPrice().getAmount());
+		    price.setCurrency(transportationvm.getCurrencyType().getLabel());   
 		service.setPrice(price);
 		
 		service.setAvailability(transportationvm.isAvailability());
@@ -52,13 +54,13 @@ public class TransportationDAO{
 		Transportation transportation = new Transportation();
 		transportation.setId(transportationvm.getId());
 		transportation.setName(transportationvm.getName());
-		transportation.setTransportation(transportationvm.getTransportationType());
+		transportation.setTransportationType(transportationvm.getTransportationType());
 		transportation.setDescription(transportationvm.getDescription());
 		transportation.setService(service);
 		
 		Picture picture = new Picture();
 		picture.setLink(transportationvm.getLink());
-		transportationvm.setPicture(picture);
+		transportation.setPicture(picture);
 
 		// create departure
 		Address departure = new Address();
@@ -68,6 +70,9 @@ public class TransportationDAO{
 		departure.setState(transportationvm.getDeparture().getState());
 		departure.setCountry(transportationvm.getDeparture().getCountry());
 		departure.setZipCode(transportationvm.getDeparture().getZipCode());
+		em.persist(departure);
+		transportation.setDeparture(departure);
+
 
 		
 		// create arrival
@@ -78,9 +83,7 @@ public class TransportationDAO{
 		arrival.setState(transportationvm.getArrival().getState());
 		arrival.setCountry(transportationvm.getArrival().getCountry());
 		arrival.setZipCode(transportationvm.getArrival().getZipCode());
-
-		//create departure/arrival in transportation
-		transportation.setDeparture(departure);
+		em.persist(arrival);
 	    transportation.setArrival(arrival);
 	    
 	    if ("organizer".equals(userType)) {
@@ -102,8 +105,6 @@ public class TransportationDAO{
 	    em.persist(picture);
 	    em.persist(service);
 	    em.persist(price);
-		em.persist(departure);
-		em.persist(arrival);
 		em.persist(transportation);
 //		em.persist(picture);
 		
@@ -113,8 +114,8 @@ public class TransportationDAO{
 
 	public List<Transportation> findByType(TransportationType transportationType) {
 		TypedQuery<Transportation> query = em.createQuery(
-				"SELECT t FROM Transportation t WHERE t.transportation = :transportation", Transportation.class);
-		query.setParameter("transportation", transportationType);
+				"SELECT t FROM Transportation t WHERE t.transportationType = :transportationType", Transportation.class);
+		query.setParameter("transportationType", transportationType);
 		return query.getResultList();
 	}
 

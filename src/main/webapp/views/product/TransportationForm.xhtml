@@ -53,9 +53,6 @@
    						}
     					</script>
 
-
-
-
 							<button
 								class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
 								type="button">Service informations</button>
@@ -80,99 +77,97 @@
 							</div>
 						</div>
 
-						<!-- Departure dépliable -->
-						<div class="col-md-12 mt-4">
-							<button
-								class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
-								type="button" data-toggle="collapse"
-								data-target="#departureSection" aria-expanded="false"
-								aria-controls="departureSection">Departure informations</button>
-							<div class="collapse" id="departureSection">
-								<div class="form-group mt-4">
-									<h:outputLabel for="DepartureNum" value="Number:" />
-									<h:inputText id="DepartureNum"
-										value="#{transportationBean.transportationvm.address.num}"
-										class="form-control" />
-								</div>
-								<div class="form-group">
-									<h:outputLabel for="DepartureStreet" value="Street:" />
-									<h:inputText id="DepartureStreet"
-										value="#{transportationBean.transportationvm.address.street}"
-										class="form-control" />
-								</div>
-								<div class="form-group mt-4">
-									<h:outputLabel for="DepartureCity" value="City:" />
-									<h:inputText id="DepartureCity"
-										value="#{transportationBean.transportationvm.address.city}"
-										class="form-control" />
-								</div>
-								<div class="form-group mt-4">
-									<h:outputLabel for="DepartureState" value="State:" />
-									<h:inputText id="DepartureState"
-										value="#{transportationBean.transportationvm.address.state}"
-										class="form-control" />
-								</div>
-								<div class="form-group mt-4">
-									<h:outputLabel for="DepartureCountry" value="Country:" />
-									<h:inputText id="DepartureCountry"
-										value="#{transportationBean.transportationvm.address.country}"
-										class="form-control" />
-								</div>
-								<div class="form-group mt-4">
-									<h:outputLabel for="DepartureZipCode" value="Zip Code:" />
-									<h:inputText id="DepartureZipCode"
-										value="#{transportationBean.transportationvm.address.zipCode}"
-										class="form-control" />
-								</div>
-							</div>
+									<!-- Departure dépliable -->
+				<div class="col-md-12 mt-4">
+					<button
+						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
+						type="button" data-toggle="collapse"
+						data-target="#departureSection" aria-expanded="false"
+						aria-controls="departureSection">Departure informations</button>
+					<div class="collapse" id="departureSection">
+						<div class="form-group mt-4">
+							<h:outputLabel for="DepartureNum" value="Number:" />
+							<h:inputText id="DepartureNum"
+								value="#{transportationBean.transportationvm.departure.num}"
+								class="form-control" />
 						</div>
+						<div class="form-group">
+							<h:outputLabel for="DepartureStreet" value="Street:" />
+							<h:inputText id="DepartureStreet"
+								value="#{transportationBean.transportationvm.departure.street}"
+								class="form-control" />
+						</div>
+						<div class="form-group mt-4">
+							<h:outputLabel for="DepartureCity" value="City:" />
+							<h:inputText id="DepartureCity"
+								value="#{transportationBean.transportationvm.departure.city}"
+								class="form-control" />
+						</div>
+						<div class="form-group mt-4">
+							<h:outputLabel for="DepartureState" value="State:" />
+							<h:inputText id="DepartureState"
+								value="#{transportationBean.transportationvm.departure.state}"
+								class="form-control" />
+						</div>
+						<div class="form-group mt-4">
+							<h:outputLabel for="DepartureCountry" value="Country:" />
+							<h:inputText id="DepartureCountry"
+								value="#{transportationBean.transportationvm.departure.country}"
+								class="form-control" />
+						</div>
+						<div class="form-group mt-4">
+							<h:outputLabel for="DepartureZipCode" value="Zip Code:" />
+							<h:inputText id="DepartureZipCode"
+								value="#{transportationBean.transportationvm.departure.zipCode}"
+								class="form-control" />
+						</div>
+					</div>
+				</div>
 
-						<!-- Departure dépliable -->
-						<div class="col-md-12 mt-4">
-							<button
-								class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
-								type="button" data-toggle="collapse"
-								data-target="#arrivalSection" aria-expanded="false"
-								aria-controls="arrivalSection">Arrival informations</button>
-							<div class="collapse" id="arrivalSection">
-								<div class="form-group mt-4">
-									<h:outputLabel for="ArrivalNum" value="Number:" />
-									<h:inputText id="ArrivalNum"
-										value="#{transportationBean.transportationvm.address.num}"
-										class="form-control" />
-								</div>
-								<div class="form-group mt-4">
-									<h:outputLabel for="ArrivalStreet" value="Street:" />
-									<h:inputText id="ArrivalStreet"
-										value="#{transportationBean.transportationvm.address.street}"
-										class="form-control" />
-								</div>
-								<div class="form-group mt-4">
-									<h:outputLabel for="ArrivalCity" value="City:" />
-									<h:inputText id="ArrivalCity"
-										value="#{transportationBean.transportationvm.address.city}"
-										class="form-control" />
-								</div>
-								<div class="form-group mt-4">
-									<h:outputLabel for="ArrivalState" value="State:" />
-									<h:inputText id="ArrivalState"
-										value="#{transportationBean.transportationvm.address.state}"
-										class="form-control" />
-								</div>
-								<div class="form-group mt-4">
-									<h:outputLabel for="ArrivalCountry" value="Country:" />
-									<h:inputText id="ArrivalCountry"
-										value="#{transportationBean.transportationvm.address.country}"
-										class="form-control" />
-								</div>
-								<div class="form-group">
-									<h:outputLabel for="ArrivalZipCode" value="Zip Code:" />
-									<h:inputText id="ArrivalZipCode"
-										value="#{transportationBean.transportationvm.address.zipCode}"
-										class="form-control" />
-								</div>
-							</div>
+				<!-- Arrival dépliable -->
+				<div class="col-md-12 mt-4">
+					<button
+						class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
+						type="button" data-toggle="collapse" data-target="#arrivalSection"
+						aria-expanded="false" aria-controls="arrivalSection">Arrival
+						informations</button>
+					<div class="collapse" id="arrivalSection">
+						<div class="form-group mt-4">
+							<h:outputLabel for="ArrivalNum" value="Number:" />
+							<h:inputText id="ArrivalNum"
+								value="#{transportationBean.transportationvm.arrival.num}"
+								class="form-control" />
 						</div>
+						<div class="form-group mt-4">
+							<h:outputLabel for="ArrivalStreet" value="Street:" />
+							<h:inputText id="ArrivalStreet"
+								value="#{transportationBean.transportationvm.arrival.street}"
+								class="form-control" />
+						</div>
+						<div class="form-group mt-4">
+							<h:outputLabel for="ArrivalCity" value="City:" />
+							<h:inputText id="ArrivalCity"
+								value="#{transportationBean.transportationvm.arrival.city}"
+								class="form-control" />
+						</div>
+						<div class="form-group mt-4">
+							<h:outputLabel for="ArrivalState" value="State:" />
+							<h:inputText id="ArrivalState"
+								value="#{transportationBean.transportationvm.arrival.state}"
+								class="form-control" />
+						</div>
+						<div class="form-group mt-4">
+							<h:outputLabel for="ArrivalCountry" value="Country:" />
+							<h:inputText id="ArrivalCountry"
+								value="#{transportationBean.transportationvm.arrival.country}"
+								class="form-control" />
+						</div>
+						<div class="form-group">
+							<h:outputLabel for="ArrivalZipCode" value="Zip Code:" />
+							<h:inputText id="ArrivalZipCode"
+								value="#{transportationBean.transportationvm.arrival.zipCode}"
+								class="form-control" />
+            </div>
 						<!-- Description dépliable -->
 						<div class="col-md-12 mt-4">
 							<button
@@ -253,6 +248,8 @@
 								styleClass="btn btn-custom btn-custom-signup" id="submitButton"
 								update="messages" />
 
+						</div>
+						</div>
 						</div>
 					</h:form>
 

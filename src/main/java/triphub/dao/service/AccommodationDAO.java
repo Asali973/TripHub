@@ -43,17 +43,14 @@ public class AccommodationDAO {
 		// Create Service
 		Service service = Service.createServiceFromViewModel(accommodationVm);
 
-		// Create Service
-		// Service service = Service.createServiceFromViewModel(accommodationVm);
-		// service.setType(ServiceType.ACCOMMODATION);
+	    // Create Price
+	    Price price = Price.createPriceFromViewModel(accommodationVm);
+	    price.setAmount(accommodationVm.getPrice().getAmount());
+	    price.setCurrency(accommodationVm.getCurrencyType().getLabel());        
+	    service.setPrice(price);
 
-		// Service service = new Service();
 
-		service.setType(ServiceType.ACCOMMODATION);
 
-		// Create Price
-		Price price = Price.createPriceFromViewModel(accommodationVm);
-		service.setPrice(price);
 
 		service.setAvailableFrom(accommodationVm.getAvailableFrom());
 		service.setAvailableTill(accommodationVm.getAvailableTill());
@@ -62,6 +59,7 @@ public class AccommodationDAO {
 		// Persist Service and Price
 		em.persist(price);
 		em.persist(service);
+
 
 		Picture picture = new Picture();
 		picture.setLink(accommodationVm.getLink());
