@@ -16,6 +16,8 @@ import triphub.entity.product.service.ServiceInterface;
 
 import triphub.entity.product.service.ServiceType;
 import triphub.entity.subservices.Accommodation;
+import triphub.entity.user.Organizer;
+import triphub.entity.user.Provider;
 import triphub.entity.util.Address;
 import triphub.entity.util.Calendar;
 import triphub.viewModel.SubServicesViewModel;
@@ -35,7 +37,7 @@ public class AccommodationDAO{
 	public AccommodationDAO() {
 	}
 
-	public Accommodation create(SubServicesViewModel accommodationVm) {
+	public Accommodation create(SubServicesViewModel accommodationVm, Long userId, String userType) {
 
 	    // Create Service
 	    Service service = Service.createServiceFromViewModel(accommodationVm);
@@ -75,6 +77,20 @@ public class AccommodationDAO{
 
 	    // Link the Address to the Accommodation
 	    accommodation.setAddress(addressAccommodation);
+	    
+	    if ("organizer".equals(userType)) {
+	        Organizer organizer = em.find(Organizer.class, userId);
+	        if (organizer == null) {
+	            throw new IllegalArgumentException("Organizer with ID " + userId + " not found.");
+	        }
+	        accommodation.setOrganizer(organizer); // Supposons que cette méthode existe
+	    } else if ("provider".equals(userType)) {
+	        Provider provider = em.find(Provider.class, userId);
+	        if (provider == null) {
+	            throw new IllegalArgumentException("Provider with ID " + userId + " not found.");
+	        }
+	        accommodation.setProvider(provider); // Supposons que cette méthode existe
+	    }
 
 	    // Persist Accommodation
 	    em.persist(accommodation);

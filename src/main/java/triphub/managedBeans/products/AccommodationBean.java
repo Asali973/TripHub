@@ -79,10 +79,30 @@ public class AccommodationBean implements Serializable {
 
 	
 	public void create() {
-		accommodationService.create(accommodationVm);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Accommodation added successfully !"));
+
+	    String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userType");
+	    
+        Long userId;
+        if ("organizer".equals(userType)) {
+            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("organizerId");
+        } else if ("provider".equals(userType)) {
+            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("providerId");
+        } else {
+            userId = null;
+        }
+
+	    accommodationService.create(accommodationVm, userId, userType);
+
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Accommodation added successfully !"));
 
 	}
+
+	
+//	public void create() {
+//		accommodationService.create(accommodationVm);
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Accommodation added successfully !"));
+//
+//	}
 
 	public String updateAccommodation() {
 		try {

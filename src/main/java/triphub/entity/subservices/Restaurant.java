@@ -5,9 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import triphub.entity.product.service.Service;
+import triphub.entity.user.Organizer;
+import triphub.entity.user.Provider;
 import triphub.entity.util.Address;
 import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.TourPackageFormViewModel;
@@ -28,6 +32,14 @@ public class Restaurant {
 	private Service service;
 
 	private String description;
+	
+	@ManyToOne
+	@JoinColumn(name="provider_id")
+	private Provider provider;
+	
+	@ManyToOne
+	@JoinColumn(name="organizer_id")
+	private Organizer organizer;
 
 	public Restaurant() {
 	}
@@ -110,6 +122,22 @@ public class Restaurant {
 
 	public void setService(Service service) {
 		this.service = service;
+	}
+
+	public Provider getProvider() {
+		return provider;
+	}
+
+	public void setProvider(Provider provider) {
+		this.provider = provider;
+	}
+
+	public Organizer getOrganizer() {
+		return organizer;
+	}
+
+	public void setOrganizer(Organizer organizer) {
+		this.organizer = organizer;
 	}
 
 }

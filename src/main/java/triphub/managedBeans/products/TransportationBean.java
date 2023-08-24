@@ -74,11 +74,30 @@ public class TransportationBean implements Serializable {
 
 	}
 
-
+	
 	public void create() {
-		transportationService.create(transportationvm);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Transportation added successfully !"));
+
+	    String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userType");
+	    
+        Long userId;
+        if ("organizer".equals(userType)) {
+            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("organizerId");
+        } else if ("provider".equals(userType)) {
+            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("providerId");
+        } else {
+            userId = null;
+        }
+
+	    transportationService.create(transportationvm, userId, userType);
+
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Transport added successfully !"));
+
 	}
+
+//	public void create() {
+//		transportationService.create(transportationvm);
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Transportation added successfully !"));
+//	}
 
 //	public Transportation read(Long id) {
 //		return transportationService.read(id);

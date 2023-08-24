@@ -69,11 +69,30 @@ public class RestaurantBean implements Serializable {
 		}
 
 	}
-
+	
 	public void create() {
-		restaurantService.create(restaurantvm);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Restaurant added successfully !"));
+
+	    String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userType");
+	    
+        Long userId;
+        if ("organizer".equals(userType)) {
+            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("organizerId");
+        } else if ("provider".equals(userType)) {
+            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("providerId");
+        } else {
+            userId = null;
+        }
+
+	    restaurantService.create(restaurantvm, userId, userType);
+
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Restaurant added successfully !"));
+
 	}
+
+//	public void create() {
+//		restaurantService.create(restaurantvm);
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Restaurant added successfully !"));
+//	}
 	
 	public String updateRestaurant() {
 		try {

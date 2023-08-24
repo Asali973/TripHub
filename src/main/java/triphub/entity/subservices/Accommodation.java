@@ -3,6 +3,8 @@ package triphub.entity.subservices;
 import javax.persistence.*;
 
 import triphub.entity.product.service.Service;
+import triphub.entity.user.Organizer;
+import triphub.entity.user.Provider;
 import triphub.entity.user.User;
 import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
@@ -35,6 +37,14 @@ public class Accommodation {
 
 	
 	private String description;
+	
+	@ManyToOne
+	@JoinColumn(name="provider_id")
+	private Provider provider;
+	
+	@ManyToOne
+	@JoinColumn(name="organizer_id")
+	private Organizer organizer;
 	
 
 	public Accommodation() {
@@ -140,4 +150,26 @@ public class Accommodation {
 	public void setService(Service service) {
 		this.service = service;
 	}
+
+
+	public Provider getProvider() {
+		return provider;
+	}
+
+
+	public void setProvider(Provider provider) {
+		this.provider = provider;
+	}
+
+
+	public Organizer getOrganizer() {
+		return organizer;
+	}
+
+
+	public void setOrganizer(Organizer organizer) {
+		this.organizer = organizer;
+	}
+	
+	
 }

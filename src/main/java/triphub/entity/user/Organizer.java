@@ -8,6 +8,9 @@ import javax.persistence.*;
 import triphub.entity.product.TourPackage;
 import triphub.entity.subscription.Customization;
 import triphub.entity.subscription.Subscription;
+import triphub.entity.subservices.Accommodation;
+import triphub.entity.subservices.Restaurant;
+import triphub.entity.subservices.Transportation;
 import triphub.entity.util.Administration;
 import triphub.entity.util.CompanyInfo;
 import triphub.viewModel.UserViewModel;
@@ -37,6 +40,15 @@ public class Organizer {
 	
 	@OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<TourPackage> tourPackages = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Transportation> transportations = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Restaurant> restaurants = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Accommodation> accommodations = new ArrayList<>();
 
 	
 	public void updateOrganizerFromViewModel(UserViewModel form) {
