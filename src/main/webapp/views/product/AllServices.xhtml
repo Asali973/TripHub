@@ -108,7 +108,7 @@
 								<h:outputLabel for="departureCity" value="Departure City:" />
 								<h:inputText id="departureCity"
 									value="#{serviceBean.searchDepartureCity}" />
-									
+
 								<h:outputLabel for="departureCountry" value="Departure Country" />
 								<h:inputText id="departureCountry"
 									value="#{serviceBean.searchDepartureCountry}" />
@@ -125,10 +125,6 @@
 
 								<h:outputLabel for="maxPrice" value="Maximum Price:" />
 								<h:inputText id="maxPrice" value="#{serviceBean.maxPrice}" />
-
-								<h:outputLabel for="transportationName" value="Name:" />
-								<h:inputText id="transportationName"
-									value="#{serviceBean.searchTransportationName}" />
 
 								<h:outputLabel for="selectedTransportationType"
 									value="Transportation Type:" />
@@ -168,13 +164,21 @@
 								<h:inputText id="restaurantCountry"
 									value="#{serviceBean.searchRestaurantCountry}" />
 
+								<h:outputLabel for="minPrice" value="Min Price:" />
+								<h:inputText id="minPrice"
+									value="#{serviceBean.minPrice}" />
+
+								<h:outputLabel for="maxPrice" value="Max Price:" />
+								<h:inputText id="maxPrice"
+									value="#{serviceBean.maxPrice}" />
+
 								<h:commandButton value="Search Restaurants"
 									action="#{serviceBean.advancedSearchRestaurant}" />
 							</h:panelGrid>
 						</h:panelGroup>
 					</h:form>
-
 				</div>
+
 
 			</div>
 

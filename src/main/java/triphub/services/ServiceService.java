@@ -59,8 +59,8 @@ public class ServiceService {
 				transportationType);
 	}
 
-	public List<Restaurant> advancedSearchRestaurants(String name, String city, String country) {
-		return serviceDAO.advancedSearchRestaurants(name, city, country);
+	public List<Restaurant> advancedSearchRestaurants(String name, String city, String country, BigDecimal minPrice, BigDecimal maxPrice) {
+		return serviceDAO.advancedSearchRestaurants(name, city, country, minPrice, maxPrice);
 	}
 
 }

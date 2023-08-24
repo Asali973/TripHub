@@ -147,16 +147,38 @@ public class ServiceDAO {
 		return typedQuery.getResultList();
 	}
 
-	public List<Restaurant> advancedSearchRestaurants(String name, String city, String country) {
+	public List<Restaurant> advancedSearchRestaurants(String name, String city, String country, BigDecimal minPrice, BigDecimal maxPrice) {
+	    CriteriaBuilder cb = em.getCriteriaBuilder();
+	    CriteriaQuery<Restaurant> query = cb.createQuery(Restaurant.class);
+	    Root<Restaurant> root = query.from(Restaurant.class);
 
-		TypedQuery<Restaurant> query = em.createQuery("SELECT r FROM Restaurant r WHERE r.name LIKE :name "
-				+ "AND r.address.city LIKE :city " + "AND r.address.country LIKE :country ", Restaurant.class);
+	    List<Predicate> predicates = new ArrayList<>();
 
-		query.setParameter("name", "%" + name + "%"); // Using % for partial matching
-		query.setParameter("city", "%" + city + "%");
-		query.setParameter("country", "%" + country + "%");
+	    if (name != null && !name.isEmpty()) {
+	        predicates.add(cb.like(root.get("name"), "%" + name + "%"));
+	    }
 
-		return query.getResultList();
+	    if (city != null && !city.isEmpty()) {
+	        predicates.add(cb.like(root.get("address").get("city"), "%" + city + "%"));
+	    }
+
+	    if (country != null && !country.isEmpty()) {
+	        predicates.add(cb.like(root.get("address").get("country"), "%" + country + "%"));
+	    }
+
+	    if (minPrice != null && maxPrice != null) {
+	        predicates.add(cb.between(root.get("service").get("price").get("amount"), minPrice, maxPrice));
+	    } else if (minPrice != null) {
+	        predicates.add(cb.greaterThanOrEqualTo(root.get("service").get("price").get("amount"), minPrice));
+	    } else if (maxPrice != null) {
+	        predicates.add(cb.lessThanOrEqualTo(root.get("service").get("price").get("amount"), maxPrice));
+	    }
+
+	    query.select(root).where(predicates.toArray(new Predicate[0]));
+
+	    TypedQuery<Restaurant> typedQuery = em.createQuery(query);
+	    return typedQuery.getResultList();
 	}
+
 
 }

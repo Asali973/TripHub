@@ -110,7 +110,7 @@ public class ServiceBean implements Serializable {
 
 	public void advancedSearchRestaurant() {
 		restaurantList = serviceService.advancedSearchRestaurants(searchRestaurantName, searchRestaurantCity,
-				searchRestaurantCountry);
+				searchRestaurantCountry, minPrice, maxPrice);
 	}
 
 	public List<Service> getAllServices() {
