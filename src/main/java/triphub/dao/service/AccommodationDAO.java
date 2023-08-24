@@ -138,7 +138,7 @@ public class AccommodationDAO {
 			throw new IllegalArgumentException("Accommodation with ID " + accommodationvm.getId() + " not found.");
 		}
 		accommodation.updateAccommodationViewModel(accommodationvm);
-		em.remove(accommodationvm);
+		em.remove(accommodation);
 		em.flush();
 
 	}

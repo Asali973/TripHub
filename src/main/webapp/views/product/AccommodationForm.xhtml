@@ -231,16 +231,16 @@
 						<td><h:form>
 								<!-- Delete button -->
 								<h:commandButton value="Delete"
-									actionListener="#{accommodationBean.deleteAccommodation}"
+									actionListener="#{accommodationBean.performDelete}"
 									styleClass="reg-btn-primary btn-sm"
 									onclick="return confirmDeleteAccom();">
-									<f:param name="id"  />
+									<f:param name="id"  value="#{accommodation.id}"/>
 								</h:commandButton>
 							</h:form></td>
 					</tr>
 				</ui:repeat>
 
-				<h:panelGroup rendered="#{accommodation.deletionSuccessful}">
+				<h:panelGroup rendered="#{accommodationBean.deletionSuccessful}">
 					<div class="alert alert-success" role="alert">Deletion of
 						Accommodation is successful, please refresh the list.</div>
 				</h:panelGroup>
