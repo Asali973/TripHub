@@ -77,8 +77,8 @@ public class Accommodation {
 		this.setName(accommodationvm.getName());
 		this.setAddress(accommodationvm.getAddress());
 		this.setAccommodationType(accommodationvm.getAccommodationType());
-		this.setService(accommodationvm.getService());
 		this.setDescription(accommodationvm.getDescription());
+		this.getService().updateServiceFromViewModel(accommodationvm); // il manquait cette ligne 
 		// need to add picture 
 
 	}

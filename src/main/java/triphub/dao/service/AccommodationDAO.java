@@ -121,11 +121,13 @@ public class AccommodationDAO {
 		}
 
 		accommodation.updateAccommodationViewModel(accommodationvm);
+	
 		accommodation = em.merge(accommodation);
 		em.flush();
 
 		// Convert the updated entity back to the view model and return it
 		return accommodation.initAccommodationViewModel();
+	
 
 	}
 
