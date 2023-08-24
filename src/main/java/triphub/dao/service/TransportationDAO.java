@@ -48,7 +48,7 @@ public class TransportationDAO{
 		Transportation transportation = new Transportation();
 		transportation.setId(transportationvm.getId());
 		transportation.setName(transportationvm.getName());
-		transportation.setType(transportationvm.getTransportationType());
+		transportation.setTransportationType(transportationvm.getTransportationType());
 		transportation.setDescription(transportationvm.getDescription());
 		transportation.setService(service);
 
@@ -91,8 +91,8 @@ public class TransportationDAO{
 
 	public List<Transportation> findByType(TransportationType transportationType) {
 		TypedQuery<Transportation> query = em.createQuery(
-				"SELECT t FROM Transportation t WHERE t.type = :type", Transportation.class);
-		query.setParameter("type", transportationType);
+				"SELECT t FROM Transportation t WHERE t.transportationType = :transportationType", Transportation.class);
+		query.setParameter("transportationType", transportationType);
 		return query.getResultList();
 	}
 

@@ -52,10 +52,10 @@ public class ServiceService {
 				accommodationType);
 	}
 
-	public List<Transportation> advancedSearchTransportations(String name, String departureCity,
-			String departureCountry, String arrivalCity, String arrivalCountry, TransportationType type) {
-		return serviceDAO.advancedSearchTransportations(name, departureCity, departureCountry, arrivalCity,
-				arrivalCountry, type);
+	public List<Transportation> advancedSearchTransportations(String name,
+//			String departureCity, String departureCountry, String arrivalCity, String arrivalCountry, *
+			TransportationType transportationType) {
+		return serviceDAO.advancedSearchTransportations(name, transportationType);
 	}
 
 	public List<Restaurant> advancedSearchRestaurants(String name, String city, String country) {

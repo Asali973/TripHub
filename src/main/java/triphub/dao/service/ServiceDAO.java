@@ -77,23 +77,24 @@ public class ServiceDAO  {
 
 
 	public List<Transportation> advancedSearchTransportations(
-	        String name, String departureCity, String departureCountry,
-	        String arrivalCity, String arrivalCountry, TransportationType type) {
+	        String name, 
+//	        String departureCity, String departureCountry, String arrivalCity, String arrivalCountry,
+	        TransportationType transportationType) {
 
 	    TypedQuery<Transportation> query = em.createQuery(
 	            "SELECT t FROM Transportation t WHERE t.name LIKE :name " +
-	            "AND t.departure.city LIKE :departureCity " +
-	            "AND t.departure.country LIKE :departureCountry " +
-	            "AND t.arrival.city LIKE :arrivalCity " +
-	            "AND t.arrival.country LIKE :arrivalCountry " +
-	            "AND t.type = :type", Transportation.class);
+//	            "AND t.departure.city LIKE :departureCity " +
+//	            "AND t.departure.country LIKE :departureCountry " +
+//	            "AND t.arrival.city LIKE :arrivalCity " +
+//	            "AND t.arrival.country LIKE :arrivalCountry " +
+	            "AND t.transportationType = :transportationType", Transportation.class);
 
 	    query.setParameter("name", "%" + name + "%"); // Using % for partial matching
-	    query.setParameter("departureCity", "%" + departureCity + "%");
-	    query.setParameter("departureCountry", "%" + departureCountry + "%");
-	    query.setParameter("arrivalCity", "%" + arrivalCity + "%");
-	    query.setParameter("arrivalCountry", "%" + arrivalCountry + "%");
-	    query.setParameter("type", type);
+//	    query.setParameter("departureCity", "%" + departureCity + "%");
+//	    query.setParameter("departureCountry", "%" + departureCountry + "%");
+//	    query.setParameter("arrivalCity", "%" + arrivalCity + "%");
+//	    query.setParameter("arrivalCountry", "%" + arrivalCountry + "%");
+	    query.setParameter("transportationType", transportationType);
 	    
 	    return query.getResultList();
 	}
