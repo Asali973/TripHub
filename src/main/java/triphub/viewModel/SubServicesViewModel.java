@@ -47,6 +47,7 @@ public class SubServicesViewModel implements Serializable {
 	private String currency;
 
 	// Image attributes
+	private Picture picture;
 	private int size;
 	private int weight;
 	private String link;
@@ -231,6 +232,15 @@ public class SubServicesViewModel implements Serializable {
 	public void setArrival(Address arrival) {
 		this.arrival = arrival;
 
+	}
+	
+
+	public Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
 	}
 
 	@Override

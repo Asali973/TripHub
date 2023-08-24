@@ -115,7 +115,7 @@ public class TourPackageBean implements Serializable {
 	            return;
 	        }
 	        
-			// Uploading the picture and setting the link to userViewModel
+			// Uploading the picture and setting the link to ViewModel
 			String picName= ImageHelper.processProfilePicture(picturePackage);
 			if (picName != null) {
 				tourPackageVm.setLink(picName);

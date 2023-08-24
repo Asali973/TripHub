@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import triphub.dao.service.TransportationDAO;
 import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
+import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
 import triphub.entity.subservices.TransportationType;
 import triphub.helpers.FacesMessageUtil;
@@ -99,6 +100,14 @@ public class TransportationService implements ServiceInterface {
 	@Override
 	public Transportation findById(Long id) {
 		return transportationDAO.findById(id);
+	}
+	
+	public List<Transportation> getTransportationForOrganizer(Long organizerId) {
+		return transportationDAO.getTransportationForOrganizer(organizerId);
+	}
+
+	public List<Transportation> getTransportationForProvider(Long providerId) {
+		return transportationDAO.getTransportationForProvider(providerId);
 	}
 
 }
