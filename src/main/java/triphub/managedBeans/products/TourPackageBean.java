@@ -64,7 +64,7 @@ public class TourPackageBean implements Serializable {
 
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
-		if (id != null) {
+		if (id != null  && !id.isEmpty()) {
 			Long tourPackageId = Long.parseLong(id);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTourPackageId",
 					tourPackageId);
@@ -74,7 +74,7 @@ public class TourPackageBean implements Serializable {
 			}
 		}
 
-		if (id != null) {
+		if (id != null  && !id.isEmpty()) {
 			Long tourPackageId = Long.parseLong(id);
 			// Fetch the selected tour package using tourPackageService
 			selectedTourPackage = tourPackageService.getTourPackageById(tourPackageId);

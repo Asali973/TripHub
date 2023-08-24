@@ -16,8 +16,10 @@
 <h:body>
 	<h:form id="updateAccommodation" enctype="multipart/form-data">
 		<h:inputHidden id="id" value="#{accommodationBean.accommodationVm.id}"
-		
 		 />
+		 <h:inputHidden id="idservice" value="#{accommodationBean.accommodationVm.service.id}"
+		 />
+		 
 		<!-- TODO ajouter les id des objets adress, service, price  -->
 		<div class="reg-form-container">
 			<h3>Update your Accommodation</h3>
@@ -183,7 +185,9 @@
 							action="#{accommodationBean.updateAccommodation}"
 							styleClass="reg-btn-primary">
 							<f:param name="id" value="#{accommodationBean.accommodationVm.id}" />
-						</h:commandButton>h:commandButton
+								<f:param name="idservice" value="#{accommodationBean.accommodationVm.service.id}" />
+								
+						</h:commandButton>
 					</div>
 				</div>
 			</div>

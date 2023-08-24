@@ -22,6 +22,7 @@ public class AccommodationService implements ServiceInterface,Serializable {
 	@Default
 	private AccommodationDAO accommodationDAO;	
 	
+	
 	public AccommodationService() {
 		
 	}
@@ -72,6 +73,7 @@ public class AccommodationService implements ServiceInterface,Serializable {
 	@Override
 	public SubServicesViewModel initSubService(Long id) {
 		 Accommodation accommodation = accommodationDAO.findById(id);
+		 
 	        if (accommodation == null) {
 	        	
 	            return null;
@@ -95,5 +97,10 @@ public class AccommodationService implements ServiceInterface,Serializable {
 		return accommodationDAO.findById(id);
 	}
 	
+		
+	
+	public Accommodation getAccommodationById(Long id) {
+		return accommodationDAO.read(id);
+	}
  
 }
