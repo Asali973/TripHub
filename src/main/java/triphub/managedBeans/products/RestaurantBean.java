@@ -1,19 +1,25 @@
 package triphub.managedBeans.products;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Part;
 
 import triphub.dao.service.RestaurantDAO;
+import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.util.CurrencyType;
 import triphub.helpers.FacesMessageUtil;
+import triphub.helpers.ImageHelper;
 import triphub.services.RestaurantService;
 import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.TourPackageFormViewModel;
@@ -34,6 +40,9 @@ public class RestaurantBean implements Serializable {
 	private List<Restaurant> allRestaurants;
 
 	private Restaurant selectedRestaurant;
+	
+	private Part pictureRestaurant;
+	private String picName;
 
 	public RestaurantBean(RestaurantService restaurantService, SubServicesViewModel restaurantvm, List<Restaurant> allRestaurants) {
 		
@@ -69,11 +78,41 @@ public class RestaurantBean implements Serializable {
 		}
 
 	}
-
+	
 	public void create() {
-		restaurantService.create(restaurantvm);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Restaurant added successfully !"));
+
+	    String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userType");
+	    
+        Long userId;
+        if ("organizer".equals(userType)) {
+            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("organizerId");
+        } else if ("provider".equals(userType)) {
+            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("providerId");
+        } else {
+            userId = null;
+        }
+        
+     // Uploading the picture and setting the link to ViewModel
+     		try {
+     			picName = ImageHelper.processProfilePicture(pictureRestaurant);
+     		} catch (IOException e) {
+
+     			e.printStackTrace();
+     		}
+     		if (picName != null) {
+     			restaurantvm.setLink(picName);
+     		}
+
+	    restaurantService.create(restaurantvm, userId, userType);
+
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Restaurant added successfully !"));
+
 	}
+
+//	public void create() {
+//		restaurantService.create(restaurantvm);
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Restaurant added successfully !"));
+//	}
 	
 	public String updateRestaurant() {
 		try {
@@ -115,6 +154,31 @@ public class RestaurantBean implements Serializable {
 		FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add("confirmDelete();");
 	}
 	
+	public List<Restaurant> getCurrentUserRestaurants() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+        String userType = (String) externalContext.getSessionMap().get("userType");
+
+        if ("organizer".equals(userType)) {
+            Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
+            if (organizerId == null) {
+                return new ArrayList<>();
+            }
+            return restaurantService.getRestaurantForOrganizer(organizerId);
+        } 
+        else if ("provider".equals(userType)) {
+            Long providerId = (Long) externalContext.getSessionMap().get("providerId");
+            if (providerId == null) {
+                return new ArrayList<>();
+            }
+            return restaurantService.getRestaurantForProvider(providerId); 
+        } 
+        else {
+ 
+            return new ArrayList<>();
+        }
+    }
+	
 	public List<Restaurant> getAllRestaurants() {
 		return restaurantService.getAll();
 	}
@@ -155,5 +219,31 @@ public class RestaurantBean implements Serializable {
 	public void setSelectedRestaurant(Restaurant selectedRestaurant) {
 		this.selectedRestaurant = selectedRestaurant;
 	}
+
+	public RestaurantDAO getRestaurantDao() {
+		return restaurantDao;
+	}
+
+	public void setRestaurantDao(RestaurantDAO restaurantDao) {
+		this.restaurantDao = restaurantDao;
+	}
+
+	public Part getPictureRestaurant() {
+		return pictureRestaurant;
+	}
+
+	public void setPictureRestaurant(Part pictureRestaurant) {
+		this.pictureRestaurant = pictureRestaurant;
+	}
+
+	public String getPicName() {
+		return picName;
+	}
+
+	public void setPicName(String picName) {
+		this.picName = picName;
+	}
+	
+	
 
 }

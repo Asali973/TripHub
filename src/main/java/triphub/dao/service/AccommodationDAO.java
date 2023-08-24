@@ -11,13 +11,17 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import triphub.entity.product.Price;
+import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceInterface;
 
 import triphub.entity.product.service.ServiceType;
 import triphub.entity.subservices.Accommodation;
+import triphub.entity.user.Organizer;
+import triphub.entity.user.Provider;
 import triphub.entity.util.Address;
 import triphub.entity.util.Calendar;
+import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
 
 @Stateless
@@ -34,54 +38,79 @@ public class AccommodationDAO {
 	public AccommodationDAO() {
 	}
 
-	public Accommodation create(SubServicesViewModel accommodationVm) {
+	public Accommodation create(SubServicesViewModel accommodationVm, Long userId, String userType) {
 
-		// Create Service
+
+	    // Create Service
+	    Service service = Service.createServiceFromViewModel(accommodationVm);
+    
+    		// Create Service
 		// Service service = Service.createServiceFromViewModel(accommodationVm);
 		// service.setType(ServiceType.ACCOMMODATION);
 
-		Service service = new Service();
-		service.setType(ServiceType.ACCOMMODATION);
-		service.setAvailableFrom(accommodationVm.getAvailableFrom());
-		service.setAvailableTill(accommodationVm.getAvailableTill());
-		service.setAvailability(accommodationVm.isAvailability());
+		// Service service = new Service();
+    
+	    service.setType(ServiceType.ACCOMMODATION);
 
-		// Create Price
-		Price price = Price.createPriceFromViewModel(accommodationVm);
-		service.setPrice(price);
+	    // Create Price
+	    Price price = Price.createPriceFromViewModel(accommodationVm);
+	    service.setPrice(price);
 
-		// Persist Service and Price
-		em.persist(price);
-		em.persist(service);
+	    service.setAvailableFrom(accommodationVm.getAvailableFrom());
+	    service.setAvailableTill(accommodationVm.getAvailableTill());
+	    service.setAvailability(accommodationVm.isAvailability());
 
-		// Create Accommodation
-		Accommodation accommodation = new Accommodation();
-		accommodation.setId(accommodationVm.getId());
-		accommodation.setName(accommodationVm.getName());
-		accommodation.setDescription(accommodationVm.getDescription());
-		accommodation.setService(service);
-		accommodation.setAccommodationType(accommodationVm.getAccommodationType());
+	    // Persist Service and Price 
+	    em.persist(price);
+	    em.persist(service);
+	    
+		Picture picture = new Picture();
+		picture.setLink(accommodationVm.getLink());
+		accommodationVm.setPicture(picture);
 
-		// Create Address
-		Address addressAccommodation = new Address();
-		addressAccommodation.setNum(accommodationVm.getAddress().getNum());
-		addressAccommodation.setStreet(accommodationVm.getAddress().getStreet());
-		addressAccommodation.setCity(accommodationVm.getAddress().getCity());
-		addressAccommodation.setState(accommodationVm.getAddress().getState());
-		addressAccommodation.setCountry(accommodationVm.getAddress().getCountry());
-		addressAccommodation.setZipCode(accommodationVm.getAddress().getZipCode());
+	    // Create Accommodation
+	    Accommodation accommodation = new Accommodation();
+	    accommodation.setId(accommodationVm.getId());
+	    accommodation.setName(accommodationVm.getName());
+	    accommodation.setDescription(accommodationVm.getDescription());
+	    accommodation.setService(service);
+	    accommodation.setAccommodationType(accommodationVm.getAccommodationType());
 
-		// Persist Address
-		em.persist(addressAccommodation);
+	    // Create Address
+	    Address addressAccommodation = new Address();
+	    addressAccommodation.setNum(accommodationVm.getAddress().getNum());
+	    addressAccommodation.setStreet(accommodationVm.getAddress().getStreet());
+	    addressAccommodation.setCity(accommodationVm.getAddress().getCity());
+	    addressAccommodation.setState(accommodationVm.getAddress().getState());
+	    addressAccommodation.setCountry(accommodationVm.getAddress().getCountry());
+	    addressAccommodation.setZipCode(accommodationVm.getAddress().getZipCode());
 
-		// Link the Address to the Accommodation
-		accommodation.setAddress(addressAccommodation);
+	    // Persist Address
+	    em.persist(addressAccommodation);
 
-		// Persist Accommodation
-		em.persist(accommodation);
-		em.flush();
+	    // Link the Address to the Accommodation
+	    accommodation.setAddress(addressAccommodation);
+	    
+	    if ("organizer".equals(userType)) {
+	        Organizer organizer = em.find(Organizer.class, userId);
+	        if (organizer == null) {
+	            throw new IllegalArgumentException("Organizer with ID " + userId + " not found.");
+	        }
+	        accommodation.setOrganizer(organizer); // Supposons que cette méthode existe
+	    } else if ("provider".equals(userType)) {
+	        Provider provider = em.find(Provider.class, userId);
+	        if (provider == null) {
+	            throw new IllegalArgumentException("Provider with ID " + userId + " not found.");
+	        }
+	        accommodation.setProvider(provider); // Supposons que cette méthode existe
+	    }
 
-		return accommodation;
+	    // Persist Accommodation
+	    em.persist(accommodation);
+	    em.flush();
+
+	    return accommodation;
+
 	}
 
 	public SubServicesViewModel update(SubServicesViewModel accommodationvm) {
@@ -143,6 +172,18 @@ public class AccommodationDAO {
 
 	public Accommodation findById(Long id) {
 		return em.find(Accommodation.class, id);
+	}
+	
+	public List<Accommodation> getAccommodationForOrganizer(Long organizerId) {
+	    TypedQuery<Accommodation> query = em.createQuery("SELECT tp FROM Accommodation tp WHERE tp.organizer.id = :organizerId", Accommodation.class);
+	    query.setParameter("organizerId", organizerId);
+	    return query.getResultList();
+	}
+	
+	public List<Accommodation> getAccommodationForProvider(Long providerId) {
+	    TypedQuery<Accommodation> query = em.createQuery("SELECT tp FROM Accommodation tp WHERE tp.organizer.id = :providerId", Accommodation.class);
+	    query.setParameter("providerId", providerId);
+	    return query.getResultList();
 	}
 
 }

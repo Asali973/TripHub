@@ -1,6 +1,13 @@
 package triphub.entity.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
+
+import triphub.entity.subservices.Accommodation;
+import triphub.entity.subservices.Restaurant;
+import triphub.entity.subservices.Transportation;
 import triphub.entity.util.Administration;
 import triphub.entity.util.CompanyInfo;
 import triphub.viewModel.UserViewModel;
@@ -24,6 +31,15 @@ public class Provider {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Administration administration;
+	
+	@OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Transportation> transportations = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Restaurant> restaurants = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Accommodation> accommodations = new ArrayList<>();
 	
 	public void updateProviderFromViewModel(UserViewModel form) {
 	    this.setId(form.getProviderId());
