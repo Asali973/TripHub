@@ -10,7 +10,9 @@
 	<persistence-unit name="triphub"
 		transaction-type="JTA">
     
-		<jta-data-source>java:jboss/datasources/triphubDS</jta-data-source>	    
+
+ 		<jta-data-source>java:jboss/datasources/triphubDS</jta-data-source>
+
 
 
 		<properties>

@@ -50,6 +50,13 @@ body, h1, h2, h3, h4, h5, p, a {
 	border-bottom-right-radius: 0;
 }
 
+#fileLabel.form-control {
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
 .btn-outline-dark {
 	border-radius: 20px;
 }

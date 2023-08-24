@@ -42,7 +42,6 @@ public class AccommodationBean implements Serializable {
 	private boolean deletionSuccessful;
 
 	private Part pictureAccommodation;
-	private String picName;
 
 	public AccommodationBean() {
 
@@ -116,14 +115,15 @@ public class AccommodationBean implements Serializable {
 
 		// Uploading the picture and setting the link to ViewModel
 		try {
-			picName = ImageHelper.processProfilePicture(pictureAccommodation);
+			String picName= ImageHelper.processProfilePicture(pictureAccommodation);
+			if (picName != null) {
+				accommodationVm.setLink(picName);
+			}
 		} catch (IOException e) {
 
 			e.printStackTrace();
 		}
-		if (picName != null) {
-			accommodationVm.setLink(picName);
-		}
+
 
 		accommodationService.create(accommodationVm, userId, userType);
 
@@ -318,14 +318,6 @@ public class AccommodationBean implements Serializable {
 
 	public void setPictureAccommodation(Part pictureAccommodation) {
 		this.pictureAccommodation = pictureAccommodation;
-	}
-
-	public String getPicName() {
-		return picName;
-	}
-
-	public void setPicName(String picName) {
-		this.picName = picName;
 	}
 	
 	
