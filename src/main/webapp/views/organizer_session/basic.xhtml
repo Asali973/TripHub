@@ -51,6 +51,8 @@ box-shadow
 
 
 
+
+
 :
 
 
@@ -64,7 +66,9 @@ box-shadow
 
 
 
+
  
+
 
 
 
@@ -90,7 +94,9 @@ box-shadow
 
 
 
+
  
+
 
 
 
@@ -116,7 +122,9 @@ box-shadow
 
 
 
+
  
+
 
 
 
@@ -142,6 +150,7 @@ box-shadow
 
 
 
+
  
 
 
@@ -155,7 +164,10 @@ box-shadow
 
 
 
+
 rgba
+
+
 
 
 
@@ -205,6 +217,8 @@ rgba
 
 
 
+
+
 0
 ,
 0
@@ -212,6 +226,8 @@ rgba
 0
 ,
 0
+
+
 
 
 
@@ -261,7 +277,11 @@ rgba
 
 
 
+
+
 )
+
+
 
 
 
@@ -404,10 +424,12 @@ rgba
 			<div class="card2">
 				<div class="card-body">
 
-<div class="card">
-    <h:graphicImage value="/images/#{organizerBean.userViewModel.companyLogoLink}" styleClass="logo" alt="Site Logo"/>
-    <div class="site-name">#{organizerBean.userViewModel.companyName}</div>
-</div>
+					<div class="card">
+						<h:graphicImage
+							value="/images/#{organizerBean.userViewModel.companyLogoLink}"
+							styleClass="logo" alt="Site Logo" />
+						<div class="site-name">#{organizerBean.userViewModel.companyName}</div>
+					</div>
 
 
 
@@ -517,7 +539,7 @@ rgba
 
 					</h:dataTable>
 
-
+					<br />
 
 
 					<!-- Restaurants -->
@@ -572,7 +594,7 @@ rgba
 
 					</h:dataTable>
 
-
+					<br />
 
 
 					<!-- Transportations -->
@@ -634,7 +656,7 @@ rgba
 
 				</div>
 			</div>
-	</ui:insert>
+		</ui:insert>
 
 
 
@@ -646,29 +668,29 @@ rgba
 
 
 
-	<!-- Footer section -->
-	<footer class="footer sticky-footer">
-		<div class="container text-center">
-			<p>© 2023 #{organizerBean.userViewModel.companyName}. All rights
-				reserved.</p>
-			<ul class="list-inline social-icons">
-				<!-- Add your social media icons and links here -->
-				<li class="list-inline-item"><a href="#"><i
-						class="fab fa-facebook-f"></i></a></li>
-				<li class="list-inline-item"><a href="#"><i
-						class="fab fa-twitter"></i></a></li>
-				<li class="list-inline-item"><a href="#"><i
-						class="fab fa-instagram"></i></a></li>
-				<li><p>Contact</p></li>
-			</ul>
-		</div>
-	</footer>
+		<!-- Footer section -->
+		<footer class="footer sticky-footer">
+			<div class="container text-center">
+				<p>© 2023 #{organizerBean.userViewModel.companyName}. All rights
+					reserved.</p>
+				<ul class="list-inline social-icons">
+					<!-- Add your social media icons and links here -->
+					<li class="list-inline-item"><a href="#"><i
+							class="fab fa-facebook-f"></i></a></li>
+					<li class="list-inline-item"><a href="#"><i
+							class="fab fa-twitter"></i></a></li>
+					<li class="list-inline-item"><a href="#"><i
+							class="fab fa-instagram"></i></a></li>
+					<li><p>Contact</p></li>
+				</ul>
+			</div>
+		</footer>
 
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		</div>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	</div>
 </h:body>
 </html>

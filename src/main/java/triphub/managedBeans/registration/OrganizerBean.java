@@ -148,6 +148,15 @@ public class OrganizerBean implements Serializable {
 	        availableLayouts = layoutDAO.getAllLayouts(); 
 	    }
 	}
+	
+    public String getXhtmlFile(Organizer organizer) {
+        if (organizer != null && organizer.getSubscription() != null 
+            && organizer.getSubscription().getCustomization() != null
+            && organizer.getSubscription().getCustomization().getLayout() != null) {
+            return organizer.getSubscription().getCustomization().getLayout().getXhtmlFile();
+        }
+        return null;
+    }
 
 	public void updateOrganizer() {
 		try {
@@ -321,5 +330,6 @@ public class OrganizerBean implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 
 }
