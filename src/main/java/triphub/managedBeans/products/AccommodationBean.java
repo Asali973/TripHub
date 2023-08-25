@@ -47,8 +47,7 @@ public class AccommodationBean implements Serializable {
 
 	}
 
-	// quand il un constructeur a plusieur a crée le constructeur par défaut
-	// n'existe plus donc il faut le créer explixicitement si besoin
+	
 	public AccommodationBean(AccommodationService accommodationService, SubServicesViewModel accommodationVm,
 			List<Accommodation> allAccommodations) {
 		this.accommodationService = accommodationService;
@@ -123,7 +122,7 @@ public class AccommodationBean implements Serializable {
 
 	public String updateAccommodation() {
 		try {
-			// accommodationVm.setCurrency(selectedCurrency);
+			
 			accommodationService.update(accommodationVm);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Accommodation updated successfully!"));
@@ -145,7 +144,7 @@ public class AccommodationBean implements Serializable {
 
 	public String initFormUpdate() {
 		try {
-			System.out.println("accommodation bean init formUpdate " + accommodationVm);
+			
 
 			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
 			String redirectUrl = contextPath + "/views/product/AccomUpdateTest.xhtml?faces-redirect=true&id="
