@@ -1,0 +1,13 @@
+.body {
+    background-image: url('#{organizerBean.userViewModel.backgroundUrl}');
+    color: #{organizerBean.userViewModel.primaryColor};
+    font-family: #{organizerBean.userViewModel.primaryFont};
+}
+.secondary {
+    color: #{organizerBean.userViewModel.secondaryColor};
+    font-family: #{organizerBean.userViewModel.secondaryFont};
+}
+.primary {
+    color: #{organizerBean.userViewModel.primaryColor};
+    font-family: #{organizerBean.userViewModel.primaryFont};
+}

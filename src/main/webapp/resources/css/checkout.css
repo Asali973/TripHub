@@ -1,104 +1,271 @@
-
 body {
-  font-family: Arial;
-  font-size: 17px;
-  padding: 8px;
+	font-size: 17px;
+	padding: 8px;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.card {
+	margin: auto;
+	max-width: 800px;
+	background-color: rgb(254, 255, 255);
+	border-radius: 15px;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(20px);
+	opacity: 0.9;
+	padding: 15px 40px;
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	margin-bottom: 50px;
+	margin-top: 50px;
+}
+
+.container2 {
+	margin: 50px auto;
+	/* Cela donne le même effet que margin-top et margin-bottom à 50px */
+	max-width: 1000px;
+	border-radius: 15px;
+	background-color: rgb(254, 255, 255);
+	border-radius: 15px;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(20px);
+	opacity: 0.9;
+	padding: 15px 40px;
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	background-color: #f2f2f2;
+	padding: 5px 20px 15px 20px;
+	border: 1px solid lightgrey;
+	padding: 40px 60px;
+}
+
+.containerCart {
+	margin: 50px auto;
+	/* Cela donne le même effet que margin-top et margin-bottom à 50px */
+	max-width: 1200px;
+	border-radius: 15px;
+	background-color: rgb(254, 255, 255);
+	border-radius: 15px;
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(20px);
+	opacity: 0.9;
+	padding: 15px 40px;
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	background-color: #f2f2f2;
+	padding: 5px 20px 15px 20px;
+	border: 1px solid lightgrey;
+	padding: 40px 60px;
+}
+
+body, h1, h2, h3, h4, h5, p, a {
+	font-family: 'Poppins', sans-serif;
+}
+
+div.form-group .form-control {
+	border-radius: 20px;
+	border: 3px solid #ccc;
+}
+
+.form-control.form-control-sm {
+	border-radius: 20px;
+	border: 3px solid #ccc;
+	width: 20px; 
+}
+
+.icon-container i {
+	margin-right: 10px;
 }
 
 .row {
-  display: -ms-flexbox; /* IE10 */
-  display: flex;
-  -ms-flex-wrap: wrap; /* IE10 */
-  flex-wrap: wrap;
-  margin: 0 -16px;
+	display: -ms-flexbox; /* IE10 */
+	display: flex;
+	-ms-flex-wrap: wrap; /* IE10 */
+	flex-wrap: wrap;
+	margin: 0 -16px;
 }
 
 .col-25 {
-  -ms-flex: 25%; /* IE10 */
-  flex: 25%;
+	-ms-flex: 25%; /* IE10 */
+	flex: 25%;
 }
 
 .col-50 {
-  -ms-flex: 50%; /* IE10 */
-  flex: 50%;
+	-ms-flex: 50%; /* IE10 */
+	flex: 50%;
 }
 
 .col-75 {
-  -ms-flex: 75%; /* IE10 */
-  flex: 75%;
+	-ms-flex: 75%; /* IE10 */
+	flex: 75%;
 }
 
-.col-25,
-.col-50,
-.col-75 {
-  padding: 0 16px;
+.container h1 {
+	text-align: center;
 }
 
-.container {
-  background-color: #f2f2f2;
-  padding: 5px 20px 15px 20px;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
+.col-25, .col-50, .col-75 {
+	padding: 0 16px;
 }
 
 input[type=text] {
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+	width: 100%;
+	margin-bottom: 20px;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
 }
 
 label {
-  margin-bottom: 10px;
-  display: block;
+	margin-bottom: 10px;
+	display: block;
 }
 
 .icon-container {
-  margin-bottom: 20px;
-  padding: 7px 0;
-  font-size: 24px;
+	margin-bottom: 20px;
+	padding: 7px 0;
+	font-size: 24px;
 }
 
 .btn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px;
-  margin: 10px 0;
-  border: none;
-  width: 100%;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 17px;
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 1.2em;
+	transition: all 0.3s;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
+
 .btn:hover {
-  background-color: #45a049;
+	background-color: #074b00;
+	color: white;
+}
+
+.btnContinue {
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 1.2em;
+	transition: all 0.3s;
+	margin: 0;
+}
+
+.btnContinue:hover {
+	background-color: #12154b;
+	color: white;
+}
+
+.btnCheckO {
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 1.2em;
+	transition: all 0.3s;
+	margin: 0;
+}
+
+.btnCheckO:hover {
+	background-color: #074b00;
+	color: white;
+}
+
+.btnSearch{
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 1.2em;
+	transition: all 0.3s;
+	margin: 0;
+}
+
+.btnSearch:hover {
+	background-color: #7f6c09;
+	color: white;
+}
+
+
+.btn-sm.btn-outline-secondary {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    border-radius: 0.5rem;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #290f7d; /* Couleur d'arrière-plan au survol */
+    color: #fff; /* Couleur du texte au survol */
+    border-color: #6c757d; /* Couleur de la bordure au survol */
+}
+
+.btn-sm.btn-outline-secondary2 {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+
+    border-radius: 0.5rem;
+}
+
+.btn-outline-secondary2:hover {
+    background-color: #650b07; /* Couleur d'arrière-plan au survol */
+    color: #fff; /* Couleur du texte au survol */
+    border-color: #6c757d; /* Couleur de la bordure au survol */
+}
+
+.btn-sm.btn-outline-secondary3 {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+
+    border-radius: 0.5rem;
+}
+
+.btn-outline-secondary3:hover {
+    background-color: #203265; /* Couleur d'arrière-plan au survol */
+    color: #fff; /* Couleur du texte au survol */
+    border-color: #6c757d; /* Couleur de la bordure au survol */
 }
 
 a {
-  color: #2196F3;
+	color: #2196F3;
 }
 
 hr {
-  border: 1px solid lightgrey;
+	border: 1px solid lightgrey;
 }
 
 span.price {
-  float: right;
-  color: grey;
+	float: right;
+	color: grey;
 }
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
-@media (max-width: 800px) {
-  .row {
-    flex-direction: column-reverse;
-  }
-  .col-25 {
-    margin-bottom: 20px;
-  }
+@media ( max-width : 800px) {
+	.row {
+		flex-direction: column-reverse;
+	}
+	.col-25 {
+		margin-bottom: 20px;
+	}
+}
+
+.table {
+	border-radius: 15px;
+	overflow: hidden;
+}
+
+.table thead th {
+	background-color: #f5f5f5;
+}
+
+.table-hover tbody tr:hover {
+	background-color: #eaeaea;
 }
