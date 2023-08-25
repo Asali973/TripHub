@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import triphub.entity.product.CartItem;
 import triphub.entity.util.Address;
@@ -37,6 +38,32 @@ public class User implements Serializable {
     @Column(name = "cart_total", nullable = true)
     private BigDecimal cartTotal;
     
+    public void addCartItem(CartItem item) {
+        if(this.cartTotal == null) {
+            this.cartTotal = BigDecimal.ZERO;
+        }
+        this.cartItems.add(item);
+        if (item.getTotalPrice() != null) {
+            this.cartTotal = this.cartTotal.add(item.getTotalPrice());
+        }
+    }
+
+    public void removeCartItem(CartItem item) {
+        if(this.cartTotal == null) {
+            this.cartTotal = BigDecimal.ZERO;
+        }
+        this.cartItems.remove(item);
+        if (item.getTotalPrice() != null) {
+            this.cartTotal = this.cartTotal.subtract(item.getTotalPrice());
+        }
+    }
+    private void updateCartTotal() {
+        this.cartTotal = this.getCartTotal();
+    }
+
+    
+    
+    
     public static User createUserFromViewModel(UserViewModel form) {
         User user = new User();
         user.setId(form.getUserId());
@@ -45,7 +72,8 @@ public class User implements Serializable {
         user.setEmail(form.getEmail());
         user.setPhoneNum(form.getPhoneNum());
         user.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));  
-        user.setCartTotal(form.getCartTotal());        
+        user.setCartTotal(BigDecimal.ZERO);  // Set to zero during initial creation
+    
         return user;
     }
     
@@ -55,10 +83,9 @@ public class User implements Serializable {
         this.setEmail(form.getEmail());
         this.setPhoneNum(form.getPhoneNum());
         this.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));
-        if (form.getCartTotal() != null) {
-            this.setCartTotal(form.getCartTotal());
+        this.updateCartTotal();
         }
-    }
+    
     
     public void initUserViewModel(UserViewModel userViewModel) {
         userViewModel.setUserId(this.getId());
@@ -142,8 +169,15 @@ public class User implements Serializable {
 	}
 
 	public BigDecimal getCartTotal() {
-		return cartTotal;
+	    if (cartItems == null) {
+	        return BigDecimal.ZERO;
+	    }
+	    return cartItems.stream()
+	                    .map(CartItem::getTotalPrice)
+	                    .filter(Objects::nonNull)
+	                    .reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
+
 
 	public void setCartTotal(BigDecimal cartTotal) {
 		this.cartTotal = cartTotal;
