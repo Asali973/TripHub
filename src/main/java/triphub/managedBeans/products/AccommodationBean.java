@@ -43,6 +43,7 @@ public class AccommodationBean implements Serializable {
 	private boolean deletionSuccessful;
 	private List<String> currencies;
 	private Part pictureAccommodation;
+	private String picName;
 
 	public AccommodationBean() {
 
@@ -141,13 +142,13 @@ public class AccommodationBean implements Serializable {
 
 		// Uploading the picture and setting the link to ViewModel
 		try {
-			String picName = ImageHelper.processProfilePicture(pictureAccommodation);
-			if (picName != null) {
-				accommodationVm.setLink(picName);
-			}
+			picName = ImageHelper.processProfilePicture(pictureAccommodation);
 		} catch (IOException e) {
 
 			e.printStackTrace();
+		}
+		if (picName != null) {
+			accommodationVm.setLink(picName);
 		}
 
 		accommodationService.create(accommodationVm, userId, userType);

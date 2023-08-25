@@ -111,7 +111,6 @@ body {
 
 .navbar, .footer {
 	border-radius: 0px; /* Ajoute des coins arrondis */
-	background-image: linear-gradient(to right, #1f2b47, #242c3d);
 	/* Gradient léger */
 }
 

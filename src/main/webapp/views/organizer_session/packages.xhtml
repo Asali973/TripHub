@@ -40,7 +40,9 @@
 						<p>Destination: #{package.destination.cityName},
 							#{package.destination.state}, #{package.destination.country}</p>
 						<p>Theme: #{package.theme.themeName}</p>
-
+						<f:facet name="header"></f:facet>
+						<h:graphicImage value="/images/#{package.picture.link}"
+							height="150" alt="Tour package picture" />
 							
 						<a href="details.xhtml?id=#{package.id}" class="btn btn-primary">View
 							Details</a>
