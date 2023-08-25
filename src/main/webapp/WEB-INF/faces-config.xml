@@ -77,6 +77,17 @@
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
+  <from-view-id>*</from-view-id>
+  <navigation-case>
+   <from-outcome>restaurants</from-outcome>
+   <to-view-id>/views/product/RestaurantForm.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>restaurants</from-outcome>
+   <to-view-id>/views/organizer_session/Restaurants.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
   <from-view-id>/views/organizer_session/details.xhtml</from-view-id>
   <navigation-case>
    <from-outcome>cart</from-outcome>

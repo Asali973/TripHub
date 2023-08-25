@@ -111,4 +111,22 @@
  <PROCESS-ITEM NAME="rules:#views#organizer_session#Accommodation.xhtml"
   PATH="/views/organizer_session/Accommodation.xhtml"
   SHAPE="256,1553,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*:6" PATH="*" SHAPE="32,1649,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:6" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="restaurants::#views#product#RestaurantForm.xhtml" NAME="output"
+    PATH="/views/product/RestaurantForm.xhtml"
+    TARGET="rules:#views#product#RestaurantForm.xhtml"
+    TITLE="restaurants" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="restaurants::#views#organizer_session#Restaurants.xhtml"
+    NAME="output1" PATH="/views/organizer_session/Restaurants.xhtml"
+    TARGET="rules:#views#organizer_session#Restaurants.xhtml"
+    TITLE="restaurants" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#product#RestaurantForm.xhtml"
+  PATH="/views/product/RestaurantForm.xhtml" SHAPE="256,1665,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#organizer_session#Restaurants.xhtml"
+  PATH="/views/organizer_session/Restaurants.xhtml" SHAPE="256,1809,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
