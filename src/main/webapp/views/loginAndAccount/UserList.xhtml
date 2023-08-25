@@ -4,15 +4,25 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:head>
-	<title>List Users</title>
+
 	<h:outputStylesheet library="css" name="listUser.css" />
 	<link
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		rel="stylesheet" />
-</h:head>
+
 
 <h:body>
+<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+<ui:define name="additionalHeadContent">
+<h:outputStylesheet library="css" name="listUser.css" />
+	<link
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		rel="stylesheet" />
+</ui:define>
+
+
+	<ui:define name="content">
+		
 	<div class="container">
 		<div class="card">
 			<div class="card-body">
@@ -220,6 +230,8 @@ $(document).ready(function() {
 });
 </script>
 	</div>
+		</ui:define>
+	</ui:composition>
 </h:body>
 
 </html>
