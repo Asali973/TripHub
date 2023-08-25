@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+		<ui:define name="additionalHeadContent">
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+			<h:outputStylesheet library="css" name="regForm.css" />
+			<h:outputStylesheet library="css" name="loginCss.css" />
+			<h:outputStylesheet library="css" name="checkout.css" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+			<link rel="stylesheet"
+				href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
+
+			<style>
+/* CSS to hide the create form container initially */
+#createFormContainer {
+	display: none;
+}
+</style>
+		</ui:define>
+
+		<ui:define name="content">
+
+
+			<div class="containerCart mt-10 mb-10">
+				<div class="text-center">
+					<button class="btnContinue mb-3" onclick="toggleCreateForm()">Create
+						a new Accommodation</button>
+				</div>
+				<div id="createFormContainer">
+					<h:form prependId="false" enctype="multipart/form-data">
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<h:outputLabel for="serviceInfo" value="Service Details"
+										style="font-weight: bold;" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="name" value="Name:" />
+									<h:inputText id="name"
+										value="#{accommodationBean.accommodationVm.name}"
+										styleClass="form-control" />
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel for="price" value="Price:" />
+									<h:inputText id="price"
+										value="#{accommodationBean.accommodationVm.price.amount}"
+										styleClass="form-control" />
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel for="Price" value="Currency*:" required="true"
+										requiredMessage="Currency is required." />
+									<h:selectOneMenu id="typeCurrency"
+										value="#{accommodationBean.accommodationVm.currencyType}"
+										class="form-control" required="true">
+										<f:selectItems value="#{accommodationBean.allCurrencyTypes}"
+											var="type" itemValue="#{type}" itemLabel="#{type.label}" />
+									</h:selectOneMenu>
+								</div>
+
+
+								<div class="form-group mt-4">
+									<label for="availableFrom">Available From*:</label>
+									<h:inputText id="availableFrom"
+										value="#{accommodationBean.accommodationVm.availableFrom}"
+										class="form-control date-picker">
+										<f:convertDateTime pattern="yyyy-MM-dd" timeZone="UTC"
+											type="date" />
+									</h:inputText>
+								</div>
+								<div class="form-group mt-4">
+									<label for="availableTill">Available Until*:</label>
+									<h:inputText id="availableTill"
+										value="#{accommodationBean.accommodationVm.availableTill}"
+										class="form-control date-picker">
+										<f:convertDateTime pattern="yyyy-MM-dd" timeZone="UTC"
+											type="date" />
+									</h:inputText>
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="pictureAccommodation" value="Picture:" />
+									<div class="input-group mt-3">
+										<h:inputFile value="#{accommodationBean.pictureAccommodation}"
+											id="pictureAccommodation"
+											styleClass="custom-file-input d-none"
+											onchange="updateLabel(this);" />
+										<label id="fileLabel" class="form-control">Choose a
+											picture</label>
+
+										<!-- Bouton Upload -->
+
+										<div class="input-group-append">
+											<button type="button" class="btn btn-customUpload"
+												onclick="document.getElementById('pictureAccommodation').click();">Upload</button>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col-md-6">
+
+								<div class="form-group">
+									<h:outputLabel for="Address" value="Address"
+										style="font-weight: bold;" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="num" value="Number:" />
+									<h:inputText id="num"
+										value="#{accommodationBean.accommodationVm.address.num}"
+										styleClass="form-control" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="street" value="Street:" />
+									<h:inputText id="street"
+										value="#{accommodationBean.accommodationVm.address.street}"
+										styleClass="form-control" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="cityName" value="City:" />
+									<h:inputText id="cityName"
+										value="#{accommodationBean.accommodationVm.address.city}"
+										styleClass="form-control" />
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel for="state" value="State:" />
+									<h:inputText id="state"
+										value="#{accommodationBean.accommodationVm.address.state}"
+										styleClass="form-control" />
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel for="country" value="Country:" />
+									<h:inputText id="country"
+										value="#{accommodationBean.accommodationVm.address.country}"
+										styleClass="form-control" />
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel for="zipcode" value="Zip Code:" />
+									<h:inputText id="zipcode"
+										value="#{accommodationBean.accommodationVm.address.zipCode}"
+										styleClass="form-control" />
+								</div>
+
+
+								<div class="form-group mt-4">
+									<label for="availability">Click here to make your
+										service available to our partners:</label>
+									<div class="toggle-button">
+										<h:selectBooleanCheckbox id="availability"
+											value="#{accommodationBean.accommodationVm.availability}" />
+									</div>
+								</div>
+
+
+								<script type="text/javascript">
+    					function updateLabel(inputElement) {
+        					var fileName = inputElement.value.split("\\").pop();
+       						 document.getElementById('fileLabel').textContent = fileName || "No file selected";
+   						}
+						</script>
+
+							</div>
+						</div>
+
+
+						<div class="row row-padding">
+							<div class="col-md-12">
+								<!-- Sixth Slot (full-width) -->
+								<div class="form-group">
+									<h:outputLabel for="description" value="Description:" />
+									<h:inputTextarea id="description"
+										value="#{accommodationBean.accommodationVm.description}"
+										styleClass="form-control" />
+								</div>
+								<div class="form-group d-flex justify-content-center">
+									<h:commandButton value="Add"
+										action="#{accommodationBean.create}" styleClass="btnCheckO" />
+								</div>
+							</div>
+						</div>
+
+
+					</h:form>
+
+				</div>
+			</div>
+
+			<!-- Display the confirmation message when a new package is added -->
+			<!-- Wrapper div to center content both horizontally and vertically -->
+
+
+			<!-- Display the confirmation message when a new package is added -->
+			<ui:fragment
+				rendered="#{not empty accommodationBean.lastAccommodationAdded}">
+				<!-- Inner div with centered text -->
+				<div class="alert alert-success" role="alert"
+					style="text-align: center; margin: 0 auto; max-width: 30%; background-color: #C8E0F4;">
+					<h3>Accommodation Successfully Added</h3>
+					<p>Name: #{accommodationBean.lastAccommodationAdded.name}</p>
+					<p>Price:
+						#{accommodationBean.lastAccommodationAdded.service.price.amount}
+						#{accommodationBean.lastAccommodationAdded.service.price.currency}</p>
+					<p>Address:
+						#{accommodationBean.lastAccommodationAdded.address.num}
+						#{accommodationBean.lastAccommodationAdded.address.num}
+						#{accommodationBean.lastAccommodationAdded.address.street}
+						#{accommodationBean.lastAccommodationAdded.address.city}
+						#{accommodationBean.lastAccommodationAdded.address.state}
+						#{accommodationBean.lastAccommodationAdded.address.zipCode}
+						#{accommodationBean.lastAccommodationAdded.address.country}</p>
+					<p>Description:
+						#{accommodationBean.lastAccommodationAdded.description}</p>
+				</div>
+			</ui:fragment>
+
+
+			<!-- Display the list -->
+			<div class="containerCart mt-10 mb-10 text-center"
+				style="max-width: 90%">
+				<h3>Available Accommodation</h3>
+				<br />
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price</th>
+							<th>Number</th>
+							<th>Street</th>
+							<th>City</th>
+							<th>State</th>
+							<th>ZipCode</th>
+							<th>Country</th>
+							<th>availableFrom</th>
+							<th>availableUntil</th>
+							<th>Description</th>
+							<th>Modify</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat value="#{accommodationBean.allAccommodation}"
+							var="accommodation">
+							<tr>
+								<td>#{accommodation.name}</td>
+								<td>#{accommodation.service.price.amount}</td>
+								<td>#{accommodation.address.num}</td>
+								<td>#{accommodation.address.street}</td>
+								<td>#{accommodation.address.city}</td>
+								<td>#{accommodation.address.state}</td>
+								<td>#{accommodation.address.zipCode}</td>
+								<td>#{accommodation.address.country}</td>
+								<td>#{accommodation.service.availableFrom}</td>
+								<td>#{accommodation.service.availableTill}</td>
+								<td>#{accommodation.description}</td>
+								<td><h:form>
+										<!-- Update button -->
+										<h:commandButton value="Update"
+											action="#{accommodationBean.initFormUpdate}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{accommodation.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Delete button -->
+										<h:commandButton value="Delete"
+											actionListener="#{accommodationBean.performDelete}"
+											styleClass="btn btn-sm btn-outline-secondary2"
+											onclick="return confirmDelete();">
+											<f:param name="id" value="#{accommodation.id}" />
+										</h:commandButton>
+									</h:form></td>
+							</tr>
+						</ui:repeat>
+
+						<h:panelGroup rendered="#{tourPackageBean.deletionSuccessful}">
+							<div class="alert alert-success" role="alert">Deletion of
+								tour package is successful, please refresh the list.</div>
+						</h:panelGroup>
+					</tbody>
+				</table>
+
+				<h:form>
+					<div class="d-flex justify-content-center mt-4">
+						<h:commandButton value="Refresh the list"
+							action="#{accommodationBean.loadAllAccommodations}"
+							styleClass="btnCheckO" />
+
+
+						<h:outputLink
+							value="/triphub/views/product/TpAdvancedSearch.xhtml"
+							styleClass="btnSearch ml-4">
+                            Advanced Search
+                        </h:outputLink>
+
+						<h:button value="Continue Shopping"
+							outcome="/views/organizer_session/homeForWebsite.xhtml"
+							class="btnContinue ml-4" />
+					</div>
+				</h:form>
+			</div>
+
+
+
+
+
+			<h:outputScript library="javascript" name="createNdisplayList.js" />
+			<h:outputScript library="javascript" name="loginJs.js" />
+			<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+			<script
+				src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+	</script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js">
+			</script>
+
+			<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        flatpickr(".date-picker", {});
+    });
+</script>
+			<script>
+    $(document).ready(function(){
+        // initialiser flatpickr pour les champs avec la classe date-picker
+        $(".date-picker").flatpickr({
+            dateFormat: "Y-m-d",
+            enableTime: false
+        });
+    });
+</script>
+			<h:outputScript library="javascript" name="servicesCrud.js" />
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

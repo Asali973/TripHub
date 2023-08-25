@@ -49,17 +49,6 @@
 						</h:selectOneMenu>
 					</div>
 					
-						<div class="reg-form-group">
-						<h:outputLabel for="Price" value="Currency*:" required="true"
-							requiredMessage="Currency is required." />
-						<h:selectOneMenu id="typeCurrency"
-							value="#{accommodationBean.accommodationVm.currencyType}"
-							class="form-control" required="true">
-							<f:selectItems value="#{accommodationBean.allCurrencyTypes}"
-								var="type" itemValue="#{type}" itemLabel="#{type.label}" />
-
-						</h:selectOneMenu>
-					</div>
 			
 						
 						<div class="reg-form-group">
@@ -92,6 +81,18 @@
 							value="#{accommodationBean.accommodationVm.price.amount}"
 							class="form-control" required="true" />
 					</div>
+					<div class="reg-form-group">
+						<h:outputLabel for="Price" value="Currency*:" required="true"
+							requiredMessage="Currency is required." />
+						<h:selectOneMenu id="typeCurrency"
+							value="#{accommodationBean.accommodationVm.currencyType}"
+							class="form-control" required="true">
+							<f:selectItems value="#{accommodationBean.allCurrencyTypes}"
+								var="typeCurrencyType" itemValue="#{typeCurrencyType}" itemLabel="#{typeCurrencyType.label}" />
+
+						</h:selectOneMenu>
+					</div>
+					
 				
 					</div>
 					

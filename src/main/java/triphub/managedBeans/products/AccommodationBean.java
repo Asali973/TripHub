@@ -171,7 +171,7 @@ public class AccommodationBean implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Accommodation updated successfully!"));
 
 			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-			String redirectUrl = contextPath + "/views/product/AccommodationForm.xhtml?faces-redirect=true";
+			String redirectUrl = contextPath + "/views/product/AccommodationFormTest.xhtml?faces-redirect=true";
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 
 		} catch (IllegalArgumentException e) {
