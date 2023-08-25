@@ -95,20 +95,20 @@
  <PROCESS-ITEM NAME="rules:*:5" PATH="*" SHAPE="48,1393,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:5" NAME="item" PATH="*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="accommodations::#views#product#AccommodationForm.xhtml"
-    NAME="output" PATH="/views/product/AccommodationForm.xhtml"
-    TARGET="rules:#views#product#AccommodationForm.xhtml"
+    ID="accommodations::#views#product#AccommodationFormTest.xhtml"
+    NAME="output" PATH="/views/product/AccommodationFormTest.xhtml"
+    TARGET="rules:#views#product#AccommodationFormTest.xhtml"
     TITLE="accommodations" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
-    ID="accommodations::#views#organizer_session#Acommodation.xhtml"
-    NAME="output1" PATH="/views/organizer_session/Acommodation.xhtml"
-    TARGET="rules:#views#organizer_session#Acommodation.xhtml"
+    ID="accommodations::#views#organizer_session#Accommodation.xhtml"
+    NAME="output1" PATH="/views/organizer_session/Accommodation.xhtml"
+    TARGET="rules:#views#organizer_session#Accommodation.xhtml"
     TITLE="accommodations" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#views#organizer_session#Acommodation.xhtml"
-  PATH="/views/organizer_session/Acommodation.xhtml"
+ <PROCESS-ITEM NAME="rules:#views#product#AccommodationFormTest.xhtml"
+  PATH="/views/product/AccommodationFormTest.xhtml" SHAPE="256,1409,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#organizer_session#Accommodation.xhtml"
+  PATH="/views/organizer_session/Accommodation.xhtml"
   SHAPE="256,1553,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#views#product#AccommodationForm.xhtml"
-  PATH="/views/product/AccommodationForm.xhtml" SHAPE="256,1409,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
