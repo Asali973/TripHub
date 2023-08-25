@@ -3,6 +3,7 @@ package triphub.managedBeans.products;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -40,7 +41,7 @@ public class AccommodationBean implements Serializable {
 	private Accommodation lastAccommodationAdded;
 	private String selectedCurrency;
 	private boolean deletionSuccessful;
-
+	private List<String> currencies;
 	private Part pictureAccommodation;
 
 	public AccommodationBean() {
@@ -54,6 +55,7 @@ public class AccommodationBean implements Serializable {
 		this.accommodationService = accommodationService;
 		this.accommodationVm = accommodationVm;
 		this.allAccommodations = allAccommodations;
+		currencies = Arrays.asList("USD", "EUR", "GBP", "JPY", "CAD", "AUD", "CHF");
 	}
 
 	@PostConstruct
@@ -339,6 +341,14 @@ public class AccommodationBean implements Serializable {
 
 	public void setPictureAccommodation(Part pictureAccommodation) {
 		this.pictureAccommodation = pictureAccommodation;
+	}
+
+	public List<String> getCurrencies() {
+		return currencies;
+	}
+
+	public void setCurrencies(List<String> currencies) {
+		this.currencies = currencies;
 	}
 
 }

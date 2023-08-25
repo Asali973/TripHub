@@ -34,7 +34,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<CartItem> cartItems = new ArrayList<>();
     
-    @Column(name = "cart_total")
+    @Column(name = "cart_total", nullable = true)
     private BigDecimal cartTotal;
     
     public static User createUserFromViewModel(UserViewModel form) {
@@ -44,7 +44,8 @@ public class User implements Serializable {
         user.setLastName(form.getLastName());
         user.setEmail(form.getEmail());
         user.setPhoneNum(form.getPhoneNum());
-        user.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));        
+        user.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));  
+        user.setCartTotal(form.getCartTotal());        
         return user;
     }
     
@@ -54,6 +55,9 @@ public class User implements Serializable {
         this.setEmail(form.getEmail());
         this.setPhoneNum(form.getPhoneNum());
         this.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));
+        if (form.getCartTotal() != null) {
+            this.setCartTotal(form.getCartTotal());
+        }
     }
     
     public void initUserViewModel(UserViewModel userViewModel) {
@@ -62,6 +66,7 @@ public class User implements Serializable {
         userViewModel.setLastName(this.getLastName());
         userViewModel.setEmail(this.getEmail());
         userViewModel.setPhoneNum(this.getPhoneNum());
+        userViewModel.setCartTotal(this.getCartTotal());
     }
  
 	public Long getId() {
@@ -128,11 +133,22 @@ public class User implements Serializable {
 		this.finance = finance;
 	}
 
-	public void setCartTotal(BigDecimal totalPrice) {
-	    this.cartTotal = totalPrice;
+	public List<CartItem> getCartItems() {
+		return cartItems;
 	}
-	
-    
-    
+
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
+	}
+
+	public BigDecimal getCartTotal() {
+		return cartTotal;
+	}
+
+	public void setCartTotal(BigDecimal cartTotal) {
+		this.cartTotal = cartTotal;
+	}
+
+        
 }
 

@@ -98,13 +98,7 @@ public class CartItem implements Serializable {
 		this.tourPackage = tourPackage;
 	}
 
-//	public Service getService() {
-//		return service;
-//	}
-//
-//	public void setService(Service service) {
-//		this.service = service;
-//	}
+
 
 	public Date getDateOfOrder() {
 		return dateOfOrder;

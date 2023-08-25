@@ -255,10 +255,7 @@ public class CartBean implements Serializable {
 	            itemPrice = cartItem.getRestaurant().getService().getPrice().getAmount();
 	        } else if (cartItem.getAccommodation() != null) {	        	
 	            itemPrice = cartItem.getAccommodation().getService().getPrice().getAmount();
-	        } else if (cartItem.getTransportation() != null) {
-	        	 System.out.println("CartItem in CartBean: " + cartItem);
-		    	    System.out.println("Transportation Name: " + cartItem.getTransportation().getName());
-		    	    System.out.println("Transportation Price: " + cartItem.getTransportation().getService().getPrice().getAmount());
+	        } else if (cartItem.getTransportation() != null) {	        	
 	            itemPrice = cartItem.getTransportation().getService().getPrice().getAmount();
 	        }
 
@@ -289,7 +286,7 @@ public class CartBean implements Serializable {
 	public void updateCartItemQuantity(CartItem cartItem) {
 		// Retrieve the User object from the session map
 		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-		// && cartItem.getNewQuantity() != cartItem.getQuantity()
+		
 		if (user != null) {
 			if (cartItem.getNewQuantity() > 0) {
 				cartItem.setQuantity(cartItem.getNewQuantity());
