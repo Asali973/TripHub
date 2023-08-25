@@ -1,0 +1,209 @@
+.card-header {
+	background-color: #f8f9fa;
+	font-weight: bold;
+	border-radius: 8px 8px 0 0;
+}
+
+.table td, .table th {
+	vertical-align: middle;
+}
+
+.mt-5 {
+	margin-top: 3rem !important;
+}
+
+.rounded-image {
+	border-radius: 15px;
+	transition: transform 0.3s;
+}
+
+.rounded-image:hover {
+	transform: scale(1.08);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+	max-height: 60px; /* La hauteur maximale que vous souhaitez */
+	width: auto;
+	margin-right: 15px;
+}
+
+.navbar-brand-text {
+	font-size: 24px;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center; /* Ceci centrera verticalement le texte et l'image */
+    justify-content: center; /* Ceci centrera horizontalement le contenu */
+}
+
+.navbar-logo {
+    margin-right: 20px; /* Ajouter de l'espace à droite de l'image */
+}
+
+.centered-content th, 
+.centered-content td {
+    text-align: center;
+}
+
+.table-content-bold {
+    font-weight: bold;
+    font-size: 1.2em; /* Ajustez la taille selon vos préférences */
+}
+
+h1 {
+    font-size: 2.5em; /* Augmente la taille de la police */
+    font-weight: bold; /* Rend le texte en gras */
+    letter-spacing: 1px; /* Augmente l'espacement des lettres */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
+    color: #333; /* Définit la couleur du texte */
+    text-transform: uppercase; /* Transforme le texte en majuscules */
+    margin-bottom: 20px; /* Ajoute un espace en dessous du titre */
+}
+
+
+
+.card, .card2 {
+	max-width: 80%;
+    margin: 0px auto 30px auto;
+    margin-top: 30px;
+    max-width: 1200px;  /* Augmentez la largeur maximale si nécessaire */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(15px);
+    opacity: 1;
+    padding: 20px 30px;  /* Réduisez le padding pour plus d'espace de contenu */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card2 {
+    padding: 20px 10px;  /* Réduisez le padding pour plus d'espace de contenu */
+}
+
+h3 {
+    font-weight: 600; /* Slightly bolder than normal but not too bold */
+    font-size: 2em; /* A modest increase in size */
+    color: #333; /* A deep shade of gray for an elegant touch */
+    letter-spacing: 0.5px; /* A slight increase for better readability */
+    line-height: 1.4; /* Improved line spacing for visual appeal */
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+
+h2 {
+    font-weight: 400; /* Slightly bolder than normal but not too bold */
+    font-size: 1.6em; /* A modest increase in size */
+    color: #333; /* A deep shade of gray for an elegant touch */
+    letter-spacing: 0.5px; /* A slight increase for better readability */
+    line-height: 1.1; /* Improved line spacing for visual appeal */
+}
+
+.containerForm {
+    margin-top: 30px;  /* Ajustez les marges du contenu si nécessaire */
+    margin-bottom: 30px;  /* Exemple pour ajuster la marge inférieure */
+}
+.container-fluid {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.btn {
+	width:80px;
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 1.1em;
+	transition: all 0.3s;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 5px;
+	transition: transform 0.3s;
+}
+
+.btn:hover {
+	background-color: #074b00;
+	color: white;
+	transform: translateY(-2px);
+}
+
+.content-wrapper {
+	flex: 1;
+	/* permet à ce div de prendre tout l'espace disponible, poussant ainsi le footer vers le bas */
+}
+
+.sticky-footer {
+	flex-shrink: 0;
+	/* empêche le footer de réduire s'il y a beaucoup de contenu sur la page */
+}
+
+.container {
+	flex: 1;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+	color: #ffffff;
+	font-weight: bold;
+}
+
+/* Sous-ligne */
+.navbar-nav .nav-link:hover {
+	text-decoration: underline;
+	color: #6467bb;
+	transform: scale(1.1);
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.footer a {
+	color: #ffffff;
+}
+
+.footer a:hover {
+	color: #50b3a2;
+}
+
+.footer {
+	height: 80px;
+	color: #ffffff;
+	border-top: none;
+}
+
+.social-icons a {
+	font-size: 1.5rem;
+	margin: 0 10px;
+	transition: color 0.3s;
+	color: #ffffff;
+}
+
+.social-icons a:hover {
+	color: #50b3a2;
+}
+
+.social-icons {
+	list-style: none;
+	padding: 0;
+}
+
+.social-icons li {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.social-icons li:last-child {
+	margin-right: 0;
+}
+
+.navbar-nav .nav-link, .footer a {
+	transition: all 0.3s; /* Transition douce pour tous les changements */
+}
+
+.social-icons a:hover {
+	transform: rotate(15deg);
+	/* Rotation douce sur les icônes de médias sociaux */
+}

@@ -22,10 +22,10 @@
 <h:body>
 	<div class="container2 mt-5 mb-5">
 		<h:form>
-		<div class="text-center">
-		<h1>Checkout Form</h1>
-		</div>
-			
+			<div class="text-center">
+				<h1>Checkout Form</h1>
+			</div>
+
 			<div class="row">
 				<!-- Billing Address Section -->
 				<div class="col-lg-6">
@@ -119,11 +119,8 @@
 							class="form-check-input" /> <label class="form-check-label">Shipping
 							address same as billing</label>
 					</div>
-
-
 				</div>
 
-				<!-- Cart Section -->
 				<div class="col-lg-6">
 					<div class="card">
 						<div class="card-header">
@@ -136,15 +133,52 @@
 							<ui:fragment rendered="#{not empty checkoutBean.cartItems}">
 								<h6>Customer Name: #{checkoutBean.fullName}</h6>
 								<h6>Product Details:</h6>
+
 								<ul class="list-group">
 									<ui:repeat value="#{checkoutBean.cartItems}" var="item">
-										<li class="list-group-item">#{item.tourPackage.name} <span
-											class="float-right"> #{item.quantity} x
-												#{item.tourPackage.price.amount}
-												#{item.tourPackage.price.currency} = #{item.quantity *
-												item.tourPackage.price.amount}
-												#{item.tourPackage.price.currency} </span>
-										</li>
+										<!-- TourPackage -->
+										<h:panelGroup rendered="#{item.tourPackage != null}">
+											<li class="list-group-item">#{item.tourPackage.name} <span
+												class="float-right"> #{item.quantity} x
+													#{item.tourPackage.price.amount}
+													#{item.tourPackage.price.currency} = #{item.quantity *
+													item.tourPackage.price.amount}
+													#{item.tourPackage.price.currency} </span>
+											</li>
+										</h:panelGroup>
+
+										<!-- Accommodation -->
+										<h:panelGroup rendered="#{item.accommodation != null}">
+											<li class="list-group-item">#{item.accommodation.name} <span
+												class="float-right"> #{item.quantity} x
+													#{item.accommodation.service.price.amount}
+													#{item.accommodation.service.price.currency} =
+													#{item.quantity * item.accommodation.service.price.amount}
+													#{item.accommodation.service.price.currency} </span>
+											</li>
+										</h:panelGroup>
+
+										<!-- Restaurant -->
+										<h:panelGroup rendered="#{item.restaurant != null}">
+											<li class="list-group-item">#{item.restaurant.name} <span
+												class="float-right"> #{item.quantity} x
+													#{item.restaurant.service.price.amount}
+													#{item.restaurant.service.price.currency} = #{item.quantity
+													* item.restaurant.service.price.amount}
+													#{item.restaurant.service.price.currency} </span>
+											</li>
+										</h:panelGroup>
+
+										<!-- Transportation -->
+										<h:panelGroup rendered="#{item.transportation != null}">
+											<li class="list-group-item">#{item.transportation.name}
+												<span class="float-right"> #{item.quantity} x
+													#{item.transportation.service.price.amount}
+													#{item.transportation.service.price.currency} =
+													#{item.quantity * item.transportation.service.price.amount}
+													#{item.transportation.service.price.currency} </span>
+											</li>
+										</h:panelGroup>
 									</ui:repeat>
 								</ul>
 								<h5 class="mt-3">
@@ -155,88 +189,23 @@
 						</div>
 					</div>
 				</div>
-			</div>
+				</div>
 		</h:form>
+
+
+
+
 		<h:form>
 			<div class="d-flex justify-content-center">
 				<h:commandButton value="Pay"
-					action="#{checkoutBean.completePurchase}"
-					styleClass="btnCheckO" />
-
-			<!-- Cart Section -->
-			<div class="col-25">
-				<div class="container">
-					<h4>
-						Cart <span class="price" style="color: black"><i
-							class="fa fa-shopping-cart"></i> <b>#{checkoutBean.cartItems.size()}</b></span>
-					</h4>
-
-					<ui:fragment rendered="#{not empty checkoutBean.cartItems}">
-						<h:outputText value="Customer Name: " />
-						<h:outputText value="#{checkoutBean.fullName}" />
-						<br />
-						<h:outputText value="Product Details:" />
-
-
-						<ul>
-			<ui:repeat value="#{checkoutBean.cartItems}" var="item">
-
-    <!-- TourPackage -->
-    <h:panelGroup rendered="#{item.tourPackage != null}">
-        <li>
-            <h:outputText value="#{item.tourPackage.name}" />
-            <span class="price">
-                #{item.quantity} x #{item.tourPackage.price.amount} #{item.tourPackage.price.currency}
-            </span>
-        </li>
-    </h:panelGroup>
-
-    <!-- Accommodation -->
-    <h:panelGroup rendered="#{item.accommodation != null}">
-        <li>
-            <h:outputText value="#{item.accommodation.name}" />
-            <span class="price">
-                #{item.quantity} x #{item.accommodation.service.price.amount} #{item.accommodation.service.price.currency}
-            </span>
-        </li>
-    </h:panelGroup>
-
-    <!-- Restaurant -->
-    <h:panelGroup rendered="#{item.restaurant != null}">
-        <li>
-            <h:outputText value="#{item.restaurant.name}" />
-            <span class="price">
-                #{item.quantity} x #{item.restaurant.service.price.amount} #{item.restaurant.service.price.currency}
-            </span>
-        </li>
-    </h:panelGroup>
-
-    <!-- Transportation -->
-    <h:panelGroup rendered="#{item.transportation != null}">
-        <li>
-            <h:outputText value="#{item.transportation.name}" />
-            <span class="price">
-                #{item.quantity} x #{item.transportation.service.price.amount} #{item.transportation.service.price.currency}
-            </span>
-        </li>
-    </h:panelGroup>
-
-</ui:repeat>
-					</ul>
-						<h:outputText value="Total Price:" />
-						<p>
-							<span class="price" style="color: black"> <b>#{checkoutBean.totalPrice}
-									#{checkoutBean.cartItems[0].tourPackage.price.currency}</b>
-							</span>
-						</p>
-					</ui:fragment>
-
-
+					action="#{checkoutBean.completePurchase}" styleClass="btnCheckO" />
 				<h:button value="Continue Shopping"
 					outcome="/views/organizer_session/homeForWebsite.xhtml"
 					class="btnContinue ml-2" />
 			</div>
 		</h:form>
+
 	</div>
+
 </h:body>
 </html>
