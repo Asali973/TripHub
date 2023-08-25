@@ -8,8 +8,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 	<h:outputStylesheet library="css" name="website.css" />
+	<h:outputStylesheet library="css" name="checkout.css" />
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+	<link
+		href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+		rel="stylesheet" />
 	<title>Your Cart</title>
 	<style>
 .tour-packages {
@@ -26,79 +31,94 @@
 </style>
 </h:head>
 <h:body>
-	<h:form>
-		<h1>Your Cart</h1>
-		<h:outputText value="Date of Purchase: #{cartBean.dateOfPurchase}">
-			<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
-		</h:outputText>
+	<div class="containerCart mt-5 mb-5">
+		<h:form>
+			<h1 class="text-center mb-4">Your Cart</h1>
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Item</th>
-					<th>Price</th>
-					<th>Date Time</th>
-					<th>User</th>
-					<th>Quantity</th>
-					<th>Update Quantity</th>
-					<th>Remove</th>
-				</tr>
-			</thead>
-			<tbody>
-				<ui:repeat value="#{cartBean.cartItems}" var="item">
+			<table class="table table-bordered table-hover mt-4">
+				<thead>
 					<tr>
-						<td><h:outputText rendered="#{item.tourPackage != null}"
-								value="#{item.tourPackage.name}" /> <h:outputText
-								rendered="#{item.accommodation != null}"
-								value="#{item.accommodation.name}" /> <h:outputText
-								rendered="#{item.restaurant != null}"
-								value="#{item.restaurant.name}" /> <h:outputText
-								rendered="#{item.transportation != null}"
-								value="#{item.transportation.name}" /></td>
-						<td><h:outputText rendered="#{item.tourPackage != null}"
-								value="#{item.tourPackage.price.amount} #{item.tourPackage.price.currency}" />
-							<h:outputText rendered="#{item.accommodation != null}"
-								value="#{item.accommodation.service.price.amount} #{item.accommodation.service.price.currency}" />
-							<h:outputText rendered="#{item.restaurant != null}"
-								value="#{item.restaurant.service.price.amount} #{item.restaurant.service.price.currency}" />
-							<h:outputText rendered="#{item.transportation != null}"
-								value="#{item.transportation.service.price.amount} #{item.transportation.service.price.currency}" />
-						</td>
-						<!-- Other columns remain the same -->
-						<td><h:outputText value="#{item.dateOfOrder}">
-								<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
-							</h:outputText></td>
-						<td><h:outputText
-								value="#{item.user.firstName} #{item.user.lastName}" /></td>
-						<td><h:outputText value="#{item.quantity}" /></td>
-						<td><h:inputText value="#{item.newQuantity}" /> <h:commandButton
-								value="Add" action="#{cartBean.updateCartItemQuantity(item)}" />
-						</td>
-						<td><h:commandButton value="Remove"
-								action="#{cartBean.removeFromCart(item.id, item.user)}"
-								immediate="true" /></td>
+						<th>Item</th>
+						<th>Price</th>
+						<th>Date Time</th>
+						<th>User</th>
+						<th>Quantity</th>
+						<th>Update Quantity</th>
+						<th>Remove</th>
 					</tr>
-				</ui:repeat>
+				</thead>
+				<tbody>
+					<ui:repeat value="#{cartBean.cartItems}" var="item">
+						<tr>
+							<td><h:outputText rendered="#{item.tourPackage != null}"
+									value="#{item.tourPackage.name}" /> <h:outputText
+									rendered="#{item.accommodation != null}"
+									value="#{item.accommodation.name}" /> <h:outputText
+									rendered="#{item.restaurant != null}"
+									value="#{item.restaurant.name}" /> <h:outputText
+									rendered="#{item.transportation != null}"
+									value="#{item.transportation.name}" /></td>
+							<td><h:outputText rendered="#{item.tourPackage != null}"
+									value="#{item.tourPackage.price.amount} #{item.tourPackage.price.currency}" />
+								<h:outputText rendered="#{item.accommodation != null}"
+									value="#{item.accommodation.service.price.amount} #{item.accommodation.service.price.currency}" />
+								<h:outputText rendered="#{item.restaurant != null}"
+									value="#{item.restaurant.service.price.amount} #{item.restaurant.service.price.currency}" />
+								<h:outputText rendered="#{item.transportation != null}"
+									value="#{item.transportation.service.price.amount} #{item.transportation.service.price.currency}" />
+							</td>
+							<!-- Other columns remain the same -->
+							<td><h:outputText value="#{item.dateOfOrder}">
+									<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+								</h:outputText></td>
+							<td><h:outputText
+									value="#{item.user.firstName} #{item.user.lastName}" /></td>
+							<td><h:outputText value="#{item.quantity}" /></td>
+							<td>
+								<div class="input-group">
+									<h:inputText value="#{item.newQuantity}"
+										styleClass="form-control form-control-sm" />
+									<div class="input-group-append">
+										<h:commandButton value="Add"
+											action="#{cartBean.updateCartItemQuantity(item)}"
+											styleClass="btn btn-sm btn-outline-secondary" />
 
-			</tbody>
+									</div>
+								</div>
+							</td>
+							<td><h:commandButton value="Remove"
+									action="#{cartBean.removeFromCart(item.id, item.user)}"
+									immediate="true" styleClass="btn btn-sm btn-outline-secondary2" /></td>
+						</tr>
+					</ui:repeat>
 
-		</table>
-		<h:outputText
-			value="Total Price: #{cartBean.calculateTotalPrice(cartBean.cartItems)} 
+				</tbody>
+
+			</table>
+
+
+			<br></br>
+			<h3 class="text-center mt-3 font-weight-bold">
+				<h:outputText
+					value="Total Price: #{cartBean.calculateTotalPrice(cartBean.cartItems)} 
 #{not empty cartBean.cartItems and cartBean.cartItems[0].tourPackage != null ? cartBean.cartItems[0].tourPackage.price.currency :
  cartBean.cartItems[0].accommodation != null ? cartBean.cartItems[0].accommodation.service.price.currency :
  cartBean.cartItems[0].restaurant != null ? cartBean.cartItems[0].restaurant.service.price.currency :
  cartBean.cartItems[0].transportation != null ? cartBean.cartItems[0].transportation.service.price.currency : ''}" />
+			</h3>
+
+			<br></br>
+			<div class="d-flex justify-content-center">
+				<h:button value="Continue Shopping"
+					outcome="/views/organizer_session/homeForWebsite.xhtml"
+					class="btnContinue" />
+				<h:commandButton value="Proceed to Checkout"
+					action="#{cartBean.goToCheckout}" class="btnCheckO ml-2" />
+			</div>
 
 
-		<h:button value="Continue Shopping"
-			outcome="/views/organizer_session/homeForWebsite.xhtml" />
-		<!-- Add the h:link component to transfer data to CheckOut.xhtml -->
-		<h:commandButton value="Proceed to Checkout"
-			action="#{cartBean.goToCheckout}" />
-
-
-	</h:form>
+		</h:form>
+	</div>
 </h:body>
 
 </html>
