@@ -45,6 +45,8 @@
     background-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     padding: 20px 30px;
+                border: 1px solid #ddd;
+            margin-bottom: 10px;
 }
 
 .card-img-top, .rounded-image {
@@ -55,14 +57,20 @@
 }
 
 .card-body, .card2 {
-    padding: 20px;
+    padding: 10px;
 }
 
-.card-header {
-    background-color: #f8f9fa;
-    font-weight: bold;
-    border-radius: 8px 8px 0 0;
-}
+        .card-header {
+            padding: 10px;
+            background-color: #f7f7f7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+                .card-header i {
+            margin-right: 10px;
+        }
 
 /* Typography */
 h1, h2, h3 {
@@ -70,6 +78,10 @@ h1, h2, h3 {
     font-weight: bold;
     letter-spacing: 0.5px;
 }
+
+        .hidden {
+            display: none;
+        }
 
 h1 {
     font-size: 2.5em;
@@ -200,3 +212,76 @@ h3 {
 .container-fluid {
     padding: 0 2%;
 }
+
+
+
+/* Pour les icônes Font Awesome ajoutées */
+h3 i {
+    margin-right: 15px;
+    transition: transform 0.3s;
+}
+
+h3:hover i {
+    transform: scale(1.3);
+    color: #6467bb;
+}
+
+/* Effet de gradient pour les boutons */
+.btn {
+    background: linear-gradient(45deg, #074b00, #2f7d32);
+    box-shadow: 0 3px 5px 2px rgba(0, 0, 0, .3);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+.btn:hover {
+    background: linear-gradient(45deg, #2f7d32, #074b00);
+    box-shadow: 0 5px 8px 2px rgba(0, 0, 0, .3);
+    transform: translateY(-2px);
+}
+
+/* Pour l'effet hover sur les icônes */
+h3:hover {
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Amélioration de la disposition des cartes pour une meilleure présentation */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+        .card2 {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .card-header {
+            padding: 10px;
+            background-color: #f7f7f7;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header i {
+            margin-right: 10px;
+        }
+
+        .card-body {
+            padding: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+

@@ -6,7 +6,6 @@
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/helpers/AuthenticationException.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/viewModel/UserViewModel.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/ImageConverter.java
-/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/Product.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/helpers/PasswordUtils.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/util/CurrencyType.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/AccommodationService.java
@@ -54,6 +53,7 @@
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/service/ServiceDAO.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/service/Service.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/subscription/Layout.java
+/Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/entity/product/Order.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/TransportationService.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/dao/user/UserDAO.java
 /Users/brendan/Desktop/P3_TRIPHUB/TripHub/src/main/java/triphub/services/CartService.java
