@@ -136,7 +136,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<div class="row row-padding">
 							<div class="col-md-12">
 								<!-- Sixth Slot (full-width) -->
@@ -158,21 +158,26 @@
 			<!-- Wrapper div to center content both horizontally and vertically -->
 
 
-    <!-- Display the confirmation message when a new package is added -->
-    <ui:fragment rendered="#{not empty tourPackageBean.lastTourPackageAdded}">
-        <!-- Inner div with centered text -->
-        <div class="alert alert-success" role="alert" style="text-align: center;margin: 0 auto; max-width: 30%;background-color: #C8E0F4;">
-            <h3>Package Successfully Added</h3>
-            <p>Name: #{tourPackageBean.lastTourPackageAdded.name}</p>
-            <p>Price: #{tourPackageBean.lastTourPackageAdded.price.amount}
-                #{tourPackageBean.lastTourPackageAdded.price.currency}</p>
-            <p>Name: #{tourPackageBean.lastTourPackageAdded.destination.cityName}
-                #{tourPackageBean.lastTourPackageAdded.destination.state}
-                #{tourPackageBean.lastTourPackageAdded.destination.country}</p>
-            <p>Name: #{tourPackageBean.lastTourPackageAdded.theme.themeName}</p>
-            <p>Description: #{tourPackageBean.lastTourPackageAdded.description}</p>
-        </div>
-    </ui:fragment>
+			<!-- Display the confirmation message when a new package is added -->
+			<ui:fragment
+				rendered="#{not empty tourPackageBean.lastTourPackageAdded}">
+				<!-- Inner div with centered text -->
+				<div class="alert alert-success" role="alert"
+					style="text-align: center; margin: 0 auto; max-width: 30%; background-color: #C8E0F4;">
+					<h3>Package Successfully Added</h3>
+					<p>Name: #{tourPackageBean.lastTourPackageAdded.name}</p>
+					<p>Price: #{tourPackageBean.lastTourPackageAdded.price.amount}
+						#{tourPackageBean.lastTourPackageAdded.price.currency}</p>
+					<p>Name:
+						#{tourPackageBean.lastTourPackageAdded.destination.cityName}
+						#{tourPackageBean.lastTourPackageAdded.destination.state}
+						#{tourPackageBean.lastTourPackageAdded.destination.country}</p>
+					<p>Name:
+						#{tourPackageBean.lastTourPackageAdded.theme.themeName}</p>
+					<p>Description:
+						#{tourPackageBean.lastTourPackageAdded.description}</p>
+				</div>
+			</ui:fragment>
 
 
 			<!-- Display the list -->
@@ -230,30 +235,26 @@
 						</h:panelGroup>
 					</tbody>
 				</table>
-				
-							<h:form>
-				<div class="d-flex justify-content-center mt-4">
-					<h:commandButton value="Refresh the list"
-						action="#{tourPackageBean.loadAllTourPackages}"
-						styleClass="btnCheckO" />
+
+				<h:form>
+					<div class="d-flex justify-content-center mt-4">
+						<h:commandButton value="Refresh the list"
+							action="#{tourPackageBean.loadAllTourPackages}"
+							styleClass="btnCheckO" />
 
 
-					<h:outputLink value="/triphub/views/product/TpAdvancedSearch.xhtml"
-						styleClass="btnSearch ml-4">
+						<h:outputLink
+							value="/triphub/views/product/TpAdvancedSearch.xhtml"
+							styleClass="btnSearch ml-4">
                             Advanced Search
                         </h:outputLink>
 
-					<h:button value="Continue Shopping"
-						outcome="/views/organizer_session/homeForWebsite.xhtml"
-						class="btnContinue ml-4" />
-				</div>
-			</h:form>
+						<h:button value="Continue Shopping"
+							outcome="/views/organizer_session/homeForWebsite.xhtml"
+							class="btnContinue ml-4" />
+					</div>
+				</h:form>
 			</div>
-
-
-
-
-
 
 			<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 			<script
