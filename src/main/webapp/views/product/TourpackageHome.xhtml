@@ -28,6 +28,7 @@
 
 		<ui:define name="content">
 
+
 			<div class="containerCart mt-5 mb-5">
 				<div class="text-center">
 					<button class="btnContinue mb-3" onclick="toggleCreateForm()">Create
@@ -114,7 +115,6 @@
 									</div>
 								</div>
 
-
 								<script type="text/javascript">
     					function updateLabel(inputElement) {
         					var fileName = inputElement.value.split("\\").pop();
@@ -155,23 +155,25 @@
 			</div>
 
 			<!-- Display the confirmation message when a new package is added -->
-			<ui:fragment
-				rendered="#{not empty tourPackageBean.lastTourPackageAdded}">
-				<div class="alert alert-success" role="alert">
-					<h3>Package Successfully Added</h3>
-					<p>Name: #{tourPackageBean.lastTourPackageAdded.name}</p>
-					<p>Price: #{tourPackageBean.lastTourPackageAdded.price.amount}
-						#{tourPackageBean.lastTourPackageAdded.price.currency}</p>
-					<p>Name:
-						#{tourPackageBean.lastTourPackageAdded.destination.cityName}
-						#{tourPackageBean.lastTourPackageAdded.destination.state}
-						#{tourPackageBean.lastTourPackageAdded.destination.country}</p>
-					<p>Name:
-						#{tourPackageBean.lastTourPackageAdded.theme.themeName}</p>
-					<p>Description:
-						#{tourPackageBean.lastTourPackageAdded.description}</p>
-				</div>
-			</ui:fragment>
+			<!-- Wrapper div to center content both horizontally and vertically -->
+
+
+    <!-- Display the confirmation message when a new package is added -->
+    <ui:fragment rendered="#{not empty tourPackageBean.lastTourPackageAdded}">
+        <!-- Inner div with centered text -->
+        <div class="alert alert-success" role="alert" style="text-align: center;margin: 0 auto; max-width: 30%;background-color: #C8E0F4;">
+            <h3>Package Successfully Added</h3>
+            <p>Name: #{tourPackageBean.lastTourPackageAdded.name}</p>
+            <p>Price: #{tourPackageBean.lastTourPackageAdded.price.amount}
+                #{tourPackageBean.lastTourPackageAdded.price.currency}</p>
+            <p>Name: #{tourPackageBean.lastTourPackageAdded.destination.cityName}
+                #{tourPackageBean.lastTourPackageAdded.destination.state}
+                #{tourPackageBean.lastTourPackageAdded.destination.country}</p>
+            <p>Name: #{tourPackageBean.lastTourPackageAdded.theme.themeName}</p>
+            <p>Description: #{tourPackageBean.lastTourPackageAdded.description}</p>
+        </div>
+    </ui:fragment>
+
 
 			<!-- Display the list -->
 			<div class="containerCart mt-5 mb-5 text-center">

@@ -41,7 +41,7 @@ public class CheckoutBean implements Serializable {
                 ids.add(Long.parseLong(id));
             }
             // can retrieve the CartItems using these ids from the database or wherever you have stored them.
-            cartItems =iCartService.getCartItemsWithTourPackages();
+            cartItems =iCartService.getCartItemsWithProducts();
         }
 
         String totalPriceParam = params.get("totalPrice");

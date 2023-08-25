@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+
 import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToOne;
 
 import triphub.entity.product.service.Service;
@@ -31,13 +33,15 @@ public class Transportation {
 	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "departure")
 	private Address departure;
 
 	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "arrival")
 	private Address arrival;
 
 	@Enumerated(EnumType.STRING)
-	private TransportationType transportation;
+	private TransportationType transportationType;
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
 	private Picture picture;
@@ -60,12 +64,12 @@ public class Transportation {
 
 	}
 
-	public Transportation(String name, Address departure, Address arrival, TransportationType transportation,
+	public Transportation(String name, Address departure, Address arrival, TransportationType transportationType,
 			Picture picture, String description, Service service) {
 		this.name = name;
 		this.departure = departure;
 		this.arrival = arrival;
-		this.transportation = transportation;
+		this.transportationType = transportationType;
 		this.picture = picture;
 		this.description = description;
 		this.service = service;
@@ -77,7 +81,7 @@ public class Transportation {
 		transportation.setName(transportationvm.getName());
 		transportation.setDeparture(transportationvm.getDeparture());
 		transportation.setArrival(transportationvm.getArrival());
-		transportation.setTransportation(transportationvm.getTransportationType());
+		transportation.setTransportationType(transportationvm.getTransportationType());
 		transportation.setDescription(transportationvm.getDescription());
 		transportation.setService(transportationvm.getService());
 		
@@ -150,12 +154,12 @@ public class Transportation {
 		this.arrival = arrival;
 	}
 
-	public TransportationType getTransportation() {
-		return transportation;
+	public TransportationType getTransportationType() {
+		return transportationType;
 	}
 
-	public void setTransportation(TransportationType transportation) {
-		this.transportation = transportation;
+	public void setTransportationType(TransportationType transportationType) {
+		this.transportationType = transportationType;
 	}
 
 	public String getName() {

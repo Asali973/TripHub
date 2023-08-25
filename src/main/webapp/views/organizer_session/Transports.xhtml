@@ -35,7 +35,7 @@
         <h2>#{transport.name}</h2>
         <p>Description: #{transport.description}</p>
         <p>Price: #{transport.service.price.amount} #{transport.service.price.currency}</p>
-        <p>Mode of Transportation: #{transport.transportation}</p>       
+        <p>Mode of Transportation: #{transport.transportationType}</p>       
         <a href="details_trans.xhtml?id=#{transport.id}" class="btn btn-primary">View Details</a>
     </div>
 </ui:repeat>
