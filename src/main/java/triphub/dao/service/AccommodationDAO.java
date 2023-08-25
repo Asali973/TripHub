@@ -42,15 +42,13 @@ public class AccommodationDAO {
 
 		// Create Service
 		Service service = Service.createServiceFromViewModel(accommodationVm);
+		service.setType(ServiceType.ACCOMMODATION);
 
 	    // Create Price
 	    Price price = Price.createPriceFromViewModel(accommodationVm);
 	    price.setAmount(accommodationVm.getPrice().getAmount());
 	    price.setCurrency(accommodationVm.getCurrencyType().getLabel());        
 	    service.setPrice(price);
-
-
-
 
 		service.setAvailableFrom(accommodationVm.getAvailableFrom());
 		service.setAvailableTill(accommodationVm.getAvailableTill());

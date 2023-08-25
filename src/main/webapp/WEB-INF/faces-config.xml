@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
  
- <faces-config version="2.2"
+<faces-config version="2.2"
 		xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
@@ -79,7 +79,17 @@
         <to-view-id>/views/organizer_session/Acommodation.xhtml</to-view-id>
     </navigation-case>
 </navigation-rule>
-
+<navigation-rule>
+    <from-view-id>*</from-view-id>
+    <navigation-case>
+        <from-outcome>restaurants</from-outcome>
+        <to-view-id>/views/product/RestaurantForm.xhtml</to-view-id>
+    </navigation-case>
+    <navigation-case>
+        <from-outcome>restaurants</from-outcome>
+        <to-view-id>/views/organizer_session/Restaurant.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
 <navigation-rule>
     <from-view-id>/views/organizer_session/details.xhtml</from-view-id>
     <navigation-case>

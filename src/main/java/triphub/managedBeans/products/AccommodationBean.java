@@ -80,42 +80,6 @@ public class AccommodationBean implements Serializable {
 		}
 	}
 
-//	@PostConstruct
-//	public void init() {
-//
-//		allAccommodations = accommodationService.getAll();
-//
-//		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-//
-//		if (id != null) {
-//			Long accommodationId = Long.parseLong(id);
-//			System.out.println("affiche accommodation id dans init  " + accommodationId);
-//			System.out.println("affiche accommodationvm dans init  " + accommodationVm);
-//			// TODO modifier pour stocker l'accommodation choisie et non pas que l'Id
-//
-//			// Store the selected accommodation id in the session
-//			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedAccommodationId",
-//					accommodationId);
-//
-//			// Fetch the selected accommodation using accommodationService
-//			accommodationVm = accommodationService.initSubService(accommodationId);
-//			System.out.println("accommodation bean init " + accommodationVm);
-//			if (accommodationVm == null) {
-//				FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
-//			}
-//		}
-
-//		if (id != null) {
-//			FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
-
-	// initialize an Accommodation ViewModel
-	// accommodationVm = accommodationService.initSubService(accommodationId);
-	// if (accommodationVm == null) {
-	// FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation
-	// ViewModel does not exist");
-	// }
-	// }
-//	}
 
 	public String loadAllAccommodations() {
 		allAccommodations = accommodationService.getAll();
@@ -152,18 +116,14 @@ public class AccommodationBean implements Serializable {
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Accommodation added successfully !"));
 
-		clear();
+		
 	}
 
-//	public void create() {
-//		accommodationService.create(accommodationVm);
-//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Accommodation added successfully !"));
-//
-//	}
+
 
 	public String updateAccommodation() {
 		try {
-			// accommodationVm.setCurrency(selectedCurrency);
+			
 			accommodationService.update(accommodationVm);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Accommodation updated successfully!"));
@@ -178,14 +138,14 @@ public class AccommodationBean implements Serializable {
 			FacesMessageUtil.addErrorMessage("Failed to update accommodation. An unexpected error occurred.");
 
 		}
-		// clear();
+
 
 		return null;
 	}
 
 	public String initFormUpdate() {
 		try {
-			System.out.println("accommodation bean init formUpdate " + accommodationVm);
+		
 
 			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
 			String redirectUrl = contextPath + "/views/product/AccomUpdate.xhtml?faces-redirect=true&id="
@@ -198,7 +158,7 @@ public class AccommodationBean implements Serializable {
 			FacesMessageUtil.addErrorMessage("Failed to update accommodation. An unexpected error occurred.");
 
 		}
-		// clear();
+		
 
 		return null; // TODO à quoi sert le srting ici
 

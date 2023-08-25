@@ -37,12 +37,16 @@ public class RestaurantBean implements Serializable {
 	private SubServicesViewModel restaurantvm = new SubServicesViewModel();
 	@Inject RestaurantDAO restaurantDao;
 	
-	private List<Restaurant> allRestaurants;
+	
 
 	private Restaurant selectedRestaurant;
 	
 	private Part pictureRestaurant;
 	private String picName;
+	private List<Restaurant> allRestaurants;
+
+	private Restaurant lastRestaurantAdded;
+	private boolean deletionSuccessful;
 
 	public RestaurantBean(RestaurantService restaurantService, SubServicesViewModel restaurantvm, List<Restaurant> allRestaurants) {
 		
@@ -80,31 +84,10 @@ public class RestaurantBean implements Serializable {
 	    }
 	}
 
-	
-//	@PostConstruct
-//	public void init() {
-//		allRestaurants = restaurantService.getAll();
-//		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-//		if (id != null) {
-//			Long restaurantId = Long.parseLong(id);
-//			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedRestaurantId",
-//					restaurantId);
-//			restaurantvm = restaurantService.initSubService(restaurantId);
-//			if (restaurantvm == null) {
-//				FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist");
-//			}
-//		}
-//		if (id != null) {
-//		    Long restaurantId = Long.parseLong(id);
-//		    // Fetch the selected restaurant using restaurantService
-//		    selectedRestaurant = restaurantDao.findById(restaurantId);
-//
-//		    if (selectedRestaurant == null) {
-//		        FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist");
-//		    }
-//		}
-//
-//	}
+	public String loadAllRestaurants( ) {
+		allRestaurants = restaurantService.getAll();
+		return "restaurants";
+	}
 	
 	public void create() {
 
@@ -134,12 +117,9 @@ public class RestaurantBean implements Serializable {
 
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Restaurant added successfully !"));
 
+	    clear();
 	}
 
-//	public void create() {
-//		restaurantService.create(restaurantvm);
-//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Restaurant added successfully !"));
-//	}
 	
 	public String updateRestaurant() {
 		try {
@@ -148,15 +128,14 @@ public class RestaurantBean implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Restaurant updated successfully!"));
 			
 			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-			String redirectUrl = contextPath + "/views/product/restaurantUpdate.xhtml?faces-redirect=true&id="
-					+ restaurantvm.getId();
+			String redirectUrl = contextPath + "/views/product/RestaurantForm.xhtml?faces-redirect=true";
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 			
 		} catch (IllegalArgumentException e) {
 			FacesMessageUtil.addErrorMessage("Failed to update restaurant: " + e.getMessage());
 		} catch (Exception e) {
 			FacesMessageUtil.addErrorMessage("Failed to update restaurant. An unexpected error occurred.");
-		}clear();
+		}
 		return null;		
 	}
 
@@ -164,6 +143,26 @@ public class RestaurantBean implements Serializable {
 		restaurantvm = new SubServicesViewModel();
 	}
 
+	
+	public String initFormUpdate() {
+		try {
+			
+
+			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+			String redirectUrl = contextPath + "/views/product/RestaurantUpdate.xhtml?faces-redirect=true&id="
+					+ restaurantvm.getId();
+			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
+
+		} catch (IllegalArgumentException e) {
+			FacesMessageUtil.addErrorMessage("Failed to update restaurant : " + e.getMessage());
+		} catch (Exception e) {
+			FacesMessageUtil.addErrorMessage("Failed to update restaurant. An unexpected error occurred.");
+
+		}
+
+		return null; 
+	}
+	
 	public void deleteRestaurant() {
 		Long selectedRestaurantId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.get("selectedRestaurantId");
@@ -179,6 +178,23 @@ public class RestaurantBean implements Serializable {
 		}
 
 		FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add("confirmDelete();");
+	}
+	
+	public String performDelete() {
+		Long selectedRestaurantId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("selectedRestaurantId");
+		SubServicesViewModel existingRestaurantvm = restaurantService.initSubService(selectedRestaurantId);
+
+		if (existingRestaurantvm == null) {
+			FacesMessageUtil.addErrorMessage("Invalid request: Restaurant does not exist.");
+			return "Restaurant does not exist";
+		}
+
+		restaurantService.delete(existingRestaurantvm);
+
+		deletionSuccessful = true;
+
+		return null;
 	}
 	
 	public List<Restaurant> getCurrentUserRestaurants() {
@@ -235,9 +251,7 @@ public class RestaurantBean implements Serializable {
 	}
 	
 
-	public void setAllRestaurants(List<Restaurant> allRestaurants) {
-		this.allRestaurants = allRestaurants;
-	}
+	
 
 	public Restaurant getSelectedRestaurant() {
 		return selectedRestaurant;
@@ -271,6 +285,26 @@ public class RestaurantBean implements Serializable {
 		this.picName = picName;
 	}
 	
+	public Restaurant getLastRestaurantAdded() {
+		return lastRestaurantAdded;
+	}
+
+	public void setLastRestaurantAdded(Restaurant lastRestaurantAdded) {
+		this.lastRestaurantAdded = lastRestaurantAdded;
+	}
+
+	public boolean isDeletionSuccessful() {
+		return deletionSuccessful;
+	}
+
+	public void setDeletionSuccessful(boolean deletionSuccessful) {
+		this.deletionSuccessful = deletionSuccessful;
+	}
+
+	public void setAllRestaurants(List<Restaurant> allRestaurants) {
+		this.allRestaurants = allRestaurants;
+	}
+
 	
 
 }

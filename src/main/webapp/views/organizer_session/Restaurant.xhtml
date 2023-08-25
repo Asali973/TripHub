@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="website.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+	<title>Tour Packages</title>
+	<style>
+.tour-packages {
+	display: flex;
+	flex-wrap: wrap;
+}
+.tour-package {
+	width: 50%; /* Two boxes per row */
+	padding: 10px;
+	box-sizing: border-box;
+}
+/* Add any additional styling as needed */
+</style>
+</h:head>
+<h:body>
+<ui:composition template="/WEB-INF/templates/organizer_template.xhtml">
+        <ui:define name="content">
+	<h1>Find Out the best deals for your Restaurant all around the World</h1>
+	<div class="tour-packages">
+		<!-- Loop through tour packages and generate flex boxes -->
+		<ui:repeat value="#{restaurantBean.allRestaurants}" var="restaurant">
+    <div class="tour-package">
+        <h2>#{restaurant.name}</h2>
+        <p>Description: #{restaurant.description}</p>
+        <p>Price: #{restaurant.service.price.amount} #{restaurant.service.price.currency}</p>
+        <p>Destination: #{restaurant.address.num}, #{restaurant.address.street}, #{restaurant.address.city},#{restaurant.address.state},#{restaurant.address.zipCode}
+        #{restaurant.address.country}</p>
+       
+
+   <a href="details_restaurant.xhtml?id=#{restaurant.id}" class="btn btn-primary">View Details</a>
+
+    </div>
+</ui:repeat>
+	</div>
+	</ui:define>
+    </ui:composition>
+</h:body>
+</html>

@@ -116,7 +116,9 @@
 										class="form-control" />
 								</div>
 							</div>
-						</div><!-- Description dépliable -->
+						</div>
+
+<!-- Description dépliable -->
 						<div class="col-md-12 mt-4">
 							<button
 								class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4 bg-white"
@@ -190,13 +192,16 @@
 					</h:form>
 				</div>
 			</div>
-
+			
+	
+	
 	<!-- Display the list -->
 	<div class="table-container">
 		<h3>Available Accommodation</h3>
 		<table class="table">
 			<thead>
 				<tr>
+					
 					<th>ID</th>
 					<th>Accommodation Name</th>
 					<th>Price</th>
@@ -217,6 +222,7 @@
 			<tbody>
 				<ui:repeat value="#{accommodationBean.allAccommodation}" var="accommodation">
 					<tr>
+						
 						<td>#{accommodation.id}</td>
 						<td>#{accommodation.name}</td>
 						<td>#{accommodation.service.price.amount}</td>
@@ -266,7 +272,6 @@
                                          action="#{accommodationBean.loadAllAccommodations}"
                                          styleClass="reg-btn-primary mr-2" />
                     </div>
-
 						<div class="text-center">
 							<!-- Advanced Search link -->
 							<h:outputLink

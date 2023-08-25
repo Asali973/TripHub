@@ -75,6 +75,7 @@ public class Restaurant {
 		this.setName(restaurantvm.getName());
 		this.getAddress().updateAddressFromViewModel(restaurantvm);
 		this.setDescription(restaurantvm.getDescription());
+		this.getService().updateServiceFromViewModel(restaurantvm);
 		
         Picture picture = new Picture();
         picture.setLink(restaurantvm.getLink());

@@ -48,6 +48,8 @@ public class RestaurantDAO {
 		service.setAvailability(restaurantvm.isAvailability());
 		service.setAvailableFrom(restaurantvm.getAvailableFrom());
 		service.setAvailableTill(restaurantvm.getAvailableTill());
+		em.persist(price);
+		em.persist(service);
 
 		// Create Restaurant
 		Restaurant restaurant = new Restaurant();
@@ -69,7 +71,8 @@ public class RestaurantDAO {
 		address.setState(restaurantvm.getAddress().getState());
 		address.setCountry(restaurantvm.getAddress().getCountry());
 		address.setZipCode(restaurantvm.getAddress().getZipCode());
-
+		
+		em.persist(address);
 		restaurant.setAddress(address);
 		
 	    if ("organizer".equals(userType)) {
@@ -87,9 +90,9 @@ public class RestaurantDAO {
 	    }
 
 
-		em.persist(price);
-		em.persist(service);
-		em.persist(address);
+		
+		
+		
 		em.persist(restaurant);
 
 		em.flush();
