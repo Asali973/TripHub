@@ -39,7 +39,9 @@
 				</div>
 				<div id="createFormContainer">
 					<h:form prependId="false" enctype="multipart/form-data">
-
+					<h:inputHidden id="id" value="#{accommodationBean.accommodationVm.id}" />
+					 <h:inputHidden id="idservice" value="#{accommodationBean.accommodationVm.service.id}"
+					 />
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -54,7 +56,7 @@
 								</div>
 
 								<div class="form-group">
-									<h:outputLabel for="price" value="Price:" />
+									<h:outputLabel for="Price" value="Price:" />
 									<h:inputText id="price"
 										value="#{accommodationBean.accommodationVm.price.amount}"
 										styleClass="form-control" />
@@ -67,7 +69,7 @@
 										value="#{accommodationBean.accommodationVm.currencyType}"
 										class="form-control" required="true">
 										<f:selectItems value="#{accommodationBean.allCurrencyTypes}"
-											var="type" itemValue="#{type}" itemLabel="#{type.label}" />
+											var="typeCurrency" itemValue="#{typeCurrency}" itemLabel="#{typeCurrency.label}" />
 									</h:selectOneMenu>
 								</div>
 
@@ -191,7 +193,10 @@
 								<div class="form-group d-flex justify-content-center">
 									<h:commandButton value="Update"
 										action="#{accommodationBean.updateAccommodation}"
-										styleClass="btnCheckO" />
+										styleClass="btnCheckO" >
+										<f:param name="id" value="#{accommodationBean.accommodationVm.id}" />
+										<f:param name="idservice" value="#{accommodationBean.accommodationVm.service.id}" />
+										</h:commandButton>
 								</div>
 								<h:form>
 									<div class="d-flex justify-content-center mt-4">

@@ -52,6 +52,18 @@
 										value="#{accommodationBean.accommodationVm.name}"
 										styleClass="form-control" />
 								</div>
+								<div class="form-group">
+									<h:outputLabel for="typeAccommodation"
+										value="Type Accommodation :" required="true"
+										requiredMessage="Type accommodation is required." />
+									<h:selectOneMenu id="typeAccommodation"
+										value="#{accommodationBean.accommodationVm.accommodationType}"
+										class="form-control" required="true">
+										<f:selectItems
+											value="#{accommodationBean.allAccommodationTypes}" var="type"
+											itemValue="#{type}" itemLabel="#{type.label}" />
+									</h:selectOneMenu>
+								</div>
 
 								<div class="form-group">
 									<h:outputLabel for="price" value="Price:" />
@@ -106,8 +118,12 @@
 											<button type="button" class="btn btn-customUpload"
 												onclick="document.getElementById('pictureAccommodation').click();">Upload</button>
 										</div>
+
 									</div>
+
 								</div>
+
+								
 
 							</div>
 
@@ -302,7 +318,7 @@
 							styleClass="btnCheckO" />
 
 
-						
+
 
 						<h:button value="Continue Shopping"
 							outcome="/views/organizer_session/homeForWebsite.xhtml"
