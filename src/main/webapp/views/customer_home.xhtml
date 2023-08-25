@@ -60,6 +60,12 @@
 							</ul>
 						</div>
 
+ <p><h:link value="Link to Organizer Session Home" outcome="/views/organizer_session/homeForWebsite" /></p>
+<h:form>
+    <ui:repeat value="#{organizerBean.allOrganizers}" var="organizer">
+        <h:commandButton value="Go to #{organizer.companyInfo.name}'s xhtmlFile" action="#{organizerBean.navigateToXhtml(organizer)}" />
+    </ui:repeat>
+</h:form>
 						<!-- welcome message -->
 						<h:form>
 							<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
@@ -86,13 +92,6 @@
 				</div>
 			</div>
 		</ui:define>
-	</ui:composition>
-   <p><h:link value="Link to Organizer Session Home" outcome="/views/organizer_session/homeForWebsite" /></p>
-<h:form>
-    <ui:repeat value="#{organizerBean.allOrganizers}" var="organizer">
-        <h:commandButton value="Go to #{organizer.companyInfo.name}'s xhtmlFile" action="#{organizerBean.getXhtmlFile(organizer)}" />
-    </ui:repeat>
-</h:form>
-
-</h:body>
+	</ui:composition>	
+  </h:body>
 </html>

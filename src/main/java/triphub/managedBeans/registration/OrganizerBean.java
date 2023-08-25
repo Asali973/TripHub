@@ -45,7 +45,7 @@ public class OrganizerBean implements Serializable {
 	private List<Layout> availableLayouts;
 
 	private List<Organizer> allOrganizers;
-
+	private Organizer selectedOrganizer;
 	public OrganizerBean() {
 	}
 
@@ -122,20 +122,36 @@ public class OrganizerBean implements Serializable {
 	@PostConstruct
 	public void init() {
 	    FacesContext context = FacesContext.getCurrentInstance();
-	    HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-	    Long organizerId = (Long) session.getAttribute("organizerId");
+	   // HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+	  //  Long organizerId = (Long) session.getAttribute("organizerId");
+	    Long organizerId = (Long) context.getExternalContext().getFlash().get("selectedOrganizerId");
+	    
+	    System.out.println("Organizer ID from Flash scope: " + organizerId);
+	 //   System.out.println("Organizer ID from Session: " + session.getAttribute("organizerId"));
+	 
+
+	
+	    if (organizerId == null) {
+	    	
+//	        organizerId = (Long) context.getExternalContext().getRequestMap().get("selectedOrganizerId");
+//	        System.out.println("Organizer ID from Request Map: " + context.getExternalContext().getRequestMap().get("selectedOrganizerId"));
+	    }
 
 	    if (organizerId != null) {
+	    	
 	        initFormData(organizerId);
-	        Organizer organizer = userService.readOrganizer(organizerId);
-	        
+	        Organizer organizer = userService.readOrganizer(organizerId);	       
+	        System.out.println("Fetched Organizer: " + organizer);
 
 	        if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
 	            SubscriptionType type = organizer.getSubscription().getType();
+	            
 	            availableLayouts = determineAvailableLayouts(type);
 	            
 	            if (!availableLayouts.isEmpty()) {
 	                userViewModel.setLayout(availableLayouts.get(0));
+	                System.out.println("Layout Name: " + (organizer.getSubscription().getCustomization().getLayout() != null ? organizer.getSubscription().getCustomization().getLayout().getName() : "Layout is null"));
+	                System.out.println("xhtml File: " + (organizer.getSubscription().getCustomization().getLayout() != null ? organizer.getSubscription().getCustomization().getLayout().getXhtmlFile() : "Layout is null"));
 	            }
 	        } else {
 	            Layout basicLayout = layoutDAO.getLayoutByName("Basic");
@@ -148,6 +164,7 @@ public class OrganizerBean implements Serializable {
 	        availableLayouts = layoutDAO.getAllLayouts(); 
 	    }
 	}
+
 	
     public String getXhtmlFile(Organizer organizer) {
         if (organizer != null && organizer.getSubscription() != null 
@@ -157,6 +174,20 @@ public class OrganizerBean implements Serializable {
         }
         return null;
     }
+    
+    public String navigateToXhtml(Organizer organizer) {
+        if (organizer != null) {
+            System.out.println("Setting Organizer ID to Flash scope: " + organizer.getId());
+            
+            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedOrganizerId", organizer.getId());
+            
+            return organizer.getSubscription().getCustomization().getLayout().getXhtmlFile() + "?faces-redirect=true";
+        }
+        return null;
+    }
+
+
+
 
 	public void updateOrganizer() {
 		try {
@@ -329,6 +360,14 @@ public class OrganizerBean implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Organizer getSelectedOrganizer() {
+		return selectedOrganizer;
+	}
+
+	public void setSelectedOrganizer(Organizer selectedOrganizer) {
+		this.selectedOrganizer = selectedOrganizer;
 	}
 	
 
