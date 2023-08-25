@@ -188,7 +188,7 @@ public class AccommodationBean implements Serializable {
 			System.out.println("accommodation bean init formUpdate " + accommodationVm);
 
 			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-			String redirectUrl = contextPath + "/views/product/AccomUpdate.xhtml?faces-redirect=true&id="
+			String redirectUrl = contextPath + "/views/product/AccomUpdateTest.xhtml?faces-redirect=true&id="
 					+ accommodationVm.getId();
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 
