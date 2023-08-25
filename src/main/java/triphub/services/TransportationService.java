@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import triphub.dao.service.TransportationDAO;
 import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
+import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
 import triphub.entity.subservices.TransportationType;
@@ -85,6 +86,10 @@ public class TransportationService implements ServiceInterface {
 			return null;
 		}
 		return transportation.initTransportationViewModel();
+	}
+	
+	public Transportation getTransportationById(Long id) {
+		return transportationDAO.read(id);
 	}
 
 	@Override

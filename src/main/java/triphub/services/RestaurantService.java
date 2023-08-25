@@ -102,6 +102,10 @@ public class RestaurantService implements ServiceInterface,Serializable {
 		return restaurantDAO.findById(id);
 	}
 	
+	public Restaurant getRestaurantById(Long id) {
+		return restaurantDAO.read(id);
+	}
+	
 	public List<Restaurant> getRestaurantForOrganizer(Long organizerId) {
 		return restaurantDAO.getRestaurantForOrganizer(organizerId);
 	}
