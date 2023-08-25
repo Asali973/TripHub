@@ -262,7 +262,14 @@ public class OrganizerBean implements Serializable {
 		}
 	}
 	
-	
+	public int getEndIndex() {
+	    if (allOrganizers != null) {
+	        return Math.min(allOrganizers.size(), 9);
+	    }
+	    return 0;
+	}
+
+
 
 	public UserService getUserService() {
 		return userService;
