@@ -1,12 +1,158 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-<h:head>
-    <title>Organizer Home Page</title>
-</h:head>
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+<style>
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-content {
+    width: 80%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.hidden {
+    display: none;
+}
+
+</style>
+</head>
 <h:body>
-    <h1>Welcome, Super Admin!</h1>
-    <p>This is the home page for Super Admin. You can customize this page with relevant information and features for Super Admin.</p>
-    <!-- Add your organizer-specific content here -->
+	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+		<ui:define name="additionalHeadContent">
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+			<h:outputStylesheet library="css" name="organizer_home.css" />
+		</ui:define>
+		<ui:define name="content">
+		
+
+    <h2>Super Admin Dashboard</h2>
+
+ <div class="col-md-4">
+    <div class="card clickable-card" onclick="openModal()">
+        <div class="card-body d-flex flex-column">
+            <h4 class="card-title mt-0">Organizers List</h4>
+            <br />
+            <p>Click to view the list of organizers.</p>
+            <div class="pt-3 d-flex justify-content-around">
+                <i class="fa-solid fa-users fa-2x"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <div id="overlay" class="overlay hidden">
+    <div class="overlay-content">
+        <h3>Organizers</h3>
+        <h:dataTable value="#{organizerBean.allOrganizers}" var="organizer" styleClass="table" headerClass="table-header" rowClasses="table-odd-row,table-even-row">
+            <h:column>
+                <f:facet name="header">First Name</f:facet>
+                #{organizer.user.firstName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Last Name</f:facet>
+                #{organizer.user.lastName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Email</f:facet>
+                #{organizer.user.email}
+            </h:column>
+             <h:column>
+                <f:facet name="header">Subscription</f:facet>
+                #{organizer.subscription.type}
+            </h:column>
+            <!-- Add more columns for other organizer details as needed -->
+        </h:dataTable>
+
+        <!-- Close button -->
+        <button onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+   
+
+    <!-- Section for displaying providers -->
+    
+    <div id="overlay" class="overlay hidden">
+    <div class="overlay-content">
+       <h3>Providers</h3>
+    <h:dataTable value="#{providerBean.allProviders}" var="provider" styleClass="table" headerClass="table-header" rowClasses="table-odd-row,table-even-row">
+        <h:column>
+            <f:facet name="header">First Name</f:facet>
+            #{provider.user.firstName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Last Name</f:facet>
+            #{provider.user.lastName}
+        </h:column>
+         <h:column>
+            <f:facet name="header">Email</f:facet>
+            #{provider.user.email}
+        </h:column>       
+    </h:dataTable>
+        <!-- Close button -->
+        <button onclick="closeModal()">Close</button>
+    </div>
+</div>
+    
+    
+ <!-- Section for displaying customers -->
+ <div id="overlay" class="overlay hidden">
+    <div class="overlay-content">
+       <h3>Customers</h3>
+    <h:dataTable value="#{customerBean.allCustomers}" var="customer" styleClass="table" headerClass="table-header" rowClasses="table-odd-row,table-even-row">
+        <h:column>
+            <f:facet name="header">First Name</f:facet>
+            #{customer.user.firstName}
+        </h:column>
+         <h:column>
+            <f:facet name="header">First Name</f:facet>
+            #{customer.user.lastName}
+        </h:column>
+          <h:column>
+            <f:facet name="header">Last Name</f:facet>
+            #{customer.user.email}
+        </h:column>        
+    </h:dataTable>		
+        <!-- Close button -->
+        <button onclick="closeModal()">Close</button>
+    </div>
+</div>
+ 
+   	
+		</ui:define>
+	</ui:composition>
 </h:body>
+<script>
+function openModal() {
+    document.getElementById('overlay').classList.remove('hidden');
+}
+
+function closeModal() {
+    document.getElementById('overlay').classList.add('hidden');
+}
+
+</script>
 </html>

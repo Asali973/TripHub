@@ -179,50 +179,42 @@
 
 
 						<ul>
-			<ui:repeat value="#{checkoutBean.cartItems}" var="item">
+							<ui:repeat value="#{checkoutBean.cartItems}" var="item">
 
-    <!-- TourPackage -->
-    <h:panelGroup rendered="#{item.tourPackage != null}">
-        <li>
-            <h:outputText value="#{item.tourPackage.name}" />
-            <span class="price">
-                #{item.quantity} x #{item.tourPackage.price.amount} #{item.tourPackage.price.currency}
-            </span>
-        </li>
-    </h:panelGroup>
+								<!-- TourPackage -->
+								<h:panelGroup rendered="#{item.tourPackage != null}">
+									<li><h:outputText value="#{item.tourPackage.name}" /> <span
+										class="price"> #{item.quantity} x
+											#{item.tourPackage.price.amount}
+											#{item.tourPackage.price.currency} </span></li>
+								</h:panelGroup>
 
-    <!-- Accommodation -->
-    <h:panelGroup rendered="#{item.accommodation != null}">
-        <li>
-            <h:outputText value="#{item.accommodation.name}" />
-            <span class="price">
-                #{item.quantity} x #{item.accommodation.service.price.amount} #{item.accommodation.service.price.currency}
-            </span>
-        </li>
-    </h:panelGroup>
+								<!-- Accommodation -->
+								<h:panelGroup rendered="#{item.accommodation != null}">
+									<li><h:outputText value="#{item.accommodation.name}" /> <span
+										class="price"> #{item.quantity} x
+											#{item.accommodation.service.price.amount}
+											#{item.accommodation.service.price.currency} </span></li>
+								</h:panelGroup>
 
-    <!-- Restaurant -->
-    <h:panelGroup rendered="#{item.restaurant != null}">
-        <li>
-            <h:outputText value="#{item.restaurant.name}" />
-            <span class="price">
-                #{item.quantity} x #{item.restaurant.service.price.amount} #{item.restaurant.service.price.currency}
-            </span>
-        </li>
-    </h:panelGroup>
+								<!-- Restaurant -->
+								<h:panelGroup rendered="#{item.restaurant != null}">
+									<li><h:outputText value="#{item.restaurant.name}" /> <span
+										class="price"> #{item.quantity} x
+											#{item.restaurant.service.price.amount}
+											#{item.restaurant.service.price.currency} </span></li>
+								</h:panelGroup>
 
-    <!-- Transportation -->
-    <h:panelGroup rendered="#{item.transportation != null}">
-        <li>
-            <h:outputText value="#{item.transportation.name}" />
-            <span class="price">
-                #{item.quantity} x #{item.transportation.service.price.amount} #{item.transportation.service.price.currency}
-            </span>
-        </li>
-    </h:panelGroup>
+								<!-- Transportation -->
+								<h:panelGroup rendered="#{item.transportation != null}">
+									<li><h:outputText value="#{item.transportation.name}" />
+										<span class="price"> #{item.quantity} x
+											#{item.transportation.service.price.amount}
+											#{item.transportation.service.price.currency} </span></li>
+								</h:panelGroup>
 
-</ui:repeat>
-					</ul>
+							</ui:repeat>
+						</ul>
 						<h:outputText value="Total Price:" />
 						<p>
 							<span class="price" style="color: black"> <b>#{checkoutBean.totalPrice}
