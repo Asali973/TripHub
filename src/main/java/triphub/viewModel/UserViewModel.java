@@ -1,6 +1,7 @@
 package triphub.viewModel;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -32,6 +33,7 @@ public class UserViewModel implements Serializable {
 	private String phoneNum;
 	private String password;
 	private String confirmPassword;
+	private BigDecimal cartTotal;
 
 	private String profilePicture;
 
@@ -61,7 +63,7 @@ public class UserViewModel implements Serializable {
 	private Price price;
 	private int duration;
 	private SubscriptionType type;
-	
+
 	private Customization customization;
 
 	private String primaryColor;
@@ -72,7 +74,7 @@ public class UserViewModel implements Serializable {
 	private String backgroundUrl;
 
 	private Layout layout;
-	
+
 	private String layoutName;
 	private String xhtmlFile;
 
@@ -82,7 +84,7 @@ public class UserViewModel implements Serializable {
 		this.organizerId = null;
 		this.superAdminId = null;
 		this.userId = null;
-
+		this.cartTotal = null;
 		this.firstName = "";
 		this.lastName = "";
 		this.email = "";
@@ -453,6 +455,14 @@ public class UserViewModel implements Serializable {
 
 	public void setXhtmlFile(String xhtmlFile) {
 		this.xhtmlFile = xhtmlFile;
+	}
+
+	public BigDecimal getCartTotal() {
+		return cartTotal;
+	}
+
+	public void setCartTotal(BigDecimal cartTotal) {
+		this.cartTotal = cartTotal;
 	}
 
 }

@@ -1,38 +1,644 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-	<link
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		rel="stylesheet" />
+	<title>Trip Hub</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="advanced.css" />
+
+	<ui:insert name="additionalHeadContent" />
+
 	<style>
-/* Custom CSS for Advanced layout */
-.header, .footer {
-	background-color: #444;
-	color: white;
-	padding: 1rem;
-	text-align: center;
+
+.bodycolor {
+	background-color: #{organizerBean.userViewModel.primaryColor
 }
 
-.sidebar {
-	background-color: #eee;
-	padding: 1rem;
+;
+}
+.navbar {
+	background-color: #{organizerBean.userViewModel.secondaryColor
+}
+
+;
+box-shadow
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rgba
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0
+,
+0
+,
+0
+,
+0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;
+}
+.footer {
+	background-color: #{organizerBean.userViewModel.secondaryColor
+}
+
+;
+}
+.font1 {
+	font-family: #{
+	organizerBean.userViewModel.primaryFont
+}
+;
 }
 </style>
+
 </h:head>
-<h:body>
-	<div class="header">Advanced Header</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-3 sidebar">Sidebar content</div>
-			<div class="col-9">Main content</div>
-		</div>
+<h:body class="bodycolor">
+	<div class="content-wrapper">
+		<nav class="navbar navbar-expand-lg">
+			<div class="container-fluid">
+				<!-- Brand/logo -->
+				<a class="navbar-brand" href="/triphub/views/home.xhtml"> <h:graphicImage
+						value="/images/#{organizerBean.userViewModel.companyLogoLink}"
+						alt="Trip Hub" styleClass="navbar-logo rounded-image" /> <h:outputText
+						value="#{organizerBean.userViewModel.companyName}"
+						styleClass="navbar-brand-text font1" />
+				</a>
+
+
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarNav" aria-controls="navbarNav"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<!-- Navigation links -->
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ml-auto">
+
+						<li class="nav-item"><a class="nav-link font1"
+							href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a></li>
+
+
+
+						<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user}">
+								<h:form id="logoutForm">
+									<h:commandLink action="#{loginBean.logout}" value="Logout"
+										styleClass="nav-link font1" />
+								</h:form>
+							</h:panelGroup></li>
+
+						<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user}">
+								<a class="nav-link font1"
+									href="/triphub/views/loginAndAccount/ProfileUser.xhtml">Your
+									Profile</a>
+							</h:panelGroup></li>
+
+						<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'provider'}">
+								<a class="nav-link font1"
+									href="/triphub/views/provider_home.xhtml">Your Space</a>
+							</h:panelGroup></li>
+
+						<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'customer'}">
+								<a class="nav-link font1"
+									href="/triphub/views/customer_home.xhtml">Your Space</a>
+							</h:panelGroup></li>
+
+						<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
+								<a class="nav-link" href="/triphub/views/organizer_home.xhtml">Back
+									to Settings</a>
+							</h:panelGroup></li>
+
+						<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user}">
+								<a class="nav-link font1"
+									href="/triphub/views/organizer_session/cart.xhtml"> <i
+									class="fas fa-shopping-cart"></i> Cart
+								</a>
+							</h:panelGroup></li>
+
+						<li class="nav-item dropdown"><h:panelGroup
+								rendered="#{empty sessionScope.user}">
+
+								<a class="nav-link dropdown-toggle font1" href="#"
+									id="navbarDropdown" role="button" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false"> Sign Up </a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item"
+										href="/triphub/views/loginAndAccount/CustomerRegistration.xhtml">Sign
+										Up as a Customer</a> <a class="dropdown-item"
+										href="/triphub/views/loginAndAccount/ProviderRegistration.xhtml">Sign
+										Up as a Provider</a> <a class="dropdown-item"
+										href="/triphub/views/loginAndAccount/OrganizerRegistration.xhtml">Sign
+										Up as an Organizer</a> <a class="dropdown-item"
+										href="/triphub/views/loginAndAccount/SuperAdminRegistration.xhtml">Sign
+										Up as an Administrator</a>
+								</div>
+							</h:panelGroup></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Add  page content here -->
+
+
+		<ui:insert name="content">
+			<div class="card2">
+				<div class="card-body">
+
+					<div class="containerForm">
+					
+					
+						<div class="flex-container">
+							<h:graphicImage
+								value="/images/#{organizerBean.userViewModel.companyLogoLink}"
+								alt="Trip Hub" styleClass="navbar-logo rounded-image"
+								style="max-height: 200px; width: auto;" />
+
+							<div class="font1" style="margin-bottom: 50px; margin-top: 50px">
+								<h1>Welcome to #{organizerBean.userViewModel.companyName} !</h1>
+							</div>
+						</div>
+
+						<h3 class="mt-5 mb-5">All you need in one package</h3>
+						<div class="grid-container">
+							<ui:repeat value="#{tourPackageBean.currentUserTourPackages}"
+								var="tourPackage">
+								<div class="card">
+									<h:graphicImage value="/images/#{tourPackage.picture.link}"
+										alt="Tour package picture" height="150"
+										styleClass="card-img-top rounded-image" />
+									<div class="card-body">
+										<h5 class="card-title">#{tourPackage.name}</h5>
+										<p class="card-text">#{tourPackage.destination.cityName}</p>
+										<p class="card-text">#{tourPackage.theme.themeName}</p>
+										<p class="card-text">#{tourPackage.price.amount}
+											#{tourPackage.price.currency}</p>
+										<a href="details.xhtml?id=#{tourPackage.id}"
+											class="btn btn-primary">Buy Now</a>
+									</div>
+								</div>
+							</ui:repeat>
+						</div>
+
+					<br />
+					<h3 class="mt-5 mb-5">Craft Your Own Journey</h3>
+						<h2 class="mt-5">Explore our accommodations</h2>
+						<div class="grid-container">
+							<ui:repeat value="#{accommodationBean.currentUserAccommodations}"
+								var="accommodation">
+								<div class="card">
+									<h:graphicImage value="/images/#{accommodation.picture.link}"
+										alt="Accommodation picture" height="150"
+										styleClass="card-img-top rounded-image" />
+									<div class="card-body">
+										<h5 class="card-title">#{accommodation.name}</h5>
+										<p class="card-text">#{accommodation.accommodationType}</p>
+										<p class="card-text">#{accommodation.service.price.amount}
+											#{accommodation.service.price.currency}</p>
+										<a href="details_acco.xhtml?id=#{accommodation.id}"
+											class="btn btn-primary">Book Now</a>
+									</div>
+								</div>
+							</ui:repeat>
+						</div>
+
+
+						<h2 class="mt-5">Dine in the finest places</h2>
+						<div class="grid-container">
+							<ui:repeat value="#{restaurantBean.currentUserRestaurants}"
+								var="restaurant">
+								<div class="card">
+									<h:graphicImage value="/images/#{restaurant.picture.link}"
+										alt="Restaurant picture" height="150"
+										styleClass="card-img-top rounded-image" />
+									<div class="card-body">
+										<h5 class="card-title">#{restaurant.name}</h5>
+										<p class="card-text">#{restaurant.service.price.amount}
+											#{restaurant.service.price.currency}</p>
+										<p class="card-text">
+											<h:outputText value="Available"
+												rendered="#{restaurant.service.availability}"
+												styleClass="table-content-bold" />
+											<h:outputText value="Not Available"
+												rendered="#{not restaurant.service.availability}"
+												styleClass="table-content-bold" />
+										</p>
+										<a href="details_res.xhtml?id=#{restaurant.id}"
+											class="btn btn-primary">Reserve Now</a>
+									</div>
+								</div>
+							</ui:repeat>
+						</div>
+
+						<h2 class="mt-5">Choose your preferred mode of transport</h2>
+						<div class="grid-container">
+							<ui:repeat
+								value="#{transportationBean.currentUserTransportations}"
+								var="transportation">
+								<div class="card">
+									<h:graphicImage value="/images/#{transportation.picture.link}"
+										alt="Transport picture" height="250"
+										styleClass="card-img-top rounded-image" />
+									<div class="card-body">
+										<h5 class="card-title">#{transportation.name}</h5>
+										<p class="card-text">#{transportation.transportationType}</p>
+										<p class="card-text">#{transportation.service.price.amount}
+											#{transportation.service.price.currency}</p>
+
+										<p class="card-text">
+											<h:outputText value="Available"
+												rendered="#{transportation.service.availability}"
+												styleClass="table-content-bold" />
+											<h:outputText value="Not Available"
+												rendered="#{not transportation.service.availability}"
+												styleClass="table-content-bold" />
+										</p>
+										<a href="details_trans.xhtml?id=#{transportation.id}"
+											class="btn btn-primary">Book Now</a>
+									</div>
+								</div>
+							</ui:repeat>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</ui:insert>
 	</div>
-	<div class="footer">Advanced Footer</div>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Footer section -->
+	<footer class="footer sticky-footer">
+		<div class="container text-center">
+			<p>© 2023 #{organizerBean.userViewModel.companyName}. All rights
+				reserved.</p>
+			<ul class="list-inline social-icons">
+				<!-- Add your social media icons and links here -->
+				<li class="list-inline-item"><a href="#"><i
+						class="fab fa-facebook-f"></i></a></li>
+				<li class="list-inline-item"><a href="#"><i
+						class="fab fa-twitter"></i></a></li>
+				<li class="list-inline-item"><a href="#"><i
+						class="fab fa-instagram"></i></a></li>
+				<li><p>Contact</p></li>
+			</ul>
+		</div>
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </h:body>
 </html>

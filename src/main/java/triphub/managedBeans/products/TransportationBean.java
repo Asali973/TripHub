@@ -16,7 +16,6 @@ import javax.servlet.http.Part;
 
 import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.Transportation;
-import triphub.entity.subservices.Transportation;
 import triphub.entity.subservices.TransportationType;
 import triphub.entity.util.CurrencyType;
 import triphub.helpers.FacesMessageUtil;

@@ -46,6 +46,7 @@
 						<th>Update Quantity</th>
 						<th>Remove</th>
 					</tr>
+
 				</thead>
 				<tbody>
 					<ui:repeat value="#{cartBean.cartItems}" var="item">
@@ -97,6 +98,7 @@
 			</table>
 
 
+
 			<br></br>
 			<h3 class="text-center mt-3 font-weight-bold">
 				<h:outputText
@@ -108,12 +110,13 @@
 			</h3>
 
 			<br></br>
+
 			<div class="d-flex justify-content-center">
+				<h:commandButton value="Proceed to Checkout"
+					action="#{cartBean.goToCheckout}" class="btnCheckO" />
 				<h:button value="Continue Shopping"
 					outcome="/views/organizer_session/homeForWebsite.xhtml"
-					class="btnContinue" />
-				<h:commandButton value="Proceed to Checkout"
-					action="#{cartBean.goToCheckout}" class="btnCheckO ml-2" />
+					class="btnContinue ml-2" />
 			</div>
 
 
