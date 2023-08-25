@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import triphub.entity.product.CartItem;
 import triphub.entity.util.Address;
@@ -34,8 +35,34 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<CartItem> cartItems = new ArrayList<>();
     
-    @Column(name = "cart_total")
+    @Column(name = "cart_total", nullable = true)
     private BigDecimal cartTotal;
+    
+    public void addCartItem(CartItem item) {
+        if(this.cartTotal == null) {
+            this.cartTotal = BigDecimal.ZERO;
+        }
+        this.cartItems.add(item);
+        if (item.getTotalPrice() != null) {
+            this.cartTotal = this.cartTotal.add(item.getTotalPrice());
+        }
+    }
+
+    public void removeCartItem(CartItem item) {
+        if(this.cartTotal == null) {
+            this.cartTotal = BigDecimal.ZERO;
+        }
+        this.cartItems.remove(item);
+        if (item.getTotalPrice() != null) {
+            this.cartTotal = this.cartTotal.subtract(item.getTotalPrice());
+        }
+    }
+    private void updateCartTotal() {
+        this.cartTotal = this.getCartTotal();
+    }
+
+    
+    
     
     public static User createUserFromViewModel(UserViewModel form) {
         User user = new User();
@@ -44,7 +71,9 @@ public class User implements Serializable {
         user.setLastName(form.getLastName());
         user.setEmail(form.getEmail());
         user.setPhoneNum(form.getPhoneNum());
-        user.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));        
+        user.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));  
+        user.setCartTotal(BigDecimal.ZERO);  // Set to zero during initial creation
+    
         return user;
     }
     
@@ -54,7 +83,9 @@ public class User implements Serializable {
         this.setEmail(form.getEmail());
         this.setPhoneNum(form.getPhoneNum());
         this.setPassword(PasswordUtils.getInstance().hashPassword(form.getPassword()));
-    }
+        this.updateCartTotal();
+        }
+    
     
     public void initUserViewModel(UserViewModel userViewModel) {
         userViewModel.setUserId(this.getId());
@@ -62,6 +93,7 @@ public class User implements Serializable {
         userViewModel.setLastName(this.getLastName());
         userViewModel.setEmail(this.getEmail());
         userViewModel.setPhoneNum(this.getPhoneNum());
+        userViewModel.setCartTotal(this.getCartTotal());
     }
  
 	public Long getId() {
@@ -128,11 +160,29 @@ public class User implements Serializable {
 		this.finance = finance;
 	}
 
-	public void setCartTotal(BigDecimal totalPrice) {
-	    this.cartTotal = totalPrice;
+	public List<CartItem> getCartItems() {
+		return cartItems;
 	}
-	
-    
-    
+
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
+	}
+
+	public BigDecimal getCartTotal() {
+	    if (cartItems == null) {
+	        return BigDecimal.ZERO;
+	    }
+	    return cartItems.stream()
+	                    .map(CartItem::getTotalPrice)
+	                    .filter(Objects::nonNull)
+	                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+	}
+
+
+	public void setCartTotal(BigDecimal cartTotal) {
+		this.cartTotal = cartTotal;
+	}
+
+        
 }
 

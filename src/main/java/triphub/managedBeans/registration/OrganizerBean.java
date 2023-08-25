@@ -26,7 +26,7 @@ import triphub.helpers.RegistrationException;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 
-@Named
+@Named("organizerBean")
 @RequestScoped
 public class OrganizerBean implements Serializable {
 
