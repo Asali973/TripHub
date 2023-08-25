@@ -134,45 +134,6 @@
 						</div>
 						<div class="card-body">
 							<ui:fragment rendered="#{not empty checkoutBean.cartItems}">
-								<h6>Customer Name: #{checkoutBean.fullName}</h6>
-								<h6>Product Details:</h6>
-								<ul class="list-group">
-									<ui:repeat value="#{checkoutBean.cartItems}" var="item">
-										<li class="list-group-item">#{item.tourPackage.name} <span
-											class="float-right"> #{item.quantity} x
-												#{item.tourPackage.price.amount}
-												#{item.tourPackage.price.currency} = #{item.quantity *
-												item.tourPackage.price.amount}
-												#{item.tourPackage.price.currency} </span>
-										</li>
-									</ui:repeat>
-								</ul>
-								<h5 class="mt-3">
-									Total Price: <span class="float-right">#{checkoutBean.totalPrice}
-										#{checkoutBean.cartItems[0].tourPackage.price.currency}</span>
-								</h5>
-							</ui:fragment>
-						</div>
-					</div>
-				</div>
-			</div>
-		</h:form>
-		
-			<div class="d-flex justify-content-center">
-			<h:form>
-				<h:commandButton value="Pay"
-					action="#{checkoutBean.completePurchase}"
-					styleClass="btnCheckO" />
-
-			<!-- Cart Section -->
-			<div class="col-25">
-				<div class="container">
-					<h4>
-						Cart <span class="price" style="color: black"><i
-							class="fa fa-shopping-cart"></i> <b>#{checkoutBean.cartItems.size()}</b></span>
-					</h4>
-
-					<ui:fragment rendered="#{not empty checkoutBean.cartItems}">
 						<h:outputText value="Customer Name: " />
 						<h:outputText value="#{checkoutBean.fullName}" />
 						<br />
@@ -224,14 +185,27 @@
 						</p>
 					</ui:fragment>
 
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		
+		
+			<h:form>
+				<h:commandButton value="Pay"
+					action="#{checkoutBean.completePurchase}"
+					styleClass="btnCheckO" />
 
+			
 				<h:button value="Continue Shopping"
 					outcome="/views/organizer_session/homeForWebsite.xhtml"
 					class="btnContinue ml-2" />
+					</h:form>
 			</div>
-			 </div>
-		</h:form>
-	</div>
-		</div>
+			
+		
+	
+		
 </h:body>
 </html>

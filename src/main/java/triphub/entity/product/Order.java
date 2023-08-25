@@ -1,5 +1,6 @@
 //package triphub.entity.product;
 //
+//import java.math.BigDecimal;
 //import java.util.List;
 //
 //import javax.persistence.Entity;
@@ -22,4 +23,6 @@
 //
 //	    @OneToMany(mappedBy = "order")
 //	    private List<CartItem> cartItems;
+//	    
+//	    private BigDecimal totalPrice;
 //}

@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import triphub.dao.product.TourPackageDAO;
 import triphub.dao.service.AccommodationDAO;
 import triphub.dao.service.RestaurantDAO;
 import triphub.dao.service.TransportationDAO;
+import triphub.dao.user.UserDAO;
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
 import triphub.entity.subservices.Accommodation;
@@ -37,6 +39,8 @@ public class CartService implements ICartService, Serializable {
 	private TransportationDAO transportationDAO;
 	@Inject
 	private CartItemDAO cartItemDAO;
+	@Inject
+	private UserDAO userDAO;
 
 	
 
@@ -157,6 +161,7 @@ public class CartService implements ICartService, Serializable {
 		// Recalculate the total price and update the user's cart total
 		BigDecimal totalPrice = calculateTotalPrice(cartItemDAO.getCartItemsByUser(user));
 		user.setCartTotal(totalPrice);
+		userDAO.updateUser(user);
 	}
 
 	@Override
@@ -170,27 +175,36 @@ public class CartService implements ICartService, Serializable {
 		return cartItems;
 	}
 
-	@Override
+//	@Override
+//	public BigDecimal calculateTotalPrice(List<CartItem> cartItems) {
+//	    BigDecimal totalPrice = BigDecimal.ZERO;
+//
+//	    for (CartItem cartItem : cartItems) {
+//	        BigDecimal itemPrice = BigDecimal.ZERO;
+//
+//	        if (cartItem.getTourPackage() != null) {
+//	            itemPrice = cartItem.getTourPackage().getPrice().getAmount();
+//	        } else if (cartItem.getRestaurant() != null) {
+//	            itemPrice = cartItem.getRestaurant().getService().getPrice().getAmount();
+//	        } else if (cartItem.getAccommodation() != null) {
+//	            itemPrice = cartItem.getAccommodation().getService().getPrice().getAmount();
+//	        } else if (cartItem.getTransportation() != null) {
+//	            itemPrice = cartItem.getTransportation().getService().getPrice().getAmount();
+//	        }
+//
+//	        totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+//	    }
+//
+//	    return totalPrice;
+//	}
 	public BigDecimal calculateTotalPrice(List<CartItem> cartItems) {
-	    BigDecimal totalPrice = BigDecimal.ZERO;
-
-	    for (CartItem cartItem : cartItems) {
-	        BigDecimal itemPrice = BigDecimal.ZERO;
-
-	        if (cartItem.getTourPackage() != null) {
-	            itemPrice = cartItem.getTourPackage().getPrice().getAmount();
-	        } else if (cartItem.getRestaurant() != null) {
-	            itemPrice = cartItem.getRestaurant().getService().getPrice().getAmount();
-	        } else if (cartItem.getAccommodation() != null) {
-	            itemPrice = cartItem.getAccommodation().getService().getPrice().getAmount();
-	        } else if (cartItem.getTransportation() != null) {
-	            itemPrice = cartItem.getTransportation().getService().getPrice().getAmount();
-	        }
-
-	        totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+	    if (cartItems == null) {
+	        return BigDecimal.ZERO;
 	    }
-
-	    return totalPrice;
+	    return cartItems.stream()
+	                    .map(CartItem::getTotalPrice)
+	                    .filter(Objects::nonNull)
+	                    .reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 
 
