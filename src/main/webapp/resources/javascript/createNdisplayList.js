@@ -1,14 +1,18 @@
 function toggleCreateForm() {
-    // Get the create form container by its ID
+    // Get the create form container and the hidden message by their IDs
     const createFormContainer = document.getElementById('createFormContainer');
+    const hiddenMessage = document.getElementById('hiddenMessage');
 
-    // Toggle the visibility of the create form container using  'display' 
-    if (createFormContainer.style.display === 'none') {
+    // Toggle the visibility of the create form container and the hidden message using 'display' 
+    if (createFormContainer.style.display === 'none' || createFormContainer.style.display === '') {
         createFormContainer.style.display = 'block'; // Show the create form
+        hiddenMessage.style.display = 'none'; // Hide the message
     } else {
         createFormContainer.style.display = 'none'; // Hide the create form
+        hiddenMessage.style.display = 'block'; // Show the message
     }
 }
+
 
 
 

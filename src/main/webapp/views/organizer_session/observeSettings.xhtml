@@ -7,205 +7,31 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<title>Observe Graphic Settings</title>
+
 	<style>
-body {
-	background-image: url('#{organizerBean.userViewModel.backgroundUrl}');
-	color: #{organizerBean.userViewModel.primaryColor
+	
+.img {
+    background-image: url('#{organizerBean.userViewModel.backgroundUrl}');
 }
 
-;
-font-family
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-#{
-organizerBean
-
-
-
-
-
-
-
-
-
-
-
-
-.userViewModel
-
-
-
-
-
-
-
-
-
-
-
-
-.primaryFont
-
-
-
-
-
-
-
-
-
-
-
-
-}
-;
-}
-.secondary {
-	color: #{organizerBean.userViewModel.secondaryColor
+.primaryColor {
+    color: #{organizerBean.userViewModel.primaryColor};
 }
 
-;
-font-family
-
-
-
-
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
- 
-
-
-
-
-
-
-#{
-organizerBean
-
-
-
-
-
-
-
-
-
-
-
-
-.userViewModel
-
-
-
-
-
-
-
-
-
-
-
-
-.secondaryFont
-
-
-
-
-
-
-
-
-
-
-
-
+.secondaryColor {
+    color: #{organizerBean.userViewModel.secondaryColor};
 }
-;
+
+.secondaryFont {
+    color: #{organizerBean.userViewModel.secondaryColor};
+    font-family: #{organizerBean.userViewModel.secondaryFont};
 }
-.primary {
-	color: #{organizerBean.userViewModel.primaryColor
+.primaryFont {
+    font-family: #{organizerBean.userViewModel.primaryFont};
 }
-;
-font-family
 
-
-
-
-
-
-:
-
-
-
-
-
-
-
-#{
-organizerBean
-
-
-
-
-
-
-.userViewModel
-
-
-
-
-
-
-
-
-
-
-
-
-.primaryFont
-
-
-
-
-
-
-
-
-
-
-
-
-}
-;
-}
 </style>
+
 </h:head>
 <h:body>
 	<h1>Welcome to the Preview</h1>
@@ -213,10 +39,6 @@ organizerBean
 	<h:outputText value="Test static value" />
 
 
-	<p class="secondary">This is some sample text to observe the
-		secondary font and color.</p>
-	<p class="primary">This is some sample text to observe the primary
-		font and color.</p>
 
 	<h2>Available Tour Packages</h2>
 
@@ -232,14 +54,32 @@ organizerBean
 			<h:graphicImage value="/images/#{tourPackage.picture.link}"
 				height="150" alt="Tour package picture" />
 		</h:column>
+		
+				<h:column>
+			<f:facet name="header">Destination</f:facet>
+        #{tourPackage.destination.cityName}
+    </h:column>
+    
+    				<h:column>
+			<f:facet name="header">Destination</f:facet>
+        #{tourPackage.theme.themeName}
+    </h:column>
 
 		<h:column>
 			<f:facet name="header">Price</f:facet>
         #{tourPackage.price.amount} #{tourPackage.price.currency}
     </h:column>
+    
+		<h:column>
+			<f:facet name="header">Action</f:facet>
+			<a href="details.xhtml?id=#{tourPackage.id}" class="btn btn-primary">View
+				Details</a>
+		</h:column>
+		
+		
 	</h:dataTable>
-	
-	
+
+
 
 	<h2>Available Accommodations</h2>
 	<h:dataTable value="#{accommodationBean.currentUserAccommodations}"
@@ -272,12 +112,8 @@ organizerBean
 			<h:outputText value="Not Available"
 				rendered="#{not accommodation.service.availability}" />
 		</h:column>
-		
-				<h:column>
-			<f:facet name="header">Description</f:facet>
-        #{accommodation.description} 
-    </h:column>
-    	</h:dataTable>
+
+	</h:dataTable>
 
 
 
@@ -309,18 +145,14 @@ organizerBean
 			<h:outputText value="Not Available"
 				rendered="#{not restaurant.service.availability}" />
 		</h:column>
-		
-				<h:column>
-			<f:facet name="header">Description</f:facet>
-        #{restaurant.description} 
-    </h:column>
-    
-    </h:dataTable>
-    
-    
-    
-    
-    	<h2>Available Transportations</h2>
+
+
+	</h:dataTable>
+
+
+
+
+	<h2>Available Transportations</h2>
 	<h:dataTable value="#{transportationBean.currentUserTransportations}"
 		var="transportation">
 		<h:column>
@@ -347,18 +179,8 @@ organizerBean
 			<h:outputText value="Not Available"
 				rendered="#{not transportation.service.availability}" />
 		</h:column>
-		
-				<h:column>
-			<f:facet name="header">Description</f:facet>
-        #{transportation.description} 
-    </h:column>
-    	</h:dataTable>
-    
-    
-    
 
-
-		
+	</h:dataTable>
 
 </h:body>
 </html>
