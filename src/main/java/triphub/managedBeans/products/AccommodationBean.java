@@ -160,7 +160,7 @@ public class AccommodationBean implements Serializable {
 		}
 		
 
-		return null; // TODO à quoi sert le srting ici
+		return null; 
 
 	}
 
