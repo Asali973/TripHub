@@ -1,7 +1,6 @@
 
 package triphub.managedBeans.products;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,15 +14,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import org.hibernate.mapping.Map;
-
-import triphub.entity.product.Destination;
-import triphub.entity.product.Price;
-import triphub.entity.product.Theme;
 import triphub.entity.product.TourPackage;
 import triphub.helpers.FacesMessageUtil;
 import triphub.helpers.ImageHelper;

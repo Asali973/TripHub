@@ -15,33 +15,6 @@
 	<ui:insert name="additionalHeadContent" />
 
 	<style>
-.grid-container {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-	gap: 20px;
-}
-
-.card {
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	overflow: hidden;
-	transition: transform 0.2s;
-}
-
-.card:hover {
-	transform: scale(1.05);
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.card-img-top {
-	width: 100%;
-	height: 150px;
-	object-fit: cover;
-}
-
-.card-body {
-	padding: 15px;
-}
 
 .bodycolor {
 	background-color: #{organizerBean.userViewModel.primaryColor
@@ -55,6 +28,10 @@
 
 ;
 box-shadow
+
+
+
+
 
 
 
@@ -98,7 +75,11 @@ box-shadow
 
 
 
+
+
  
+
+
 
 
 
@@ -128,7 +109,11 @@ box-shadow
 
 
 
+
+
  
+
+
 
 
 
@@ -158,7 +143,11 @@ box-shadow
 
 
 
+
+
  
+
+
 
 
 
@@ -188,6 +177,8 @@ box-shadow
 
 
 
+
+
  
 
 
@@ -203,7 +194,13 @@ box-shadow
 
 
 
+
+
 rgba
+
+
+
+
 
 
 
@@ -261,6 +258,10 @@ rgba
 
 
 
+
+
+
+
 0
 ,
 0
@@ -268,6 +269,10 @@ rgba
 0
 ,
 0
+
+
+
+
 
 
 
@@ -325,7 +330,15 @@ rgba
 
 
 
+
+
+
+
 )
+
+
+
+
 
 
 
@@ -489,7 +502,8 @@ rgba
 								var="tourPackage">
 								<div class="card">
 									<h:graphicImage value="/images/#{tourPackage.picture.link}"
-										alt="Tour package picture" height="150" styleClass="card-img-top rounded-image" />
+										alt="Tour package picture" height="150"
+										styleClass="card-img-top rounded-image" />
 									<div class="card-body">
 										<h5 class="card-title">#{tourPackage.name}</h5>
 										<p class="card-text">#{tourPackage.destination.cityName}</p>
@@ -503,14 +517,16 @@ rgba
 							</ui:repeat>
 						</div>
 
-
+					<br />
+					<h3 class="mt-5 mb-5">Craft Your Own Journey</h3>
 						<h2 class="mt-5">Explore our accommodations</h2>
 						<div class="grid-container">
 							<ui:repeat value="#{accommodationBean.currentUserAccommodations}"
 								var="accommodation">
 								<div class="card">
 									<h:graphicImage value="/images/#{accommodation.picture.link}"
-										alt="Accommodation picture" height="150" styleClass="card-img-top rounded-image" />
+										alt="Accommodation picture" height="150"
+										styleClass="card-img-top rounded-image" />
 									<div class="card-body">
 										<h5 class="card-title">#{accommodation.name}</h5>
 										<p class="card-text">#{accommodation.accommodationType}</p>
@@ -530,7 +546,8 @@ rgba
 								var="restaurant">
 								<div class="card">
 									<h:graphicImage value="/images/#{restaurant.picture.link}"
-										alt="Restaurant picture" height="150" styleClass="card-img-top rounded-image" />
+										alt="Restaurant picture" height="150"
+										styleClass="card-img-top rounded-image" />
 									<div class="card-body">
 										<h5 class="card-title">#{restaurant.name}</h5>
 										<p class="card-text">#{restaurant.service.price.amount}
@@ -552,16 +569,27 @@ rgba
 
 						<h2 class="mt-5">Choose your preferred mode of transport</h2>
 						<div class="grid-container">
-							<ui:repeat value="#{transportationBean.currentUserTransportations}"
-								var="transport">
+							<ui:repeat
+								value="#{transportationBean.currentUserTransportations}"
+								var="transportation">
 								<div class="card">
 									<h:graphicImage value="/images/#{transportation.picture.link}"
-										alt="Transport picture" height="150" styleClass="rounded-image" />
+										alt="Transport picture" height="150"
+										styleClass="rounded-image" />
 									<div class="card-body">
 										<h5 class="card-title">#{transportation.name}</h5>
-										<p class="card-text">#{transportation.type}</p>
-										<p class="card-text">#{transportation.price.amount}
-											#{transportation.price.currency}</p>
+										<p class="card-text">#{transportation.transportationType}</p>
+										<p class="card-text">#{transportation.service.price.amount}
+											#{transportation.service.price.currency}</p>
+
+										<p class="card-text">
+											<h:outputText value="Available"
+												rendered="#{transportation.service.availability}"
+												styleClass="table-content-bold" />
+											<h:outputText value="Not Available"
+												rendered="#{not transportation.service.availability}"
+												styleClass="table-content-bold" />
+										</p>
 										<a href="details_trans.xhtml?id=#{transportation.id}"
 											class="btn btn-primary">Book Now</a>
 									</div>

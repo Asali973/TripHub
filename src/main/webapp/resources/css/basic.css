@@ -32,86 +32,124 @@
 	font-size: 24px;
 }
 
+/* Flexbox Centering */
 .flex-container {
-    display: flex;
-    align-items: center; /* Ceci centrera verticalement le texte et l'image */
-    justify-content: center; /* Ceci centrera horizontalement le contenu */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .navbar-logo {
-    margin-right: 20px; /* Ajouter de l'espace à droite de l'image */
+	margin-right: 20px; /* Ajouter de l'espace à droite de l'image */
 }
 
-.centered-content th, 
-.centered-content td {
-    text-align: center;
+.centered-content th, .centered-content td {
+	text-align: center;
 }
 
 .table-content-bold {
-    font-weight: bold;
-    font-size: 1.2em; /* Ajustez la taille selon vos préférences */
+	font-weight: bold;
+	font-size: 1.2em; /* Ajustez la taille selon vos préférences */
 }
 
 h1 {
-    font-size: 2.5em; /* Augmente la taille de la police */
-    font-weight: bold; /* Rend le texte en gras */
-    letter-spacing: 1px; /* Augmente l'espacement des lettres */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
-    color: #333; /* Définit la couleur du texte */
-    text-transform: uppercase; /* Transforme le texte en majuscules */
-    margin-bottom: 20px; /* Ajoute un espace en dessous du titre */
-}
-
-
-
-.card, .card2 {
-	max-width: 80%;
-    margin: 0px auto 30px auto;
-    margin-top: 30px;
-    max-width: 1200px;  /* Augmentez la largeur maximale si nécessaire */
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(15px);
-    opacity: 1;
-    padding: 20px 30px;  /* Réduisez le padding pour plus d'espace de contenu */
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	font-size: 2.5em; /* Augmente la taille de la police */
+	font-weight: bold; /* Rend le texte en gras */
+	letter-spacing: 1px; /* Augmente l'espacement des lettres */
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+	/* Ajoute une ombre légère */
+	color: #333; /* Définit la couleur du texte */
+	text-transform: uppercase; /* Transforme le texte en majuscules */
+	margin-bottom: 20px; /* Ajoute un espace en dessous du titre */
 }
 
 .card2 {
-    padding: 20px 10px;  /* Réduisez le padding pour plus d'espace de contenu */
+	max-width: 80%;
+	margin: 0px auto 30px auto;
+	margin-top: 30px;
+	max-width: 1200px; /* Augmentez la largeur maximale si nécessaire */
+	background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 15px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+	backdrop-filter: blur(15px);
+	opacity: 1;
+	padding: 20px 30px;
+	/* Réduisez le padding pour plus d'espace de contenu */
+	transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow
+		0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card2 {
+	padding: 20px 10px;
+	/* Réduisez le padding pour plus d'espace de contenu */
 }
 
 h3 {
-    font-weight: 600; /* Slightly bolder than normal but not too bold */
-    font-size: 2em; /* A modest increase in size */
-    color: #333; /* A deep shade of gray for an elegant touch */
-    letter-spacing: 0.5px; /* A slight increase for better readability */
-    line-height: 1.4; /* Improved line spacing for visual appeal */
-    margin-top: 5rem;
-    margin-bottom: 5rem;
+	font-weight: 600; /* Slightly bolder than normal but not too bold */
+	font-size: 2em; /* A modest increase in size */
+	color: #333; /* A deep shade of gray for an elegant touch */
+	letter-spacing: 0.5px; /* A slight increase for better readability */
+	line-height: 1.4; /* Improved line spacing for visual appeal */
+	margin-top: 5rem;
+	margin-bottom: 5rem;
 }
 
+.card {
+	background: rgba(255, 255, 255, 0.3);
+	border-radius: 12px;
+	overflow: hidden;
+	/* To ensure the rounded corners for any child elements */
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+	max-width: 600px;
+	margin: 50px auto;
+	padding: 20px;
+	display: flex;
+	align-items: center; /* Center items vertically */
+	gap: 20px; /* Space between the logo and site name */
+}
+
+.card:hover {
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+	transform: translateY(-5px);
+}
+
+.logo {
+	flex-shrink: 0; /* Prevent logo from shrinking */
+	height: 200px;
+	border-radius: 50%; /* Circular logo */
+	object-fit: cover; /* Ensures image proportions are maintained */
+}
+
+.site-name {
+	 font-family: 'Roboto', sans-serif;
+	font-size: 45px;
+	color: #333;
+	letter-spacing: -0.5px;
+	/* Slight negative letter spacing for modern typography */
+	font-weight: 500; /* Medium font weight */
+}
 
 h2 {
-    font-weight: 400; /* Slightly bolder than normal but not too bold */
-    font-size: 1.6em; /* A modest increase in size */
-    color: #333; /* A deep shade of gray for an elegant touch */
-    letter-spacing: 0.5px; /* A slight increase for better readability */
-    line-height: 1.1; /* Improved line spacing for visual appeal */
+	font-weight: 400; /* Slightly bolder than normal but not too bold */
+	font-size: 1.6em; /* A modest increase in size */
+	color: #333; /* A deep shade of gray for an elegant touch */
+	letter-spacing: 0.5px; /* A slight increase for better readability */
+	line-height: 1.1; /* Improved line spacing for visual appeal */
 }
 
 .containerForm {
-    margin-top: 30px;  /* Ajustez les marges du contenu si nécessaire */
-    margin-bottom: 30px;  /* Exemple pour ajuster la marge inférieure */
+	margin-top: 30px; /* Ajustez les marges du contenu si nécessaire */
+	margin-bottom: 30px; /* Exemple pour ajuster la marge inférieure */
 }
+
 .container-fluid {
-    padding-left: 2%;
-    padding-right: 2%;
+	padding-left: 2%;
+	padding-right: 2%;
 }
 
 .btn {
-	width:80px;
+	width: 80px;
 	background-color: black;
 	color: white;
 	border: none;
