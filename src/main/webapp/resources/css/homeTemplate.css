@@ -1,6 +1,12 @@
+:root {
+	--footer-background : black;
+	--gray: grey;
+}
+
 html, body {
 	height: 100%;
 }
+
 
 body {
 	display: flex;
@@ -12,20 +18,8 @@ body {
 	min-height: 100vh;
 }
 
-
-
 .content-wrapper {
-	flex: 1;
-	/* permet à ce div de prendre tout l'espace disponible, poussant ainsi le footer vers le bas */
-}
-
-.sticky-footer {
-	flex-shrink: 0;
-	/* empêche le footer de réduire s'il y a beaucoup de contenu sur la page */
-}
-
-.container {
-	flex: 1;
+	flex: 1 0 auto; /* to stick the footer where it belongs */
 }
 
 .navbar {
@@ -33,23 +27,17 @@ body {
 	box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-brand, .navbar-nav .nav-link {
-	color: #ffffff;
-}
-
 .navbar-brand {
 	font-weight: bold;
 }
 
-/* Changement de couleur */
-.navbar-nav .nav-link:hover {
-	color: #007bff;
-	/* Vous pouvez remplacer cette couleur par celle de votre choix */
+.navbar, .footer {
+	border-radius: 0px; /* Ajoute des coins arrondis */
+	/* Gradient léger */
 }
 
-/* Sous-ligne */
-.navbar-nav .nav-link:hover {
-	text-decoration: underline;
+.navbar-brand, .navbar-nav .nav-link {
+	color: #ffffff;
 }
 
 /* Transformation (agrandissement) */
@@ -59,66 +47,135 @@ body {
 }
 
 .navbar-nav .nav-link:hover {
-	transform: scale(1.1);
-	/* Le lien sera agrandi de 10% lorsqu'il est survolé */
-}
-
-/* Ombre */
-.navbar-nav .nav-link:hover {
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-	/* Ajoute une ombre avec un léger flou */
-}
-
-.footer {
-	height: 80px;
-	background-color: #242c3d;
-	color: #ffffff;
-	border-top: none;
-}
-
-.footer a {
-	color: #ffffff;
-}
-
-.footer a:hover {
-	color: #50b3a2;
-}
-
-.social-icons a {
-	font-size: 1.5rem;
-	margin: 0 10px;
-	transition: color 0.3s;
-	color: #ffffff;
-}
-
-.social-icons a:hover {
-	color: #50b3a2;
-}
-
-.social-icons {
-	list-style: none;
-	padding: 0;
-}
-
-.social-icons li {
-	display: inline-block;
-	margin-right: 10px;
-}
-
-.social-icons li:last-child {
-	margin-right: 0;
-}
-
-.navbar, .footer {
-	border-radius: 0px; /* Ajoute des coins arrondis */
-	/* Gradient léger */
+	text-decoration: underline; /* Sous-ligne */
+	color: #007bff; /* Changement de couleur */
+	transform: scale(1.1); /* Le lien sera agrandi de 10% lorsqu'il est survolé */
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ajoute une ombre avec un léger flou */
 }
 
 .navbar-nav .nav-link, .footer a {
 	transition: all 0.3s; /* Transition douce pour tous les changements */
 }
 
-.social-icons a:hover {
-	transform: rotate(15deg);
-	/* Rotation douce sur les icônes de médias sociaux */
+
+
+footer {
+	padding: 16px;  
+ 	background-color: var(--footer-background); 
+ 	color: white; 
+ 	min-width: 300px;
+ 	width: 100%;
+ 	display: flex;
+ 	justify-content: center; 
+	flex-shrink: 0; /* empêche le footer de réduire s'il y a beaucoup de contenu sur la page */
 }
+
+.footer-wrapper {
+	display: flex;
+	background-color: var(- -footer-background);
+	flex-direction: column;
+}
+
+.footer-columns menu {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.footer-columns menu a {
+	color: white;
+	text-decoration: none;
+}
+
+.footer-columns menu a:hover {
+	text-decoration: underline;
+}
+
+.footer-columns menu li {
+	margin-bottom: 16px;
+}
+
+.logo {
+	width: 40px;
+}
+
+.social-links {
+	display: flex;
+	flex-direction: row;
+	gap: 12px;
+}
+
+.social-links a:hover {
+	transform: scale(1.1);
+}
+
+.footer-top {
+	display: flex;
+	max-width: 800px;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 8px 8px;
+	justify-content: space-between;
+	border-bottom: 1px solid var(- -gray);
+}
+
+.footer-columns {
+	padding-top: 24px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+.footer-columns h3 {
+	color: white;
+	margin-top: 0;
+	margin-bottom: 25px;
+	font-size: 1.125rem;
+}
+
+.footer-columns>section {
+	min-width: 180px;
+}
+
+.footer-bottom {
+	text-align: center;
+	border-top: 1px solid var(- -gray);
+	margin-top: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	gap: 8px;
+	padding: 16px 0px;
+	flex-wrap: wrap;
+}
+
+.footer-bottom-links {
+	margin-left: auto;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+@media ( max-width :800px) {
+	.footer-bottom-links {
+		margin: 0 auto;
+	}
+}
+
+.footer-bottom-links>a {
+	color: white;
+	text-decoration: none;
+}
+
+.footer-bottom-links>a:hover {
+	text-decoration: underline
+}
+
+.footer-bottom>small {
+	font-size: 16px;
+	margin: 0 4px;
+}
+
