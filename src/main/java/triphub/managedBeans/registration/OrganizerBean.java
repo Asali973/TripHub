@@ -1,5 +1,4 @@
 package triphub.managedBeans.registration;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -81,7 +80,6 @@ public class OrganizerBean implements Serializable {
 			initFormData(newOrganizer.getId());
 
 			userViewModel.clear();
-
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Organizer created successfully!", null));
 
@@ -111,9 +109,7 @@ public class OrganizerBean implements Serializable {
 				userViewModel.setSecondaryColor(customization.getSecondaryColor());
 				userViewModel.setPrimaryFont(customization.getPrimaryFont());
 				userViewModel.setSecondaryFont(customization.getSecondaryFont());
-
 			}
-
 		} else {
 			FacesMessageUtil.addErrorMessage("Initialization failed: Organizer does not exist");
 		}
@@ -286,7 +282,6 @@ public class OrganizerBean implements Serializable {
 	        FacesMessageUtil.addSuccessMessage("Subscription saved successfully!");
 	    }
 	}
-
 	
 	public List<Layout> determineAvailableLayouts(SubscriptionType type) {
 	    List<Layout> layouts = new ArrayList<>();
@@ -320,7 +315,6 @@ public class OrganizerBean implements Serializable {
 	        default:
 	            break;
 	    }
-
 	    return layouts;
 	}
 
