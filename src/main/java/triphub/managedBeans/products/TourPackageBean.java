@@ -50,33 +50,71 @@ public class TourPackageBean implements Serializable {
 
 	}
 
+//	@PostConstruct
+//	public void init() {
+//		allTourPackages = tourPackageService.getAllTourPackages();
+//
+//		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+//
+//		if (id != null  && !id.isEmpty()) {
+//			Long tourPackageId = Long.parseLong(id);
+//			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTourPackageId",
+//					tourPackageId);
+//			tourPackageVm = tourPackageService.initTourPackage(tourPackageId);
+//			if (tourPackageVm == null) {
+//				FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
+//			}
+//		}
+//
+//		if (id != null  && !id.isEmpty()) {
+//			Long tourPackageId = Long.parseLong(id);
+//			// Fetch the selected tour package using tourPackageService
+//			selectedTourPackage = tourPackageService.getTourPackageById(tourPackageId);
+//
+//			if (selectedTourPackage == null) {
+//				FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
+//			}
+//		}
+//
+//	}
 	@PostConstruct
 	public void init() {
-		allTourPackages = tourPackageService.getAllTourPackages();
-
-		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-
-		if (id != null  && !id.isEmpty()) {
-			Long tourPackageId = Long.parseLong(id);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTourPackageId",
-					tourPackageId);
-			tourPackageVm = tourPackageService.initTourPackage(tourPackageId);
-			if (tourPackageVm == null) {
-				FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
-			}
-		}
-
-		if (id != null  && !id.isEmpty()) {
-			Long tourPackageId = Long.parseLong(id);
-			// Fetch the selected tour package using tourPackageService
-			selectedTourPackage = tourPackageService.getTourPackageById(tourPackageId);
-
-			if (selectedTourPackage == null) {
-				FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
-			}
-		}
-
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    // Step 1: Try to fetch the tourPackageId from the session
+	    tourPackageId = (Long) externalContext.getSessionMap().get("selectedTourPackageId");
+	    
+	    // Step 2: If not found in session, try to get from the request parameters
+	    if (tourPackageId == null) {
+	        String idParam = externalContext.getRequestParameterMap().get("id");
+	        if (idParam != null && !idParam.trim().isEmpty()) {
+	            try {
+	                tourPackageId = Long.parseLong(idParam);
+	                externalContext.getSessionMap().put("selectedTourPackageId", tourPackageId);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("Invalid tour package ID format.");
+	            }
+	        }
+	    }
+	    
+	    // Step 3: Use the tourPackageId to initialize other parts
+	    if (tourPackageId != null) {
+	        tourPackageVm = tourPackageService.initTourPackage(tourPackageId);
+	        if (tourPackageVm == null) {
+	            FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
+	            return;
+	        }
+	        
+	        // Fetch the selected tour package
+	        selectedTourPackage = tourPackageService.getTourPackageById(tourPackageId);
+	        if (selectedTourPackage == null) {
+	            FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
+	            return;
+	        }
+	    } else {
+	        allTourPackages = tourPackageService.getAllTourPackages();
+	    }
 	}
+
 
 	public String loadAllTourPackages() {
 		allTourPackages = tourPackageService.getAllTourPackages();
@@ -251,12 +289,31 @@ public class TourPackageBean implements Serializable {
 	
 	public List<TourPackage> getCurrentUserTourPackages() {
 	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+	    
 	    Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
+	    
+	    
 	    if (organizerId == null) {
-	        return new ArrayList<>(); // Retournez une liste vide ou null selon votre choix.
+	        String organizerIdParam = externalContext.getRequestParameterMap().get("organizerId");
+	        if (organizerIdParam != null && !organizerIdParam.trim().isEmpty()) {
+	            try {
+	                organizerId = Long.parseLong(organizerIdParam);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("ID not valid");
+	                return new ArrayList<>(); 
+	            }
+	        }
 	    }
+
+	    if (organizerId == null) {
+	        return new ArrayList<>();
+	    }
+
 	    return tourPackageService.getTourPackagesForOrganizer(organizerId);
 	}
+
+
 
 	
 

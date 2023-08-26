@@ -96,6 +96,23 @@
 				</div>
 			</div>
 		</ui:define>
-	</ui:composition>	
-  </h:body>
+
+	
+ 
+
+
+   <p><h:link value="Link to Organizer Session Home" outcome="/views/organizer_session/homeForWebsite" /></p>
+<ui:repeat value="#{organizerBean.allOrganizers}" var="organizer">
+    <h:link value="Go to #{organizer.companyInfo.name}'s xhtmlFile" 
+            outcome="/views/organizer_session/observeSettings?faces-redirect=true">
+        <f:param name="organizerId" value="#{organizer.id}" />
+        <f:param name="userId" value="#{organizer.id}" />
+    </h:link>
+</ui:repeat>
+
+
+	</ui:composition>
+
+</h:body>
+
 </html>

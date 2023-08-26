@@ -148,6 +148,7 @@ public class OrganizerBean implements Serializable {
 	    }
 	    return organizerId;
 	}
+
 	private void setupLayoutForOrganizer(Long organizerId) {
 	    Organizer organizer = userService.readOrganizer(organizerId);
 	    if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
