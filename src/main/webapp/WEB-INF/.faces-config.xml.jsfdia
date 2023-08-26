@@ -149,7 +149,28 @@
   PATH="/views/product/RestaurantForm.xhtml" SHAPE="256,1665,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#views#organizer_session#Restaurants.xhtml"
   PATH="/views/organizer_session/Restaurants.xhtml" SHAPE="256,1809,0,0" model-entity="JSFProcessGroup"/>
+<<<<<<< HEAD
+ <PROCESS-ITEM NAME="rules:*:7" PATH="*" SHAPE="32,1793,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:7" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="transportations::#views#product#TransportationForm.xhtml"
+    NAME="output" PATH="/views/product/TransportationForm.xhtml"
+    TARGET="rules:#views#product#TransportationForm.xhtml"
+    TITLE="transportations" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="transportations::#views#organizer_session#Transports.xhtml"
+    NAME="output1" PATH="/views/organizer_session/Transports.xhtml"
+    TARGET="rules:#views#organizer_session#Transports.xhtml"
+    TITLE="transportations" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#organizer_session#Transports.xhtml"
+  PATH="/views/organizer_session/Transports.xhtml" SHAPE="256,2177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#product#TransportationForm.xhtml"
+  PATH="/views/product/TransportationForm.xhtml" SHAPE="256,2065,0,0" model-entity="JSFProcessGroup"/>
+=======
 
   PATH="/views/organizer_home.xhtml" SHAPE="240,257,0,0" model-entity="JSFProcessGroup"/>
 
+>>>>>>> 8a118846c3a18a9f46d4d1e3c65b53b483c833a7
 </PROCESS>
