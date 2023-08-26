@@ -23,7 +23,6 @@ import triphub.helpers.ImageHelper;
 import triphub.services.AccommodationService;
 
 import triphub.viewModel.SubServicesViewModel;
-import triphub.viewModel.TourPackageFormViewModel;
 
 @Named("accommodationBean")
 @RequestScoped
@@ -44,6 +43,8 @@ public class AccommodationBean implements Serializable {
 	private List<String> currencies;
 	private Part pictureAccommodation;
 	private String picName;
+	
+	private Long accommodationId;
 
 	public AccommodationBean() {
 
@@ -60,26 +61,38 @@ public class AccommodationBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		allAccommodations = accommodationService.getAll();
-
-		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-
-		if (id != null && !id.isEmpty()) {
-			Long accommodationId = Long.parseLong(id);
-
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedAccommodationId",
-					accommodationId);
-
-			accommodationVm = accommodationService.initSubService(accommodationId);
-			if (accommodationVm == null) {
-				FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
-			}
-
-			selectedAccommodation = accommodationService.getAccommodationById(accommodationId);
-			if (selectedAccommodation == null) {
-				FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
-			}
-		}
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    
+	    accommodationId = (Long) externalContext.getSessionMap().get("selectedAccommodationId");
+	    
+	    if (accommodationId == null) {
+	        String idParam = externalContext.getRequestParameterMap().get("id");
+	        if (idParam != null && !idParam.trim().isEmpty()) {
+	            try {
+	                accommodationId = Long.parseLong(idParam);
+	                externalContext.getSessionMap().put("selectedAccommodationId", accommodationId);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("Id not valid");
+	                return; 
+	            }
+	        }
+	    }
+	    
+	    if (accommodationId != null) {
+	        accommodationVm = accommodationService.initSubService(accommodationId);
+	        if (accommodationVm == null) {
+	            FacesMessageUtil.addErrorMessage("Accommodation does not exists");
+	            return;
+	        }
+	        
+	        selectedAccommodation = accommodationService.getAccommodationById(accommodationId);
+	        if (selectedAccommodation == null) {
+	            FacesMessageUtil.addErrorMessage("Accommodation does not exists");
+	            return;
+	        }
+	    } else {
+	        allAccommodations = accommodationService.getAll();
+	    }
 	}
 
 
@@ -205,27 +218,61 @@ public class AccommodationBean implements Serializable {
 	}
 
 	public List<Accommodation> getCurrentUserAccommodations() {
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
-		String userType = (String) externalContext.getSessionMap().get("userType");
+	    String userType = (String) externalContext.getSessionMap().get("userType");
+	    Long userId = null;
 
-		if ("organizer".equals(userType)) {
-			Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
-			if (organizerId == null) {
-				return new ArrayList<>();
-			}
-			return accommodationService.getAccommodationForOrganizer(organizerId);
-		} else if ("provider".equals(userType)) {
-			Long providerId = (Long) externalContext.getSessionMap().get("providerId");
-			if (providerId == null) {
-				return new ArrayList<>();
-			}
-			return accommodationService.getAccommodationForProvider(providerId);
-		} else {
+	    if ("organizer".equals(userType)) {
+	        userId = (Long) externalContext.getSessionMap().get("organizerId");
+	    } else if ("provider".equals(userType)) {
+	        userId = (Long) externalContext.getSessionMap().get("providerId");
+	    }
 
-			return new ArrayList<>();
-		}
+	    if (userId == null) {
+	        String userIdParam = externalContext.getRequestParameterMap().get("userId");
+	        if (userIdParam != null && !userIdParam.trim().isEmpty()) {
+	            try {
+	                userId = Long.parseLong(userIdParam);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("Format d'ID d'utilisateur non valide.");
+	                return new ArrayList<>(); 
+	            }
+	        }
+	    }
+
+	    if (userId == null) {
+	        return new ArrayList<>();
+	    }
+
+	    return accommodationService.getAccommodationForOrganizer(userId); 
 	}
+
+
+
+	
+//	public List<Accommodation> getCurrentUserAccommodations() {
+//		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//
+//		String userType = (String) externalContext.getSessionMap().get("userType");
+//
+//		if ("organizer".equals(userType)) {
+//			Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
+//			if (organizerId == null) {
+//				return new ArrayList<>();
+//			}
+//			return accommodationService.getAccommodationForOrganizer(organizerId);
+//		} else if ("provider".equals(userType)) {
+//			Long providerId = (Long) externalContext.getSessionMap().get("providerId");
+//			if (providerId == null) {
+//				return new ArrayList<>();
+//			}
+//			return accommodationService.getAccommodationForProvider(providerId);
+//		} else {
+//
+//			return new ArrayList<>();
+//		}
+//	}
 
 	public List<Accommodation> getAllAccommodation() {
 		return accommodationService.getAllAccommodation();
