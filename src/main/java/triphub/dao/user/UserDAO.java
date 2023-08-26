@@ -117,5 +117,11 @@ public class UserDAO {
 			return null;
 		}
 	}
-
+	public void updateUser(User user) {
+        em.merge(user);
+    }
+    
+    public void refreshUser(User user) {
+        em.refresh(user);
+    }
 }

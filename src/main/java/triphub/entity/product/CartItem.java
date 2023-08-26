@@ -64,12 +64,47 @@ public class CartItem implements Serializable {
 		this.setQuantity(viewModel.getQuantity());
 
 	}
+			
+	 public void setQuantity(int quantity) {
+	        this.quantity = quantity;
+	        updateTotalPrice();
+	    }
+   	
+	 private void updateTotalPrice() {
+		    if (tourPackage != null) {
+		        this.totalPrice = tourPackage.getPrice().getAmount().multiply(new BigDecimal(quantity));
+		    } else if (accommodation != null) {
+		        this.totalPrice = accommodation.getService().getPrice().getAmount().multiply(new BigDecimal(quantity));
+		    } else if (restaurant != null) {
+		        this.totalPrice = restaurant.getService().getPrice().getAmount().multiply(new BigDecimal(quantity));
+		    } else if (transportation != null) {
+		        this.totalPrice = transportation.getService().getPrice().getAmount().multiply(new BigDecimal(quantity));
+		    }
+		}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-
-	}
-
+	 @Transient
+	    public BigDecimal getTotalPrice() {
+	        if (tourPackage != null) {
+	            return tourPackage.getPrice().getAmount().multiply(new BigDecimal(quantity));
+	        }
+	        if (accommodation != null) {
+	            return accommodation.getService().getPrice().getAmount().multiply(new BigDecimal(quantity));
+	        }
+	        if (transportation != null) {
+	            return transportation.getService().getPrice().getAmount().multiply(new BigDecimal(quantity));
+	        }
+	        if (restaurant != null) {
+	            return restaurant.getService().getPrice().getAmount().multiply(new BigDecimal(quantity));
+	        }
+	        
+	        return BigDecimal.ZERO;  // Default, though it might be better to handle this case more gracefully.
+	    }
+	 
+	 public void setTourPackage(TourPackage tourPackage) {
+	        this.tourPackage = tourPackage;
+	        updateTotalPrice();
+	    }
+	 
 	public Long getId() {
 		return id;
 	}
@@ -93,19 +128,8 @@ public class CartItem implements Serializable {
 	public TourPackage getTourPackage() {
 		return tourPackage;
 	}
-
-	public void setTourPackage(TourPackage tourPackage) {
-		this.tourPackage = tourPackage;
-	}
-
-//	public Service getService() {
-//		return service;
-//	}
-//
-//	public void setService(Service service) {
-//		this.service = service;
-//	}
-
+	
+	
 	public Date getDateOfOrder() {
 		return dateOfOrder;
 	}
@@ -122,9 +146,7 @@ public class CartItem implements Serializable {
 		this.newQuantity = newQuantity;
 	}
 
-	public BigDecimal getTotalPrice() {
-		return totalPrice;
-	}
+	
 
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
@@ -136,6 +158,7 @@ public class CartItem implements Serializable {
 
 	public void setAccommodation(Accommodation accommodation) {
 		this.accommodation = accommodation;
+		updateTotalPrice();
 	}
 
 	public Restaurant getRestaurant() {
@@ -144,6 +167,7 @@ public class CartItem implements Serializable {
 
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
+		updateTotalPrice();
 	}
 
 	public Transportation getTransportation() {
@@ -152,6 +176,7 @@ public class CartItem implements Serializable {
 
 	public void setTransportation(Transportation transportation) {
 		this.transportation = transportation;
+		updateTotalPrice();
 	}
 
 	

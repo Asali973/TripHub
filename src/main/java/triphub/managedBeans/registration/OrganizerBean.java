@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -27,7 +26,7 @@ import triphub.helpers.RegistrationException;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 
-@Named
+@Named("organizerBean")
 @RequestScoped
 public class OrganizerBean implements Serializable {
 
@@ -149,6 +148,15 @@ public class OrganizerBean implements Serializable {
 	        availableLayouts = layoutDAO.getAllLayouts(); 
 	    }
 	}
+	
+    public String getXhtmlFile(Organizer organizer) {
+        if (organizer != null && organizer.getSubscription() != null 
+            && organizer.getSubscription().getCustomization() != null
+            && organizer.getSubscription().getCustomization().getLayout() != null) {
+            return organizer.getSubscription().getCustomization().getLayout().getXhtmlFile();
+        }
+        return null;
+    }
 
 	public void updateOrganizer() {
 		try {
@@ -254,7 +262,14 @@ public class OrganizerBean implements Serializable {
 		}
 	}
 	
-	
+	public int getEndIndex() {
+	    if (allOrganizers != null) {
+	        return Math.min(allOrganizers.size(), 9);
+	    }
+	    return 0;
+	}
+
+
 
 	public UserService getUserService() {
 		return userService;
@@ -315,5 +330,6 @@ public class OrganizerBean implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 
 }

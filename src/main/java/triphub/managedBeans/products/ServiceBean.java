@@ -3,7 +3,6 @@ package triphub.managedBeans.products;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -18,7 +17,6 @@ import triphub.entity.subservices.AccommodationType;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
 import triphub.entity.subservices.TransportationType;
-import triphub.helpers.FacesMessageUtil;
 import triphub.services.ServiceService;
 import triphub.viewModel.SubServicesViewModel;
 

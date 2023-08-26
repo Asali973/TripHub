@@ -10,20 +10,332 @@
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet library="css" name="homeTemplate.css" />
+	<h:outputStylesheet library="css" name="basic.css" />
 
 	<ui:insert name="additionalHeadContent" />
 
+	<style>
+.bodycolor {
+	background-color: #{organizerBean.userViewModel.primaryColor
+}
+
+;
+}
+.navbar {
+	background-color: #{organizerBean.userViewModel.secondaryColor
+}
+
+;
+box-shadow
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+0px
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+3px
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+10px
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+rgba
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0
+,
+0
+,
+0
+,
+0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;
+}
+.footer {
+	background-color: #{organizerBean.userViewModel.secondaryColor
+}
+
+;
+}
+.font1 {
+	font-family: #{
+	organizerBean.userViewModel.primaryFont
+}
+;
+}
+</style>
+
 </h:head>
-<h:body>
+<h:body class="bodycolor">
 	<div class="content-wrapper">
-		<nav class="navbar navbar-expand-lg navbar-dark">
+		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
 				<!-- Brand/logo -->
 				<a class="navbar-brand" href="/triphub/views/home.xhtml"> <h:graphicImage
-						library="images" name="logoheader.png" alt="Trip Hub"
-						style="width: 180px; height: 50px;" />
+						value="/images/#{organizerBean.userViewModel.companyLogoLink}"
+						alt="Trip Hub" styleClass="navbar-logo rounded-image" /> <h:outputText
+						value="#{organizerBean.userViewModel.companyName}"
+						styleClass="navbar-brand-text font1" />
 				</a>
+
+
 
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarNav" aria-controls="navbarNav"
@@ -35,7 +347,7 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav ml-auto">
 
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"><a class="nav-link font1"
 							href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a></li>
 
 
@@ -44,59 +356,49 @@
 								rendered="#{not empty sessionScope.user}">
 								<h:form id="logoutForm">
 									<h:commandLink action="#{loginBean.logout}" value="Logout"
-										styleClass="nav-link" />
+										styleClass="nav-link font1" />
 								</h:form>
 							</h:panelGroup></li>
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user}">
-								<a class="nav-link"
+								<a class="nav-link font1"
 									href="/triphub/views/loginAndAccount/ProfileUser.xhtml">Your
 									Profile</a>
 							</h:panelGroup></li>
 
 						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link" href="/triphub/views/organizer_home.xhtml">Your
-									Space</a>
-							</h:panelGroup></li>
-
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link"
-									href="/triphub/views/product/TourpackageHome.xhtml">Your
-									Tour Package</a>
-							</h:panelGroup></li>
-
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link"
-									href="#">Services</a>
-							</h:panelGroup></li>
-
-
-						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'provider'}">
-								<a class="nav-link" href="/triphub/views/provider_home.xhtml">Your
-									Space</a>
+								<a class="nav-link font1"
+									href="/triphub/views/provider_home.xhtml">Your Space</a>
 							</h:panelGroup></li>
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'customer'}">
-								<a class="nav-link" href="/triphub/views/customer_home.xhtml">Your
-									Space</a>
+								<a class="nav-link font1"
+									href="/triphub/views/customer_home.xhtml">Your Space</a>
 							</h:panelGroup></li>
 
+						<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
+								<a class="nav-link" href="/triphub/views/organizer_home.xhtml">Back
+									to Settings</a>
+							</h:panelGroup></li>
 
-
-
+						<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user}">
+								<a class="nav-link font1"
+									href="/triphub/views/organizer_session/cart.xhtml"> <i
+									class="fas fa-shopping-cart"></i> Cart
+								</a>
+							</h:panelGroup></li>
 
 						<li class="nav-item dropdown"><h:panelGroup
 								rendered="#{empty sessionScope.user}">
 
-								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"> Sign Up </a>
+								<a class="nav-link dropdown-toggle font1" href="#"
+									id="navbarDropdown" role="button" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false"> Sign Up </a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<a class="dropdown-item"
 										href="/triphub/views/loginAndAccount/CustomerRegistration.xhtml">Sign
@@ -115,34 +417,280 @@
 		</nav>
 
 		<!-- Add  page content here -->
-		<div class="container-fluid mt-4">
-			<ui:insert name="content" />
-		</div>
-	</div>
-	<!-- Footer section -->
-	<footer class="footer sticky-footer">
-		<div class="container text-center">
-			<p>© 2023 Trip Hub. All rights reserved.</p>
-			<ul class="list-inline social-icons">
-				<!-- Add your social media icons and links here -->
-				<li class="list-inline-item"><a href="#"><i
-						class="fab fa-facebook-f"></i></a></li>
-				<li class="list-inline-item"><a href="#"><i
-						class="fab fa-twitter"></i></a></li>
-				<li class="list-inline-item"><a href="#"><i
-						class="fab fa-instagram"></i></a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-			</ul>
-			<p>
-				<a href="#">About Us</a>
-			</p>
-		</div>
-	</footer>
 
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+		<ui:insert name="content">
+
+			<div class="card2">
+				<div class="card-body">
+
+					<div class="card">
+						<h:graphicImage
+							value="/images/#{organizerBean.userViewModel.companyLogoLink}"
+							styleClass="logo" alt="Site Logo" />
+						<div class="site-name">#{organizerBean.userViewModel.companyName}</div>
+					</div>
+
+
+
+
+					<!-- Tour Packages -->
+					<h3 class="mt-5 mb-5">All you need in one package</h3>
+
+					<h:dataTable value="#{tourPackageBean.currentUserTourPackages}"
+						var="tourPackage" styleClass="table table-hover centered-content">
+
+						<!-- Image Column -->
+						<h:column>
+							<div class="table-content-bold">
+								<h:graphicImage value="/images/#{tourPackage.picture.link}"
+									height="150" alt="Tour package picture"
+									styleClass="rounded-image" />
+							</div>
+						</h:column>
+
+						<!-- Name Column -->
+						<h:column>
+							<h:outputText value="#{tourPackage.name}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Destination Column -->
+						<h:column>
+							<h:outputText value="#{tourPackage.destination.cityName}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Theme Column -->
+						<h:column>
+							<h:outputText value="#{tourPackage.theme.themeName}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Price Column -->
+						<h:column>
+							<h:outputText
+								value="#{tourPackage.price.amount} #{tourPackage.price.currency}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Action Column -->
+						<h:column>
+							<a href="details.xhtml?id=#{tourPackage.id}"
+								class="btn btn-primary btn-sm">Buy Now</a>
+						</h:column>
+
+					</h:dataTable>
+
+					<br />
+					<h3 class="mt-5 mb-5">Craft Your Own Journey</h3>
+
+
+					<!-- Accommodations -->
+					<h2 class="mt-3 mb-3">Explore our accommodations</h2>
+
+					<h:dataTable value="#{accommodationBean.currentUserAccommodations}"
+						var="accommodation"
+						styleClass="table table-hover centered-content">
+
+						<!-- Image Column -->
+						<h:column>
+							<div class="table-content-bold">
+								<h:graphicImage value="/images/#{accommodation.picture.link}"
+									height="150" alt="Accommodation picture"
+									styleClass="rounded-image" />
+							</div>
+						</h:column>
+
+						<!-- Name Column -->
+						<h:column>
+							<h:outputText value="#{accommodation.name}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Type Column -->
+						<h:column>
+							<h:outputText value="#{accommodation.accommodationType}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Price Column -->
+						<h:column>
+							<h:outputText
+								value="#{accommodation.service.price.amount} #{accommodation.service.price.currency}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Availability Column -->
+						<h:column>
+							<h:outputText value="Available"
+								rendered="#{accommodation.service.availability}"
+								styleClass="table-content-bold" />
+							<h:outputText value="Not Available"
+								rendered="#{not accommodation.service.availability}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Action Column -->
+						<h:column>
+							<a href="details_acco.xhtml?id=#{accommodation.id}"
+								class="btn btn-primary btn-sm">Book Now</a>
+						</h:column>
+
+					</h:dataTable>
+
+					<br />
+
+
+					<!-- Restaurants -->
+					<h2 class="mt-3 mb-3">Dine in the finest places</h2>
+
+					<h:dataTable value="#{restaurantBean.currentUserRestaurants}"
+						var="restaurant" styleClass="table table-hover centered-content">
+
+						<!-- Image Column -->
+						<h:column>
+							<div class="table-content-bold">
+								<h:graphicImage value="/images/#{restaurant.picture.link}"
+									height="150" alt="Restaurant picture"
+									styleClass="rounded-image" />
+							</div>
+						</h:column>
+
+						<!-- Name Column -->
+						<h:column>
+							<h:outputText value="#{restaurant.name}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Description Column -->
+						<h:column>
+							<h:outputText value="#{restaurant.description}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Price Column -->
+						<h:column>
+							<h:outputText
+								value="#{restaurant.service.price.amount} #{restaurant.service.price.currency}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Availability Column -->
+						<h:column>
+							<h:outputText value="Available"
+								rendered="#{restaurant.service.availability}"
+								styleClass="table-content-bold" />
+							<h:outputText value="Not Available"
+								rendered="#{not restaurant.service.availability}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Action Column -->
+						<h:column>
+							<a href="details_res.xhtml?id=#{restaurant.id}"
+								class="btn btn-primary btn-sm">Reserve Now</a>
+						</h:column>
+
+					</h:dataTable>
+
+					<br />
+
+
+					<!-- Transportations -->
+					<h2 class="mt-3 mb-3">Choose your preferred mode of transport</h2>
+
+					<h:dataTable
+						value="#{transportationBean.currentUserTransportations}"
+						var="transportation"
+						styleClass="table table-hover centered-content">
+
+						<!-- Image Column -->
+						<h:column>
+							<div class="table-content-bold">
+								<h:graphicImage value="/images/#{transportation.picture.link}"
+									height="150" alt="Transportation picture"
+									styleClass="rounded-image" />
+							</div>
+						</h:column>
+
+						<!-- Name Column -->
+						<h:column>
+							<h:outputText value="#{transportation.name}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Description Ville -->
+						<h:column>
+							<h:outputText value="#{transportation.departure.city}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+
+
+						<!-- Price Column -->
+						<h:column>
+							<h:outputText
+								value="#{transportation.service.price.amount} #{transportation.service.price.currency}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Availability Column -->
+						<h:column>
+							<h:outputText value="Available"
+								rendered="#{transportation.service.availability}"
+								styleClass="table-content-bold" />
+							<h:outputText value="Not Available"
+								rendered="#{not transportation.service.availability}"
+								styleClass="table-content-bold" />
+						</h:column>
+
+						<!-- Action Column -->
+						<h:column>
+							<a href="details_trans.xhtml?id=#{transportation.id}"
+								class="btn btn-primary btn-sm">Book Now</a>
+						</h:column>
+
+					</h:dataTable>
+
+
+				</div>
+			</div>
+		</ui:insert>
+
+
+
+
+
+
+
+
+
+
+
+		<!-- Footer section -->
+		<footer class="footer sticky-footer">
+			<div class="container text-center">
+				<p>© 2023 #{organizerBean.userViewModel.companyName}. All rights
+					reserved.</p>
+				<ul class="list-inline social-icons">
+					<!-- Add your social media icons and links here -->
+					<li class="list-inline-item"><a href="#"><i
+							class="fab fa-facebook-f"></i></a></li>
+					<li class="list-inline-item"><a href="#"><i
+							class="fab fa-twitter"></i></a></li>
+					<li class="list-inline-item"><a href="#"><i
+							class="fab fa-instagram"></i></a></li>
+					<li><p>Contact</p></li>
+				</ul>
+			</div>
+		</footer>
+
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	</div>
 </h:body>
 </html>

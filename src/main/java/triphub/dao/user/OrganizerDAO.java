@@ -190,11 +190,22 @@ public class OrganizerDAO {
 			em.flush();
 		}
 	}
+	
 
 	public Subscription getSubscriptionForOrganizer(Long organizerId) {
 		Organizer organizer = em.find(Organizer.class, organizerId);
 		return organizer != null ? organizer.getSubscription() : null;
 	}
+	
+    public String getXhtmlFileByOrganizerId(Long organizerId) {
+        Organizer organizer = em.find(Organizer.class, organizerId);
+        if (organizer != null && organizer.getSubscription() != null 
+            && organizer.getSubscription().getCustomization() != null
+            && organizer.getSubscription().getCustomization().getLayout() != null) {
+            return organizer.getSubscription().getCustomization().getLayout().getXhtmlFile();
+        }
+        return null;
+    }
 	
 
 
