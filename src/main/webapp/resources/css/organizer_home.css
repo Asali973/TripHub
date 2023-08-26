@@ -146,6 +146,11 @@ body, h1, h2, h3, h4, h5, p, a {
     padding: 10px 15px;    
     border-radius: 15px;
 }
+.search-input {
+    border-radius: 15px; 
+    padding: 5px 10px; 
+    margin-right: 15px; 
+    }
 
 
 

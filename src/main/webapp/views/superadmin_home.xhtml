@@ -14,6 +14,12 @@
 				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
 				rel="stylesheet" />
 			<h:outputStylesheet library="css" name="organizer_home.css" />
+			<style>
+/* CSS to hide the create form container initially */
+#createFormContainer {
+	display: none;
+}
+</style>
 		</ui:define>
 
 		<ui:define name="content">
@@ -23,8 +29,12 @@
 						page!</h1>
 					<div class="card">
 						<div class="card-body">
+						<!-- The button to toggle the search form visibility -->
+                    <div class="text-center">
+                        <button class="btn btn-primary mb-3" onclick="toggleCreateForm()">Search User</button>
+                    </div>
 							<!-- search bar start here -->
-							<div class="text-center mt-2 mb-5">
+							<div class="text-center mt-2 mb-5"  id="createFormContainer">
 								<h:form id="searchForm">
 
 									<!-- Row 1: 4 search boxes -->
@@ -185,10 +195,10 @@
 													<br />
 													<p>Check the lists of services.</p>
 													<div class="pt-3 d-flex justify-content-around">
-														 <i class="fas fa-plane fa-2x"></i>														 
-														 <i class="fas fa-train fa-2x"></i>
-														 <i class="fas fa-hotel fa-2x"></i>
-														 <i class="fas fa-utensils fa-2x"></i>
+														<i class="fas fa-plane fa-2x"></i> <i
+															class="fas fa-train fa-2x"></i> <i
+															class="fas fa-hotel fa-2x"></i> <i
+															class="fas fa-utensils fa-2x"></i>
 													</div>
 												</div>
 											</div>
@@ -203,7 +213,7 @@
 				</div>
 				<!-- Closing for <div class="containerForm"> -->
 			</div>
-			<!-- Closing for <div class="centered-content"> -->
+			<h:outputScript library="javascript" name="createNdisplayList.js" />
 		</ui:define>
 	</ui:composition>
 </h:body>
