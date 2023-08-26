@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -97,13 +98,14 @@ public class ServiceBean implements Serializable {
 	}
 
 	public void advancedSearchAccommodation() {
-		accommodationList = serviceService.advancedSearchAccommodations(searchAccommodationCity,searchAccommodationCountry,
-				minPrice, maxPrice, searchAccommodationName, selectedAccommodationType);
+		accommodationList = serviceService.advancedSearchAccommodations(searchAccommodationCity,
+				searchAccommodationCountry, minPrice, maxPrice, searchAccommodationName, selectedAccommodationType);
 	}
 
 	public void advancedSearchTransportation() {
-		transportationList = serviceService.advancedSearchTransportations(searchDepartureCity, searchDepartureCountry, searchArrivalCity, searchArrivalCountry,
-				minPrice, maxPrice, searchTransportationName, selectedTransportationType);
+		transportationList = serviceService.advancedSearchTransportations(searchDepartureCity, searchDepartureCountry,
+				searchArrivalCity, searchArrivalCountry, minPrice, maxPrice, searchTransportationName,
+				selectedTransportationType);
 	}
 
 	public void advancedSearchRestaurant() {
