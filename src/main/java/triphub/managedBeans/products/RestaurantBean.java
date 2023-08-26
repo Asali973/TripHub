@@ -33,7 +33,7 @@ public class RestaurantBean implements Serializable {
 	@Inject
 	private RestaurantService restaurantService;
 
-	// @Inject
+//	@Inject
 	private SubServicesViewModel restaurantvm = new SubServicesViewModel();
 	// @Inject
 	// RestaurantDAO restaurantDao;
@@ -84,13 +84,13 @@ public class RestaurantBean implements Serializable {
 	    if (restaurantId != null) {
 	        restaurantvm = restaurantService.initSubService(restaurantId);
 	        if (restaurantvm == null) {
-	            FacesMessageUtil.addErrorMessage("Transportation does not exist");
+	            FacesMessageUtil.addErrorMessage("Restaurant does not exist");
 	            return;
 	        }
 	        
 	        selectedRestaurant = restaurantService.findById(restaurantId);
 	        if (selectedRestaurant == null) {
-	            FacesMessageUtil.addErrorMessage("Transportation does not exist");
+	            FacesMessageUtil.addErrorMessage("Restaurant does not exist");
 	            return;
 	        }
 	    } else {
@@ -144,7 +144,7 @@ public class RestaurantBean implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Restaurant updated successfully!"));
 
 			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-			String redirectUrl = contextPath + "/views/product/restaurantForm.xhtml?faces-redirect=true";
+			String redirectUrl = contextPath + "/views/product/RestaurantForm.xhtml?faces-redirect=true";
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 
 		} catch (IllegalArgumentException e) {

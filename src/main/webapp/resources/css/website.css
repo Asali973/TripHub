@@ -79,6 +79,20 @@ body {
 	display: block;
 }
 
+
+#purchase-container-parent {
+width:100%;
+position: relative;
+}
+
+
+#purchase-pic-child{
+	position:absolute;
+	top: 50%;
+  left: 50%;
+}
+
+
 /* Styling for the footer */
 .footer {
   position: fixed;
@@ -106,3 +120,14 @@ body {
 .social-icon:hover {
   color: #ddd;
 }
+.centered-content {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin-top: 100px;  /* Adjust this value as per your requirement */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
