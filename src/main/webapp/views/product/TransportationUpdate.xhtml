@@ -21,12 +21,6 @@
 			<link rel="stylesheet"
 				href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
 
-			<style>
-/* CSS to hide the create form container initially */
-#createFormContainer {
-	display: none;
-}
-</style>
 		</ui:define>
 
 		<ui:define name="content">
@@ -43,8 +37,8 @@
 							value="#{transportationBean.transportationvm.id}" />
 						<h:inputHidden id="idservice"
 							value="#{transportationBean.transportationvm.service.id}" />
-						<div class="row">
-							<div class="col-md-6">
+<div class="row">
+							<div class="col-md-4">
 								<div class="form-group">
 									<h:outputLabel for="serviceInfo" value="Service Details"
 										style="font-weight: bold;" />
@@ -56,10 +50,9 @@
 										styleClass="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="transportationType"
-										value="Transporation Type:" required="true"
-										requiredMessage="Type transporation is required." />
-									<h:selectOneMenu id="transportationType"
+									<h:outputLabel for="typeTransport" value="Type :"
+										required="true" requiredMessage="Type is required." />
+									<h:selectOneMenu id="typeTransport"
 										value="#{transportationBean.transportationvm.transportationType}"
 										class="form-control" required="true">
 										<f:selectItems
@@ -69,7 +62,7 @@
 								</div>
 
 								<div class="form-group">
-									<h:outputLabel for="Price" value="Price:" />
+									<h:outputLabel for="price" value="Price:" />
 									<h:inputText id="price"
 										value="#{transportationBean.transportationvm.price.amount}"
 										styleClass="form-control" />
@@ -82,13 +75,12 @@
 										value="#{transportationBean.transportationvm.currencyType}"
 										class="form-control" required="true">
 										<f:selectItems value="#{transportationBean.allCurrencyTypes}"
-											var="typeCurrency" itemValue="#{typeCurrency}"
-											itemLabel="#{typeCurrency.label}" />
+											var="type" itemValue="#{type}" itemLabel="#{type.label}" />
 									</h:selectOneMenu>
 								</div>
 
 
-								<div class="form-group mt-4">
+								<div class="form-group">
 									<label for="availableFrom">Available From*:</label>
 									<h:inputText id="availableFrom"
 										value="#{transportationBean.transportationvm.availableFrom}"
@@ -97,7 +89,7 @@
 											type="date" />
 									</h:inputText>
 								</div>
-								<div class="form-group mt-4">
+								<div class="form-group">
 									<label for="availableTill">Available Until*:</label>
 									<h:inputText id="availableTill"
 										value="#{transportationBean.transportationvm.availableTill}"
@@ -120,111 +112,61 @@
 
 										<div class="input-group-append">
 											<button type="button" class="btn btn-customUpload"
-												onclick="document.getElementById('pictureTransportation').click();">Upload</button>
+												onclick="document.getElementById('pictureTransport').click();">Upload</button>
 										</div>
+
 									</div>
+
 								</div>
+
+
 
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-4">
 
 								<div class="form-group">
-									<h:outputLabel for="Address" value="Address Departure"
+									<h:outputLabel for="Departure" value="Departure"
 										style="font-weight: bold;" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="DepartureNum" value="Number:" />
-									<h:inputText id="DepartureNum"
+									<h:outputLabel for="num" value="Number:" />
+									<h:inputText id="num"
 										value="#{transportationBean.transportationvm.departure.num}"
 										styleClass="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="DepartureStreet" value="Street:" />
-									<h:inputText id="DepartureStreet"
+									<h:outputLabel for="street" value="Street:" />
+									<h:inputText id="street"
 										value="#{transportationBean.transportationvm.departure.street}"
 										styleClass="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="DepartureCity" value="City:" />
-									<h:inputText id="DepartureCity"
+									<h:outputLabel for="cityName" value="City:" />
+									<h:inputText id="cityName"
 										value="#{transportationBean.transportationvm.departure.city}"
 										styleClass="form-control" />
 								</div>
 
 								<div class="form-group">
-									<h:outputLabel for="DepartureState" value="State:" />
-									<h:inputText id="DepartureState"
+									<h:outputLabel for="state" value="State:" />
+									<h:inputText id="state"
 										value="#{transportationBean.transportationvm.departure.state}"
 										styleClass="form-control" />
 								</div>
 
 								<div class="form-group">
-									<h:outputLabel for="DepartureCountry" value="Country:" />
-									<h:inputText id="DepartureCountry"
+									<h:outputLabel for="country" value="Country:" />
+									<h:inputText id="country"
 										value="#{transportationBean.transportationvm.departure.country}"
 										styleClass="form-control" />
 								</div>
 
 								<div class="form-group">
-									<h:outputLabel for="DepartureZipCode" value="Zip Code:" />
-									<h:inputText id="DepartureZipCode"
+									<h:outputLabel for="zipcode" value="Zip Code:" />
+									<h:inputText id="zipcode"
 										value="#{transportationBean.transportationvm.departure.zipCode}"
 										styleClass="form-control" />
-								</div>
-
-								<div class="form-group">
-									<h:outputLabel for="Address" value="Address Arrival"
-										style="font-weight: bold;" />
-								</div>
-								<div class="form-group">
-									<h:outputLabel for="ArrivalNum" value="Number:" />
-									<h:inputText id="ArrivalNum"
-										value="#{transportationBean.transportationvm.arrival.num}"
-										styleClass="form-control" />
-								</div>
-								<div class="form-group">
-									<h:outputLabel for="ArrivalStreet" value="Street:" />
-									<h:inputText id="ArrivalStreet"
-										value="#{transportationBean.transportationvm.arrival.street}"
-										styleClass="form-control" />
-								</div>
-								<div class="form-group">
-									<h:outputLabel for="ArrivalCity" value="City:" />
-									<h:inputText id="ArrivalCity"
-										value="#{transportationBean.transportationvm.arrival.city}"
-										styleClass="form-control" />
-								</div>
-
-								<div class="form-group">
-									<h:outputLabel for="ArrivalState" value="State:" />
-									<h:inputText id="ArrivalState"
-										value="#{transportationBean.transportationvm.arrival.state}"
-										styleClass="form-control" />
-								</div>
-								
-								<div class="form-group">
-									<h:outputLabel for="ArrivalZipCode" value="Zip Code:" />
-									<h:inputText id="ArrivalZipCode"
-										value="#{transportationBean.transportationvm.arrival.zipCode}"
-										styleClass="form-control" />
-								</div>
-
-								<div class="form-group">
-									<h:outputLabel for="ArrivalCountry" value="Country:" />
-									<h:inputText id="ArrivalCountry"
-										value="#{transportationBean.transportationvm.arrival.country}"
-										styleClass="form-control" />
-								</div>
-
-							
-								<div class="form-group mt-4">
-									<label for="availability">Click here to make your
-										service available to our partners:</label>
-									<div class="toggle-button">
-										<h:selectBooleanCheckbox id="availability"
-											value="#{accommodationBean.accommodationVm.availability}" />
-									</div>
 								</div>
 
 
@@ -236,7 +178,68 @@
 						</script>
 
 							</div>
+
+							<div class="col-md-4">
+
+								<div class="form-group">
+									<h:outputLabel for="Arrival" value="Arrival"
+										style="font-weight: bold;" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="numA" value="Number:" />
+									<h:inputText id="numA"
+										value="#{transportationBean.transportationvm.arrival.num}"
+										styleClass="form-control" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="streetA" value="Street:" />
+									<h:inputText id="streetA"
+										value="#{transportationBean.transportationvm.arrival.street}"
+										styleClass="form-control" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="cityNameA" value="City:" />
+									<h:inputText id="cityNameA"
+										value="#{transportationBean.transportationvm.arrival.city}"
+										styleClass="form-control" />
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel for="stateA" value="State:" />
+									<h:inputText id="stateA"
+										value="#{transportationBean.transportationvm.arrival.state}"
+										styleClass="form-control" />
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel for="countryA" value="Country:" />
+									<h:inputText id="countryA"
+										value="#{transportationBean.transportationvm.arrival.country}"
+										styleClass="form-control" />
+								</div>
+
+								<div class="form-group">
+									<h:outputLabel for="zipcodeA" value="Zip Code:" />
+									<h:inputText id="zipcodeA"
+										value="#{transportationBean.transportationvm.arrival.zipCode}"
+										styleClass="form-control" />
+								</div>
+
+
+								<div class="form-group">
+									<label for="availability">Click here to make your
+										service available to our partners:</label>
+									<div class="toggle-button">
+										<h:selectBooleanCheckbox id="availability"
+											value="#{transportationBean.transportationvm.availability}" />
+									</div>
+								</div>
+
+							</div>
+
 						</div>
+
+
 
 
 						<div class="row row-padding">
@@ -261,7 +264,7 @@
 								<h:form>
 									<div class="d-flex justify-content-center mt-4">
 										<h:commandButton value="Refresh the list"
-											action="#{accommodationBean.loadAllTransportations}"
+											action="#{transportationBean.loadTransportations()}"
 											styleClass="btnCheckO" />
 
 										<h:button value="Continue Shopping"
