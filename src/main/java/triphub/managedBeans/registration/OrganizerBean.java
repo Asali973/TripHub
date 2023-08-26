@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -27,7 +27,7 @@ import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 
 @Named("organizerBean")
-@RequestScoped
+@SessionScoped
 public class OrganizerBean implements Serializable {
 
 	@Inject
@@ -122,19 +122,19 @@ public class OrganizerBean implements Serializable {
 	@PostConstruct
 	public void init() {
 	    FacesContext context = FacesContext.getCurrentInstance();
-	   // HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-	  //  Long organizerId = (Long) session.getAttribute("organizerId");
-	    Long organizerId = (Long) context.getExternalContext().getFlash().get("selectedOrganizerId");
+	    HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+	    Long organizerId = (Long) session.getAttribute("organizerId");
+	   // Long organizerId = (Long) context.getExternalContext().getFlash().get("selectedOrganizerId");
 	    
-	    System.out.println("Organizer ID from Flash scope: " + organizerId);
-	 //   System.out.println("Organizer ID from Session: " + session.getAttribute("organizerId"));
+	  //  System.out.println("Organizer ID from Flash scope: " + organizerId);
+	  System.out.println("Organizer ID from Session: " + session.getAttribute("organizerId"));
 	 
 
 	
 	    if (organizerId == null) {
 	    	
-//	        organizerId = (Long) context.getExternalContext().getRequestMap().get("selectedOrganizerId");
-//	        System.out.println("Organizer ID from Request Map: " + context.getExternalContext().getRequestMap().get("selectedOrganizerId"));
+	        organizerId = (Long) context.getExternalContext().getRequestMap().get("selectedOrganizerId");
+	        System.out.println("Organizer ID from Request Map: " + context.getExternalContext().getRequestMap().get("selectedOrganizerId"));
 	    }
 
 	    if (organizerId != null) {
@@ -142,6 +142,10 @@ public class OrganizerBean implements Serializable {
 	        initFormData(organizerId);
 	        Organizer organizer = userService.readOrganizer(organizerId);	       
 	        System.out.println("Fetched Organizer: " + organizer);
+	        System.out.println("Fetched TourPackages: " + organizer.getTourPackages());
+	       
+
+
 
 	        if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
 	            SubscriptionType type = organizer.getSubscription().getType();
@@ -175,12 +179,23 @@ public class OrganizerBean implements Serializable {
         return null;
     }
     
+//    public String navigateToXhtml(Organizer organizer) {
+//        if (organizer != null) {
+//            System.out.println("Setting Organizer ID to Flash scope: " + organizer.getId());
+//            
+//            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedOrganizerId", organizer.getId());
+//            
+//            return organizer.getSubscription().getCustomization().getLayout().getXhtmlFile() + "?faces-redirect=true";
+//        }
+//        return null;
+//    }
     public String navigateToXhtml(Organizer organizer) {
         if (organizer != null) {
-            System.out.println("Setting Organizer ID to Flash scope: " + organizer.getId());
-            
-            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedOrganizerId", organizer.getId());
-            
+            System.out.println("Setting Organizer ID to Session: " + organizer.getId());
+
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            session.setAttribute("selectedOrganizerId", organizer.getId());
+
             return organizer.getSubscription().getCustomization().getLayout().getXhtmlFile() + "?faces-redirect=true";
         }
         return null;
