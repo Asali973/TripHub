@@ -292,38 +292,32 @@ public class OrganizerBean implements Serializable {
 	}
 
 	public List<Layout> determineAvailableLayouts(SubscriptionType type) {
-		List<Layout> layouts = new ArrayList<>();
+	    List<Layout> layouts = new ArrayList<>();
 
-		Layout basicLayout = layoutDAO.getLayoutByName("Basic");
-		if (basicLayout != null) {
-			layouts.add(basicLayout);
-		}
+	    Layout basicLayout = layoutDAO.getLayoutByName("Basic");
+	    if (basicLayout != null) {
+	        layouts.add(basicLayout);
+	    }
 
-		if (type == null) {
-			return layouts;
-		}
+	    if (type == null) {
+	        return layouts;
+	    }
 
-		switch (type) {
-		case STANDARD:
-			addLayoutToList(layouts, "Basic");
-			break;
-		case DELUXE:
-			addLayoutToList(layouts, "Basic");
-			addLayoutToList(layouts, "Advanced");
-			addLayoutToList(layouts, "Advanced+");
-			break;
-		case PREMIUM:
-			addLayoutToList(layouts, "Basic");
-			addLayoutToList(layouts, "Advanced");
-			addLayoutToList(layouts, "Advanced+");
-			addLayoutToList(layouts, "Elite");
-			addLayoutToList(layouts, "Elite+");
-			addLayoutToList(layouts, "Elite Pro");
-			break;
-		default:
-			break;
-		}
-		return layouts;
+	    switch (type) {
+	        case STANDARD:
+	            break;
+	        case DELUXE:
+	            addLayoutToList(layouts, "Advanced");
+	            break;
+	        case PREMIUM:
+	            addLayoutToList(layouts, "Advanced");
+	            addLayoutToList(layouts, "Elite");
+	            break;
+	        default:
+	            break;
+	    }
+
+	    return layouts;
 	}
 
 	private void addLayoutToList(List<Layout> layouts, String layoutName) {

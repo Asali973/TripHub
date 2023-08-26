@@ -328,7 +328,7 @@ rgba
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
 				<!-- Brand/logo -->
-				<a class="navbar-brand" href="/triphub/views/home.xhtml"> <h:graphicImage
+				<a class="navbar-brand" >href="/triphub/views/organizer_session/observedSettings.xhtml"href="/triphub/views/organizer_session/observed_settings.xhtml" <h:graphicImage
 						value="/images/#{organizerBean.userViewModel.companyLogoLink}"
 						alt="Trip Hub" styleClass="navbar-logo rounded-image" /> <h:outputText
 						value="#{organizerBean.userViewModel.companyName}"
@@ -347,8 +347,13 @@ rgba
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav ml-auto">
 
-						<li class="nav-item"><a class="nav-link font1"
-							href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a></li>
+						<li class="nav-item"><h:panelGroup
+								rendered="#{empty sessionScope.user}">
+								<h:form id="loginForm">
+									<a class="nav-link"
+										href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a>
+								</h:form>
+							</h:panelGroup></li>
 
 
 

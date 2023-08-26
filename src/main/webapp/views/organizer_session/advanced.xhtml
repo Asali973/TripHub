@@ -15,7 +15,6 @@
 	<ui:insert name="additionalHeadContent" />
 
 	<style>
-
 .bodycolor {
 	background-color: #{organizerBean.userViewModel.primaryColor
 }
@@ -28,6 +27,8 @@
 
 ;
 box-shadow
+
+
 
 
 
@@ -77,7 +78,9 @@ box-shadow
 
 
 
+
  
+
 
 
 
@@ -111,7 +114,9 @@ box-shadow
 
 
 
+
  
+
 
 
 
@@ -145,7 +150,9 @@ box-shadow
 
 
 
+
  
+
 
 
 
@@ -179,6 +186,7 @@ box-shadow
 
 
 
+
  
 
 
@@ -196,7 +204,10 @@ box-shadow
 
 
 
+
 rgba
+
+
 
 
 
@@ -262,6 +273,8 @@ rgba
 
 
 
+
+
 0
 ,
 0
@@ -269,6 +282,8 @@ rgba
 0
 ,
 0
+
+
 
 
 
@@ -334,7 +349,11 @@ rgba
 
 
 
+
+
 )
+
+
 
 
 
@@ -389,7 +408,7 @@ rgba
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
 				<!-- Brand/logo -->
-				<a class="navbar-brand" href="/triphub/views/home.xhtml"> <h:graphicImage
+				<a class="navbar-brand" href="/triphub/views/organizer_session/observedSettings.xhtml"> <h:graphicImage
 						value="/images/#{organizerBean.userViewModel.companyLogoLink}"
 						alt="Trip Hub" styleClass="navbar-logo rounded-image" /> <h:outputText
 						value="#{organizerBean.userViewModel.companyName}"
@@ -408,10 +427,13 @@ rgba
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav ml-auto">
 
-						<li class="nav-item"><a class="nav-link font1"
-							href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a></li>
-
-
+						<li class="nav-item"><h:panelGroup
+								rendered="#{empty sessionScope.user}">
+								<h:form id="loginForm">
+									<a class="nav-link"
+										href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a>
+								</h:form>
+							</h:panelGroup></li>
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user}">
@@ -485,8 +507,8 @@ rgba
 				<div class="card-body">
 
 					<div class="containerForm">
-					
-					
+
+
 						<div class="flex-container">
 							<h:graphicImage
 								value="/images/#{organizerBean.userViewModel.companyLogoLink}"
@@ -519,8 +541,8 @@ rgba
 							</ui:repeat>
 						</div>
 
-					<br />
-					<h3 class="mt-5 mb-5">Craft Your Own Journey</h3>
+						<br />
+						<h3 class="mt-5 mb-5">Craft Your Own Journey</h3>
 						<h2 class="mt-5">Explore our accommodations</h2>
 						<div class="grid-container">
 							<ui:repeat value="#{accommodationBean.currentUserAccommodations}"
