@@ -44,6 +44,8 @@ public class AccommodationBean implements Serializable {
 	private List<String> currencies;
 	private Part pictureAccommodation;
 	private String picName;
+	
+	private Long accommodationId;
 
 	public AccommodationBean() {
 
@@ -61,27 +63,43 @@ public class AccommodationBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		allAccommodations = accommodationService.getAll();
-
-		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-
-		if (id != null && !id.isEmpty()) {
-			Long accommodationId = Long.parseLong(id);
-
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedAccommodationId",
-					accommodationId);
-
-			accommodationVm = accommodationService.initSubService(accommodationId);
-			if (accommodationVm == null) {
-				FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
-			}
-
-			selectedAccommodation = accommodationService.getAccommodationById(accommodationId);
-			if (selectedAccommodation == null) {
-				FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
-			}
-		}
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    
+	    // Étape 1 : Essayez de récupérer le accommodationId de la session
+	    accommodationId = (Long) externalContext.getSessionMap().get("selectedAccommodationId");
+	    
+	    // Étape 2 : Si non trouvé dans la session, essayez de le récupérer depuis les paramètres de la requête
+	    if (accommodationId == null) {
+	        String idParam = externalContext.getRequestParameterMap().get("id");
+	        if (idParam != null && !idParam.trim().isEmpty()) {
+	            try {
+	                accommodationId = Long.parseLong(idParam);
+	                externalContext.getSessionMap().put("selectedAccommodationId", accommodationId);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("Format d'ID de logement non valide.");
+	                return; // Arrêtez la méthode ici pour éviter d'autres erreurs
+	            }
+	        }
+	    }
+	    
+	    // Étape 3 : Utilisez le accommodationId pour initialiser d'autres parties
+	    if (accommodationId != null) {
+	        accommodationVm = accommodationService.initSubService(accommodationId);
+	        if (accommodationVm == null) {
+	            FacesMessageUtil.addErrorMessage("Échec de l'initialisation: Le logement n'existe pas pour le modèle de vue");
+	            return;
+	        }
+	        
+	        selectedAccommodation = accommodationService.getAccommodationById(accommodationId);
+	        if (selectedAccommodation == null) {
+	            FacesMessageUtil.addErrorMessage("Échec de l'initialisation: Le logement n'existe pas dans la base de données");
+	            return;
+	        }
+	    } else {
+	        allAccommodations = accommodationService.getAll();
+	    }
 	}
+
 
 //	@PostConstruct
 //	public void init() {
@@ -246,27 +264,61 @@ public class AccommodationBean implements Serializable {
 	}
 
 	public List<Accommodation> getCurrentUserAccommodations() {
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
-		String userType = (String) externalContext.getSessionMap().get("userType");
+	    String userType = (String) externalContext.getSessionMap().get("userType");
+	    Long userId = null;
 
-		if ("organizer".equals(userType)) {
-			Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
-			if (organizerId == null) {
-				return new ArrayList<>();
-			}
-			return accommodationService.getAccommodationForOrganizer(organizerId);
-		} else if ("provider".equals(userType)) {
-			Long providerId = (Long) externalContext.getSessionMap().get("providerId");
-			if (providerId == null) {
-				return new ArrayList<>();
-			}
-			return accommodationService.getAccommodationForProvider(providerId);
-		} else {
+	    if ("organizer".equals(userType)) {
+	        userId = (Long) externalContext.getSessionMap().get("organizerId");
+	    } else if ("provider".equals(userType)) {
+	        userId = (Long) externalContext.getSessionMap().get("providerId");
+	    }
 
-			return new ArrayList<>();
-		}
+	    if (userId == null) {
+	        String userIdParam = externalContext.getRequestParameterMap().get("userId");
+	        if (userIdParam != null && !userIdParam.trim().isEmpty()) {
+	            try {
+	                userId = Long.parseLong(userIdParam);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("Format d'ID d'utilisateur non valide.");
+	                return new ArrayList<>(); 
+	            }
+	        }
+	    }
+
+	    if (userId == null) {
+	        return new ArrayList<>();
+	    }
+
+	    return accommodationService.getAccommodationForOrganizer(userId); 
 	}
+
+
+
+	
+//	public List<Accommodation> getCurrentUserAccommodations() {
+//		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//
+//		String userType = (String) externalContext.getSessionMap().get("userType");
+//
+//		if ("organizer".equals(userType)) {
+//			Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
+//			if (organizerId == null) {
+//				return new ArrayList<>();
+//			}
+//			return accommodationService.getAccommodationForOrganizer(organizerId);
+//		} else if ("provider".equals(userType)) {
+//			Long providerId = (Long) externalContext.getSessionMap().get("providerId");
+//			if (providerId == null) {
+//				return new ArrayList<>();
+//			}
+//			return accommodationService.getAccommodationForProvider(providerId);
+//		} else {
+//
+//			return new ArrayList<>();
+//		}
+//	}
 
 	public List<Accommodation> getAllAccommodation() {
 		return accommodationService.getAllAccommodation();

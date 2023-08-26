@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -118,36 +119,120 @@ public class OrganizerBean implements Serializable {
 		}
 	}
 
-	
 	@PostConstruct
 	public void init() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-	    Long organizerId = (Long) session.getAttribute("organizerId");
+	    Long organizerId = getOrganizerIdFromSessionOrRequest();
 
 	    if (organizerId != null) {
 	        initFormData(organizerId);
-	        Organizer organizer = userService.readOrganizer(organizerId);
-	        
-
-	        if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
-	            SubscriptionType type = organizer.getSubscription().getType();
-	            availableLayouts = determineAvailableLayouts(type);
-	            
-	            if (!availableLayouts.isEmpty()) {
-	                userViewModel.setLayout(availableLayouts.get(0));
-	            }
-	        } else {
-	            Layout basicLayout = layoutDAO.getLayoutByName("Basic");
-	            availableLayouts = new ArrayList<>();
-	            availableLayouts.add(basicLayout);
-	            userViewModel.setLayout(basicLayout);
-	        }
+	        setupLayoutForOrganizer(organizerId);
 	    } else {
 	        allOrganizers = userService.getAllOrganizers();
 	        availableLayouts = layoutDAO.getAllLayouts(); 
 	    }
 	}
+
+	private Long getOrganizerIdFromSessionOrRequest() {
+	    // Try to get from session first
+	    FacesContext context = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+	    Long organizerId = (Long) session.getAttribute("organizerId");
+
+	    // If not in session, try from request param
+	    if (organizerId == null) {
+	        Map<String, String> params = context.getExternalContext().getRequestParameterMap();
+	        String organizerIdParam = params.get("organizerId");
+	        if (organizerIdParam != null) {
+	            try {
+	                organizerId = Long.parseLong(organizerIdParam);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("Invalid organizer ID format.");
+	            }
+	        }
+	    }
+	    return organizerId;
+	}
+
+	private void setupLayoutForOrganizer(Long organizerId) {
+	    Organizer organizer = userService.readOrganizer(organizerId);
+	    if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
+	        SubscriptionType type = organizer.getSubscription().getType();
+	        availableLayouts = determineAvailableLayouts(type);
+
+	        if (!availableLayouts.isEmpty()) {
+	            userViewModel.setLayout(availableLayouts.get(0)); 
+	        }
+	    } else {
+	        Layout basicLayout = layoutDAO.getLayoutByName("Basic");
+	        availableLayouts = new ArrayList<>();
+	        availableLayouts.add(basicLayout);
+	        userViewModel.setLayout(basicLayout);
+	    }
+	}
+//	@PostConstruct
+//	public void init() {
+//	    FacesContext context = FacesContext.getCurrentInstance();
+//	    HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+//	    Long organizerId = (Long) session.getAttribute("organizerId");
+//
+//	    if (organizerId != null) {
+//	        initFormData(organizerId);
+//	        Organizer organizer = userService.readOrganizer(organizerId);
+//	        
+//
+//	        if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
+//	            SubscriptionType type = organizer.getSubscription().getType();
+//	            availableLayouts = determineAvailableLayouts(type);
+//	            
+//	            if (!availableLayouts.isEmpty()) {
+//	                userViewModel.setLayout(availableLayouts.get(0));
+//	            }
+//	        } else {
+//	            Layout basicLayout = layoutDAO.getLayoutByName("Basic");
+//	            availableLayouts = new ArrayList<>();
+//	            availableLayouts.add(basicLayout);
+//	            userViewModel.setLayout(basicLayout);
+//	        }
+//	    } else {
+//	        allOrganizers = userService.getAllOrganizers();
+//	        availableLayouts = layoutDAO.getAllLayouts(); 
+//	    }
+//	}
+//	
+//	
+//	public void initFromRequestParam() {
+//	    FacesContext context = FacesContext.getCurrentInstance();
+//	    Map<String, String> params = context.getExternalContext().getRequestParameterMap();
+//	    String organizerIdParam = params.get("organizerId");
+//
+//	    if (organizerIdParam != null) {
+//	        try {
+//	            Long organizerId = Long.parseLong(organizerIdParam);
+//	            initFormData(organizerId);
+//
+//	            // Charger les layouts disponibles pour cet organizer spécifique
+//	            Organizer organizer = userService.readOrganizer(organizerId);
+//	            if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
+//	                SubscriptionType type = organizer.getSubscription().getType();
+//	                availableLayouts = determineAvailableLayouts(type);
+//
+//	                if (!availableLayouts.isEmpty()) {
+//	                    userViewModel.setLayout(availableLayouts.get(0)); // Ceci est juste un exemple, adaptez-le selon votre besoin.
+//	                }
+//	            } else {
+//	                Layout basicLayout = layoutDAO.getLayoutByName("Basic");
+//	                availableLayouts = new ArrayList<>();
+//	                availableLayouts.add(basicLayout);
+//	                userViewModel.setLayout(basicLayout);
+//	            }
+//	        } catch (NumberFormatException e) {
+//	            FacesMessageUtil.addErrorMessage("Invalid organizer ID format.");
+//	        }
+//	    } else {
+//	        FacesMessageUtil.addErrorMessage("Organizer ID is not provided.");
+//	    }
+//	}
+
 	
     public String getXhtmlFile(Organizer organizer) {
         if (organizer != null && organizer.getSubscription() != null 

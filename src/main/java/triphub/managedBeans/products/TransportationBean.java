@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
+import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
 import triphub.entity.subservices.TransportationType;
 import triphub.entity.util.CurrencyType;
@@ -39,6 +40,8 @@ public class TransportationBean implements Serializable {
 
 	private Part pictureTransport;
 	private String picName;
+	
+	private Long transportationId;
 
 	public TransportationBean() {
 
@@ -54,31 +57,69 @@ public class TransportationBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		allTransportations = transportationService.getAll();
-
-		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-
-		if (id != null && !id.isEmpty()) {
-			Long transportationId = Long.parseLong(id);
-
-			// Store the selected transportation id in the session
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTransportationId",
-					transportationId);
-
-			// Fetch the selected transportation using transportationService
-			selectedTransportation = transportationService.findById(transportationId);
-			if (selectedTransportation == null) {
-				FacesMessageUtil
-						.addErrorMessage("Initialization failed: Transportation does not exist in the database");
-			}
-
-			// Initialize a Transportation ViewModel or fetch specific data
-			transportationvm = transportationService.initSubService(transportationId);
-			if (transportationvm == null) {
-				FacesMessageUtil.addErrorMessage("Initialization failed: Transportation ViewModel does not exist");
-			}
-		}
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    
+	    transportationId = (Long) externalContext.getSessionMap().get("selectedTransportationId");
+	    
+	    if (transportationId == null) {
+	        String idParam = externalContext.getRequestParameterMap().get("id");
+	        if (idParam != null && !idParam.trim().isEmpty()) {
+	            try {
+	                transportationId = Long.parseLong(idParam);
+	                externalContext.getSessionMap().put("selectedTransportationId", transportationId);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("Format d'ID de transportation non valide.");
+	                return; 
+	            }
+	        }
+	    }
+	    
+	    if (transportationId != null) {
+	        transportationvm = transportationService.initSubService(transportationId);
+	        if (transportationvm == null) {
+	            FacesMessageUtil.addErrorMessage("Échec de l'initialisation: Le transportation n'existe pas pour le modèle de vue");
+	            return;
+	        }
+	        
+	        selectedTransportation = transportationService.findById(transportationId);
+	        if (selectedTransportation == null) {
+	            FacesMessageUtil.addErrorMessage("Échec de l'initialisation: Le transportation n'existe pas dans la base de données");
+	            return;
+	        }
+	    } else {
+	        allTransportations = transportationService.getAll();
+	    }
 	}
+
+	
+	
+//	@PostConstruct
+//	public void init() {
+//		allTransportations = transportationService.getAll();
+//
+//		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+//
+//		if (id != null && !id.isEmpty()) {
+//			Long transportationId = Long.parseLong(id);
+//
+//			// Store the selected transportation id in the session
+//			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTransportationId",
+//					transportationId);
+//
+//			// Fetch the selected transportation using transportationService
+//			selectedTransportation = transportationService.findById(transportationId);
+//			if (selectedTransportation == null) {
+//				FacesMessageUtil
+//						.addErrorMessage("Initialization failed: Transportation does not exist in the database");
+//			}
+//
+//			// Initialize a Transportation ViewModel or fetch specific data
+//			transportationvm = transportationService.initSubService(transportationId);
+//			if (transportationvm == null) {
+//				FacesMessageUtil.addErrorMessage("Initialization failed: Transportation ViewModel does not exist");
+//			}
+//		}
+//	}
 
 	public void create() {
 
@@ -151,27 +192,61 @@ public class TransportationBean implements Serializable {
 	}
 
 	public List<Transportation> getCurrentUserTransportations() {
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
-		String userType = (String) externalContext.getSessionMap().get("userType");
+	    String userType = (String) externalContext.getSessionMap().get("userType");
+	    Long userId = null;
 
-		if ("organizer".equals(userType)) {
-			Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
-			if (organizerId == null) {
-				return new ArrayList<>();
-			}
-			return transportationService.getTransportationForOrganizer(organizerId);
-		} else if ("provider".equals(userType)) {
-			Long providerId = (Long) externalContext.getSessionMap().get("providerId");
-			if (providerId == null) {
-				return new ArrayList<>();
-			}
-			return transportationService.getTransportationForProvider(providerId);
-		} else {
+	    if ("organizer".equals(userType)) {
+	        userId = (Long) externalContext.getSessionMap().get("organizerId");
+	    } else if ("provider".equals(userType)) {
+	        userId = (Long) externalContext.getSessionMap().get("providerId");
+	    }
 
-			return new ArrayList<>();
-		}
+	    if (userId == null) {
+	        String userIdParam = externalContext.getRequestParameterMap().get("userId");
+	        if (userIdParam != null && !userIdParam.trim().isEmpty()) {
+	            try {
+	                userId = Long.parseLong(userIdParam);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("Format d'ID d'utilisateur non valide.");
+	                return new ArrayList<>();
+	            }
+	        }
+	    }
+
+	    if (userId == null) {
+	        return new ArrayList<>();
+	    }
+
+	    return transportationService.getTransportationForOrganizer(userId);
 	}
+
+
+
+	
+//	public List<Transportation> getCurrentUserTransportations() {
+//		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//
+//		String userType = (String) externalContext.getSessionMap().get("userType");
+//
+//		if ("organizer".equals(userType)) {
+//			Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
+//			if (organizerId == null) {
+//				return new ArrayList<>();
+//			}
+//			return transportationService.getTransportationForOrganizer(organizerId);
+//		} else if ("provider".equals(userType)) {
+//			Long providerId = (Long) externalContext.getSessionMap().get("providerId");
+//			if (providerId == null) {
+//				return new ArrayList<>();
+//			}
+//			return transportationService.getTransportationForProvider(providerId);
+//		} else {
+//
+//			return new ArrayList<>();
+//		}
+//	}
 
 	public List<Transportation> findByType(TransportationType transportationType) {
 		return transportationService.findByType(transportationType);
