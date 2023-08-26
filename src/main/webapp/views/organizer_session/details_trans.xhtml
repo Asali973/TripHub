@@ -8,38 +8,121 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 	<h:outputStylesheet library="css" name="website.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+	<h:outputStylesheet library="css" name="checkout.css" />
+	<link rel="stylesheet"
+				href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
+	
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		
 	<title>Transportation Details</title>
 	<style>
-.transports {
-	display: flex;
-	flex-wrap: wrap;
+.package-details {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	padding: 20px;
+	background-color: #f8f9fa;
 }
 
-.transport {
-	width: 50%; /* Two boxes per row */
-	padding: 10px;
-	box-sizing: border-box;
+.package-header h1, .package-header h2 {
+	margin-bottom: 30px;
 }
-/* Add any additional styling as needed */
+
+.package-card {
+	border-radius: 20px;
+	border: none;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.package-card img {
+	border-radius: 20px;
+	display: block;
+	margin: 0 auto;
+	max-width: 80%;
+	margin-bottom: 5px;
+}
+
+.package-text {
+	padding: 1em 2em;
+	font-size: 1.2em;
+}
+
+.package-text p {
+	margin-bottom: 1em;
+}
+
+.package-text strong {
+	font-size: 1.1em;
+	}
 </style>
 </h:head>
 
 <h:body>
-	<h1>Transportation Details</h1>
+    <div class="container2 mt-5 package-details">
+        <div class="text-center package-header">
+            <h2>#{transportationBean.selectedTransportation != null ?
+                transportationBean.selectedTransportation.name : 'Transportation Not Found'}</h2>
+        </div>
 
-	<h2>#{transportationBean.selectedTransportation != null ? transportationBean.selectedTransportation.name : 'Transport Not Found'}</h2>
-	<p>Description: #{transportationBean.selectedTransportation.description}</p>
-	<p>Price: #{transportationBean.selectedTransportation.service.price.amount}
-		#{transportationBean.selectedTransportation.service.price.currency}</p>
-	<p>From: #{transportationBean.selectedTransportation.departure.city}</p>
-	<p>To: #{transportationBean.selectedTransportation.arrival.city}</p>
-	<p>Type: #{transportationBean.selectedTransportation.transportationType}</p>
-			<h:form>
-      <h:commandButton value="Add to Cart" action="#{cartBean.addToCart}">
-        <f:param name="selectedTransportationId" value="#{param.id}" />
-        <f:param name="quantity" value="#{cartBean.selectedQuantity}" />
-      </h:commandButton>
-    </h:form>
+        <div class="package-card">
+            <h:graphicImage value="/images/#{transportationBean.selectedTransportation.picture.link}"
+                            class="img-fluid" alt="Selected transportation picture" />
+
+            <div class="package-text">
+                <p>
+                    <strong>Description:</strong>
+                    #{transportationBean.selectedTransportation.description}
+                </p>
+                <p>
+                    <strong>Price:</strong>
+                    #{transportationBean.selectedTransportation.service.price.amount}
+                    #{transportationBean.selectedTransportation.service.price.currency}
+                </p>
+               
+                <p>
+                    <strong>Transport Type:</strong>
+                    #{transportationBean.selectedTransportation.transportationType}
+                </p>
+            </div>
+
+            <h:form>
+               <div class="package-text">
+                    <label for="availableFrom"> From*:</label>
+                    <h:inputText id="availableFrom" class="form-control date-picker"></h:inputText>
+                </div>
+                <div class="package-text">
+                    <label for="availableTill"> To*:</label>
+                    <h:inputText id="availableTill" class="form-control date-picker"></h:inputText>
+                </div>
+                  </h:form>
+                   <h:form>
+                    <div class="d-flex justify-content-center">
+                    <h:commandButton value="Add to Cart" action="#{cartBean.addToCart}"
+                                     class="btnCheckO">
+                        <f:param name="selectedRestaurantId" value="#{param.id}" />
+                        <f:param name="quantity" value="#{cartBean.selectedQuantity}" />
+                    </h:commandButton>
+                    <h:button value="Continue Browsing"
+                              outcome="/views/organizer_session/homeForWebsite.xhtml"
+                              class="btnContinue ml-4" />
+                </div>
+            </h:form>
+        </div>
+    </div>
 </h:body>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    $(document).ready(function(){
+        // Initialize flatpickr for the elements with the class date-picker
+        $(".date-picker").flatpickr({
+            dateFormat: "Y-m-d",
+            enableTime: false
+        });
+    });
+</script>
+			<h:outputScript library="javascript" name="servicesCrud.js" />
 </html>

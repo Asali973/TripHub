@@ -276,8 +276,11 @@ public class UserService implements Serializable{
 	public Subscription getSubscription(Long organizerId) {
 		return organizerDAO.getSubscriptionForOrganizer(organizerId);
 	}
-	
-	
+	//to use in customer home
+	public List<Organizer> findOrganizerByCompanyOrCountry(String companyName, String country) {
+	    return organizerDAO.findOrganizerByCompanyOrCountry(companyName, country);
+	}
+
 	
 	
 	
