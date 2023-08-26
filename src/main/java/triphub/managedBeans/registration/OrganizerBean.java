@@ -1,12 +1,12 @@
 package triphub.managedBeans.registration;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -27,7 +27,7 @@ import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 
 @Named("organizerBean")
-@SessionScoped
+@RequestScoped
 public class OrganizerBean implements Serializable {
 
 	@Inject
@@ -45,7 +45,7 @@ public class OrganizerBean implements Serializable {
 	private List<Layout> availableLayouts;
 
 	private List<Organizer> allOrganizers;
-	private Organizer selectedOrganizer;
+
 	public OrganizerBean() {
 	}
 
@@ -80,7 +80,6 @@ public class OrganizerBean implements Serializable {
 			initFormData(newOrganizer.getId());
 
 			userViewModel.clear();
-
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Organizer created successfully!", null));
 
@@ -110,64 +109,124 @@ public class OrganizerBean implements Serializable {
 				userViewModel.setSecondaryColor(customization.getSecondaryColor());
 				userViewModel.setPrimaryFont(customization.getPrimaryFont());
 				userViewModel.setSecondaryFont(customization.getSecondaryFont());
-
 			}
-
 		} else {
 			FacesMessageUtil.addErrorMessage("Initialization failed: Organizer does not exist");
 		}
 	}
 
-	
 	@PostConstruct
 	public void init() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-	    Long organizerId = (Long) session.getAttribute("organizerId");
-	   // Long organizerId = (Long) context.getExternalContext().getFlash().get("selectedOrganizerId");
-	    
-	  //  System.out.println("Organizer ID from Flash scope: " + organizerId);
-	  System.out.println("Organizer ID from Session: " + session.getAttribute("organizerId"));
-	 
-
-	
-	    if (organizerId == null) {
-	    	
-	        organizerId = (Long) context.getExternalContext().getRequestMap().get("selectedOrganizerId");
-	        System.out.println("Organizer ID from Request Map: " + context.getExternalContext().getRequestMap().get("selectedOrganizerId"));
-	    }
+	    Long organizerId = getOrganizerIdFromSessionOrRequest();
 
 	    if (organizerId != null) {
-	    	
 	        initFormData(organizerId);
-	        Organizer organizer = userService.readOrganizer(organizerId);	       
-	        System.out.println("Fetched Organizer: " + organizer);
-	        System.out.println("Fetched TourPackages: " + organizer.getTourPackages());
-	       
-
-
-
-	        if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
-	            SubscriptionType type = organizer.getSubscription().getType();
-	            
-	            availableLayouts = determineAvailableLayouts(type);
-	            
-	            if (!availableLayouts.isEmpty()) {
-	                userViewModel.setLayout(availableLayouts.get(0));
-	                System.out.println("Layout Name: " + (organizer.getSubscription().getCustomization().getLayout() != null ? organizer.getSubscription().getCustomization().getLayout().getName() : "Layout is null"));
-	                System.out.println("xhtml File: " + (organizer.getSubscription().getCustomization().getLayout() != null ? organizer.getSubscription().getCustomization().getLayout().getXhtmlFile() : "Layout is null"));
-	            }
-	        } else {
-	            Layout basicLayout = layoutDAO.getLayoutByName("Basic");
-	            availableLayouts = new ArrayList<>();
-	            availableLayouts.add(basicLayout);
-	            userViewModel.setLayout(basicLayout);
-	        }
+	        setupLayoutForOrganizer(organizerId);
 	    } else {
 	        allOrganizers = userService.getAllOrganizers();
 	        availableLayouts = layoutDAO.getAllLayouts(); 
 	    }
 	}
+
+	private Long getOrganizerIdFromSessionOrRequest() {
+	    // Try to get from session first
+	    FacesContext context = FacesContext.getCurrentInstance();
+	    HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+	    Long organizerId = (Long) session.getAttribute("organizerId");
+
+	    // If not in session, try from request param
+	    if (organizerId == null) {
+	        Map<String, String> params = context.getExternalContext().getRequestParameterMap();
+	        String organizerIdParam = params.get("organizerId");
+	        if (organizerIdParam != null) {
+	            try {
+	                organizerId = Long.parseLong(organizerIdParam);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("Invalid organizer ID format.");
+	            }
+	        }
+	    }
+	    return organizerId;
+	}
+	private void setupLayoutForOrganizer(Long organizerId) {
+	    Organizer organizer = userService.readOrganizer(organizerId);
+	    if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
+	        SubscriptionType type = organizer.getSubscription().getType();
+	        availableLayouts = determineAvailableLayouts(type);
+
+	        if (!availableLayouts.isEmpty()) {
+	            userViewModel.setLayout(availableLayouts.get(0)); 
+	        }
+	    } else {
+	        Layout basicLayout = layoutDAO.getLayoutByName("Basic");
+	        availableLayouts = new ArrayList<>();
+	        availableLayouts.add(basicLayout);
+	        userViewModel.setLayout(basicLayout);
+	    }
+	}
+//	@PostConstruct
+//	public void init() {
+//	    FacesContext context = FacesContext.getCurrentInstance();
+//	    HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+//	    Long organizerId = (Long) session.getAttribute("organizerId");
+//
+//	    if (organizerId != null) {
+//	        initFormData(organizerId);
+//	        Organizer organizer = userService.readOrganizer(organizerId);
+//	        
+//
+//	        if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
+//	            SubscriptionType type = organizer.getSubscription().getType();
+//	            availableLayouts = determineAvailableLayouts(type);
+//	            
+//	            if (!availableLayouts.isEmpty()) {
+//	                userViewModel.setLayout(availableLayouts.get(0));
+//	            }
+//	        } else {
+//	            Layout basicLayout = layoutDAO.getLayoutByName("Basic");
+//	            availableLayouts = new ArrayList<>();
+//	            availableLayouts.add(basicLayout);
+//	            userViewModel.setLayout(basicLayout);
+//	        }
+//	    } else {
+//	        allOrganizers = userService.getAllOrganizers();
+//	        availableLayouts = layoutDAO.getAllLayouts(); 
+//	    }
+//	}
+//	
+//	
+//	public void initFromRequestParam() {
+//	    FacesContext context = FacesContext.getCurrentInstance();
+//	    Map<String, String> params = context.getExternalContext().getRequestParameterMap();
+//	    String organizerIdParam = params.get("organizerId");
+//
+//	    if (organizerIdParam != null) {
+//	        try {
+//	            Long organizerId = Long.parseLong(organizerIdParam);
+//	            initFormData(organizerId);
+//
+//	            // Charger les layouts disponibles pour cet organizer spécifique
+//	            Organizer organizer = userService.readOrganizer(organizerId);
+//	            if (organizer != null && organizer.getSubscription() != null && organizer.getSubscription().getType() != null) {
+//	                SubscriptionType type = organizer.getSubscription().getType();
+//	                availableLayouts = determineAvailableLayouts(type);
+//
+//	                if (!availableLayouts.isEmpty()) {
+//	                    userViewModel.setLayout(availableLayouts.get(0)); // Ceci est juste un exemple, adaptez-le selon votre besoin.
+//	                }
+//	            } else {
+//	                Layout basicLayout = layoutDAO.getLayoutByName("Basic");
+//	                availableLayouts = new ArrayList<>();
+//	                availableLayouts.add(basicLayout);
+//	                userViewModel.setLayout(basicLayout);
+//	            }
+//	        } catch (NumberFormatException e) {
+//	            FacesMessageUtil.addErrorMessage("Invalid organizer ID format.");
+//	        }
+//	    } else {
+//	        FacesMessageUtil.addErrorMessage("Organizer ID is not provided.");
+//	    }
+//	}
 
 	
     public String getXhtmlFile(Organizer organizer) {
@@ -178,31 +237,6 @@ public class OrganizerBean implements Serializable {
         }
         return null;
     }
-    
-//    public String navigateToXhtml(Organizer organizer) {
-//        if (organizer != null) {
-//            System.out.println("Setting Organizer ID to Flash scope: " + organizer.getId());
-//            
-//            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedOrganizerId", organizer.getId());
-//            
-//            return organizer.getSubscription().getCustomization().getLayout().getXhtmlFile() + "?faces-redirect=true";
-//        }
-//        return null;
-//    }
-    public String navigateToXhtml(Organizer organizer) {
-        if (organizer != null) {
-            System.out.println("Setting Organizer ID to Session: " + organizer.getId());
-
-            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-            session.setAttribute("selectedOrganizerId", organizer.getId());
-
-            return organizer.getSubscription().getCustomization().getLayout().getXhtmlFile() + "?faces-redirect=true";
-        }
-        return null;
-    }
-
-
-
 
 	public void updateOrganizer() {
 		try {
@@ -247,7 +281,6 @@ public class OrganizerBean implements Serializable {
 	        FacesMessageUtil.addSuccessMessage("Subscription saved successfully!");
 	    }
 	}
-
 	
 	public List<Layout> determineAvailableLayouts(SubscriptionType type) {
 	    List<Layout> layouts = new ArrayList<>();
@@ -281,7 +314,6 @@ public class OrganizerBean implements Serializable {
 	        default:
 	            break;
 	    }
-
 	    return layouts;
 	}
 
@@ -375,14 +407,6 @@ public class OrganizerBean implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public Organizer getSelectedOrganizer() {
-		return selectedOrganizer;
-	}
-
-	public void setSelectedOrganizer(Organizer selectedOrganizer) {
-		this.selectedOrganizer = selectedOrganizer;
 	}
 	
 
