@@ -120,3 +120,14 @@ position: relative;
 .social-icon:hover {
   color: #ddd;
 }
+.centered-content {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin-top: 100px;  /* Adjust this value as per your requirement */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
