@@ -1,12 +1,11 @@
 :root {
-	--footer-background : black;
-	--gray: grey;
+	--color-background : #242c3d;
+	--gray: white;
 }
 
 html, body {
 	height: 100%;
 }
-
 
 body {
 	display: flex;
@@ -23,45 +22,29 @@ body {
 }
 
 .navbar {
-	background-color: #242c3d;
+	background-color: var(--color-background);
 	box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-brand {
-	font-weight: bold;
-}
-
 .navbar, .footer {
-	border-radius: 0px; /* Ajoute des coins arrondis */
-	/* Gradient léger */
+	border-radius: 0px; /* Ajoute des coins arrondis, Gradient léger */
 }
 
-.navbar-brand, .navbar-nav .nav-link {
-	color: #ffffff;
+.navbar-nav, .nav-link {
+	color: var(--gray);
+	transition: all 0.3s; /* Transition douce pour tous les changements */
+	transition: transform 0.3s; /* Transformation (agrandissement) */
 }
 
-/* Transformation (agrandissement) */
-.navbar-nav .nav-link {
-	transition: transform 0.3s;
-	/* Assurez-vous d'ajouter une transition pour que l'effet soit fluide */
-}
-
-.navbar-nav .nav-link:hover {
+.nav-link:hover {
 	text-decoration: underline; /* Sous-ligne */
-	color: #007bff; /* Changement de couleur */
 	transform: scale(1.1); /* Le lien sera agrandi de 10% lorsqu'il est survolé */
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ajoute une ombre avec un léger flou */
 }
 
-.navbar-nav .nav-link, .footer a {
-	transition: all 0.3s; /* Transition douce pour tous les changements */
-}
-
-
-
 footer {
 	padding: 16px;  
- 	background-color: var(--footer-background); 
+ 	background-color: var(--color-background); 
  	color: white; 
  	min-width: 300px;
  	width: 100%;
@@ -72,8 +55,11 @@ footer {
 
 .footer-wrapper {
 	display: flex;
-	background-color: var(- -footer-background);
+	background-color: var(--color-background);
 	flex-direction: column;
+	width: inherit;
+	max-width:1600px;
+	padding: 0 10% 0 10%;
 }
 
 .footer-columns menu {
@@ -111,12 +97,11 @@ footer {
 
 .footer-top {
 	display: flex;
-	max-width: 800px;
 	flex-wrap: wrap;
 	align-items: center;
 	padding: 8px 8px;
 	justify-content: space-between;
-	border-bottom: 1px solid var(- -gray);
+	border-bottom: 1px solid var(--gray);
 }
 
 .footer-columns {
@@ -124,7 +109,7 @@ footer {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	gap: 16px;
+	justify-content: space-evenly
 }
 
 .footer-columns h3 {
@@ -136,11 +121,12 @@ footer {
 
 .footer-columns>section {
 	min-width: 180px;
+	text-align: center;
 }
 
 .footer-bottom {
 	text-align: center;
-	border-top: 1px solid var(- -gray);
+	border-top: 1px solid var(--gray);
 	margin-top: 48px;
 	display: flex;
 	align-items: center;
@@ -159,19 +145,20 @@ footer {
 	gap: 16px;
 }
 
-@media ( max-width :800px) {
+@media (max-width :800px) {
 	.footer-bottom-links {
 		margin: 0 auto;
 	}
 }
 
-.footer-bottom-links>a {
+.footer-bottom-links > a {
 	color: white;
-	text-decoration: none;
+ 	text-decoration: none;
 }
 
-.footer-bottom-links>a:hover {
-	text-decoration: underline
+.footer-bottom-links > a:hover {
+	color: white;
+ 	text-decoration: none;
 }
 
 .footer-bottom>small {
