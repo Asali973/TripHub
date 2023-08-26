@@ -123,7 +123,7 @@
 
 								</div>
 
-								
+
 
 							</div>
 
@@ -248,69 +248,69 @@
 
 			<!-- Display the list -->
 			<div class="containerCart mt-10 mb-10 text-center"
-				style="max-width: 90%">
+				style="max-width: 100%">
 				<h3>Available Accommodation</h3>
 				<br />
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Price</th>
-							<th>Number</th>
-							<th>Street</th>
-							<th>City</th>
-							<th>State</th>
-							<th>ZipCode</th>
-							<th>Country</th>
-							<th>availableFrom</th>
-							<th>availableUntil</th>
-							<th>Description</th>
-							<th>Modify</th>
-							<th>Delete</th>
-						</tr>
-					</thead>
-					<tbody>
-						<ui:repeat value="#{accommodationBean.allAccommodation}"
-							var="accommodation">
+					<table class="table">
+						<thead>
 							<tr>
-								<td>#{accommodation.name}</td>
-								<td>#{accommodation.service.price.amount}</td>
-								<td>#{accommodation.address.num}</td>
-								<td>#{accommodation.address.street}</td>
-								<td>#{accommodation.address.city}</td>
-								<td>#{accommodation.address.state}</td>
-								<td>#{accommodation.address.zipCode}</td>
-								<td>#{accommodation.address.country}</td>
-								<td>#{accommodation.service.availableFrom}</td>
-								<td>#{accommodation.service.availableTill}</td>
-								<td>#{accommodation.description}</td>
-								<td><h:form>
-										<!-- Update button -->
-										<h:commandButton value="Update"
-											action="#{accommodationBean.initFormUpdate}"
-											styleClass="btn btn-sm btn-outline-secondary3">
-											<f:param name="id" value="#{accommodation.id}" />
-										</h:commandButton>
-									</h:form></td>
-								<td><h:form>
-										<!-- Delete button -->
-										<h:commandButton value="Delete"
-											actionListener="#{accommodationBean.performDelete}"
-											styleClass="btn btn-sm btn-outline-secondary2"
-											onclick="return confirmDelete();">
-											<f:param name="id" value="#{accommodation.id}" />
-										</h:commandButton>
-									</h:form></td>
+								<th>Name</th>
+								<th>Price</th>
+								<th>Number</th>
+								<th>Street</th>
+								<th>City</th>
+								<th>State</th>
+								<th>ZipCode</th>
+								<th>Country</th>
+								<th>availableFrom</th>
+								<th>availableUntil</th>
+								<th>Description</th>
+								<th>Modify</th>
+								<th>Delete</th>
 							</tr>
-						</ui:repeat>
+						</thead>
+						<tbody>
+							<ui:repeat value="#{accommodationBean.allAccommodation}"
+								var="accommodation">
+								<tr>
+									<td>#{accommodation.name}</td>
+									<td>#{accommodation.service.price.amount}</td>
+									<td>#{accommodation.address.num}</td>
+									<td>#{accommodation.address.street}</td>
+									<td>#{accommodation.address.city}</td>
+									<td>#{accommodation.address.state}</td>
+									<td>#{accommodation.address.zipCode}</td>
+									<td>#{accommodation.address.country}</td>
+									<td>#{accommodation.service.availableFrom}</td>
+									<td>#{accommodation.service.availableTill}</td>
+									<td>#{accommodation.description}</td>
+									<td><h:form>
+											<!-- Update button -->
+											<h:commandButton value="Update"
+												action="#{accommodationBean.initFormUpdate}"
+												styleClass="btn btn-sm btn-outline-secondary3">
+												<f:param name="id" value="#{accommodation.id}" />
+											</h:commandButton>
+										</h:form></td>
+									<td><h:form>
+											<!-- Delete button -->
+											<h:commandButton value="Delete"
+												actionListener="#{accommodationBean.performDelete}"
+												styleClass="btn btn-sm btn-outline-secondary2"
+												onclick="return confirmDelete();">
+												<f:param name="id" value="#{accommodation.id}" />
+											</h:commandButton>
+										</h:form></td>
+								</tr>
+							</ui:repeat>
 
-						<h:panelGroup rendered="#{tourPackageBean.deletionSuccessful}">
-							<div class="alert alert-success" role="alert">Deletion of
-								tour package is successful, please refresh the list.</div>
-						</h:panelGroup>
-					</tbody>
-				</table>
-
+							<h:panelGroup rendered="#{tourPackageBean.deletionSuccessful}">
+								<div class="alert alert-success" role="alert">Deletion of
+									tour package is successful, please refresh the list.</div>
+							</h:panelGroup>
+						</tbody>
+					</table>
+				</div>
 				<h:form>
 					<div class="d-flex justify-content-center mt-4">
 						<h:commandButton value="Refresh the list"
@@ -325,10 +325,6 @@
 							class="btnContinue ml-4" />
 					</div>
 				</h:form>
-			</div>
-
-
-
 
 
 			<h:outputScript library="javascript" name="createNdisplayList.js" />
