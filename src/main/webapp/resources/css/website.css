@@ -79,6 +79,20 @@ body {
 	display: block;
 }
 
+
+#purchase-container-parent {
+width:100%;
+position: relative;
+}
+
+
+#purchase-pic-child{
+	position:absolute;
+	top: 50%;
+  left: 50%;
+}
+
+
 /* Styling for the footer */
 .footer {
   position: fixed;

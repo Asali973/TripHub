@@ -21,12 +21,6 @@
 			<link rel="stylesheet"
 				href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
 
-			<style>
-/* CSS to hide the create form container initially */
-#createFormContainer {
-	display: none;
-}
-</style>
 		</ui:define>
 
 		<ui:define name="content">
@@ -34,7 +28,7 @@
 
 			<div class="containerCart mt-10 mb-10">
 				<div class="text-center">
-					<button class="btnContinue mb-3" onclick="toggleCreateForm()">
+					<button class="btnContinue mb-3">
 						Update your Accommodation</button>
 				</div>
 				<div id="createFormContainer">
@@ -210,17 +204,7 @@
 										<f:param name="idservice" value="#{accommodationBean.accommodationVm.service.id}" />
 										</h:commandButton>
 								</div>
-								<h:form>
-									<div class="d-flex justify-content-center mt-4">
-										<h:commandButton value="Refresh the list"
-											action="#{accommodationBean.loadAllAccommodations}"
-											styleClass="btnCheckO" />
-
-										<h:button value="Continue Shopping"
-											outcome="/views/organizer_session/homeForWebsite.xhtml"
-											class="btnContinue ml-4" />
-									</div>
-								</h:form>
+								
 							</div>
 						</div>
 
