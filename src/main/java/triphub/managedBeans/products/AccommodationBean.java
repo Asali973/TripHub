@@ -23,7 +23,6 @@ import triphub.helpers.ImageHelper;
 import triphub.services.AccommodationService;
 
 import triphub.viewModel.SubServicesViewModel;
-import triphub.viewModel.TourPackageFormViewModel;
 
 @Named("accommodationBean")
 @RequestScoped
@@ -51,8 +50,7 @@ public class AccommodationBean implements Serializable {
 
 	}
 
-	// quand il un constructeur a plusieur a crée le constructeur par défaut
-	// n'existe plus donc il faut le créer explixicitement si besoin
+	
 	public AccommodationBean(AccommodationService accommodationService, SubServicesViewModel accommodationVm,
 			List<Accommodation> allAccommodations) {
 		this.accommodationService = accommodationService;
@@ -65,10 +63,8 @@ public class AccommodationBean implements Serializable {
 	public void init() {
 	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 	    
-	    // Étape 1 : Essayez de récupérer le accommodationId de la session
 	    accommodationId = (Long) externalContext.getSessionMap().get("selectedAccommodationId");
 	    
-	    // Étape 2 : Si non trouvé dans la session, essayez de le récupérer depuis les paramètres de la requête
 	    if (accommodationId == null) {
 	        String idParam = externalContext.getRequestParameterMap().get("id");
 	        if (idParam != null && !idParam.trim().isEmpty()) {
@@ -76,23 +72,22 @@ public class AccommodationBean implements Serializable {
 	                accommodationId = Long.parseLong(idParam);
 	                externalContext.getSessionMap().put("selectedAccommodationId", accommodationId);
 	            } catch (NumberFormatException e) {
-	                FacesMessageUtil.addErrorMessage("Format d'ID de logement non valide.");
-	                return; // Arrêtez la méthode ici pour éviter d'autres erreurs
+	                FacesMessageUtil.addErrorMessage("Id not valid");
+	                return; 
 	            }
 	        }
 	    }
 	    
-	    // Étape 3 : Utilisez le accommodationId pour initialiser d'autres parties
 	    if (accommodationId != null) {
 	        accommodationVm = accommodationService.initSubService(accommodationId);
 	        if (accommodationVm == null) {
-	            FacesMessageUtil.addErrorMessage("Échec de l'initialisation: Le logement n'existe pas pour le modèle de vue");
+	            FacesMessageUtil.addErrorMessage("Accommodation does not exists");
 	            return;
 	        }
 	        
 	        selectedAccommodation = accommodationService.getAccommodationById(accommodationId);
 	        if (selectedAccommodation == null) {
-	            FacesMessageUtil.addErrorMessage("Échec de l'initialisation: Le logement n'existe pas dans la base de données");
+	            FacesMessageUtil.addErrorMessage("Accommodation does not exists");
 	            return;
 	        }
 	    } else {
@@ -100,43 +95,6 @@ public class AccommodationBean implements Serializable {
 	    }
 	}
 
-
-//	@PostConstruct
-//	public void init() {
-//
-//		allAccommodations = accommodationService.getAll();
-//
-//		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-//
-//		if (id != null) {
-//			Long accommodationId = Long.parseLong(id);
-//			System.out.println("affiche accommodation id dans init  " + accommodationId);
-//			System.out.println("affiche accommodationvm dans init  " + accommodationVm);
-//			// TODO modifier pour stocker l'accommodation choisie et non pas que l'Id
-//
-//			// Store the selected accommodation id in the session
-//			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedAccommodationId",
-//					accommodationId);
-//
-//			// Fetch the selected accommodation using accommodationService
-//			accommodationVm = accommodationService.initSubService(accommodationId);
-//			System.out.println("accommodation bean init " + accommodationVm);
-//			if (accommodationVm == null) {
-//				FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
-//			}
-//		}
-
-//		if (id != null) {
-//			FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation does not exist");
-
-	// initialize an Accommodation ViewModel
-	// accommodationVm = accommodationService.initSubService(accommodationId);
-	// if (accommodationVm == null) {
-	// FacesMessageUtil.addErrorMessage("Initialization failed: Accommodation
-	// ViewModel does not exist");
-	// }
-	// }
-//	}
 
 	public String loadAllAccommodations() {
 		allAccommodations = accommodationService.getAll();
@@ -176,15 +134,11 @@ public class AccommodationBean implements Serializable {
 		clear();
 	}
 
-//	public void create() {
-//		accommodationService.create(accommodationVm);
-//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Accommodation added successfully !"));
-//
-//	}
+
 
 	public String updateAccommodation() {
 		try {
-			// accommodationVm.setCurrency(selectedCurrency);
+			
 			accommodationService.update(accommodationVm);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Accommodation updated successfully!"));
@@ -206,10 +160,10 @@ public class AccommodationBean implements Serializable {
 
 	public String initFormUpdate() {
 		try {
-			System.out.println("accommodation bean init formUpdate " + accommodationVm);
+			
 
 			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-			String redirectUrl = contextPath + "/views/product/AccomUpdate.xhtml?faces-redirect=true&id="
+			String redirectUrl = contextPath + "/views/product/AccomUpdateTest.xhtml?faces-redirect=true&id="
 					+ accommodationVm.getId();
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
 
