@@ -1,4 +1,5 @@
-<ui:composition template="/WEB-INF/templates/organizer_template.xhtml"
+
+<ui:composition template="/WEB-INF/templates/navTemplate.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -14,19 +15,155 @@
 .toggle-link {
 	cursor: pointer;
 	text-decoration: none;
-	color: blue;
+	color: gray;
+	display: inline-block;
+	padding: 10px 20px;
+	border-radius: 20px;
+	background-color: #f9f9f9;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.toggle-link:hover {
+	background-color: #e6e6e6;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input-container {
+	display: flex;
+	align-items: center; /* Align items vertically in the center */
+	margin-bottom: 20px; /* Adjust spacing between input pairs */
+}
+
+/* Label style */
+.h-label {
+	margin-right: 10px; /* Add some spacing between label and input */
+}
+
+/* Input field style */
+.input-field {
+	border: none;
+	border-radius: 20px;
+	padding: 6px 12px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	flex: 1; /* Fill available space in the container */
+}
+
+/* Search button style */
+.search-button {
+	background-color: black;
+	color: white;
+	border-radius: 20px;
+	padding: 6px 12px;
+	cursor: pointer;
 }
 
 .columns-container {
 	display: flex;
 	justify-content: space-between;
+	decoration: none;
 }
 
 .column {
 	flex: 1;
 	margin: 10px;
 	padding: 10px;
-	border: 1px solid #ccc;
+	border: none;
+}
+
+/* Style for the search buttons */
+h\\:commandButton {
+	background-color: black;
+	color: white;
+	text-align: right;
+}
+/* Custom CSS for the table */
+.table-container {
+	margin: 0 auto;
+	width: 80%;
+	padding: 20px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+	margin-top: 20px;
+	width: 100%;
+}
+/* Previous styles remain unchanged */
+
+/* Custom CSS for the result section */
+.result-section {
+	margin: 20px auto;
+	padding: 20px;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+	width: 100%;
+}
+
+.result-section .table {
+	width: 100%;
+	border-collapse: separate;
+	/* Separate border spacing for horizontal lines */
+	border-spacing: 0; /* No spacing between cells */
+}
+
+.result-section .table th, .result-section .table td {
+	text-align: center;
+	padding: 10px;
+	border: none; /* Remove cell borders */
+	border-bottom: 1px solid #ddd;
+	/* Add bottom border to create horizontal lines */
+}
+
+.result-section .table th {
+	background-color: #f2f2f2;
+}
+
+.result-section .table tbody tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.result-section .table tbody tr:hover {
+	background-color: #ddd;
+}
+
+.result-table {
+	width: 100%;
+	border-collapse: collapse;
+	border-radius: 15px;
+	overflow: hidden;
+	decoration: none;
+}
+
+.result-table th, .result-table td {
+	text-align: center;
+	padding: 10px;
+}
+
+.result-table th {
+	background-color: #f2f2f2;
+}
+
+.result-table tbody tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.result-table tbody tr:hover {
+	background-color: #ddd;
+}
+
+.result-title {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.rounded-table {
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+	padding: 10px;
+	overflow: hidden;
+	decoration: none;
 }
 </style>
 			<script>
@@ -50,6 +187,16 @@
 		            panel.style.display = 'none';
 		        }
 		    }
+		    function toggleResultSection(panelId) {
+		        var resultPanel = document.getElementById(panelId);
+		        if (resultPanel.style.display === 'none') {
+		            resultPanel.style.display = 'block';
+		        } else {
+		            resultPanel.style.display = 'none';
+		        }
+		    }
+		    		  
+		    		    
 		</script>
 		</h:head>
 
@@ -62,37 +209,66 @@
 						<h3 class="toggle-link" onclick="toggleAccommodationSearch()">Search
 							our accommodations</h3>
 						<h:panelGroup id="accommodationPanelGroup" style="display: none;">
-							<h:panelGrid columns="2">
-								<h:outputLabel for="accommodationName" value="Name:" />
+							<div class="input-container">
+								<h:outputLabel for="accommodationName" value="Name:"
+									styleClass="h-label" />
 								<h:inputText id="accommodationName"
-									value="#{serviceBean.searchAccommodationName}" />
+									value="#{serviceBean.searchAccommodationName}"
+									styleClass="input-field" />
+							</div>
 
-								<h:outputLabel for="accommodationCity" value="City:" />
+							<div class="input-container">
+								<h:outputLabel for="accommodationCity" value="City:"
+									styleClass="h-label" />
 								<h:inputText id="accommodationCity"
-									value="#{serviceBean.searchAccommodationCity}" />
+									value="#{serviceBean.searchAccommodationCity}"
+									styleClass="input-field" />
+							</div>
 
-								<h:outputLabel for="accommodationCountry" value="Country:" />
+							<div class="input-container">
+								<h:outputLabel for="accommodationCountry" value="Country:"
+									styleClass="h-label" />
 								<h:inputText id="accommodationCountry"
-									value="#{serviceBean.searchAccommodationCountry}" />
+									value="#{serviceBean.searchAccommodationCountry}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
+								<h:outputLabel for="minPrice" value="Min Price:"
+									styleClass="h-label" />
+								<h:inputText id="minPrice" value="#{serviceBean.minPrice}"
+									styleClass="input-field" />
+							</div>
 
-								<h:outputLabel for="minPrice" value="Min Price:" />
-								<h:inputText id="minPrice" value="#{serviceBean.minPrice}" />
+							<div class="input-container">
+								<h:outputLabel for="maxPrice" value="Max Price:"
+									styleClass="h-label" />
+								<h:inputText id="maxPrice" value="#{serviceBean.maxPrice}"
+									styleClass="input-field" />
+							</div>
 
-								<h:outputLabel for="maxPrice" value="Max Price:" />
-								<h:inputText id="maxPrice" value="#{serviceBean.maxPrice}" />
-
+							<div class="input-container">
 								<h:selectOneMenu
-									value="#{serviceBean.selectedAccommodationType}">
-									<f:selectItem itemValue="#{null}" itemLabel="Any Type" />
+									value="#{serviceBean.selectedAccommodationType}"
+									styleClass="input-field">
+									<f:selectItem itemValue="#{null}" itemLabel="Any Type"
+										styleClass="h-label" />
 									<f:selectItems
 										value="#{accommodationBean.allAccommodationTypes}"
 										var="accommodationType" itemValue="#{accommodationType}"
-										itemLabel="#{accommodationType.label}" />
+										itemLabel="#{accommodationType.label}" styleClass="h-label" />
 								</h:selectOneMenu>
+							</div>
+
+							<div class="input-container">
 
 								<h:commandButton value="Search Accommodation"
-									action="#{serviceBean.advancedSearchAccommodation}" />
-							</h:panelGrid>
+									action="#{serviceBean.advancedSearchAccommodation}"
+									styleClass="h-label search-button"
+									onclick="toggleResultSection('accommodationResultPanel');">
+								</h:commandButton>
+
+							</div>
+
 						</h:panelGroup>
 					</h:form>
 				</div>
@@ -104,42 +280,70 @@
 						<h3 class="toggle-link" onclick="toggleTransportationSearch()">Search
 							our transportations</h3>
 						<h:panelGroup id="transportationPanelGroup" style="display: none;">
-							<h:panelGrid columns="2">
-								<h:outputLabel for="departureCity" value="Departure City:" />
+							<div class="input-container">
+								<h:outputLabel for="departureCity" value="Departure City:"
+									styleClass="h-label" />
 								<h:inputText id="departureCity"
-									value="#{serviceBean.searchDepartureCity}" />
-
-								<h:outputLabel for="departureCountry" value="Departure Country" />
+									value="#{serviceBean.searchDepartureCity}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
+								<h:outputLabel for="departureCountry" value="Departure Country:"
+									styleClass="h-label" />
 								<h:inputText id="departureCountry"
-									value="#{serviceBean.searchDepartureCountry}" />
-
-								<h:outputLabel for="arrivalCity" value="Arrival City:" />
+									value="#{serviceBean.searchDepartureCountry}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
+								<h:outputLabel for="arrivalCity" value="Arrival City:"
+									styleClass="h-label" />
 								<h:inputText id="arrivalCity"
-									value="#{serviceBean.searchArrivalCity}" />
-								<h:outputLabel for="arrivalCountry" value="Arrival Country" />
+									value="#{serviceBean.searchArrivalCity}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
+
+								<h:outputLabel for="arrivalCountry" value="Arrival Country:"
+									styleClass="h-label" />
 								<h:inputText id="arrivalCountry"
-									value="#{serviceBean.searchArrivalCountry}" />
+									value="#{serviceBean.searchArrivalCountry}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
 
-								<h:outputLabel for="minPrice" value="Minimum Price:" />
-								<h:inputText id="minPrice" value="#{serviceBean.minPrice}" />
+								<h:outputLabel for="minPrice" value="Minimum Price:"
+									styleClass="h-label" />
+								<h:inputText id="minPrice" value="#{serviceBean.minPrice}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
 
-								<h:outputLabel for="maxPrice" value="Maximum Price:" />
-								<h:inputText id="maxPrice" value="#{serviceBean.maxPrice}" />
+								<h:outputLabel for="maxPrice" value="Maximum Price:"
+									styleClass="h-label" />
+								<h:inputText id="maxPrice" value="#{serviceBean.maxPrice}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
 
 								<h:outputLabel for="selectedTransportationType"
-									value="Transportation Type:" />
+									value="Transportation Type:" styleClass="h-label" />
 								<h:selectOneMenu id="selectedTransportationType"
-									value="#{serviceBean.selectedTransportationType}">
+									value="#{serviceBean.selectedTransportationType}"
+									styleClass="input-field">
 									<f:selectItem itemValue="#{null}" itemLabel="Any Type" />
 									<f:selectItems
 										value="#{transportationBean.allTransportationTypes}"
 										var="transportationType" itemValue="#{transportationType}"
 										itemLabel="#{transportationType.label}" />
 								</h:selectOneMenu>
+							</div>
+							<div class="input-container">
 
 								<h:commandButton value="Search Transportation"
-									action="#{serviceBean.advancedSearchTransportation}" />
-							</h:panelGrid>
+									action="#{serviceBean.advancedSearchTransportation}"
+									styleClass="h-label search-button">
+								</h:commandButton>
+							</div>
 						</h:panelGroup>
 					</h:form>
 				</div>
@@ -151,28 +355,45 @@
 						<h3 class="toggle-link" onclick="toggleRestaurantSearch()">Search
 							our restaurants</h3>
 						<h:panelGroup id="restaurantPanelGroup" style="display: none;">
-							<h:panelGrid columns="2">
-								<h:outputLabel for="restaurantName" value="Name:" />
+							<div class="input-container">
+								<h:outputLabel for="restaurantName" value="Name:"
+									styleClass="h-label" />
 								<h:inputText id="restaurantName"
-									value="#{serviceBean.searchRestaurantName}" />
-
-								<h:outputLabel for="restaurantCity" value="City:" />
+									value="#{serviceBean.searchRestaurantName}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
+								<h:outputLabel for="restaurantCity" value="City:"
+									styleClass="h-label" />
 								<h:inputText id="restaurantCity"
-									value="#{serviceBean.searchRestaurantCity}" />
-
-								<h:outputLabel for="restaurantCountry" value="Country:" />
+									value="#{serviceBean.searchRestaurantCity}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
+								<h:outputLabel for="restaurantCountry" value="Country:"
+									styleClass="h-label" />
 								<h:inputText id="restaurantCountry"
-									value="#{serviceBean.searchRestaurantCountry}" />
-
-								<h:outputLabel for="minPrice" value="Min Price:" />
-								<h:inputText id="minPrice" value="#{serviceBean.minPrice}" />
-
-								<h:outputLabel for="maxPrice" value="Max Price:" />
-								<h:inputText id="maxPrice" value="#{serviceBean.maxPrice}" />
-
-								<h:commandButton value="Search Restaurants"
-									action="#{serviceBean.advancedSearchRestaurant}" />
-							</h:panelGrid>
+									value="#{serviceBean.searchRestaurantCountry}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
+								<h:outputLabel for="minPrice" value="Min Price:"
+									styleClass="h-label" />
+								<h:inputText id="minPrice" value="#{serviceBean.minPrice}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
+								<h:outputLabel for="maxPrice" value="Max Price:"
+									styleClass="h-label" />
+								<h:inputText id="maxPrice" value="#{serviceBean.maxPrice}"
+									styleClass="input-field" />
+							</div>
+							<div class="input-container">
+								<h:commandButton value="Search Restaurant"
+									action="#{serviceBean.advancedSearchRestaurant}"
+									styleClass="h-label search-button">
+								</h:commandButton>
+							</div>
 						</h:panelGroup>
 					</h:form>
 				</div>
@@ -183,68 +404,163 @@
 			<!-- Accommodation Results -->
 			<h:form>
 
-				<h:panelGroup>
-					<h3>Accommodation Results</h3>
-					<h:dataTable value="#{serviceBean.accommodationList}"
-						var="accommodation">
-						<!-- Display relevant data from your result list -->
-						<h:column>
-							<h:outputText value="#{accommodation.name}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{accommodation.accommodationType}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{accommodation.address.city}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{accommodation.address.country}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{accommodation.service.price.amount}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{accommodation.service.price.currency}" />
-						</h:column>
-						<!-- Add more columns for other data -->
-					</h:dataTable>
+				<h:panelGroup id="accommodationResultPanel"
+					rendered="#{not empty serviceBean.accommodationList}">
+					<div class="result-section col-md-10">
+						<h3 class="result-title">Accommodation Results</h3>
+						<div class="rounded-table">
+							<h:dataTable value="#{serviceBean.accommodationList}"
+								var="accommodation" styleClass="result-table">
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Name" />
+									</f:facet>
+									<h:outputText value="#{accommodation.name}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Type" />
+									</f:facet>
+									<h:outputText value="#{accommodation.accommodationType}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="City" />
+									</f:facet>
+									<h:outputText value="#{accommodation.address.city}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Country" />
+									</f:facet>
+									<h:outputText value="#{accommodation.address.country}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Price" />
+									</f:facet>
+									<h:outputText value="#{accommodation.service.price.amount}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Currency" />
+									</f:facet>
+									<h:outputText value="#{accommodation.service.price.currency}" />
+								</h:column>
+									<h:column>
+									<f:facet name="header">
+										<h:outputText value="From" />
+									</f:facet>
+									<h:outputText value="#{accommodation.service.availableFrom}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Until" />
+									</f:facet>
+									<h:outputText value="#{accommodation.service.availableTill}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Available" />
+									</f:facet>
+									<h:outputText
+										value="#{accomodation.service.availability ? 'Yes' : 'No'}" />
+								</h:column>
+
+								<h:column>
+									<h:commandButton value="Select" styleClass="search-button" />
+								</h:column>
+							</h:dataTable>
+						</div>
+					</div>
 				</h:panelGroup>
 			</h:form>
 			<!-- Transportation Results -->
 			<h:form>
 
-				<h:panelGroup>
-					<h3>Transportation Results</h3>
-					<h:dataTable value="#{serviceBean.transportationList}"
-						var="transportation">
-						<h:column>
-							<h:outputText value="#{transportation.name}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{transportation.departure.city}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{transportation.departure.country}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{transportation.arrival.city}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{transportation.arrival.country}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{transportation.service.price.amount}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{transportation.service.price.currency}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{transportation.transportationType}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{transportation.description}" />
-						</h:column>
-					</h:dataTable>
+				<h:panelGroup id="transportationResultPanel"
+					rendered="#{not empty serviceBean.transportationList}">
+					<div class="result-section col-md-10">
+
+						<h3 class="result-title">Transportation Results</h3>
+						<div class="rounded-table">
+							<h:dataTable value="#{serviceBean.transportationList}"
+								var="transportation" styleClass="result-table">
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Name" />
+									</f:facet>
+									<h:outputText value="#{transportation.name}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Type" />
+									</f:facet>
+									<h:outputText value="#{transportation.transportationType}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Departure City" />
+									</f:facet>
+									<h:outputText value="#{transportation.departure.city}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Departure Country" />
+									</f:facet>
+									<h:outputText value="#{transportation.departure.country}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Arrival City" />
+									</f:facet>
+									<h:outputText value="#{transportation.arrival.city}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Arrival Country" />
+									</f:facet>
+									<h:outputText value="#{transportation.arrival.country}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Price" />
+									</f:facet>
+									<h:outputText value="#{transportation.service.price.amount}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Currency" />
+									</f:facet>
+									<h:outputText value="#{transportation.service.price.currency}" />
+								</h:column>
+									<h:column>
+									<f:facet name="header">
+										<h:outputText value="From" />
+									</f:facet>
+									<h:outputText value="#{transportation.service.availableFrom}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Until" />
+									</f:facet>
+									<h:outputText value="#{transportation.service.availableTill}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Available" />
+									</f:facet>
+									<h:outputText
+										value="#{transportation.service.availability ? 'Yes' : 'No'}" />
+								</h:column>
+
+								<h:column>
+									<h:commandButton value="Select" styleClass="search-button" />
+								</h:column>
+
+							</h:dataTable>
+						</div>
+					</div>
 				</h:panelGroup>
 			</h:form>
 
@@ -252,27 +568,71 @@
 			<!-- Restaurant Results -->
 			<h:form>
 
-				<h:panelGroup>
-					<h3>Restaurant Results</h3>
-					<h:dataTable value="#{serviceBean.restaurantList}" var="restaurant">
-						<!-- Display relevant data from your result list -->
-						<h:column>
-							<h:outputText value="#{restaurant.name}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{restaurant.address.city}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{restaurant.address.country}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{transportation.service.price.amount}" />
-						</h:column>
-						<h:column>
-							<h:outputText value="#{transportation.service.price.currency}" />
-						</h:column>
-						<!-- Add more columns for other data -->
-					</h:dataTable>
+				<h:panelGroup id="restaurantResultPanel"
+					rendered="#{not empty serviceBean.restaurantList}">
+					<div class="result-section col-md-10">
+
+						<h3 class="result-title">Restaurant Results</h3>
+						<div class="rounded-table">
+							<h:dataTable value="#{serviceBean.restaurantList}"
+								var="restaurant" styleClass="result-table">
+								<!-- Display relevant data from your result list -->
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Name" />
+									</f:facet>
+									<h:outputText value="#{restaurant.name}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="City" />
+									</f:facet>
+									<h:outputText value="#{restaurant.address.city}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Country" />
+									</f:facet>
+									<h:outputText value="#{restaurant.address.country}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="From" />
+									</f:facet>
+									<h:outputText value="#{restaurant.service.availableFrom}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Until" />
+									</f:facet>
+									<h:outputText value="#{restaurant.service.availableTill}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Price" />
+									</f:facet>
+									<h:outputText value="#{restaurant.service.price.amount}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Currency" />
+									</f:facet>
+									<h:outputText value="#{restaurant.service.price.currency}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Availability" />
+									</f:facet>
+									<h:outputText
+										value="#{restaurant.service.availability ? 'Yes' : 'No'}" />
+								</h:column>
+
+								<h:column>
+									<h:commandButton value="Select" styleClass="search-button" />
+								</h:column>
+							</h:dataTable>
+						</div>
+					</div>
 				</h:panelGroup>
 			</h:form>
 		</h:body>
