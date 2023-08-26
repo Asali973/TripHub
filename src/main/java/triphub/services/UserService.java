@@ -17,7 +17,7 @@ import triphub.helpers.RegistrationException;
 import triphub.viewModel.UserViewModel;
 
 @Stateless
-public class UserService implements Serializable{
+public class UserService implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private CustomerDAO customerDAO;
@@ -56,6 +56,12 @@ public class UserService implements Serializable{
 
 	public User findByUserId(Long userId) {
 		return userDAO.findByUserId(userId);
+	}
+
+	public List<User> advancedSearch(String firstName, String lastName, String city, String street,
+			String zipCode, String country, String email, String phoneNum, String CCNumber) {
+		return userDAO.advancedSearch(firstName, lastName, city, street, zipCode, country, email, phoneNum,
+				CCNumber);
 	}
 
 	// Methods related to customers
@@ -272,25 +278,17 @@ public class UserService implements Serializable{
 	public void updateSubscription(Long organizerId, Subscription subscription) {
 		organizerDAO.updateSubscription(organizerId, subscription);
 	}
+
 //this one to display in cart bean 
 	public Subscription getSubscription(Long organizerId) {
 		return organizerDAO.getSubscriptionForOrganizer(organizerId);
 	}
-	//to use in customer home
+
+	// to use in customer home
 	public List<Organizer> findOrganizerByCompanyOrCountry(String companyName, String country) {
-	    return organizerDAO.findOrganizerByCompanyOrCountry(companyName, country);
+		return organizerDAO.findOrganizerByCompanyOrCountry(companyName, country);
 	}
 
-	
-	
-	
-
-
-	
-	
-	
-	
-	
 	// Methods related to Organizer customization
 	public Customization getCustomizationForOrganizer(Long organizerId) {
 		Organizer organizer = organizerDAO.readOrganizer(organizerId);
