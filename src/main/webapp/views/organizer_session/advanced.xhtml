@@ -61,6 +61,8 @@ box-shadow
 
 
 
+
+
 :
 
 
@@ -79,7 +81,9 @@ box-shadow
 
 
 
+
  
+
 
 
 
@@ -115,7 +119,9 @@ box-shadow
 
 
 
+
  
+
 
 
 
@@ -151,7 +157,9 @@ box-shadow
 
 
 
+
  
+
 
 
 
@@ -187,6 +195,7 @@ box-shadow
 
 
 
+
  
 
 
@@ -205,7 +214,10 @@ box-shadow
 
 
 
+
 rgba
+
+
 
 
 
@@ -275,6 +287,8 @@ rgba
 
 
 
+
+
 0
 ,
 0
@@ -282,6 +296,8 @@ rgba
 0
 ,
 0
+
+
 
 
 
@@ -351,7 +367,11 @@ rgba
 
 
 
+
+
 )
+
+
 
 
 
@@ -408,12 +428,16 @@ rgba
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
 				<!-- Brand/logo -->
-				<a class="navbar-brand" href="/triphub/views/organizer_session/observedSettings.xhtml"> <h:graphicImage
+				<h:link
+					outcome="/views/organizer_session/homeForWebsite?faces-redirect=true"
+					styleClass="navbar-brand">
+					<f:param name="organizerId" value="#{organizerBean.organizerId}" />
+					<h:graphicImage
 						value="/images/#{organizerBean.userViewModel.companyLogoLink}"
-						alt="Trip Hub" styleClass="navbar-logo rounded-image" /> <h:outputText
-						value="#{organizerBean.userViewModel.companyName}"
+						alt="Trip Hub" styleClass="navbar-logo rounded-image" />
+					<h:outputText value="#{organizerBean.userViewModel.companyName}"
 						styleClass="navbar-brand-text font1" />
-				</a>
+				</h:link>
 
 
 
@@ -435,13 +459,6 @@ rgba
 								</h:form>
 							</h:panelGroup></li>
 
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user}">
-								<h:form id="logoutForm">
-									<h:commandLink action="#{loginBean.logout}" value="Logout"
-										styleClass="nav-link font1" />
-								</h:form>
-							</h:panelGroup></li>
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user}">
@@ -470,10 +487,12 @@ rgba
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user}">
-								<a class="nav-link font1"
-									href="/triphub/views/organizer_session/cart.xhtml"> <i
-									class="fas fa-shopping-cart"></i> Cart
-								</a>
+								<h:link
+									outcome="/views/organizer_session/cart?faces-redirect=true"
+									styleClass="nav-link font1">
+									<f:param name="organizerId"
+										value="#{organizerBean.organizerId}" />
+									<i class="fas fa-shopping-cart"></i> Cart</h:link>
 							</h:panelGroup></li>
 
 						<li class="nav-item dropdown"><h:panelGroup
@@ -556,8 +575,12 @@ rgba
 										<p class="card-text">#{accommodation.accommodationType}</p>
 										<p class="card-text">#{accommodation.service.price.amount}
 											#{accommodation.service.price.currency}</p>
-										<a href="details_acco.xhtml?id=#{accommodation.id}"
-											class="btn btn-primary">Book Now</a>
+									<h:link outcome="details_acco.xhtml" value="Book Now"
+										styleClass="btn btn-primary">
+										<f:param name="id" value="#{accommodation.id}" />
+										<f:param name="organizerId"
+											value="#{organizerBean.organizerId}" />
+									</h:link>
 									</div>
 								</div>
 							</ui:repeat>
@@ -584,8 +607,12 @@ rgba
 												rendered="#{not restaurant.service.availability}"
 												styleClass="table-content-bold" />
 										</p>
-										<a href="details_res.xhtml?id=#{restaurant.id}"
-											class="btn btn-primary">Reserve Now</a>
+									<h:link outcome="details_res.xhtml" value="Reserve Now"
+										styleClass="btn btn-primary">
+										<f:param name="id" value="#{restaurant.id}" />
+										<f:param name="organizerId"
+											value="#{organizerBean.organizerId}" />
+									</h:link>
 									</div>
 								</div>
 							</ui:repeat>
@@ -614,8 +641,12 @@ rgba
 												rendered="#{not transportation.service.availability}"
 												styleClass="table-content-bold" />
 										</p>
-										<a href="details_trans.xhtml?id=#{transportation.id}"
-											class="btn btn-primary">Book Now</a>
+									<h:link outcome="details_trans.xhtml" value="Book Now"
+										styleClass="btn btn-primary">
+										<f:param name="id" value="#{transportation.id}" />
+										<f:param name="organizerId"
+											value="#{organizerBean.organizerId}" />
+									</h:link>
 									</div>
 								</div>
 							</ui:repeat>

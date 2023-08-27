@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -17,7 +18,7 @@ import triphub.entity.product.CartItem;
 import triphub.services.ICartService;
 
 @Named("checkoutBean")
-@SessionScoped
+@RequestScoped
 public class CheckoutBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Inject
@@ -26,6 +27,7 @@ public class CheckoutBean implements Serializable {
 	private ICartService iCartService;
 	private List<CartItem> cartItems; 
     private BigDecimal totalPrice;
+    private String organizerId;
     
     
     @PostConstruct
@@ -48,6 +50,14 @@ public class CheckoutBean implements Serializable {
         if (totalPriceParam != null && !totalPriceParam.isEmpty()) {
             totalPrice = new BigDecimal(totalPriceParam);
         }
+        
+        organizerId = params.get("organizerId");
+        
+        System.out.println("Inside CheckoutBean init");
+        System.out.println("organizerId from params: " + params.get("organizerId"));
+
+
+        
     }
     
     public String completePurchase() {
@@ -77,6 +87,15 @@ public class CheckoutBean implements Serializable {
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	
+	public String getOrganizerId() {
+	    return organizerId;
+	}
+
+	public void setOrganizerId(String organizerId) {
+	    this.organizerId = organizerId;
+	}
+
     
     
 }

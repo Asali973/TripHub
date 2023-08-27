@@ -50,6 +50,8 @@ public class OrganizerBean implements Serializable {
 	private String searchCountry;
 
 	private List<Organizer> searchResults;
+	
+	private Long organizerId;
 
 	public OrganizerBean() {
 	}
@@ -126,7 +128,7 @@ public class OrganizerBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		Long organizerId = getOrganizerIdFromSessionOrRequest();
+		organizerId = getOrganizerIdFromSessionOrRequest();
 
 		if (organizerId != null) {
 			initFormData(organizerId);
@@ -430,4 +432,14 @@ public class OrganizerBean implements Serializable {
 	public void setSearchResults(List<Organizer> searchResults) {
 		this.searchResults = searchResults;
 	}
+
+	public Long getOrganizerId() {
+		return organizerId;
+	}
+
+	public void setOrganizerId(Long organizerId) {
+		this.organizerId = organizerId;
+	}
+	
+	
 }
