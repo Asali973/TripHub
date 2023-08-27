@@ -174,11 +174,9 @@
 					<h:commandButton value="Pay"
 						action="#{checkoutBean.completePurchase}" styleClass="btnCheckO" />
 
-					<h:button value="Continue Shopping"
-						outcome="/views/organizer_session/homeForWebsite.xhtml"
-						class="btnContinue ml-4">
-						<f:param name="organizerId" value="#{organizerBean.organizerId}" />
-					</h:button>
+					<h:outputLink
+								value="http://localhost:8080/triphub/views//customer_home.xhtml"
+								styleClass="btnContinue ml-4"> Continue Shopping</h:outputLink>
 				</h:form>
 			</div>
 		</ui:define>
