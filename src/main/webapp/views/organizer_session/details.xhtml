@@ -7,7 +7,6 @@ xmlns:ui="http://java.sun.com/jsf/facelets"
 
 
 <h:body>
-
 	<ui:composition template="#{organizerBean.userViewModel.xhtmlFile}">
 		<ui:define name="additionalHeadContent">
 			<meta charset="UTF-8" />
@@ -20,46 +19,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets"
 			<link rel="stylesheet"
 				href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
 			<title>Package Details</title>
-			<style>
-.package-details {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	border-radius: 20px;
-	padding: 20px;
-	background-color: #f8f9fa;
-}
 
-.package-header h1, .package-header h2 {
-	margin-bottom: 30px;
-}
-
-.package-card {
-	border-radius: 20px;
-	border: none;
-	overflow: hidden;
-	margin-bottom: 10px;
-}
-
-.package-card img {
-	border-radius: 20px;
-	display: block;
-	margin: 0 auto;
-	max-width: 80%;
-	margin-bottom: 5px;
-}
-
-.package-text {
-	padding: 1em 2em;
-	font-size: 1.2em;
-}
-
-.package-text p {
-	margin-bottom: 1em;
-}
-
-.package-text strong {
-	font-size: 1.1em;
-}
-</style>
 		</ui:define>
 		<ui:define name="content">
 
@@ -109,6 +69,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets"
 					<h:form>
 						<div class="d-flex justify-content-center">
 							<h:commandButton value="Add to Cart"
+
 								action="#{cartBean.addToCart}" class="btnCheckO">
 								<f:param name="selectedPackageId" value="#{param.id}" />
 								<f:param name="quantity" value="#{cartBean.selectedQuantity}" />
@@ -124,9 +85,9 @@ xmlns:ui="http://java.sun.com/jsf/facelets"
 						</div>
 
 					</h:form>
-
 				</div>
 			</div>
+
 
 			<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 			<script>

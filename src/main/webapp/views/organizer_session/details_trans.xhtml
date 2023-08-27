@@ -68,39 +68,44 @@
 						transportationBean.selectedTransportation.name : 'Transportation
 						Not Found'}</h2>
 				</div>
+<h:body>
+    <div class="container2 mt-5 package-details">
+        <div class="text-center package-header">
+            <h2>#{transportationBean.selectedTransportation != null ?
+                transportationBean.selectedTransportation.name : 'Transportation Not Found'}</h2>
+        </div>
 
-				<div class="package-card">
-					<h:graphicImage
-						value="/images/#{transportationBean.selectedTransportation.picture.link}"
-						class="img-fluid" alt="Selected transportation picture" />
+        <div class="package-card">
+            <h:graphicImage value="/images/#{transportationBean.selectedTransportation.picture.link}"
+                            class="img-fluid" alt="Selected transportation picture" />
 
-					<div class="package-text">
-						<p>
-							<strong>Description:</strong>
-							#{transportationBean.selectedTransportation.description}
-						</p>
-						<p>
-							<strong>Price:</strong>
-							#{transportationBean.selectedTransportation.service.price.amount}
-							#{transportationBean.selectedTransportation.service.price.currency}
-						</p>
+            <div class="package-text">
+                <p>
+                    <strong>Description:</strong>
+                    #{transportationBean.selectedTransportation.description}
+                </p>
+                <p>
+                    <strong>Price:</strong>
+                    #{transportationBean.selectedTransportation.service.price.amount}
+                    #{transportationBean.selectedTransportation.service.price.currency}
+                </p>
+               
+                <p>
+                    <strong>Transport Type:</strong>
+                    #{transportationBean.selectedTransportation.transportationType}
+                </p>
+            </div>
 
-						<p>
-							<strong>Transport Type:</strong>
-							#{transportationBean.selectedTransportation.transportationType}
-						</p>
-					</div>
-
-					<h:form>
-						<div class="package-text">
-							<label for="availableFrom"> From*:</label>
-							<h:inputText id="availableFrom" class="form-control date-picker"></h:inputText>
-						</div>
-						<div class="package-text">
-							<label for="availableTill"> To*:</label>
-							<h:inputText id="availableTill" class="form-control date-picker"></h:inputText>
-						</div>
-					</h:form>
+            <h:form>
+               <div class="package-text">
+                    <label for="availableFrom"> From*:</label>
+                    <h:inputText id="availableFrom" class="form-control date-picker"></h:inputText>
+                </div>
+                <div class="package-text">
+                    <label for="availableTill"> To*:</label>
+                    <h:inputText id="availableTill" class="form-control date-picker"></h:inputText>
+                </div>
+                  </h:form>
 					<h:form>
 						<div class="d-flex justify-content-center">
 							<h:commandButton value="Add to Cart"
@@ -119,19 +124,17 @@
 						</div>
 
 					</h:form>
-
-
-
-
-				</div>
-			</div>
-			<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-			<script>
+        </div>
+    </div>
+</h:body>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        
+        			<script>
     document.addEventListener("DOMContentLoaded", function() {
         flatpickr(".date-picker", {});
     });
 </script>
-			<script>
+<script>
     $(document).ready(function(){
         // initialiser flatpickr pour les champs avec la classe date-picker
         $(".date-picker").flatpickr({
