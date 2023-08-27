@@ -1,20 +1,17 @@
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:head>
-    <title>Organizer Home Page</title>
-</h:head>
-<h:body>
-    <ui:composition template="/WEB-INF/templates/websiteTemplate.xhtml">
-        <ui:define name="content">
-            <!-- Add your organizer-specific content here -->
-            <h1>Welcome, Organizer!</h1>
-            <p>This is the website for organizers. You can customize this page with relevant information and features for tour organizers. </p>
-            <!-- Add your specific organizer-related content here -->
-        </ui:define>
-    </ui:composition>
-</h:body>
-</html>
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
+
+
+
+<ui:composition template="#{organizerBean.userViewModel.xhtmlFile}">
+
+</ui:composition>
+
+
+</html>

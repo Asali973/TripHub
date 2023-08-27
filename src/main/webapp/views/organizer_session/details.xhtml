@@ -1,110 +1,111 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+>
 
-<h:head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet library="css" name="website.css" />
-	<h:outputStylesheet library="css" name="checkout.css" />
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-	<title>Package Details</title>
-	<style>
-.package-details {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	border-radius: 20px;
-	padding: 20px;
-	background-color: #f8f9fa;
-}
-
-.package-header h1, .package-header h2 {
-	margin-bottom: 30px;
-}
-
-.package-card {
-	border-radius: 20px;
-	border: none;
-	overflow: hidden;
-	margin-bottom: 10px;
-}
-
-.package-card img {
-	border-radius: 20px;
-	display: block;
-	margin: 0 auto;
-	max-width: 80%;
-	margin-bottom: 5px;
-}
-
-.package-text {
-	padding: 1em 2em;
-	font-size: 1.2em;
-}
-
-.package-text p {
-	margin-bottom: 1em;
-}
-
-.package-text strong {
-	font-size: 1.1em;
-}
-</style>
-</h:head>
 
 <h:body>
+	<ui:composition template="#{organizerBean.userViewModel.xhtmlFile}">
+		<ui:define name="additionalHeadContent">
+			<meta charset="UTF-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<h:outputStylesheet library="css" name="bootstrap.min.css" />
+			<h:outputStylesheet library="css" name="website.css" />
+			<h:outputStylesheet library="css" name="checkout.css" />
+			<link rel="stylesheet"
+				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+			<link rel="stylesheet"
+				href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
+			<title>Package Details</title>
 
-	<div class="container2 mt-5 package-details ">
-		<div class="text-center package-header">
-			<h1>#{tourPackageBean.selectedTourPackage != null ?
-				tourPackageBean.selectedTourPackage.name : 'Package Not Found'}</h1>
-		</div>
+		</ui:define>
+		<ui:define name="content">
 
-		<div class="package-card">
-			<h:graphicImage
-				value="/images/#{tourPackageBean.selectedTourPackage.picture.link}"
-				class="img-fluid" alt="Selected tour package picture" />
-			<div class="package-text">
-				<p>
-					<strong>Description:</strong>
-					#{tourPackageBean.selectedTourPackage.description}
-				</p>
-				<p>
-					<strong>Price:</strong>
-					#{tourPackageBean.selectedTourPackage.price.amount}
-					#{tourPackageBean.selectedTourPackage.price.currency}
-				</p>
-				<p>
-					<strong>Destination:</strong>
-					#{tourPackageBean.selectedTourPackage.destination.cityName},
-					#{tourPackageBean.selectedTourPackage.destination.state},
-					#{tourPackageBean.selectedTourPackage.destination.country}
-				</p>
-				<p>
-					<strong>Theme:</strong>
-					#{tourPackageBean.selectedTourPackage.theme.themeName}
-				</p>
+			<div class="container2 mt-5 package-details ">
+				<div class="text-center package-header">
+					<h1>#{tourPackageBean.selectedTourPackage != null ?
+						tourPackageBean.selectedTourPackage.name : 'Package Not Found'}</h1>
+				</div>
 
+				<div class="package-card">
+					<h:graphicImage
+						value="/images/#{tourPackageBean.selectedTourPackage.picture.link}"
+						class="img-fluid" alt="Selected tour package picture" />
+					<div class="package-text">
+						<p>
+							<strong>Description:</strong>
+							#{tourPackageBean.selectedTourPackage.description}
+						</p>
+						<p>
+							<strong>Price:</strong>
+							#{tourPackageBean.selectedTourPackage.price.amount}
+							#{tourPackageBean.selectedTourPackage.price.currency}
+						</p>
+						<p>
+							<strong>Destination:</strong>
+							#{tourPackageBean.selectedTourPackage.destination.cityName},
+							#{tourPackageBean.selectedTourPackage.destination.state},
+							#{tourPackageBean.selectedTourPackage.destination.country}
+						</p>
+						<p>
+							<strong>Theme:</strong>
+							#{tourPackageBean.selectedTourPackage.theme.themeName}
+						</p>
+
+					</div>
+
+					<h:form>
+						<div class="package-text">
+							<label for="availableFrom"> From*:</label>
+							<h:inputText id="availableFrom" class="form-control date-picker"></h:inputText>
+						</div>
+						<div class="package-text">
+							<label for="availableTill"> To*:</label>
+							<h:inputText id="availableTill" class="form-control date-picker"></h:inputText>
+						</div>
+					</h:form>
+					<h:form>
+						<div class="d-flex justify-content-center">
+							<h:commandButton value="Add to Cart"
+
+								action="#{cartBean.addToCart}" class="btnCheckO">
+								<f:param name="selectedPackageId" value="#{param.id}" />
+								<f:param name="quantity" value="#{cartBean.selectedQuantity}" />
+								<f:param name="organizerId" value="#{organizerBean.organizerId}" />
+							</h:commandButton>
+
+
+							<h:button value="Continue Shopping"
+								outcome="/views/organizer_session/homeForWebsite.xhtml"
+								class="btnContinue ml-4">
+								<f:param name="organizerId" value="#{organizerBean.organizerId}" />
+							</h:button>
+						</div>
+
+					</h:form>
+				</div>
 			</div>
 
-			<h:form>
-				<div class="d-flex justify-content-center">
-					<h:commandButton value="Add to Cart" action="#{cartBean.addToCart}"
-						class="btnCheckO ">
-						<f:param name="selectedPackageId" value="#{param.id}" />
-						<f:param name="quantity" value="#{cartBean.selectedQuantity}" />
-					</h:commandButton>
 
-					<h:button value="Continue Shopping"
-						outcome="/views/organizer_session/homeForWebsite.xhtml"
-						class="btnContinue ml-4" />
-				</div>
-			</h:form>
-
-		</div>
-	</div>
+			<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+			<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        flatpickr(".date-picker", {});
+    });
+</script>
+			<script>
+    $(document).ready(function(){
+        // initialiser flatpickr pour les champs avec la classe date-picker
+        $(".date-picker").flatpickr({
+            dateFormat: "Y-m-d",
+            enableTime: false
+        });
+    });
+</script>
+			<h:outputScript library="javascript" name="servicesCrud.js" />
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

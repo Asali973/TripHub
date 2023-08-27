@@ -1,0 +1,38 @@
+.package-details {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	padding: 20px;
+	background-color: #f8f9fa;
+}
+
+.package-header h1, .package-header h2 {
+	margin-bottom: 30px;
+}
+
+.package-card {
+	border-radius: 20px;
+	border: none;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.package-card img {
+	border-radius: 20px;
+	display: block;
+	margin: 0 auto;
+	max-width: 80%;
+	margin-bottom: 5px;
+}
+
+.package-text {
+	padding: 1em 2em;
+	font-size: 1.2em;
+}
+
+.package-text p {
+	margin-bottom: 1em;
+}
+
+.package-text strong {
+	font-size: 1.1em;
+}

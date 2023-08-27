@@ -5,127 +5,174 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<h:head>
-	<title>Update Tour Package</title>
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet library="css" name="regForm.css" />
-</h:head>
-
 <h:body>
-	<h:form id="updatePackageForm" enctype="multipart/form-data">
-		<h:inputHidden id="id" value="#{tourPackageBean.tourPackageVm.id}" />
-		<div class="reg-form-container">
-			<h3>Update your Tour Package</h3>
-			<div class="row">
-				<div class="col-md-6">
-					<!-- First Slot (left column) -->
-					<div class="reg-form-group">
-						<h:outputLabel for="name" value="Name:" />
-						<h:inputText id="name"
-							value="#{tourPackageBean.tourPackageVm.name}"
-							styleClass="reg-form-control" />
-					</div>
+	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+		<ui:define name="additionalHeadContent">
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+			<h:outputStylesheet library="css" name="regForm.css" />
+			<h:outputStylesheet library="css" name="loginCss.css" />
+			<h:outputStylesheet library="css" name="checkout.css" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+		</ui:define>
+		<ui:define name="content">
+	<div class="containerCart mt-5 mb-5">
+	<div class="text-center">
+<button class="btnContinue mb-3" >Update your Tour Package</button>
+	</div>
+	
+			<div id="createFormContainer">
+					<h:form prependId="false" enctype="multipart/form-data">
 
-					<div class="reg-form-group">
-						<h:outputLabel for="price" value="Price:" />
-						<h:inputText id="price"
-							value="#{tourPackageBean.tourPackageVm.amount}"
-							styleClass="reg-form-control" />
-					</div>
-
-					<div class="reg-form-group">
-						<h:outputLabel for="currency" value="Currency:" />
-						<h:selectOneMenu id="currency"
-							value="#{tourPackageBean.selectedCurrency}"
-							styleClass="reg-form-control">
-							<f:selectItems value="#{tourPackageBean.currencies}" />
-						</h:selectOneMenu>
-						<!-- Use the tourPackageVm.currency value in an inputHidden field -->
-						<h:inputHidden id="currencyHidden"
-							value="#{tourPackageBean.tourPackageVm.currency}" />
-					</div>
-				</div>
-
-				<div class="col-md-6">
-					<!-- Second Slot (right column) -->
-					<div class="reg-form-group">
-						<h:outputLabel for="cityName" value="City:" />
-						<h:inputText id="cityName"
-							value="#{tourPackageBean.tourPackageVm.cityName}"
-							styleClass="reg-form-control" />
-					</div>
-
-					<div class="reg-form-group">
-						<h:outputLabel for="state" value="State:" />
-						<h:inputText id="state"
-							value="#{tourPackageBean.tourPackageVm.state}"
-							styleClass="reg-form-control" />
-					</div>
-
-					<div class="reg-form-group">
-						<h:outputLabel for="country" value="Country:" />
-						<h:inputText id="country"
-							value="#{tourPackageBean.tourPackageVm.country}"
-							styleClass="reg-form-control" />
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-6">
-					<!-- Third Slot (left column) -->
-					<div class="reg-form-group">
-						<h:outputLabel for="themeName" value="Theme:" />
-						<h:inputText id="themeName"
-							value="#{tourPackageBean.tourPackageVm.themeName}"
-							styleClass="reg-form-control" />
-					</div>
-				</div>
-
-				<div class="col-md-6">
-					<!-- Fourth Slot (right column) -->
-					<div class="reg-form-group">
-						<h:outputLabel for="pictureFile" value="Upload Picture:" />
-						<div class="input-group mt-3">
-							<div class="custom-file">
-								<h:inputFile value="#{tourPackageBean.profilePicture}"
-									id="pictureFile" styleClass="form-control" />
-								<label class="custom-file-label" for="pictureFile">Choose
-									picture</label>
+			
+				<h:inputHidden id="id" value="#{tourPackageBean.tourPackageVm.id}" />
+				
+				<div class="reg-form-container">
+					
+					<div class="row">
+							<div class="col-md-6">
+							<!-- First Slot (left column) -->
+							<div class="form-group">
+								<h:outputLabel for="name" value="Name:" />
+								<h:inputText id="name"
+									value="#{tourPackageBean.tourPackageVm.name}"
+									styleClass="form-control" />
 							</div>
-							<div class="input-group-append">
-								<button type="button" class="btn btn-custom">Upload</button>
+
+							<div class="form-group">
+								<h:outputLabel for="price" value="Price:" />
+								<h:inputText id="price"
+									value="#{tourPackageBean.tourPackageVm.amount}"
+									styleClass="form-control" />
+							</div>
+
+							<div class="form-group">
+								<h:outputLabel for="currency" value="Currency:" />
+								<h:selectOneMenu id="currency"
+									value="#{tourPackageBean.selectedCurrency}"
+									styleClass="form-control">
+									<f:selectItems value="#{tourPackageBean.currencies}" />
+								</h:selectOneMenu>
+								<!-- Use the tourPackageVm.currency value in an inputHidden field -->
+								<h:inputHidden id="currencyHidden"
+									value="#{tourPackageBean.tourPackageVm.currency}" />
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<!-- Second Slot (right column) -->
+							<div class="form-group">
+								<h:outputLabel for="cityName" value="City:" />
+								<h:inputText id="cityName"
+									value="#{tourPackageBean.tourPackageVm.cityName}"
+									styleClass="form-control" />
+							</div>
+
+							<div class="form-group">
+								<h:outputLabel for="state" value="State:" />
+								<h:inputText id="state"
+									value="#{tourPackageBean.tourPackageVm.state}"
+									styleClass="form-control" />
+							</div>
+
+							<div class="form-group">
+								<h:outputLabel for="country" value="Country:" />
+								<h:inputText id="country"
+									value="#{tourPackageBean.tourPackageVm.country}"
+									styleClass="form-control" />
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="row row-padding">
-				<div class="col-md-12">
-					<!-- Fifth Slot (full-width) -->
-					<div class="reg-form-group">
-						<h:outputLabel for="description" value="Description:" />
-						<h:inputText id="description"
-							value="#{tourPackageBean.tourPackageVm.description}"
-							styleClass="reg-form-control" />
+
+					<div class="row">
+						<div class="col-md-6">
+							<!-- Third Slot (left column) -->
+							<div class="form-group">
+								<h:outputLabel for="themeName" value="Theme:" />
+								<h:inputText id="themeName"
+									value="#{tourPackageBean.tourPackageVm.themeName}"
+									styleClass="form-control" />
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<!-- Fourth Slot (right column) -->
+							<div class="form-group">
+								<h:outputLabel for="pictureFile" value="Upload Picture:" />
+									<div class="input-group mt-3">
+										<h:inputFile value="#{tourPackageBean.picturePackage}"
+											id="picturePackage" styleClass="custom-file-input d-none"
+											onchange="updateLabel(this);" />
+										<label id="fileLabel" class="form-control">Choose a
+											picture</label>
+
+										<!-- Bouton Upload -->
+										<div class="input-group-append">
+											<button type="button" class="btn btn-customUpload"
+												onclick="document.getElementById('picturePackage').click();">Upload</button>
+										</div>
+									</div>
+								</div>
+
+								<script type="text/javascript">
+    					function updateLabel(inputElement) {
+        					var fileName = inputElement.value.split("\\").pop();
+       						 document.getElementById('fileLabel').textContent = fileName || "No file selected";
+   						}
+						</script>
+
+							</div>
+						</div>
+					<div class="row row-padding">
+						<div class="col-md-12">
+							<!-- Fifth Slot (full-width) -->
+							<div class="form-group">
+								<h:outputLabel for="description" value="Description:" />
+								<h:inputText id="description"
+									value="#{tourPackageBean.tourPackageVm.description}"
+									styleClass="form-control" />
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="row row-padding">
-				<div class="col-md-12">
-					<!-- Fifth Slot (full-width) -->
-					<div class="reg-form-group">
-						<h:commandButton value="Update"
-							action="#{tourPackageBean.updatePackage}"
-							styleClass="reg-btn-primary" />
+					<div class="row row-padding">
+						<div class="col-md-12">
+							<!-- Fifth Slot (full-width) -->
+							<div class="form-group d-flex justify-content-center">
+								<h:commandButton value="Update"
+									action="#{tourPackageBean.updatePackage}"
+									styleClass="btnCheckO" />
+							</div>
+						</div>
 					</div>
+
 				</div>
+					<div class="row row-padding">
+					<div class="col-md-12">
+					<div class="form-group d-flex justify-content-center">
+					<h:link
+						value="Click here to check the updated Tour Package in the list!"
+						outcome="/views/product/TourpackageHome.xhtml"
+						styleClass="btnCheckO" />
+						</div>
+				</div>
+				</div>
+			</h:form>
+			</div>
 			</div>
 			
-		</div>
-		 <div class="reg-form-group">
-                    <h:link value="Click here to check the updated Tour Package in the list!" outcome="/views/product/TourpackageHome.xhtml" styleClass="custom-link-button" />
-                </div>
-	</h:form>	
+			<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+			<script
+				src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+			<h:outputScript library="javascript" name="loginJs.js" />
+			<h:outputScript library="javascript" name="createNdisplayList.js" />
+			
+				</ui:define>
+	</ui:composition>
 </h:body>
 </html>

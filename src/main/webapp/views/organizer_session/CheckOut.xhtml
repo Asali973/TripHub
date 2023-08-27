@@ -3,184 +3,183 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet library="css" name="website.css" />
-	<h:outputStylesheet library="css" name="checkout.css" />
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-	<link
-		href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
-		rel="stylesheet" />
-	<title>Checkout Form</title>
-</h:head>
+
 <h:body>
-	<div class="container2 mt-5 mb-5">
-		<h:form>
-		<div class="text-center">
-		<h1>Checkout Form</h1>
-		</div>
-			
-			<div class="row">
-				<!-- Billing Address Section -->
-				<div class="col-lg-6">
-					<h3>Billing Address</h3>
-					<div class="form-group">
-						<label for="fname"><i class="fa fa-user"></i> Full Name</label> <input
-							type="text" id="fname" name="firstname" placeholder="John M. Doe"
-							class="form-control" />
+	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+		<ui:define name="additionalHeadContent">
+			<meta charset="UTF-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<h:outputStylesheet library="css" name="bootstrap.min.css" />
+			<h:outputStylesheet library="css" name="website.css" />
+			<h:outputStylesheet library="css" name="checkout.css" />
+			<link rel="stylesheet"
+				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+			<title>Checkout Form</title>
+		</ui:define>
+
+		<ui:define name="content">
+			<div class="container2 mt-5 mb-5">
+				<h:form>
+					<div class="text-center">
+						<h1>Checkout Form</h1>
 					</div>
-					<div class="form-group">
-						<label for="email"><i class="fa fa-envelope"></i> Email</label> <input
-							type="text" id="email" name="email"
-							placeholder="john@example.com" class="form-control" />
-					</div>
-					<div class="form-group">
-						<label for="adr"><i class="fa fa-address-card-o"></i>
-							Address</label> <input type="text" id="adr" name="address"
-							placeholder="542 W. 15th Street" class="form-control" />
-					</div>
-					<div class="form-group">
-						<label for="city"><i class="fa fa-institution"></i> City</label> <input
-							type="text" id="city" name="city" placeholder="New York"
-							class="form-control" />
-					</div>
+
 					<div class="row">
-						<div class="col-6">
+						<!-- Billing Address Section -->
+						<div class="col-lg-6">
+							<h3>Billing Address</h3>
 							<div class="form-group">
-								<label for="state">State</label> <input type="text" id="state"
-									name="state" placeholder="NY" class="form-control" />
+								<label for="fname"><i class="fa fa-user"></i> Full Name</label>
+								<input type="text" id="fname" name="firstname"
+									placeholder="John M. Doe" class="form-control" />
 							</div>
-						</div>
-						<div class="col-6">
 							<div class="form-group">
-								<label for="zip">Zip</label> <input type="text" id="zip"
-									name="zip" placeholder="10001" class="form-control" />
+								<label for="email"><i class="fa fa-envelope"></i> Email</label>
+								<input type="text" id="email" name="email"
+									placeholder="john@example.com" class="form-control" />
 							</div>
-						</div>
-					</div>
-					<h3>Payment</h3>
-					<div class="form-group">
-						<label for="cname">Name on Card</label> <input type="text"
-							id="cname" name="cardname" placeholder="John More Doe"
-							class="form-control" />
-					</div>
-					<div class="form-group">
-						<label for="ccnum">Credit card number</label> <input type="text"
-							id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444"
-							class="form-control" />
-					</div>
-					<div class="form-group">
-						<label for="expmonth">Exp Month</label> <input type="text"
-							id="expmonth" name="expmonth" placeholder="September"
-							class="form-control" />
-					</div>
-					<div class="row">
-						<div class="col-6">
 							<div class="form-group">
-								<label for="expyear">Exp Year</label> <input type="text"
-									id="expyear" name="expyear" placeholder="2018"
+								<label for="adr"><i class="fa fa-address-card-o"></i>
+									Address</label> <input type="text" id="adr" name="address"
+									placeholder="542 W. 15th Street" class="form-control" />
+							</div>
+							<div class="form-group">
+								<label for="city"><i class="fa fa-institution"></i> City</label>
+								<input type="text" id="city" name="city" placeholder="New York"
 									class="form-control" />
 							</div>
-						</div>
-						<div class="col-6">
+							<div class="row">
+								<div class="col-6">
+									<div class="form-group">
+										<label for="state">State</label> <input type="text" id="state"
+											name="state" placeholder="NY" class="form-control" />
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<label for="zip">Zip</label> <input type="text" id="zip"
+											name="zip" placeholder="10001" class="form-control" />
+									</div>
+								</div>
+							</div>
+							<h3>Payment</h3>
 							<div class="form-group">
-								<label for="cvv">CVV</label> <input type="text" id="cvv"
-									name="cvv" placeholder="352" class="form-control" />
+								<label for="cname">Name on Card</label> <input type="text"
+									id="cname" name="cardname" placeholder="John More Doe"
+									class="form-control" />
+							</div>
+							<div class="form-group">
+								<label for="ccnum">Credit card number</label> <input type="text"
+									id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444"
+									class="form-control" />
+							</div>
+							<div class="form-group">
+								<label for="expmonth">Exp Month</label> <input type="text"
+									id="expmonth" name="expmonth" placeholder="September"
+									class="form-control" />
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<div class="form-group">
+										<label for="expyear">Exp Year</label> <input type="text"
+											id="expyear" name="expyear" placeholder="2018"
+											class="form-control" />
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<label for="cvv">CVV</label> <input type="text" id="cvv"
+											name="cvv" placeholder="352" class="form-control" />
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Accepted Cards</label>
+								<div class="icon-container fa-2x" style="color: #3855CB">
+									<i class="fab fa-cc-visa fa-2x"></i> <i
+										class="fab fa-cc-amex fa-2x"></i> <i
+										class="fab fa-cc-mastercard fa-2x"></i> <i
+										class="fab fa-cc-discover fa-2x"></i>
+								</div>
+							</div>
+							<div class="form-group form-check">
+								<input type="checkbox" checked="checked" name="sameadr"
+									class="form-check-input" /> <label class="form-check-label">Shipping
+									address same as billing</label>
+							</div>
+						</div>
+						<!-- Cart Section -->
+						<div class="col-lg-6">
+							<div class="card">
+								<div class="card-header">
+									<h4>
+										Cart <span class="price" style="color: #3855CB"><i
+											class="fa fa-shopping-cart"></i> <b>#{checkoutBean.cartItems.size()}</b></span>
+									</h4>
+								</div>
+								<div class="card-body">
+									<ui:fragment rendered="#{not empty checkoutBean.cartItems}">
+										<h:outputText value="Customer Name: " />
+										<h:outputText value="#{checkoutBean.fullName}" />
+										<br />
+										<h:outputText value="Product Details:" />
+										<ul>
+											<ui:repeat value="#{checkoutBean.cartItems}" var="item">
+												<!-- TourPackage -->
+												<h:panelGroup rendered="#{item.tourPackage != null}">
+													<li><h:outputText value="#{item.tourPackage.name}" />
+														<span class="price"> #{item.quantity} x
+															#{item.tourPackage.price.amount}
+															#{item.tourPackage.price.currency} </span></li>
+												</h:panelGroup>
+												<!-- Accommodation -->
+												<h:panelGroup rendered="#{item.accommodation != null}">
+													<li><h:outputText value="#{item.accommodation.name}" />
+														<span class="price"> #{item.quantity} x
+															#{item.accommodation.service.price.amount}
+															#{item.accommodation.service.price.currency} </span></li>
+												</h:panelGroup>
+												<!-- Restaurant -->
+												<h:panelGroup rendered="#{item.restaurant != null}">
+													<li><h:outputText value="#{item.restaurant.name}" />
+														<span class="price"> #{item.quantity} x
+															#{item.restaurant.service.price.amount}
+															#{item.restaurant.service.price.currency} </span></li>
+												</h:panelGroup>
+												<!-- Transportation -->
+												<h:panelGroup rendered="#{item.transportation != null}">
+													<li><h:outputText value="#{item.transportation.name}" />
+														<span class="price"> #{item.quantity} x
+															#{item.transportation.service.price.amount}
+															#{item.transportation.service.price.currency} </span></li>
+												</h:panelGroup>
+											</ui:repeat>
+										</ul>
+										<h:outputText value="Total Price:" />
+										<p>
+											<span class="price" style="color: black"> <b>#{checkoutBean.totalPrice}
+													#{checkoutBean.cartItems[0].tourPackage.price.currency}</b>
+											</span>
+										</p>
+									</ui:fragment>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label>Accepted Cards</label>
-						<div class="icon-container fa-2x" style="color: #3855CB">
-							<i class="fab fa-cc-visa fa-2x"></i> <i
-								class="fab fa-cc-amex fa-2x"></i> <i
-								class="fab fa-cc-mastercard fa-2x"></i> <i
-								class="fab fa-cc-discover fa-2x"></i>
-						</div>
-					</div>
-					<div class="form-group form-check">
-						<input type="checkbox" checked="checked" name="sameadr"
-							class="form-check-input" /> <label class="form-check-label">Shipping
-							address same as billing</label>
-					</div>
-				</div>
-				<!-- Cart Section -->
-				<div class="col-lg-6">
-					<div class="card">
-						<div class="card-header">
-							<h4>
-								Cart <span class="price" style="color: #3855CB"><i
-									class="fa fa-shopping-cart"></i> <b>#{checkoutBean.cartItems.size()}</b></span>
-							</h4>
-						</div>
-						<div class="card-body">
-							<ui:fragment rendered="#{not empty checkoutBean.cartItems}">
-						<h:outputText value="Customer Name: " />
-						<h:outputText value="#{checkoutBean.fullName}" />
-						<br />
-						<h:outputText value="Product Details:" />
-						<ul>
-							<ui:repeat value="#{checkoutBean.cartItems}" var="item">
-								<!-- TourPackage -->
-								<h:panelGroup rendered="#{item.tourPackage != null}">
-									<li><h:outputText value="#{item.tourPackage.name}" /> <span
-										class="price"> #{item.quantity} x
-											#{item.tourPackage.price.amount}
-											#{item.tourPackage.price.currency} </span></li>
-								</h:panelGroup>
-								<!-- Accommodation -->
-								<h:panelGroup rendered="#{item.accommodation != null}">
-									<li><h:outputText value="#{item.accommodation.name}" /> <span
-										class="price"> #{item.quantity} x
-											#{item.accommodation.service.price.amount}
-											#{item.accommodation.service.price.currency} </span></li>
-								</h:panelGroup>
-								<!-- Restaurant -->
-								<h:panelGroup rendered="#{item.restaurant != null}">
-									<li><h:outputText value="#{item.restaurant.name}" /> <span
-										class="price"> #{item.quantity} x
-											#{item.restaurant.service.price.amount}
-											#{item.restaurant.service.price.currency} </span></li>
-								</h:panelGroup>
-								<!-- Transportation -->
-								<h:panelGroup rendered="#{item.transportation != null}">
-									<li><h:outputText value="#{item.transportation.name}" />
-										<span class="price"> #{item.quantity} x
-											#{item.transportation.service.price.amount}
-											#{item.transportation.service.price.currency} </span></li>
-								</h:panelGroup>
-							</ui:repeat>
-						</ul>
-						<h:outputText value="Total Price:" />
-						<p>
-							<span class="price" style="color: black"> <b>#{checkoutBean.totalPrice}
-									#{checkoutBean.cartItems[0].tourPackage.price.currency}</b>
-							</span>
-						</p>
-					</ui:fragment>
-						</div>
-					</div>
-				</div>
+				</h:form>
+				<h:form>
+					<h:commandButton value="Pay"
+						action="#{checkoutBean.completePurchase}" styleClass="btnCheckO" />
+
+					<h:button value="Continue Shopping"
+						outcome="/views/organizer_session/homeForWebsite.xhtml"
+						class="btnContinue ml-2" />
+				</h:form>
 			</div>
-		</h:form>
-		
-		
-			<h:form>
-				<h:commandButton value="Pay"
-					action="#{checkoutBean.completePurchase}"
-					styleClass="btnCheckO" />
-			
-				<h:button value="Continue Shopping"
-					outcome="/views/organizer_session/homeForWebsite.xhtml"
-					class="btnContinue ml-2" />
-					</h:form>
-			</div>
-			
-		
-	
-		
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

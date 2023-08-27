@@ -73,6 +73,10 @@ div.form-group .form-control {
 	width: 20px; 
 }
 
+.heightMatched {
+    height: 40px; /* This is just an example, you can adjust the height to your preference. */
+}
+
 .icon-container i {
 	margin-right: 10px;
 }
@@ -270,3 +274,4 @@ span.price {
 .table-hover tbody tr:hover {
 	background-color: #eaeaea;
 }
+

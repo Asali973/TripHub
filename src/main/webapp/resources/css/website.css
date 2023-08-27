@@ -10,19 +10,6 @@ body {
 	font-family: Arial, sans-serif;
 }
 
-.navbar {
-	overflow: hidden;
-	background-color: #333;
-}
-
-.navbar a {
-	float: left;
-	font-size: 16px;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
 
 .dropdown {
 	float: left;
@@ -39,10 +26,7 @@ body {
 	padding: 14px 16px;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-	background-color: #ddd;
-	color: black;
-}
+
 
  /* .dropdown-content {
     display: none;
@@ -52,11 +36,7 @@ body {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 3;
 }*/
-.navbar .dropdown-content {
-    /* Override user agent styles */
-    display: none !important;
-    /* Other styles remain the same */
-}
+
 
 .dropdown-content a {
 	float: none;
@@ -79,30 +59,58 @@ body {
 	display: block;
 }
 
-/* Styling for the footer */
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #333;
-  color: white;
-  padding: 10px 0;
-  text-align: center;
+
+#purchase-container-parent {
+width:100%;
+position: relative;
 }
 
-/* Styling for social media icons */
-.social-icons {
-  font-size: 24px;
+
+#purchase-pic-child{
+	position:absolute;
+	top: 50%;
+  left: 50%;
 }
 
-.social-icon {
-  color: white;
-  text-decoration: none;
-  margin: 0 10px;
+
+
+
+.package-details {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	padding: 20px;
+	background-color: #f8f9fa;
 }
 
-/* Adjust individual icon colors on hover */
-.social-icon:hover {
-  color: #ddd;
+.package-header h1, .package-header h2 {
+	margin-bottom: 30px;
 }
+
+.package-card {
+	border-radius: 20px;
+	border: none;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.package-card img {
+	border-radius: 20px;
+	display: block;
+	margin: 0 auto;
+	max-width: 80%;
+	margin-bottom: 5px;
+}
+
+.package-text {
+	padding: 1em 2em;
+	font-size: 1.2em;
+}
+
+.package-text p {
+	margin-bottom: 1em;
+}
+
+.package-text strong {
+	font-size: 1.1em;
+}
+
