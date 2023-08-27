@@ -28,16 +28,8 @@
 					<div class="card-body">
 						<h2 class="card-title text-center mb-5">List of Triphub Providers</h2>
 
-						<!-- Providers Button -->
-						<button
-							class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
-							type="button" data-toggle="collapse" data-target="#providerTab"
-							aria-expanded="false" aria-controls="providerTab">
-							<strong>Providers</strong>
-						</button>
-
 						<h:form id="providerForm">
-							<div class="collapse" id="providerTab">
+							<div id="providerTab">
 								<div class="table-responsive">
 									<h:dataTable value="#{providerBean.allProviders}"
 										var="provider" styleClass="table table-hover table-striped">

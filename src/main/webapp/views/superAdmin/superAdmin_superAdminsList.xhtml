@@ -26,18 +26,10 @@
 			<div class="container">
 				<div class="card">
 					<div class="card-body">
-						<h2 class="card-title text-center mb-5">List of Triphub users</h2>
-
-						<!-- SuperAdmins Button -->
-						<button
-							class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
-							type="button" data-toggle="collapse" data-target="#superAdminTab"
-							aria-expanded="false" aria-controls="superAdminTab">
-							<strong>Administrators</strong>
-						</button>
+						<h2 class="card-title text-center mb-5">List of Triphub Administrators</h2>
 
 						<h:form id="superAdminForm">
-							<div class="collapse" id="superAdminTab">
+							<div id="superAdminTab">
 								<div class="table-responsive">
 									<h:dataTable value="#{superAdminBean.allSuperAdmins}"
 										var="superAdmin" styleClass="table table-hover table-striped">
