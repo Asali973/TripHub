@@ -6,22 +6,18 @@
 <h:body>
 	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
 		<ui:define name="additionalHeadContent">
-			<link
-				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-				rel="stylesheet" />
-			<link
-				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
-				rel="stylesheet" />
+			<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+			<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet" />
+			<h:outputStylesheet library="css" name="regForm.css" />
 			<h:outputStylesheet library="css" name="loginCss.css" />
-			<link rel="stylesheet"
-				href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
-
+			<h:outputStylesheet library="css" name="checkout.css" />
+			<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet" />
 		</ui:define>
 		<ui:define name="content">	
 		
 			<!-- Display the list -->
 			<div class="containerCart mt-10 mb-10 text-center"
-				style="max-width: 100%">
+				style="max-width: 90%">
 				<h3>Available Restaurants</h3>
 				<br />
 				<table class="table">
@@ -104,7 +100,7 @@
 			</h:form>
 
 			<!-- Display the accommodation list -->
-			<div class="table-container">
+			<div class="containerCart mt-5 mb-5 text-center">
 				<h3>Available Accommodation</h3>
 				<table class="table">
 					<thead>
