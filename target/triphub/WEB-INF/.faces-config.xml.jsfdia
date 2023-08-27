@@ -110,5 +110,5 @@
  <PROCESS-ITEM NAME="rules:#views#superadmin_home.xhtml"
   PATH="/views/superadmin_home.xhtml" SHAPE="240,481,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#views#organizer_home.xhtml"
-
+  PATH="/views/organizer_home.xhtml" SHAPE="240,257,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

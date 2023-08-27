@@ -33,19 +33,27 @@ public class RestaurantBean implements Serializable {
 	@Inject
 	private RestaurantService restaurantService;
 
-	@Inject
+//	@Inject
 	private SubServicesViewModel restaurantvm = new SubServicesViewModel();
-	@Inject RestaurantDAO restaurantDao;
-	
+	// @Inject
+	// RestaurantDAO restaurantDao;
+
 	private List<Restaurant> allRestaurants;
+	private Restaurant lastRestaurantAdded;
+	private String selectedCurrency;
+	private boolean deletionSuccessful;
 
 	private Restaurant selectedRestaurant;
+
+	
+	private Long restaurantId;
 	
 	private Part pictureRestaurant;
 	private String picName;
 
-	public RestaurantBean(RestaurantService restaurantService, SubServicesViewModel restaurantvm, List<Restaurant> allRestaurants) {
-		
+	public RestaurantBean(RestaurantService restaurantService, SubServicesViewModel restaurantvm,
+			List<Restaurant> allRestaurants) {
+
 		this.restaurantService = restaurantService;
 		this.restaurantvm = restaurantvm;
 		this.allRestaurants = allRestaurants;
@@ -53,111 +61,115 @@ public class RestaurantBean implements Serializable {
 
 	public RestaurantBean() {
 	}
-	
+
 	@PostConstruct
 	public void init() {
-	    allRestaurants = restaurantService.getAll();
-
-	    String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-
-	    if (id != null && !id.isEmpty()) {
-	        Long restaurantId = Long.parseLong(id);
-
-	        
-	        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedRestaurantId", restaurantId);
-	        
-	        
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	   
+	    restaurantId = (Long) externalContext.getSessionMap().get("selectedRestaurantId");
+	    
+	    if (restaurantId == null) {
+	        String idParam = externalContext.getRequestParameterMap().get("id");
+	        if (idParam != null && !idParam.trim().isEmpty()) {
+	            try {
+	                restaurantId = Long.parseLong(idParam);
+	                externalContext.getSessionMap().put("selectedRestaurantId", restaurantId);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("Id not valid");
+	                return;
+	            }
+	        }
+	    }
+	    
+	    if (restaurantId != null) {
 	        restaurantvm = restaurantService.initSubService(restaurantId);
 	        if (restaurantvm == null) {
-	            FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist for the view model");
+	            FacesMessageUtil.addErrorMessage("Restaurant does not exist");
+	            return;
 	        }
 	        
-
-	        selectedRestaurant = restaurantDao.findById(restaurantId);
+	        selectedRestaurant = restaurantService.findById(restaurantId);
 	        if (selectedRestaurant == null) {
-	            FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist in the database");
+	            FacesMessageUtil.addErrorMessage("Restaurant does not exist");
+	            return;
 	        }
+	    } else {
+	        allRestaurants = restaurantService.getAll();
 	    }
 	}
 
-	
-//	@PostConstruct
-//	public void init() {
-//		allRestaurants = restaurantService.getAll();
-//		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-//		if (id != null) {
-//			Long restaurantId = Long.parseLong(id);
-//			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedRestaurantId",
-//					restaurantId);
-//			restaurantvm = restaurantService.initSubService(restaurantId);
-//			if (restaurantvm == null) {
-//				FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist");
-//			}
-//		}
-//		if (id != null) {
-//		    Long restaurantId = Long.parseLong(id);
-//		    // Fetch the selected restaurant using restaurantService
-//		    selectedRestaurant = restaurantDao.findById(restaurantId);
-//
-//		    if (selectedRestaurant == null) {
-//		        FacesMessageUtil.addErrorMessage("Initialization failed: Restaurant does not exist");
-//		    }
-//		}
-//
-//	}
-	
-	public void create() {
 
-	    String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userType");
-	    
-        Long userId;
-        if ("organizer".equals(userType)) {
-            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("organizerId");
-        } else if ("provider".equals(userType)) {
-            userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("providerId");
-        } else {
-            userId = null;
-        }
-        
-     // Uploading the picture and setting the link to ViewModel
-     		try {
-     			picName = ImageHelper.processProfilePicture(pictureRestaurant);
-     		} catch (IOException e) {
+	public String loadAllRestaurants() {
+		allRestaurants = restaurantService.getAll();
 
-     			e.printStackTrace();
-     		}
-     		if (picName != null) {
-     			restaurantvm.setLink(picName);
-     		}
-
-	    restaurantService.create(restaurantvm, userId, userType);
-
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Restaurant added successfully !"));
-
+		return "restaurants";
 	}
 
-//	public void create() {
-//		restaurantService.create(restaurantvm);
-//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Restaurant added successfully !"));
-//	}
-	
+	public void create() {
+
+		String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("userType");
+
+		Long userId;
+		if ("organizer".equals(userType)) {
+			userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("organizerId");
+		} else if ("provider".equals(userType)) {
+			userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("providerId");
+		} else {
+			userId = null;
+		}
+
+		// Uploading the picture and setting the link to ViewModel
+		try {
+			picName = ImageHelper.processProfilePicture(pictureRestaurant);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		if (picName != null) {
+			restaurantvm.setLink(picName);
+		}
+
+		restaurantService.create(restaurantvm, userId, userType);
+
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Restaurant added successfully !"));
+
+		clear();
+	}
+
 	public String updateRestaurant() {
 		try {
 			restaurantService.update(restaurantvm);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Restaurant updated successfully!"));
-			
+
 			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-			String redirectUrl = contextPath + "/views/product/restaurantUpdate.xhtml?faces-redirect=true&id="
-					+ restaurantvm.getId();
+			String redirectUrl = contextPath + "/views/product/RestaurantForm.xhtml?faces-redirect=true";
 			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
-			
+
 		} catch (IllegalArgumentException e) {
 			FacesMessageUtil.addErrorMessage("Failed to update restaurant: " + e.getMessage());
 		} catch (Exception e) {
 			FacesMessageUtil.addErrorMessage("Failed to update restaurant. An unexpected error occurred.");
-		}clear();
-		return null;		
+		}
+		return null;
+	}
+
+	public String initFormUpdate() {
+		try {
+			
+			String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+			String redirectUrl = contextPath + "/views/product/RestaurantUpdate.xhtml?faces-redirect=true&id="
+					+ restaurantvm.getId();
+			FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
+
+		} catch (IllegalArgumentException e) {
+			FacesMessageUtil.addErrorMessage("Failed to update restaurant: " + e.getMessage());
+		} catch (Exception e) {
+			FacesMessageUtil.addErrorMessage("Failed to update restaurant. An unexpected error occurred.");
+
+		}
+		return null;
 	}
 
 	public void clear() {
@@ -167,7 +179,7 @@ public class RestaurantBean implements Serializable {
 	public void deleteRestaurant() {
 		Long selectedRestaurantId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.get("selectedRestaurantId");
-		if ( selectedRestaurantId == null) {
+		if (selectedRestaurantId == null) {
 			FacesMessageUtil.addErrorMessage("Invalid request: Restaurant ID not found in session.");
 			return;
 		}
@@ -181,35 +193,60 @@ public class RestaurantBean implements Serializable {
 		FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add("confirmDelete();");
 	}
 	
-	public List<Restaurant> getCurrentUserRestaurants() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-
-        String userType = (String) externalContext.getSessionMap().get("userType");
-
-        if ("organizer".equals(userType)) {
-            Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
-            if (organizerId == null) {
-                return new ArrayList<>();
-            }
-            return restaurantService.getRestaurantForOrganizer(organizerId);
-        } 
-        else if ("provider".equals(userType)) {
-            Long providerId = (Long) externalContext.getSessionMap().get("providerId");
-            if (providerId == null) {
-                return new ArrayList<>();
-            }
-            return restaurantService.getRestaurantForProvider(providerId); 
-        } 
-        else {
- 
-            return new ArrayList<>();
-        }
-    }
 	
+	public List<Restaurant> getCurrentUserRestaurants() {
+	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+	    String userType = (String) externalContext.getSessionMap().get("userType");
+	    Long userId = null;
+
+	    if ("organizer".equals(userType)) {
+	        userId = (Long) externalContext.getSessionMap().get("organizerId");
+	    } else if ("provider".equals(userType)) {
+	        userId = (Long) externalContext.getSessionMap().get("providerId");
+	    }
+
+	    if (userId == null) {
+	        String userIdParam = externalContext.getRequestParameterMap().get("userId");
+	        if (userIdParam != null && !userIdParam.trim().isEmpty()) {
+	            try {
+	                userId = Long.parseLong(userIdParam);
+	            } catch (NumberFormatException e) {
+	                FacesMessageUtil.addErrorMessage("Format d'ID d'utilisateur non valide.");
+	                return new ArrayList<>(); 
+	            }
+	        }
+	    }
+
+	    if (userId == null) {
+	        return new ArrayList<>();
+	    }
+
+	    return restaurantService.getRestaurantForOrganizer(userId); 
+	}
+
+	public String performDelete() {
+		Long selectedRestaurantId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("selectedRestaurantId");
+		SubServicesViewModel existingRestaurantvm = restaurantService.initSubService(selectedRestaurantId);
+
+		if (existingRestaurantvm == null) {
+			FacesMessageUtil.addErrorMessage("Invalid request: Accommodation does not exist.");
+			return "Accommodation does not exist";
+		}
+
+		restaurantService.delete(existingRestaurantvm);
+
+		deletionSuccessful = true;
+
+		return null;
+	}
+
+
 	public List<Restaurant> getAllRestaurants() {
 		return restaurantService.getAll();
 	}
-	
+
 	public CurrencyType[] getAllCurrencyTypes() {
 		return CurrencyType.values();
 	}
@@ -221,7 +258,7 @@ public class RestaurantBean implements Serializable {
 	public void setRestaurantService(RestaurantService restaurantService) {
 		this.restaurantService = restaurantService;
 	}
-	
+
 	public SubServicesViewModel getRestaurantvm() {
 		return restaurantvm;
 	}
@@ -233,7 +270,6 @@ public class RestaurantBean implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
 
 	public void setAllRestaurants(List<Restaurant> allRestaurants) {
 		this.allRestaurants = allRestaurants;
@@ -245,14 +281,6 @@ public class RestaurantBean implements Serializable {
 
 	public void setSelectedRestaurant(Restaurant selectedRestaurant) {
 		this.selectedRestaurant = selectedRestaurant;
-	}
-
-	public RestaurantDAO getRestaurantDao() {
-		return restaurantDao;
-	}
-
-	public void setRestaurantDao(RestaurantDAO restaurantDao) {
-		this.restaurantDao = restaurantDao;
 	}
 
 	public Part getPictureRestaurant() {
@@ -270,7 +298,37 @@ public class RestaurantBean implements Serializable {
 	public void setPicName(String picName) {
 		this.picName = picName;
 	}
+
+	public Long getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(Long restaurantId) {
+		this.restaurantId = restaurantId;
+	}
 	
-	
+	public Restaurant getLastRestaurantAdded() {
+		return lastRestaurantAdded;
+	}
+
+	public void setLastRestaurantAdded(Restaurant lastRestaurantAdded) {
+		this.lastRestaurantAdded = lastRestaurantAdded;
+	}
+
+	public String getSelectedCurrency() {
+		return selectedCurrency;
+	}
+
+	public void setSelectedCurrency(String selectedCurrency) {
+		this.selectedCurrency = selectedCurrency;
+	}
+
+	public boolean isDeletionSuccessful() {
+		return deletionSuccessful;
+	}
+
+	public void setDeletionSuccessful(boolean deletionSuccessful) {
+		this.deletionSuccessful = deletionSuccessful;
+	}
 
 }

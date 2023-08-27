@@ -1,5 +1,6 @@
 package triphub.dao.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -190,7 +191,21 @@ public class OrganizerDAO {
 			em.flush();
 		}
 	}
-	
+	public List<Organizer> findOrganizerByCompanyOrCountry(String companyName, String country) {
+	    TypedQuery<Organizer> query = em.createQuery(
+	        "SELECT c FROM Organizer c WHERE c.companyInfo.name = :companyName OR c.user.address.country = :country",
+	        Organizer.class);
+	    
+	    query.setParameter("companyName", companyName);
+	    query.setParameter("country", country);
+
+	    try {
+	        return query.getResultList();
+	    } catch (NoResultException e) {
+	        return new ArrayList<>();
+	    }
+	}
+
 
 	public Subscription getSubscriptionForOrganizer(Long organizerId) {
 		Organizer organizer = em.find(Organizer.class, organizerId);

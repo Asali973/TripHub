@@ -11,7 +11,7 @@
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet library="css" name="advanced.css" />
+	<h:outputStylesheet library="css" name="elite.css" />
 
 	<ui:insert name="additionalHeadContent" />
 
@@ -28,6 +28,34 @@
 
 ;
 box-shadow
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -104,7 +132,35 @@ box-shadow
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -156,7 +212,35 @@ box-shadow
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -208,7 +292,35 @@ box-shadow
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -260,6 +372,20 @@ box-shadow
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
 
 
@@ -286,7 +412,49 @@ box-shadow
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 rgba
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -388,6 +556,34 @@ rgba
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 0
 ,
 0
@@ -395,6 +591,34 @@ rgba
 0
 ,
 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -496,7 +720,63 @@ rgba
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -569,7 +849,9 @@ rgba
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
 				<!-- Brand/logo -->
-				<a class="navbar-brand" href="/triphub/views/home.xhtml"> <h:graphicImage
+				<a class="navbar-brand"
+					href="/triphub/views/organizer_session/observedSettings.xhtml">
+					<h:graphicImage
 						value="/images/#{organizerBean.userViewModel.companyLogoLink}"
 						alt="Trip Hub" styleClass="navbar-logo rounded-image" /> <h:outputText
 						value="#{organizerBean.userViewModel.companyName}"
@@ -588,24 +870,32 @@ rgba
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav ml-auto">
 
-						<li class="nav-item"><a class="nav-link font1"
-							href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a></li>
 
+						<li class="nav-item"><h:panelGroup
+								rendered="#{empty sessionScope.user}">
+								<h:form id="loginForm">
+									<a class="nav-link"
+										href="/triphub/views/loginAndAccount/login.xhtml"><i
+										class="fas fa-sign-in-alt"></i>Sign In</a>
+								</h:form>
+							</h:panelGroup></li>
 
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user}">
 								<h:form id="logoutForm">
-									<h:commandLink action="#{loginBean.logout}" value="Logout"
-										styleClass="nav-link font1" />
+									<h:commandLink action="#{loginBean.logout}"
+										styleClass="nav-link font1">
+										<i class="fas fa-sign-out-alt"></i> Logout</h:commandLink>
 								</h:form>
 							</h:panelGroup></li>
+
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user}">
 								<a class="nav-link font1"
-									href="/triphub/views/loginAndAccount/ProfileUser.xhtml">Your
-									Profile</a>
+									href="/triphub/views/loginAndAccount/ProfileUser.xhtml"><i
+									class="fas fa-user-circle mr-1"></i>Your Profile</a>
 							</h:panelGroup></li>
 
 						<li class="nav-item"><h:panelGroup
@@ -617,13 +907,14 @@ rgba
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'customer'}">
 								<a class="nav-link font1"
-									href="/triphub/views/customer_home.xhtml">Your Space</a>
+									href="/triphub/views/customer_home.xhtml"><i
+									class="fas fa-user-friends"></i> Home</a>
 							</h:panelGroup></li>
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link" href="/triphub/views/organizer_home.xhtml">Back
-									to Settings</a>
+								<a class="nav-link" href="/triphub/views/organizer_home.xhtml"><i
+									class="fas fa-cogs"></i> Back to Settings</a>
 							</h:panelGroup></li>
 
 						<li class="nav-item"><h:panelGroup
@@ -636,21 +927,9 @@ rgba
 
 						<li class="nav-item dropdown"><h:panelGroup
 								rendered="#{empty sessionScope.user}">
-
-								<a class="nav-link dropdown-toggle font1" href="#"
-									id="navbarDropdown" role="button" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> Sign Up </a>
-								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item"
-										href="/triphub/views/loginAndAccount/CustomerRegistration.xhtml">Sign
-										Up as a Customer</a> <a class="dropdown-item"
-										href="/triphub/views/loginAndAccount/ProviderRegistration.xhtml">Sign
-										Up as a Provider</a> <a class="dropdown-item"
-										href="/triphub/views/loginAndAccount/OrganizerRegistration.xhtml">Sign
-										Up as an Organizer</a> <a class="dropdown-item"
-										href="/triphub/views/loginAndAccount/SuperAdminRegistration.xhtml">Sign
-										Up as an Administrator</a>
-								</div>
+								<a class="nav-link font1"
+									href="/triphub/views/loginAndAccount/CustomerRegistration.xhtml"><i
+									class="fas fa-user-plus"></i> Sign Up</a>
 							</h:panelGroup></li>
 					</ul>
 				</div>
@@ -666,37 +945,31 @@ rgba
 				<div class="flex-container mt-5 mb-5">
 					<h:graphicImage
 						value="/images/#{organizerBean.userViewModel.companyLogoLink}"
-						alt="Trip Hub" styleClass="navbar-logo rounded-image"
-						style="max-height: 200px; width: auto;" />
+						alt="Trip Hub"
+						styleClass="navbar-logo rounded-image border-radius: 50px"
+						style="max-height: 500px; width: auto" />
 
 					<div class="font1" style="margin-bottom: 50px; margin-top: 50px">
 						<h1>Welcome to #{organizerBean.userViewModel.companyName} !</h1>
 					</div>
 				</div>
 
-				<!-- Recherche par nom -->
-				<input type="text" id="nameInput" onkeyup="searchFunction()"
-					placeholder="Search for names.."/> 
-					<!-- Recherche par disponibilite -->
-				<select id="availabilityInput" onchange="searchFunction()">
-					<option value="all">All</option>
-					<option value="available">Available</option>
-					<option value="notAvailable">Not Available</option>
-				</select>
+				<!-- Recherche par keyword -->
+				<div class="search-container">
+					<input type="text" id="keywordInput" onkeyup="searchByKeyword()"
+						placeholder="Search by keyword..." /> <span class="search-icon">
+						<i class="fas fa-search"></i>
+					</span>
+				</div>
 
-				<!-- Recherche par fourchette de prix -->
-				<input type="number" id="minPriceInput" onkeyup="searchFunction()"
-					placeholder="Min price"/>
-				<input type="number" id="maxPriceInput" onkeyup="searchFunction()"
-					placeholder="Max price"/>
-					
-					
-					
+
+
 				<div class="card2">
 					<div class="card-header" onclick="toggleContent(this)">
-						<i class="fas fa-suitcase"></i> All you need in one package
+						<i class="fas fa-suitcase fa-2x"></i>
+						<h2 style="display: inline;">All you need in one package</h2>
 					</div>
-					<div class="card-body hidden grid-container">
+					<div class="card-body grid-container">
 						<ui:repeat value="#{tourPackageBean.currentUserTourPackages}"
 							var="tourPackage">
 							<div class="card">
@@ -720,9 +993,10 @@ rgba
 				<!-- Accommodations Section -->
 				<div class="card2">
 					<div class="card-header" onclick="toggleContent(this)">
-						<i class="fas fa-bed"></i> Explore our accommodations
+						<i class="fas fa-bed fa-2x"></i>
+						<h2 style="display: inline;">Explore our accommodations</h2>
 					</div>
-					<div class="card-body hidden grid-container">
+					<div class="card-body grid-container">
 						<ui:repeat value="#{accommodationBean.currentUserAccommodations}"
 							var="accommodation">
 							<div class="card">
@@ -745,9 +1019,10 @@ rgba
 				<!-- Restaurants Section -->
 				<div class="card2">
 					<div class="card-header" onclick="toggleContent(this)">
-						<i class="fas fa-utensils"></i> Dine in the finest places
+						<i class="fas fa-utensils fa-2x"></i>
+						<h2 style="display: inline;">Dine in the finest places</h2>
 					</div>
-					<div class="card-body hidden grid-container">
+					<div class="card-body grid-container">
 						<ui:repeat value="#{restaurantBean.currentUserRestaurants}"
 							var="restaurant">
 							<div class="card">
@@ -781,7 +1056,7 @@ rgba
 						<h2 style="display: inline;">Choose your preferred mode of
 							transport</h2>
 					</div>
-					<div class="card-body hidden grid-container">
+					<div class="card-body grid-container">
 						<ui:repeat
 							value="#{transportationBean.currentUserTransportations}"
 							var="transportation">
@@ -813,56 +1088,43 @@ rgba
 
 
 			<script>
-				function toggleContent(element) {
-				    let body = element.nextElementSibling;
-				    if (body.style.display === "none" || body.style.display === "") {
-				        body.style.display = body.classList.contains('grid-container') ? "grid" : "block";
-				    } else {
-				        body.style.display = "none";
-				    }
-				}
+			function toggleContent(element) {
+			    let body = element.nextElementSibling;
+			    if (body.style.display === "none" || body.style.display === "") {
+			        body.style.display = "grid";
+			    } else {
+			        body.style.display = "none";
+			    }
+			}
+
     </script>
 
 			<script>
-			//<![CDATA[
-function searchFunction() {
-    let nameInput = document.getElementById("nameInput");
-    let availabilityInput = document.getElementById("availabilityInput");
-    let minPriceInput = document.getElementById("minPriceInput");
-    let maxPriceInput = document.getElementById("maxPriceInput");
-    
-    let filterName = nameInput.value.toUpperCase();
-    let filterAvailability = availabilityInput.value;
-    let filterMinPrice = parseFloat(minPriceInput.value) || 0;  // Si pas de valeur, assumez 0
-    let filterMaxPrice = parseFloat(maxPriceInput.value) || Infinity;  // Si pas de valeur, assumez un prix très élevé
+document.addEventListener('DOMContentLoaded', (event) => {
+    let headers = document.querySelectorAll('.card-header');
+    headers.forEach(header => {
+        toggleContent(header);
+    });
+});
+</script>
 
+			<script>
+			//<![CDATA[
+function searchByKeyword() {
+    let input = document.getElementById("keywordInput");
+    let filter = input.value.toUpperCase();
     let cards = document.getElementsByClassName("card");
 
     for (let i = 0; i < cards.length; i++) {
-        let cardTitle = cards[i].getElementsByClassName("card-title")[0];
-        let cardTexts = cards[i].getElementsByClassName("card-text");
-        let availabilityText = cardTexts[2].textContent || cardTexts[2].innerText;  // Suppose que la disponibilité est toujours le 3ème texte de la carte
-        let priceText = parseFloat(cardTexts[1].textContent);  // Suppose que le prix est toujours le 2ème texte de la carte
-
-        // Recherche par nom
-        let byName = true;
-        if (cardTitle) {
-            byName = cardTitle.textContent.toUpperCase().indexOf(filterName) > -1;
+        let cardTitle = cards[i].querySelector(".card-title").textContent || "";
+        let cardTexts = cards[i].querySelectorAll(".card-text");
+        let textContent = cardTitle;
+        
+        for (let j = 0; j < cardTexts.length; j++) {
+            textContent += " " + cardTexts[j].textContent;
         }
 
-        // Recherche par disponibilité
-        let byAvailability = true;
-        if (filterAvailability === "available") {
-            byAvailability = availabilityText === "Available";
-        } else if (filterAvailability === "notAvailable") {
-            byAvailability = availabilityText === "Not Available";
-        }
-
-        // Recherche par fourchette de prix
-        let byPrice = priceText >= filterMinPrice && priceText <= filterMaxPrice;
-
-        // Appliquez les filtres
-        if (byName && byAvailability && byPrice) {
+        if (textContent.toUpperCase().indexOf(filter) > -1) {
             cards[i].style.display = "";
         } else {
             cards[i].style.display = "none";
@@ -870,26 +1132,79 @@ function searchFunction() {
     }
 }
 
+
+
 			//]]>
     </script>
 		</ui:insert>
 	</div>
 
+
 	<!-- Footer section -->
 	<footer class="footer sticky-footer">
-		<div class="container text-center">
-			<p>© 2023 #{organizerBean.userViewModel.companyName}. All rights
-				reserved.</p>
-			<ul class="list-inline social-icons">
-				<!-- Add your social media icons and links here -->
-				<li class="list-inline-item"><a href="#"><i
-						class="fab fa-facebook-f"></i></a></li>
-				<li class="list-inline-item"><a href="#"><i
-						class="fab fa-twitter"></i></a></li>
-				<li class="list-inline-item"><a href="#"><i
-						class="fab fa-instagram"></i></a></li>
-				<li><p>Contact</p></li>
-			</ul>
+
+		<div class="footer-line"></div>
+		<div class="footer-wrapper">
+			<section class="footer-top">
+				<div class="footer-headline mr-4">
+					<p class="mr-2" style="font-size: 26px; font-weight: bold;">Sign
+						up to our newsletter</p>
+					<p>Stay up to date with our news and articles</p>
+
+				</div>
+				<div class="footer-subscribe">
+					<input type="email" spellcheck="false" placeholder="Your Email" />
+					<button>Sign Up</button>
+				</div>
+			</section>
+			<div class="footer-columns">
+				<section class="footer-logo">
+					<h:graphicImage
+						value="/images/#{organizerBean.userViewModel.companyLogoLink}"
+						alt="Trip Hub" styleClass="navbar-logo rounded-image"
+						style="height: 30px;" />
+					<p class="mr-2" style="font-size: 30px; font-weight: bold;">#{organizerBean.userViewModel.companyName}</p>
+				</section>
+				<section>
+					<h3>Resources</h3>
+					<ul>
+						<li><a href="#" title="Support">Support</a></li>
+						<li><a href="#" title="Newsletter">Newsletter</a></li>
+						<li><a href="#" title="Help Centre">Help Centre</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>Company</h3>
+					<ul>
+						<li><a href="#" title="About Us">About Us</a></li>
+						<li><a href="#" title="Blog">Blog</a></li>
+						<li><a href="#" title="Contact">Contact</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>Legal</h3>
+					<ul>
+						<li><a href="#" title="Terms and services"> Terms </a></li>
+						<li><a href="#" title="Privacy Policy"> Privacy </a></li>
+						<li><a href="#" title="Cookies"> Contact </a></li>
+					</ul>
+				</section>
+			</div>
+			<div class="footer-bottom">
+				<small>© #{organizerBean.userViewModel.companyName} Ltd. <span
+					id="year"></span>, All rights reserved
+				</small> <span class='social-links'> <a href="#" title="Instagram">
+						<i class="fab fa-instagram" style="font-size: 25px;"></i>
+				</a> <a href="#" title="Linkedin"> <i class="fab fa-linkedin"
+						style="font-size: 25px;"></i>
+				</a> <a href="#" title="Twitter"> <i class="fab fa-twitter"
+						style="font-size: 25px;"></i>
+				</a> <a href="#" title="Youtube"> <i class="fab fa-youtube"
+						style="font-size: 25px;"></i>
+				</a>
+				</span>
+			</div>
+
 		</div>
 	</footer>
 

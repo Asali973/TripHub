@@ -36,42 +36,51 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav ml-auto">
 
-						<li class="nav-item"><a class="nav-link"
-							href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a></li>
+						<li class="nav-item"><h:panelGroup
+								rendered="#{empty sessionScope.user}">
+								<h:form id="loginForm">
+									<a class="nav-link"
+										href="/triphub/views/loginAndAccount/login.xhtml"><i
+										class="fas fa-sign-in-alt mr-2"></i>Sign In</a>
+								</h:form>
+							</h:panelGroup></li>
+
 
 
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user}">
 								<h:form id="logoutForm">
-									<h:commandLink action="#{loginBean.logout}" value="Logout"
-										styleClass="nav-link" />
+									<h:commandLink action="#{loginBean.logout}"
+										styleClass="nav-link font1">
+										<i class="fas fa-sign-out-alt"></i> Logout</h:commandLink>
 								</h:form>
 							</h:panelGroup></li>
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user}">
+								<a class="nav-link font1"
+									href="/triphub/views/loginAndAccount/ProfileUser.xhtml"><i
+									class="fas fa-user-circle mr-1"></i>Your Profile</a>
+							</h:panelGroup></li>
+
+						<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
+								<a class="nav-link" href="/triphub/views/organizer_home.xhtml"><i
+									class="fas fa-cogs"></i> Your Space</a>
+							</h:panelGroup></li>
+
+						<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
 								<a class="nav-link"
-									href="/triphub/views/loginAndAccount/ProfileUser.xhtml">Your
-									Profile</a>
+									href="/triphub/views/product/TourpackageHome.xhtml"><i
+									class="fa-solid fa-earth-africa"></i> Your Tour Package</a>
 							</h:panelGroup></li>
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link" href="/triphub/views/organizer_home.xhtml">Your
-									Space</a>
-							</h:panelGroup></li>
+								<a class="nav-link" href="#"><i class="fa-solid fa-utensils"></i> Your Services</a>
 
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link"
-									href="/triphub/views/product/TourpackageHome.xhtml">Your
-									Tour Package</a>
-							</h:panelGroup></li>
-
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link" href="#">Services</a>
 							</h:panelGroup></li>
 
 
@@ -83,8 +92,7 @@
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'customer'}">
-								<a class="nav-link" href="/triphub/views/customer_home.xhtml">Your
-									Space</a>
+								<a class="nav-link" href="/triphub/views/customer_home.xhtml">Home</a>
 							</h:panelGroup></li>
 
 
@@ -94,7 +102,10 @@
 
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 									role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"> Sign Up </a>
+									aria-expanded="false"> <i class="fas fa-user-plus"></i>
+									Sign Up
+								</a>
+
 								<div class="dropdown-menu dropdown-menu-right"
 									aria-labelledby="navbarDropdown">
 

@@ -112,8 +112,85 @@
 										href="/triphub/views/loginAndAccount/SuperAdminRegistration.xhtml">Sign
 										Up as an Administrator</a>
 								</div>
+
 							</h:panelGroup></li>
 					</ul>
+
+								<div class="col-md-4 text-center">
+									<h4>Partners</h4>
+									<p>Associations, enterprises, restaurants, volunteers, and
+										more. Offer unique services to organizers.</p>
+									<a
+										href="/triphub/views/loginAndAccount/ProviderRegistration.xhtml"
+										class="btn btn-primary mt-2">Join as Partner</a>
+								</div>
+								<div class="col-md-4 text-center">
+									<h4>Clients</h4>
+									<p>Individuals, corporations, associations, and more. Dive
+										into tailor-made travel experiences.</p>
+									<a
+										href="/triphub/views/loginAndAccount/CustomerRegistration.xhtml"
+										class="btn btn-primary mt-2">Join as Client</a>
+								</div>
+							</div>
+						</div>
+						<div class="text-center mt-5 mb-5 mr-4 ml-4"
+							style="max-width: 1000px; margin: auto;">
+							<h3>Embark on the TripHub journey! Personalize your travel
+								world, aligning with your identity and values. Let the adventure
+								begin!</h3>
+						</div>
+
+
+						<h:form>
+
+							<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
+								<h:commandButton value="Users list"
+									action="loginAndAccount/UserList" />
+							</h:panelGroup>
+
+							<h:commandButton value="Create Accommodation"
+								action="product/AccommodationForm" />
+								<h:commandButton value="Create Accommodation test"
+								action="product/AccommodationFormTest" />
+								<h:commandButton value="Update Accommodation test"
+								action="product/AccomUpdateTest" />
+							<h:commandButton value="Create Transportation"
+								action="product/TransportationForm" />
+							<h:commandButton value="Search your Tour Packages"
+								action="product/TpAdvancedSearch" />
+							<h:commandButton value="Go to Tour Packages"
+								action="product/TourpackageHome" />
+							<h:commandButton value="Create Restaurant"
+								action="product/RestaurantForm" />
+							<h:commandButton value="Update Services"
+								action="product/UpdateServices" />
+							<h:commandButton action="product/AllServices"
+								value="See All Services" />
+								<h:commandButton value="Restaurant Update"
+								action="product/RestaurantUpdate" />
+							<h:commandButton action="product/AllServices"
+								value="See All Services" />
+								<h:commandButton value="Transportation Update"
+								action="product/TransportationUpdate" />
+
+						</h:form>
+						<h:panelGroup rendered="#{sessionScope.userType eq 'customer'}">
+							<p>Welcome, dear customer!</p>
+						</h:panelGroup>
+
+						<h:panelGroup rendered="#{sessionScope.userType eq 'organizer'}">
+							<p>Welcome, dear organizer!</p>
+						</h:panelGroup>
+
+						<h:panelGroup rendered="#{sessionScope.userType eq 'provider'}">
+							<p>Welcome, dear provider!</p>
+						</h:panelGroup>
+
+						<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
+							<p>Welcome, dear super admin!</p>
+						</h:panelGroup>
+					</div>
 				</div>
 			</div>
 		</nav>

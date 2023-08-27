@@ -8,34 +8,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 	<h:outputStylesheet library="css" name="website.css" />
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 	<title>Purchase Successful</title>
 </h:head>
 <h:body>
-	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
-		<ui:define name="additionalHeadContent">
-			<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-				rel="stylesheet" />
-			<link
-				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
-				rel="stylesheet" />
-			<h:outputStylesheet library="css" name="organizer_home.css" />
-		</ui:define>
-		<ui:define name="content">
-			<div id="purchase-container-parent">
-				<h:form id="purchase-container-child">
-				<h:graphicImage id="purchase-pic" library="images" name="successful_purchase_logo.png" alt="payment successful"/>
-				<h1>Purchase Successful!</h1>
-				<p>Thank you for your purchase. Your order is now being
-					processed.</p>
-
-				<!-- Optionally, provide a button to navigate back to the main page or other parts of your application -->
-				<h:commandButton value="Back to Home"
-					action="homeForWebsite?faces-redirect=true" />
-				</h:form>
-			</div>		
-		</ui:define>
-	</ui:composition>
+    <div class="centered-content">
+        <h1 class="text-center">
+            <i class="fas fa-check-circle" style="color: #32CD32; font-size: 4rem;"></i> <br/>
+            Purchase Successful!
+        </h1>
+        <p class="text-center">Thank you for your purchase. Your order is now being processed.</p>
+        <div class="text-center">
+            <h:form>
+               <h:outputLink value="http://localhost:8080/triphub/views//customer_home.xhtml" class="btn">Back to Home</h:outputLink>
+            </h:form>
+        </div>
+    </div>
 </h:body>
 </html>

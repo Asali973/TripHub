@@ -2,9 +2,11 @@ package triphub.managedBeans.registration;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,6 +30,7 @@ public class LoginBean implements Serializable {
 	private UserViewModel userViewModel = new UserViewModel();
 	
 	private String userType;
+	private User user;
 
 	public LoginBean() {
 	}
@@ -162,12 +165,7 @@ public class LoginBean implements Serializable {
 			return "/views/loginAndAccount/ProfileUser.xhtml?faces-redirect=true";
 		}
 		return null;
-	}
-	
-
-
-
-
+	}	
 
 	@PostConstruct
 	public void init() {
@@ -202,7 +200,47 @@ public class LoginBean implements Serializable {
 	    } catch (IOException e) {
 	    }
 	}
+	
+	public void performUserSearch() {
+	    // Get search parameters from the ViewModel
+	    String firstName = userViewModel.getFirstName();
+	    String lastName = userViewModel.getLastName();
+	    String city = userViewModel.getCity();
+	    String street = userViewModel.getStreet();
+	    String zipCode = userViewModel.getZipCode();
+	    String country = userViewModel.getCountry();
+	    String email = userViewModel.getEmail();
+	    String phoneNum = userViewModel.getPhoneNum();
+	    String CCNumber = userViewModel.getCCNumber();
 
+	    // Call the service method
+	    List<User> searchResults = userService.advancedSearch(firstName, lastName, city, street, zipCode, country, email, phoneNum, CCNumber);
+
+	    // Process the search results
+	    if (searchResults.isEmpty()) {
+	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No users found based on the given criteria.", null);
+	        FacesContext.getCurrentInstance().addMessage(null, message);
+	    } else {
+	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "User search successful.", null);
+	        FacesContext.getCurrentInstance().addMessage(null, message);
+
+	        
+	        for (User user : searchResults) {
+	            String userDetail = "User Name: " + user.getFirstName() + " " + user.getLastName() +
+	                                ", Email: " + user.getEmail() + 
+	                                ", City: " + user.getAddress().getCity() +
+	                                ", Street Address: " + user.getAddress().getStreet() +
+	                                ", Zipcode: " + user.getAddress().getZipCode() +
+	                                ", Country: " + user.getAddress().getCountry() +
+	                                ", Phone Number: " + user.getPhoneNum(); 
+
+	            FacesMessage userMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, userDetail, null);
+	            FacesContext.getCurrentInstance().addMessage(null, userMessage);
+	        }
+	    }
+	}
+
+	
 	public UserService getUserService() {
 		return userService;
 	}
@@ -229,6 +267,14 @@ public class LoginBean implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

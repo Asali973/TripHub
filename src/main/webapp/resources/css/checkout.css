@@ -43,6 +43,7 @@ body {
 	margin: 50px auto;
 	/* Cela donne le même effet que margin-top et margin-bottom à 50px */
 	max-width: 1200px;
+	overflow: auto;
 	border-radius: 15px;
 	background-color: rgb(254, 255, 255);
 	border-radius: 15px;
@@ -269,3 +270,4 @@ span.price {
 .table-hover tbody tr:hover {
 	background-color: #eaeaea;
 }
+
