@@ -92,6 +92,8 @@ public class CartBean implements Serializable {
 	private String restaurantName;
 	private BigDecimal restaurantPrice;
 	private String restaurantCurrency;
+	
+	private Long organizerId;
 
 	@PostConstruct
 	public void init() {
@@ -171,12 +173,14 @@ public class CartBean implements Serializable {
 		addTransportationToCart(user, params.get("selectedTransportationId"), params.get("quantity"));
 
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("cart.xhtml");
+			String organizerId = params.get("organizerId");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("cart.xhtml?organizerId=" + organizerId);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return null; // Return null to stay on the same page
+		return null; 
 	}
 
 	public void addTourPackageToCart(User user, String productId, String quantity) {
@@ -303,15 +307,38 @@ public class CartBean implements Serializable {
 	}
 
 	////// Related to CheckOutBean/////
-
+	
 	public String goToCheckout() {
-		List<String> itemIdsAsString = cartItems.stream().map(cartItem -> Long.toString(cartItem.getId()))
-				.collect(Collectors.toList());
-		String idsParam = String.join(",", itemIdsAsString);
-		BigDecimal totalPrice = calculateTotalPrice(cartItems);
+	    Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 
-		return "CheckOut.xhtml?ids=" + idsParam + "&totalPrice=" + totalPrice + "&faces-redirect=true";
+	    // Debug logs
+	    System.out.println("Inside goToCheckout");
+	    System.out.println("organizerId from params: " + params.get("organizerId"));
+
+	    List<String> itemIdsAsString = cartItems.stream().map(cartItem -> Long.toString(cartItem.getId()))
+	            .collect(Collectors.toList());
+	    String idsParam = String.join(",", itemIdsAsString);
+	    BigDecimal totalPrice = calculateTotalPrice(cartItems);
+	    
+	    String organizerId = params.get("organizerId");
+
+	    // Utilisez la redirection native de JSF
+	    return "CheckOut.xhtml?faces-redirect=true&ids=" + idsParam + "&totalPrice=" + totalPrice + "&organizerId=" + organizerId;
 	}
+
+
+
+
+
+
+//	public String goToCheckout() {
+//		List<String> itemIdsAsString = cartItems.stream().map(cartItem -> Long.toString(cartItem.getId()))
+//				.collect(Collectors.toList());
+//		String idsParam = String.join(",", itemIdsAsString);
+//		BigDecimal totalPrice = calculateTotalPrice(cartItems);
+//
+//		return "CheckOut.xhtml?ids=" + idsParam + "&totalPrice=" + totalPrice + "&faces-redirect=true";
+//	}
 
 	public String navigateToCheckout() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -565,6 +592,20 @@ public class CartBean implements Serializable {
 	public void setRestaurantCurrency(String restaurantCurrency) {
 		this.restaurantCurrency = restaurantCurrency;
 	}
+
+
+
+	public Long getOrganizerId() {
+		return organizerId;
+	}
+
+
+
+	public void setOrganizerId(Long organizerId) {
+		this.organizerId = organizerId;
+	}
+	
+	
 
 }
 

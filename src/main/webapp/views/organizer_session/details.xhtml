@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+>
 
-<h:head>
-
-
-</h:head>
 
 <h:body>
 
@@ -20,6 +17,8 @@
 			<h:outputStylesheet library="css" name="checkout.css" />
 			<link rel="stylesheet"
 				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+			<link rel="stylesheet"
+				href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
 			<title>Package Details</title>
 			<style>
 .package-details {
@@ -97,42 +96,47 @@
 
 					</div>
 
-			<h:form>
-			 <div class="package-text">
-                    <label for="availableFrom"> From*:</label>
-                    <h:inputText id="availableFrom" class="form-control date-picker"></h:inputText>
-                </div>
-                <div class="package-text">
-                    <label for="availableTill"> To*:</label>
-                    <h:inputText id="availableTill" class="form-control date-picker"></h:inputText>
-                </div>
-                  </h:form>
-                   <h:form>
-				<div class="d-flex justify-content-center">
-					<h:commandButton value="Add to Cart" action="#{cartBean.addToCart}"
-						class="btnCheckO ">
-						<f:param name="selectedPackageId" value="#{param.id}" />
-						<f:param name="quantity" value="#{cartBean.selectedQuantity}" />
-					</h:commandButton>
+					<h:form>
+						<div class="package-text">
+							<label for="availableFrom"> From*:</label>
+							<h:inputText id="availableFrom" class="form-control date-picker"></h:inputText>
+						</div>
+						<div class="package-text">
+							<label for="availableTill"> To*:</label>
+							<h:inputText id="availableTill" class="form-control date-picker"></h:inputText>
+						</div>
+					</h:form>
+					<h:form>
+						<div class="d-flex justify-content-center">
+							<h:commandButton value="Add to Cart"
+								action="#{cartBean.addToCart}" class="btnCheckO">
+								<f:param name="selectedPackageId" value="#{param.id}" />
+								<f:param name="quantity" value="#{cartBean.selectedQuantity}" />
+								<f:param name="organizerId" value="#{organizerBean.organizerId}" />
+							</h:commandButton>
 
-					<h:button value="Continue Shopping"
-						outcome="/views/organizer_session/homeForWebsite.xhtml"
-						class="btnContinue ml-4" />
-				</div>
-			</h:form>
 
 							<h:button value="Continue Shopping"
 								outcome="/views/organizer_session/homeForWebsite.xhtml"
-								class="btnContinue ml-4" />
+								class="btnContinue ml-4">
+								<f:param name="organizerId" value="#{organizerBean.organizerId}" />
+							</h:button>
 						</div>
+
 					</h:form>
 
 				</div>
 			</div>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
+
+			<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+			<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        flatpickr(".date-picker", {});
+    });
+</script>
+			<script>
     $(document).ready(function(){
-        // Initialize flatpickr for the elements with the class date-picker
+        // initialiser flatpickr pour les champs avec la classe date-picker
         $(".date-picker").flatpickr({
             dateFormat: "Y-m-d",
             enableTime: false
@@ -143,5 +147,4 @@
 		</ui:define>
 	</ui:composition>
 </h:body>
-
 </html>
