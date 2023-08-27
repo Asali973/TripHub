@@ -40,7 +40,8 @@ public class TourPackageBean implements Serializable {
 	private boolean deletionSuccessful;
 	private List<String> currencies;
 	private String selectedCurrency;
-	
+	private List<TourPackage> searchResults = new ArrayList<>();
+
 	private Part picturePackage;
 
 	public TourPackageBean() {
@@ -50,33 +51,6 @@ public class TourPackageBean implements Serializable {
 
 	}
 
-//	@PostConstruct
-//	public void init() {
-//		allTourPackages = tourPackageService.getAllTourPackages();
-//
-//		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-//
-//		if (id != null  && !id.isEmpty()) {
-//			Long tourPackageId = Long.parseLong(id);
-//			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTourPackageId",
-//					tourPackageId);
-//			tourPackageVm = tourPackageService.initTourPackage(tourPackageId);
-//			if (tourPackageVm == null) {
-//				FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
-//			}
-//		}
-//
-//		if (id != null  && !id.isEmpty()) {
-//			Long tourPackageId = Long.parseLong(id);
-//			// Fetch the selected tour package using tourPackageService
-//			selectedTourPackage = tourPackageService.getTourPackageById(tourPackageId);
-//
-//			if (selectedTourPackage == null) {
-//				FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
-//			}
-//		}
-//
-//	}
 	@PostConstruct
 	public void init() {
 	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -251,7 +225,7 @@ public class TourPackageBean implements Serializable {
 
 		List<TourPackage> searchResults = tourPackageService.advancedSearch(city, state, country, minPrice, maxPrice,
 				name, themeName);
-
+		// this.searchResults = tourPackageService.advancedSearch(city, state, country, minPrice, maxPrice, name, themeName);
 		if (searchResults.isEmpty()) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No results found.", null);
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -425,29 +399,15 @@ public class TourPackageBean implements Serializable {
 	public void setPicturePackage(Part picturePackage) {
 		this.picturePackage = picturePackage;
 	}
+
+	public List<TourPackage> getSearchResults() {
+		return searchResults;
+	}
+
+	public void setSearchResults(List<TourPackage> searchResults) {
+		this.searchResults = searchResults;
+	}
 	
 	
 
 }
-//// document.addEventListener('DOMContentLoaded', function() {
-//// Get the "Add Package" form and button
-//const addTourForm = document.getElementById('addTourForm');
-//const addPackageButton = addTourForm.querySelector('button[type="submit"]');
-//
-//// Add a submit event listener to the "Add Package" form
-//addTourForm.addEventListener('submit', function(event) {
-//    event.preventDefault();
-//    // Call  function to submit the form data to the server (if needed)
-//    submitAddTourForm();
-//});
-//
-//// Get the "Display the list" form and button
-//const displayListForm = document.getElementById('displayListForm');
-//const displayListButton = displayListForm.getElementById('displayListButton');
-//
-//// Add a click event listener to the "Display the list" button
-//displayListButton.addEventListener('click', function() {
-//    // Use AJAX to fetch the updated list data
-//    fetchUpdatedListData();
-//});
-//}); 
