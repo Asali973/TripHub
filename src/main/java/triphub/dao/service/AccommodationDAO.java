@@ -17,6 +17,7 @@ import triphub.entity.product.service.ServiceInterface;
 
 import triphub.entity.product.service.ServiceType;
 import triphub.entity.subservices.Accommodation;
+import triphub.entity.subservices.Restaurant;
 import triphub.entity.user.Organizer;
 import triphub.entity.user.Provider;
 import triphub.entity.util.Address;
@@ -184,5 +185,31 @@ public class AccommodationDAO {
 		query.setParameter("providerId", providerId);
 		return query.getResultList();
 	}
+	
+	public boolean addAccommodationToOrganizer(Long organizerId, Long accommodationId) {
+	    try {
+
+	        Accommodation accommodation = em.find(Accommodation.class, accommodationId);
+	        if (accommodation == null) {
+	            throw new IllegalArgumentException("Accommodation with ID " + accommodationId + " not found.");
+	        }
+
+	        Organizer organizer = em.find(Organizer.class, organizerId);
+	        if (organizer == null) {
+	            throw new IllegalArgumentException("Organizer with ID " + organizerId + " not found.");
+	        }
+
+	        accommodation.setOrganizer(organizer);
+
+	        em.merge(accommodation);
+	        em.flush();
+
+	        return true;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 
 }

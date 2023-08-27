@@ -102,10 +102,10 @@
 									</h:inputText>
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="pictureTransportation" value="Picture:" />
+									<h:outputLabel for="pictureTransport" value="Picture:" />
 									<div class="input-group mt-3">
 										<h:inputFile value="#{transportationBean.pictureTransport}"
-											id="pictureTransportation"
+											id="pictureTransport"
 											styleClass="custom-file-input d-none"
 											onchange="updateLabel(this);" />
 										<label id="fileLabel" class="form-control">Choose a
@@ -318,6 +318,7 @@
 								<th>Until</th>
 								<th>Description</th>
 								<th>Modify</th>
+								<th>Add</th>
 								<th>Delete</th>
 							</tr>
 						</thead>
@@ -342,15 +343,25 @@
 												<f:param name="id" value="#{transportation.id}" />
 											</h:commandButton>
 										</h:form></td>
-									<td><h:form>
-											<!-- Delete button -->
-											<h:commandButton value="Delete"
-												actionListener="#{transportationBean.performDelete}"
-												styleClass="btn btn-sm btn-outline-secondary2"
-												onclick="return confirmDelete();">
-												<f:param name="id" value="#{transportation.id}" />
-											</h:commandButton>
-										</h:form></td>
+
+											<td><h:form>
+													<!-- Add to Organizer button -->
+													<h:commandButton value="Add"
+														onclick="showSuccessMessage(); return true;"
+														actionListener="#{transportationBean.addTransportationToOrganizer}"
+														styleClass="btn btn-sm btn-outline-secondary3">
+														<f:param name="id" value="#{transportation.id}" />
+													</h:commandButton>
+												</h:form></td>
+											<td><h:form>
+													<!-- Delete button -->
+													<h:commandButton value="Delete"
+														actionListener="#{transportationBean.performDelete}"
+														styleClass="btn btn-sm btn-outline-secondary2"
+														onclick="return confirmDelete();">
+														<f:param name="id" value="#{transportation.id}" />
+													</h:commandButton>
+												</h:form></td>
 								</tr>
 							</ui:repeat>
 
@@ -366,13 +377,6 @@
 						<h:commandButton value="Refresh the list"
 							action="#{transportationBean.loadTransportations()}"
 							styleClass="btnCheckO" />
-
-
-
-
-						<h:button value="Continue Shopping"
-							outcome="/views/organizer_session/homeForWebsite.xhtml"
-							class="btnContinue ml-4" />
 					</div>
 				</h:form>
 			</div>
@@ -386,6 +390,12 @@
 			<script
 				src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js">
 			</script>
+
+			<script type="text/javascript">
+    function showSuccessMessage() {
+        alert('Transportation added successfully!');
+    }
+</script>
 
 			<script>
     document.addEventListener("DOMContentLoaded", function() {
