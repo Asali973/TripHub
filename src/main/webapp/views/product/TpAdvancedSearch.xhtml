@@ -3,9 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
-<h:body>
-	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
-		<ui:define name="additionalHeadContent">
+
+	<head>
 		<link
 				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 				rel="stylesheet" />
@@ -17,8 +16,8 @@
 			<link
 				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
 				rel="stylesheet" />
-		</ui:define>
-		<ui:define name="content">
+				</head>
+	<h:body>
 		<div class="containerCart mt-5 mb-5">
 				<div class="text-center">
 					<button class="btnContinue mb-3" >
@@ -115,7 +114,6 @@
 				src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 			<script
 				src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-		</ui:define>
-	</ui:composition>
+	
 </h:body>
 </html>
