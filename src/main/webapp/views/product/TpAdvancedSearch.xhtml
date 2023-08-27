@@ -3,103 +3,117 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
-<h:body>
-<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
-<ui:define name="additionalHeadContent">
 
-	</ui:define>
-		<ui:define name="content">
-	<div class="container mt-5">
-		<h3>Advanced Search</h3>
-		<h:form id="formId">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group">
-						<h:outputLabel for="name" value="Package Name:" />
-						<h:inputText id="name"
-							value="#{tourPackageBean.tourPackageVm.name}"
-							class="form-control" />
-					</div>
+	<head>
+		<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+			<h:outputStylesheet library="css" name="loginCss.css" />
+			<h:outputStylesheet library="css" name="checkout.css" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+				</head>
+	<h:body>
+		<div class="containerCart mt-5 mb-5">
+				<div class="text-center">
+					<button class="btnContinue mb-3" >
+						Advanced Search</button>
 				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<h:outputLabel for="city" value="City:" />
-						<h:inputText id="city"
-							value="#{tourPackageBean.tourPackageVm.cityName}"
-							class="form-control" />
+				<!-- form container -->
+				<div id="createFormContainer">
+				<h:form id="formId">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputLabel for="name" value="Package Name:" />
+								<h:inputText id="name"
+									value="#{tourPackageBean.tourPackageVm.name}"
+									class="form-control" />
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<h:outputLabel for="city" value="City:" />
+								<h:inputText id="city"
+									value="#{tourPackageBean.tourPackageVm.cityName}"
+									class="form-control" />
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputLabel for="state" value="State:" />
+								<h:inputText id="state"
+									value="#{tourPackageBean.tourPackageVm.state}"
+									class="form-control" />
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<h:outputLabel for="state" value="State:" />
-						<h:inputText id="state"
-							value="#{tourPackageBean.tourPackageVm.state}"
-							class="form-control" />
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputLabel for="country" value="Country:" />
+								<h:inputText id="country"
+									value="#{tourPackageBean.tourPackageVm.country}"
+									class="form-control" />
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputLabel for="themeName" value="Theme:" />
+								<h:inputText id="themeName"
+									value="#{tourPackageBean.tourPackageVm.themeName}"
+									class="form-control" />
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group">
-						<h:outputLabel for="country" value="Country:" />
-						<h:inputText id="country"
-							value="#{tourPackageBean.tourPackageVm.country}"
-							class="form-control" />
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<h:outputLabel for="themeName" value="Theme:" />
-						<h:inputText id="themeName"
-							value="#{tourPackageBean.tourPackageVm.themeName}"
-							class="form-control" />
-					</div>
-				</div>
-			</div>
-			<div class="row">
+					<div class="row">
 
-				<div class="col-md-4">
-					<div class="form-group">
-						<h:outputLabel for="minPrice" value="Min Price:" />
-						<h:selectOneMenu id="minPrice"
-							value="#{tourPackageBean.tourPackageVm.minPrice}"
-							class="form-control">
-							<f:selectItems value="#{tourPackageBean.minPriceOptions}" />
-						</h:selectOneMenu>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<h:outputLabel for="maxPrice" value="Max Price:" />
-						<h:selectOneMenu id="maxPrice"
-							value="#{tourPackageBean.tourPackageVm.maxPrice}"
-							class="form-control">
-							<f:selectItems value="#{tourPackageBean.minPriceOptions}" />
-						</h:selectOneMenu>
-					</div>
-				</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputLabel for="minPrice" value="Min Price:" />
+								<h:selectOneMenu id="minPrice"
+									value="#{tourPackageBean.tourPackageVm.minPrice}"
+									class="form-control">
+									<f:selectItems value="#{tourPackageBean.minPriceOptions}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputLabel for="maxPrice" value="Max Price:" />
+								<h:selectOneMenu id="maxPrice"
+									value="#{tourPackageBean.tourPackageVm.maxPrice}"
+									class="form-control">
+									<f:selectItems value="#{tourPackageBean.minPriceOptions}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
 
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group">
-						<h:commandButton value="Search"
-							action="#{tourPackageBean.performAdvancedSearch}"
-							class="btn btn-primary" />
 					</div>
+					<div class="row row-padding">
+						<div class="col-md-12">
+							<div class="form-group d-flex justify-content-center">
+								<h:commandButton value="Search"
+									action="#{tourPackageBean.performAdvancedSearch}"
+									styleClass="btnCheckO"  />
+							</div>
+						</div>
+					</div>
+				</h:form>
 				</div>
+				<h:messages globalOnly="true" styleClass="alert alert-info" />
 			</div>
-		</h:form>
-		<h:messages globalOnly="true" styleClass="alert alert-info" />
-	</div>
 
-	<!-- Add Bootstrap JS and jQuery (required for Bootstrap components) -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	</ui:define>
-	</ui:composition>
+			<!-- Add Bootstrap JS and jQuery (required for Bootstrap components) -->
+			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+			<script
+				src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
 </h:body>
 </html>
