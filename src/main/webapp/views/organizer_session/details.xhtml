@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html"
-xmlns:ui="http://java.sun.com/jsf/facelets"
->
-
+xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:body>
 	<ui:composition template="#{organizerBean.userViewModel.xhtmlFile}">
@@ -77,11 +75,10 @@ xmlns:ui="http://java.sun.com/jsf/facelets"
 							</h:commandButton>
 
 
-							<h:button value="Continue Shopping"
-								outcome="/views/organizer_session/homeForWebsite.xhtml"
-								class="btnContinue ml-4">
-								<f:param name="organizerId" value="#{organizerBean.organizerId}" />
-							</h:button>
+								<h:outputLink
+								value="http://localhost:8080/triphub/views//customer_home.xhtml"
+								styleClass="btnContinue ml-4"> Continue Shopping</h:outputLink>
+
 						</div>
 
 					</h:form>
