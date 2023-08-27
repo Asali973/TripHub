@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -5,117 +6,40 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<h:head>
-	<title>Trip Hub Homepage</title>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet library="css" name="homepage.css" />
-
-	<ui:insert name="additionalHeadContent" />
-
-</h:head>
 <h:body>
-		
-		<div class="content-wrapper">
-			<div class="background-image">
-				<nav class="navbar navbar-expand-lg navbar-dark">
-					<div class="container-fluid">		
-			
-				<!-- Brand/logo -->
-				<a class="navbar-brand" href="/triphub/views/home.xhtml">
-				<h:graphicImage library="images" name="logo-rond-3.png" alt="Trip Hub"
-						style="width: 80px; height: 80px;" />
-				</a>
+	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+		<ui:define name="additionalHeadContent">
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+			<h:outputStylesheet library="css" name="organizer_home.css" />
+		</ui:define>
 
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarNav" aria-controls="navbarNav"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+		<ui:define name="content">
+			<div class="container-fluid mt-5">
 
-				<!-- Navigation links -->
-				<div class="collapse navbar-collapse" id="navbarNav">
-					<ul class="navbar-nav ml-auto">
+				<div class="card2 ml-0 mr-0">
+					<div
+						class="card-body d-flex flex-column justify-content-center align-items-center">
+						<h:graphicImage library="images" name="logobody.png"
+							alt="Your Image Description" class="img-fluid mb-4"
+							style="max-width: 800px; height: auto;" />
 
-						<li class="nav-item"><a class="nav-link"
-							href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a></li>
-
-
-
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user}">
-								<h:form id="logoutForm">
-									<h:commandLink action="#{loginBean.logout}" value="Logout"
-										styleClass="nav-link" />
-								</h:form>
-							</h:panelGroup></li>
-
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user}">
-								<a class="nav-link"
-									href="/triphub/views/loginAndAccount/ProfileUser.xhtml">Your
-									Profile</a>
-							</h:panelGroup></li>
-
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link" href="/triphub/views/organizer_home.xhtml">Your
-									Space</a>
-							</h:panelGroup></li>
-
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link"
-									href="/triphub/views/product/TourpackageHome.xhtml">Your
-									Tour Package</a>
-							</h:panelGroup></li>
-
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link" href="#">Services</a>
-							</h:panelGroup></li>
-
-
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'provider'}">
-								<a class="nav-link" href="/triphub/views/provider_home.xhtml">Your
-									Space</a>
-							</h:panelGroup></li>
-
-						<li class="nav-item"><h:panelGroup
-								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'customer'}">
-								<a class="nav-link" href="/triphub/views/customer_home.xhtml">Your
-									Space</a>
-							</h:panelGroup></li>
-
-
-
-						<li class="nav-item dropdown">
-							<h:panelGroup rendered="#{empty sessionScope.user}">
-
-								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"> Sign Up </a>
-								<div class="dropdown-menu dropdown-menu-right"
-									aria-labelledby="navbarDropdown">
-
-									<a class="dropdown-item"
-										href="/triphub/views/loginAndAccount/CustomerRegistration.xhtml">Sign
-										Up as a Customer</a> <a class="dropdown-item"
-										href="/triphub/views/loginAndAccount/ProviderRegistration.xhtml">Sign
-										Up as a Provider</a> <a class="dropdown-item"
-										href="/triphub/views/loginAndAccount/OrganizerRegistration.xhtml">Sign
-										Up as an Organizer</a> <a class="dropdown-item"
-										href="/triphub/views/loginAndAccount/SuperAdminRegistration.xhtml">Sign
-										Up as an Administrator</a>
+						<div class="mb-4">
+							<h3 class="text-center" style="font-weight: bold;">Who we
+								serve:</h3>
+							<div class="row mt-4">
+								<div class="col-md-4 text-center">
+									<h4>Travel Organizers</h4>
+									<p>As a member of TripHub, craft, manage, and personalize
+										your travel offerings seamlessly.</p>
+									<a
+										href="/triphub/views/loginAndAccount/OrganizerRegistration.xhtml"
+										class="btn btn-primary mt-2">Join as Organizer</a>
 								</div>
-
-							</h:panelGroup></li>
-					</ul>
-
 								<div class="col-md-4 text-center">
 									<h4>Partners</h4>
 									<p>Associations, enterprises, restaurants, volunteers, and
@@ -193,186 +117,7 @@
 					</div>
 				</div>
 			</div>
-		</nav>
-
-
-
-		<!-- 	TYPEWRITTER HERE -->
-		
-    		<div id="typewritter-triphub">TRIPHUB</div> 
-        		<br/>
-        		<div id="auto-type-container"><span class="auto-type"></span></div>
-			</div>
-
-		
-		
-		
-		
-	<div class="container-fluid mt-5">
-
-		<div class="card2 ml-0 mr-0">
-			<div
-				class="card-body d-flex flex-column justify-content-center align-items-center">
-
-
-				<div class="mb-4">
-					<h3 class="text-center" style="font-weight: bold;">Who we
-						serve:</h3>
-					<div class="row mt-4">
-						<div class="col-md-4 text-center">
-							<h4>Travel Organizers</h4>
-							<p>As a member of TripHub, craft, manage, and personalize
-								your travel offerings seamlessly.</p>
-							<a
-								href="/triphub/views/loginAndAccount/OrganizerRegistration.xhtml"
-								class="btn btn-primary mt-2">Join as Organizer</a>
-						</div>
-						<div class="col-md-4 text-center">
-							<h4>Partners</h4>
-							<p>Associations, enterprises, restaurants, volunteers, and
-								more. Offer unique services to organizers.</p>
-							<a
-								href="/triphub/views/loginAndAccount/ProviderRegistration.xhtml"
-								class="btn btn-primary mt-2">Join as Partner</a>
-						</div>
-						<div class="col-md-4 text-center">
-							<h4>Clients</h4>
-							<p>Individuals, corporations, associations, and more. Dive
-								into tailor-made travel experiences.</p>
-							<a
-								href="/triphub/views/loginAndAccount/CustomerRegistration.xhtml"
-								class="btn btn-primary mt-2">Join as Client</a>
-						</div>
-					</div>
-				</div>
-				<div class="text-center mt-5 mb-5 mr-4 ml-4"
-					style="max-width: 1000px; margin: auto;">
-					<h3>Embark on the TripHub journey! Personalize your travel
-						world, aligning with your identity and values. Let the adventure
-						begin!</h3>
-				</div>
-
-
-				<h:form>
-
-					<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
-						<h:commandButton value="Users list"
-							action="loginAndAccount/UserList" />
-					</h:panelGroup>
-
-					<h:commandButton value="Create Accommodation"
-						action="product/AccommodationForm" />
-					<h:commandButton value="Create Accommodation test"
-						action="product/AccommodationFormTest" />
-					<h:commandButton value="Create Transportation"
-						action="product/TransportationForm" />
-					<h:commandButton value="Search your Tour Packages"
-						action="product/TpAdvancedSearch" />
-					<h:commandButton value="Go to Tour Packages"
-						action="product/TourpackageHome" />
-					<h:commandButton value="Create Restaurant"
-						action="product/RestaurantForm" />
-					<h:commandButton value="Update Services"
-						action="product/UpdateServices" />
-					<h:commandButton action="product/AllServices"
-						value="See All Services" />
-
-				</h:form>
-				<h:panelGroup rendered="#{sessionScope.userType eq 'customer'}">
-					<p>Welcome, dear customer!</p>
-				</h:panelGroup>
-
-				<h:panelGroup rendered="#{sessionScope.userType eq 'organizer'}">
-					<p>Welcome, dear organizer!</p>
-				</h:panelGroup>
-
-				<h:panelGroup rendered="#{sessionScope.userType eq 'provider'}">
-					<p>Welcome, dear provider!</p>
-				</h:panelGroup>
-
-				<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
-					<p>Welcome, dear super admin!</p>
-				</h:panelGroup>
-			</div>
-		</div>
-	</div>
-	</div>
-
-
-	<!-- Footer section -->
-
-	<footer>
-		<div class="footer-wrapper">
-			<section class='footer-top'>
-				<a href="/triphub/views/home.xhtml"> <h:graphicImage
-						library="images" name="logo-rond-3.png" alt="Trip Hub"
-						style="width: 30px; height: 30px;" /></a> <span class='social-links'>
-					<a><h:graphicImage library="images" name="instagram.svg"
-							alt="Instagram" style="width: 24px; height: 24px;" /></a> <a><h:graphicImage
-							library="images" name="linkedin.svg" alt="LinkedIn"
-							style="width: 24px; height: 24px;" /></a> <a><h:graphicImage
-							library="images" name="twitter.svg" alt="Twitter"
-							style="width: 24px; height: 24px;" /></a> <a><h:graphicImage
-							library="images" name="youtube.svg" alt="Youtube"
-							style="width: 24px; height: 24px;" /></a>
-				</span>
-			</section>
-			<section class="footer-columns">
-				<section>
-					<menu>
-						<h3>Triphub 1</h3>
-						<li><a href="/triphub/views/home.xhtml">Section 1</a></li>
-						<li><a href="/triphub/views/home.xhtml">Section 2</a></li>
-						<li><a href="/triphub/views/home.xhtml">Section 3</a></li>
-					</menu>
-				</section>
-				<section>
-					<menu>
-						<h3>Triphub 2</h3>
-						<li><a href="/triphub/views/home.xhtml">Section 1</a></li>
-						<li><a href="/triphub/views/home.xhtml">Section 2</a></li>
-						<li><a href="/triphub/views/home.xhtml">Section 3</a></li>
-					</menu>
-				</section>
-				<section>
-					<menu>
-						<h3>Company</h3>
-						<li><a href="/triphub/views/home.xhtml">Blog</a></li>
-						<li><a href="/triphub/views/home.xhtml">About Us</a></li>
-						<li><a href="/triphub/views/home.xhtml">Contact</a></li>
-					</menu>
-				</section>
-			</section>
-			<section class="footer-bottom">
-				<small>© <span id="year"></span> Trip Hub. All rights
-					reserved.
-				</small> <span class="footer-bottom-links"> <a
-					href="/triphub/views/home.xhtml">Terms and Services</a> <a
-					href="/triphub/views/home.xhtml">Privacy Policy</a>
-				</span>
-			</section>
-		</div>
-	</footer>
-
-	<script>document.getElementById("year").innerHTML = new Date().getFullYear()</script>
-	
-	<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-
-	<script>
-	var typed = new Typed(".auto-type", {
-		strings:["is good", "helps you create your business", "is easy peasy to use", "brings you visibility"],
-	typeSpeed:100,
-	backSpeed:100,
-	loop:true
-	})
-	
-	</script>
-	
-<!-- 	<script type="text/javascript" src="/triphub/resources/javascript/typewritter.js"></script> -->
-	
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>
