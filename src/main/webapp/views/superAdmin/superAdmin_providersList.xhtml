@@ -34,59 +34,61 @@
 									<h:dataTable value="#{providerBean.allProviders}"
 										var="provider" styleClass="table table-hover table-striped">
 										<h:column>
-											<f:facet name="header">Name</f:facet>
-                        #{provider.user.lastName}
-                    </h:column>
-										<h:column>
 											<f:facet name="header">First Name</f:facet>
-                        #{provider.user.firstName}
-                    </h:column>
+                        						#{provider.user.firstName}
+                   						</h:column>
+                   						<h:column>
+											<f:facet name="header">Last Name</f:facet>
+                        						#{provider.user.lastName}
+                    					</h:column>
 										<h:column>
 											<f:facet name="header">Email</f:facet>
-                        #{provider.user.email}
-                    </h:column>
+                        						#{provider.user.email}
+                    					</h:column>
 										<h:column>
-											<f:facet name="header">Phone n°</f:facet>
-                        #{provider.user.phoneNum}               
-                    </h:column>
+											<f:facet name="header">Phone</f:facet>
+                        						#{provider.user.phoneNum}               
+                    					</h:column>
 										<h:column>
 											<f:facet name="header">Email</f:facet>
-                        	#{provider.user.email}
-	                    </h:column>
+                        						#{provider.user.email}
+	                    				</h:column>
 										<h:column>
 											<f:facet name="header">Address</f:facet>
-                        #{provider.user.address.num}
-                        #{provider.user.address.street}
-                        #{provider.user.address.city}
-                        #{provider.user.address.zipCode}
-                        #{provider.user.address.state}
-                        #{provider.user.address.country}
-                    </h:column>
+												#{provider.user.address.num}
+												#{provider.user.address.street}
+												#{provider.user.address.city}
+												#{provider.user.address.zipCode}
+												#{provider.user.address.state}
+												#{provider.user.address.country}
+                    					</h:column>
                     
-                    <h:column>
+                    					<h:column>
 											<f:facet name="header">Company name</f:facet>
-                        	#{provider.companyInfo.name}
-	                </h:column>
+                        						#{provider.companyInfo.name}
+	                					</h:column>
 	                                    <h:column>
-	                <f:facet name="header">SIRET</f:facet>
-                        	#{provider.administration.siret}
-	                </h:column>
+	                						<f:facet name="header">SIRET</f:facet>
+                        						#{provider.administration.siret}
+	                					</h:column>
 
 										<h:column>
-											<f:facet name="header">Delete</f:facet>
-											<h:commandButton value="Delete"
-												action="#{providerBean.deleteProvider}"
-												class="btn btn-customDelete btn-custom-signup"
-												onclick="return confirm('Are you sure you want to delete?');" />
-										</h:column>
-										<h:column>
-											<f:facet name="header">Details</f:facet>
+<!-- 											<f:facet name="header">Details</f:facet> -->
 											<h:commandButton value="Modify"
 												action="#{loginBean.loadUserData}"
 												class="btn btn-customUpdate btn-custom-signup mr-2">
 												<f:param name="selectedUserId" value="#{provider.user.id}" />
 											</h:commandButton>
 										</h:column>
+										
+										<h:column>
+<!-- 											<f:facet name="header">Delete</f:facet> -->
+											<h:commandButton value="Delete"
+												action="#{providerBean.deleteProvider}"
+												class="btn btn-customDelete btn-custom-signup"
+												onclick="return confirm('Are you sure you want to delete?');" />
+										</h:column>
+
 									</h:dataTable>
 								</div>
 							</div>

@@ -19,8 +19,7 @@
 				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 				rel="stylesheet" />
 		</ui:define>
-
-
+		
 		<ui:define name="content">
 
 			<div class="container">
@@ -34,62 +33,72 @@
 									<h:dataTable value="#{organizerBean.allOrganizers}"
 										var="organizer" styleClass="table table-hover table-striped">
 										<h:column>
-											<f:facet name="header">Name</f:facet>
-                        #{organizer.user.lastName}
-                    </h:column>
-										<h:column>
 											<f:facet name="header">First Name</f:facet>
-                        #{organizer.user.firstName}
-                    </h:column>
+                        						#{organizer.user.firstName}
+                   						</h:column>
+										<h:column>
+											<f:facet name="header">Last Name</f:facet>
+                        						#{organizer.user.lastName}
+                   						</h:column>
 										<h:column>
 											<f:facet name="header">Email</f:facet>
-                        #{organizer.user.email}
-                    </h:column>
+                        						#{organizer.user.email}
+                    					</h:column>
+										<h:column>
+											<f:facet name="header">Phone</f:facet>
+                        						#{organizer.user.phoneNum}
+                    					</h:column>
 										<h:column>
 											<f:facet name="header">Address</f:facet>
-                        #{organizer.user.address.num}
-                        #{organizer.user.address.street}
-                        #{organizer.user.address.city}
-                        #{organizer.user.address.zipCode}
-                        #{organizer.user.address.state}
-                        #{organizer.user.address.country}
-                    </h:column>
-                    										<h:column>
+												#{organizer.user.address.num}
+												#{organizer.user.address.street}
+												#{organizer.user.address.city}
+												#{organizer.user.address.zipCode}
+												#{organizer.user.address.state}
+												#{organizer.user.address.country}
+                    					</h:column>
+										<h:column>
 											<f:facet name="header">Company name</f:facet>
-                        #{organizer.companyInfo.name}
-                    </h:column>
-                    
-                    										<h:column>
+                        						#{organizer.companyInfo.name}
+                    					</h:column>
+										<h:column>
 											<f:facet name="header">SIRET</f:facet>
-                        #{organizer.administration.siret}
-                    </h:column>
-                    <h:column>
-											<f:facet name="header">pro phone</f:facet>
-                        #{organizer.administration.phone}
-                    </h:column>
-                    <h:column>
-											<f:facet name="header">Pro email</f:facet>
-                        #{organizer.administration.email}
-                    </h:column>
-                    <h:column>
-											<f:facet name="header">sector</f:facet>
-                        #{organizer.administration.sector}
-                    </h:column>
+                        						#{organizer.administration.siret}
+                    					</h:column>
 										<h:column>
-											<f:facet name="header">Delete</f:facet>
-											<h:commandButton value="Delete"
-												action="#{organizerBean.deleteOrganizer}"
-												class="btn btn-customDelete btn-custom-signup"
-												onclick="return confirm('Are you sure you want to delete?');" />
-										</h:column>
+											<f:facet name="header">Pro Phone</f:facet>
+                       							#{organizer.administration.phone}
+                    					</h:column>
 										<h:column>
-											<f:facet name="header">Details</f:facet>
+											<f:facet name="header">Pro Email</f:facet>
+                        						#{organizer.administration.email}
+                    					</h:column>
+										<h:column>
+											<f:facet name="header">Sector</f:facet>
+                        						#{organizer.administration.sector}
+                    					</h:column>
+ 										<h:column>
+											<f:facet name="header">Subscription</f:facet>
+                        						#{organizer.subscription.type}
+                    					</h:column>                   					
+
+										<h:column>
+<!-- 											<f:facet name="header">Details</f:facet> -->
 											<h:commandButton value="Modify"
 												action="#{loginBean.loadUserData}"
 												class="btn btn-customUpdate btn-custom-signup mr-2">
 												<f:param name="selectedUserId" value="#{organizer.user.id}" />
 											</h:commandButton>
 										</h:column>
+
+										<h:column>
+<!-- 											<f:facet name="header">Delete</f:facet> -->
+											<h:commandButton value="Delete"
+												action="#{organizerBean.deleteOrganizer}"
+												class="btn btn-customDelete btn-custom-signup"
+												onclick="return confirm('Are you sure you want to delete?');" />
+										</h:column>
+
 									</h:dataTable>
 								</div>
 							</div>

@@ -34,16 +34,22 @@
 									<h:dataTable value="#{customerBean.allCustomers}"
 										var="customer" styleClass="table table-hover table-striped">
 										<h:column>
-											<f:facet name="header">Name</f:facet>
-                        #{customer.user.lastName}
-                    </h:column>
-										<h:column>
 											<f:facet name="header">First Name</f:facet>
                         #{customer.user.firstName}
                     </h:column>
+                    										<h:column>
+											<f:facet name="header">Last Name</f:facet>
+                        #{customer.user.lastName}
+                    </h:column>
+
 										<h:column>
 											<f:facet name="header">Email</f:facet>
                         #{customer.user.email}
+                    </h:column>
+                    
+                    										<h:column>
+											<f:facet name="header">Phone</f:facet>
+                        #{customer.user.phoneNum}
                     </h:column>
 										<h:column>
 											<f:facet name="header">Address</f:facet>
@@ -53,6 +59,11 @@
                         #{customer.user.address.zipCode}
                         #{customer.user.address.state}
                         #{customer.user.address.country}
+                    </h:column>
+                    
+                    										<h:column>
+											<f:facet name="header">Total Purchases</f:facet>
+                        #{customer.user.cartTotal}
                     </h:column>
                     
 										<h:column>
