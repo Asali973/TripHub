@@ -165,5 +165,31 @@ public class RestaurantDAO {
 	    query.setParameter("providerId", providerId);
 	    return query.getResultList();
 	}
+	
+	public boolean addRestaurantToOrganizer(Long organizerId, Long restaurantId) {
+	    try {
+
+	        Restaurant restaurant = em.find(Restaurant.class, restaurantId);
+	        if (restaurant == null) {
+	            throw new IllegalArgumentException("Restaurant with ID " + restaurantId + " not found.");
+	        }
+
+	        Organizer organizer = em.find(Organizer.class, organizerId);
+	        if (organizer == null) {
+	            throw new IllegalArgumentException("Organizer with ID " + organizerId + " not found.");
+	        }
+
+	        restaurant.setOrganizer(organizer);
+
+	        em.merge(restaurant);
+	        em.flush();
+
+	        return true;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 
 }

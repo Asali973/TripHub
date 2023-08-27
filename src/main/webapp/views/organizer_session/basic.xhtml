@@ -376,7 +376,7 @@ rgba
 						value="/images/#{organizerBean.userViewModel.companyLogoLink}"
 						alt="Trip Hub" styleClass="navbar-logo rounded-image" />
 					<h:outputText value="#{organizerBean.userViewModel.companyName}"
-						styleClass="navbar-brand-text font1" />
+						styleClass="navbar-brand-text" />
 				</h:link>
 
 
@@ -393,7 +393,7 @@ rgba
 						<li class="nav-item"><h:panelGroup
 								rendered="#{empty sessionScope.user}">
 								<h:form id="loginForm">
-									<a class="nav-link"
+									<a class="nav-link font1"
 										href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a>
 								</h:form>
 							</h:panelGroup></li>
@@ -420,7 +420,7 @@ rgba
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link" href="/triphub/views/organizer_home.xhtml">Back
+								<a class="nav-link font1" href="/triphub/views/organizer_home.xhtml">Back
 									to Settings</a>
 							</h:panelGroup></li>
 
@@ -465,18 +465,22 @@ rgba
 			<div class="card2">
 				<div class="card-body">
 
-					<div class="card">
+					<div class="card font1">
 						<h:graphicImage
 							value="/images/#{organizerBean.userViewModel.companyLogoLink}"
 							styleClass="logo" alt="Site Logo" />
-						<div class="site-name">#{organizerBean.userViewModel.companyName}</div>
+						<div class="site-name font1">
+						<h2 class="mt-5 mb-5 font1">#{organizerBean.userViewModel.companyName}</h2>
+						</div>
+						
+						
 					</div>
 
 
 
 
 					<!-- Tour Packages -->
-					<h3 class="mt-5 mb-5">All you need in one package</h3>
+					<h3 class="mt-5 mb-5 font1">All you need in one package</h3>
 
 					<h:dataTable value="#{tourPackageBean.currentUserTourPackages}"
 						var="tourPackage" styleClass="table table-hover centered-content">
@@ -527,11 +531,11 @@ rgba
 					</h:dataTable>
 
 					<br />
-					<h3 class="mt-5 mb-5">Craft Your Own Journey</h3>
+					<h3 class="mt-5 mb-5 font1">Craft Your Own Journey</h3>
 
 
 					<!-- Accommodations -->
-					<h2 class="mt-3 mb-3">Explore our accommodations</h2>
+					<h2 class="mt-3 mb-3 font1">Explore our accommodations</h2>
 
 					<h:dataTable value="#{accommodationBean.currentUserAccommodations}"
 						var="accommodation"
@@ -590,7 +594,7 @@ rgba
 
 
 					<!-- Restaurants -->
-					<h2 class="mt-3 mb-3">Dine in the finest places</h2>
+					<h2 class="mt-3 mb-3 font1">Dine in the finest places</h2>
 
 					<h:dataTable value="#{restaurantBean.currentUserRestaurants}"
 						var="restaurant" styleClass="table table-hover centered-content">
@@ -648,7 +652,7 @@ rgba
 
 
 					<!-- Transportations -->
-					<h2 class="mt-3 mb-3">Choose your preferred mode of transport</h2>
+					<h2 class="mt-3 mb-3 font1">Choose your preferred mode of transport</h2>
 
 					<h:dataTable
 						value="#{transportationBean.currentUserTransportations}"

@@ -115,16 +115,6 @@ body, h1, h2, h3, h4, h5, p, a {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.btn-primary2 {
-    background-color: black;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 30px;
-    transition: all 0.3s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
 .btn-primary:hover {
     background-color: #8e5e23;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
