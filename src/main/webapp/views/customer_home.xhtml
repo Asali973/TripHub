@@ -32,36 +32,31 @@
 						<div class="text-center mt-5 mb-5 mr-4 ml-4"
 							style="max-width: 1000px; margin: auto;">
 							<h3>Embark on the TripHub journey! Personalize your travel
-								world, accessing our tour operator sites in one place. Let the adventure
-								begin!</h3>
+								world, accessing our tour operator sites in one place. Let the
+								adventure begin!</h3>
 						</div>
 						<!-- search box -->
 						<div class="text-center mt-2 mb-5">
-    <h:form id="searchForm">
-        <!-- Input for searching by company name -->
-        <h:inputText placeholder="Search by company name..."
-                          value="#{organizerBean.searchCompanyName}" 
-                          class="search-input" />
+							<h:form id="searchForm">
+								<!-- Input for searching by company name -->
+								<h:inputText placeholder="Search by company name..."
+									value="#{organizerBean.searchCompanyName}" class="search-input" />
 
-        <!-- Button to search by company name -->
-        <h:commandButton value="Search by Company Name"
-                         action="#{organizerBean.searchOrganizers}"
-                         class="btn btn-primary spaced-btn" />                         
-            
-        <!-- Input for searching by country -->
-         <h:inputText placeholder="Search by country..."
-                          value="#{organizerBean.searchCountry}" 
-                          class="search-input" />
+								<!-- Button to search by company name -->
+								<h:commandButton value="Search by Company Name"
+									action="#{organizerBean.searchOrganizers}"
+									class="btn btn-primary spaced-btn" />
 
-        <!-- Button to search by country -->
-        <h:commandButton value="Search by Country"
-                         action="#{organizerBean.searchOrganizers}"
-                         class="btn btn-primary spaced-btn" />
-    </h:form>
-</div>
+								<!-- Input for searching by country -->
+								<h:inputText placeholder="Search by country..."
+									value="#{organizerBean.searchCountry}" class="search-input" />
 
-
-						<!-- Rest of your code... -->
+								<!-- Button to search by country -->
+								<h:commandButton value="Search by Country"
+									action="#{organizerBean.searchOrganizers}"
+									class="btn btn-primary spaced-btn" />
+							</h:form>
+						</div>
 
 						<!-- Display Search Results -->
 						<div class="container mt-5">
