@@ -52,7 +52,7 @@
 										value="#{restaurantBean.restaurantvm.name}"
 										styleClass="form-control" />
 								</div>
-								
+
 								<div class="form-group">
 									<h:outputLabel for="price" value="Price:" />
 									<h:inputText id="price"
@@ -94,8 +94,7 @@
 									<h:outputLabel for="pictureRestau" value="Picture:" />
 									<div class="input-group mt-3">
 										<h:inputFile value="#{restaurantBean.pictureRestaurant}"
-											id="pictureRestau"
-											styleClass="custom-file-input d-none"
+											id="pictureRestau" styleClass="custom-file-input d-none"
 											onchange="updateLabel(this);" />
 										<label id="fileLabel" class="form-control">Choose a
 											picture</label>
@@ -193,8 +192,8 @@
 										styleClass="form-control" />
 								</div>
 								<div class="form-group d-flex justify-content-center">
-									<h:commandButton value="Add"
-										action="#{restaurantBean.create}" styleClass="btnCheckO" />
+									<h:commandButton value="Add" action="#{restaurantBean.create}"
+										styleClass="btnCheckO" />
 								</div>
 							</div>
 						</div>
@@ -220,8 +219,7 @@
 					<p>Price:
 						#{restaurantBean.lastRestaurantAdded.service.price.amount}
 						#{restaurantBean.lastRestaurantAdded.service.price.currency}</p>
-					<p>Address:
-						#{restaurantBean.lastRestaurantAdded.address.num}
+					<p>Address: #{restaurantBean.lastRestaurantAdded.address.num}
 						#{restaurantBean.lastRestaurantAdded.address.num}
 						#{restaurantBean.lastRestaurantAdded.address.street}
 						#{restaurantBean.lastRestaurantAdded.address.city}
@@ -239,81 +237,85 @@
 				style="max-width: 100%">
 				<h3>Available Restaurants</h3>
 				<br />
-					<table class="table">
-						<thead>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price</th>
+							<th>Number</th>
+							<th>Street</th>
+							<th>City</th>
+							<th>State</th>
+							<th>ZipCode</th>
+							<th>Country</th>
+							<th>availableFrom</th>
+							<th>availableUntil</th>
+							<th>Description</th>
+							<th>Modify</th>
+							<th>Add</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat value="#{restaurantBean.allRestaurants}"
+							var="restaurant">
 							<tr>
-								<th>Name</th>
-								<th>Price</th>
-								<th>Number</th>
-								<th>Street</th>
-								<th>City</th>
-								<th>State</th>
-								<th>ZipCode</th>
-								<th>Country</th>
-								<th>availableFrom</th>
-								<th>availableUntil</th>
-								<th>Description</th>
-								<th>Modify</th>
-								<th>Delete</th>
+								<td>#{restaurant.name}</td>
+								<td>#{restaurant.service.price.amount}</td>
+								<td>#{restaurant.address.num}</td>
+								<td>#{restaurant.address.street}</td>
+								<td>#{restaurant.address.city}</td>
+								<td>#{restaurant.address.state}</td>
+								<td>#{restaurant.address.zipCode}</td>
+								<td>#{restaurant.address.country}</td>
+								<td>#{restaurant.service.availableFrom}</td>
+								<td>#{restaurant.service.availableTill}</td>
+								<td>#{restaurant.description}</td>
+								<td><h:form>
+										<!-- Update button -->
+										<h:commandButton value="Update"
+											action="#{restaurantBean.initFormUpdate}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{restaurant.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Add to Organizer button -->
+										<h:commandButton value="Add"
+											onclick="showSuccessMessage(); return true;"
+											actionListener="#{restaurantBean.addRestaurantToOrganizer}" styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{restaurant.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Delete button -->
+										<h:commandButton value="Delete"
+											actionListener="#{restaurantBean.performDelete}"
+											styleClass="btn btn-sm btn-outline-secondary2"
+											onclick="return confirmDelete();">
+											<f:param name="id" value="#{restaurant.id}" />
+										</h:commandButton>
+									</h:form></td>
+
 							</tr>
-						</thead>
-						<tbody>
-							<ui:repeat value="#{restaurantBean.allRestaurants}"
-								var="restaurant">
-								<tr>
-									<td>#{restaurant.name}</td>
-									<td>#{restaurant.service.price.amount}</td>
-									<td>#{restaurant.address.num}</td>
-									<td>#{restaurant.address.street}</td>
-									<td>#{restaurant.address.city}</td>
-									<td>#{restaurant.address.state}</td>
-									<td>#{restaurant.address.zipCode}</td>
-									<td>#{restaurant.address.country}</td>
-									<td>#{restaurant.service.availableFrom}</td>
-									<td>#{restaurant.service.availableTill}</td>
-									<td>#{restaurant.description}</td>
-									<td><h:form>
-											<!-- Update button -->
-											<h:commandButton value="Update"
-												action="#{restaurantBean.initFormUpdate}"
-												styleClass="btn btn-sm btn-outline-secondary3">
-												<f:param name="id" value="#{restaurant.id}" />
-											</h:commandButton>
-										</h:form></td>
-									<td><h:form>
-											<!-- Delete button -->
-											<h:commandButton value="Delete"
-												actionListener="#{restaurantBean.performDelete}"
-												styleClass="btn btn-sm btn-outline-secondary2"
-												onclick="return confirmDelete();">
-												<f:param name="id" value="#{restaurant.id}" />
-											</h:commandButton>
-										</h:form></td>
-								</tr>
-							</ui:repeat>
+						</ui:repeat>
 
-							<h:panelGroup rendered="#{restaurantBean.deletionSuccessful}">
-								<div class="alert alert-success" role="alert">Deletion of
-									restaurant is successful, please refresh the list.</div>
-							</h:panelGroup>
-						</tbody>
-					</table>
+						<h:panelGroup rendered="#{restaurantBean.deletionSuccessful}">
+							<div class="alert alert-success" role="alert">Deletion of
+								restaurant is successful, please refresh the list.</div>
+						</h:panelGroup>
+					</tbody>
+				</table>
+			</div>
+			<h:form>
+				<div class="d-flex justify-content-center mt-4">
+					<h:commandButton value="Refresh the list"
+						action="#{restaurantBean.loadAllRestaurants()}"
+						styleClass="btnCheckO" />
 				</div>
-				<h:form>
-					<div class="d-flex justify-content-center mt-4">
-						<h:commandButton value="Refresh the list"
-							action="#{restaurantBean.loadAllRestaurants()}"
-							styleClass="btnCheckO" />
-
-
-
-
-						<h:button value="Continue Shopping"
-							outcome="/views/organizer_session/homeForWebsite.xhtml"
-							class="btnContinue ml-4" />
-					</div>
-				</h:form>
-
+				<br/>
+			</h:form>
+<br/>
 
 			<h:outputScript library="javascript" name="createNdisplayList.js" />
 			<h:outputScript library="javascript" name="loginJs.js" />
@@ -324,6 +326,12 @@
 			<script
 				src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js">
 			</script>
+			
+			<script type="text/javascript">
+    function showSuccessMessage() {
+        alert('Restaurant added successfully!');
+    }
+</script>
 
 			<script>
     document.addEventListener("DOMContentLoaded", function() {

@@ -454,7 +454,7 @@ rgba
 						<li class="nav-item"><h:panelGroup
 								rendered="#{empty sessionScope.user}">
 								<h:form id="loginForm">
-									<a class="nav-link"
+									<a class="nav-link font1"
 										href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a>
 								</h:form>
 							</h:panelGroup></li>
@@ -481,7 +481,7 @@ rgba
 
 						<li class="nav-item"><h:panelGroup
 								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-								<a class="nav-link" href="/triphub/views/organizer_home.xhtml">Back
+								<a class="nav-link font1" href="/triphub/views/organizer_home.xhtml">Back
 									to Settings</a>
 							</h:panelGroup></li>
 
@@ -539,7 +539,7 @@ rgba
 							</div>
 						</div>
 
-						<h3 class="mt-5 mb-5">All you need in one package</h3>
+						<h3 class="mt-5 mb-5 font1">All you need in one package</h3>
 						<div class="grid-container">
 							<ui:repeat value="#{tourPackageBean.currentUserTourPackages}"
 								var="tourPackage">
@@ -561,7 +561,7 @@ rgba
 						</div>
 
 						<br />
-						<h3 class="mt-5 mb-5">Craft Your Own Journey</h3>
+						<h3 class="mt-5 mb-5 font1">Craft Your Own Journey</h3>
 						<h2 class="mt-5">Explore our accommodations</h2>
 						<div class="grid-container">
 							<ui:repeat value="#{accommodationBean.currentUserAccommodations}"
@@ -587,7 +587,7 @@ rgba
 						</div>
 
 
-						<h2 class="mt-5">Dine in the finest places</h2>
+						<h2 class="mt-5 font1">Dine in the finest places</h2>
 						<div class="grid-container">
 							<ui:repeat value="#{restaurantBean.currentUserRestaurants}"
 								var="restaurant">
@@ -618,7 +618,7 @@ rgba
 							</ui:repeat>
 						</div>
 
-						<h2 class="mt-5">Choose your preferred mode of transport</h2>
+						<h2 class="mt-5 font1">Choose your preferred mode of transport</h2>
 						<div class="grid-container">
 							<ui:repeat
 								value="#{transportationBean.currentUserTransportations}"

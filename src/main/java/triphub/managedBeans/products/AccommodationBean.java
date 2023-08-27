@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
+import triphub.dao.service.AccommodationDAO;
 import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.AccommodationType;
 import triphub.entity.util.CurrencyType;
@@ -30,6 +31,9 @@ public class AccommodationBean implements Serializable {
 
 	@Inject
 	private AccommodationService accommodationService;
+	
+	@Inject
+	private AccommodationDAO accommodationDao;
 
 	private SubServicesViewModel accommodationVm = new SubServicesViewModel();
 
@@ -248,6 +252,42 @@ public class AccommodationBean implements Serializable {
 	    return accommodationService.getAccommodationForOrganizer(userId); 
 	}
 
+	public void addAccommodationToOrganizer() {
+		String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("userType");
+		Long userId;
+
+		if ("organizer".equals(userType)) {
+			userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("organizerId");
+		} else {
+			FacesMessageUtil.addErrorMessage("Only an organizer can add a accommodation");
+			return;
+		}
+
+		String accommodationIdParam = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
+				.get("id");
+
+		if (accommodationIdParam == null) {
+			FacesMessageUtil.addErrorMessage("Select a accommodation.");
+			return;
+		}
+
+		Long selectedAccommodationIdToAdd;
+		try {
+			selectedAccommodationIdToAdd = Long.parseLong(accommodationIdParam);
+		} catch (NumberFormatException e) {
+			FacesMessageUtil.addErrorMessage("Accommodation id no valid.");
+			return;
+		}
+
+		boolean result = accommodationDao.addAccommodationToOrganizer(userId, selectedAccommodationIdToAdd);
+
+		if (result) {
+			FacesMessageUtil.addSuccessMessage("Accommodation added with success.");
+		} else {
+			FacesMessageUtil.addErrorMessage("Error when added a accommodation.");
+		}
+	}
 
 
 	

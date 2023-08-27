@@ -176,7 +176,9 @@
 
 					<h:button value="Continue Shopping"
 						outcome="/views/organizer_session/homeForWebsite.xhtml"
-						class="btnContinue ml-2" />
+						class="btnContinue ml-4">
+						<f:param name="organizerId" value="#{organizerBean.organizerId}" />
+					</h:button>
 				</h:form>
 			</div>
 		</ui:define>

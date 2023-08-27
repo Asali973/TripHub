@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:ui="http://java.sun.com/jsf/facelets"
->
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
 <h:body>
@@ -19,6 +18,11 @@ xmlns:ui="http://java.sun.com/jsf/facelets"
 			<link rel="stylesheet"
 				href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css" />
 			<title>Package Details</title>
+			<style>
+.form-control.date-picker {
+	border-radius: 20px !important;
+}
+</style>
 
 		</ui:define>
 		<ui:define name="content">
@@ -69,7 +73,6 @@ xmlns:ui="http://java.sun.com/jsf/facelets"
 					<h:form>
 						<div class="d-flex justify-content-center">
 							<h:commandButton value="Add to Cart"
-
 								action="#{cartBean.addToCart}" class="btnCheckO">
 								<f:param name="selectedPackageId" value="#{param.id}" />
 								<f:param name="quantity" value="#{cartBean.selectedQuantity}" />

@@ -91,22 +91,20 @@ public class TransportationDAO{
 	        if (organizer == null) {
 	            throw new IllegalArgumentException("Organizer with ID " + userId + " not found.");
 	        }
-	        transportation.setOrganizer(organizer); // Supposons que cette méthode existe
+	        transportation.setOrganizer(organizer);
 	    } else if ("provider".equals(userType)) {
 	        Provider provider = em.find(Provider.class, userId);
 	        if (provider == null) {
 	            throw new IllegalArgumentException("Provider with ID " + userId + " not found.");
 	        }
-	        transportation.setProvider(provider); // Supposons que cette méthode existe
+	        transportation.setProvider(provider);
 	    }
 	    
-//		Picture picture = new Picture();
-//		picture.setLink(transportationvm.getLink());
+
 	    em.persist(picture);
 	    em.persist(service);
 	    em.persist(price);
 		em.persist(transportation);
-//		em.persist(picture);
 		
 		return transportation;
 	}
@@ -132,7 +130,6 @@ public class TransportationDAO{
 		transportation = em.merge(transportation);
 		em.flush();
 
-		// Convert the updated entity back to the view model and return it
 		return transportation.initTransportationViewModel();
 	}
 
@@ -142,7 +139,7 @@ public class TransportationDAO{
 	    if (transportation == null) {
 	        throw new IllegalArgumentException("Transportation with ID " + transportationvm.getId() + " not found.");
 	    }
-	    em.remove(transportation); // Remove the entity directly
+	    em.remove(transportation);
 	    em.flush();
 	}
 
@@ -195,5 +192,31 @@ public class TransportationDAO{
 		query.setParameter("providerId", providerId);
 		return query.getResultList();
 	}
+	
+	public boolean addTransportationToOrganizer(Long organizerId, Long transportationId) {
+	    try {
+
+	        Transportation transportation = em.find(Transportation.class, transportationId);
+	        if (transportation == null) {
+	            throw new IllegalArgumentException("Transportation with ID " + transportationId + " not found.");
+	        }
+
+	        Organizer organizer = em.find(Organizer.class, organizerId);
+	        if (organizer == null) {
+	            throw new IllegalArgumentException("Organizer with ID " + organizerId + " not found.");
+	        }
+
+	        transportation.setOrganizer(organizer);
+
+	        em.merge(transportation);
+	        em.flush();
+
+	        return true;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 
 }
