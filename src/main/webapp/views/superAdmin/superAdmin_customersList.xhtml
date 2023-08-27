@@ -28,16 +28,8 @@
 					<div class="card-body">
 						<h2 class="card-title text-center mb-5">List of our clients' Customers</h2>
 
-						<!-- Customers Button -->
-						<button
-							class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
-							type="button" data-toggle="collapse" data-target="#customerTab"
-							aria-expanded="false" aria-controls="customerTab">
-							<strong>Customers</strong>
-						</button>
-
 						<h:form id="customerForm">
-							<div class="collapse" id="customerTab">
+							<div id="customerTab">
 								<div class="table-responsive">
 									<h:dataTable value="#{customerBean.allCustomers}"
 										var="customer" styleClass="table table-hover table-striped">

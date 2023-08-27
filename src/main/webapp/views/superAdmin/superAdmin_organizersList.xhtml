@@ -28,17 +28,8 @@
 					<div class="card-body">
 						<h2 class="card-title text-center mb-5">List of Triphub Organizers</h2>
 
-						
-						<!-- Organizers Button -->
-						<button
-							class="btn btn-outline-dark btn-lg btn-block text-left mt-4 display-4"
-							type="button" data-toggle="collapse" data-target="#organizerTab"
-							aria-expanded="false" aria-controls="organizerTab">
-							<strong>Organizers</strong>
-						</button>
-
 						<h:form id="organizerForm">
-							<div class="collapse" id="organizerTab">
+							<div id="organizerTab">
 								<div class="table-responsive">
 									<h:dataTable value="#{organizerBean.allOrganizers}"
 										var="organizer" styleClass="table table-hover table-striped">
