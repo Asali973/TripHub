@@ -23,46 +23,6 @@
 				href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 			<title>Accommodation Details</title>
-			<style>
-.package-details {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	border-radius: 20px;
-	padding: 20px;
-	background-color: #f8f9fa;
-}
-
-.package-header h1, .package-header h2 {
-	margin-bottom: 30px;
-}
-
-.package-card {
-	border-radius: 20px;
-	border: none;
-	overflow: hidden;
-	margin-bottom: 10px;
-}
-
-.package-card img {
-	border-radius: 20px;
-	display: block;
-	margin: 0 auto;
-	max-width: 80%;
-	margin-bottom: 5px;
-}
-
-.package-text {
-	padding: 1em 2em;
-	font-size: 1.2em;
-}
-
-.package-text p {
-	margin-bottom: 1em;
-}
-
-.package-text strong {
-	font-size: 1.1em;
-}
-</style>
 
 		</ui:define>
 		<ui:define name="content">
@@ -72,7 +32,7 @@
 						accommodationBean.selectedAccommodation.name : 'Accommodation Not
 						Found'}</h2>
 				</div>
-
+				<!-- start card -->
 				<div class="package-card">
 					<h:graphicImage
 						value="/images/#{accommodationBean.selectedAccommodation.picture.link}"
@@ -99,6 +59,7 @@
 							#{accommodationBean.selectedAccommodation.accommodationType}
 						</p>
 					</div>
+
 					<h:form>
 						<div class="package-text">
 							<label for="availableFrom"> From*:</label>
@@ -108,27 +69,24 @@
 							<label for="availableTill"> To*:</label>
 							<h:inputText id="availableTill" class="form-control date-picker"></h:inputText>
 						</div>
+					</h:form>
+					<h:form>
+						<div class="d-flex justify-content-center">
+							<h:commandButton value="Add to Cart"
+								action="#{cartBean.addToCart}" class="btnCheckO">
+								<f:param name="selectedAccommodationId" value="#{param.id}" />
+								<f:param name="quantity" value="#{cartBean.selectedQuantity}" />
+								<f:param name="organizerId" value="#{organizerBean.organizerId}" />
+							</h:commandButton>
 
-						<h:form>
-							<div class="d-flex justify-content-center">
-								<h:commandButton value="Add to Cart"
-									action="#{cartBean.addToCart}" class="btnCheckO">
-									<f:param name="selectedAccommodationId" value="#{param.id}" />
-									<f:param name="quantity" value="#{cartBean.selectedQuantity}" />
-									<f:param name="organizerId"
-										value="#{organizerBean.organizerId}" />
-								</h:commandButton>
 
+								<h:outputLink
+								value="http://localhost:8080/triphub/views//customer_home.xhtml"
+								styleClass="btnContinue ml-4"> Continue Shopping</h:outputLink>
 
-								<h:button value="Continue Shopping"
-									outcome="/views/organizer_session/homeForWebsite.xhtml"
-									class="btnContinue ml-4">
-									<f:param name="organizerId"
-										value="#{organizerBean.organizerId}" />
-								</h:button>
-							</div>
+						</div>
 
-						</h:form>
+					</h:form>
 				</div>
 			</div>
 

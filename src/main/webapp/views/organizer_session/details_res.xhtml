@@ -3,9 +3,6 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:head>
-
-</h:head>
 
 <h:body>
 	<ui:composition template="#{organizerBean.userViewModel.xhtmlFile}">
@@ -121,12 +118,12 @@
 								<f:param name="organizerId" value="#{organizerBean.organizerId}" />
 							</h:commandButton>
 
+							<h:outputLink
+								value="http://localhost:8080/triphub/views//customer_home.xhtml"
+								styleClass="btnContinue ml-4"> Continue Shopping</h:outputLink>
 
-							<h:button value="Continue Shopping"
-								outcome="/views/organizer_session/homeForWebsite.xhtml"
-								class="btnContinue ml-4">
-								<f:param name="organizerId" value="#{organizerBean.organizerId}" />
-							</h:button>
+
+
 						</div>
 
 					</h:form>
