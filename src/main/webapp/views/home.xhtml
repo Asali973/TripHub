@@ -27,7 +27,7 @@
 					<!-- Brand/logo -->
 					<a class="navbar-brand" href="/triphub/views/home.xhtml"> <h:graphicImage
 							library="images" name="logo-rond-3.png" alt="Trip Hub"
-							style="width: 80px; height: 80px;" />
+							style="width: 125x; height: 125px;" />
 					</a>
 
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -39,81 +39,96 @@
 
 					<!-- Navigation links -->
 					<div class="collapse navbar-collapse" id="navbarNav">
-						<ul class="navbar-nav ml-auto">
+					<ul class="navbar-nav ml-auto">
 
-							<li class="nav-item"><a class="nav-link"
-								href="/triphub/views/loginAndAccount/login.xhtml">Sign In</a></li>
-
-
-
-							<li class="nav-item"><h:panelGroup
-									rendered="#{not empty sessionScope.user}">
-									<h:form id="logoutForm">
-										<h:commandLink action="#{loginBean.logout}" value="Logout"
-											styleClass="nav-link" />
-									</h:form>
-								</h:panelGroup></li>
-
-							<li class="nav-item"><h:panelGroup
-									rendered="#{not empty sessionScope.user}">
+						<li class="nav-item"><h:panelGroup
+								rendered="#{empty sessionScope.user}">
+								<h:form id="loginForm">
 									<a class="nav-link"
-										href="/triphub/views/loginAndAccount/ProfileUser.xhtml">Your
-										Profile</a>
-								</h:panelGroup></li>
+										href="/triphub/views/loginAndAccount/login.xhtml"><i
+										class="fas fa-sign-in-alt mr-2"></i>Sign In</a>
+								</h:form>
+							</h:panelGroup></li>
 
-							<li class="nav-item"><h:panelGroup
-									rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-									<a class="nav-link" href="/triphub/views/organizer_home.xhtml">Your
-										Space</a>
-								</h:panelGroup></li>
-
-							<li class="nav-item"><h:panelGroup
-									rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-									<a class="nav-link"
-										href="/triphub/views/product/TourpackageHome.xhtml">Your
-										Tour Package</a>
-								</h:panelGroup></li>
-
-							<li class="nav-item"><h:panelGroup
-									rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
-									<a class="nav-link" href="#">Services</a>
-								</h:panelGroup></li>
 
 
 							<li class="nav-item"><h:panelGroup
-									rendered="#{not empty sessionScope.user and sessionScope.userType eq 'provider'}">
-									<a class="nav-link" href="/triphub/views/provider_home.xhtml">Your
-										Space</a>
-								</h:panelGroup></li>
+								rendered="#{not empty sessionScope.user}">
+								<h:form id="logoutForm">
+									<h:commandLink action="#{loginBean.logout}"
+										styleClass="nav-link font1">
+										<i class="fas fa-sign-out-alt"></i> Logout</h:commandLink>
+								</h:form>
+							</h:panelGroup></li>
+
+							<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user}">
+								<a class="nav-link font1"
+									href="/triphub/views/loginAndAccount/ProfileUser.xhtml"><i
+									class="fas fa-user-circle mr-1"></i>Your Profile</a>
+							</h:panelGroup></li>
+
+							<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
+								<a class="nav-link" href="/triphub/views/organizer_home.xhtml"><i
+									class="fas fa-cogs"></i> Your Space</a>
+							</h:panelGroup></li>
+
+							<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
+								<a class="nav-link"
+									href="/triphub/views/product/TourpackageHome.xhtml"><i
+									class="fa-solid fa-earth-africa"></i> Your Tour Package</a>
+							</h:panelGroup></li>
+
+							<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'organizer'}">
+								<a class="nav-link" href="#"><i class="fa-solid fa-utensils"></i> Your Services</a>
+							</h:panelGroup></li>
+
+
+							<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'provider'}">
+								<a class="nav-link" href="/triphub/views/provider_home.xhtml">Your
+									Space</a>
+							</h:panelGroup></li>
 
 							<li class="nav-item"><h:panelGroup
 									rendered="#{not empty sessionScope.user and sessionScope.userType eq 'customer'}">
 									<a class="nav-link" href="/triphub/views/customer_home.xhtml">Your
 										Space</a>
 								</h:panelGroup></li>
+								
+							<li class="nav-item"><h:panelGroup
+								rendered="#{not empty sessionScope.user and sessionScope.userType eq 'customer'}">
+								<a class="nav-link" href="/triphub/views/customer_home.xhtml">Home</a>
+							</h:panelGroup></li>
 
 
 
-							<li class="nav-item dropdown"><h:panelGroup
-									rendered="#{empty sessionScope.user}">
+							<li class="nav-item dropdown">
+							<h:panelGroup rendered="#{empty sessionScope.user}">
 
-									<a class="nav-link dropdown-toggle" href="#"
-										id="navbarDropdown" role="button" data-toggle="dropdown"
-										aria-haspopup="true" aria-expanded="false"> Sign Up </a>
-									<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="navbarDropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+									role="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false"> <i class="fas fa-user-plus"></i>
+									Sign Up
+								</a>
 
-										<a class="dropdown-item"
-											href="/triphub/views/loginAndAccount/CustomerRegistration.xhtml">Sign
-											Up as a Customer</a> <a class="dropdown-item"
-											href="/triphub/views/loginAndAccount/ProviderRegistration.xhtml">Sign
-											Up as a Provider</a> <a class="dropdown-item"
-											href="/triphub/views/loginAndAccount/OrganizerRegistration.xhtml">Sign
-											Up as an Organizer</a> <a class="dropdown-item"
-											href="/triphub/views/loginAndAccount/SuperAdminRegistration.xhtml">Sign
-											Up as an Administrator</a>
-									</div>
-								</h:panelGroup></li>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="navbarDropdown">
+
+									<a class="dropdown-item"
+										href="/triphub/views/loginAndAccount/CustomerRegistration.xhtml">Sign
+										Up as a Customer</a> <a class="dropdown-item"
+										href="/triphub/views/loginAndAccount/ProviderRegistration.xhtml">Sign
+										Up as a Provider</a> <a class="dropdown-item"
+										href="/triphub/views/loginAndAccount/OrganizerRegistration.xhtml">Sign
+										Up as an Organizer</a> <a class="dropdown-item"
+										href="/triphub/views/loginAndAccount/SuperAdminRegistration.xhtml">Sign
+										Up as an Administrator</a>
+								</div>
+							</h:panelGroup></li>
 						</ul>
 					</div>
 				</div>
@@ -189,7 +204,7 @@
 			<section class='footer-top'>
 				<a href="/triphub/views/home.xhtml"> <h:graphicImage
 						library="images" name="logo-TRIPHUB-rond-blanc.png" alt="Trip Hub"
-						style="width: 30px; height: 30px;" /></a> <span class='social-links'>
+						style="width: 50px; height: 50px;" /></a> <span class='social-links'>
 					<a><h:graphicImage library="images" name="instagram.svg"
 							alt="Instagram" style="width: 24px; height: 24px;" /></a> <a><h:graphicImage
 							library="images" name="linkedin.svg" alt="LinkedIn"
@@ -203,18 +218,23 @@
 			<section class="footer-columns">
 				<section>
 					<menu>
-						<h3>Triphub 1</h3>
-						<li><a href="/triphub/views/home.xhtml">Section 1</a></li>
-						<li><a href="/triphub/views/home.xhtml">Section 2</a></li>
-						<li><a href="/triphub/views/home.xhtml">Section 3</a></li>
+						<h3>Who we are</h3>
+<!-- 						<li><a href="/triphub/views/home.xhtml">Section 1</a></li> -->
+<!-- 						<li><a href="/triphub/views/home.xhtml">Section 2</a></li> -->
+<!-- 						<li><a href="/triphub/views/home.xhtml">Section 3</a></li> -->
+
+						<li id="who-we-are">Connecting travel organizers, service providers, 
+						and customers, our platform offers a curated range of products. 
+						Organizers shine, customers discover — a modern hub for 
+						personalized travel experiences.</li>
 					</menu>
 				</section>
 				<section>
 					<menu>
-						<h3>Triphub 2</h3>
-						<li><a href="/triphub/views/home.xhtml">Section 1</a></li>
-						<li><a href="/triphub/views/home.xhtml">Section 2</a></li>
-						<li><a href="/triphub/views/home.xhtml">Section 3</a></li>
+						<h3>Useful links</h3>
+						<li><a href="/triphub/views/home.xhtml">Go to Organizer section</a></li>
+						<li><a href="/triphub/views/home.xhtml">Go to Provider section</a></li>
+						<li><a href="/triphub/views/home.xhtml">Go to Admin section</a></li>
 					</menu>
 				</section>
 				<section>
@@ -243,7 +263,14 @@
 
 	<script>
 	var typed = new Typed(".auto-type", {
-		strings:["is good", "helps you create your business", "is easy peasy to use", "brings you visibility"],
+		strings:["is awesome", 
+			"helps you create your business", 
+			"is easy to use", 
+			"brings you visibility",
+			"makes your ideas florish",
+			"strengthens your community",
+			"brings your business to the fore",
+			],
 	typeSpeed:100,
 	backSpeed:100,
 	loop:true

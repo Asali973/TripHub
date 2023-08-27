@@ -110,13 +110,9 @@ h2.card-title {
 
 .card {
 	margin: auto;
-	max-width: 800px;
+	max-width: 1500px;
 	border-radius: 20px;
 	background-color: #F0F0F0;
-}
-
-.container {
-	margin-top: 50px;
 }
 
 .table-hover tbody tr:hover {
