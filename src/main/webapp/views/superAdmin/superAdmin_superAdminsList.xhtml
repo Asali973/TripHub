@@ -34,26 +34,35 @@
 									<h:dataTable value="#{superAdminBean.allSuperAdmins}"
 										var="superAdmin" styleClass="table table-hover table-striped">
 										<h:column>
-											<f:facet name="header">Name</f:facet>
-                        #{superAdmin.user.lastName}
-                    </h:column>
-										<h:column>
 											<f:facet name="header">First Name</f:facet>
                         #{superAdmin.user.firstName}
                     </h:column>
+                    										<h:column>
+											<f:facet name="header">Last Name</f:facet>
+                        #{superAdmin.user.lastName}
+                    </h:column>
+
 										<h:column>
 											<f:facet name="header">Email</f:facet>
                         #{superAdmin.user.email}
                     </h:column>
 										<h:column>
-											<f:facet name="header">Delete</f:facet>
-											<h:commandButton value="Delete"
-												action="#{superAdminBean.deleteSuperAdmin}"
-												class="btn btn-customDelete btn-custom-signup"
-												onclick="return confirm('Are you sure you want to delete?');" />
-										</h:column>
+											<f:facet name="header">Phone</f:facet>
+                        #{superAdmin.user.phoneNum}
+                    </h:column>      
+                    
+                    <h:column>
+											<f:facet name="header">Address</f:facet>
+                        #{superAdmin.user.address.num}
+                        #{superAdmin.user.address.street}
+                        #{superAdmin.user.address.city}
+                        #{superAdmin.user.address.zipCode}
+                        #{superAdmin.user.address.state}
+                        #{superAdmin.user.address.country}
+                    </h:column>              
+                    
 										<h:column>
-											<f:facet name="header">Details</f:facet>
+<!-- 											<f:facet name="header">Edit</f:facet> -->
 											<h:commandButton value="Modify"
 												action="#{loginBean.loadUserData}"
 												class="btn btn-customUpdate btn-custom-signup mr-2">
@@ -61,6 +70,15 @@
 													value="#{superAdminr.user.id}" />
 											</h:commandButton>
 										</h:column>
+										
+										<h:column>
+<!-- 											<f:facet name="header">Delete</f:facet> -->
+											<h:commandButton value="Delete"
+												action="#{superAdminBean.deleteSuperAdmin}"
+												class="btn btn-customDelete btn-custom-signup"
+												onclick="return confirm('Are you sure you want to delete?');" />
+										</h:column>
+										
 									</h:dataTable>
 								</div>
 							</div>
