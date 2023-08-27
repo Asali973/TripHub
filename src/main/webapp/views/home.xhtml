@@ -117,23 +117,6 @@
 						</ul>
 					</div>
 				</div>
-
-
-				<h:panelGroup rendered="#{sessionScope.userType eq 'customer'}">
-					<p>Welcome, dear customer!</p>
-				</h:panelGroup>
-
-				<h:panelGroup rendered="#{sessionScope.userType eq 'organizer'}">
-					<p>Welcome, dear organizer!</p>
-				</h:panelGroup>
-
-				<h:panelGroup rendered="#{sessionScope.userType eq 'provider'}">
-					<p>Welcome, dear provider!</p>
-				</h:panelGroup>
-
-				<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
-					<p>Welcome, dear super admin!</p>
-				</h:panelGroup>
 			</nav>
 
 
@@ -194,47 +177,6 @@
 							begin!</h3>
 					</div>
 
-
-					<h:form>
-
-						<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
-							<h:commandButton value="Users list"
-								action="loginAndAccount/UserList" />
-						</h:panelGroup>
-
-						<h:commandButton value="Create Accommodation"
-							action="product/AccommodationForm" />
-						<h:commandButton value="Create Accommodation test"
-							action="product/AccommodationFormTest" />
-						<h:commandButton value="Create Transportation"
-							action="product/TransportationForm" />
-						<h:commandButton value="Search your Tour Packages"
-							action="product/TpAdvancedSearch" />
-						<h:commandButton value="Go to Tour Packages"
-							action="product/TourpackageHome" />
-						<h:commandButton value="Create Restaurant"
-							action="product/RestaurantForm" />
-						<h:commandButton value="Update Services"
-							action="product/UpdateServices" />
-						<h:commandButton action="product/AllServices"
-							value="See All Services" />
-
-					</h:form>
-					<h:panelGroup rendered="#{sessionScope.userType eq 'customer'}">
-						<p>Welcome, dear customer!</p>
-					</h:panelGroup>
-
-					<h:panelGroup rendered="#{sessionScope.userType eq 'organizer'}">
-						<p>Welcome, dear organizer!</p>
-					</h:panelGroup>
-
-					<h:panelGroup rendered="#{sessionScope.userType eq 'provider'}">
-						<p>Welcome, dear provider!</p>
-					</h:panelGroup>
-
-					<h:panelGroup rendered="#{sessionScope.userType eq 'superAdmin'}">
-						<p>Welcome, dear super admin!</p>
-					</h:panelGroup>
 				</div>
 			</div>
 		</div>
