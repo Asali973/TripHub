@@ -22,43 +22,9 @@
 			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 			<title>Transportation Details</title>
-</ui:define>
+		</ui:define>
 
 		<ui:define name="content">
-
-
-.form-control.date-picker {
-    border-radius: 20px !important;
-}
-
-.package-card {
-	border-radius: 20px;
-	border: none;
-	overflow: hidden;
-	margin-bottom: 10px;
-}
-
-.package-card img {
-	border-radius: 20px;
-	display: block;
-	margin: 0 auto;
-	max-width: 80%;
-	margin-bottom: 5px;
-}
-
-.package-text {
-	padding: 1em 2em;
-	font-size: 1.2em;
-}
-
-.package-text p {
-	margin-bottom: 1em;
-}
-
-.package-text strong {
-	font-size: 1.1em;
-}
-</style>
 
 			<div class="container2 mt-5 package-details">
 				<div class="text-center package-header">
@@ -117,13 +83,13 @@
 				</div>
 			</div>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
+			<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+			<script>
     document.addEventListener("DOMContentLoaded", function() {
         flatpickr(".date-picker", {});
     });
 </script>
-<script>
+			<script>
     $(document).ready(function(){
         // initialiser flatpickr pour les champs avec la classe date-picker
         $(".date-picker").flatpickr({
@@ -132,8 +98,8 @@
         });
     });
 </script>
-<h:outputScript library="javascript" name="servicesCrud.js" />
-</ui:define>
-</ui:composition>
+			<h:outputScript library="javascript" name="servicesCrud.js" />
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

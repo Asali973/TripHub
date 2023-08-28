@@ -6,15 +6,26 @@
 <h:body>
 	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
 		<ui:define name="additionalHeadContent">
-			<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
-			<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet" />
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
 			<h:outputStylesheet library="css" name="regForm.css" />
 			<h:outputStylesheet library="css" name="loginCss.css" />
 			<h:outputStylesheet library="css" name="checkout.css" />
-			<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
 		</ui:define>
-		<ui:define name="content">	
-		
+		<ui:define name="content">
+			<div class="header">
+				<a href="http://localhost:8080/triphub/views/superadmin_home.xhtml"
+					id="backBtn"> <i class="fa fa-arrow-left"></i> Back to Admin
+					Dashboard
+				</a>
+			</div>
 			<!-- Display the list -->
 			<div class="containerCart mt-10 mb-10 text-center"
 				style="max-width: 90%">
@@ -66,7 +77,8 @@
 										<!-- Add to Organizer button -->
 										<h:commandButton value="Add"
 											onclick="showSuccessMessage(); return true;"
-											actionListener="#{restaurantBean.addRestaurantToOrganizer}" styleClass="btn btn-sm btn-outline-secondary3">
+											actionListener="#{restaurantBean.addRestaurantToOrganizer}"
+											styleClass="btn btn-sm btn-outline-secondary3">
 											<f:param name="id" value="#{restaurant.id}" />
 										</h:commandButton>
 									</h:form></td>
@@ -96,7 +108,7 @@
 						action="#{restaurantBean.loadAllRestaurants()}"
 						styleClass="btnCheckO" />
 				</div>
-				<br/>
+				<br />
 			</h:form>
 
 			<!-- Display the accommodation list -->
@@ -188,8 +200,7 @@
 
 						<div class="text-center">
 							<!-- Advanced Search link -->
-							<h:outputLink
-								value="/triphub/views/product/AllServices.xhtml"
+							<h:outputLink value="/triphub/views/product/AllServices.xhtml"
 								styleClass="reg-btn-primary">
                             Advanced Search
                         </h:outputLink>
@@ -198,88 +209,88 @@
 					</div>
 				</h:form>
 			</div>
-			
+
 			<!-- Display the list -->
-				<div class="containerCart mt-10 mb-10 text-center"
-					style="max-width: 100%">
-					<h3>Available Transportations</h3>
-					<br />
-					<table class="table">
-						<thead>
+			<div class="containerCart mt-10 mb-10 text-center"
+				style="max-width: 100%">
+				<h3>Available Transportations</h3>
+				<br />
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price</th>
+							<th>Departure City</th>
+							<th>Departure Country</th>
+							<th>Arrival City</th>
+							<th>Arrival Country</th>
+							<th>From</th>
+							<th>Until</th>
+							<th>Description</th>
+							<th>Modify</th>
+							<th>Add</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat value="#{transportationBean.allTransportation}"
+							var="transportation">
 							<tr>
-								<th>Name</th>
-								<th>Price</th>
-								<th>Departure City</th>
-								<th>Departure Country</th>
-								<th>Arrival City</th>
-								<th>Arrival Country</th>
-								<th>From</th>
-								<th>Until</th>
-								<th>Description</th>
-								<th>Modify</th>
-								<th>Add</th>
-								<th>Delete</th>
+								<td>#{transportation.name}</td>
+								<td>#{transportation.service.price.amount}</td>
+								<td>#{transportation.departure.city}</td>
+								<td>#{transportation.departure.country}</td>
+								<td>#{transportation.arrival.city}</td>
+								<td>#{transportation.arrival.country}</td>
+								<td>#{transportation.service.availableFrom}</td>
+								<td>#{transportation.service.availableTill}</td>
+								<td>#{transportation.description}</td>
+								<td><h:form>
+										<!-- Update button -->
+										<h:commandButton value="Update"
+											action="#{transportationBean.initFormUpdate}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{transportation.id}" />
+										</h:commandButton>
+									</h:form></td>
+
+								<td><h:form>
+										<!-- Add to Organizer button -->
+										<h:commandButton value="Add"
+											onclick="showSuccessMessage(); return true;"
+											actionListener="#{transportationBean.addTransportationToOrganizer}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{transportation.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Delete button -->
+										<h:commandButton value="Delete"
+											actionListener="#{transportationBean.performDelete}"
+											styleClass="btn btn-sm btn-outline-secondary2"
+											onclick="return confirmDelete();">
+											<f:param name="id" value="#{transportation.id}" />
+										</h:commandButton>
+									</h:form></td>
 							</tr>
-						</thead>
-						<tbody>
-							<ui:repeat value="#{transportationBean.allTransportation}"
-								var="transportation">
-								<tr>
-									<td>#{transportation.name}</td>
-									<td>#{transportation.service.price.amount}</td>
-									<td>#{transportation.departure.city}</td>
-									<td>#{transportation.departure.country}</td>
-									<td>#{transportation.arrival.city}</td>
-									<td>#{transportation.arrival.country}</td>
-									<td>#{transportation.service.availableFrom}</td>
-									<td>#{transportation.service.availableTill}</td>
-									<td>#{transportation.description}</td>
-									<td><h:form>
-											<!-- Update button -->
-											<h:commandButton value="Update"
-												action="#{transportationBean.initFormUpdate}"
-												styleClass="btn btn-sm btn-outline-secondary3">
-												<f:param name="id" value="#{transportation.id}" />
-											</h:commandButton>
-										</h:form></td>
+						</ui:repeat>
 
-											<td><h:form>
-													<!-- Add to Organizer button -->
-													<h:commandButton value="Add"
-														onclick="showSuccessMessage(); return true;"
-														actionListener="#{transportationBean.addTransportationToOrganizer}"
-														styleClass="btn btn-sm btn-outline-secondary3">
-														<f:param name="id" value="#{transportation.id}" />
-													</h:commandButton>
-												</h:form></td>
-											<td><h:form>
-													<!-- Delete button -->
-													<h:commandButton value="Delete"
-														actionListener="#{transportationBean.performDelete}"
-														styleClass="btn btn-sm btn-outline-secondary2"
-														onclick="return confirmDelete();">
-														<f:param name="id" value="#{transportation.id}" />
-													</h:commandButton>
-												</h:form></td>
-								</tr>
-							</ui:repeat>
-
-							<h:panelGroup rendered="#{transportationBean.deletionSuccessful}">
-								<div class="alert alert-success" role="alert">Deletion of
-									transportation is successful, please refresh the list.</div>
-							</h:panelGroup>
-						</tbody>
-					</table>
+						<h:panelGroup rendered="#{transportationBean.deletionSuccessful}">
+							<div class="alert alert-success" role="alert">Deletion of
+								transportation is successful, please refresh the list.</div>
+						</h:panelGroup>
+					</tbody>
+				</table>
+			</div>
+			<h:form>
+				<div class="d-flex justify-content-center mt-4">
+					<h:commandButton value="Refresh the list"
+						action="#{transportationBean.loadTransportations()}"
+						styleClass="btnCheckO" />
 				</div>
-				<h:form>
-					<div class="d-flex justify-content-center mt-4">
-						<h:commandButton value="Refresh the list"
-							action="#{transportationBean.loadTransportations()}"
-							styleClass="btnCheckO" />
-					</div>
-				</h:form>
-			
-			
+			</h:form>
+
+
 			<h:outputScript library="javascript" name="createNdisplayList.js" />
 			<h:outputScript library="javascript" name="loginJs.js" />
 			<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -274,4 +274,19 @@ span.price {
 .table-hover tbody tr:hover {
 	background-color: #eaeaea;
 }
+.header {
+    display: flex;
+    justify-content: flex-end;
+}
+.header a#backBtn {
+	float: right;
+    text-decoration: none;
+    color: #333; /* Or any color you prefer */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f4f4f4; /* Light gray background */
+}
 
+.header a#backBtn:hover {
+    background-color: #ddd; /* Slightly darker gray for hover effect */
+}

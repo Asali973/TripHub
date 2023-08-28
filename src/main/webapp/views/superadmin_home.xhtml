@@ -14,6 +14,7 @@
 				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
 				rel="stylesheet" />
 			<h:outputStylesheet library="css" name="organizer_home.css" />
+			
 			<style>
 /* CSS to hide the create form container initially */
 #createFormContainer {
@@ -29,12 +30,13 @@
 						page!</h1>
 					<div class="card">
 						<div class="card-body">
-						<!-- The button to toggle the search form visibility -->
-                    <div class="text-center">
-                        <button class="btn btn-primary mb-3" onclick="toggleCreateForm()">Search User</button>
-                    </div>
+							<!-- The button to toggle the search form visibility -->
+							<div class="text-center">
+								<button class="btn btn-primary mb-3"
+									onclick="toggleCreateForm()">Search User</button>
+							</div>
 							<!-- search bar start here -->
-							<div class="text-center mt-2 mb-5"  id="createFormContainer">
+							<div class="text-center mt-2 mb-5" id="createFormContainer">
 								<h:form id="searchForm">
 
 									<!-- Row 1: 4 search boxes -->
@@ -96,13 +98,89 @@
 										<div class="col-md-4 text-right">
 											<h:commandButton value="Search by criteria"
 												action="#{loginBean.performUserSearch}"
-												class="btn btn-primary mt-4" />
+												class="btn btn-primary mt-4" >
+											</h:commandButton>
+
 										</div>
 									</div>
 								</h:form>
 								<h:messages globalOnly="true" styleClass="alert alert-info" />
 							</div>
+						
+							<!-- hidden table -->
+							<div id="resultsContainer" class="mt-5">
+    <div class="mt-5">
+        <h:dataTable value="#{loginBean.searchResults}" var="user"
+                     styleClass="table table-hover table-striped">
+            <!-- User attributes -->
+            <h:column>
+                <f:facet name="header">First Name</f:facet>
+                #{user.firstName}
+            </h:column>
 
+            <h:column>
+                <f:facet name="header">Last Name</f:facet>
+                #{user.lastName}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Email</f:facet>
+                #{user.email}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">N*</f:facet>
+                #{user.address.num}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Street</f:facet>
+                #{user.address.street}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">City</f:facet>
+                #{user.address.city}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">State</f:facet>
+                #{user.address.state}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Country</f:facet>
+                #{user.address.country}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">ZipCode</f:facet>
+                #{user.address.zipCode}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Phone</f:facet>
+                #{user.phoneNum}
+            </h:column>
+
+            <!-- Update button -->
+            <h:column>
+                <h:commandButton value="Modify"
+                                 action="#{loginBean.loadUserData}"
+                                 styleClass="btn btn-sm btn-outline-secondary3">
+                    <f:param name="selectedUserId" value="#{superAdmin.user.id}" />
+                </h:commandButton>
+            </h:column>
+
+            <h:column>
+                <h:commandButton value="Delete"
+                                 action="#{superAdminBean.deleteSuperAdmin}"
+                                 styleClass="btn btn-sm btn-outline-secondary3"
+                                 onclick="return confirm('Are you sure you want to delete?');" />
+            </h:column>
+        </h:dataTable>
+    </div>
+</div>
 
 							<!--  cards start from here -->
 							<h:form>
