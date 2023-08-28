@@ -1,6 +1,7 @@
 :root {
 	--color-background : #242c3d;
 	--gray: white;
+	font-family: 'Poppins', sans-serif;
 }
 
 html, body {
@@ -10,7 +11,6 @@ html, body {
 body {
 	display: flex;
 	flex-direction: column;
-	font-family: 'Arial', sans-serif;
 	background-color: #f4f5f7;
 	display: flex;
 	flex-direction: column;
@@ -18,10 +18,9 @@ body {
 
 }
 
-
 .background-image{
 	max-width: 100%;
-	height:800px;
+	height:100vh;
  	background-image: url("/triphub/resources/images/homepageBackground.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
@@ -58,14 +57,9 @@ body {
 	font-family: "Courier New", monospace;
 }
 
-
 .content-wrapper {
 	flex: 1 0 auto; /* to stick the footer where it belongs */
 }
-
-/* .navbar { */
-/* 	box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); */
-/* } */
 
 .navbar, .footer {
 	border-radius: 0px; /* Ajoute des coins arrondis, Gradient léger */
@@ -75,7 +69,7 @@ body {
 	color: var(--gray) !important;
 	transition: all 0.3s; /* Transition douce pour tous les changements */
 	transition: transform 0.3s; /* Transformation (agrandissement) */
-	
+	font-weight:600;
 }
 
 .nav-link:hover {
@@ -158,11 +152,13 @@ footer {
 	color: white;
 	margin-top: 0;
 	margin-bottom: 25px;
-	font-size: 1.125rem;
+	font-size: 1.25rem;
+	font-weight:700;
 }
 
 .footer-columns>section {
 	min-width: 180px;
+	max-width:300px;
 	text-align: center;
 }
 
@@ -206,5 +202,25 @@ footer {
 .footer-bottom>small {
 	font-size: 16px;
 	margin: 0 4px;
+}
+
+.btn-primary {
+    background-color: rgb(22, 67, 89);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #8e5e23;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+    outline: none;
 }
 

@@ -29,29 +29,19 @@
 							page</h2>
 						<h:form>
 							<div class="mt-4">
-								<h:outputText value="Primary Color:" class="d-block mb-2" />
+								<h:outputText value="Choose a background color:" class="d-block mb-2" />
 								<h:inputText id="primaryColor" a:type="color"
 									class="form-control mb-3"
 									value="#{organizerBean.userViewModel.primaryColor}" />
 
-								<h:outputText value="Secondary Color:" class="d-block mb-2" />
+								<h:outputText value="Header and footer color:" class="d-block mb-2" />
 								<h:inputText id="secondaryColor" a:type="color"
 									class="form-control mb-3"
 									value="#{organizerBean.userViewModel.secondaryColor}" />
 
-								<h:outputText value="Primary Font:" class="d-block mb-2" />
+								<h:outputText value="Select a font for your text:" class="d-block mb-2" />
 								<h:selectOneMenu
 									value="#{organizerBean.userViewModel.primaryFont}"
-									class="form-control mb-3">
-									<f:selectItem itemLabel="Arial" itemValue="Arial" />
-									<f:selectItem itemLabel="Verdana" itemValue="Verdana" />
-									<f:selectItem itemLabel="Times New Roman"
-										itemValue="Times New Roman" />
-								</h:selectOneMenu>
-
-								<h:outputText value="Secondary Font:" class="d-block mb-2" />
-								<h:selectOneMenu
-									value="#{organizerBean.userViewModel.secondaryFont}"
 									class="form-control mb-3">
 									<f:selectItem itemLabel="Arial" itemValue="Arial" />
 									<f:selectItem itemLabel="Verdana" itemValue="Verdana" />

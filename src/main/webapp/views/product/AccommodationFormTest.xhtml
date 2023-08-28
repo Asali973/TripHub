@@ -53,9 +53,8 @@
 										styleClass="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="typeAccommodation"
-										value="Type:" required="true"
-										requiredMessage="Type is required." />
+									<h:outputLabel for="typeAccommodation" value="Type:"
+										required="true" requiredMessage="Type is required." />
 									<h:selectOneMenu id="typeAccommodation"
 										value="#{accommodationBean.accommodationVm.accommodationType}"
 										class="form-control" required="true">
@@ -251,81 +250,84 @@
 				style="max-width: 100%">
 				<h3>Available Accommodation</h3>
 				<br />
-					<table class="table">
-						<thead>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price</th>
+							<th>Number</th>
+							<th>Street</th>
+							<th>City</th>
+							<th>State</th>
+							<th>ZipCode</th>
+							<th>Country</th>
+							<th>From</th>
+							<th>Until</th>
+							<th>Description</th>
+							<th>Modify</th>
+							<th>Add</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat value="#{accommodationBean.allAccommodation}"
+							var="accommodation">
 							<tr>
-								<th>Name</th>
-								<th>Price</th>
-								<th>Number</th>
-								<th>Street</th>
-								<th>City</th>
-								<th>State</th>
-								<th>ZipCode</th>
-								<th>Country</th>
-								<th>From</th>
-								<th>Until</th>
-								<th>Description</th>
-								<th>Modify</th>
-								<th>Delete</th>
+								<td>#{accommodation.name}</td>
+								<td>#{accommodation.service.price.amount}</td>
+								<td>#{accommodation.address.num}</td>
+								<td>#{accommodation.address.street}</td>
+								<td>#{accommodation.address.city}</td>
+								<td>#{accommodation.address.state}</td>
+								<td>#{accommodation.address.zipCode}</td>
+								<td>#{accommodation.address.country}</td>
+								<td>#{accommodation.service.availableFrom}</td>
+								<td>#{accommodation.service.availableTill}</td>
+								<td>#{accommodation.description}</td>
+								<td><h:form>
+										<!-- Update button -->
+										<h:commandButton value="Update"
+											action="#{accommodationBean.initFormUpdate}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{accommodation.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Add to Organizer button -->
+										<h:commandButton value="Add"
+											onclick="showSuccessMessage(); return true;"
+											actionListener="#{accommodationBean.addAccommodationToOrganizer}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{accommodation.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Delete button -->
+										<h:commandButton value="Delete"
+											actionListener="#{accommodationBean.performDelete}"
+											styleClass="btn btn-sm btn-outline-secondary2"
+											onclick="return confirmDelete();">
+											<f:param name="id" value="#{accommodation.id}" />
+										</h:commandButton>
+									</h:form></td>
 							</tr>
-						</thead>
-						<tbody>
-							<ui:repeat value="#{accommodationBean.allAccommodation}"
-								var="accommodation">
-								<tr>
-									<td>#{accommodation.name}</td>
-									<td>#{accommodation.service.price.amount}</td>
-									<td>#{accommodation.address.num}</td>
-									<td>#{accommodation.address.street}</td>
-									<td>#{accommodation.address.city}</td>
-									<td>#{accommodation.address.state}</td>
-									<td>#{accommodation.address.zipCode}</td>
-									<td>#{accommodation.address.country}</td>
-									<td>#{accommodation.service.availableFrom}</td>
-									<td>#{accommodation.service.availableTill}</td>
-									<td>#{accommodation.description}</td>
-									<td><h:form>
-											<!-- Update button -->
-											<h:commandButton value="Update"
-												action="#{accommodationBean.initFormUpdate}"
-												styleClass="btn btn-sm btn-outline-secondary3">
-												<f:param name="id" value="#{accommodation.id}" />
-											</h:commandButton>
-										</h:form></td>
-									<td><h:form>
-											<!-- Delete button -->
-											<h:commandButton value="Delete"
-												actionListener="#{accommodationBean.performDelete}"
-												styleClass="btn btn-sm btn-outline-secondary2"
-												onclick="return confirmDelete();">
-												<f:param name="id" value="#{accommodation.id}" />
-											</h:commandButton>
-										</h:form></td>
-								</tr>
-							</ui:repeat>
+						</ui:repeat>
 
-							<h:panelGroup rendered="#{tourPackageBean.deletionSuccessful}">
-								<div class="alert alert-success" role="alert">Deletion of
-									tour package is successful, please refresh the list.</div>
-							</h:panelGroup>
-						</tbody>
-					</table>
+						<h:panelGroup rendered="#{tourPackageBean.deletionSuccessful}">
+							<div class="alert alert-success" role="alert">Deletion of
+								tour package is successful, please refresh the list.</div>
+						</h:panelGroup>
+					</tbody>
+				</table>
+			</div>
+			<h:form>
+				<div class="d-flex justify-content-center mt-4">
+					<h:commandButton value="Refresh the list"
+						action="#{accommodationBean.loadAllAccommodations}"
+						styleClass="btnCheckO" />
 				</div>
-				<h:form>
-					<div class="d-flex justify-content-center mt-4">
-						<h:commandButton value="Refresh the list"
-							action="#{accommodationBean.loadAllAccommodations}"
-							styleClass="btnCheckO" />
-
-
-
-
-						<h:button value="Continue Shopping"
-							outcome="/views/organizer_session/homeForWebsite.xhtml"
-							class="btnContinue ml-4" />
-					</div>
-				</h:form>
-
+			</h:form>
+			<br />
 
 			<h:outputScript library="javascript" name="createNdisplayList.js" />
 			<h:outputScript library="javascript" name="loginJs.js" />
@@ -336,6 +338,12 @@
 			<script
 				src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js">
 			</script>
+			<script type="text/javascript">
+    function showSuccessMessage() {
+        alert('Accommodation added successfully!');
+    }
+</script>
+
 
 			<script>
     document.addEventListener("DOMContentLoaded", function() {

@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
+import triphub.dao.service.TransportationDAO;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
 import triphub.entity.subservices.TransportationType;
@@ -29,6 +30,9 @@ public class TransportationBean implements Serializable {
 
 	@Inject
 	private TransportationService transportationService;
+	
+	@Inject
+	private TransportationDAO transportationDao;
 
 	private static final long serialVersionUID = 1L;
 
@@ -241,31 +245,43 @@ public class TransportationBean implements Serializable {
 	    return transportationService.getTransportationForOrganizer(userId);
 	}
 
+	public void addTransportationToOrganizer() {
+		String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("userType");
+		Long userId;
 
+		if ("organizer".equals(userType)) {
+			userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("organizerId");
+		} else {
+			FacesMessageUtil.addErrorMessage("Only an organizer can add a transportation");
+			return;
+		}
 
-	
-//	public List<Transportation> getCurrentUserTransportations() {
-//		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-//
-//		String userType = (String) externalContext.getSessionMap().get("userType");
-//
-//		if ("organizer".equals(userType)) {
-//			Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
-//			if (organizerId == null) {
-//				return new ArrayList<>();
-//			}
-//			return transportationService.getTransportationForOrganizer(organizerId);
-//		} else if ("provider".equals(userType)) {
-//			Long providerId = (Long) externalContext.getSessionMap().get("providerId");
-//			if (providerId == null) {
-//				return new ArrayList<>();
-//			}
-//			return transportationService.getTransportationForProvider(providerId);
-//		} else {
-//
-//			return new ArrayList<>();
-//		}
-//	}
+		String transportationIdParam = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
+				.get("id");
+
+		if (transportationIdParam == null) {
+			FacesMessageUtil.addErrorMessage("Select a transportation.");
+			return;
+		}
+
+		Long selectedTransportationIdToAdd;
+		try {
+			selectedTransportationIdToAdd = Long.parseLong(transportationIdParam);
+		} catch (NumberFormatException e) {
+			FacesMessageUtil.addErrorMessage("Transportation id no valid.");
+			return;
+		}
+
+		boolean result = transportationDao.addTransportationToOrganizer(userId, selectedTransportationIdToAdd);
+
+		if (result) {
+			FacesMessageUtil.addSuccessMessage("Transportation added with success.");
+		} else {
+			FacesMessageUtil.addErrorMessage("Error when added a transportation.");
+		}
+	}
+
 
 	public List<Transportation> findByType(TransportationType transportationType) {
 		return transportationService.findByType(transportationType);

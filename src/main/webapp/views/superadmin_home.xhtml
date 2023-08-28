@@ -14,6 +14,7 @@
 				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
 				rel="stylesheet" />
 			<h:outputStylesheet library="css" name="organizer_home.css" />
+			
 			<style>
 /* CSS to hide the create form container initially */
 #createFormContainer {
@@ -29,12 +30,13 @@
 						page!</h1>
 					<div class="card">
 						<div class="card-body">
-						<!-- The button to toggle the search form visibility -->
-                    <div class="text-center">
-                        <button class="btn btn-primary mb-3" onclick="toggleCreateForm()">Search User</button>
-                    </div>
+							<!-- The button to toggle the search form visibility -->
+							<div class="text-center">
+								<button class="btn btn-primary mb-3"
+									onclick="toggleCreateForm()">Search User</button>
+							</div>
 							<!-- search bar start here -->
-							<div class="text-center mt-2 mb-5"  id="createFormContainer">
+							<div class="text-center mt-2 mb-5" id="createFormContainer">
 								<h:form id="searchForm">
 
 									<!-- Row 1: 4 search boxes -->
@@ -96,13 +98,16 @@
 										<div class="col-md-4 text-right">
 											<h:commandButton value="Search by criteria"
 												action="#{loginBean.performUserSearch}"
-												class="btn btn-primary mt-4" />
+												class="btn btn-primary mt-4" >
+											</h:commandButton>
+
 										</div>
 									</div>
 								</h:form>
 								<h:messages globalOnly="true" styleClass="alert alert-info" />
 							</div>
-
+						
+						
 
 							<!--  cards start from here -->
 							<h:form>
@@ -188,7 +193,7 @@
 										</h:link>
 									</div>
 									<div class="col-md-4">
-										<h:link outcome="/views/product/AllServices.xhtml">
+										<h:link outcome="/views/product/serviceList.xhtml">
 											<div class="card clickable-card">
 												<div class="card-body d-flex flex-column">
 													<h4 class="card-title mt-0">Service List</h4>

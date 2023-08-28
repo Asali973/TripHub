@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
+		<ui:define name="additionalHeadContent">
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+			<h:outputStylesheet library="css" name="regForm.css" />
+			<h:outputStylesheet library="css" name="loginCss.css" />
+			<h:outputStylesheet library="css" name="checkout.css" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
+		</ui:define>
+		<ui:define name="content">
+
+
+			<div class="d-flex justify-content-end mt-4">
+				<!-- Advanced Search link -->
+				<h:outputLink value="/triphub/views/product/AllServices.xhtml"
+					styleClass="btn btn-sm btn-outline-secondary3">
+        Advanced Search
+    </h:outputLink>
+			</div>
+
+
+			<!-- Display the list -->
+			<div class="containerCart mt-10 mb-10 text-center"
+				style="max-width: 100%">
+				<h3>Available Restaurants</h3>
+				<br />
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price</th>
+							<th>Number</th>
+							<th>Street</th>
+							<th>City</th>
+							<th>State</th>
+							<th>ZipCode</th>
+							<th>Country</th>
+							<th>availableFrom</th>
+							<th>availableUntil</th>
+							<th>Description</th>
+							<th>Modify</th>
+							<th>Add</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat value="#{restaurantBean.allRestaurants}"
+							var="restaurant">
+							<tr>
+								<td>#{restaurant.name}</td>
+								<td>#{restaurant.service.price.amount}</td>
+								<td>#{restaurant.address.num}</td>
+								<td>#{restaurant.address.street}</td>
+								<td>#{restaurant.address.city}</td>
+								<td>#{restaurant.address.state}</td>
+								<td>#{restaurant.address.zipCode}</td>
+								<td>#{restaurant.address.country}</td>
+								<td>#{restaurant.service.availableFrom}</td>
+								<td>#{restaurant.service.availableTill}</td>
+								<td>#{restaurant.description}</td>
+								<td><h:form>
+										<!-- Update button -->
+										<h:commandButton value="Update"
+											action="#{restaurantBean.initFormUpdate}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{restaurant.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Add to Organizer button -->
+										<h:commandButton value="Add"
+											onclick="showSuccessMessage(); return true;"
+											actionListener="#{restaurantBean.addRestaurantToOrganizer}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{restaurant.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Delete button -->
+										<h:commandButton value="Delete"
+											actionListener="#{restaurantBean.performDelete}"
+											styleClass="btn btn-sm btn-outline-secondary2"
+											onclick="return confirmDelete();">
+											<f:param name="id" value="#{restaurant.id}" />
+										</h:commandButton>
+									</h:form></td>
+
+							</tr>
+						</ui:repeat>
+
+						<h:panelGroup rendered="#{restaurantBean.deletionSuccessful}">
+							<div class="alert alert-success" role="alert">Deletion of
+								restaurant is successful, please refresh the list.</div>
+						</h:panelGroup>
+					</tbody>
+				</table>
+			</div>
+			<h:form>
+				<div class="d-flex justify-content-center mt-4">
+					<h:commandButton value="Refresh the list"
+						action="#{restaurantBean.loadAllRestaurants()}"
+						styleClass="btnCheckO" />
+				</div>
+				<br />
+			</h:form>
+
+			<!-- Display the accommodation list -->
+			<div class="containerCart mt-10 mb-10 text-center"
+				style="max-width: 100%">
+				<h3>Available Accommodation</h3>
+				<table class="table">
+					<thead>
+						<tr>
+						
+							<th>Name</th>
+							<th>Price</th>
+							<th>Currency</th>
+							<th>Number</th>
+							<th>Street</th>
+							<th>City</th>
+							<th>State</th>
+							<th>ZipCode</th>
+							<th>Country</th>
+							<th>availableFrom</th>
+							<th>availableUntil</th>
+							<th>Description</th>
+							<th>Modify</th>
+							<th>Add</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat value="#{accommodationBean.allAccommodation}"
+							var="accommodation">
+							<tr>
+								<td>#{accommodation.name}</td>
+								<td>#{accommodation.service.price.amount}</td>
+								<td>#{accommodation.service.price.currency}</td>
+								<td>#{accommodation.address.num}</td>
+								<td>#{accommodation.address.street}</td>
+								<td>#{accommodation.address.city}</td>
+								<td>#{accommodation.address.state}</td>
+								<td>#{accommodation.address.zipCode}</td>
+								<td>#{accommodation.address.country}</td>
+								<td>#{accommodation.service.availableFrom}</td>
+								<td>#{accommodation.service.availableTill}</td>
+								<td>#{accommodation.description}</td>
+
+								<td><h:form>
+										<!-- Update button -->
+										<h:commandButton value="Update"
+											action="#{accommodationBean.initFormUpdate}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{accommodation.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Add to Organizer button -->
+										<h:commandButton value="Add"
+											onclick="showSuccessMessage(); return true;"
+											actionListener="#{accommodationBean.addAccommodationToOrganizer}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{accommodation.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Delete button -->
+										<h:commandButton value="Delete"
+											actionListener="#{accommodationBean.performDelete}"
+											styleClass="btn btn-sm btn-outline-secondary3"
+											onclick="return confirmDeleteAccom();">
+											<f:param name="id" value="#{accommodation.id}" />
+										</h:commandButton>
+									</h:form></td>
+							</tr>
+						</ui:repeat>
+						<h:panelGroup rendered="#{accommodationBean.deletionSuccessful}">
+							<div class="alert alert-success" role="alert">Deletion of
+								Accommodation is successful, please refresh the list.</div>
+						</h:panelGroup>
+					</tbody>
+				</table>
+			</div>
+			<div class="button-container">
+				<h:form>
+					<div class="button-row">
+						<div class="text-center">
+							<!-- Refresh the list button -->
+							<h:commandButton value="Refresh the list"
+								action="#{accommodationBean.loadAllAccommodations}"
+								styleClass="btnCheckO" />
+						</div>
+
+					</div>
+				</h:form>
+			</div>
+
+			<!-- Display the list -->
+			<div class="containerCart mt-10 mb-10 text-center"
+				style="max-width: 100%">
+				<h3>Available Transportations</h3>
+				<br />
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price</th>
+							<th>Departure City</th>
+							<th>Departure Country</th>
+							<th>Arrival City</th>
+							<th>Arrival Country</th>
+							<th>From</th>
+							<th>Until</th>
+							<th>Description</th>
+							<th>Modify</th>
+							<th>Add</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat value="#{transportationBean.allTransportation}"
+							var="transportation">
+							<tr>
+								<td>#{transportation.name}</td>
+								<td>#{transportation.service.price.amount}</td>
+								<td>#{transportation.departure.city}</td>
+								<td>#{transportation.departure.country}</td>
+								<td>#{transportation.arrival.city}</td>
+								<td>#{transportation.arrival.country}</td>
+								<td>#{transportation.service.availableFrom}</td>
+								<td>#{transportation.service.availableTill}</td>
+								<td>#{transportation.description}</td>
+								<td><h:form>
+										<!-- Update button -->
+										<h:commandButton value="Update"
+											action="#{transportationBean.initFormUpdate}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{transportation.id}" />
+										</h:commandButton>
+									</h:form></td>
+
+								<td><h:form>
+										<!-- Add to Organizer button -->
+										<h:commandButton value="Add"
+											onclick="showSuccessMessage(); return true;"
+											actionListener="#{transportationBean.addTransportationToOrganizer}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{transportation.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Delete button -->
+										<h:commandButton value="Delete"
+											actionListener="#{transportationBean.performDelete}"
+											styleClass="btn btn-sm btn-outline-secondary2"
+											onclick="return confirmDelete();">
+											<f:param name="id" value="#{transportation.id}" />
+										</h:commandButton>
+									</h:form></td>
+							</tr>
+						</ui:repeat>
+
+						<h:panelGroup rendered="#{transportationBean.deletionSuccessful}">
+							<div class="alert alert-success" role="alert">Deletion of
+								transportation is successful, please refresh the list.</div>
+						</h:panelGroup>
+					</tbody>
+				</table>
+			</div>
+			<h:form>
+				<div class="d-flex justify-content-center mt-4">
+					<h:commandButton value="Refresh the list"
+						action="#{transportationBean.loadTransportations()}"
+						styleClass="btnCheckO" />
+				</div>
+			</h:form>
+
+
+			<h:outputScript library="javascript" name="createNdisplayList.js" />
+			<h:outputScript library="javascript" name="loginJs.js" />
+			<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+			<script
+				src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+	</script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js">
+			</script>
+
+			<script type="text/javascript">
+    function showSuccessMessage() {
+        alert('Accommodation added successfully!');
+    }
+</script>
+
+			<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        flatpickr(".date-picker", {});
+    });
+</script>
+			<script>
+    $(document).ready(function(){
+        // initialiser flatpickr pour les champs avec la classe date-picker
+        $(".date-picker").flatpickr({
+            dateFormat: "Y-m-d",
+            enableTime: false
+        });
+    });
+</script>
+			<h:outputScript library="javascript" name="servicesCrud.js" />
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

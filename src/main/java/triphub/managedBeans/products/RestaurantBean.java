@@ -35,8 +35,8 @@ public class RestaurantBean implements Serializable {
 
 //	@Inject
 	private SubServicesViewModel restaurantvm = new SubServicesViewModel();
-	// @Inject
-	// RestaurantDAO restaurantDao;
+	@Inject
+	private RestaurantDAO restaurantDao;
 
 	private List<Restaurant> allRestaurants;
 	private Restaurant lastRestaurantAdded;
@@ -50,6 +50,8 @@ public class RestaurantBean implements Serializable {
 	
 	private Part pictureRestaurant;
 	private String picName;
+	
+	private Long selectedRestaurantIdToAdd;
 
 	public RestaurantBean(RestaurantService restaurantService, SubServicesViewModel restaurantvm,
 			List<Restaurant> allRestaurants) {
@@ -241,6 +243,42 @@ public class RestaurantBean implements Serializable {
 
 		return null;
 	}
+	
+	public void addRestaurantToOrganizer() {
+	    String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userType");
+	    Long userId;
+
+	    if ("organizer".equals(userType)) {
+	        userId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("organizerId");
+	    } else {
+	        FacesMessageUtil.addErrorMessage("Only an organizer can add a restaurant");
+	        return;
+	    }
+	    
+	    String restaurantIdParam = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+	    
+	    if (restaurantIdParam == null) {
+	        FacesMessageUtil.addErrorMessage("Select a restaurant.");
+	        return;
+	    }
+	    
+	    Long selectedRestaurantIdToAdd;
+	    try {
+	        selectedRestaurantIdToAdd = Long.parseLong(restaurantIdParam);
+	    } catch (NumberFormatException e) {
+	        FacesMessageUtil.addErrorMessage("Restaurant id no valid.");
+	        return;
+	    }
+
+	    boolean result = restaurantDao.addRestaurantToOrganizer(userId, selectedRestaurantIdToAdd);
+
+	    if (result) {
+	        FacesMessageUtil.addSuccessMessage("Restaurant added with success.");
+	    } else {
+	        FacesMessageUtil.addErrorMessage("Error when added a restaurant.");
+	    }
+	}
+
 
 
 	public List<Restaurant> getAllRestaurants() {
@@ -329,6 +367,14 @@ public class RestaurantBean implements Serializable {
 
 	public void setDeletionSuccessful(boolean deletionSuccessful) {
 		this.deletionSuccessful = deletionSuccessful;
+	}
+	
+	public Long getSelectedRestaurantIdToAdd() {
+	    return selectedRestaurantIdToAdd;
+	}
+
+	public void setSelectedRestaurantIdToAdd(Long selectedRestaurantIdToAdd) {
+	    this.selectedRestaurantIdToAdd = selectedRestaurantIdToAdd;
 	}
 
 }

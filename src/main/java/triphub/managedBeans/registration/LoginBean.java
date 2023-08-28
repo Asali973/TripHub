@@ -31,7 +31,7 @@ public class LoginBean implements Serializable {
 	
 	private String userType;
 	private User user;
-
+	private List<User> searchResults;
 	public LoginBean() {
 	}
 
@@ -215,7 +215,7 @@ public class LoginBean implements Serializable {
 
 	    // Call the service method
 	    List<User> searchResults = userService.advancedSearch(firstName, lastName, city, street, zipCode, country, email, phoneNum, CCNumber);
-
+	    setSearchResults(searchResults);
 	    // Process the search results
 	    if (searchResults.isEmpty()) {
 	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No users found based on the given criteria.", null);
@@ -277,6 +277,12 @@ public class LoginBean implements Serializable {
 		this.user = user;
 	}
 	
-	
+	public List<User> getSearchResults() {
+	    return searchResults;
+	}
+
+	public void setSearchResults(List<User> searchResults) {
+	    this.searchResults = searchResults;
+	}
 	
 }
