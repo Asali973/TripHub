@@ -78,10 +78,10 @@ $(document).ready(function() {
 	// Show/hide password
 	$('#togglePasswordO').click(function() {
 		var input = $('#passwordO');
-		if (input.attr('type') == 'passwordO') {
+		if (input.attr('type') == 'password') {
 			input.attr('type', 'text');
 		} else {
-			input.attr('type', 'passwordO');
+			input.attr('type', 'password');
 		}
 	});
 
@@ -139,10 +139,10 @@ $(document).ready(function() {
 	// Show/hide password
 	$('#togglePasswordP').click(function() {
 		var input = $('#passwordP');
-		if (input.attr('type') == 'passwordP') {
+		if (input.attr('type') == 'password') {
 			input.attr('type', 'text');
 		} else {
-			input.attr('type', 'passwordP');
+			input.attr('type', 'password');
 		}
 	});
 
@@ -198,12 +198,12 @@ $(document).ready(function() {
 	});
 
 	// Show/hide password
-	$('#toggleSasswordS').click(function() {
+	$('#togglePasswordS').click(function() {
 		var input = $('#passwordS');
-		if (input.attr('type') == 'passwordS') {
+		if (input.attr('type') == 'password') {
 			input.attr('type', 'text');
 		} else {
-			input.attr('type', 'passwordS');
+			input.attr('type', 'password');
 		}
 	});
 
