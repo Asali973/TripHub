@@ -20,15 +20,20 @@
 				rel="stylesheet" />
 		</ui:define>
 		<ui:define name="content">
-			<div class="header">
-				<a href="http://localhost:8080/triphub/views/superadmin_home.xhtml"
-					id="backBtn"> <i class="fa fa-arrow-left"></i> Back to Admin
-					Dashboard
-				</a>
+
+
+			<div class="d-flex justify-content-end mt-4">
+				<!-- Advanced Search link -->
+				<h:outputLink value="/triphub/views/product/AllServices.xhtml"
+					styleClass="btn btn-sm btn-outline-secondary3">
+        Advanced Search
+    </h:outputLink>
 			</div>
+
+
 			<!-- Display the list -->
 			<div class="containerCart mt-10 mb-10 text-center"
-				style="max-width: 90%">
+				style="max-width: 100%">
 				<h3>Available Restaurants</h3>
 				<br />
 				<table class="table">
@@ -112,13 +117,14 @@
 			</h:form>
 
 			<!-- Display the accommodation list -->
-			<div class="containerCart mt-5 mb-5 text-center">
+			<div class="containerCart mt-10 mb-10 text-center"
+				style="max-width: 100%">
 				<h3>Available Accommodation</h3>
 				<table class="table">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Accommodation Name</th>
+						
+							<th>Name</th>
 							<th>Price</th>
 							<th>Currency</th>
 							<th>Number</th>
@@ -139,7 +145,6 @@
 						<ui:repeat value="#{accommodationBean.allAccommodation}"
 							var="accommodation">
 							<tr>
-								<td>#{accommodation.id}</td>
 								<td>#{accommodation.name}</td>
 								<td>#{accommodation.service.price.amount}</td>
 								<td>#{accommodation.service.price.currency}</td>
@@ -157,7 +162,7 @@
 										<!-- Update button -->
 										<h:commandButton value="Update"
 											action="#{accommodationBean.initFormUpdate}"
-											styleClass="reg-btn-primary btn-sm">
+											styleClass="btn btn-sm btn-outline-secondary3">
 											<f:param name="id" value="#{accommodation.id}" />
 										</h:commandButton>
 									</h:form></td>
@@ -174,7 +179,7 @@
 										<!-- Delete button -->
 										<h:commandButton value="Delete"
 											actionListener="#{accommodationBean.performDelete}"
-											styleClass="reg-btn-primary btn-sm"
+											styleClass="btn btn-sm btn-outline-secondary3"
 											onclick="return confirmDeleteAccom();">
 											<f:param name="id" value="#{accommodation.id}" />
 										</h:commandButton>
@@ -195,15 +200,7 @@
 							<!-- Refresh the list button -->
 							<h:commandButton value="Refresh the list"
 								action="#{accommodationBean.loadAllAccommodations}"
-								styleClass="reg-btn-primary mr-2" />
-						</div>
-
-						<div class="text-center">
-							<!-- Advanced Search link -->
-							<h:outputLink value="/triphub/views/product/AllServices.xhtml"
-								styleClass="reg-btn-primary">
-                            Advanced Search
-                        </h:outputLink>
+								styleClass="btnCheckO" />
 						</div>
 
 					</div>
