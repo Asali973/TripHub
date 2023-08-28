@@ -6,18 +6,31 @@
 <h:body>
 	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
 		<ui:define name="additionalHeadContent">
-			<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
-			<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet" />
+			<link
+				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+				rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
 			<h:outputStylesheet library="css" name="regForm.css" />
 			<h:outputStylesheet library="css" name="loginCss.css" />
 			<h:outputStylesheet library="css" name="checkout.css" />
-			<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet" />
+			<link
+				href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap"
+				rel="stylesheet" />
 		</ui:define>
 		<ui:define name="content">
-		<div class="containerCart mt-5 mb-5 text-center">
+
+			<div class="header">
+				<a href="http://localhost:8080/triphub/views/superadmin_home.xhtml"
+					id="backBtn"> <i class="fa fa-arrow-left"></i> Back to Admin
+					Dashboard
+				</a>
+			</div>
+			<div class="containerCart mt-5 mb-5 text-center">
 				<h3>Available Tour Packages</h3>
-			<table class="table">
-			<thead>
+				<table class="table">
+					<thead>
 						<tr>
 							<th>Package Name</th>
 							<th>Price</th>
@@ -30,48 +43,56 @@
 							<th>Delete</th>
 						</tr>
 					</thead>
-				<tbody>
-					<ui:repeat value="#{tourPackageBean.allTourPackages}" var="package">
-						<tr>
-							<td>#{package.name}</td>
-							<td>#{package.price.amount}</td>
-							<td>#{package.price.currency}</td>
-							<td>#{package.destination.cityName}</td>
-							<td>#{package.destination.state}</td>
-							<td>#{package.destination.country}</td>
-							<td>#{package.theme.themeName}</td>
-							<td>
-								<h:form>
-									<!-- Update button -->
-									<h:commandButton value="Update" action="#{tourPackageBean.updatePackage}" styleClass="btn btn-sm btn-outline-secondary3">
-										<f:param name="id" value="#{package.id}" />
-									</h:commandButton>
-								</h:form>
-							</td>
-							<td>
-								<h:form>
-									<!-- Delete button -->
-									<h:commandButton value="Delete" actionListener="#{tourPackageBean.performDelete}" styleClass="btn btn-sm btn-outline-secondary2" onclick="return confirmDelete();">
-										<f:param name="id" value="#{package.id}" />
-									</h:commandButton>
-								</h:form>
-							</td>
-						</tr>
-					</ui:repeat>
-				</tbody>
-			</table>
+					<tbody>
+						<ui:repeat value="#{tourPackageBean.allTourPackages}"
+							var="package">
+							<tr>
+								<td>#{package.name}</td>
+								<td>#{package.price.amount}</td>
+								<td>#{package.price.currency}</td>
+								<td>#{package.destination.cityName}</td>
+								<td>#{package.destination.state}</td>
+								<td>#{package.destination.country}</td>
+								<td>#{package.theme.themeName}</td>
+								<td><h:form>
+										<!-- Update button -->
+										<h:commandButton value="Update"
+											action="#{tourPackageBean.updatePackage}"
+											styleClass="btn btn-sm btn-outline-secondary3">
+											<f:param name="id" value="#{package.id}" />
+										</h:commandButton>
+									</h:form></td>
+								<td><h:form>
+										<!-- Delete button -->
+										<h:commandButton value="Delete"
+											actionListener="#{tourPackageBean.performDelete}"
+											styleClass="btn btn-sm btn-outline-secondary2"
+											onclick="return confirmDelete();">
+											<f:param name="id" value="#{package.id}" />
+										</h:commandButton>
+									</h:form></td>
+							</tr>
+						</ui:repeat>
+					</tbody>
+				</table>
 
-			<h:panelGroup rendered="#{tourPackageBean.deletionSuccessful}">
-				<div class="alert alert-success" role="alert">Deletion of tour package is successful, please refresh the list.</div>
-			</h:panelGroup>
+				<h:panelGroup rendered="#{tourPackageBean.deletionSuccessful}">
+					<div class="alert alert-success" role="alert">Deletion of
+						tour package is successful, please refresh the list.</div>
+				</h:panelGroup>
 
-			<h:form>
-				<div class="d-flex justify-content-center mt-4">
-					<h:commandButton value="Refresh the list" action="#{tourPackageBean.loadAllTourPackages}" styleClass="btnCheckO" />
-					<h:outputLink value="/triphub/views/product/TpAdvancedSearch.xhtml" styleClass="btnSearch ml-4">Advanced Search</h:outputLink>
-				</div>
-			</h:form>
-		</div> <!-- Ending the main content container -->
+				<h:form>
+					<div class="d-flex justify-content-center mt-4">
+						<h:commandButton value="Refresh the list"
+							action="#{tourPackageBean.loadAllTourPackages}"
+							styleClass="btnCheckO" />
+						<h:outputLink
+							value="/triphub/views/product/TpAdvancedSearch.xhtml"
+							styleClass="btnSearch ml-4">Advanced Search</h:outputLink>
+					</div>
+				</h:form>
+			</div>
+			<!-- Ending the main content container -->
 		</ui:define>
 	</ui:composition>
 </h:body>
