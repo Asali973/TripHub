@@ -12,6 +12,12 @@ import triphub.helpers.PasswordUtils;
 import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.UserViewModel;
 
+/**
+ * Represents a lodging establishment where travelers can pay for shelter and
+ * rest. It could be in various forms mentioned in AccommodationType enum class.
+ * This entity contains details of the accommodation, related services, and its
+ * visual representation.
+ */
 @Entity
 public class Accommodation {
 
@@ -27,29 +33,24 @@ public class Accommodation {
 	@Enumerated(EnumType.STRING)
 	private AccommodationType accommodationType;
 
-
 	@OneToOne(cascade = CascadeType.ALL)
 	private Service service;
-
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
 	private Picture picture;
 
-	
 	private String description;
-	
+
 	@ManyToOne
-	@JoinColumn(name="provider_id")
+	@JoinColumn(name = "provider_id")
 	private Provider provider;
-	
+
 	@ManyToOne
-	@JoinColumn(name="organizer_id")
+	@JoinColumn(name = "organizer_id")
 	private Organizer organizer;
-	
 
 	public Accommodation() {
 	}
-	
 
 	public Accommodation(String name, Address address, AccommodationType accommodationType, Picture picture,
 			String description, Service service) {
@@ -61,6 +62,12 @@ public class Accommodation {
 		this.service = service;
 	}
 
+	/**
+	 * Converts the provided ViewModel into an Accommodation entity.
+	 *
+	 * @param accommodationvm ViewModel representing the accommodation details.
+	 * @return A fully constructed Accommodation entity.
+	 */
 	public static Accommodation createAccommodationFromViewModel(SubServicesViewModel accommodationvm) {
 		Accommodation accommodation = new Accommodation();
 		accommodation.setId(accommodationvm.getId());
@@ -69,30 +76,39 @@ public class Accommodation {
 		accommodation.setAccommodationType(accommodationvm.getAccommodationType());
 		accommodation.setDescription(accommodationvm.getDescription());
 		accommodation.setService(accommodationvm.getService());
-		
-		
+
 		Picture picture = new Picture();
 		picture.setLink(accommodationvm.getLink());
 		accommodation.setPicture(picture);
-		
+
 		return accommodation;
 	}
 
+	/**
+	 * Updates the current Accommodation entity based on the provided ViewModel.
+	 *
+	 * @param accommodationvm ViewModel representing the updated accommodation
+	 *                        details.
+	 */
 	public void updateAccommodationViewModel(SubServicesViewModel accommodationvm) {
 		this.setId(accommodationvm.getId());
 		this.setName(accommodationvm.getName());
 		this.setAddress(accommodationvm.getAddress());
 		this.setAccommodationType(accommodationvm.getAccommodationType());
 		this.setDescription(accommodationvm.getDescription());
-		this.getService().updateServiceFromViewModel(accommodationvm); // il manquait cette ligne 
-		// need to add picture 
-		
-        Picture picture = new Picture();
-        picture.setLink(accommodationvm.getLink());
-        this.setPicture(picture);
+		this.getService().updateServiceFromViewModel(accommodationvm);
+		Picture picture = new Picture();
+		picture.setLink(accommodationvm.getLink());
+		this.setPicture(picture);
 
 	}
 
+	/**
+	 * Initializes a ViewModel with the details from the current Accommodation
+	 * entity.
+	 *
+	 * @return A ViewModel populated with the accommodation's details.
+	 */
 	public SubServicesViewModel initAccommodationViewModel() {
 		SubServicesViewModel accommodationvm = new SubServicesViewModel();
 		accommodationvm.setId(this.getId());
@@ -100,17 +116,14 @@ public class Accommodation {
 		accommodationvm.setAddress(this.getAddress());
 		accommodationvm.setAccommodationType(this.getAccommodationType());
 		accommodationvm.setDescription(this.getDescription());
-		//this.getAddress().initAddressViewModel(accommodationvm);
 		this.getService().initServiceViewModel(accommodationvm);
-		
-        if (this.getPicture() != null) {
-        	accommodationvm.setLink(this.getPicture().getLink());
-        }
-        
+
+		if (this.getPicture() != null) {
+			accommodationvm.setLink(this.getPicture().getLink());
+		}
+
 		return accommodationvm;
 	}
-	
-	
 
 	// getters - setters
 
@@ -170,27 +183,21 @@ public class Accommodation {
 		this.service = service;
 	}
 
-
-
 	public Provider getProvider() {
 		return provider;
 	}
-
 
 	public void setProvider(Provider provider) {
 		this.provider = provider;
 	}
 
-
 	public Organizer getOrganizer() {
 		return organizer;
 	}
 
-
 	public void setOrganizer(Organizer organizer) {
 		this.organizer = organizer;
 	}
-	
 
 	@Override
 	public String toString() {
@@ -199,5 +206,4 @@ public class Accommodation {
 				+ "]";
 	}
 
-	
 }

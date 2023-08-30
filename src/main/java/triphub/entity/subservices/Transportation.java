@@ -20,6 +20,12 @@ import triphub.entity.util.Address;
 import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
 
+/**
+ * Represents a mode of transportation. This entity contains details of the
+ * transportation, including the departure and arrival addresses, related
+ * services, and a visual representation.
+ */
+
 @Entity
 public class Transportation {
 
@@ -33,11 +39,11 @@ public class Transportation {
 	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "departure")
+	@JoinColumn(name = "departure")
 	private Address departure;
 
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "arrival")
+	@JoinColumn(name = "arrival")
 	private Address arrival;
 
 	@Enumerated(EnumType.STRING)
@@ -47,18 +53,14 @@ public class Transportation {
 	private Picture picture;
 
 	private String description;
-	
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name="provider_id")
+	@JoinColumn(name = "provider_id")
 	private Provider provider;
-	
+
 	@ManyToOne
-	@JoinColumn(name="organizer_id")
+	@JoinColumn(name = "organizer_id")
 	private Organizer organizer;
-	
-	
 
 	public Transportation() {
 
@@ -74,7 +76,13 @@ public class Transportation {
 		this.description = description;
 		this.service = service;
 	}
-	
+
+	/**
+	 * Converts the provided ViewModel into a Transportation entity.
+	 *
+	 * @param transportationvm ViewModel representing the transportation details.
+	 * @return A fully constructed Transportation entity.
+	 */
 	public static Transportation createTransportationFromViewModel(SubServicesViewModel transportationvm) {
 		Transportation transportation = new Transportation();
 		transportation.setId(transportationvm.getId());
@@ -84,27 +92,39 @@ public class Transportation {
 		transportation.setTransportationType(transportationvm.getTransportationType());
 		transportation.setDescription(transportationvm.getDescription());
 		transportation.setService(transportationvm.getService());
-		
+
 		Picture picture = new Picture();
 		picture.setLink(transportationvm.getLink());
 		transportation.setPicture(picture);
-		
+
 		return transportation;
 	}
 
+	/**
+	 * Updates the current Transportation entity based on the provided ViewModel.
+	 *
+	 * @param transportationvm ViewModel representing the updated transportation
+	 *                         details.
+	 */
 	public void updateTransportationViewModel(SubServicesViewModel transportationvm) {
 		this.setId(transportationvm.getId());
 		this.setName(transportationvm.getName());
 		this.setDeparture(transportationvm.getDeparture());
 		this.setArrival(transportationvm.getArrival());
 		this.setDescription(transportationvm.getDescription());
-		
-        Picture picture = new Picture();
-        picture.setLink(transportationvm.getLink());
-        this.setPicture(picture);
+
+		Picture picture = new Picture();
+		picture.setLink(transportationvm.getLink());
+		this.setPicture(picture);
 
 	}
 
+	/**
+	 * Initializes a ViewModel with the details from the current Transportation
+	 * entity.
+	 *
+	 * @return A ViewModel populated with the transportation's details.
+	 */
 	public SubServicesViewModel initTransportationViewModel() {
 		SubServicesViewModel transportationvm = new SubServicesViewModel();
 		transportationvm.setId(this.getId());
@@ -114,11 +134,11 @@ public class Transportation {
 		transportationvm.setDescription(this.getDescription());
 		this.getDeparture().initAddressViewModel(transportationvm);
 		this.getArrival().initAddressViewModel(transportationvm);
-		
-        if (this.getPicture() != null) {
-        	transportationvm.setLink(this.getPicture().getLink());
-        }
-        
+
+		if (this.getPicture() != null) {
+			transportationvm.setLink(this.getPicture().getLink());
+		}
+
 		return transportationvm;
 	}
 
@@ -201,6 +221,5 @@ public class Transportation {
 	public void setOrganizer(Organizer organizer) {
 		this.organizer = organizer;
 	}
-	
 
 }

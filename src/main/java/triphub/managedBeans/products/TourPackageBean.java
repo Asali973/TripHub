@@ -237,8 +237,7 @@ public class TourPackageBean implements Serializable {
 
 		List<TourPackage> searchResults = tourPackageService.advancedSearch(city, state, country, minPrice, maxPrice,
 				name, themeName);
-		// this.searchResults = tourPackageService.advancedSearch(city, state, country,
-		// minPrice, maxPrice, name, themeName);
+		
 		if (searchResults.isEmpty()) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No results found.", null);
 			FacesContext.getCurrentInstance().addMessage(null, message);

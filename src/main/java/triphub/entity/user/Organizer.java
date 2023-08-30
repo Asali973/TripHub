@@ -15,6 +15,14 @@ import triphub.entity.util.Administration;
 import triphub.entity.util.CompanyInfo;
 import triphub.viewModel.UserViewModel;
 
+/**
+ * Represents an organizer entity within the system.
+ * Organizers have responsibilities for organizing and managing various services 
+ * such as tours, transportations, restaurants, and accommodation.
+ * This entity aggregates details pertaining to the organizer 
+ * including their associated user details, company information, administration,
+ * subscription details, and other related entities.
+ */
 @Entity
 public class Organizer {
 
@@ -32,9 +40,6 @@ public class Organizer {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Administration administration;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Destination destination;
-
 	@OneToOne(cascade = CascadeType.ALL)
 	private Subscription subscription;
 	
@@ -50,7 +55,12 @@ public class Organizer {
 	@OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Accommodation> accommodations = new ArrayList<>();
 
-	
+	/**
+     * Updates the attributes and associated entities of this Organizer
+     * based on the data from the provided UserViewModel.
+     * 
+     * @param form UserViewModel containing the updated data.
+     */
 	public void updateOrganizerFromViewModel(UserViewModel form) {
 	    this.setId(form.getOrganizerId());
 	    this.getUser().updateUserFromViewModel(form);
@@ -59,7 +69,13 @@ public class Organizer {
 	    this.getCompanyInfo().updateCompanyInfoFromViewModel(form);
 	    this.getAdministration().updateAdministrationFromViewModel(form);
 	}
-
+	
+	/**
+     * Initializes a UserViewModel with the attributes and associated entities 
+     * of this Organizer.
+     * 
+     * @return UserViewModel The initialized view model populated with data from this Organizer.
+     */
 	public UserViewModel initOrganizerViewModel() {
 	    UserViewModel userViewModel = new UserViewModel();
 	    this.getUser().initUserViewModel(userViewModel);
@@ -72,6 +88,13 @@ public class Organizer {
 	    return userViewModel;
 	}
 	
+	/**
+     * Updates the graphic settings (colors, fonts, logos, layouts) for the Organizer 
+     * based on the data from the provided UserViewModel. This method updates the 
+     * customization attributes related to the organizer's subscription if it exists.
+     * 
+     * @param form UserViewModel containing the updated graphic settings data.
+     */
 	public void updateGraphicSettingsFromViewModel(UserViewModel form) {
 	    if(this.getSubscription() != null && this.getSubscription().getCustomization() != null) {
 	        Customization customization = this.getSubscription().getCustomization();
@@ -85,6 +108,12 @@ public class Organizer {
 	    }
 	}
 	
+	/**
+	 * Fetches the Subscription associated with this Organizer.
+	 * If the Subscription doesn't exist, it initializes a new one.
+	 *
+	 * @return Subscription The existing or newly created Subscription.
+	 */
     public Subscription toSubscription() {
         if (this.subscription == null) {
             this.subscription = new Subscription();
@@ -92,6 +121,13 @@ public class Organizer {
         return this.subscription;
     }
     
+    /**
+     * Fetches the Customization associated with the Organizer's Subscription.
+     * This method uses the toSubscription() to ensure that a Subscription exists
+     * and then fetches its associated Customization.
+     *
+     * @return Customization The Customization associated with the Organizer's Subscription.
+     */
     public Customization toCustomization() {
         return this.toSubscription().toCustomization();
     }

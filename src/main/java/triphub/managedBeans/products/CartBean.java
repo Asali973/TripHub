@@ -68,8 +68,6 @@ public class CartBean implements Serializable {
 	private RestaurantBean restaurantBean;
 	@Inject
 	private TransportationBean transportationBean;
-	@Inject
-	private ServiceBean serviceBean;
 
 	@Inject
 	private AccommodationDAO accomodationDAO;
@@ -209,7 +207,8 @@ public class CartBean implements Serializable {
 	}
 
 	/**
-	 * Adds a tour package to the user's cart.
+	 * Adds a tour package to the user's cart that will be used for addToCart method
+	 * above .
 	 *
 	 * @param user      The user adding the tour package.
 	 * @param productId The ID of the tour package product.
@@ -228,6 +227,14 @@ public class CartBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Adds an accommodation to the user's cart that will be used for addToCart
+	 * method above .
+	 * 
+	 * @param user
+	 * @param productId
+	 * @param quantity
+	 */
 	public void addAccommodationToCart(User user, String productId, String quantity) {
 		if (productId != null) {
 			Long selectedAccommodationId = Long.parseLong(productId);
@@ -240,6 +247,15 @@ public class CartBean implements Serializable {
 			}
 		}
 	}
+
+	/**
+	 * Adds a restaurant to the user's cart that will be used for addToCart method
+	 * above.
+	 * 
+	 * @param user
+	 * @param productId
+	 * @param quantity
+	 */
 
 	public void addRestaurantToCart(User user, String productId, String quantity) {
 		if (productId != null) {
@@ -255,6 +271,14 @@ public class CartBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Adds a transportation to the user's cart that will be used for addToCart
+	 * method above.
+	 * 
+	 * @param user
+	 * @param productId
+	 * @param quantity
+	 */
 	public void addTransportationToCart(User user, String productId, String quantity) {
 		if (productId != null) {
 			Long selectedTransportationId = Long.parseLong(productId);
@@ -283,6 +307,24 @@ public class CartBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Calculates the total price for a list of cart items. The method computes the
+	 * sum based on the type of service each cart item represents (e.g.,
+	 * TourPackage, Restaurant, Accommodation, or Transportation) and its respective
+	 * quantity.
+	 * 
+	 * @param cartItems List of cart items for which the total price is to be
+	 *                  calculated.
+	 * @return The total price for the provided list of cart items.
+	 *
+	 *         <p>
+	 *         - If a cart item is associated with a {@code TourPackage}, the price
+	 *         is directly taken from the tour package's price. - If a cart item
+	 *         represents a {@code Restaurant}, {@code Accommodation}, or
+	 *         {@code Transportation}, the price is fetched from the respective
+	 *         service's price.
+	 *         </p>
+	 */
 	public BigDecimal calculateTotalPrice(List<CartItem> cartItems) {
 		BigDecimal totalPrice = BigDecimal.ZERO;
 
@@ -641,33 +683,3 @@ public class CartBean implements Serializable {
 	}
 
 }
-
-//prototype method
-//public String addToCart() {
-//Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-//String selectedPackageIdParam = params.get("selectedPackageId");
-//String selectedQuantityParam = params.get("quantity");
-//
-//if (selectedPackageIdParam != null) {
-//	Long selectedPackageId = Long.parseLong(selectedPackageIdParam);
-//	int selectedQuantity = Integer.parseInt(selectedQuantityParam);
-//	TourPackage selectedTourPackage = tourPackageService.getTourPackageById(selectedPackageId);
-//
-//	if (selectedTourPackage != null) {
-//		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-//
-//		iCartService.addToCart(selectedTourPackage, user, selectedQuantity); 
-//		
-//		dateOfPurchase = new Date();
-//
-//		try {
-//			FacesContext.getCurrentInstance().getExternalContext().redirect("cart.xhtml");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//}
-//return null; // Return null to stay on the same page
-//}
-//<h:inputText id="availableFrom" value="#{restaurantBean.selectedRestaurant.service.availableFrom}" styleClass="datePicker" />
-//<h:inputText id="availableTill" value="#{restaurantBean.selectedRestaurant.service.availableTill}" styleClass="datePicker" />
