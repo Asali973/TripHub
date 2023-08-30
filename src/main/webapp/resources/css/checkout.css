@@ -23,7 +23,6 @@ body {
 
 .container2 {
 	margin: 50px auto;
-	/* Cela donne le même effet que margin-top et margin-bottom à 50px */
 	max-width: 1000px;
 	border-radius: 15px;
 	background-color: rgb(254, 255, 255);
@@ -41,7 +40,6 @@ body {
 
 .containerCart {
 	margin: 50px auto;
-	/* Cela donne le même effet que margin-top et margin-bottom à 50px */
 	max-width: 1200px;
 	overflow: auto;
 	border-radius: 15px;
@@ -74,7 +72,7 @@ div.form-group .form-control {
 }
 
 .heightMatched {
-    height: 40px; /* This is just an example, you can adjust the height to your preference. */
+    height: 40px; 
 }
 
 .icon-container i {
@@ -208,9 +206,9 @@ label {
 }
 
 .btn-outline-secondary:hover {
-    background-color: #290f7d; /* Couleur d'arrière-plan au survol */
-    color: #fff; /* Couleur du texte au survol */
-    border-color: #6c757d; /* Couleur de la bordure au survol */
+    background-color: #290f7d; 
+    color: #fff; 
+    border-color: #6c757d; 
 }
 
 .btn-sm.btn-outline-secondary2 {
@@ -221,9 +219,9 @@ label {
 }
 
 .btn-outline-secondary2:hover {
-    background-color: #650b07; /* Couleur d'arrière-plan au survol */
-    color: #fff; /* Couleur du texte au survol */
-    border-color: #6c757d; /* Couleur de la bordure au survol */
+    background-color: #650b07;
+    color: #fff; 
+    border-color: #6c757d; 
 }
 
 .btn-sm.btn-outline-secondary3 {
@@ -234,9 +232,9 @@ label {
 }
 
 .btn-outline-secondary3:hover {
-    background-color: #203265; /* Couleur d'arrière-plan au survol */
-    color: #fff; /* Couleur du texte au survol */
-    border-color: #6c757d; /* Couleur de la bordure au survol */
+    background-color: #203265; 
+    color: #fff; 
+    border-color: #6c757d;
 }
 
 a {
@@ -252,7 +250,6 @@ span.price {
 	color: grey;
 }
 
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
 @media ( max-width : 800px) {
 	.row {
 		flex-direction: column-reverse;
@@ -281,12 +278,12 @@ span.price {
 .header a#backBtn {
 	float: right;
     text-decoration: none;
-    color: #333; /* Or any color you prefer */
+    color: #333;
     padding: 10px;
     border-radius: 5px;
-    background-color: #f4f4f4; /* Light gray background */
+    background-color: #f4f4f4;
 }
 
 .header a#backBtn:hover {
-    background-color: #ddd; /* Slightly darker gray for hover effect */
+    background-color: #ddd; 
 }
