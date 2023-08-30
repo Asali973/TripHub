@@ -19,6 +19,9 @@ import triphub.helpers.RegistrationException;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 
+/**
+ * Managed bean to handle customer-related operations.
+ */
 @Named("customerBean")
 @RequestScoped
 public class CustomerBean implements Serializable {
@@ -31,13 +34,16 @@ public class CustomerBean implements Serializable {
 	private UserViewModel userViewModel = new UserViewModel();
 
 	private Part profilePicture;
-	
+
 	private List<Customer> allCustomers;
 
 	public CustomerBean() {
 	}
 
-	public void register() throws IOException{
+	/**
+	 * Registers a new customer.
+	 */
+	public void register() throws IOException {
 		if (!userViewModel.getPassword().equals(userViewModel.getConfirmPassword())) {
 			FacesMessageUtil.addErrorMessage("Passwords do not match!");
 			return;
@@ -62,15 +68,18 @@ public class CustomerBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Customer created successfully!", null));
 
-	        // Redirection to login.xhtml
-	        context.getExternalContext().redirect("/triphub/views/loginAndAccount/login.xhtml");
-	        
+			// Redirection to login.xhtml
+			context.getExternalContext().redirect("/triphub/views/loginAndAccount/login.xhtml");
+
 		} catch (RegistrationException e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration failed: " + e.getMessage(), null));
 		}
 	}
 
+	/**
+	 * Initializes form data for the customer.
+	 */
 	public void initFormData(Long customerId) {
 		UserViewModel temp = userService.initCustomer(customerId);
 		if (temp != null) {
@@ -80,6 +89,9 @@ public class CustomerBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Initializes the bean.
+	 */
 	@PostConstruct
 	public void init() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -89,10 +101,13 @@ public class CustomerBean implements Serializable {
 		if (customerId != null) {
 			initFormData(customerId);
 		}
-		
-	    allCustomers = userService.getAllCustomers();
+
+		allCustomers = userService.getAllCustomers();
 	}
 
+	/**
+	 * Updates customer information.
+	 */
 	public void updateCustomer() {
 		try {
 			String profilePicName = ImageHelper.processProfilePicture(profilePicture);
@@ -104,27 +119,32 @@ public class CustomerBean implements Serializable {
 			FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
 		}
 	}
-	
+
+	/**
+	 * Deletes a customer.
+	 */
 	public void deleteCustomer() {
-	    try {
-	        userService.deleteCustomer(userViewModel.getCustomerId());
-	        FacesMessageUtil.addSuccessMessage("Customer deleted successfully!");
-	        
-	        FacesContext context = FacesContext.getCurrentInstance();
+		try {
+			userService.deleteCustomer(userViewModel.getCustomerId());
+			FacesMessageUtil.addSuccessMessage("Customer deleted successfully!");
 
-	        context.getExternalContext().redirect("/triphub/views/home.xhtml");
-	        
-	    } catch (Exception e) {
-	        FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
-	    }
+			FacesContext context = FacesContext.getCurrentInstance();
+
+			context.getExternalContext().redirect("/triphub/views/home.xhtml");
+
+		} catch (Exception e) {
+			FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
+		}
 	}
-	
+
+	/**
+	 * Modifies customer information.
+	 */
 	public String modifyCustomer(Customer customer) {
-	    userViewModel = customer.initCustomerViewModel();
+		userViewModel = customer.initCustomerViewModel();
 
-	    return "/views/logginAndAccount/ProfilUser?faces-redirect=true";
+		return "/views/logginAndAccount/ProfilUser?faces-redirect=true";
 	}
-
 
 	public Part getProfilePicture() {
 		return profilePicture;
@@ -141,12 +161,12 @@ public class CustomerBean implements Serializable {
 	public void setUserViewModel(UserViewModel userViewModel) {
 		this.userViewModel = userViewModel;
 	}
-	
+
 	public List<Customer> getAllCustomers() {
-	    return allCustomers;
+		return allCustomers;
 	}
 
 	public void setAllCustomers(List<Customer> allCustomers) {
-	    this.allCustomers = allCustomers;
+		this.allCustomers = allCustomers;
 	}
 }

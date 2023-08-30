@@ -20,38 +20,47 @@ import triphub.helpers.RegistrationException;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 
+/**
+ * Managed bean for handling provider functionalities such as registration,
+ * update, and delete.
+ */
 @Named("providerBean")
 @RequestScoped
 public class ProviderBean implements Serializable {
 
+	@Inject
+	private UserService userService;
 
-    @Inject
-    private UserService userService;
+	private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
+	private UserViewModel userViewModel = new UserViewModel();
+	private Part logoPicture;
+	private Part companyPicture;
 
-    private UserViewModel userViewModel = new UserViewModel();
-    private Part logoPicture;
-    private Part companyPicture;
-    
-    private List<Provider> allProviders;
+	private List<Provider> allProviders;
 
-    public ProviderBean() {
-    }
-   
-    public void register() throws IOException{
-        if (!userViewModel.getPassword().equals(userViewModel.getConfirmPassword())) {
-            FacesMessageUtil.addErrorMessage("Passwords do not match!");
-            return;
-        }
+	public ProviderBean() {
+	}
 
-        try {
-            Provider email = userService.findByEmailProvider(userViewModel.getEmail());
-            if (email != null) {
-                throw new RegistrationException("This email is already used");
-            }
+	/**
+	 * Registers a new provider after validating the data. If successful, redirects
+	 * to login.
+	 *
+	 * @throws IOException if there's an error during redirection.
+	 */
+	public void register() throws IOException {
+		if (!userViewModel.getPassword().equals(userViewModel.getConfirmPassword())) {
+			FacesMessageUtil.addErrorMessage("Passwords do not match!");
+			return;
+		}
 
-            Provider newProvider = userService.createProvider(userViewModel);
+		try {
+			Provider email = userService.findByEmailProvider(userViewModel.getEmail());
+			if (email != null) {
+				throw new RegistrationException("This email is already used");
+			}
+
+			Provider newProvider = userService.createProvider(userViewModel);
 
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
@@ -63,16 +72,21 @@ public class ProviderBean implements Serializable {
 
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Provider created successfully!", null));
-			
-	        // Redirection to login.xhtml
-	        context.getExternalContext().redirect("/triphub/views/loginAndAccount/login.xhtml");
-	        
+
+			// Redirection to login.xhtml
+			context.getExternalContext().redirect("/triphub/views/loginAndAccount/login.xhtml");
+
 		} catch (RegistrationException e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration failed: " + e.getMessage(), null));
 		}
 	}
-    
+
+	/**
+	 * Initializes the form data based on the given provider ID.
+	 *
+	 * @param providerId ID of the provider to initialize the form data with.
+	 */
 	public void initFormData(Long providerId) {
 		UserViewModel temp = userService.initProvider(providerId);
 		if (temp != null) {
@@ -82,6 +96,9 @@ public class ProviderBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Post-construct method to initialize necessary data.
+	 */
 	@PostConstruct
 	public void init() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -91,10 +108,13 @@ public class ProviderBean implements Serializable {
 		if (providerId != null) {
 			initFormData(providerId);
 		}
-		
-		 allProviders = userService.getAllProviders();
+
+		allProviders = userService.getAllProviders();
 	}
 
+	/**
+	 * Updates the provider's details including images.
+	 */
 	public void updateProvider() {
 		try {
 			String logoPicName = ImageHelper.processProfilePicture(logoPicture);
@@ -110,19 +130,22 @@ public class ProviderBean implements Serializable {
 			FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
 		}
 	}
-	
-	public void deleteProvider() {
-	    try {
-	        userService.deleteProvider(userViewModel.getProviderId());
-	        FacesMessageUtil.addSuccessMessage("Provider deleted successfully!");
-	        
-	        FacesContext context = FacesContext.getCurrentInstance();
 
-	        context.getExternalContext().redirect("/triphub/views/home.xhtml");
-	        
-	    } catch (Exception e) {
-	        FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
-	    }
+	/**
+	 * Deletes the specified provider and then redirects to home.
+	 */
+	public void deleteProvider() {
+		try {
+			userService.deleteProvider(userViewModel.getProviderId());
+			FacesMessageUtil.addSuccessMessage("Provider deleted successfully!");
+
+			FacesContext context = FacesContext.getCurrentInstance();
+
+			context.getExternalContext().redirect("/triphub/views/home.xhtml");
+
+		} catch (Exception e) {
+			FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
+		}
 	}
 
 	public UserService getUserService() {
@@ -156,14 +179,13 @@ public class ProviderBean implements Serializable {
 	public void setCompanyPicture(Part companyPicture) {
 		this.companyPicture = companyPicture;
 	}
-	
-    public List<Provider> getAllProviders() {
-        return allProviders;
-    }
 
-    public void setAllProviders(List<Provider> allProviders) {
-        this.allProviders = allProviders;
-    }
-    
-    
+	public List<Provider> getAllProviders() {
+		return allProviders;
+	}
+
+	public void setAllProviders(List<Provider> allProviders) {
+		this.allProviders = allProviders;
+	}
+
 }

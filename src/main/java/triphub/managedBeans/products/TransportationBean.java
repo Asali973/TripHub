@@ -24,13 +24,17 @@ import triphub.helpers.ImageHelper;
 import triphub.services.TransportationService;
 import triphub.viewModel.SubServicesViewModel;
 
+/**
+ * Managed Bean responsible for handling transportation-related actions in the
+ * view layer.
+ */
 @Named("transportationBean")
 @RequestScoped
 public class TransportationBean implements Serializable {
 
 	@Inject
 	private TransportationService transportationService;
-	
+
 	@Inject
 	private TransportationDAO transportationDao;
 
@@ -47,7 +51,7 @@ public class TransportationBean implements Serializable {
 
 	private Part pictureTransport;
 	private String picName;
-	
+
 	private Long transportationId;
 
 	public TransportationBean() {
@@ -62,52 +66,60 @@ public class TransportationBean implements Serializable {
 		this.allTransportations = allTransportations;
 	}
 
+	/**
+	 * Initializes the bean after construction.
+	 */
 	@PostConstruct
 	public void init() {
 
-	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-	    
-	    transportationId = (Long) externalContext.getSessionMap().get("selectedTransportationId");
-	    
-	    if (transportationId == null) {
-	        String idParam = externalContext.getRequestParameterMap().get("id");
-	        if (idParam != null && !idParam.trim().isEmpty()) {
-	            try {
-	                transportationId = Long.parseLong(idParam);
-	                externalContext.getSessionMap().put("selectedTransportationId", transportationId);
-	            } catch (NumberFormatException e) {
-	                FacesMessageUtil.addErrorMessage("Id not valid");
-	                return; 
-	            }
-	        }
-	    }
-	    
-	    if (transportationId != null) {
-	        transportationvm = transportationService.initSubService(transportationId);
-	        if (transportationvm == null) {
-	            FacesMessageUtil.addErrorMessage("Transportation does not exist");
-	            return;
-	        }
-	        
-	        selectedTransportation = transportationService.findById(transportationId);
-	        if (selectedTransportation == null) {
-	            FacesMessageUtil.addErrorMessage("Transportation does not exist");
-	            return;
-	        }
-	    } else {
-	        allTransportations = transportationService.getAll();
-	    }
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+		transportationId = (Long) externalContext.getSessionMap().get("selectedTransportationId");
+
+		if (transportationId == null) {
+			String idParam = externalContext.getRequestParameterMap().get("id");
+			if (idParam != null && !idParam.trim().isEmpty()) {
+				try {
+					transportationId = Long.parseLong(idParam);
+					externalContext.getSessionMap().put("selectedTransportationId", transportationId);
+				} catch (NumberFormatException e) {
+					FacesMessageUtil.addErrorMessage("Id not valid");
+					return;
+				}
+			}
+		}
+
+		if (transportationId != null) {
+			transportationvm = transportationService.initSubService(transportationId);
+			if (transportationvm == null) {
+				FacesMessageUtil.addErrorMessage("Transportation does not exist");
+				return;
+			}
+
+			selectedTransportation = transportationService.findById(transportationId);
+			if (selectedTransportation == null) {
+				FacesMessageUtil.addErrorMessage("Transportation does not exist");
+				return;
+			}
+		} else {
+			allTransportations = transportationService.getAll();
+		}
 	}
 
-	
-
+	/**
+	 * Loads all transportations.
+	 *
+	 * @return redirection string
+	 */
 	public String loadTransportations() {
 		allTransportations = transportationService.getAll();
 
 		return "tranportations";
 	}
 
-
+	/**
+	 * Creates a transportation entity.
+	 */
 	public void create() {
 
 		String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
@@ -140,6 +152,11 @@ public class TransportationBean implements Serializable {
 		clear();
 	}
 
+	/**
+	 * Updates an existing transportation entity.
+	 *
+	 * @return redirection string
+	 */
 	public String update() {
 		try {
 			transportationService.update(transportationvm);
@@ -158,6 +175,11 @@ public class TransportationBean implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Initializes the form for transportation update.
+	 *
+	 * @return redirection string
+	 */
 	public String initFormUpdate() {
 		try {
 
@@ -181,6 +203,9 @@ public class TransportationBean implements Serializable {
 		transportationvm = new SubServicesViewModel();
 	}
 
+	/**
+	 * Deletes a transportation entity.
+	 */
 	public void delete() {
 		Long selectedTransportationId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.get("selectedTransportationId");
@@ -196,7 +221,12 @@ public class TransportationBean implements Serializable {
 		}
 		FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add("confirmDelete();");
 	}
-	
+
+	/**
+	 * Performs the deletion action.
+	 *
+	 * @return deletion result message
+	 */
 	public String performDelete() {
 		Long selectedTransportationId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.get("selectedTransportationId");
@@ -214,37 +244,45 @@ public class TransportationBean implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Retrieves the transportations associated with the current user.
+	 *
+	 * @return List of Transportations
+	 */
 	public List<Transportation> getCurrentUserTransportations() {
-	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
-	    String userType = (String) externalContext.getSessionMap().get("userType");
-	    Long userId = null;
+		String userType = (String) externalContext.getSessionMap().get("userType");
+		Long userId = null;
 
-	    if ("organizer".equals(userType)) {
-	        userId = (Long) externalContext.getSessionMap().get("organizerId");
-	    } else if ("provider".equals(userType)) {
-	        userId = (Long) externalContext.getSessionMap().get("providerId");
-	    }
+		if ("organizer".equals(userType)) {
+			userId = (Long) externalContext.getSessionMap().get("organizerId");
+		} else if ("provider".equals(userType)) {
+			userId = (Long) externalContext.getSessionMap().get("providerId");
+		}
 
-	    if (userId == null) {
-	        String userIdParam = externalContext.getRequestParameterMap().get("userId");
-	        if (userIdParam != null && !userIdParam.trim().isEmpty()) {
-	            try {
-	                userId = Long.parseLong(userIdParam);
-	            } catch (NumberFormatException e) {
-	                FacesMessageUtil.addErrorMessage("Format d'ID d'utilisateur non valide.");
-	                return new ArrayList<>();
-	            }
-	        }
-	    }
+		if (userId == null) {
+			String userIdParam = externalContext.getRequestParameterMap().get("userId");
+			if (userIdParam != null && !userIdParam.trim().isEmpty()) {
+				try {
+					userId = Long.parseLong(userIdParam);
+				} catch (NumberFormatException e) {
+					FacesMessageUtil.addErrorMessage("Format d'ID d'utilisateur non valide.");
+					return new ArrayList<>();
+				}
+			}
+		}
 
-	    if (userId == null) {
-	        return new ArrayList<>();
-	    }
+		if (userId == null) {
+			return new ArrayList<>();
+		}
 
-	    return transportationService.getTransportationForOrganizer(userId);
+		return transportationService.getTransportationForOrganizer(userId);
 	}
 
+	/**
+	 * Adds a transportation to an organizer.
+	 */
 	public void addTransportationToOrganizer() {
 		String userType = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.get("userType");
@@ -281,7 +319,6 @@ public class TransportationBean implements Serializable {
 			FacesMessageUtil.addErrorMessage("Error when added a transportation.");
 		}
 	}
-
 
 	public List<Transportation> findByType(TransportationType transportationType) {
 		return transportationService.findByType(transportationType);
