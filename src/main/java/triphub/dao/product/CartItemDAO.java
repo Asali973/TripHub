@@ -73,25 +73,6 @@ public class CartItemDAO implements Serializable {
         query.setParameter("user", user);
         return query.getResultList();
     }
-
-    /**
-     * Fetches all cart items with associated tour packages.
-     * 
-     * @return List of cart items with populated tour packages.
-     */
-    public List<CartItem> getCartItemsWithTourPackages() {
-        TypedQuery<CartItem> query = em.createQuery("SELECT c FROM CartItem c", CartItem.class);
-        List<CartItem> cartItems = query.getResultList();
-
-        for (CartItem item : cartItems) {
-            Long productId = item.getTourPackage().getId();
-            TourPackage tourPackage = em.find(TourPackage.class, productId);
-            item.setTourPackage(tourPackage);
-        }
-
-        return cartItems;
-    }
-
     /**
      * Fetches all cart items with their associated products.
      * 

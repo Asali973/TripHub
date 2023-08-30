@@ -12,6 +12,11 @@ import triphub.entity.util.Administration;
 import triphub.entity.util.CompanyInfo;
 import triphub.viewModel.UserViewModel;
 
+/**
+ * Represents a provider entity with attributes and associations relevant 
+ * to providers in the system. A provider is an entity that offers multiple 
+ * types of services including transportation, restaurants, and accommodations.
+ */
 @Entity
 public class Provider {
 
@@ -26,9 +31,6 @@ public class Provider {
 	@OneToOne(cascade = CascadeType.ALL)
 	private CompanyInfo companyInfo;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Service service;
-
 	@OneToOne(cascade = CascadeType.ALL)
 	private Administration administration;
 	
@@ -41,6 +43,13 @@ public class Provider {
 	@OneToMany(mappedBy = "provider", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Accommodation> accommodations = new ArrayList<>();
 	
+	/**
+	 * Updates the attributes and associations of this Provider entity based 
+	 * on the data provided in the given UserViewModel.
+	 * 
+	 * @param form UserViewModel containing the updated data.
+	 */
+	
 	public void updateProviderFromViewModel(UserViewModel form) {
 	    this.setId(form.getProviderId());
 	    this.getUser().updateUserFromViewModel(form);
@@ -50,6 +59,12 @@ public class Provider {
 	    this.getAdministration().updateAdministrationFromViewModel(form);
 	}
 
+	/**
+	 * Initializes a UserViewModel with the attributes and associations 
+	 * of this Provider entity.
+	 * 
+	 * @return UserViewModel The initialized view model with data from this Provider.
+	 */
 	public UserViewModel initProviderViewModel() {
 	    UserViewModel form = new UserViewModel();
 	    this.getUser().initUserViewModel(form);

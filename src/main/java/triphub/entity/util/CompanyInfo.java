@@ -3,61 +3,78 @@ package triphub.entity.util;
 import javax.persistence.*;
 
 import triphub.viewModel.UserViewModel;
-
+/**
+ * Represents company-specific information in the system.
+ * This entity contains details such as company name and associated pictures like logos.
+ */
 @Entity
 public class CompanyInfo {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String name;
+	private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Picture logo;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Picture logo;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Picture picture;
-    
-    public static CompanyInfo createCompanyInfoFromViewModel(UserViewModel form) {
-        CompanyInfo companyInfo = new CompanyInfo();
-        companyInfo.setName(form.getCompanyName());
+	@OneToOne(cascade = CascadeType.ALL)
+	private Picture picture;
 
-        Picture logo = new Picture();
-        logo.setLink(form.getCompanyLogoLink());
-        companyInfo.setLogo(logo);
+	 /**
+     * Creates and returns a CompanyInfo object from the provided UserViewModel.
+     * 
+     * @param form The UserViewModel containing company information data.
+     * @return A new CompanyInfo object.
+     */
+	public static CompanyInfo createCompanyInfoFromViewModel(UserViewModel form) {
+		CompanyInfo companyInfo = new CompanyInfo();
+		companyInfo.setName(form.getCompanyName());
 
-        Picture picture = new Picture();
-        picture.setLink(form.getCompanyPictureLink());
-        companyInfo.setPicture(picture);
+		Picture logo = new Picture();
+		logo.setLink(form.getCompanyLogoLink());
+		companyInfo.setLogo(logo);
 
-        return companyInfo;
-    }
-    
-    public void updateCompanyInfoFromViewModel(UserViewModel form) {
-        this.setName(form.getCompanyName());
+		Picture picture = new Picture();
+		picture.setLink(form.getCompanyPictureLink());
+		companyInfo.setPicture(picture);
 
-        Picture logo = new Picture();
-        logo.setLink(form.getCompanyLogoLink());
-        this.setLogo(logo);
+		return companyInfo;
+	}
+	
+	 /**
+     * Updates the properties of the CompanyInfo based on the provided UserViewModel.
+     * 
+     * @param form The UserViewModel containing updated company information data.
+     */
+	public void updateCompanyInfoFromViewModel(UserViewModel form) {
+		this.setName(form.getCompanyName());
 
-        Picture picture = new Picture();
-        picture.setLink(form.getCompanyPictureLink());
-        this.setPicture(picture);
-    }
+		Picture logo = new Picture();
+		logo.setLink(form.getCompanyLogoLink());
+		this.setLogo(logo);
 
-    public void initCompanyInfoViewModel(UserViewModel userViewModel) {
-        userViewModel.setCompanyName(this.getName());
+		Picture picture = new Picture();
+		picture.setLink(form.getCompanyPictureLink());
+		this.setPicture(picture);
+	}
 
-        if (this.getLogo() != null) {
-            userViewModel.setCompanyLogoLink(this.getLogo().getLink());
-        }
+	/**
+     * Initializes the provided UserViewModel with the properties of this CompanyInfo object.
+     * 
+     * @param userViewModel The UserViewModel to be populated with company information data.
+     */
+	public void initCompanyInfoViewModel(UserViewModel userViewModel) {
+		userViewModel.setCompanyName(this.getName());
 
-        if (this.getPicture() != null) {
-            userViewModel.setCompanyPictureLink(this.getPicture().getLink());
-        }
-    }
+		if (this.getLogo() != null) {
+			userViewModel.setCompanyLogoLink(this.getLogo().getLink());
+		}
 
-
+		if (this.getPicture() != null) {
+			userViewModel.setCompanyPictureLink(this.getPicture().getLink());
+		}
+	}
 
 	public Long getId() {
 		return id;
@@ -90,7 +107,5 @@ public class CompanyInfo {
 	public void setPicture(Picture picture) {
 		this.picture = picture;
 	}
-    
-    
-    
+
 }
