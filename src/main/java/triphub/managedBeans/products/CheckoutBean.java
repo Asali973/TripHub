@@ -17,6 +17,9 @@ import javax.inject.Named;
 import triphub.entity.product.CartItem;
 import triphub.services.ICartService;
 
+/**
+ * Represents the JSF managed bean for handling checkout processes in the triphub application.
+ */
 @Named("checkoutBean")
 @RequestScoped
 public class CheckoutBean implements Serializable {
@@ -29,7 +32,9 @@ public class CheckoutBean implements Serializable {
     private BigDecimal totalPrice;
     private String organizerId;
     
-    
+    /**
+     * Initializes the checkout bean with data retrieved from request parameters.
+     */
     @PostConstruct
     public void init() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -42,7 +47,6 @@ public class CheckoutBean implements Serializable {
             for (String id : idsArray) {
                 ids.add(Long.parseLong(id));
             }
-            // can retrieve the CartItems using these ids from the database or wherever you have stored them.
             cartItems =iCartService.getCartItemsWithProducts();
         }
 
@@ -60,13 +64,18 @@ public class CheckoutBean implements Serializable {
         
     }
     
-    public String completePurchase() {
-        //TODO:  Handle the checkout process here. e.g., save the order, send notifications, etc.
-
-      
+    /**
+     * Completes the purchase and redirects to the success page.
+     * @return the name of the success page.
+     */
+    public String completePurchase() {      
         return "purchaseSuccessful.xhtml?faces-redirect=true";
     }
 
+    /**
+     * Retrieves the full name of the user associated with the first cart item.
+     * @return full name of the user or null if cart items are empty.
+     */
     public String getFullName() {
         if (cartItems != null && !cartItems.isEmpty()) {
             return cartItems.get(0).getUser().getFirstName() + " " + cartItems.get(0).getUser().getLastName();

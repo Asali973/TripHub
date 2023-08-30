@@ -17,6 +17,10 @@ import triphub.entity.user.*;
 import triphub.entity.util.*;
 import triphub.viewModel.UserViewModel;
 
+/**
+ * Data Access Object (DAO) for handling database operations related to the
+ * Organizer entity.
+ */
 @Stateless
 public class OrganizerDAO {
 
@@ -26,6 +30,13 @@ public class OrganizerDAO {
 	public OrganizerDAO() {
 	}
 
+	/**
+	 * Creates a new Organizer from the given UserViewModel.
+	 *
+	 * @param form the UserViewModel with the necessary information to create a new
+	 *             Organizer.
+	 * @return the created Organizer.
+	 */
 	public Organizer createOrganizer(UserViewModel form) {
 
 		User user = User.createUserFromViewModel(form);
@@ -37,11 +48,10 @@ public class OrganizerDAO {
 
 		CompanyInfo companyInfo = CompanyInfo.createCompanyInfoFromViewModel(form);
 		Administration administration = Administration.createAdministrationFromViewModel(form);
-		
+
 		Subscription defaultSubscription = new Subscription();
 		defaultSubscription.setType(SubscriptionType.STANDARD);
 		em.persist(defaultSubscription);
-		
 
 		Organizer organizer = new Organizer();
 		organizer.setUser(user);
@@ -49,7 +59,6 @@ public class OrganizerDAO {
 		organizer.setCompanyInfo(companyInfo);
 		organizer.setAdministration(administration);
 		organizer.setSubscription(defaultSubscription);
-		
 
 		em.persist(companyInfo);
 		em.persist(administration);
@@ -61,6 +70,14 @@ public class OrganizerDAO {
 		return organizer;
 	}
 
+	/**
+	 * Updates the graphic settings for the Organizer identified by the
+	 * UserViewModel.
+	 *
+	 * @param userViewModel the UserViewModel with the necessary information to
+	 *                      update graphic settings.
+	 * @return updated UserViewModel.
+	 */
 	public UserViewModel updateGraphicSettings(UserViewModel userViewModel) {
 		Organizer organizer = em.find(Organizer.class, userViewModel.getOrganizerId());
 
@@ -107,6 +124,13 @@ public class OrganizerDAO {
 		return userViewModel;
 	}
 
+	/**
+	 * Updates the Organizer details from the provided UserViewModel.
+	 *
+	 * @param userViewModel the UserViewModel with the necessary information to
+	 *                      update the Organizer.
+	 * @return updated UserViewModel.
+	 */
 	public UserViewModel updateOrganizer(UserViewModel userViewModel) {
 		Organizer organizer = em.find(Organizer.class, userViewModel.getOrganizerId());
 
@@ -122,6 +146,12 @@ public class OrganizerDAO {
 		return userViewModel;
 	}
 
+	/**
+	 * Initializes an Organizer ViewModel from the given Organizer ID.
+	 *
+	 * @param organizerId the ID of the Organizer.
+	 * @return the initialized UserViewModel.
+	 */
 	public UserViewModel initOrganizer(Long organizerId) {
 		Organizer organizer = em.find(Organizer.class, organizerId);
 		if (organizer == null) {
@@ -131,10 +161,21 @@ public class OrganizerDAO {
 		return organizer.initOrganizerViewModel();
 	}
 
+	/**
+	 * Retrieves an Organizer from the database using the provided ID.
+	 *
+	 * @param id the ID of the Organizer to be retrieved.
+	 * @return the Organizer found or null if not found.
+	 */
 	public Organizer readOrganizer(Long id) {
 		return em.find(Organizer.class, id);
 	}
 
+	/**
+	 * Deletes an Organizer from the database using the provided ID.
+	 *
+	 * @param id the ID of the Organizer to be deleted.
+	 */
 	public void deleteOrganizer(Long id) {
 		Organizer organizer = em.find(Organizer.class, id);
 		if (organizer != null) {
@@ -142,6 +183,12 @@ public class OrganizerDAO {
 		}
 	}
 
+	/**
+	 * Finds an Organizer by its email.
+	 *
+	 * @param email Email of the Organizer to search for.
+	 * @return Organizer with the provided email or null if not found.
+	 */
 	public Organizer findByEmailOrganizer(String email) {
 		TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user.email = :email",
 				Organizer.class);
@@ -153,6 +200,12 @@ public class OrganizerDAO {
 		}
 	}
 
+	/**
+	 * Finds an Organizer by its associated User entity.
+	 *
+	 * @param user User entity associated with the Organizer to search for.
+	 * @return Organizer associated with the given User or null if not found.
+	 */
 	public Organizer findByUserOrganizer(User user) {
 		TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user = :user", Organizer.class);
 		query.setParameter("user", user);
@@ -163,6 +216,13 @@ public class OrganizerDAO {
 		}
 	}
 
+	/**
+	 * Finds an Organizer by the ID of its associated User entity.
+	 *
+	 * @param userId ID of the User entity associated with the Organizer to search
+	 *               for.
+	 * @return Organizer associated with the given User ID or null if not found.
+	 */
 	public Organizer findOrganizerByUserId(Long userId) {
 		TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c WHERE c.user.id = :userId",
 				Organizer.class);
@@ -175,11 +235,22 @@ public class OrganizerDAO {
 		}
 	}
 
+	/**
+	 * Retrieves all Organizers.
+	 *
+	 * @return List of all Organizers.
+	 */
 	public List<Organizer> findAllOrganizers() {
 		TypedQuery<Organizer> query = em.createQuery("SELECT c FROM Organizer c", Organizer.class);
 		return query.getResultList();
 	}
 
+	/**
+	 * Updates the Subscription of an Organizer.
+	 *
+	 * @param organizerId  ID of the Organizer to update.
+	 * @param subscription New Subscription for the Organizer.
+	 */
 	public void updateSubscription(Long organizerId, Subscription subscription) {
 		Organizer organizer = em.find(Organizer.class, organizerId);
 		if (organizer != null) {
@@ -191,37 +262,54 @@ public class OrganizerDAO {
 			em.flush();
 		}
 	}
-	public List<Organizer> findOrganizerByCompanyOrCountry(String companyName, String country) {
-	    TypedQuery<Organizer> query = em.createQuery(
-	        "SELECT c FROM Organizer c WHERE c.companyInfo.name = :companyName OR c.user.address.country = :country",
-	        Organizer.class);
-	    
-	    query.setParameter("companyName", companyName);
-	    query.setParameter("country", country);
 
-	    try {
-	        return query.getResultList();
-	    } catch (NoResultException e) {
-	        return new ArrayList<>();
-	    }
+	/**
+	 * Finds Organizers based on company name or country.
+	 *
+	 * @param companyName Name of the company.
+	 * @param country     Country of the Organizer.
+	 * @return List of Organizers matching the criteria.
+	 */
+	public List<Organizer> findOrganizerByCompanyOrCountry(String companyName, String country) {
+		TypedQuery<Organizer> query = em.createQuery(
+				"SELECT c FROM Organizer c WHERE c.companyInfo.name = :companyName OR c.user.address.country = :country",
+				Organizer.class);
+
+		query.setParameter("companyName", companyName);
+		query.setParameter("country", country);
+
+		try {
+			return query.getResultList();
+		} catch (NoResultException e) {
+			return new ArrayList<>();
+		}
 	}
 
-
+	/**
+	 * Retrieves the Subscription associated with a given Organizer ID.
+	 *
+	 * @param organizerId ID of the Organizer.
+	 * @return Subscription associated with the Organizer or null if not found.
+	 */
 	public Subscription getSubscriptionForOrganizer(Long organizerId) {
 		Organizer organizer = em.find(Organizer.class, organizerId);
 		return organizer != null ? organizer.getSubscription() : null;
 	}
-	
-    public String getXhtmlFileByOrganizerId(Long organizerId) {
-        Organizer organizer = em.find(Organizer.class, organizerId);
-        if (organizer != null && organizer.getSubscription() != null 
-            && organizer.getSubscription().getCustomization() != null
-            && organizer.getSubscription().getCustomization().getLayout() != null) {
-            return organizer.getSubscription().getCustomization().getLayout().getXhtmlFile();
-        }
-        return null;
-    }
-	
 
+	/**
+	 * Retrieves the xhtml file (template) associated with the Organizer by its ID.
+	 *
+	 * @param organizerId the ID of the Organizer.
+	 * @return the xhtml file path of the template or null if not found.
+	 */
+	public String getXhtmlFileByOrganizerId(Long organizerId) {
+		Organizer organizer = em.find(Organizer.class, organizerId);
+		if (organizer != null && organizer.getSubscription() != null
+				&& organizer.getSubscription().getCustomization() != null
+				&& organizer.getSubscription().getCustomization().getLayout() != null) {
+			return organizer.getSubscription().getCustomization().getLayout().getXhtmlFile();
+		}
+		return null;
+	}
 
 }

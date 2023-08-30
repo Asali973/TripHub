@@ -21,6 +21,9 @@ import triphub.entity.subservices.TransportationType;
 import triphub.services.ServiceService;
 import triphub.viewModel.SubServicesViewModel;
 
+/**
+ * Managed Bean responsible for handling Service-related actions.
+ */
 @Named("serviceBean")
 @RequestScoped
 public class ServiceBean implements Serializable {
@@ -72,17 +75,24 @@ public class ServiceBean implements Serializable {
 		this.setAllServices(allServices);
 	}
 
+	/**
+	 * Initializes the properties of the ServiceBean.
+	 */
 	@PostConstruct
 	public void init() {
-		// Initialize other properties
-		selectedServiceType = null; // Initialize the selected service type
-		selectedAccommodationType = null; // Initialize the selected accommodation type
-		selectedTransportationType = null; // Initialize the selected accommodation type
+		selectedServiceType = null;
+		selectedAccommodationType = null;
+		selectedTransportationType = null;
 		accommodationList = new ArrayList<>();
 		transportationList = new ArrayList<>();
-		restaurantList = new ArrayList<>();// Initialize the selected service type
+		restaurantList = new ArrayList<>();
 	}
 
+	/**
+	 * Filters services based on selected service type.
+	 * 
+	 * @return List of filtered services.
+	 */
 	public List<Service> getFilteredServices() {
 		List<Service> filteredServices = new ArrayList<>();
 		if (selectedServiceType == null) {
@@ -97,17 +107,26 @@ public class ServiceBean implements Serializable {
 		return filteredServices;
 	}
 
+	/**
+	 * Executes advanced search for accommodations based on user-defined criteria.
+	 */
 	public void advancedSearchAccommodation() {
 		accommodationList = serviceService.advancedSearchAccommodations(searchAccommodationCity,
 				searchAccommodationCountry, minPrice, maxPrice, searchAccommodationName, selectedAccommodationType);
 	}
 
+	/**
+	 * Executes advanced search for transportations based on user-defined criteria.
+	 */
 	public void advancedSearchTransportation() {
 		transportationList = serviceService.advancedSearchTransportations(searchDepartureCity, searchDepartureCountry,
 				searchArrivalCity, searchArrivalCountry, minPrice, maxPrice, searchTransportationName,
 				selectedTransportationType);
 	}
 
+	/**
+	 * Executes advanced search for restaurants based on user-defined criteria.
+	 */
 	public void advancedSearchRestaurant() {
 		restaurantList = serviceService.advancedSearchRestaurants(searchRestaurantName, searchRestaurantCity,
 				searchRestaurantCountry, minPrice, maxPrice);

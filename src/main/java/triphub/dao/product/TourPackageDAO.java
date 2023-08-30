@@ -24,6 +24,10 @@ import triphub.entity.product.TourPackage;
 import triphub.entity.user.Organizer;
 import triphub.viewModel.TourPackageFormViewModel;
 
+
+/**
+ * DAO for managing operations related to TourPackage entities.
+ */
 @Stateless
 public class TourPackageDAO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -31,10 +35,16 @@ public class TourPackageDAO implements Serializable {
 	private EntityManager em;
 	
 	
-
 	public TourPackageDAO() {
 	}
 
+	/**
+     * Creates a new TourPackage based on the provided view model and organizer ID.
+     *
+     * @param tourPackageVm The view model with package details.
+     * @param organizerId The ID of the associated organizer.
+     * @return The newly created TourPackage.
+     */
 	public TourPackage create(TourPackageFormViewModel tourPackageVm, Long organizerId) {
 		
 	    Organizer organizer = em.find(Organizer.class, organizerId);
@@ -64,20 +74,24 @@ public class TourPackageDAO implements Serializable {
 		newPrice.setAmount(tourPackageVm.getAmount());
 		newPrice.setCurrency(tourPackageVm.getCurrency());
 		newPackage.setPrice(newPrice);
-		
-//		List<Picture> pictures = tourPackageVm.getPictureslinks();
-//	    newPackage.setPictures(pictures);    
+		 
 		em.persist(picture);
 		em.persist(newDestination);
 		em.persist(newTheme);
 		em.persist(newPrice);
 		em.persist(newPackage);
 
-	//	em.persist(pictures);
 		em.flush();
 		return newPackage;
 	}
 
+	
+    /**
+     * Updates an existing TourPackage based on the provided view model.
+     *
+     * @param tourPackageVm The view model with updated package details.
+     * @return The updated view model.
+     */
 	public TourPackageFormViewModel updateTourPackage(TourPackageFormViewModel tourPackageVm) {
 
 		TourPackage tourPackage = em.find(TourPackage.class, tourPackageVm.getId());
@@ -89,11 +103,15 @@ public class TourPackageDAO implements Serializable {
 		tourPackage = em.merge(tourPackage);
 		em.flush();
 
-		// Convert the updated entity back to the view model and return it
 		return tourPackage.initTourPackageFormViewModel();
-		// return tourPackageVm;
 	}
-
+	
+	
+    /**
+     * Deletes a TourPackage based on the provided view model.
+     *
+     * @param tourPackageVm The view model of the package to be deleted.
+     */
 	public void delete(TourPackageFormViewModel tourPackageVm) {
 		TourPackage tourPackage = em.find(TourPackage.class, tourPackageVm.getId());
 		if (tourPackage == null) {
@@ -105,6 +123,12 @@ public class TourPackageDAO implements Serializable {
 		em.flush();
 	}
 
+    /**
+     * Initializes a TourPackageFormViewModel for the given package ID.
+     *
+     * @param id The ID of the TourPackage.
+     * @return The initialized view model.
+     */
 	public TourPackageFormViewModel initTourPackage(Long id) {
 		TourPackage tourPackage = em.find(TourPackage.class, id);
 		if (tourPackage == null) {
@@ -113,21 +137,44 @@ public class TourPackageDAO implements Serializable {
 		return tourPackage.initTourPackageFormViewModel();
 	}
 
+    /**
+     * Reads a TourPackage based on the given ID.
+     *
+     * @param id The ID of the package.
+     * @return The found TourPackage or null if not found.
+     */
 	public TourPackage read(Long id) {
 		return em.find(TourPackage.class, id);
 	}
 
+    /**
+     * Deletes a TourPackage based on its ID.
+     *
+     * @param id The ID of the package.
+     */
 	public void deleteTourPackageById(Long id) {
 		TourPackage entity = em.find(TourPackage.class, id);
 		if (entity != null) {
 			em.remove(entity);
 		}
 	}
-
+	
+    /**
+     * Searches for a TourPackage based on its name.
+     *
+     * @param packageName The name of the package.
+     * @return The found package or null if not found.
+     */
 	public TourPackage findTourPackageById(Long tourPackageId) {
 		return em.find(TourPackage.class, tourPackageId);
 	}
 
+    /**
+     * Searches for a TourPackage based on its name.
+     *
+     * @param packageName The name of the package.
+     * @return The found package or null if not found.
+     */
 	public TourPackage findPackageByName(String packageName) {
 		TypedQuery<TourPackage> query = em.createQuery("SELECT tp FROM TourPackage tp WHERE tp.name = :name",
 				TourPackage.class);
@@ -137,12 +184,29 @@ public class TourPackageDAO implements Serializable {
 		return packages.isEmpty() ? null : packages.get(0);
 	}
 
+    /**
+     * Retrieves all stored TourPackages.
+     *
+     * @return A list of all packages.
+     */
 	public List<TourPackage> getAllTourPackages() {
 		TypedQuery<TourPackage> query = em.createQuery("SELECT tp FROM TourPackage tp", TourPackage.class);
 
 		return query.getResultList();
 	}
 
+	   /**
+     * Conducts an advanced search based on the provided criteria.
+     *
+     * @param city The city name.
+     * @param state The state name.
+     * @param country The country name.
+     * @param minPrice The minimum price.
+     * @param maxPrice The maximum price.
+     * @param name The package name.
+     * @param themeName The theme name.
+     * @return A list of matching packages.
+     */
 	public List<TourPackage> advancedSearch(String city, String state, String country, BigDecimal minPrice,
 			BigDecimal maxPrice, String name, String themeName) {
 	
@@ -187,6 +251,12 @@ public class TourPackageDAO implements Serializable {
 		return typedQuery.getResultList();
 	}
 	
+    /**
+     * Retrieves all packages for a given organizer.
+     *
+     * @param organizerId The ID of the organizer.
+     * @return A list of the organizer's packages.
+     */
 	public List<TourPackage> getTourPackagesForOrganizer(Long organizerId) {
 	    TypedQuery<TourPackage> query = em.createQuery("SELECT tp FROM TourPackage tp WHERE tp.organizer.id = :organizerId", TourPackage.class);
 	    query.setParameter("organizerId", organizerId);

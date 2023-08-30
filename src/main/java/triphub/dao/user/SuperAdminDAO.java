@@ -18,6 +18,9 @@ import triphub.helpers.PasswordUtils;
 import triphub.helpers.RegistrationException;
 import triphub.viewModel.UserViewModel;
 
+/**
+ * DAO class responsible for operations related to the SuperAdmin entity.
+ */
 @Stateless
 public class SuperAdminDAO {
 
@@ -27,6 +30,12 @@ public class SuperAdminDAO {
 	public SuperAdminDAO() {
 	}
 
+	/**
+	 * Creates a SuperAdmin entity based on the provided form.
+	 *
+	 * @param form the UserViewModel form.
+	 * @return the created SuperAdmin entity.
+	 */
 	public SuperAdmin createSuperAdmin(UserViewModel form) {
 
 		User user = User.createUserFromViewModel(form);
@@ -53,6 +62,12 @@ public class SuperAdminDAO {
 		return superAdmin;
 	}
 
+	/**
+	 * Updates the SuperAdmin entity based on the provided userViewModel.
+	 *
+	 * @param userViewModel the form for updating.
+	 * @return the updated UserViewModel.
+	 */
 	public UserViewModel updateSuperAdmin(UserViewModel userViewModel) {
 		SuperAdmin superAdmin = em.find(SuperAdmin.class, userViewModel.getSuperAdminId());
 
@@ -68,6 +83,12 @@ public class SuperAdminDAO {
 		return userViewModel;
 	}
 
+	/**
+	 * Initializes a SuperAdmin from its ID.
+	 *
+	 * @param superAdminId the ID of the SuperAdmin.
+	 * @return the initialized UserViewModel.
+	 */
 	public UserViewModel initSuperAdmin(Long superAdminId) {
 		SuperAdmin superAdmin = em.find(SuperAdmin.class, superAdminId);
 		if (superAdmin == null) {
@@ -77,10 +98,21 @@ public class SuperAdminDAO {
 		return superAdmin.initSuperAdminViewModel();
 	}
 
+	/**
+	 * Retrieves a SuperAdmin entity by its ID.
+	 *
+	 * @param id the ID of the SuperAdmin.
+	 * @return the SuperAdmin entity.
+	 */
 	public SuperAdmin readSuperAdmin(Long id) {
 		return em.find(SuperAdmin.class, id);
 	}
 
+	/**
+	 * Deletes a SuperAdmin entity by its ID.
+	 *
+	 * @param id the ID of the SuperAdmin.
+	 */
 	public void deleteSuperAdmin(Long id) {
 		SuperAdmin superAdmin = em.find(SuperAdmin.class, id);
 		if (superAdmin != null) {
@@ -88,6 +120,12 @@ public class SuperAdminDAO {
 		}
 	}
 
+	/**
+	 * Finds a SuperAdmin based on its email.
+	 *
+	 * @param email the email of the SuperAdmin.
+	 * @return the matching SuperAdmin, or null if not found.
+	 */
 	public SuperAdmin findByEmailSuperAdmin(String email) {
 		TypedQuery<SuperAdmin> query = em.createQuery("SELECT c FROM SuperAdmin c WHERE c.user.email = :email",
 				SuperAdmin.class);
@@ -99,6 +137,12 @@ public class SuperAdminDAO {
 		}
 	}
 
+	/**
+	 * Finds a SuperAdmin based on the associated User entity.
+	 *
+	 * @param user the associated User entity.
+	 * @return the matching SuperAdmin, or null if not found.
+	 */
 	public SuperAdmin findByUserSuperAdmin(User user) {
 		try {
 			TypedQuery<SuperAdmin> query = em.createQuery("SELECT c FROM SuperAdmin c WHERE c.user = :user",
@@ -110,6 +154,12 @@ public class SuperAdminDAO {
 		}
 	}
 
+	/**
+	 * Finds a SuperAdmin based on the ID of its associated User entity.
+	 *
+	 * @param userId the ID of the associated User entity.
+	 * @return the matching SuperAdmin, or null if not found.
+	 */
 	public SuperAdmin findSuperAdminByUserId(Long userId) {
 		TypedQuery<SuperAdmin> query = em.createQuery("SELECT c FROM SuperAdmin c WHERE c.user.id = :userId",
 				SuperAdmin.class);
@@ -121,10 +171,15 @@ public class SuperAdminDAO {
 			return null;
 		}
 	}
-	
+
+	/**
+	 * Retrieves all SuperAdmins.
+	 *
+	 * @return a list of all SuperAdmins.
+	 */
 	public List<SuperAdmin> findAllSuperAdmins() {
-	    TypedQuery<SuperAdmin> query = em.createQuery("SELECT c FROM SuperAdmin c", SuperAdmin.class);
-	    return query.getResultList();
+		TypedQuery<SuperAdmin> query = em.createQuery("SELECT c FROM SuperAdmin c", SuperAdmin.class);
+		return query.getResultList();
 	}
 
 }
