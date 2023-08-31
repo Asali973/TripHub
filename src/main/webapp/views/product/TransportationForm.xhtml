@@ -105,8 +105,7 @@
 									<h:outputLabel for="pictureTransport" value="Picture:" />
 									<div class="input-group mt-3">
 										<h:inputFile value="#{transportationBean.pictureTransport}"
-											id="pictureTransport"
-											styleClass="custom-file-input d-none"
+											id="pictureTransport" styleClass="custom-file-input d-none"
 											onchange="updateLabel(this);" />
 										<label id="fileLabel" class="form-control">Choose a
 											picture</label>
@@ -171,14 +170,6 @@
 										value="#{transportationBean.transportationvm.departure.zipCode}"
 										styleClass="form-control" />
 								</div>
-
-
-								<script type="text/javascript">
-    					function updateLabel(inputElement) {
-        					var fileName = inputElement.value.split("\\").pop();
-       						 document.getElementById('fileLabel').textContent = fileName || "No file selected";
-   						}
-						</script>
 
 							</div>
 
@@ -344,24 +335,24 @@
 											</h:commandButton>
 										</h:form></td>
 
-											<td><h:form>
-													<!-- Add to Organizer button -->
-													<h:commandButton value="Add"
-														onclick="showSuccessMessage(); return true;"
-														actionListener="#{transportationBean.addTransportationToOrganizer}"
-														styleClass="btn btn-sm btn-outline-secondary3">
-														<f:param name="id" value="#{transportation.id}" />
-													</h:commandButton>
-												</h:form></td>
-											<td><h:form>
-													<!-- Delete button -->
-													<h:commandButton value="Delete"
-														actionListener="#{transportationBean.performDelete}"
-														styleClass="btn btn-sm btn-outline-secondary2"
-														onclick="return confirmDelete();">
-														<f:param name="id" value="#{transportation.id}" />
-													</h:commandButton>
-												</h:form></td>
+									<td><h:form>
+											<!-- Add to Organizer button -->
+											<h:commandButton value="Add"
+												onclick="showSuccessMessage(); return true;"
+												actionListener="#{transportationBean.addTransportationToOrganizer}"
+												styleClass="btn btn-sm btn-outline-secondary3">
+												<f:param name="id" value="#{transportation.id}" />
+											</h:commandButton>
+										</h:form></td>
+									<td><h:form>
+											<!-- Delete button -->
+											<h:commandButton value="Delete"
+												actionListener="#{transportationBean.performDelete}"
+												styleClass="btn btn-sm btn-outline-secondary2"
+												onclick="return confirmDelete();">
+												<f:param name="id" value="#{transportation.id}" />
+											</h:commandButton>
+										</h:form></td>
 								</tr>
 							</ui:repeat>
 
@@ -390,6 +381,14 @@
 			<script
 				src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js">
 			</script>
+
+			<script type="text/javascript">
+    					function updateLabel(inputElement) {
+        					var fileName = inputElement.value.split("\\").pop();
+       						 document.getElementById('fileLabel').textContent = fileName || "No file selected";
+   						}
+						</script>
+
 
 			<script type="text/javascript">
     function showSuccessMessage() {
