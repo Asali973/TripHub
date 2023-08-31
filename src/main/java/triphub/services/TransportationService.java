@@ -7,7 +7,7 @@ import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-import triphub.dao.service.TransportationDAO;
+import triphub.dao.services.TransportationDAO;
 import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.subservices.Accommodation;

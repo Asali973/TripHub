@@ -7,7 +7,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import triphub.dao.service.ServiceDAO;
+import triphub.dao.services.ServiceDAO;
 import triphub.entity.product.service.Service;
 import triphub.entity.product.service.ServiceType;
 import triphub.entity.subservices.Accommodation;

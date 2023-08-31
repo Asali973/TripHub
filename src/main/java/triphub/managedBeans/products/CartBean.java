@@ -18,9 +18,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
-import triphub.dao.service.AccommodationDAO;
-import triphub.dao.service.RestaurantDAO;
-import triphub.dao.service.TransportationDAO;
+import triphub.dao.services.AccommodationDAO;
+import triphub.dao.services.RestaurantDAO;
+import triphub.dao.services.TransportationDAO;
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
 

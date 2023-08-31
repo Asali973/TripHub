@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
-import triphub.dao.service.RestaurantDAO;
+import triphub.dao.services.RestaurantDAO;
 import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.util.CurrencyType;
