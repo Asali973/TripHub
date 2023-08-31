@@ -204,3 +204,23 @@ footer {
 	margin: 0 4px;
 }
 
+.btn-primary {
+    background-color: rgb(22, 67, 89);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #8e5e23;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+    outline: none;
+}
+

@@ -21,6 +21,9 @@ import triphub.entity.util.Address;
 import triphub.entity.util.FinanceInfo;
 import triphub.viewModel.UserViewModel;
 
+/**
+ * DAO class responsible for operations related to the User entity.
+ */
 @Stateless
 public class UserDAO {
 	@PersistenceContext
@@ -38,22 +41,37 @@ public class UserDAO {
 	@Inject
 	private OrganizerDAO organizerDAO;
 
-//	public UserDAO(EntityManager em) {
-//		this.em = em;
-//	}
-
 	public UserDAO() {
 	}
 
+	/**
+	 * Creates a User entity in the database.
+	 *
+	 * @param user the User entity to create.
+	 * @return the created User entity.
+	 */
 	public User createUser(User user) {
 		em.persist(user);
 		return user;
 	}
 
+	/**
+	 * Retrieves a User entity by its ID.
+	 *
+	 * @param id the ID of the User.
+	 * @return the User entity.
+	 */
 	public User readUser(Long id) {
 		return em.find(User.class, id);
 	}
 
+	/**
+	 * Initializes a User entity using a UserViewModel, primarily for the Customer
+	 * role.
+	 *
+	 * @param userId the ID of the User.
+	 * @return the initialized UserViewModel.
+	 */
 	public UserViewModel initUser(Long userId) {
 		// Use the CustomerDAO to get the Customer with the same ID as the User
 		Customer customer = customerDAO.findCustomerByUserId(userId);
@@ -92,18 +110,17 @@ public class UserDAO {
 			userViewModel.setExpirationDate(finance.getExpirationDate());
 		}
 
-//        // Use the CustomerDAO to get the Customer with the same ID as the User;
-//        if (customer != null) {
-//            // Add the Customer details to the UserViewModel
-////            userViewModel.setProfilePicture(customer.getPicture().getLink());
-//            userViewModel.setCustomerId(customer.getId());
-//        }
-
 		userViewModel.setUserId(user.getId());
 
 		return userViewModel;
 	}
 
+	/**
+	 * Finds a User based on its email.
+	 *
+	 * @param email the email of the User.
+	 * @return the matching User, or null if not found.
+	 */
 	public User findByEmailUser(String email) {
 		TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
 		query.setParameter("email", email);
@@ -115,6 +132,12 @@ public class UserDAO {
 		}
 	}
 
+	/**
+	 * Retrieves a User entity by its ID.
+	 *
+	 * @param userId the ID of the User.
+	 * @return the User entity, or null if not found.
+	 */
 	public User findByUserId(Long userId) {
 		try {
 			return em.find(User.class, userId);
@@ -123,15 +146,39 @@ public class UserDAO {
 		}
 	}
 
+	/**
+	 * Updates a User entity in the database.
+	 *
+	 * @param user the User entity to update.
+	 */
 	public void updateUser(User user) {
 		em.merge(user);
 	}
 
+	/**
+	 * Refreshes a User entity from the database.
+	 *
+	 * @param user the User entity to refresh.
+	 */
 	public void refreshUser(User user) {
 		em.refresh(user);
 	}
 
-	public List<User> advancedSearch( String firstName,String lastName, String city, String street, String zipCode,
+	/**
+	 * Performs an advanced search on Users using various criteria.
+	 *
+	 * @param firstName First name of the user.
+	 * @param lastName  Last name of the user.
+	 * @param city      City of the user's address.
+	 * @param street    Street of the user's address.
+	 * @param zipCode   Zip code of the user's address.
+	 * @param country   Country of the user's address.
+	 * @param email     Email of the user.
+	 * @param phoneNum  Phone number of the user.
+	 * @param CCNumber  Credit card number of the user.
+	 * @return List of Users matching the search criteria.
+	 */
+	public List<User> advancedSearch(String firstName, String lastName, String city, String street, String zipCode,
 			String country, String email, String phoneNum, String CCNumber) {
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();

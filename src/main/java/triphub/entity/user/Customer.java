@@ -4,6 +4,10 @@ import javax.persistence.*;
 
 import triphub.entity.util.Picture;
 import triphub.viewModel.UserViewModel;
+/**
+ * Represents a customer entity in the system.
+ * This entity contains details specific to a customer, along with references to related entities like User and Picture.
+ */
 
 @Entity
 public class Customer {
@@ -18,6 +22,12 @@ public class Customer {
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Picture picture;
 	
+	/**
+	 * Updates the properties of the Customer based on the provided UserViewModel.
+	 * The method updates the user, address, finance information, and picture associated with the customer.
+	 * 
+	 * @param form The UserViewModel containing updated data for the customer.
+	 */
 	public void updateCustomerFromViewModel(UserViewModel form) {
 	    this.setId(form.getCustomerId());
 	    this.getUser().updateUserFromViewModel(form);
@@ -25,7 +35,13 @@ public class Customer {
 	    this.getUser().getFinance().updateFinanceInfoFromViewModel(form);
 	    this.getPicture().updatePictureFromViewModel(form);
 	}
-
+	
+	/**
+	 * Converts the properties of the Customer entity into a UserViewModel.
+	 * This method extracts details from associated entities like User, Address, Finance Info, and Picture.
+	 * 
+	 * @return userViewModel The UserViewModel containing the current data of the customer.
+	 */
 	public UserViewModel initCustomerViewModel() {
 	    UserViewModel userViewModel = new UserViewModel();
 	    this.getUser().initUserViewModel(userViewModel);

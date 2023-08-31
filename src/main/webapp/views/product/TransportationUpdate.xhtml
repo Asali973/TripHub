@@ -37,7 +37,7 @@
 							value="#{transportationBean.transportationvm.id}" />
 						<h:inputHidden id="idservice"
 							value="#{transportationBean.transportationvm.service.id}" />
-<div class="row">
+						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
 									<h:outputLabel for="serviceInfo" value="Service Details"
@@ -168,15 +168,6 @@
 										value="#{transportationBean.transportationvm.departure.zipCode}"
 										styleClass="form-control" />
 								</div>
-
-
-								<script type="text/javascript">
-    					function updateLabel(inputElement) {
-        					var fileName = inputElement.value.split("\\").pop();
-       						 document.getElementById('fileLabel').textContent = fileName || "No file selected";
-   						}
-						</script>
-
 							</div>
 
 							<div class="col-md-4">
@@ -253,8 +244,7 @@
 								</div>
 								<div class="form-group d-flex justify-content-center">
 									<h:commandButton value="Update"
-										action="#{transportationBean.update}"
-										styleClass="btnCheckO">
+										action="#{transportationBean.update}" styleClass="btnCheckO">
 										<f:param name="id"
 											value="#{transportationBean.transportationvm.id}" />
 										<f:param name="idservice"
@@ -290,6 +280,13 @@
 			<script
 				src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js">
 			</script>
+			<script type="text/javascript">
+    					function updateLabel(inputElement) {
+        					var fileName = inputElement.value.split("\\").pop();
+       						 document.getElementById('fileLabel').textContent = fileName || "No file selected";
+   						}
+						</script>
+
 
 			<script>
     document.addEventListener("DOMContentLoaded", function() {

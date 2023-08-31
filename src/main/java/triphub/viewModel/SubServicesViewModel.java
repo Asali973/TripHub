@@ -24,25 +24,32 @@ public class SubServicesViewModel implements Serializable {
 	private Long id;
 	
 	private String name;
+
+	private String description;
+
 	
+	// Service attributes
 	private boolean availability;
 	private Date availableFrom;
 	private Date availableTill;
 
+	
+	// enumerations for Accommodation type, Transportation type, Currency type (price) and Service type
 	private AccommodationType accommodationType;
 	private TransportationType transportationType;
 	
 	private CurrencyType currencyType;
 	private ServiceType serviceType;
 	
-	private String description;
 
+	// Address attributes
 	private Address address = new Address();
 	private Address departure  = new Address();
 	private Address arrival = new Address();
 	private Price price= new Price();
 	private Service service = new Service();
 
+	// price attributes
 	private BigDecimal amount;
 	private String currency;
 

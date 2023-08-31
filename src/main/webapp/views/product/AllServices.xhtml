@@ -11,193 +11,7 @@
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			<title>Service Management</title>
 			<h:outputStylesheet library="css" name="bootstrap.min.css" />
-			<style>
-.toggle-link {
-	cursor: pointer;
-	text-decoration: none;
-	color: gray;
-	display: inline-block;
-	padding: 10px 20px;
-	border-radius: 20px;
-	background-color: #f9f9f9;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.toggle-link:hover {
-	background-color: #e6e6e6;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.input-container {
-	display: flex;
-	align-items: center; /* Align items vertically in the center */
-	margin-bottom: 20px; /* Adjust spacing between input pairs */
-}
-
-/* Label style */
-.h-label {
-	margin-right: 10px; /* Add some spacing between label and input */
-}
-
-/* Input field style */
-.input-field {
-	border: none;
-	border-radius: 20px;
-	padding: 6px 12px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	flex: 1; /* Fill available space in the container */
-}
-
-/* Search button style */
-.search-button {
-	background-color: black;
-	color: white;
-	border-radius: 20px;
-	padding: 6px 12px;
-	cursor: pointer;
-}
-
-.columns-container {
-	display: flex;
-	justify-content: space-between;
-	decoration: none;
-}
-
-.column {
-	flex: 1;
-	margin: 10px;
-	padding: 10px;
-	border: none;
-}
-
-/* Style for the search buttons */
-h\\:commandButton {
-	background-color: black;
-	color: white;
-	text-align: right;
-}
-/* Custom CSS for the table */
-.table-container {
-	margin: 0 auto;
-	width: 80%;
-	padding: 20px;
-	border: 2px solid #ccc;
-	border-radius: 5px;
-	background-color: #f9f9f9;
-	margin-top: 20px;
-	width: 100%;
-}
-/* Previous styles remain unchanged */
-
-/* Custom CSS for the result section */
-.result-section {
-	margin: 20px auto;
-	padding: 20px;
-	border-radius: 10px;
-	background-color: white;
-	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-	width: 100%;
-}
-
-.result-section .table {
-	width: 100%;
-	border-collapse: separate;
-	/* Separate border spacing for horizontal lines */
-	border-spacing: 0; /* No spacing between cells */
-}
-
-.result-section .table th, .result-section .table td {
-	text-align: center;
-	padding: 10px;
-	border: none; /* Remove cell borders */
-	border-bottom: 1px solid #ddd;
-	/* Add bottom border to create horizontal lines */
-}
-
-.result-section .table th {
-	background-color: #f2f2f2;
-}
-
-.result-section .table tbody tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-
-.result-section .table tbody tr:hover {
-	background-color: #ddd;
-}
-
-.result-table {
-	width: 100%;
-	border-collapse: collapse;
-	border-radius: 15px;
-	overflow: hidden;
-	decoration: none;
-}
-
-.result-table th, .result-table td {
-	text-align: center;
-	padding: 10px;
-}
-
-.result-table th {
-	background-color: #f2f2f2;
-}
-
-.result-table tbody tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-
-.result-table tbody tr:hover {
-	background-color: #ddd;
-}
-
-.result-title {
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-.rounded-table {
-	border-radius: 10px;
-	background-color: white;
-	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-	padding: 10px;
-	overflow: hidden;
-	decoration: none;
-}
-</style>
-			<script>
-		    function toggleAccommodationSearch() {
-		        togglePanel('accommodationForm:accommodationPanelGroup');
-		    }
-
-		    function toggleTransportationSearch() {
-		        togglePanel('transportationForm:transportationPanelGroup');
-		    }
-
-		    function toggleRestaurantSearch() {
-		        togglePanel('restaurantForm:restaurantPanelGroup');
-		    }
-
-		    function togglePanel(panelId) {
-		        var panel = document.getElementById(panelId);
-		        if (panel.style.display === 'none') {
-		            panel.style.display = 'block';
-		        } else {
-		            panel.style.display = 'none';
-		        }
-		    }
-		    function toggleResultSection(panelId) {
-		        var resultPanel = document.getElementById(panelId);
-		        if (resultPanel.style.display === 'none') {
-		            resultPanel.style.display = 'block';
-		        } else {
-		            resultPanel.style.display = 'none';
-		        }
-		    }
-		    		  
-		    		    
-		</script>
+			<h:outputStylesheet library="css" name="AllServices.css" />
 		</h:head>
 
 
@@ -447,7 +261,7 @@ h\\:commandButton {
 									</f:facet>
 									<h:outputText value="#{accommodation.service.price.currency}" />
 								</h:column>
-									<h:column>
+								<h:column>
 									<f:facet name="header">
 										<h:outputText value="From" />
 									</f:facet>
@@ -534,7 +348,7 @@ h\\:commandButton {
 									</f:facet>
 									<h:outputText value="#{transportation.service.price.currency}" />
 								</h:column>
-									<h:column>
+								<h:column>
 									<f:facet name="header">
 										<h:outputText value="From" />
 									</f:facet>
@@ -635,6 +449,8 @@ h\\:commandButton {
 					</div>
 				</h:panelGroup>
 			</h:form>
+			<h:outputScript library="javascript" name="allServicesSearch.js" />
+
 		</h:body>
 
 	</ui:define>

@@ -13,6 +13,15 @@ function toggleCreateForm() {
     }
 }
 
+function toggleTableVisibility() {
+    const dataTableContainer = document.getElementById('dataTableContainer');
+    if (dataTableContainer.style.display === 'none' || dataTableContainer.style.display === '') {
+        dataTableContainer.style.display = 'block';
+    } else {
+        dataTableContainer.style.display = 'none';
+    }
+}
+
 
 
 

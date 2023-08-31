@@ -110,7 +110,7 @@ h2.card-title {
 
 .card {
 	margin: auto;
-	max-width: 800px;
+/* 	max-width: 800px; */
 	border-radius: 20px;
 	background-color: #F0F0F0;
 }

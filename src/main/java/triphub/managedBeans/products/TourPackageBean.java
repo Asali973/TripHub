@@ -22,6 +22,9 @@ import triphub.helpers.ImageHelper;
 import triphub.services.TourPackageService;
 import triphub.viewModel.TourPackageFormViewModel;
 
+/**
+ * Managed bean for handling tour package related operations.
+ */
 @Named("tourPackageBean")
 @RequestScoped
 
@@ -51,50 +54,16 @@ public class TourPackageBean implements Serializable {
 
 	}
 
-//	@PostConstruct
-//	public void init() {
-//	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-//	    // Step 1: Try to fetch the tourPackageId from the session
-//	    tourPackageId = (Long) externalContext.getSessionMap().get("selectedTourPackageId");
-//	    
-//	    // Step 2: If not found in session, try to get from the request parameters
-//	    if (tourPackageId == null) {
-//	        String idParam = externalContext.getRequestParameterMap().get("id");
-//	        if (idParam != null && !idParam.trim().isEmpty()) {
-//	            try {
-//	                tourPackageId = Long.parseLong(idParam);
-//	                externalContext.getSessionMap().put("selectedTourPackageId", tourPackageId);
-//	            } catch (NumberFormatException e) {
-//	                FacesMessageUtil.addErrorMessage("Invalid tour package ID format.");
-//	            }
-//	        }
-//	    }
-//	    
-//	    // Step 3: Use the tourPackageId to initialize other parts
-//	    if (tourPackageId != null) {
-//	        tourPackageVm = tourPackageService.initTourPackage(tourPackageId);
-//	        if (tourPackageVm == null) {
-//	            FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
-//	            return;
-//	        }
-//	        
-//	        // Fetch the selected tour package
-//	        selectedTourPackage = tourPackageService.getTourPackageById(tourPackageId);
-//	        if (selectedTourPackage == null) {
-//	            FacesMessageUtil.addErrorMessage("Initialization failed: Tour package does not exist");
-//	            return;
-//	        }
-//	    } else {
-//	        allTourPackages = tourPackageService.getAllTourPackages();
-//	    }
-//	}
+	/**
+	 * Initializes data for the bean.
+	 */
 	@PostConstruct
 	public void init() {
 		allTourPackages = tourPackageService.getAllTourPackages();
 
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
-		if (id != null  && !id.isEmpty()) {
+		if (id != null && !id.isEmpty()) {
 			Long tourPackageId = Long.parseLong(id);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("selectedTourPackageId",
 					tourPackageId);
@@ -104,7 +73,7 @@ public class TourPackageBean implements Serializable {
 			}
 		}
 
-		if (id != null  && !id.isEmpty()) {
+		if (id != null && !id.isEmpty()) {
 			Long tourPackageId = Long.parseLong(id);
 			// Fetch the selected tour package using tourPackageService
 			selectedTourPackage = tourPackageService.getTourPackageById(tourPackageId);
@@ -116,59 +85,59 @@ public class TourPackageBean implements Serializable {
 
 	}
 
+	/**
+	 * Load all tour packages.
+	 *
+	 * @return Navigation outcome.
+	 */
 	public String loadAllTourPackages() {
 		allTourPackages = tourPackageService.getAllTourPackages();
 
 		return "tourPackages";
 	}
 
-//	public void createPackage() {
-////		try {
-////			String profilePicName = ImageHelper.processProfilePicture(profilePicture);
-////			if (profilePicName != null) {
-////				tourPackageVm.setProfilePicture(profilePicName);
-////			}
-//		lastTourPackageAdded = tourPackageService.createTourPackage(tourPackageVm);
-////		} catch (Exception e) {
-////			FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
-////		}
-//		clear();
-//	}
-	
+	/**
+	 * Create a new tour package.
+	 */
 	public void createPackage() {
-	    try {
-	        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-	        Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
+		try {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
 
-	        if (organizerId == null) {
-	            FacesMessageUtil.addErrorMessage("No organizerId found in session.");
-	            return;
-	        }
-	        
+			if (organizerId == null) {
+				FacesMessageUtil.addErrorMessage("No organizerId found in session.");
+				return;
+			}
+
 			// Uploading the picture and setting the link to ViewModel
-			String picName= ImageHelper.processProfilePicture(picturePackage);
+			String picName = ImageHelper.processProfilePicture(picturePackage);
 			if (picName != null) {
 				tourPackageVm.setLink(picName);
 			}
 
-	        lastTourPackageAdded = tourPackageService.createTourPackage(tourPackageVm, organizerId);
-	    } catch (Exception e) {
-	        FacesMessageUtil.addErrorMessage("Creation failed: " + e.getMessage());
-	    }
-	    clear();
+			lastTourPackageAdded = tourPackageService.createTourPackage(tourPackageVm, organizerId);
+		} catch (Exception e) {
+			FacesMessageUtil.addErrorMessage("Creation failed: " + e.getMessage());
+		}
+		clear();
 	}
 
-
+	/**
+	 * View details of a specific tour package.
+	 *
+	 * @param packageId The ID of the package.
+	 * @return Navigation outcome.
+	 */
 	public String viewDetails(long packageId) {
-		// Fetch package details based on packageId and store in selectedPackage
-		// property
 		selectedTourPackage = tourPackageService.getTourPackageById(packageId);
-
-		// Return navigation outcome for the details page
-		return "details"; // This should match the name of your details.xhtml page without the .xhtml
-							// extension
+		return "details";
 	}
 
+	/**
+	 * Update an existing tour package.
+	 *
+	 * @return Navigation outcome.
+	 */
 	public String updatePackage() {
 		try {
 			tourPackageVm.setCurrency(selectedCurrency);
@@ -191,6 +160,9 @@ public class TourPackageBean implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Delete a tour package.
+	 */
 	public void deletePackage() {
 		Long selectedTourPackageId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.get("selectedTourPackageId");
@@ -208,6 +180,11 @@ public class TourPackageBean implements Serializable {
 		FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add("confirmDelete();");
 	}
 
+	/**
+	 * Perform the delete action.
+	 *
+	 * @return Optional message.
+	 */
 	public String performDelete() {
 		Long selectedTourPackageId = (Long) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.get("selectedTourPackageId");
@@ -225,6 +202,11 @@ public class TourPackageBean implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Initialize form data based on a tour package ID.
+	 *
+	 * @param id Tour package ID.
+	 */
 	public void initFormData(Long id) {
 		TourPackageFormViewModel temp = tourPackageService.initTourPackage(id);
 		if (temp == null) {
@@ -234,6 +216,9 @@ public class TourPackageBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Conduct an advanced search for tour packages.
+	 */
 	public void performAdvancedSearch() {
 		String name = tourPackageVm.getName();
 		String themeName = tourPackageVm.getThemeName();
@@ -252,7 +237,7 @@ public class TourPackageBean implements Serializable {
 
 		List<TourPackage> searchResults = tourPackageService.advancedSearch(city, state, country, minPrice, maxPrice,
 				name, themeName);
-		// this.searchResults = tourPackageService.advancedSearch(city, state, country, minPrice, maxPrice, name, themeName);
+		
 		if (searchResults.isEmpty()) {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No results found.", null);
 			FacesContext.getCurrentInstance().addMessage(null, message);
@@ -274,7 +259,12 @@ public class TourPackageBean implements Serializable {
 		}
 	}
 
-	// Setting Max and Min values
+	/**
+	 * Generate options for price.
+	 *
+	 * @param maxPrice Maximum price value.
+	 * @return List of options.
+	 */
 	public List<BigDecimal> generateNumberOptions(BigDecimal maxPrice) {
 		if (maxPrice == null || maxPrice.compareTo(BigDecimal.ZERO) == 0) {
 			maxPrice = BigDecimal.valueOf(3000); // Set the default maximum price to 3000
@@ -286,38 +276,39 @@ public class TourPackageBean implements Serializable {
 		}
 		return options;
 	}
-	
-	
+
+	/**
+	 * Fetch tour packages for the currently logged-in user.
+	 *
+	 * @return List of tour packages.
+	 */
 	public List<TourPackage> getCurrentUserTourPackages() {
-	    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
-	    
-	    Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
-	    
-	    
-	    if (organizerId == null) {
-	        String organizerIdParam = externalContext.getRequestParameterMap().get("organizerId");
-	        if (organizerIdParam != null && !organizerIdParam.trim().isEmpty()) {
-	            try {
-	                organizerId = Long.parseLong(organizerIdParam);
-	            } catch (NumberFormatException e) {
-	                FacesMessageUtil.addErrorMessage("ID not valid");
-	                return new ArrayList<>(); 
-	            }
-	        }
-	    }
+		Long organizerId = (Long) externalContext.getSessionMap().get("organizerId");
 
-	    if (organizerId == null) {
-	        return new ArrayList<>();
-	    }
+		if (organizerId == null) {
+			String organizerIdParam = externalContext.getRequestParameterMap().get("organizerId");
+			if (organizerIdParam != null && !organizerIdParam.trim().isEmpty()) {
+				try {
+					organizerId = Long.parseLong(organizerIdParam);
+				} catch (NumberFormatException e) {
+					FacesMessageUtil.addErrorMessage("ID not valid");
+					return new ArrayList<>();
+				}
+			}
+		}
 
-	    return tourPackageService.getTourPackagesForOrganizer(organizerId);
+		if (organizerId == null) {
+			return new ArrayList<>();
+		}
+
+		return tourPackageService.getTourPackagesForOrganizer(organizerId);
 	}
 
-
-
-	
-
+	/**
+	 * Clear the ViewModel.
+	 */
 	public void clear() {
 		tourPackageVm = new TourPackageFormViewModel();
 	}
@@ -434,7 +425,5 @@ public class TourPackageBean implements Serializable {
 	public void setSearchResults(List<TourPackage> searchResults) {
 		this.searchResults = searchResults;
 	}
-	
-	
 
 }

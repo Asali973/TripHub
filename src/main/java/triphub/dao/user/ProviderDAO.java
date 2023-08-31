@@ -12,6 +12,9 @@ import triphub.entity.user.*;
 import triphub.entity.util.*;
 import triphub.viewModel.UserViewModel;
 
+/**
+ * DAO class responsible for operations related to the Provider entity.
+ */
 @Stateless
 public class ProviderDAO {
 
@@ -21,6 +24,12 @@ public class ProviderDAO {
 	public ProviderDAO() {
 	}
 
+	/**
+	 * Creates a Provider entity based on the given view model.
+	 *
+	 * @param form the UserViewModel form.
+	 * @return the created Provider entity.
+	 */
 	public Provider createProvider(UserViewModel form) {
 
 		User user = User.createUserFromViewModel(form);
@@ -49,6 +58,12 @@ public class ProviderDAO {
 		return provider;
 	}
 
+	/**
+	 * Updates the Provider entity based on the given userViewModel.
+	 *
+	 * @param userViewModel the form for updating.
+	 * @return the updated UserViewModel.
+	 */
 	public UserViewModel updateProvider(UserViewModel userViewModel) {
 		Provider provider = em.find(Provider.class, userViewModel.getProviderId());
 
@@ -64,6 +79,12 @@ public class ProviderDAO {
 		return userViewModel;
 	}
 
+	/**
+	 * Initializes a Provider from its ID.
+	 *
+	 * @param providerId the ID of the Provider.
+	 * @return the initialized UserViewModel.
+	 */
 	public UserViewModel initProvider(Long providerId) {
 		Provider provider = em.find(Provider.class, providerId);
 		if (provider == null) {
@@ -73,10 +94,21 @@ public class ProviderDAO {
 		return provider.initProviderViewModel();
 	}
 
+	/**
+	 * Retrieves a Provider entity by its ID.
+	 *
+	 * @param id the ID of the Provider.
+	 * @return the Provider entity.
+	 */
 	public Provider readProvider(Long id) {
 		return em.find(Provider.class, id);
 	}
 
+	/**
+	 * Deletes a Provider entity by its ID.
+	 *
+	 * @param id the ID of the Provider.
+	 */
 	public void deleteProvider(Long id) {
 		Provider provider = em.find(Provider.class, id);
 		if (provider != null) {
@@ -84,6 +116,12 @@ public class ProviderDAO {
 		}
 	}
 
+	/**
+	 * Finds a Provider based on its email.
+	 *
+	 * @param email the email of the Provider.
+	 * @return the matching Provider, or null if not found.
+	 */
 	public Provider findByEmailProvider(String email) {
 		TypedQuery<Provider> query = em.createQuery("SELECT c FROM Provider c WHERE c.user.email = :email",
 				Provider.class);
@@ -95,6 +133,12 @@ public class ProviderDAO {
 		}
 	}
 
+	/**
+	 * Finds a Provider based on the associated User entity.
+	 *
+	 * @param user the associated User entity.
+	 * @return the matching Provider, or null if not found.
+	 */
 	public Provider findByUserProvider(User user) {
 		TypedQuery<Provider> query = em.createQuery("SELECT c FROM Provider c WHERE c.user = :user", Provider.class);
 		query.setParameter("user", user);
@@ -105,6 +149,12 @@ public class ProviderDAO {
 		}
 	}
 
+	/**
+	 * Finds a Provider based on the ID of its associated User entity.
+	 *
+	 * @param userId the ID of the associated User entity.
+	 * @return the matching Provider, or null if not found.
+	 */
 	public Provider findProviderByUserId(Long userId) {
 		TypedQuery<Provider> query = em.createQuery("SELECT c FROM Provider c WHERE c.user.id = :userId",
 				Provider.class);
@@ -116,10 +166,15 @@ public class ProviderDAO {
 			return null;
 		}
 	}
-	
+
+	/**
+	 * Retrieves all Providers.
+	 *
+	 * @return a list of all Providers.
+	 */
 	public List<Provider> findAllProviders() {
-	    TypedQuery<Provider> query = em.createQuery("SELECT c FROM Provider c", Provider.class);
-	    return query.getResultList();
+		TypedQuery<Provider> query = em.createQuery("SELECT c FROM Provider c", Provider.class);
+		return query.getResultList();
 	}
 
 }

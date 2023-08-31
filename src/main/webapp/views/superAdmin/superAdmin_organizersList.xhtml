@@ -3,120 +3,110 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
-
-
-<h:outputStylesheet library="css" name="listUser.css" />
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	rel="stylesheet" />
-
-
 <h:body>
 	<ui:composition template="/WEB-INF/templates/navTemplate.xhtml">
 		<ui:define name="additionalHeadContent">
-			<h:outputStylesheet library="css" name="listUser.css" />
-			<link
-				href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-				rel="stylesheet" />
+			<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+			<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet" />
+			<h:outputStylesheet library="css" name="regForm.css" />
+			<h:outputStylesheet library="css" name="loginCss.css" />
+			<h:outputStylesheet library="css" name="checkout.css" />
+			<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet" />
 		</ui:define>
+        <ui:define name="content">
 
 
-		<ui:define name="content">
+<div class="header">
+    <a href="http://localhost:8080/triphub/views/superadmin_home.xhtml" id="backBtn">
+        <i class="fa fa-arrow-left"></i> Back to Admin Dashboard
+    </a>  
+</div>
 
-			<div class="container">
-				<div class="card">
-					<div class="card-body">
-						<h2 class="card-title text-center mb-5">List of Triphub Organizers</h2>
+			 <!-- Content goes here -->
+            <div class="containerCart mt-10 mb-10 text-center" style="max-width: 90%">
+                <h3>Organizer List</h3>
+                <br />
 
-						<h:form id="organizerForm">
-							<div id="organizerTab">
-								<div class="table-responsive">
+                <h:form>
+								<div class="table">
 									<h:dataTable value="#{organizerBean.allOrganizers}"
 										var="organizer" styleClass="table table-hover table-striped">
 										<h:column>
-											<f:facet name="header">Name</f:facet>
-                        #{organizer.user.lastName}
-                    </h:column>
-										<h:column>
 											<f:facet name="header">First Name</f:facet>
-                        #{organizer.user.firstName}
-                    </h:column>
+                        						#{organizer.user.firstName}
+                   						</h:column>
+										<h:column>
+											<f:facet name="header">Last Name</f:facet>
+                        						#{organizer.user.lastName}
+                   						</h:column>
 										<h:column>
 											<f:facet name="header">Email</f:facet>
-                        #{organizer.user.email}
-                    </h:column>
+                        						#{organizer.user.email}
+                    					</h:column>
+										<h:column>
+											<f:facet name="header">Phone</f:facet>
+                        						#{organizer.user.phoneNum}
+                    					</h:column>
 										<h:column>
 											<f:facet name="header">Address</f:facet>
-                        #{organizer.user.address.num}
-                        #{organizer.user.address.street}
-                        #{organizer.user.address.city}
-                        #{organizer.user.address.zipCode}
-                        #{organizer.user.address.state}
-                        #{organizer.user.address.country}
-                    </h:column>
-                    										<h:column>
+												#{organizer.user.address.num}
+												#{organizer.user.address.street}
+												#{organizer.user.address.city}
+												#{organizer.user.address.zipCode}
+												#{organizer.user.address.state}
+												#{organizer.user.address.country}
+                    					</h:column>
+										<h:column>
 											<f:facet name="header">Company name</f:facet>
-                        #{organizer.companyInfo.name}
-                    </h:column>
-                    
-                    										<h:column>
+                        						#{organizer.companyInfo.name}
+                    					</h:column>
+										<h:column>
 											<f:facet name="header">SIRET</f:facet>
-                        #{organizer.administration.siret}
-                    </h:column>
-                    <h:column>
-											<f:facet name="header">pro phone</f:facet>
-                        #{organizer.administration.phone}
-                    </h:column>
-                    <h:column>
-											<f:facet name="header">Pro email</f:facet>
-                        #{organizer.administration.email}
-                    </h:column>
-                    <h:column>
-											<f:facet name="header">sector</f:facet>
-                        #{organizer.administration.sector}
-                    </h:column>
+                        						#{organizer.administration.siret}
+                    					</h:column>
 										<h:column>
-											<f:facet name="header">Delete</f:facet>
-											<h:commandButton value="Delete"
-												action="#{organizerBean.deleteOrganizer}"
-												class="btn btn-customDelete btn-custom-signup"
-												onclick="return confirm('Are you sure you want to delete?');" />
-										</h:column>
+											<f:facet name="header">Pro Phone</f:facet>
+                       							#{organizer.administration.phone}
+                    					</h:column>
 										<h:column>
-											<f:facet name="header">Details</f:facet>
+											<f:facet name="header">Pro Email</f:facet>
+                        						#{organizer.administration.email}
+                    					</h:column>
+										<h:column>
+											<f:facet name="header">Sector</f:facet>
+                        						#{organizer.administration.sector}
+                    					</h:column>
+ 										<h:column>
+											<f:facet name="header">Subscription</f:facet>
+                        						#{organizer.subscription.type}
+                    					</h:column>                   					
+
+										<h:column>
+<!-- 											<f:facet name="header">Details</f:facet> -->
 											<h:commandButton value="Modify"
 												action="#{loginBean.loadUserData}"
-												class="btn btn-customUpdate btn-custom-signup mr-2">
+												styleClass="btn btn-sm btn-outline-secondary3">
 												<f:param name="selectedUserId" value="#{organizer.user.id}" />
 											</h:commandButton>
 										</h:column>
-									</h:dataTable>
-								</div>
-							</div>
-						</h:form>
-					</div>
-				</div>
 
+										<h:column>
+<!-- 											<f:facet name="header">Delete</f:facet> -->
+											<h:commandButton value="Delete"
+												action="#{organizerBean.deleteOrganizer}"
+											styleClass="btn btn-sm btn-outline-secondary3"
+												onclick="return confirm('Are you sure you want to delete?');" />
+										</h:column>
 
+								       </h:dataTable>
+                    </div>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
 
-				<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-				<script
-					src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-				<!-- 	<h:outputScript library="javascript" name="effectListUser.js" /> -->
-				<script>
-$(document).ready(function() {
-    $('.collapse').on('show.bs.collapse', function () {
-        $(this).prev().find('.btn').removeClass('btn-outline-dark').addClass('btn-dark');
-    });
-
-    $('.collapse').on('hide.bs.collapse', function () {
-        $(this).prev().find('.btn').removeClass('btn-dark').addClass('btn-outline-dark');
-    });
-});
-</script>
-			</div>
-		</ui:define>
-	</ui:composition>
+    <!-- External Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </h:body>
-
 </html>

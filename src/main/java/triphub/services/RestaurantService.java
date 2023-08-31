@@ -6,8 +6,8 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-
-import triphub.dao.service.RestaurantDAO;
+import triphub.dao.services.RestaurantDAO;
+import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.subservices.Restaurant;
 

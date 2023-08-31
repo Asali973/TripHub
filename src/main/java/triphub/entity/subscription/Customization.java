@@ -1,6 +1,13 @@
 package triphub.entity.subscription;
 
 import javax.persistence.*;
+/**
+ * Represents the customization settings associated with a user's subscription.
+ * <p>
+ * Each customization contains design choices for different components such as colors, fonts, logo, and background.
+ * It can also have an associated layout preference.
+ * </p>
+ */
 
 @Entity
 public class Customization {

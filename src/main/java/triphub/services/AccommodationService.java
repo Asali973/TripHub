@@ -6,7 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import triphub.dao.service.AccommodationDAO;
+import triphub.dao.services.AccommodationDAO;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.subservices.Accommodation;
 import triphub.helpers.FacesMessageUtil;

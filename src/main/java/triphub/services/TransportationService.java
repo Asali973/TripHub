@@ -7,7 +7,7 @@ import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-import triphub.dao.service.TransportationDAO;
+import triphub.dao.services.TransportationDAO;
 import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
 import triphub.entity.subservices.Accommodation;
@@ -62,12 +62,10 @@ public class TransportationService implements ServiceInterface {
 		try {
 			transportationDAO.update(transportationvm);
 		} catch (IllegalArgumentException e) {
-			// Handle the case when the transportation with the provided ID was not found in
-			// the DAO
+			// Handle the case when the transportation with the provided ID was not found in the DAO		
 			FacesMessageUtil.addErrorMessage("Failed to update transportation: " + e.getMessage());
 		} catch (Exception e) {
-			// Handle any other unexpected exceptions that might occur during the update
-			// process
+			// Handle any other unexpected exceptions that might occur during the update process			
 			FacesMessageUtil.addErrorMessage("Failed to update transportation. An unexpected error occurred.");
 		}
 		

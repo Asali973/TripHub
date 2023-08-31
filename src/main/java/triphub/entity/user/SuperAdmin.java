@@ -4,7 +4,9 @@ import javax.persistence.*;
 
 import triphub.entity.util.Picture;
 import triphub.viewModel.UserViewModel;
-
+/**
+ * Represents a super administrator entity in the system.
+ */
 @Entity
 public class SuperAdmin {
     @Id
@@ -17,6 +19,12 @@ public class SuperAdmin {
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Picture picture;
 	
+	/**
+	 * Updates the SuperAdmin and its associated entities 
+	 * (User, Address, FinanceInfo, and Picture) from a UserViewModel.
+	 * 
+	 * @param form The UserViewModel containing the updated data.
+	 */
     public void updateSuperAdminFromViewModel(UserViewModel form) {
     	this.setId(form.getSuperAdminId());
         this.getUser().updateUserFromViewModel(form);
@@ -25,6 +33,12 @@ public class SuperAdmin {
         this.getPicture().updatePictureFromViewModel(form);
     }
 
+    /**
+     * Initializes a UserViewModel from the data of the SuperAdmin and its 
+     * associated entities (User, Address, FinanceInfo, and Picture).
+     * 
+     * @return UserViewModel The initialized view model with data from SuperAdmin and its associations.
+     */
     public UserViewModel initSuperAdminViewModel() {
         UserViewModel userViewModel = new UserViewModel();
         this.getUser().initUserViewModel(userViewModel);

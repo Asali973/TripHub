@@ -18,15 +18,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
-import triphub.dao.service.AccommodationDAO;
-import triphub.dao.service.RestaurantDAO;
-import triphub.dao.service.TransportationDAO;
+import triphub.dao.services.AccommodationDAO;
+import triphub.dao.services.RestaurantDAO;
+import triphub.dao.services.TransportationDAO;
 import triphub.entity.product.CartItem;
 import triphub.entity.product.TourPackage;
 
-
 import triphub.entity.subservices.*;
-
 
 import triphub.entity.user.User;
 import triphub.helpers.FacesMessageUtil;
@@ -38,6 +36,13 @@ import triphub.services.TransportationService;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 
+/**
+ * CartBean is a managed bean responsible for handling all shopping cart
+ * operations for a user. This includes tasks like adding products to the cart,
+ * removing items from the cart, updating cart item quantities, and navigating
+ * to the checkout process.
+ * 
+ */
 @Named("cartBean")
 @RequestScoped
 public class CartBean implements Serializable {
@@ -63,9 +68,7 @@ public class CartBean implements Serializable {
 	private RestaurantBean restaurantBean;
 	@Inject
 	private TransportationBean transportationBean;
-	@Inject
-	private ServiceBean serviceBean;
-	
+
 	@Inject
 	private AccommodationDAO accomodationDAO;
 
@@ -92,12 +95,17 @@ public class CartBean implements Serializable {
 	private String restaurantName;
 	private BigDecimal restaurantPrice;
 	private String restaurantCurrency;
-	
+
 	private Long organizerId;
 
+	/**
+	 * Initialization method that is called post construction of the bean. It
+	 * fetches the cart items and handles parameters passed from external contexts,
+	 * like the product type to be selected.
+	 */
 	@PostConstruct
 	public void init() {
-		// cartItems = iCartService.getCartItemsWithTourPackages();
+
 		cartItems = iCartService.getCartItemsWithProducts();
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 		String type = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("type");
@@ -156,19 +164,28 @@ public class CartBean implements Serializable {
 		}
 
 	}
-	
-	public void navigateToURL() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/triphub/views//customer_home.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
+	/**
+	 * Redirects the user to a given URL.
+	 */
+	public void navigateToURL() {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("http://localhost:8080/triphub/views//customer_home.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Adds selected products to the cart based on parameters provided.
+	 *
+	 * @return A string redirecting to the cart page with the specified organizerId.
+	 */
 	public String addToCart() {
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-		
+
 		// For each product type, call the corresponding method:
 		for (Map.Entry<String, String> param : params.entrySet()) {
 			System.out.println("Key = " + param.getKey() + " - Value = " + param.getValue());
@@ -186,9 +203,17 @@ public class CartBean implements Serializable {
 			e.printStackTrace();
 		}
 
-		return null; 
+		return null;
 	}
 
+	/**
+	 * Adds a tour package to the user's cart that will be used for addToCart method
+	 * above .
+	 *
+	 * @param user      The user adding the tour package.
+	 * @param productId The ID of the tour package product.
+	 * @param quantity  The quantity of the product to be added.
+	 */
 	public void addTourPackageToCart(User user, String productId, String quantity) {
 		if (productId != null) {
 			Long selectedPackageId = Long.parseLong(productId);
@@ -201,7 +226,15 @@ public class CartBean implements Serializable {
 			}
 		}
 	}
-	
+
+	/**
+	 * Adds an accommodation to the user's cart that will be used for addToCart
+	 * method above .
+	 * 
+	 * @param user
+	 * @param productId
+	 * @param quantity
+	 */
 	public void addAccommodationToCart(User user, String productId, String quantity) {
 		if (productId != null) {
 			Long selectedAccommodationId = Long.parseLong(productId);
@@ -214,22 +247,38 @@ public class CartBean implements Serializable {
 			}
 		}
 	}
-	
+
+	/**
+	 * Adds a restaurant to the user's cart that will be used for addToCart method
+	 * above.
+	 * 
+	 * @param user
+	 * @param productId
+	 * @param quantity
+	 */
 
 	public void addRestaurantToCart(User user, String productId, String quantity) {
-		if (productId != null ) {
+		if (productId != null) {
 			Long selectedRestaurantId = Long.parseLong(productId);
 			int selectedQuantity = Integer.parseInt(quantity);
 
 			Restaurant selectedRestaurant = restaurantDAO.findById(selectedRestaurantId);
 
-			if (selectedRestaurant != null) {			
+			if (selectedRestaurant != null) {
 				iCartService.addToCart(selectedRestaurant, user, selectedQuantity);
 				dateOfPurchase = new Date();
 			}
 		}
 	}
 
+	/**
+	 * Adds a transportation to the user's cart that will be used for addToCart
+	 * method above.
+	 * 
+	 * @param user
+	 * @param productId
+	 * @param quantity
+	 */
 	public void addTransportationToCart(User user, String productId, String quantity) {
 		if (productId != null) {
 			Long selectedTransportationId = Long.parseLong(productId);
@@ -243,6 +292,12 @@ public class CartBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Calculates the total price of all cart items.
+	 *
+	 * @param cartItems List of all items in the cart.
+	 * @return The total price of all items in the cart.
+	 */
 	public void initUserData(Long userId) {
 		UserViewModel temp = userService.initUser(userId);
 		if (temp != null) {
@@ -252,30 +307,54 @@ public class CartBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Calculates the total price for a list of cart items. The method computes the
+	 * sum based on the type of service each cart item represents (e.g.,
+	 * TourPackage, Restaurant, Accommodation, or Transportation) and its respective
+	 * quantity.
+	 * 
+	 * @param cartItems List of cart items for which the total price is to be
+	 *                  calculated.
+	 * @return The total price for the provided list of cart items.
+	 *
+	 *         <p>
+	 *         - If a cart item is associated with a {@code TourPackage}, the price
+	 *         is directly taken from the tour package's price. - If a cart item
+	 *         represents a {@code Restaurant}, {@code Accommodation}, or
+	 *         {@code Transportation}, the price is fetched from the respective
+	 *         service's price.
+	 *         </p>
+	 */
 	public BigDecimal calculateTotalPrice(List<CartItem> cartItems) {
-	    BigDecimal totalPrice = BigDecimal.ZERO;
+		BigDecimal totalPrice = BigDecimal.ZERO;
 
-	    for (CartItem cartItem : cartItems) {
-	    	
-	        BigDecimal itemPrice = BigDecimal.ZERO;
+		for (CartItem cartItem : cartItems) {
 
-	        if (cartItem.getTourPackage() != null) {
-	            itemPrice = cartItem.getTourPackage().getPrice().getAmount();
-	        } else if (cartItem.getRestaurant() != null) {
-	            itemPrice = cartItem.getRestaurant().getService().getPrice().getAmount();
-	        } else if (cartItem.getAccommodation() != null) {	        	
-	            itemPrice = cartItem.getAccommodation().getService().getPrice().getAmount();
-	        } else if (cartItem.getTransportation() != null) {	        	
-	            itemPrice = cartItem.getTransportation().getService().getPrice().getAmount();
-	        }
+			BigDecimal itemPrice = BigDecimal.ZERO;
 
-	        totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
-	    }
+			if (cartItem.getTourPackage() != null) {
+				itemPrice = cartItem.getTourPackage().getPrice().getAmount();
+			} else if (cartItem.getRestaurant() != null) {
+				itemPrice = cartItem.getRestaurant().getService().getPrice().getAmount();
+			} else if (cartItem.getAccommodation() != null) {
+				itemPrice = cartItem.getAccommodation().getService().getPrice().getAmount();
+			} else if (cartItem.getTransportation() != null) {
+				itemPrice = cartItem.getTransportation().getService().getPrice().getAmount();
+			}
 
-	    return totalPrice;
+			totalPrice = totalPrice.add(itemPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+		}
+
+		return totalPrice;
 	}
 
-
+	/**
+	 * Removes an item from the cart.
+	 *
+	 * @param cartItemId The ID of the cart item to be removed.
+	 * @param user       The user for whom the cart item is to be removed.
+	 * @return A string redirecting to the cart page.
+	 */
 	public String removeFromCart(Long cartItemId, User user) {
 		iCartService.removeFromCart(cartItemId, user);
 		FacesContext.getCurrentInstance().addMessage(null,
@@ -284,6 +363,11 @@ public class CartBean implements Serializable {
 		return "cart?faces-redirect=true";
 	}
 
+	/**
+	 * Provides a list of quantity options available for a product.
+	 *
+	 * @return A list of select items representing the available quantities.
+	 */
 	public List<SelectItem> getQuantityOptions() {
 		List<SelectItem> options = new ArrayList<>();
 
@@ -293,10 +377,15 @@ public class CartBean implements Serializable {
 		return options;
 	}
 
+	/**
+	 * Updates the quantity of a specified cart item.
+	 *
+	 * @param cartItem The cart item whose quantity needs to be updated.
+	 */
 	public void updateCartItemQuantity(CartItem cartItem) {
 		// Retrieve the User object from the session map
 		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-		
+
 		if (user != null) {
 			if (cartItem.getNewQuantity() > 0) {
 				cartItem.setQuantity(cartItem.getNewQuantity());
@@ -305,34 +394,20 @@ public class CartBean implements Serializable {
 				// Remove the cart item if the new quantity is set to 0
 				iCartService.removeFromCart(cartItem.getId(), user);
 			} else {
-				// TODO: Handle other cases or invalid input as needed
 			}
 		} else {
-			// TODO: Handle the case when the user is not available in the session
+
 		}
 	}
 
 	////// Related to CheckOutBean/////
-	
-//	public String goToCheckout() {
-//	    Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-//
-//	    // Debug logs
-//	    System.out.println("Inside goToCheckout");
-//	    System.out.println("organizerId from params: " + params.get("organizerId"));
-//
-//	    List<String> itemIdsAsString = cartItems.stream().map(cartItem -> Long.toString(cartItem.getId()))
-//	            .collect(Collectors.toList());
-//	    String idsParam = String.join(",", itemIdsAsString);
-//	    BigDecimal totalPrice = calculateTotalPrice(cartItems);
-//	    
-//	    String organizerId = params.get("organizerId");
-//
-//	    // Utilisez la redirection native de JSF
-//	    return "CheckOut.xhtml?faces-redirect=true&ids=" + idsParam + "&totalPrice=" + totalPrice + "&organizerId=" + organizerId;
-//	}
 
-
+	/**
+	 * Directs the user to the checkout page.
+	 *
+	 * @return A string redirecting to the checkout page with the relevant
+	 *         parameters.
+	 */
 	public String goToCheckout() {
 		List<String> itemIdsAsString = cartItems.stream().map(cartItem -> Long.toString(cartItem.getId()))
 				.collect(Collectors.toList());
@@ -342,6 +417,12 @@ public class CartBean implements Serializable {
 		return "CheckOut.xhtml?ids=" + idsParam + "&totalPrice=" + totalPrice + "&faces-redirect=true";
 	}
 
+	/**
+	 * Navigates the user to the checkout page by setting relevant attributes in the
+	 * CheckoutBean.
+	 *
+	 * @return A string redirecting to the checkout page.
+	 */
 	public String navigateToCheckout() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		CheckoutBean checkoutBean = (CheckoutBean) externalContext.getSessionMap().get("checkoutBean");
@@ -351,7 +432,7 @@ public class CartBean implements Serializable {
 			checkoutBean.setTotalPrice(calculateTotalPrice(cartItems));
 
 		}
-		return "checkout.xhtml?faces-redirect=true"; // Navigate to checkout page
+		return "checkout.xhtml?faces-redirect=true";
 	}
 
 	/////// Getters & Setters///////
@@ -444,7 +525,6 @@ public class CartBean implements Serializable {
 		this.dateOfPurchase = dateOfPurchase;
 	}
 
-
 	public AccommodationService getAccommodationService() {
 		return accommodationService;
 	}
@@ -468,7 +548,6 @@ public class CartBean implements Serializable {
 	public void setTransportationService(TransportationService transportationService) {
 		this.transportationService = transportationService;
 	}
-
 
 	public CartItem getCurrentCartItem() {
 		return currentCartItem;
@@ -595,48 +674,12 @@ public class CartBean implements Serializable {
 		this.restaurantCurrency = restaurantCurrency;
 	}
 
-
-
 	public Long getOrganizerId() {
 		return organizerId;
 	}
 
-
-
 	public void setOrganizerId(Long organizerId) {
 		this.organizerId = organizerId;
 	}
-	
-	
 
 }
-
-//prototype method
-//public String addToCart() {
-//Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-//String selectedPackageIdParam = params.get("selectedPackageId");
-//String selectedQuantityParam = params.get("quantity");
-//
-//if (selectedPackageIdParam != null) {
-//	Long selectedPackageId = Long.parseLong(selectedPackageIdParam);
-//	int selectedQuantity = Integer.parseInt(selectedQuantityParam);
-//	TourPackage selectedTourPackage = tourPackageService.getTourPackageById(selectedPackageId);
-//
-//	if (selectedTourPackage != null) {
-//		User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-//
-//		iCartService.addToCart(selectedTourPackage, user, selectedQuantity); 
-//		
-//		dateOfPurchase = new Date();
-//
-//		try {
-//			FacesContext.getCurrentInstance().getExternalContext().redirect("cart.xhtml");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//}
-//return null; // Return null to stay on the same page
-//}
-//<h:inputText id="availableFrom" value="#{restaurantBean.selectedRestaurant.service.availableFrom}" styleClass="datePicker" />
-//<h:inputText id="availableTill" value="#{restaurantBean.selectedRestaurant.service.availableTill}" styleClass="datePicker" />
