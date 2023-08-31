@@ -30,13 +30,13 @@
 			<div class="containerCart mt-10 mb-10">
 				<div class="text-center">
 					<button class="btnContinue mb-3" onclick="toggleCreateForm()">
-						Update your Restaurant </button>
+						Update your Restaurant</button>
 				</div>
 				<div id="createFormContainer">
 					<h:form prependId="false" enctype="multipart/form-data">
-					<h:inputHidden id="id" value="#{restaurantBean.restaurantvm.id}" />
-					 <h:inputHidden id="idservice" value="#{restaurantBean.restaurantvm.service.id}"
-					 />
+						<h:inputHidden id="id" value="#{restaurantBean.restaurantvm.id}" />
+						<h:inputHidden id="idservice"
+							value="#{restaurantBean.restaurantvm.service.id}" />
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -64,7 +64,8 @@
 										value="#{restaurantBean.restaurantvm.currencyType}"
 										class="form-control" required="true">
 										<f:selectItems value="#{restaurantBean.allCurrencyTypes}"
-											var="typeCurrency" itemValue="#{typeCurrency}" itemLabel="#{typeCurrency.label}" />
+											var="typeCurrency" itemValue="#{typeCurrency}"
+											itemLabel="#{typeCurrency.label}" />
 									</h:selectOneMenu>
 								</div>
 
@@ -91,8 +92,7 @@
 									<h:outputLabel for="pictureRestaurant" value="Picture:" />
 									<div class="input-group mt-3">
 										<h:inputFile value="#{restaurantBean.pictureRestaurant}"
-											id="pictureRestaurant"
-											styleClass="custom-file-input d-none"
+											id="pictureRestaurant" styleClass="custom-file-input d-none"
 											onchange="updateLabel(this);" />
 										<label id="fileLabel" class="form-control">Choose a
 											picture</label>
@@ -163,15 +163,6 @@
 											value="#{restaurantBean.restaurantvm.availability}" />
 									</div>
 								</div>
-
-
-								<script type="text/javascript">
-    					function updateLabel(inputElement) {
-        					var fileName = inputElement.value.split("\\").pop();
-       						 document.getElementById('fileLabel').textContent = fileName || "No file selected";
-   						}
-						</script>
-
 							</div>
 						</div>
 
@@ -188,12 +179,13 @@
 								<div class="form-group d-flex justify-content-center">
 									<h:commandButton value="Update"
 										action="#{restaurantBean.updateRestaurant()}"
-										styleClass="btnCheckO" >
+										styleClass="btnCheckO">
 										<f:param name="id" value="#{restaurantBean.restaurantvm.id}" />
-										<f:param name="idservice" value="#{restaurantBean.restaurantvm.service.id}" />
-										</h:commandButton>
+										<f:param name="idservice"
+											value="#{restaurantBean.restaurantvm.service.id}" />
+									</h:commandButton>
 								</div>
-								
+
 							</div>
 						</div>
 
@@ -212,6 +204,12 @@
 			<script
 				src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js">
 			</script>
+			<script type="text/javascript">
+    					function updateLabel(inputElement) {
+        					var fileName = inputElement.value.split("\\").pop();
+       						 document.getElementById('fileLabel').textContent = fileName || "No file selected";
+   						}
+						</script>
 
 			<script>
     document.addEventListener("DOMContentLoaded", function() {

@@ -28,14 +28,14 @@
 
 			<div class="containerCart mt-10 mb-10">
 				<div class="text-center">
-					<button class="btnContinue mb-3">
-						Update your Accommodation</button>
+					<button class="btnContinue mb-3">Update your Accommodation</button>
 				</div>
 				<div id="createFormContainer">
 					<h:form prependId="false" enctype="multipart/form-data">
-					<h:inputHidden id="id" value="#{accommodationBean.accommodationVm.id}" />
-					 <h:inputHidden id="idservice" value="#{accommodationBean.accommodationVm.service.id}"
-					 />
+						<h:inputHidden id="id"
+							value="#{accommodationBean.accommodationVm.id}" />
+						<h:inputHidden id="idservice"
+							value="#{accommodationBean.accommodationVm.service.id}" />
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -75,7 +75,8 @@
 										value="#{accommodationBean.accommodationVm.currencyType}"
 										class="form-control" required="true">
 										<f:selectItems value="#{accommodationBean.allCurrencyTypes}"
-											var="typeCurrency" itemValue="#{typeCurrency}" itemLabel="#{typeCurrency.label}" />
+											var="typeCurrency" itemValue="#{typeCurrency}"
+											itemLabel="#{typeCurrency.label}" />
 									</h:selectOneMenu>
 								</div>
 
@@ -176,13 +177,6 @@
 								</div>
 
 
-								<script type="text/javascript">
-    					function updateLabel(inputElement) {
-        					var fileName = inputElement.value.split("\\").pop();
-       						 document.getElementById('fileLabel').textContent = fileName || "No file selected";
-   						}
-						</script>
-
 							</div>
 						</div>
 
@@ -199,12 +193,14 @@
 								<div class="form-group d-flex justify-content-center">
 									<h:commandButton value="Update"
 										action="#{accommodationBean.updateAccommodation}"
-										styleClass="btnCheckO" >
-										<f:param name="id" value="#{accommodationBean.accommodationVm.id}" />
-										<f:param name="idservice" value="#{accommodationBean.accommodationVm.service.id}" />
-										</h:commandButton>
+										styleClass="btnCheckO">
+										<f:param name="id"
+											value="#{accommodationBean.accommodationVm.id}" />
+										<f:param name="idservice"
+											value="#{accommodationBean.accommodationVm.service.id}" />
+									</h:commandButton>
 								</div>
-								
+
 							</div>
 						</div>
 
@@ -223,7 +219,12 @@
 			<script
 				src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js">
 			</script>
-
+			<script type="text/javascript">
+    					function updateLabel(inputElement) {
+        					var fileName = inputElement.value.split("\\").pop();
+       						 document.getElementById('fileLabel').textContent = fileName || "No file selected";
+   						}
+						</script>s
 			<script>
     document.addEventListener("DOMContentLoaded", function() {
         flatpickr(".date-picker", {});
