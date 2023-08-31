@@ -62,12 +62,10 @@ public class TransportationService implements ServiceInterface {
 		try {
 			transportationDAO.update(transportationvm);
 		} catch (IllegalArgumentException e) {
-			// Handle the case when the transportation with the provided ID was not found in
-			// the DAO
+			// Handle the case when the transportation with the provided ID was not found in the DAO		
 			FacesMessageUtil.addErrorMessage("Failed to update transportation: " + e.getMessage());
 		} catch (Exception e) {
-			// Handle any other unexpected exceptions that might occur during the update
-			// process
+			// Handle any other unexpected exceptions that might occur during the update process			
 			FacesMessageUtil.addErrorMessage("Failed to update transportation. An unexpected error occurred.");
 		}
 		

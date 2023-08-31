@@ -3,7 +3,10 @@ package triphub.entity.util;
 import java.util.Date;
 
 import javax.persistence.*;
-
+/**
+ * Represents a calendar entry in the system.
+ * Contains information such as date and time for events or other time-based occurrences.
+ */
 @Entity
 public class Calendar {
     @Id

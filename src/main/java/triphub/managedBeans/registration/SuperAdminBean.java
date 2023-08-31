@@ -19,6 +19,10 @@ import triphub.helpers.RegistrationException;
 import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 
+/**
+ * Managed bean responsible for handling SuperAdmin related operations including
+ * registration, update, and delete actions.
+ */
 @Named("superAdminBean")
 @RequestScoped
 public class SuperAdminBean implements Serializable {
@@ -31,13 +35,19 @@ public class SuperAdminBean implements Serializable {
 	private UserViewModel userViewModel = new UserViewModel();
 
 	private Part profilePicture;
-	
+
 	private List<SuperAdmin> allSuperAdmins;
 
 	public SuperAdminBean() {
 	}
 
-	public void register() throws IOException{
+	/**
+	 * Registers a new SuperAdmin. Validates the data, creates the SuperAdmin if
+	 * validation passes and redirects to login on success.
+	 *
+	 * @throws IOException if there's an error during redirection.
+	 */
+	public void register() throws IOException {
 		if (!userViewModel.getPassword().equals(userViewModel.getConfirmPassword())) {
 			FacesMessageUtil.addErrorMessage("Passwords do not match!");
 			return;
@@ -61,16 +71,21 @@ public class SuperAdminBean implements Serializable {
 
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "SuperAdmin created successfully!", null));
-			
-	        // Redirection to login.xhtml
-	        context.getExternalContext().redirect("/triphub/views/loginAndAccount/login.xhtml");
-	        
+
+			// Redirection to login.xhtml
+			context.getExternalContext().redirect("/triphub/views/loginAndAccount/login.xhtml");
+
 		} catch (RegistrationException e) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration failed: " + e.getMessage(), null));
 		}
 	}
 
+	/**
+	 * Initializes the form data for a specified SuperAdmin.
+	 *
+	 * @param superAdminId The ID of the SuperAdmin.
+	 */
 	public void initFormData(Long superAdminId) {
 		UserViewModel temp = userService.initSuperAdmin(superAdminId);
 		if (temp != null) {
@@ -80,6 +95,9 @@ public class SuperAdminBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Post-construct method to initialize the necessary data and attributes.
+	 */
 	@PostConstruct
 	public void init() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -89,10 +107,13 @@ public class SuperAdminBean implements Serializable {
 		if (superAdminId != null) {
 			initFormData(superAdminId);
 		}
-		
+
 		allSuperAdmins = userService.getAllSuperAdmins();
 	}
 
+	/**
+	 * Updates the SuperAdmin's details including the profile picture.
+	 */
 	public void updateSuperAdmin() {
 		try {
 			String profilePicName = ImageHelper.processProfilePicture(profilePicture);
@@ -104,25 +125,28 @@ public class SuperAdminBean implements Serializable {
 			FacesMessageUtil.addErrorMessage("Update failed: " + e.getMessage());
 		}
 	}
-	
+
+	/**
+	 * Deletes the specified SuperAdmin and redirects the user to the home page.
+	 */
 	public void deleteSuperAdmin() {
-	    try {
-	        userService.deleteSuperAdmin(userViewModel.getSuperAdminId());
-	        FacesMessageUtil.addSuccessMessage("SuperAdmin deleted successfully!");
-	        
-	        FacesContext context = FacesContext.getCurrentInstance();
+		try {
+			userService.deleteSuperAdmin(userViewModel.getSuperAdminId());
+			FacesMessageUtil.addSuccessMessage("SuperAdmin deleted successfully!");
 
-	        context.getExternalContext().redirect("/triphub/views/home.xhtml");
-	        
-	    } catch (Exception e) {
-	        FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
-	    }
+			FacesContext context = FacesContext.getCurrentInstance();
+
+			context.getExternalContext().redirect("/triphub/views/home.xhtml");
+
+		} catch (Exception e) {
+			FacesMessageUtil.addErrorMessage("Delete failed: " + e.getMessage());
+		}
 	}
-	
-	public String modifySuperAdmin(SuperAdmin superAdmin) {
-	    userViewModel = superAdmin.initSuperAdminViewModel();
 
-	    return "modifySuperAdmin?faces-redirect=true";
+	public String modifySuperAdmin(SuperAdmin superAdmin) {
+		userViewModel = superAdmin.initSuperAdminViewModel();
+
+		return "modifySuperAdmin?faces-redirect=true";
 	}
 
 	public UserService getUserService() {
@@ -149,13 +173,12 @@ public class SuperAdminBean implements Serializable {
 		this.profilePicture = profilePicture;
 	}
 
-    public List<SuperAdmin> getAllSuperAdmins() {
-        return allSuperAdmins;
-    }
+	public List<SuperAdmin> getAllSuperAdmins() {
+		return allSuperAdmins;
+	}
 
-    public void setAllSuperAdmins(List<SuperAdmin> allSuperAdmins) {
-        this.allSuperAdmins = allSuperAdmins;
-    }
-
+	public void setAllSuperAdmins(List<SuperAdmin> allSuperAdmins) {
+		this.allSuperAdmins = allSuperAdmins;
+	}
 
 }

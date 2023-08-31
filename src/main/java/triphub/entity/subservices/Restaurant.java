@@ -17,6 +17,11 @@ import triphub.entity.util.Picture;
 import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.TourPackageFormViewModel;
 
+/**
+ * Represents an establishment that prepares and serves food and drinks to
+ * customers. This entity contains details of the restaurant, related services,
+ * and its visual representation.
+ */
 @Entity
 public class Restaurant {
 
@@ -33,16 +38,16 @@ public class Restaurant {
 	private Service service;
 
 	private String description;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // image can be null
 	private Picture picture;
-	
+
 	@ManyToOne
-	@JoinColumn(name="provider_id")
+	@JoinColumn(name = "provider_id")
 	private Provider provider;
-	
+
 	@ManyToOne
-	@JoinColumn(name="organizer_id")
+	@JoinColumn(name = "organizer_id")
 	private Organizer organizer;
 
 	public Restaurant() {
@@ -55,6 +60,12 @@ public class Restaurant {
 		this.description = description;
 	}
 
+	/**
+	 * Converts the provided ViewModel into a Restaurant entity.
+	 *
+	 * @param restaurantvm ViewModel representing the restaurant details.
+	 * @return A fully constructed Restaurant entity.
+	 */
 	public static Restaurant createAccommodationFromViewModel(SubServicesViewModel restaurantvm) {
 		Restaurant restaurant = new Restaurant();
 		restaurant.setId(restaurantvm.getId());
@@ -62,44 +73,52 @@ public class Restaurant {
 		restaurant.setAddress(restaurantvm.getAddress());
 		restaurant.setDescription(restaurantvm.getDescription());
 		restaurant.setService(restaurantvm.getService());
-		
+
 		Picture picture = new Picture();
 		picture.setLink(restaurantvm.getLink());
 		restaurant.setPicture(picture);
-		
+
 		return restaurant;
 	}
 
+	/**
+	 * Updates the current Restaurant entity based on the provided ViewModel.
+	 *
+	 * @param restaurantvm ViewModel representing the updated restaurant details.
+	 */
 	public void updateRestaurantViewModel(SubServicesViewModel restaurantvm) {
 		this.setId(restaurantvm.getId());
 		this.setName(restaurantvm.getName());
 		this.getAddress().updateAddressFromViewModel(restaurantvm);
 		this.setDescription(restaurantvm.getDescription());
-		
-        Picture picture = new Picture();
-        picture.setLink(restaurantvm.getLink());
-        this.setPicture(picture);
-        
+
+		Picture picture = new Picture();
+		picture.setLink(restaurantvm.getLink());
+		this.setPicture(picture);
 
 	}
 
+	/**
+	 * Initializes a ViewModel with the details from the current Restaurant entity.
+	 *
+	 * @return A ViewModel populated with the restaurant's details.
+	 */
 	public SubServicesViewModel initRestaurantViewModel() {
-	    SubServicesViewModel restaurantvm = new SubServicesViewModel();
-	    
-	    restaurantvm.setId(this.getId());
-	    restaurantvm.setName(this.getName());
-	    restaurantvm.setAddress(this.getAddress());
-	    restaurantvm.setDescription(this.getDescription()); 
-	    this.getAddress().initAddressViewModel(restaurantvm);    
-	    this.getService().initServiceViewModel(restaurantvm);
-	    
-        if (this.getPicture() != null) {
-        	restaurantvm.setLink(this.getPicture().getLink());
-        }
+		SubServicesViewModel restaurantvm = new SubServicesViewModel();
 
-	    return restaurantvm;
+		restaurantvm.setId(this.getId());
+		restaurantvm.setName(this.getName());
+		restaurantvm.setAddress(this.getAddress());
+		restaurantvm.setDescription(this.getDescription());
+		this.getAddress().initAddressViewModel(restaurantvm);
+		this.getService().initServiceViewModel(restaurantvm);
+
+		if (this.getPicture() != null) {
+			restaurantvm.setLink(this.getPicture().getLink());
+		}
+
+		return restaurantvm;
 	}
-
 
 	// Getters - Setters
 	public Long getId() {
@@ -165,7 +184,5 @@ public class Restaurant {
 	public void setPicture(Picture picture) {
 		this.picture = picture;
 	}
-	
-	
 
 }

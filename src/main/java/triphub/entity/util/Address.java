@@ -4,7 +4,10 @@ import javax.persistence.*;
 
 import triphub.viewModel.SubServicesViewModel;
 import triphub.viewModel.UserViewModel;
-
+/**
+ * Represents an address entity in the system.
+ * This entity contains address details such as number, street, city, state, country, and zip code.
+ */
 @Entity
 public class Address {
 	@Id
@@ -17,11 +20,23 @@ public class Address {
 	private String state;
 	private String country;
 	private String zipCode;
-
+	
+	/**
+	 * Default constructor for Address.
+	 */
 	public Address() {
 
 	}
-
+	/**
+	 * Parameterized constructor for creating an Address object.
+	 * 
+	 * @param num     Address number.
+	 * @param street  Street name.
+	 * @param city    City name.
+	 * @param state   State name.
+	 * @param country Country name.
+	 * @param zipCode Zip code.
+	 */
 	public Address(String num, String street, String city, String state, String country, String zipCode) {
 		this.num = num;
 		this.street = street;
@@ -31,6 +46,12 @@ public class Address {
 		this.zipCode = zipCode;
 	}
 
+	/**
+	 * Creates and returns an Address object from the provided UserViewModel.
+	 * 
+	 * @param form The UserViewModel containing address data.
+	 * @return An Address object.
+	 */
 	public static Address createAddressFromViewModel(UserViewModel form) {
 		Address address = new Address();
 		address.setNum(form.getNum());
@@ -41,7 +62,12 @@ public class Address {
 		address.setZipCode(form.getZipCode());
 		return address;
 	}
-
+	
+	/**
+	 * Updates the properties of the Address based on the provided UserViewModel.
+	 * 
+	 * @param form The UserViewModel containing updated address data.
+	 */
 	public void updateAddressFromViewModel(UserViewModel form) {
 		this.setNum(form.getNum());
 		this.setStreet(form.getStreet());
@@ -51,6 +77,11 @@ public class Address {
 		this.setZipCode(form.getZipCode());
 	}
 	
+	/**
+	 * Initializes the provided UserViewModel with the properties of this Address object.
+	 * 
+	 * @param userViewModel The UserViewModel to be populated with address data.
+	 */
 	public void initAddressViewModel(UserViewModel userViewModel) {
 	    userViewModel.setNum(this.getNum());
 	    userViewModel.setStreet(this.getStreet());
@@ -59,6 +90,12 @@ public class Address {
 	    userViewModel.setCountry(this.getCountry());
 	    userViewModel.setZipCode(this.getZipCode());
 	}
+	
+	/**
+	 * Initializes the provided SubServicesViewModel with the properties of this Address object.
+	 * 
+	 * @param subservicesvm The SubServicesViewModel to be populated with address data.
+	 */
 	public void initAddressViewModel(SubServicesViewModel subservicesvm) {
 		subservicesvm.getAddress().setNum(this.getNum());
 		subservicesvm.getAddress().setStreet(this.getStreet());
@@ -68,6 +105,11 @@ public class Address {
 		subservicesvm.getAddress().setZipCode(this.getZipCode());
 	}
 	
+	/**
+	 * Updates the properties of the Address based on the provided SubServicesViewModel.
+	 * 
+	 * @param form The SubServicesViewModel containing updated address data.
+	 */
 	public void updateAddressFromViewModel(SubServicesViewModel form) {
 		this.setNum(form.getAddress().getNum());
 		this.setStreet(form.getAddress().getStreet());

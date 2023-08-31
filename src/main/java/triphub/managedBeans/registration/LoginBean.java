@@ -19,6 +19,10 @@ import triphub.services.UserService;
 import triphub.viewModel.UserViewModel;
 import org.mindrot.jbcrypt.BCrypt;
 
+/**
+ * Managed bean responsible for handling user login, session management, and
+ * user search operations.
+ */
 @Named("loginBean")
 @SessionScoped
 public class LoginBean implements Serializable {
@@ -28,13 +32,21 @@ public class LoginBean implements Serializable {
 	private UserService userService;
 
 	private UserViewModel userViewModel = new UserViewModel();
-	
+
 	private String userType;
 	private User user;
 	private List<User> searchResults;
+
 	public LoginBean() {
 	}
 
+	/**
+	 * Attempts to log in the user based on the provided email and password.
+	 * Redirects to the appropriate home page based on the user type upon successful
+	 * login.
+	 *
+	 * @return The navigation outcome to redirect the user.
+	 */
 	public String login() {
 		User user = userService.findByEmailUser(userViewModel.getEmail());
 
@@ -58,7 +70,8 @@ public class LoginBean implements Serializable {
 			if (organizer != null) {
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "organizer");
 				this.setUserType("organizer");
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("organizerId", organizer.getId());
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("organizerId",
+						organizer.getId());
 				this.userViewModel = userService.initOrganizer(organizer.getId());
 			}
 
@@ -84,42 +97,48 @@ public class LoginBean implements Serializable {
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userViewModel",
 					this.userViewModel);
 
-			//return "/views/home?faces-redirect=true";
-			
-			  switch (this.userType) {
-	            case "customer":
-	                return "/views/customer_home?faces-redirect=true";
-	            case "organizer":
-	                return "/views/organizer_home?faces-redirect=true";
-	            case "provider":
-	                return "/views/provider_home?faces-redirect=true";
-	            case "superAdmin":
-	                return "/views/superadmin_home?faces-redirect=true";
-	        }
-	    }
-		
+			// return "/views/home?faces-redirect=true";
+
+			switch (this.userType) {
+			case "customer":
+				return "/views/customer_home?faces-redirect=true";
+			case "organizer":
+				return "/views/organizer_home?faces-redirect=true";
+			case "provider":
+				return "/views/provider_home?faces-redirect=true";
+			case "superAdmin":
+				return "/views/superadmin_home?faces-redirect=true";
+			}
+		}
+
 		return "login";
 	}
-	
+
+	/**
+	 * Loads user data for a specified user and redirects to the user's profile
+	 * page.
+	 *
+	 * @return The navigation outcome to redirect to the user's profile page.
+	 */
 	public String loadUserData() {
-	    Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-	    String userIdParam = params.get("selectedUserId");
-	    
-	    System.out.println("selectedUserId: " + userIdParam);
-	    Long userId = null;
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String userIdParam = params.get("selectedUserId");
 
-	    if (userIdParam != null) {
-	        try {
-	            userId = Long.parseLong(userIdParam);
-	        } catch (NumberFormatException e) {
-	        }
-	    }
+		System.out.println("selectedUserId: " + userIdParam);
+		Long userId = null;
 
-	    if (userId != null) {
-	        User user = userService.findByUserId(userId);
+		if (userIdParam != null) {
+			try {
+				userId = Long.parseLong(userIdParam);
+			} catch (NumberFormatException e) {
+			}
+		}
+
+		if (userId != null) {
+			User user = userService.findByUserId(userId);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userId", user.getId());
-	        System.out.println("User retrieved: " + user);
+			System.out.println("User retrieved: " + user);
 
 			// Initialize the UserViewModel
 			initUserData(user.getId());
@@ -136,7 +155,8 @@ public class LoginBean implements Serializable {
 			if (organizer != null) {
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userType", "organizer");
 				this.setUserType("organizer");
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("organizerId", organizer.getId());
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("organizerId",
+						organizer.getId());
 				this.userViewModel = userService.initOrganizer(organizer.getId());
 			}
 
@@ -165,8 +185,11 @@ public class LoginBean implements Serializable {
 			return "/views/loginAndAccount/ProfileUser.xhtml?faces-redirect=true";
 		}
 		return null;
-	}	
+	}
 
+	/**
+	 * Post-construct method to initialize session data and user attributes.
+	 */
 	@PostConstruct
 	public void init() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -183,6 +206,11 @@ public class LoginBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Initializes the user data for a specified user.
+	 *
+	 * @param userId The ID of the user.
+	 */
 	public void initUserData(Long userId) {
 		UserViewModel temp = userService.initUser(userId);
 		if (temp != null) {
@@ -192,55 +220,60 @@ public class LoginBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Logs out the user and invalidates the session, then redirects to the home
+	 * page.
+	 */
 	public void logout() {
-	    // Invalidate session
-	    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-	    try {
-	        FacesContext.getCurrentInstance().getExternalContext().redirect("/triphub/views/home.xhtml");
-	    } catch (IOException e) {
-	    }
+		// Invalidate session
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/triphub/views/home.xhtml");
+		} catch (IOException e) {
+		}
 	}
-	
+
+	/**
+	 * Performs an advanced search for users based on various search parameters.
+	 * Displays search results and appropriate messages.
+	 */
 	public void performUserSearch() {
-	    // Get search parameters from the ViewModel
-	    String firstName = userViewModel.getFirstName();
-	    String lastName = userViewModel.getLastName();
-	    String city = userViewModel.getCity();
-	    String street = userViewModel.getStreet();
-	    String zipCode = userViewModel.getZipCode();
-	    String country = userViewModel.getCountry();
-	    String email = userViewModel.getEmail();
-	    String phoneNum = userViewModel.getPhoneNum();
-	    String CCNumber = userViewModel.getCCNumber();
+		// Get search parameters from the ViewModel
+		String firstName = userViewModel.getFirstName();
+		String lastName = userViewModel.getLastName();
+		String city = userViewModel.getCity();
+		String street = userViewModel.getStreet();
+		String zipCode = userViewModel.getZipCode();
+		String country = userViewModel.getCountry();
+		String email = userViewModel.getEmail();
+		String phoneNum = userViewModel.getPhoneNum();
+		String CCNumber = userViewModel.getCCNumber();
 
-	    // Call the service method
-	    List<User> searchResults = userService.advancedSearch(firstName, lastName, city, street, zipCode, country, email, phoneNum, CCNumber);
-	    setSearchResults(searchResults);
-	    // Process the search results
-	    if (searchResults.isEmpty()) {
-	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "No users found based on the given criteria.", null);
-	        FacesContext.getCurrentInstance().addMessage(null, message);
-	    } else {
-	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "User search successful.", null);
-	        FacesContext.getCurrentInstance().addMessage(null, message);
+		// Call the service method
+		List<User> searchResults = userService.advancedSearch(firstName, lastName, city, street, zipCode, country,
+				email, phoneNum, CCNumber);
+		setSearchResults(searchResults);
+		// Process the search results
+		if (searchResults.isEmpty()) {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"No users found based on the given criteria.", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "User search successful.", null);
+			FacesContext.getCurrentInstance().addMessage(null, message);
 
-	        
-	        for (User user : searchResults) {
-	            String userDetail = "User Name: " + user.getFirstName() + " " + user.getLastName() +
-	                                ", Email: " + user.getEmail() + 
-	                                ", City: " + user.getAddress().getCity() +
-	                                ", Street Address: " + user.getAddress().getStreet() +
-	                                ", Zipcode: " + user.getAddress().getZipCode() +
-	                                ", Country: " + user.getAddress().getCountry() +
-	                                ", Phone Number: " + user.getPhoneNum(); 
+			for (User user : searchResults) {
+				String userDetail = "User Name: " + user.getFirstName() + " " + user.getLastName() + ", Email: "
+						+ user.getEmail() + ", City: " + user.getAddress().getCity() + ", Street Address: "
+						+ user.getAddress().getStreet() + ", Zipcode: " + user.getAddress().getZipCode() + ", Country: "
+						+ user.getAddress().getCountry() + ", Phone Number: " + user.getPhoneNum();
 
-	            FacesMessage userMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, userDetail, null);
-	            FacesContext.getCurrentInstance().addMessage(null, userMessage);
-	        }
-	    }
+				FacesMessage userMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, userDetail, null);
+				FacesContext.getCurrentInstance().addMessage(null, userMessage);
+			}
+		}
 	}
 
-	
 	public UserService getUserService() {
 		return userService;
 	}
@@ -276,13 +309,13 @@ public class LoginBean implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public List<User> getSearchResults() {
-	    return searchResults;
+		return searchResults;
 	}
 
 	public void setSearchResults(List<User> searchResults) {
-	    this.searchResults = searchResults;
+		this.searchResults = searchResults;
 	}
-	
+
 }
