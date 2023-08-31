@@ -21,12 +21,14 @@ public class UserViewModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	// Different users Id
 	private Long customerId;
 	private Long providerId;
 	private Long organizerId;
 	private Long superAdminId;
 	private Long userId;
 
+	//Users attribute
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -37,6 +39,7 @@ public class UserViewModel implements Serializable {
 
 	private String profilePicture;
 
+	// Address Attributes
 	private String num;
 	private String street;
 	private String city;
@@ -47,6 +50,7 @@ public class UserViewModel implements Serializable {
 	private String CCNumber;
 	private Date expirationDate;
 
+	//Company info attributes
 	private String companyName;
 	private String companyLogoLink;
 	private String companyPictureLink;
@@ -64,6 +68,7 @@ public class UserViewModel implements Serializable {
 	private int duration;
 	private SubscriptionType type;
 
+	//Customization attributes
 	private Customization customization;
 
 	private String primaryColor;
@@ -78,6 +83,7 @@ public class UserViewModel implements Serializable {
 	private String layoutName;
 	private String xhtmlFile;
 
+	// Method to set all the attributes to null/empty String/0
 	public void clear() {
 		this.customerId = null;
 		this.providerId = null;
@@ -114,9 +120,11 @@ public class UserViewModel implements Serializable {
 		this.adminEmail = "";
 	}
 
+	// Empty constructor
 	public UserViewModel() {
 	}
 
+	// Getters & Setters
 	public String getFirstName() {
 		return firstName;
 	}

@@ -335,6 +335,8 @@ public class AccommodationBean implements Serializable {
 			FacesMessageUtil.addErrorMessage("Error when added a accommodation.");
 		}
 	}
+	
+	// getters and setters
 
 	public List<Accommodation> getAllAccommodation() {
 		return accommodationService.getAllAccommodation();
