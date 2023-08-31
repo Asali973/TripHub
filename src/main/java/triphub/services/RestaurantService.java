@@ -8,14 +8,19 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import triphub.dao.service.RestaurantDAO;
-import triphub.entity.product.TourPackage;
 import triphub.entity.product.service.ServiceInterface;
-import triphub.entity.subservices.Accommodation;
 import triphub.entity.subservices.Restaurant;
-import triphub.entity.subservices.Transportation;
+
 import triphub.helpers.FacesMessageUtil;
 import triphub.viewModel.SubServicesViewModel;
-import triphub.viewModel.TourPackageFormViewModel;
+
+/**
+ * This class represents a service for managing restaurants within the TripHub application.
+ * It provides methods to create, read, update, and delete restaurants, as well as retrieve
+ * information about restaurants.
+ *
+ */
+
 
 @ApplicationScoped
 public class RestaurantService implements ServiceInterface,Serializable {
@@ -32,13 +37,15 @@ public class RestaurantService implements ServiceInterface,Serializable {
 		this.restaurantDAO = restaurantDAO;
 	}
 
-
-//	@Transactional
-//	@Override
-//	public Restaurant create(SubServicesViewModel restaurantvm) {
-//		return restaurantDAO.create(restaurantvm);
-//	}
 	
+	 /**
+     * Creates a restaurant based on the provided view model and user information.
+     *
+     * @param restaurantvm The view model containing restaurant information.
+     * @param userId       The ID of the user creating the restaurant.
+     * @param userType     The type of user creating the restaurant.
+     * @return The created Restaurant object.
+     */
 	@Transactional
 	@Override
 	public Restaurant create(SubServicesViewModel restaurantvm, Long userId, String userType) {
@@ -51,13 +58,23 @@ public class RestaurantService implements ServiceInterface,Serializable {
         }
 		return null;		
 	}
-
+	
+	 /**
+     * Retrieves a restaurant by its ID.
+     *
+     * @param id The ID of the restaurant to retrieve.
+     * @return The retrieved Restaurant object, or null if not found.
+     */
 	@Override
 	public Restaurant read(Long id) {
 		return restaurantDAO.read(id);
 	}
 
-	
+	/**
+     * Updates a restaurant based on the provided view model.
+     *
+     * @param restaurantvm The view model containing updated restaurant information.
+     */	
 	public void update(SubServicesViewModel restaurantvm) {
 		try {
 			restaurantDAO.update(restaurantvm);
@@ -72,11 +89,22 @@ public class RestaurantService implements ServiceInterface,Serializable {
 		}
 		
 	}
+	  /**
+     * Deletes a restaurant based on the provided view model.
+     *
+     * @param restaurantvm The view model containing restaurant information to be deleted.
+     */
 
 	@Override
 	public void delete(SubServicesViewModel restaurantvm) {
 		restaurantDAO.delete(restaurantvm);		
 	}
+	 /**
+     * Initializes a sub-service (restaurant) based on the provided ID.
+     *
+     * @param id The ID of the restaurant to be initialized.
+     * @return The initialized SubServicesViewModel representing the restaurant.
+     */
 
 	@Override
 	public SubServicesViewModel initSubService(Long id) {
@@ -87,30 +115,65 @@ public class RestaurantService implements ServiceInterface,Serializable {
 	        return restaurant.initRestaurantViewModel();
 	}
 
-	@Override
-	public List<Restaurant> getAll() {
-		return restaurantDAO.getAll();
-	}
+	 /**
+     * Retrieves a list of all restaurants.
+     *
+     * @return A list containing all restaurants.
+     */
+    @Override
+    public List<Restaurant> getAll() {
+        return restaurantDAO.getAll();
+    }
 
-	@Override
-	public Restaurant findByName(String name) {
-		return restaurantDAO.findByName(name);
-	}
+    /**
+     * Finds a restaurant by its name.
+     *
+     * @param name The name of the restaurant to find.
+     * @return The found Restaurant object, or null if not found.
+     */
+    @Override
+    public Restaurant findByName(String name) {
+        return restaurantDAO.findByName(name);
+    }
 
-	@Override
-	public Restaurant findById(Long id) {
-		return restaurantDAO.findById(id);
-	}
-	
-	public Restaurant getRestaurantById(Long id) {
-		return restaurantDAO.read(id);
-	}
-	
-	public List<Restaurant> getRestaurantForOrganizer(Long organizerId) {
-		return restaurantDAO.getRestaurantForOrganizer(organizerId);
-	}
-	
-	public List<Restaurant> getRestaurantForProvider(Long providerId) {
-		return restaurantDAO.getRestaurantForProvider(providerId);
-	}
+    /**
+     * Retrieves a restaurant by its ID.
+     *
+     * @param id The ID of the restaurant to retrieve.
+     * @return The retrieved Restaurant object, or null if not found.
+     */
+    @Override
+    public Restaurant findById(Long id) {
+        return restaurantDAO.findById(id);
+    }
+    
+    /**
+     * Retrieves a restaurant by its ID.
+     *
+     * @param id The ID of the restaurant to retrieve.
+     * @return The retrieved Restaurant object, or null if not found.
+     */
+    public Restaurant getRestaurantById(Long id) {
+        return restaurantDAO.read(id);
+    }
+    
+    /**
+     * Retrieves a list of restaurants associated with a specific organizer.
+     *
+     * @param organizerId The ID of the organizer.
+     * @return A list of restaurants associated with the organizer.
+     */
+    public List<Restaurant> getRestaurantForOrganizer(Long organizerId) {
+        return restaurantDAO.getRestaurantForOrganizer(organizerId);
+    }
+    
+    /**
+     * Retrieves a list of restaurants associated with a specific provider.
+     *
+     * @param providerId The ID of the provider.
+     * @return A list of restaurants associated with the provider.
+     */
+    public List<Restaurant> getRestaurantForProvider(Long providerId) {
+        return restaurantDAO.getRestaurantForProvider(providerId);
+    }
 }
