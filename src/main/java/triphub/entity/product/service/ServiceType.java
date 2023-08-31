@@ -1,19 +1,45 @@
 package triphub.entity.product.service;
 
+/**
+ * This enum represents the different types of services that can be offered within the TripHub application.
+ * Each service type is associated with a label that can be used to provide a more descriptive representation.
+ */
 public enum ServiceType {
-	ACCOMMODATION,
-	RESTAURANT,
-	TRANSPORTATION;
+    /** Represents an accommodation service. */
+    ACCOMMODATION("Accommodation"),
 
-	private String label;
+    /** Represents a restaurant service. */
+    RESTAURANT("Restaurant"),
 
-	public String getLabel() {
-		return label;
-	}
+    /** Represents a transportation service. */
+    TRANSPORTATION("Transportation");
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
-	
-	
+    private String label;
+
+    /**
+     * Constructs a ServiceType enum constant with the provided label.
+     *
+     * @param label The label associated with the service type.
+     */
+    ServiceType(String label) {
+        this.label = label;
+    }
+
+    /**
+     * Returns the label associated with the service type.
+     *
+     * @return The label of the service type.
+     */
+    public String getLabel() {
+        return label;
+    }
+
+    /**
+     * Sets the label associated with the service type.
+     *
+     * @param label The label to be set.
+     */
+    public void setLabel(String label) {
+        this.label = label;
+    }
 }

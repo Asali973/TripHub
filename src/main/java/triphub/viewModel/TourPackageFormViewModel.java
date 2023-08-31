@@ -37,6 +37,7 @@ public class TourPackageFormViewModel implements Serializable {
 	private Picture picture;
 	private String link;
 
+	// Method to set all the attributes to null/empty String/0
 	public void clear() {
 
 		this.id = null;
@@ -56,9 +57,11 @@ public class TourPackageFormViewModel implements Serializable {
 		this.themeName = "";
 	}
 
+	// Empty constructor
 	public TourPackageFormViewModel() {
 	}
 
+	//Getters & Setters
 
 	public String getProfilePicture() {
 		return profilePicture;

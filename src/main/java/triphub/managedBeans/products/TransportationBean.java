@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 
-import triphub.dao.service.TransportationDAO;
+import triphub.dao.services.TransportationDAO;
 import triphub.entity.subservices.Restaurant;
 import triphub.entity.subservices.Transportation;
 import triphub.entity.subservices.TransportationType;

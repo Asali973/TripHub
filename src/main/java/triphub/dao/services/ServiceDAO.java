@@ -1,4 +1,4 @@
-package triphub.dao.service;
+package triphub.dao.services;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
